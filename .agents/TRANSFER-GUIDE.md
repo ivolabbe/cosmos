@@ -159,7 +159,7 @@ Run these checks after every transfer batch. See `.agents/verify.sh` for the ful
 - **CMS:** Drupal 7
 - **Total articles:** 643
 - **Article counts by letter:** A:55 B:27 C:59 D:30 E:27 F:19 G:41 H:32 I:19 J:5 K:8 L:25 M:36 N:16 O:10 P:46 Q:2 R:25 S:83 T:28 U:5 V:14 W:15 X:7 Y:1 Z:8
-- **Status:** All 643 articles transferred (March 2026)
+- **Status:** All 644 articles transferred including About page (March 2026)
 
 ## Lessons Learned
 
@@ -171,3 +171,4 @@ These issues were encountered during the bulk transfer and should be pre-empted 
 4. **Non-article `/cosmos/` paths:** Links like `/cosmos/cosmos/-/-About` or `/cosmos/S/S0+galaxy` don't follow standard convention. Fix: convert to slug anyway, flag as warnings.
 5. **Agent load balancing:** Letter S has 83 articles (3x average). Assign biggest letters to dedicated agents, batch smaller ones together.
 6. **Post-transfer fixup pass is essential:** Even with good transform rules, a verify + fixup pass catches edge cases agents miss (filename collisions, unusual URL patterns).
+7. **Special pages outside A-Z:** The About page (`/cosmos/-/-About`) has no letter category. Naive slug produces `-about.html` (leading dash). Fix: transfer manually as `about.html`, use a modified breadcrumb (no letter link), and grep-fix any references to the broken slug (`-about.html` → `about.html`).
