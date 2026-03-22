@@ -1,0 +1,159 @@
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>CAS - Error - 404 Document Not Found</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="author" content="Andrew Jameson" />
+  <meta name="description" content="Centre for Astrophysics and Supercomputing" />
+
+  <meta name="keywords" content="Astronomy, Astrophysics, Swinburne University of Technology, Centre for Astrophysics and Supercomputing, Melbourne, Victoria, Australia, Swinburne, University, Technology, Higher Education, Research,Entrepreneurship,Postgraduate,Undergraduate,Courses,Course,Coursework,Sciences,Computing,Information Technology,IT" />
+
+  <!-- Astro CSS -->
+  <link rel="stylesheet" type="text/css" href="/siteheaders/astro_style.css" />
+  <link rel="stylesheet" type="text/css" href="/siteheaders/astro_form.css" />
+  <!-- Swin Interim CSS -->
+  <link rel="stylesheet" type="text/css" href="//www.swinburne.edu.au/import/import_interim.css" />
+  <!-- Swin General CSS -->
+  <link rel="stylesheet" type="text/css" href="//www.swinburne.edu.au/import/import.css" />
+  <script type="text/javascript" src="//www.swinburne.edu.au/import/js/jquery.js"></script>
+  <script type="text/javascript" src="//www.swinburne.edu.au/import/js/swinburne.js"></script>
+  <script type="text/javascript" src="/js/astroMail.js"></script>
+  <link rel="icon" href="//www.swinburne.edu.au/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="//www.swinburne.edu.au/favicon.ico" type="image/x-icon" />
+  <link rel="alternate stylesheet" type="text/css" href="//www.swinburne.edu.au/import/high-contrast.css" title="high-contrast" media="screen" />
+  <!-- Swin Site CSS -->
+  <link rel="stylesheet" type="text/css" href="/cwis/php_pages/webapps/css/website_113.css" />
+
+
+</head>
+
+<body>
+<div id="top">
+  <a id="skip_content" href="#content" accesskey="S">Skip to Content</a>
+</div>
+
+ <div id="navigation">
+   <ul id="top_menu_top_row">
+        <li id="nav_li_home"><a id="nav_home" href="https://www.swinburne.edu.au/" title="Swinburne Home"  accesskey="1">Home</a></li>
+        <li><a id="nav_about" href="https://www.swinburne.edu.au/about/" title="About Swinburne">About</a></li>
+        <li><a id="nav_contacts" href="https://www.swinburne.edu.au/contacts-campuses/" title="Contacts and Campuses">Contacts &amp; Campuses</a></li>
+        <li><a id="nav_staff" href="https://www.swinburne.edu.au/staff/" title="Swinburne Staff">Staff</a></li>
+        <li><a id="nav_student" href="https://www.swinburne.edu.au/student/" title="Swinburne Students">Current Students</a></li>
+    </ul>
+    <ul id="top_menu_bottom_row">
+       <li><a id="nav_future" href="https://www.future.swinburne.edu.au">Study at Swinburne</a></li>
+        <li><a id="nav_research" href="https://www.research.swinburne.edu.au/">Research</a></li>
+        <li><a id="nav_industry" href="https://www.swinburne.edu.au/business-partnerships/">Business &amp; Partnerships</a></li>
+        <li><a id="nav_international" href="https://www.international.swinburne.edu.au/">International</a></li>
+        <li id="global-search-li"> 
+            <form action="https://search.swinburne.edu.au/s/search.html" method="get" id="global-search" onsubmit="pageTracker._trackEvent('Global - Site Search Keywords',document.getElementById('global-search-query').value.toLowerCase(),document.URL);">
+                <input type="hidden" name="collection" id="collection" value="swinburne-internet-meta" />
+                <label id="global-search-query-label" for="global-search-query" style="display:none">Search the Swinburne site</label>
+                <input id="global-search-query" type="text" value="" placeholder="Search..." required name="query" />
+                <input id="global-search-submit" type="submit" value="Search" />
+            </form>     
+        </li>
+    </ul>
+</div>
+
+<div id="main">
+  <div id="container">
+    <div id="wrapper">
+      <div id="column">
+
+<script type="text/javascript">
+    <!--
+    document.getElementById("nav_research").className = "selected"; 
+    //-->   
+</script>
+<!-- START Banner Small Search Version 3: Edited 16 Feb 2012 -->
+<div id="banner-small">
+  <div>     
+    <p id="banner-logo"><a href="//www.swinburne.edu.au/"><img alt="Swinburne University of Technology - Melbourne Australia" src="//www.swinburne.edu.au/images/banners/swinburne_logo.gif" width="179" height="91" /></a></p>
+    <p id="pagetitle"><span></span>Centre for Astrophysics and Supercomputing</p>
+  </div>
+</div>
+
+
+<div id="navcol">
+<!--START MENU WRITER v2.0-->
+<div id="left_menu">
+	<ul>
+		<li><a href="/internal/">Internal</a></li>
+		<li><a href="/sao/">Swinburne Astronomy Online</a></li>
+		<li><a href="/supercomputing/">Supercomputing</a></li>
+	</ul>
+</div>
+<!-- END MENU WRITER -->
+<div style="width: 184px; align: center; margin-top: -145px;">
+<center>
+<a href="/topic.php?topic=equity"><img src="/images/PleiadesAwardSilver_2016_113x250.png" width="113px" height="250px"/></a>
+</center>
+</div>
+</div>
+
+        <div id="content">
+          <div id="content-col">
+
+
+<!-- ########################################## -->
+<!-- ############  START CONTENT  ############# -->
+
+<h1>Error 404 - Document Not Found</h1>
+<p class="main_text_black">The requested page does not exist. If you were following a link from a web page on another site then please inform the administrators of that site. If you were following a link from our site or you suspect a server configuration error then please contact the person maintaining these pages as given below.</p>
+
+<p class="main_text_black">You may choose to navigate from our <a href="//astronomy.swin.edu.au/">front page</a> and perhaps try the site search engine.
+</p>
+
+
+<!-- ############  END CONTENT    ############# -->
+<!-- ########################################## -->
+          </div>
+        </div>
+        <div class="clear">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer" style="border: 1px">
+  <div id="foot">
+    <ul>
+      <li>&copy; Swinburne</li>
+      <li>CRICOS number 00111D</li>
+      <li><a href="//www.swinburne.edu.au/contact.htm">Contact Us</a></li>
+      <li><a href="//www.swinburne.edu.au/disclaimer.htm" accesskey="8">Copyright and disclaimer</a></li>
+      <li><a href="//www.swinburne.edu.au/privacy.htm">Privacy</a></li>
+      <li><a href="//www.swinburne.edu.au/feedback.htm" accesskey="9">Feedback</a></li>
+      <li><a href="//www.swinburne.edu.au/accessibility.htm" accesskey="0">Accessibility Information</a></li>
+    </ul>
+    <ul>
+      <li>Maintained by: Andrew Jameson <a href="mailto:ajameson&#64;&#115;&#119;&#105;&#110;&#46;edu&#46;au">(ajameson&#64;&#115;&#119;&#105;&#110;&#46;edu&#46;au)</a></li>
+      <li class="last">Authorised by: Prof. Jean Brodie (<a href="mailto:&#x6a;&#x62;&#x72;&#x6f;&#x64;&#x69;&#x65;&commat;&#x73;&#x77;&#x69;&#x6e;&period;&#x65;&#x64;&#x75;&period;&#x61;&#x75;">&#x6a;&#x62;&#x72;&#x6f;&#x64;&#x69;&#x65;&commat;&#x73;&#x77;&#x69;&#x6e;&period;&#x65;&#x64;&#x75;&period;&#x61;&#x75;</a>)</li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22111847-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+</body>
+</html>
+
+                                                       
+

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Average | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=T">T</a></li>
+        <li><span class="current">Time Average</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container container--narrow">
+        <header class="article__header">
+          <h1 class="article__title">Time Average</h1>
+        </header>
+        <div class="article__body">
+          <p>The <a class="lexicon-term" href="time-average.html">time average</a> of a function is found by evaluating the  integral:</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-bdc4dfc2c217ee5380c1543160ca62358bc60ef0.png" alt="$ \left\langle f(t)\right\rangle = \frac1{\Delta T}\int\limits_t^{t+\Delta T}f(t^\prime)dt^\prime $"width="221" height="51" /></p>
+
+	<p>with the average taken over a time, ΔT.</p>
+
+	<p>Time averages are often important when considering  oscillating waves of the form:</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-0283323acff4ee31341ba18b869436b295da8c9e.png" alt="$ f(t) = A\sin(\omega t) $"width="145" height="22" /></p>
+
+	<p>where ω is the <a class="lexicon-term" href="angular-frequency.html">angular frequency</a> and <em>A</em> is the <a class="lexicon-term" href="amplitude.html">amplitude</a>.  The instantaneous value  of this wave varies  between <em>-A</em> and <em>A</em>, however, the time average of  this wave over one <a href="wave-period.html">period</a> is <img class="teximage" src="../images/tex-8813229118016ad71a85e0f58237f44bddc71489.png" alt="$ \langle f(t)\rangle = 0 $"width="90" height="22" />.</p>
+
+	<p>Another common example (such is in the calculation of the  intensity of an electromagnetic wave) is  to find the time average of the functions</p>
+
+	<table>
+	<caption><img class="teximage" src="../images/tex-ac5f99994b23d0df3513072b84d173f0c03dc9ae.png" alt="$ f(t) = \sin^2(\omega t) $"width="134" height="23" /></caption>
+		<tr>
+			<td style="text-align:center;">and </td>
+			<td style="text-align:center;"><img class="teximage" src="../images/tex-87d99fba4be027f3af5f2dcdcf249d1cc7a64f42.png" alt="$ g(t) = \cos^2(\omega t) $"width="136" height="23" /> </td>
+		</tr>
+	</table>
+
+	<p>Using the equation (1) above, it can be shown that:</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-4957e0b2b93695e0f07a1ff4e69169d96b51d635.png" alt="$ \langle f(t) \rangle = \langle g(t) \rangle = \frac 12 $"width="169" height="25" />.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

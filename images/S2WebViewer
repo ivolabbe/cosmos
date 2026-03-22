@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="https://astronomy.swin.edu.au/cms/drupal7/misc/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+  <title>Page not found | CAS Drupal 7 - Live</title>
+  <link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/sites/default/files/css/css_T9EHySSJ-Ugh1u8TqAQmGnmXH6YzYGopx58kNaWn-ec.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/sites/default/files/css/css_qjEFK7nEvh0LNhfMT0CTn1m3P-ZfJSm__A4Y1q9QNJU.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/sites/default/files/css/css_B4YK_GBXkk-_KtLBZKh5p_RXXFuRIjqbNN7voDxXS80.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/sites/default/files/css/css_chZZheOZ560ZGl9GxYoogifYDh58U04-H8IHmCfFzI0.css" media="all" />
+<link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/sites/default/files/css/css_2THG1eGiBIizsWFeexsNe1iDifJ00QRS9uSd03rY9co.css" media="print" />
+
+<!--[if lte IE 7]>
+<link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/themes/bartik/css/ie.css?p6crh5" media="all" />
+<![endif]-->
+
+<!--[if IE 6]>
+<link type="text/css" rel="stylesheet" href="https://astronomy.swin.edu.au/cms/drupal7/themes/bartik/css/ie6.css?p6crh5" media="all" />
+<![endif]-->
+  <script type="text/javascript" src="https://astronomy.swin.edu.au/cms/drupal7/sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/cms\/drupal7\/","pathPrefix":"","ajaxPageState":{"theme":"bartik","theme_token":"UJ3-4-nmD8l0H4VMA6pFw_iNfNPB_EHGbg_8FW0C_o4","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/book\/book.css":1,"sites\/all\/modules\/chili_highlighter\/css\/chili_highlighter.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/drutex\/drutex.css":1,"sites\/all\/modules\/lexicon\/css\/lexicon.css":1,"themes\/bartik\/css\/layout.css":1,"themes\/bartik\/css\/style.css":1,"themes\/bartik\/css\/colors.css":1,"themes\/bartik\/css\/print.css":1,"themes\/bartik\/css\/ie.css":1,"themes\/bartik\/css\/ie6.css":1}},"urlIsAjaxTrusted":{"\/cms\/drupal7\/sites\/all\/modules\/cpmfetch\/S2WebViewer?data=\/cms\/cpg15x\/albums\/userpics\/galaxy-merger_s2w.zip\u0026preview=\/cms\/cpg15x\/albums\/userpics\/galaxy-merger_s2w.png":true,"\/cms\/drupal7\/sites\/all\/modules\/cpmfetch\/S2WebViewer?destination=sites\/all\/modules\/cpmfetch\/S2WebViewer":true}});
+//--><!]]>
+</script>
+</head>
+<body class="html not-front not-logged-in one-sidebar sidebar-first page-sites page-sites-all page-sites-all-modules page-sites-all-modules-cpmfetch page-sites-all-modules-cpmfetch-s2webviewer" >
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+    <div id="page-wrapper"><div id="page">
+
+  <div id="header" class="without-secondary-menu"><div class="section clearfix">
+
+          <a href="/cms/drupal7/" title="Home" rel="home" id="logo">
+        <img src="https://astronomy.swin.edu.au/cms/drupal7/themes/bartik/logo.png" alt="Home" />
+      </a>
+    
+          <div id="name-and-slogan">
+
+                              <div id="site-name">
+              <strong>
+                <a href="/cms/drupal7/" title="Home" rel="home"><span>CAS Drupal 7 - Live</span></a>
+              </strong>
+            </div>
+                  
+        
+      </div> <!-- /#name-and-slogan -->
+    
+    
+    
+    
+  </div></div> <!-- /.section, /#header -->
+
+  
+  
+  <div id="main-wrapper" class="clearfix"><div id="main" class="clearfix">
+
+    
+          <div id="sidebar-first" class="column sidebar"><div class="section">
+          <div class="region region-sidebar-first">
+    <div id="block-book-navigation" class="block block-book">
+
+    <h2>Book navigation</h2>
+  
+  <div class="content">
+      <div id="book-block-menu-50029" class="book-block-menu">
+      </div>
+  <div id="book-block-menu-50025" class="book-block-menu">
+      </div>
+  <div id="book-block-menu-32" class="book-block-menu">
+      </div>
+  <div id="book-block-menu-10" class="book-block-menu">
+      </div>
+  </div>
+</div>
+<div id="block-search-form" class="block block-search">
+
+    
+  <div class="content">
+    <form action="/cms/drupal7/sites/all/modules/cpmfetch/S2WebViewer?data=/cms/cpg15x/albums/userpics/galaxy-merger_s2w.zip&amp;preview=/cms/cpg15x/albums/userpics/galaxy-merger_s2w.png" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline">
+      <h2 class="element-invisible">Search form</h2>
+    <div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search </label>
+ <input title="Enter the terms you wish to search for." type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" class="form-text" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-3VIE8rk4yGOljaJqVRj98k2oGxisrACKifFosoOJ0Xs" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div>
+</div></form>  </div>
+</div>
+<div id="block-user-login" class="block block-user">
+
+    <h2>User login</h2>
+  
+  <div class="content">
+    <form action="/cms/drupal7/sites/all/modules/cpmfetch/S2WebViewer?destination=sites/all/modules/cpmfetch/S2WebViewer" method="post" id="user-login-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-name">
+  <label for="edit-name">Username <span class="form-required" title="This field is required.">*</span></label>
+ <input type="text" id="edit-name" name="name" value="" size="15" maxlength="60" class="form-text required" />
+<div class="description">SIMS Username</div>
+</div>
+<div class="form-item form-type-password form-item-pass">
+  <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
+ <input type="password" id="edit-pass" name="pass" size="15" maxlength="128" class="form-text required" />
+<div class="description">SIMS Password</div>
+</div>
+<div class="item-list"><ul><li class="first last"><a href="https://csg.ict.swin.edu.au/help">Logon Help</a></li>
+</ul></div><input type="hidden" name="form_build_id" value="form-DcQEb68-1wRGUrfryi8mclnUNvihg3e6Kwo52EABpAg" />
+<input type="hidden" name="form_id" value="user_login_block" />
+<div class="form-actions form-wrapper" id="edit-actions--2"><input type="submit" id="edit-submit--2" name="op" value="Log in" class="form-submit" /></div></div></form>  </div>
+</div>
+  </div>
+      </div></div> <!-- /.section, /#sidebar-first -->
+    
+    <div id="content" class="column"><div class="section">
+            <a id="main-content"></a>
+                    <h1 class="title" id="page-title">
+          Page not found        </h1>
+                          <div class="tabs">
+                  </div>
+                          <div class="region region-content">
+    <div id="block-system-main" class="block block-system">
+
+    
+  <div class="content">
+    The requested page "/cms/drupal7/sites/all/modules/cpmfetch/S2WebViewer?data=/cms/cpg15x/albums/userpics/galaxy-merger_s2w.zip&amp;preview=/cms/cpg15x/albums/userpics/galaxy-merger_s2w.png" could not be found.  </div>
+</div>
+  </div>
+      
+    </div></div> <!-- /.section, /#content -->
+
+    
+  </div></div> <!-- /#main, /#main-wrapper -->
+
+  
+  <div id="footer-wrapper"><div class="section">
+
+    
+          <div id="footer" class="clearfix">
+          <div class="region region-footer">
+    <div id="block-system-powered-by" class="block block-system">
+
+    
+  <div class="content">
+    <span>Powered by <a href="https://www.drupal.org">Drupal</a></span>  </div>
+</div>
+  </div>
+      </div> <!-- /#footer -->
+    
+  </div></div> <!-- /.section, /#footer-wrapper -->
+
+</div></div> <!-- /#page, /#page-wrapper -->
+  </body>
+</html>

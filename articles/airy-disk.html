@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airy Disk | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=A">A</a></li>
+        <li><span class="current">Airy Disk</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container container--narrow">
+        <header class="article__header">
+          <h1 class="article__title">Airy Disk</h1>
+        </header>
+        <div class="article__body">
+          <p>
+<div class="imageRight" style="width:313px; ">
+<div class="imageWrapper" style="width:313px; ">
+<img src="../images/airydisk.jpg" width="313" height="450" alt="airydisk.jpg" title="airydisk.jpg"/>
+<div class="caption">
+<strong>(top)</strong>: The normalised irradiance profile for a circular <a class="lexicon-term" href="aperture.html">aperture</a>.<br />
+<strong>(bottom)</strong>: The irradiance pattern, showing the central <a class="lexicon-term" href="airy-disk.html">Airy disk</a>  surrounded by a series of rings with reduced intensity.<br/>
+</div>
+</div><!-- End of imageWrapper div -->
+</div><!-- End of alignment div -->
+</p>
+
+	<p>When a point source, such as a <a class="lexicon-term" href="star.html">star</a>, is observed through a  <a class="lexicon-term" href="telescope.html">telescope</a> with a circular aperture, the image  is not a point source &#8211; it is a disk surrounded by a number of very  faint rings.  These rings are produced by Fraunhofer Diffraction  of the <a class="lexicon-term" href="light.html">light</a> by the circular aperture. In this case, the  irradiance is:</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-5f7f0243103e8037d89cb925ef16b49e737faef5.png" alt="$ I(\theta) = I(0)\left[\frac{2J_1(ka\sin\theta)}{ka\sin\theta}\right]^2 $"width="222" height="42" /></p>
+
+	<p>where <em>I(0)</em> is the peak irradiance at the centre of the diffraction pattern,  <em>D = 2a</em> is the diameter of the aperture, <em>k</em> is the wave number and  <em>J<sub>1</sub>(u)</em>  is the first order Bessel function.</p>
+
+	<p>The central region of the profile, from the peak to the first minimum, is  called the Airy disk.  It has an angular radius given by:</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-9b79adf0300cfe48247e5b612661941c7330bc31.png" alt="$ D\sin\theta = 1.22\lambda  $"width="138" height="16" /></p>
+
+	<p>Using the small <a class="lexicon-term" href="angle.html">angle</a> approximation that <img class="teximage" src="../images/tex-585469d1efad3eb62543b7a031bc4d4b4efd4427.png" alt="$ \sin\theta\simeq\theta $"width="77" height="15" />, the angular radius of the Airy disk is</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-6d64b3fb9de7876bbd630a86f706adc292c4c261.png" alt="$ \theta \simeq 1.22\frac{\lambda}{D} $"width="91" height="25" /></p>
+
+	<p>According to the <a class="lexicon-term" href="rayleigh-criterion.html">Rayleigh Criterion</a>, two point sources  cannot be resolved if their separation is less than the radius of  the Airy disk.  The Airy disk is named for the English astronomer Sir George Biddell Airy,  who served as the seventh Astronomer Royal from 1835-1881.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

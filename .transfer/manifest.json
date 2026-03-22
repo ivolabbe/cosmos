@@ -1,0 +1,4503 @@
+[
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/ALMA",
+    "letter": "A",
+    "title": "ALMA",
+    "slug": "alma",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/APEX",
+    "letter": "A",
+    "title": "APEX",
+    "slug": "apex",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/ATCA",
+    "letter": "A",
+    "title": "ATCA",
+    "slug": "atca",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Ablation",
+    "letter": "A",
+    "title": "Ablation",
+    "slug": "ablation",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Absolute+Magnitude",
+    "letter": "A",
+    "title": "Absolute Magnitude",
+    "slug": "absolute-magnitude",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Absorption+Line",
+    "letter": "A",
+    "title": "Absorption Line",
+    "slug": "absorption-line",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Abundance+Ratio",
+    "letter": "A",
+    "title": "Abundance Ratio",
+    "slug": "abundance-ratio",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Active+Galactic+Nuclei",
+    "letter": "A",
+    "title": "Active Galactic Nuclei",
+    "slug": "active-galactic-nuclei",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Airy+Disk",
+    "letter": "A",
+    "title": "Airy Disk",
+    "slug": "airy-disk",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Albedo",
+    "letter": "A",
+    "title": "Albedo",
+    "slug": "albedo",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Alternative+Cosmologies",
+    "letter": "A",
+    "title": "Alternative Cosmologies",
+    "slug": "alternative-cosmologies",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Altitude",
+    "letter": "A",
+    "title": "Altitude",
+    "slug": "altitude",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Amor+Asteroids",
+    "letter": "A",
+    "title": "Amor Asteroids",
+    "slug": "amor-asteroids",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Amplitude",
+    "letter": "A",
+    "title": "Amplitude",
+    "slug": "amplitude",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Anaximander",
+    "letter": "A",
+    "title": "Anaximander",
+    "slug": "anaximander",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Anaximenes",
+    "letter": "A",
+    "title": "Anaximenes",
+    "slug": "anaximenes",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Andromeda+galaxy",
+    "letter": "A",
+    "title": "Andromeda galaxy",
+    "slug": "andromeda-galaxy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Angle",
+    "letter": "A",
+    "title": "Angle",
+    "slug": "angle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Angular+Diameter",
+    "letter": "A",
+    "title": "Angular Diameter",
+    "slug": "angular-diameter",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Angular+Frequency",
+    "letter": "A",
+    "title": "Angular Frequency",
+    "slug": "angular-frequency",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Angular+Momentum",
+    "letter": "A",
+    "title": "Angular Momentum",
+    "slug": "angular-momentum",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Angular+Velocity",
+    "letter": "A",
+    "title": "Angular Velocity",
+    "slug": "angular-velocity",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Anomalistic+Year",
+    "letter": "A",
+    "title": "Anomalistic Year",
+    "slug": "anomalistic-year",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Anomalous+Cosmic+Rays",
+    "letter": "A",
+    "title": "Anomalous Cosmic Rays",
+    "slug": "anomalous-cosmic-rays",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Anomalous+X-ray+Pulsar",
+    "letter": "A",
+    "title": "Anomalous X-ray Pulsar",
+    "slug": "anomalous-x-ray-pulsar",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Antarctic+Circle",
+    "letter": "A",
+    "title": "Antarctic Circle",
+    "slug": "antarctic-circle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Apastron",
+    "letter": "A",
+    "title": "Apastron",
+    "slug": "apastron",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Aperture",
+    "letter": "A",
+    "title": "Aperture",
+    "slug": "aperture",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Aphelion",
+    "letter": "A",
+    "title": "Aphelion",
+    "slug": "aphelion",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Apoapsis",
+    "letter": "A",
+    "title": "Apoapsis",
+    "slug": "apoapsis",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Apogee",
+    "letter": "A",
+    "title": "Apogee",
+    "slug": "apogee",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Apollo+Asteroids",
+    "letter": "A",
+    "title": "Apollo Asteroids",
+    "slug": "apollo-asteroids",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Apparent+Diameter",
+    "letter": "A",
+    "title": "Apparent Diameter",
+    "slug": "apparent-diameter",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Apparent+Magnitude",
+    "letter": "A",
+    "title": "Apparent Magnitude",
+    "slug": "apparent-magnitude",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Arcminute",
+    "letter": "A",
+    "title": "Arcminute",
+    "slug": "arcminute",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Arcsecond",
+    "letter": "A",
+    "title": "Arcsecond",
+    "slug": "arcsecond",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Arctic+Circle",
+    "letter": "A",
+    "title": "Arctic Circle",
+    "slug": "arctic-circle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Area",
+    "letter": "A",
+    "title": "Area",
+    "slug": "area",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Argument+Of+Perihelion",
+    "letter": "A",
+    "title": "Argument Of Perihelion",
+    "slug": "argument-of-perihelion",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Ascending+Node",
+    "letter": "A",
+    "title": "Ascending Node",
+    "slug": "ascending-node",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Asterism",
+    "letter": "A",
+    "title": "Asterism",
+    "slug": "asterism",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Asteroid",
+    "letter": "A",
+    "title": "Asteroid",
+    "slug": "asteroid",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Asteroid+Belt",
+    "letter": "A",
+    "title": "Asteroid Belt",
+    "slug": "asteroid-belt",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Astrolabe",
+    "letter": "A",
+    "title": "Astrolabe",
+    "slug": "astrolabe",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Astronomical+Unit",
+    "letter": "A",
+    "title": "Astronomical Unit",
+    "slug": "astronomical-unit",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Astronomy",
+    "letter": "A",
+    "title": "Astronomy",
+    "slug": "astronomy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Asymmetrical+Galaxies",
+    "letter": "A",
+    "title": "Asymmetrical Galaxies",
+    "slug": "asymmetrical-galaxies",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Aten+Asteroids",
+    "letter": "A",
+    "title": "Aten Asteroids",
+    "slug": "aten-asteroids",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Atom",
+    "letter": "A",
+    "title": "Atom",
+    "slug": "atom",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Aurora",
+    "letter": "A",
+    "title": "Aurora",
+    "slug": "aurora",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Aurora+australis+%28southern+lights%29",
+    "letter": "A",
+    "title": "Aurora australis %28southern lights%29",
+    "slug": "aurora-australis-%28southern-lights%29",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Aurora+borealis+%28northern+lights%29",
+    "letter": "A",
+    "title": "Aurora borealis %28northern lights%29",
+    "slug": "aurora-borealis-%28northern-lights%29",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Autumnal+Equinox",
+    "letter": "A",
+    "title": "Autumnal Equinox",
+    "slug": "autumnal-equinox",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Axis",
+    "letter": "A",
+    "title": "Axis",
+    "slug": "axis",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Azimuth",
+    "letter": "A",
+    "title": "Azimuth",
+    "slug": "azimuth",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Baade%27s+Window",
+    "letter": "B",
+    "title": "Baade%27s Window",
+    "slug": "baade%27s-window",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Balmer+series",
+    "letter": "B",
+    "title": "Balmer series",
+    "slug": "balmer-series",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bandpass",
+    "letter": "B",
+    "title": "Bandpass",
+    "slug": "bandpass",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bars",
+    "letter": "B",
+    "title": "Bars",
+    "slug": "bars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Baryonic+Acoustic+Oscillations",
+    "letter": "B",
+    "title": "Baryonic Acoustic Oscillations",
+    "slug": "baryonic-acoustic-oscillations",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Baryonic+Matter",
+    "letter": "B",
+    "title": "Baryonic Matter",
+    "slug": "baryonic-matter",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Baryons",
+    "letter": "B",
+    "title": "Baryons",
+    "slug": "baryons",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Baseline",
+    "letter": "B",
+    "title": "Baseline",
+    "slug": "baseline",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Be+X-ray+Binaries",
+    "letter": "B",
+    "title": "Be X-ray Binaries",
+    "slug": "be-x-ray-binaries",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Be+star",
+    "letter": "B",
+    "title": "Be star",
+    "slug": "be-star",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Big+Bang",
+    "letter": "B",
+    "title": "Big Bang",
+    "slug": "big-bang",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Big+Crunch",
+    "letter": "B",
+    "title": "Big Crunch",
+    "slug": "big-crunch",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Binary+Mass+Function",
+    "letter": "B",
+    "title": "Binary Mass Function",
+    "slug": "binary-mass-function",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Binary+Pulsars",
+    "letter": "B",
+    "title": "Binary Pulsars",
+    "slug": "binary-pulsars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Binary+Star",
+    "letter": "B",
+    "title": "Binary Star",
+    "slug": "binary-star",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Black+Hole",
+    "letter": "B",
+    "title": "Black Hole",
+    "slug": "black-hole",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Blackbody+Radiation",
+    "letter": "B",
+    "title": "Blackbody Radiation",
+    "slug": "blackbody-radiation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Blue+Stragglers",
+    "letter": "B",
+    "title": "Blue Stragglers",
+    "slug": "blue-stragglers",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bok+Globule",
+    "letter": "B",
+    "title": "Bok Globule",
+    "slug": "bok-globule",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bolide",
+    "letter": "B",
+    "title": "Bolide",
+    "slug": "bolide",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bolometric+Magnitude",
+    "letter": "B",
+    "title": "Bolometric Magnitude",
+    "slug": "bolometric-magnitude",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bremsstrahlung+radiation",
+    "letter": "B",
+    "title": "Bremsstrahlung radiation",
+    "slug": "bremsstrahlung-radiation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Brightest+Cluster+Galaxies",
+    "letter": "B",
+    "title": "Brightest Cluster Galaxies",
+    "slug": "brightest-cluster-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Broadband",
+    "letter": "B",
+    "title": "Broadband",
+    "slug": "broadband",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Brown+Dwarf",
+    "letter": "B",
+    "title": "Brown Dwarf",
+    "slug": "brown-dwarf",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Bulges",
+    "letter": "B",
+    "title": "Bulges",
+    "slug": "bulges",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/B/Butcher-Oemler+Effect",
+    "letter": "B",
+    "title": "Butcher-Oemler Effect",
+    "slug": "butcher-oemler-effect",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/CD+Galaxies",
+    "letter": "C",
+    "title": "CD Galaxies",
+    "slug": "cd-galaxies",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/CNO+cycle",
+    "letter": "C",
+    "title": "CNO cycle",
+    "slug": "cno-cycle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Callippus",
+    "letter": "C",
+    "title": "Callippus",
+    "slug": "callippus",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Canis+Major+Dwarf",
+    "letter": "C",
+    "title": "Canis Major Dwarf",
+    "slug": "canis-major-dwarf",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cataclysmic+Variable",
+    "letter": "C",
+    "title": "Cataclysmic Variable",
+    "slug": "cataclysmic-variable",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Celestial",
+    "letter": "C",
+    "title": "Celestial",
+    "slug": "celestial",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Celestial+Coordinates",
+    "letter": "C",
+    "title": "Celestial Coordinates",
+    "slug": "celestial-coordinates",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Celestial+Meridian",
+    "letter": "C",
+    "title": "Celestial Meridian",
+    "slug": "celestial-meridian",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Celestial+Poles",
+    "letter": "C",
+    "title": "Celestial Poles",
+    "slug": "celestial-poles",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Celestial+Sphere",
+    "letter": "C",
+    "title": "Celestial Sphere",
+    "slug": "celestial-sphere",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Centaurs",
+    "letter": "C",
+    "title": "Centaurs",
+    "slug": "centaurs",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Centre+Of+The+Milky+Way",
+    "letter": "C",
+    "title": "Centre Of The Milky Way",
+    "slug": "centre-of-the-milky-way",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Centre+of+Mass",
+    "letter": "C",
+    "title": "Centre of Mass",
+    "slug": "centre-of-mass",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Centripetal+Force",
+    "letter": "C",
+    "title": "Centripetal Force",
+    "slug": "centripetal-force",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cepheid+Variable+Stars",
+    "letter": "C",
+    "title": "Cepheid Variable Stars",
+    "slug": "cepheid-variable-stars",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Ceres",
+    "letter": "C",
+    "title": "Ceres",
+    "slug": "ceres",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Chandrasekhar+Limit",
+    "letter": "C",
+    "title": "Chandrasekhar Limit",
+    "slug": "chandrasekhar-limit",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Chemical+Composition",
+    "letter": "C",
+    "title": "Chemical Composition",
+    "slug": "chemical-composition",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Chemical+Evolution",
+    "letter": "C",
+    "title": "Chemical Evolution",
+    "slug": "chemical-evolution",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Chondrite",
+    "letter": "C",
+    "title": "Chondrite",
+    "slug": "chondrite",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Chondrule",
+    "letter": "C",
+    "title": "Chondrule",
+    "slug": "chondrule",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Chromosphere",
+    "letter": "C",
+    "title": "Chromosphere",
+    "slug": "chromosphere",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Classical+Novae",
+    "letter": "C",
+    "title": "Classical Novae",
+    "slug": "classical-novae",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cluster+Environment",
+    "letter": "C",
+    "title": "Cluster Environment",
+    "slug": "cluster-environment",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Colour+Gradients+In+Galaxies",
+    "letter": "C",
+    "title": "Colour Gradients In Galaxies",
+    "slug": "colour-gradients-in-galaxies",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Column+Density",
+    "letter": "C",
+    "title": "Column Density",
+    "slug": "column-density",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Comet",
+    "letter": "C",
+    "title": "Comet",
+    "slug": "comet",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Coma",
+    "letter": "C",
+    "title": "Cometary Coma",
+    "slug": "cometary-coma",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Dust+Tail",
+    "letter": "C",
+    "title": "Cometary Dust Tail",
+    "slug": "cometary-dust-tail",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Gas+Tail",
+    "letter": "C",
+    "title": "Cometary Gas Tail",
+    "slug": "cometary-gas-tail",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Hydrogen+Cloud",
+    "letter": "C",
+    "title": "Cometary Hydrogen Cloud",
+    "slug": "cometary-hydrogen-cloud",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Neutral+Tail",
+    "letter": "C",
+    "title": "Cometary Neutral Tail",
+    "slug": "cometary-neutral-tail",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Nucleus",
+    "letter": "C",
+    "title": "Cometary Nucleus",
+    "slug": "cometary-nucleus",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cometary+Tails",
+    "letter": "C",
+    "title": "Cometary Tails",
+    "slug": "cometary-tails",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Comoving+distance",
+    "letter": "C",
+    "title": "Comoving distance",
+    "slug": "comoving-distance",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Comoving+volume+",
+    "letter": "C",
+    "title": "Comoving volume ",
+    "slug": "comoving-volume",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Concordance+Model",
+    "letter": "C",
+    "title": "Concordance Model",
+    "slug": "concordance-model",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Conic+sections",
+    "letter": "C",
+    "title": "Conic sections",
+    "slug": "conic-sections",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Conjunction",
+    "letter": "C",
+    "title": "Conjunction",
+    "slug": "conjunction",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Constellation",
+    "letter": "C",
+    "title": "Constellation",
+    "slug": "constellation",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Constructive+Interference",
+    "letter": "C",
+    "title": "Constructive Interference",
+    "slug": "constructive-interference",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Coordinated+Universal+Time",
+    "letter": "C",
+    "title": "Coordinated Universal Time",
+    "slug": "coordinated-universal-time",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Core-collapse",
+    "letter": "C",
+    "title": "Core-collapse",
+    "slug": "core-collapse",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Core-collapse+Progenitors",
+    "letter": "C",
+    "title": "Core-collapse Progenitors",
+    "slug": "core-collapse-progenitors",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Core-collapse+Supernovae",
+    "letter": "C",
+    "title": "Core-collapse Supernovae",
+    "slug": "core-collapse-supernovae",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Corona",
+    "letter": "C",
+    "title": "Corona",
+    "slug": "corona",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Correlated",
+    "letter": "C",
+    "title": "Correlated",
+    "slug": "correlated",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Correlator",
+    "letter": "C",
+    "title": "Correlator",
+    "slug": "correlator",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmic+Censorship+Conjecture",
+    "letter": "C",
+    "title": "Cosmic Censorship Conjecture",
+    "slug": "cosmic-censorship-conjecture",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmic+Microwave+Background",
+    "letter": "C",
+    "title": "Cosmic Microwave Background",
+    "slug": "cosmic-microwave-background",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmic+Microwave+Background+Dipole",
+    "letter": "C",
+    "title": "Cosmic Microwave Background Dipole",
+    "slug": "cosmic-microwave-background-dipole",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmic+Ray+Energies",
+    "letter": "C",
+    "title": "Cosmic Ray Energies",
+    "slug": "cosmic-ray-energies",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmic+Rays",
+    "letter": "C",
+    "title": "Cosmic Rays",
+    "slug": "cosmic-rays",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmological+Redshift",
+    "letter": "C",
+    "title": "Cosmological Redshift",
+    "slug": "cosmological-redshift",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cosmology",
+    "letter": "C",
+    "title": "Cosmology",
+    "slug": "cosmology",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Coulomb%27s+law",
+    "letter": "C",
+    "title": "Coulomb%27s law",
+    "slug": "coulomb%27s-law",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Crater",
+    "letter": "C",
+    "title": "Crater",
+    "slug": "crater",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Critical+Density",
+    "letter": "C",
+    "title": "Critical Density",
+    "slug": "critical-density",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/C/Cross-staff",
+    "letter": "C",
+    "title": "Cross-staff",
+    "slug": "cross-staff",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dark+Burst",
+    "letter": "D",
+    "title": "Dark Burst",
+    "slug": "dark-burst",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dark+Energy",
+    "letter": "D",
+    "title": "Dark Energy",
+    "slug": "dark-energy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dark+Halo",
+    "letter": "D",
+    "title": "Dark Halo",
+    "slug": "dark-halo",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dark+Matter",
+    "letter": "D",
+    "title": "Dark Matter",
+    "slug": "dark-matter",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dark+Nebula",
+    "letter": "D",
+    "title": "Dark Nebula",
+    "slug": "dark-nebula",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Day",
+    "letter": "D",
+    "title": "Day",
+    "slug": "day",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Deceleration+Parameter",
+    "letter": "D",
+    "title": "Deceleration Parameter",
+    "slug": "deceleration-parameter",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Declination",
+    "letter": "D",
+    "title": "Declination",
+    "slug": "declination",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Degenerate+Electron+Pressure",
+    "letter": "D",
+    "title": "Degenerate Electron Pressure",
+    "slug": "degenerate-electron-pressure",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Degree+%28angular%29",
+    "letter": "D",
+    "title": "Degree %28angular%29",
+    "slug": "degree-%28angular%29",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Degree+%28temperature%29",
+    "letter": "D",
+    "title": "Degree %28temperature%29",
+    "slug": "degree-%28temperature%29",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Density",
+    "letter": "D",
+    "title": "Density",
+    "slug": "density",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Density+Parameter",
+    "letter": "D",
+    "title": "Density Parameter",
+    "slug": "density-parameter",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Density+Wave+Model",
+    "letter": "D",
+    "title": "Density Wave Model",
+    "slug": "density-wave-model",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Descending+Node",
+    "letter": "D",
+    "title": "Descending Node",
+    "slug": "descending-node",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Destructive+Interference",
+    "letter": "D",
+    "title": "Destructive Interference",
+    "slug": "destructive-interference",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Differential+Rotation",
+    "letter": "D",
+    "title": "Differential Rotation",
+    "slug": "differential-rotation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Differentiated+Object",
+    "letter": "D",
+    "title": "Differentiated Object",
+    "slug": "differentiated-object",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Disk+Galaxies",
+    "letter": "D",
+    "title": "Disk Galaxies",
+    "slug": "disk-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Displacement",
+    "letter": "D",
+    "title": "Displacement",
+    "slug": "displacement",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dissociation",
+    "letter": "D",
+    "title": "Dissociation",
+    "slug": "dissociation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Distance",
+    "letter": "D",
+    "title": "Distance",
+    "slug": "distance",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Distance+Modulus",
+    "letter": "D",
+    "title": "Distance Modulus",
+    "slug": "distance-modulus",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Disturbed+Galaxies",
+    "letter": "D",
+    "title": "Disturbed Galaxies",
+    "slug": "disturbed-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Diurnal+Motion",
+    "letter": "D",
+    "title": "Diurnal Motion",
+    "slug": "diurnal-motion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Doppler+Shift",
+    "letter": "D",
+    "title": "Doppler Shift",
+    "slug": "doppler-shift",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dust+Grain",
+    "letter": "D",
+    "title": "Dust Grain",
+    "slug": "dust-grain",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dwarf+Galaxy",
+    "letter": "D",
+    "title": "Dwarf Galaxy",
+    "slug": "dwarf-galaxy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dwarf+Novae",
+    "letter": "D",
+    "title": "Dwarf Novae",
+    "slug": "dwarf-novae",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dynamical+Friction",
+    "letter": "D",
+    "title": "Dynamical Friction",
+    "slug": "dynamical-friction",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Early+Black+Hole+Theories",
+    "letter": "E",
+    "title": "Early Black Hole Theories",
+    "slug": "early-black-hole-theories",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Early-type+Galaxies",
+    "letter": "E",
+    "title": "Early-type Galaxies",
+    "slug": "early-type-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Ecliptic",
+    "letter": "E",
+    "title": "Ecliptic",
+    "slug": "ecliptic",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Effective+Radius",
+    "letter": "E",
+    "title": "Effective Radius",
+    "slug": "effective-radius",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Effective+Temperature",
+    "letter": "E",
+    "title": "Effective Temperature",
+    "slug": "effective-temperature",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Electromagnetic+Radiation",
+    "letter": "E",
+    "title": "Electromagnetic Radiation",
+    "slug": "electromagnetic-radiation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Electromagnetic+Spectrum",
+    "letter": "E",
+    "title": "Electromagnetic Spectrum",
+    "slug": "electromagnetic-spectrum",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Electron",
+    "letter": "E",
+    "title": "Electron",
+    "slug": "electron",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Electron+Degeneracy+Pressure",
+    "letter": "E",
+    "title": "Electron Degeneracy Pressure",
+    "slug": "electron-degeneracy-pressure",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Electron+Volt",
+    "letter": "E",
+    "title": "Electron Volt",
+    "slug": "electron-volt",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Element",
+    "letter": "E",
+    "title": "Element",
+    "slug": "element",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Ellipse",
+    "letter": "E",
+    "title": "Ellipse",
+    "slug": "ellipse",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Elliptical+Galaxy",
+    "letter": "E",
+    "title": "Elliptical Galaxy",
+    "slug": "elliptical-galaxy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Elongation",
+    "letter": "E",
+    "title": "Elongation",
+    "slug": "elongation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Emission+Line",
+    "letter": "E",
+    "title": "Emission Line",
+    "slug": "emission-line",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Emission+Nebula",
+    "letter": "E",
+    "title": "Emission Nebula",
+    "slug": "emission-nebula",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Environments+Of+Galaxies",
+    "letter": "E",
+    "title": "Environments Of Galaxies",
+    "slug": "environments-of-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Epoch",
+    "letter": "E",
+    "title": "Epoch",
+    "slug": "epoch",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Epoch+Of+Recombination",
+    "letter": "E",
+    "title": "Epoch Of Recombination",
+    "slug": "epoch-of-recombination",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Equator",
+    "letter": "E",
+    "title": "Equator",
+    "slug": "equator",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Equatorial+Coordinate+System",
+    "letter": "E",
+    "title": "Equatorial Coordinate System",
+    "slug": "equatorial-coordinate-system",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Equivalent+Width",
+    "letter": "E",
+    "title": "Equivalent Width",
+    "slug": "equivalent-width",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Errors",
+    "letter": "E",
+    "title": "Errors",
+    "slug": "errors",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/European+VLBI+Network",
+    "letter": "E",
+    "title": "European VLBI Network",
+    "slug": "european-vlbi-network",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Event+Horizon",
+    "letter": "E",
+    "title": "Event Horizon",
+    "slug": "event-horizon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Evolution+Of+Galaxies",
+    "letter": "E",
+    "title": "Evolution Of Galaxies",
+    "slug": "evolution-of-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Extinction",
+    "letter": "E",
+    "title": "Extinction",
+    "slug": "extinction",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Fast+Fourier+Transform",
+    "letter": "F",
+    "title": "Fast Fourier Transform",
+    "slug": "fast-fourier-transform",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Fast+Radio+Bursts",
+    "letter": "F",
+    "title": "Fast Radio Bursts",
+    "slug": "fast-radio-bursts",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Field+Programmable+Gate+Array",
+    "letter": "F",
+    "title": "Field Programmable Gate Array",
+    "slug": "field-programmable-gate-array",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Filters",
+    "letter": "F",
+    "title": "Filters",
+    "slug": "filters",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Fireball",
+    "letter": "F",
+    "title": "Fireball",
+    "slug": "fireball",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/First+Quarter+Moon",
+    "letter": "F",
+    "title": "First Quarter Moon",
+    "slug": "first-quarter-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Flatness+Problem",
+    "letter": "F",
+    "title": "Flatness Problem",
+    "slug": "flatness-problem",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Flocculent+Spiral",
+    "letter": "F",
+    "title": "Flocculent Spiral",
+    "slug": "flocculent-spiral",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Fluence",
+    "letter": "F",
+    "title": "Fluence",
+    "slug": "fluence",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Flux",
+    "letter": "F",
+    "title": "Flux",
+    "slug": "flux",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Focal+Length",
+    "letter": "F",
+    "title": "Focal Length",
+    "slug": "focal-length",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Focal+Plane",
+    "letter": "F",
+    "title": "Focal Plane",
+    "slug": "focal-plane",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Focal+Point",
+    "letter": "F",
+    "title": "Focal Point",
+    "slug": "focal-point",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Forbush+Decrease",
+    "letter": "F",
+    "title": "Forbush Decrease",
+    "slug": "forbush-decrease",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Fossil+Groups",
+    "letter": "F",
+    "title": "Fossil Groups",
+    "slug": "fossil-groups",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Fourier+Transform",
+    "letter": "F",
+    "title": "Fourier Transform",
+    "slug": "fourier-transform",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Frequency",
+    "letter": "F",
+    "title": "Frequency",
+    "slug": "frequency",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Friedmann-Lemaitre+Universe",
+    "letter": "F",
+    "title": "Friedmann-Lemaitre Universe",
+    "slug": "friedmann-lemaitre-universe",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/F/Full+Moon",
+    "letter": "F",
+    "title": "Full Moon",
+    "slug": "full-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Anti-Centre",
+    "letter": "G",
+    "title": "Galactic Anti-Centre",
+    "slug": "galactic-anti-centre",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Coordinate+System",
+    "letter": "G",
+    "title": "Galactic Coordinate System",
+    "slug": "galactic-coordinate-system",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Cosmic+Rays",
+    "letter": "G",
+    "title": "Galactic Cosmic Rays",
+    "slug": "galactic-cosmic-rays",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Equator",
+    "letter": "G",
+    "title": "Galactic Equator",
+    "slug": "galactic-equator",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Filaments",
+    "letter": "G",
+    "title": "Galactic Filaments",
+    "slug": "galactic-filaments",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Jets",
+    "letter": "G",
+    "title": "Galactic Jets",
+    "slug": "galactic-jets",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Nuclei",
+    "letter": "G",
+    "title": "Galactic Nuclei",
+    "slug": "galactic-nuclei",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Plane",
+    "letter": "G",
+    "title": "Galactic Plane",
+    "slug": "galactic-plane",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Sheets",
+    "letter": "G",
+    "title": "Galactic Sheets",
+    "slug": "galactic-sheets",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Voids",
+    "letter": "G",
+    "title": "Galactic Voids",
+    "slug": "galactic-voids",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galactic+Winds",
+    "letter": "G",
+    "title": "Galactic Winds",
+    "slug": "galactic-winds",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy",
+    "letter": "G",
+    "title": "Galaxy",
+    "slug": "galaxy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy+Formation",
+    "letter": "G",
+    "title": "Galaxy Formation",
+    "slug": "galaxy-formation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy+Harassment",
+    "letter": "G",
+    "title": "Galaxy Harassment",
+    "slug": "galaxy-harassment",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy+Morphology",
+    "letter": "G",
+    "title": "Galaxy Morphology",
+    "slug": "galaxy-morphology",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy+Strangulation",
+    "letter": "G",
+    "title": "Galaxy Strangulation",
+    "slug": "galaxy-strangulation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy+Types",
+    "letter": "G",
+    "title": "Galaxy Types",
+    "slug": "galaxy-types",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst",
+    "letter": "G",
+    "title": "Gamma Ray Burst",
+    "slug": "gamma-ray-burst",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Afterglow",
+    "letter": "G",
+    "title": "Gamma Ray Burst Afterglow",
+    "slug": "gamma-ray-burst-afterglow",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Energies",
+    "letter": "G",
+    "title": "Gamma Ray Burst Energies",
+    "slug": "gamma-ray-burst-energies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+History",
+    "letter": "G",
+    "title": "Gamma Ray Burst History",
+    "slug": "gamma-ray-burst-history",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Light+Curves",
+    "letter": "G",
+    "title": "Gamma Ray Burst Light Curves",
+    "slug": "gamma-ray-burst-light-curves",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Mass+Extinction",
+    "letter": "G",
+    "title": "Gamma Ray Burst Mass Extinction",
+    "slug": "gamma-ray-burst-mass-extinction",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Optical+Transient",
+    "letter": "G",
+    "title": "Gamma Ray Burst Optical Transient",
+    "slug": "gamma-ray-burst-optical-transient",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Progenitors",
+    "letter": "G",
+    "title": "Gamma Ray Burst Progenitors",
+    "slug": "gamma-ray-burst-progenitors",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gamma+Ray+Burst+Types",
+    "letter": "G",
+    "title": "Gamma Ray Burst Types",
+    "slug": "gamma-ray-burst-types",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gas+Giant+Planet",
+    "letter": "G",
+    "title": "Gas Giant Planet",
+    "slug": "gas-giant-planet",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gaussian+Function",
+    "letter": "G",
+    "title": "Gaussian Function",
+    "slug": "gaussian-function",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Geomagnetic+Storms",
+    "letter": "G",
+    "title": "Geomagnetic Storms",
+    "slug": "geomagnetic-storms",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Giant+Pulses",
+    "letter": "G",
+    "title": "Giant Pulses",
+    "slug": "giant-pulses",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gibbous+Moon",
+    "letter": "G",
+    "title": "Gibbous Moon",
+    "slug": "gibbous-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Glitch",
+    "letter": "G",
+    "title": "Glitch",
+    "slug": "glitch",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Grand+Design+Spiral",
+    "letter": "G",
+    "title": "Grand Design Spiral",
+    "slug": "grand-design-spiral",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gravitational+Constant",
+    "letter": "G",
+    "title": "Gravitational Constant",
+    "slug": "gravitational-constant",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gravitational+Radiation",
+    "letter": "G",
+    "title": "Gravitational Radiation",
+    "slug": "gravitational-radiation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gravitational+Redshift",
+    "letter": "G",
+    "title": "Gravitational Redshift",
+    "slug": "gravitational-redshift",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gravitational+Waves",
+    "letter": "G",
+    "title": "Gravitational Waves",
+    "slug": "gravitational-waves",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Greenwich+Mean+Time",
+    "letter": "G",
+    "title": "Greenwich Mean Time",
+    "slug": "greenwich-mean-time",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Gregorian+Calendar",
+    "letter": "G",
+    "title": "Gregorian Calendar",
+    "slug": "gregorian-calendar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Greisen-Zatsepin-Kuzmin+Limit",
+    "letter": "G",
+    "title": "Greisen-Zatsepin-Kuzmin Limit",
+    "slug": "greisen-zatsepin-kuzmin-limit",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Group+Environment",
+    "letter": "G",
+    "title": "Group Environment",
+    "slug": "group-environment",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/HI+Cloud",
+    "letter": "H",
+    "title": "HI Cloud",
+    "slug": "hi-cloud",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/HII+Region",
+    "letter": "H",
+    "title": "HII Region",
+    "slug": "hii-region",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/HIPASS",
+    "letter": "H",
+    "title": "HIPASS",
+    "slug": "hipass",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hadron",
+    "letter": "H",
+    "title": "Hadron",
+    "slug": "hadron",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Half-light+Radius",
+    "letter": "H",
+    "title": "Half-light Radius",
+    "slug": "half-light-radius",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Halley-Type+Comets",
+    "letter": "H",
+    "title": "Halley-Type Comets",
+    "slug": "halley-type-comets",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Halo",
+    "letter": "H",
+    "title": "Halo",
+    "slug": "halo",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Harmonic",
+    "letter": "H",
+    "title": "Harmonic",
+    "slug": "harmonic",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Harvard+Spectral+Classification",
+    "letter": "H",
+    "title": "Harvard Spectral Classification",
+    "slug": "harvard-spectral-classification",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Helium",
+    "letter": "H",
+    "title": "Helium",
+    "slug": "helium",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Heraclitus",
+    "letter": "H",
+    "title": "Heraclitus",
+    "slug": "heraclitus",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Herbig-Haro+Object",
+    "letter": "H",
+    "title": "Herbig-Haro Object",
+    "slug": "herbig-haro-object",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hertz",
+    "letter": "H",
+    "title": "Hertz",
+    "slug": "hertz",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hertzsprung-Russell+Diagram",
+    "letter": "H",
+    "title": "Hertzsprung-Russell Diagram",
+    "slug": "hertzsprung-russell-diagram",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hickson+Compact+Groups",
+    "letter": "H",
+    "title": "Hickson Compact Groups",
+    "slug": "hickson-compact-groups",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hierarchical+Clustering",
+    "letter": "H",
+    "title": "Hierarchical Clustering",
+    "slug": "hierarchical-clustering",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hierarchical+Merging",
+    "letter": "H",
+    "title": "Hierarchical Merging",
+    "slug": "hierarchical-merging",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/High+Velocity+Cloud",
+    "letter": "H",
+    "title": "High Velocity Cloud",
+    "slug": "high-velocity-cloud",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/High-mass+X-ray+Binaries",
+    "letter": "H",
+    "title": "High-mass X-ray Binaries",
+    "slug": "high-mass-x-ray-binaries",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/History+Of+Galaxy+Classification",
+    "letter": "H",
+    "title": "History Of Galaxy Classification",
+    "slug": "history-of-galaxy-classification",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Homocentric+Sphere+Model",
+    "letter": "H",
+    "title": "Homocentric Sphere Model",
+    "slug": "homocentric-sphere-model",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Horizontal+Branch+stars",
+    "letter": "H",
+    "title": "Horizontal Branch stars",
+    "slug": "horizontal-branch-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Horizontal+Coordinate+System",
+    "letter": "H",
+    "title": "Horizontal Coordinate System",
+    "slug": "horizontal-coordinate-system",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hot+Coronal+Gas",
+    "letter": "H",
+    "title": "Hot Coronal Gas",
+    "slug": "hot-coronal-gas",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hubble+Classification",
+    "letter": "H",
+    "title": "Hubble Classification",
+    "slug": "hubble-classification",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hubble+Flow",
+    "letter": "H",
+    "title": "Hubble Flow",
+    "slug": "hubble-flow",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hubble+Law",
+    "letter": "H",
+    "title": "Hubble Law",
+    "slug": "hubble-law",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hubble+Space+Telescope",
+    "letter": "H",
+    "title": "Hubble Space Telescope",
+    "slug": "hubble-space-telescope",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hubble+distance",
+    "letter": "H",
+    "title": "Hubble distance",
+    "slug": "hubble-distance",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hydrogen",
+    "letter": "H",
+    "title": "Hydrogen",
+    "slug": "hydrogen",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hydrostatic+Equilibrium",
+    "letter": "H",
+    "title": "Hydrostatic Equilibrium",
+    "slug": "hydrostatic-equilibrium",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/H/Hypernova",
+    "letter": "H",
+    "title": "Hypernova",
+    "slug": "hypernova",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Inertia",
+    "letter": "I",
+    "title": "Inertia",
+    "slug": "inertia",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Inferior+Conjunction",
+    "letter": "I",
+    "title": "Inferior Conjunction",
+    "slug": "inferior-conjunction",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Inferior+Planet",
+    "letter": "I",
+    "title": "Inferior Planet",
+    "slug": "inferior-planet",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Infrared",
+    "letter": "I",
+    "title": "Infrared",
+    "slug": "infrared",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Instability+Strip",
+    "letter": "I",
+    "title": "Instability Strip",
+    "slug": "instability-strip",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Interacting+Galaxies",
+    "letter": "I",
+    "title": "Interacting Galaxies",
+    "slug": "interacting-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Intercloud+Gas",
+    "letter": "I",
+    "title": "Intercloud Gas",
+    "slug": "intercloud-gas",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Intergalactic+Medium",
+    "letter": "I",
+    "title": "Intergalactic Medium",
+    "slug": "intergalactic-medium",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Interstellar+Absorption+Lines",
+    "letter": "I",
+    "title": "Interstellar Absorption Lines",
+    "slug": "interstellar-absorption-lines",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Interstellar+Gas+Cloud",
+    "letter": "I",
+    "title": "Interstellar Gas Cloud",
+    "slug": "interstellar-gas-cloud",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Interstellar+Reddening",
+    "letter": "I",
+    "title": "Interstellar Reddening",
+    "slug": "interstellar-reddening",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Intra-cluster+Medium",
+    "letter": "I",
+    "title": "Intra-cluster Medium",
+    "slug": "intra-cluster-medium",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Ion",
+    "letter": "I",
+    "title": "Ion",
+    "slug": "ion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Ionian+Philosophers",
+    "letter": "I",
+    "title": "Ionian Philosophers",
+    "slug": "ionian-philosophers",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Ionisation",
+    "letter": "I",
+    "title": "Ionisation",
+    "slug": "ionisation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Ionised+Hydrogen",
+    "letter": "I",
+    "title": "Ionised Hydrogen",
+    "slug": "ionised-hydrogen",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Irregular+Galaxy",
+    "letter": "I",
+    "title": "Irregular Galaxy",
+    "slug": "irregular-galaxy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Isolated+Galaxies",
+    "letter": "I",
+    "title": "Isolated Galaxies",
+    "slug": "isolated-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/I/Isotope",
+    "letter": "I",
+    "title": "Isotope",
+    "slug": "isotope",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/J/Jansky",
+    "letter": "J",
+    "title": "Jansky",
+    "slug": "jansky",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/J/Jets",
+    "letter": "J",
+    "title": "Jets",
+    "slug": "jets",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/J/Jovian+Planet",
+    "letter": "J",
+    "title": "Jovian Planet",
+    "slug": "jovian-planet",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/J/Julian+Calendar",
+    "letter": "J",
+    "title": "Julian Calendar",
+    "slug": "julian-calendar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/J/Jupiter-family+Comets",
+    "letter": "J",
+    "title": "Jupiter-family Comets",
+    "slug": "jupiter-family-comets",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kelvin",
+    "letter": "K",
+    "title": "Kelvin",
+    "slug": "kelvin",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Keplerian+Disk",
+    "letter": "K",
+    "title": "Keplerian Disk",
+    "slug": "keplerian-disk",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kiloparsec",
+    "letter": "K",
+    "title": "Kiloparsec",
+    "slug": "kiloparsec",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kinetic+Energy",
+    "letter": "K",
+    "title": "Kinetic Energy",
+    "slug": "kinetic-energy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kirkwood+Gaps",
+    "letter": "K",
+    "title": "Kirkwood Gaps",
+    "slug": "kirkwood-gaps",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kormendy+Relation",
+    "letter": "K",
+    "title": "Kormendy Relation",
+    "slug": "kormendy-relation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kuiper+Belt",
+    "letter": "K",
+    "title": "Kuiper Belt",
+    "slug": "kuiper-belt",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/K/Kuiper+Belt+Objects",
+    "letter": "K",
+    "title": "Kuiper Belt Objects",
+    "slug": "kuiper-belt-objects",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/LIGO",
+    "letter": "L",
+    "title": "LIGO",
+    "slug": "ligo",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Large-scale+Structure",
+    "letter": "L",
+    "title": "Large-scale Structure",
+    "slug": "large-scale-structure",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Last+Quarter+Moon",
+    "letter": "L",
+    "title": "Last Quarter Moon",
+    "slug": "last-quarter-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Late-type+Galaxies",
+    "letter": "L",
+    "title": "Late-type Galaxies",
+    "slug": "late-type-galaxies",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Leap+Year",
+    "letter": "L",
+    "title": "Leap Year",
+    "slug": "leap-year",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Length",
+    "letter": "L",
+    "title": "Length",
+    "slug": "length",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Lenticular+Galaxy",
+    "letter": "L",
+    "title": "Lenticular Galaxy",
+    "slug": "lenticular-galaxy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Lepton",
+    "letter": "L",
+    "title": "Lepton",
+    "slug": "lepton",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Light",
+    "letter": "L",
+    "title": "Light",
+    "slug": "light",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Light+Year",
+    "letter": "L",
+    "title": "Light Year",
+    "slug": "light-year",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Limiting+Magnitude",
+    "letter": "L",
+    "title": "Limiting Magnitude",
+    "slug": "limiting-magnitude",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Linearly+Proportional",
+    "letter": "L",
+    "title": "Linearly Proportional",
+    "slug": "linearly-proportional",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Local+Flow",
+    "letter": "L",
+    "title": "Local Flow",
+    "slug": "local-flow",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Local+Group",
+    "letter": "L",
+    "title": "Local Group",
+    "slug": "local-group",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Local+Noon",
+    "letter": "L",
+    "title": "Local Noon",
+    "slug": "local-noon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Long+Baseline+Array",
+    "letter": "L",
+    "title": "Long Baseline Array",
+    "slug": "long-baseline-array",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Long-period+Comets",
+    "letter": "L",
+    "title": "Long-period Comets",
+    "slug": "long-period-comets",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Lookback+Time",
+    "letter": "L",
+    "title": "Lookback Time",
+    "slug": "lookback-time",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Loose+Groups",
+    "letter": "L",
+    "title": "Loose Groups",
+    "slug": "loose-groups",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Lovell+76m+telescope",
+    "letter": "L",
+    "title": "Lovell 76m telescope",
+    "slug": "lovell-76m-telescope",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Low+Surface+Brightness+Galaxy",
+    "letter": "L",
+    "title": "Low Surface Brightness Galaxy",
+    "slug": "low-surface-brightness-galaxy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Low-mass+X-ray+Binaries",
+    "letter": "L",
+    "title": "Low-mass X-ray Binaries",
+    "slug": "low-mass-x-ray-binaries",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Lower+Meridian",
+    "letter": "L",
+    "title": "Lower Meridian",
+    "slug": "lower-meridian",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Luminosity",
+    "letter": "L",
+    "title": "Luminosity",
+    "slug": "luminosity",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/L/Luminosity-Decline+Rate+Relation",
+    "letter": "L",
+    "title": "Luminosity-Decline Rate Relation",
+    "slug": "luminosity-decline-rate-relation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/MACHOs",
+    "letter": "M",
+    "title": "MACHOs",
+    "slug": "machos",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/MERLIN",
+    "letter": "M",
+    "title": "MERLIN",
+    "slug": "merlin",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Mach%27s+Principle",
+    "letter": "M",
+    "title": "Mach%27s Principle",
+    "slug": "mach%27s-principle",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Magellanic+Clouds",
+    "letter": "M",
+    "title": "Magellanic Clouds",
+    "slug": "magellanic-clouds",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Magellanic+Stream",
+    "letter": "M",
+    "title": "Magellanic Stream",
+    "slug": "magellanic-stream",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Magnetar",
+    "letter": "M",
+    "title": "Magnetar",
+    "slug": "magnetar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Main+Asteroid+Belt",
+    "letter": "M",
+    "title": "Main Asteroid Belt",
+    "slug": "main-asteroid-belt",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Main+Sequence+Lifetime",
+    "letter": "M",
+    "title": "Main Sequence Lifetime",
+    "slug": "main-sequence-lifetime",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Mars",
+    "letter": "M",
+    "title": "Mars",
+    "slug": "mars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Masers",
+    "letter": "M",
+    "title": "Masers",
+    "slug": "masers",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Mass",
+    "letter": "M",
+    "title": "Mass",
+    "slug": "mass",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Megaparsec",
+    "letter": "M",
+    "title": "Megaparsec",
+    "slug": "megaparsec",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Mercury",
+    "letter": "M",
+    "title": "Mercury",
+    "slug": "mercury",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meridian",
+    "letter": "M",
+    "title": "Meridian",
+    "slug": "meridian",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meridian+Transit",
+    "letter": "M",
+    "title": "Meridian Transit",
+    "slug": "meridian-transit",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Metals",
+    "letter": "M",
+    "title": "Metals",
+    "slug": "metals",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meteor",
+    "letter": "M",
+    "title": "Meteor",
+    "slug": "meteor",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meteor+Shower",
+    "letter": "M",
+    "title": "Meteor Shower",
+    "slug": "meteor-shower",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meteor+Stream",
+    "letter": "M",
+    "title": "Meteor Stream",
+    "slug": "meteor-stream",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meteorite",
+    "letter": "M",
+    "title": "Meteorite",
+    "slug": "meteorite",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Meteoroid",
+    "letter": "M",
+    "title": "Meteoroid",
+    "slug": "meteoroid",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Micrometeorite",
+    "letter": "M",
+    "title": "Micrometeorite",
+    "slug": "micrometeorite",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Milky+Way",
+    "letter": "M",
+    "title": "Milky Way",
+    "slug": "milky-way",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Millisecond+Pulsar",
+    "letter": "M",
+    "title": "Millisecond Pulsar",
+    "slug": "millisecond-pulsar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Mirror",
+    "letter": "M",
+    "title": "Mirror",
+    "slug": "mirror",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Molecular+Cloud",
+    "letter": "M",
+    "title": "Molecular Cloud",
+    "slug": "molecular-cloud",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Molecular+Hydrogen",
+    "letter": "M",
+    "title": "Molecular Hydrogen",
+    "slug": "molecular-hydrogen",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Molecule",
+    "letter": "M",
+    "title": "Molecule",
+    "slug": "molecule",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Moment+of+Inertia",
+    "letter": "M",
+    "title": "Moment of Inertia",
+    "slug": "moment-of-inertia",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Momentum",
+    "letter": "M",
+    "title": "Momentum",
+    "slug": "momentum",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Monolithic+Collapse",
+    "letter": "M",
+    "title": "Monolithic Collapse",
+    "slug": "monolithic-collapse",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Moon",
+    "letter": "M",
+    "title": "Moon",
+    "slug": "moon",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Mopra+Telescope",
+    "letter": "M",
+    "title": "Mopra Telescope",
+    "slug": "mopra-telescope",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Morgan-Keenan+Luminosity+Class",
+    "letter": "M",
+    "title": "Morgan-Keenan Luminosity Class",
+    "slug": "morgan-keenan-luminosity-class",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Morphological+Peculiarities",
+    "letter": "M",
+    "title": "Morphological Peculiarities",
+    "slug": "morphological-peculiarities",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Morphology+Density+Relation",
+    "letter": "M",
+    "title": "Morphology Density Relation",
+    "slug": "morphology-density-relation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/NGC",
+    "letter": "N",
+    "title": "NGC",
+    "slug": "ngc",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Nadir",
+    "letter": "N",
+    "title": "Nadir",
+    "slug": "nadir",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Narrowband",
+    "letter": "N",
+    "title": "Narrowband",
+    "slug": "narrowband",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Near+Earth+Asteroids",
+    "letter": "N",
+    "title": "Near Earth Asteroids",
+    "slug": "near-earth-asteroids",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Nebula",
+    "letter": "N",
+    "title": "Nebula",
+    "slug": "nebula",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Neutral+Hydrogen",
+    "letter": "N",
+    "title": "Neutral Hydrogen",
+    "slug": "neutral-hydrogen",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Neutron",
+    "letter": "N",
+    "title": "Neutron",
+    "slug": "neutron",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Neutron+Star",
+    "letter": "N",
+    "title": "Neutron Star",
+    "slug": "neutron-star",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/New+Moon",
+    "letter": "N",
+    "title": "New Moon",
+    "slug": "new-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Newton%27s+First+Law+of+Motion",
+    "letter": "N",
+    "title": "Newton%27s First Law of Motion",
+    "slug": "newton%27s-first-law-of-motion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Newton%27s+Second+Law+of+Motion",
+    "letter": "N",
+    "title": "Newton%27s Second Law of Motion",
+    "slug": "newton%27s-second-law-of-motion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Newton%27s+Third+Law+of+Motion",
+    "letter": "N",
+    "title": "Newton%27s Third Law of Motion",
+    "slug": "newton%27s-third-law-of-motion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Non-thermal+Radiation",
+    "letter": "N",
+    "title": "Non-thermal Radiation",
+    "slug": "non-thermal-radiation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/North+Galactic+Pole",
+    "letter": "N",
+    "title": "North Galactic Pole",
+    "slug": "north-galactic-pole",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Novae",
+    "letter": "N",
+    "title": "Novae",
+    "slug": "novae",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/N/Nyquist+Rate",
+    "letter": "N",
+    "title": "Nyquist Rate",
+    "slug": "nyquist-rate",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Objective+Lens",
+    "letter": "O",
+    "title": "Objective Lens",
+    "slug": "objective-lens",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Oort+Cloud",
+    "letter": "O",
+    "title": "Oort Cloud",
+    "slug": "oort-cloud",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Opposition",
+    "letter": "O",
+    "title": "Opposition",
+    "slug": "opposition",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Orbit",
+    "letter": "O",
+    "title": "Orbit",
+    "slug": "orbit",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Orbital+Eccentricity",
+    "letter": "O",
+    "title": "Orbital Eccentricity",
+    "slug": "orbital-eccentricity",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Orbital+Elements",
+    "letter": "O",
+    "title": "Orbital Elements",
+    "slug": "orbital-elements",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Orbital+Inclination",
+    "letter": "O",
+    "title": "Orbital Inclination",
+    "slug": "orbital-inclination",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Origin+Of+Spiral+Arms",
+    "letter": "O",
+    "title": "Origin Of Spiral Arms",
+    "slug": "origin-of-spiral-arms",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Orphan+Afterglow",
+    "letter": "O",
+    "title": "Orphan Afterglow",
+    "slug": "orphan-afterglow",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/O/Oxygen",
+    "letter": "O",
+    "title": "Oxygen",
+    "slug": "oxygen",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/PSR+J0437-4715",
+    "letter": "P",
+    "title": "PSR J0437-4715",
+    "slug": "psr-j0437-4715",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/PSR+J1141-6545",
+    "letter": "P",
+    "title": "PSR J1141-6545",
+    "slug": "psr-j1141-6545",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Parabola",
+    "letter": "P",
+    "title": "Parabola",
+    "slug": "parabola",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Parkes+64+metre+radio+telescope",
+    "letter": "P",
+    "title": "Parkes 64 metre radio telescope",
+    "slug": "parkes-64-metre-radio-telescope",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Parsec",
+    "letter": "P",
+    "title": "Parsec",
+    "slug": "parsec",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Peculiar+Velocity",
+    "letter": "P",
+    "title": "Peculiar Velocity",
+    "slug": "peculiar-velocity",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Periapsis",
+    "letter": "P",
+    "title": "Periapsis",
+    "slug": "periapsis",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Periastron",
+    "letter": "P",
+    "title": "Periastron",
+    "slug": "periastron",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Perigee",
+    "letter": "P",
+    "title": "Perigee",
+    "slug": "perigee",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Perihelion",
+    "letter": "P",
+    "title": "Perihelion",
+    "slug": "perihelion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Period",
+    "letter": "P",
+    "title": "Period",
+    "slug": "period",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Period+Derivative",
+    "letter": "P",
+    "title": "Period Derivative",
+    "slug": "period-derivative",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Phases",
+    "letter": "P",
+    "title": "Phases",
+    "slug": "phases",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Photodisintegration",
+    "letter": "P",
+    "title": "Photodisintegration",
+    "slug": "photodisintegration",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Photon",
+    "letter": "P",
+    "title": "Photon",
+    "slug": "photon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Photosphere",
+    "letter": "P",
+    "title": "Photosphere",
+    "slug": "photosphere",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pierre+Auger+Observatory",
+    "letter": "P",
+    "title": "Pierre Auger Observatory",
+    "slug": "pierre-auger-observatory",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck%27s+Constant",
+    "letter": "P",
+    "title": "Planck%27s Constant",
+    "slug": "planck%27s-constant",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Energy",
+    "letter": "P",
+    "title": "Planck Energy",
+    "slug": "planck-energy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Length",
+    "letter": "P",
+    "title": "Planck Length",
+    "slug": "planck-length",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Mass",
+    "letter": "P",
+    "title": "Planck Mass",
+    "slug": "planck-mass",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Temperature",
+    "letter": "P",
+    "title": "Planck Temperature",
+    "slug": "planck-temperature",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Time",
+    "letter": "P",
+    "title": "Planck Time",
+    "slug": "planck-time",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Units",
+    "letter": "P",
+    "title": "Planck Units",
+    "slug": "planck-units",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planet",
+    "letter": "P",
+    "title": "Planet",
+    "slug": "planet",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planetary+Nebulae",
+    "letter": "P",
+    "title": "Planetary Nebulae",
+    "slug": "planetary-nebulae",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planetesimals",
+    "letter": "P",
+    "title": "Planetesimals",
+    "slug": "planetesimals",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Plutinos",
+    "letter": "P",
+    "title": "Plutinos",
+    "slug": "plutinos",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Population+I",
+    "letter": "P",
+    "title": "Population I",
+    "slug": "population-i",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Population+II",
+    "letter": "P",
+    "title": "Population II",
+    "slug": "population-ii",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Population+III",
+    "letter": "P",
+    "title": "Population III",
+    "slug": "population-iii",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Positron",
+    "letter": "P",
+    "title": "Positron",
+    "slug": "positron",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Potentially+Hazardous+Asteroids",
+    "letter": "P",
+    "title": "Potentially Hazardous Asteroids",
+    "slug": "potentially-hazardous-asteroids",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Power+Spectrum",
+    "letter": "P",
+    "title": "Power Spectrum",
+    "slug": "power-spectrum",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pressure",
+    "letter": "P",
+    "title": "Pressure",
+    "slug": "pressure",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Primordial+Fireball",
+    "letter": "P",
+    "title": "Primordial Fireball",
+    "slug": "primordial-fireball",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Projected+Semi-major+Axis",
+    "letter": "P",
+    "title": "Projected Semi-major Axis",
+    "slug": "projected-semi-major-axis",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Proper+motion",
+    "letter": "P",
+    "title": "Proper motion",
+    "slug": "proper-motion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Proto-planetary+nebulae",
+    "letter": "P",
+    "title": "Proto-planetary nebulae",
+    "slug": "proto-planetary-nebulae",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Proton",
+    "letter": "P",
+    "title": "Proton",
+    "slug": "proton",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Protostar",
+    "letter": "P",
+    "title": "Protostar",
+    "slug": "protostar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pulsar",
+    "letter": "P",
+    "title": "Pulsar",
+    "slug": "pulsar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pulsar+Characteristic+Age",
+    "letter": "P",
+    "title": "Pulsar Characteristic Age",
+    "slug": "pulsar-characteristic-age",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pulsar+Dispersion+Measure",
+    "letter": "P",
+    "title": "Pulsar Dispersion Measure",
+    "slug": "pulsar-dispersion-measure",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pulsar+Evolution",
+    "letter": "P",
+    "title": "Pulsar Evolution",
+    "slug": "pulsar-evolution",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Pulsar+Timing",
+    "letter": "P",
+    "title": "Pulsar Timing",
+    "slug": "pulsar-timing",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Q/Quark",
+    "letter": "Q",
+    "title": "Quark",
+    "slug": "quark",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Q/Quasar",
+    "letter": "Q",
+    "title": "Quasar",
+    "slug": "quasar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/RR+Lyrae",
+    "letter": "R",
+    "title": "RR Lyrae",
+    "slug": "rr-lyrae",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/RRATs",
+    "letter": "R",
+    "title": "RRATs",
+    "slug": "rrats",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radial+velocity",
+    "letter": "R",
+    "title": "Radial velocity",
+    "slug": "radial-velocity",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radian",
+    "letter": "R",
+    "title": "Radian",
+    "slug": "radian",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radiant",
+    "letter": "R",
+    "title": "Radiant",
+    "slug": "radiant",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radiant+Flux+Density",
+    "letter": "R",
+    "title": "Radiant Flux Density",
+    "slug": "radiant-flux-density",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radiation+Pressure",
+    "letter": "R",
+    "title": "Radiation Pressure",
+    "slug": "radiation-pressure",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radio+Astronomy",
+    "letter": "R",
+    "title": "Radio Astronomy",
+    "slug": "radio-astronomy",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radio+Interferometer",
+    "letter": "R",
+    "title": "Radio Interferometer",
+    "slug": "radio-interferometer",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Radio+Supernova",
+    "letter": "R",
+    "title": "Radio Supernova",
+    "slug": "radio-supernova",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Ram+Pressure+Stripping",
+    "letter": "R",
+    "title": "Ram Pressure Stripping",
+    "slug": "ram-pressure-stripping",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Rayleigh+Criterion",
+    "letter": "R",
+    "title": "Rayleigh Criterion",
+    "slug": "rayleigh-criterion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Real+Image",
+    "letter": "R",
+    "title": "Real Image",
+    "slug": "real-image",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Recurrent+Novae",
+    "letter": "R",
+    "title": "Recurrent Novae",
+    "slug": "recurrent-novae",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Red+Dwarf",
+    "letter": "R",
+    "title": "Red Dwarf",
+    "slug": "red-dwarf",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Red+giant+stars",
+    "letter": "R",
+    "title": "Red giant stars",
+    "slug": "red-giant-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Redshift",
+    "letter": "R",
+    "title": "Redshift",
+    "slug": "redshift",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Reflection+Nebula",
+    "letter": "R",
+    "title": "Reflection Nebula",
+    "slug": "reflection-nebula",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Relativistic+Cosmology",
+    "letter": "R",
+    "title": "Relativistic Cosmology",
+    "slug": "relativistic-cosmology",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Resolution",
+    "letter": "R",
+    "title": "Resolution",
+    "slug": "resolution",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Right+Ascension",
+    "letter": "R",
+    "title": "Right Ascension",
+    "slug": "right-ascension",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Roche-lobe",
+    "letter": "R",
+    "title": "Roche-lobe",
+    "slug": "roche-lobe",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Roche-lobe+Overflow",
+    "letter": "R",
+    "title": "Roche-lobe Overflow",
+    "slug": "roche-lobe-overflow",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Roemer+Delay",
+    "letter": "R",
+    "title": "Roemer Delay",
+    "slug": "roemer-delay",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/R/Rotation+Curve",
+    "letter": "R",
+    "title": "Rotation Curve",
+    "slug": "rotation-curve",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/S0+Galaxy",
+    "letter": "S",
+    "title": "S0 Galaxy",
+    "slug": "s0-galaxy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/SEST",
+    "letter": "S",
+    "title": "SEST",
+    "slug": "sest",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/SETI",
+    "letter": "S",
+    "title": "SETI",
+    "slug": "seti",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/SI+Units",
+    "letter": "S",
+    "title": "SI Units",
+    "slug": "si-units",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Scale+Height",
+    "letter": "S",
+    "title": "Scale Height",
+    "slug": "scale-height",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Scale+Length",
+    "letter": "S",
+    "title": "Scale Length",
+    "slug": "scale-length",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Scaling+Relations",
+    "letter": "S",
+    "title": "Scaling Relations",
+    "slug": "scaling-relations",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Scattered+Disk+Objects",
+    "letter": "S",
+    "title": "Scattered Disk Objects",
+    "slug": "scattered-disk-objects",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Schwarzschild+Lens",
+    "letter": "S",
+    "title": "Schwarzschild Lens",
+    "slug": "schwarzschild-lens",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Schwarzschild+Radius",
+    "letter": "S",
+    "title": "Schwarzschild Radius",
+    "slug": "schwarzschild-radius",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Seasons",
+    "letter": "S",
+    "title": "Seasons",
+    "slug": "seasons",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Second",
+    "letter": "S",
+    "title": "Second",
+    "slug": "second",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Secular+Evolution",
+    "letter": "S",
+    "title": "Secular Evolution",
+    "slug": "secular-evolution",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Self-gravitating+Bodies",
+    "letter": "S",
+    "title": "Self-gravitating Bodies",
+    "slug": "self-gravitating-bodies",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Self-gravitation",
+    "letter": "S",
+    "title": "Self-gravitation",
+    "slug": "self-gravitation",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Semi-major+Axis",
+    "letter": "S",
+    "title": "Semi-major Axis",
+    "slug": "semi-major-axis",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Semi-minor+Axis",
+    "letter": "S",
+    "title": "Semi-minor Axis",
+    "slug": "semi-minor-axis",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Shapiro+Delay",
+    "letter": "S",
+    "title": "Shapiro Delay",
+    "slug": "shapiro-delay",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Shells",
+    "letter": "S",
+    "title": "Shells",
+    "slug": "shells",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Shooting+Star",
+    "letter": "S",
+    "title": "Shooting Star",
+    "slug": "shooting-star",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Short-period+Comets",
+    "letter": "S",
+    "title": "Short-period Comets",
+    "slug": "short-period-comets",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Sidereal+Day",
+    "letter": "S",
+    "title": "Sidereal Day",
+    "slug": "sidereal-day",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Sidereal+Period",
+    "letter": "S",
+    "title": "Sidereal Period",
+    "slug": "sidereal-period",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Single+Stellar+Populations",
+    "letter": "S",
+    "title": "Single Stellar Populations",
+    "slug": "single-stellar-populations",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Singularity",
+    "letter": "S",
+    "title": "Singularity",
+    "slug": "singularity",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Six-Degree+Field+Galaxy+Survey",
+    "letter": "S",
+    "title": "Six-Degree Field Galaxy Survey",
+    "slug": "six-degree-field-galaxy-survey",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Small+Magellanic+Cloud",
+    "letter": "S",
+    "title": "Small Magellanic Cloud",
+    "slug": "small-magellanic-cloud",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Soft+Gamma+Repeater",
+    "letter": "S",
+    "title": "Soft Gamma Repeater",
+    "slug": "soft-gamma-repeater",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Soft+X-ray+Transient",
+    "letter": "S",
+    "title": "Soft X-ray Transient",
+    "slug": "soft-x-ray-transient",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solar+Cosmic+Rays",
+    "letter": "S",
+    "title": "Solar Cosmic Rays",
+    "slug": "solar-cosmic-rays",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solar+Day",
+    "letter": "S",
+    "title": "Solar Day",
+    "slug": "solar-day",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solar+Flare",
+    "letter": "S",
+    "title": "Solar Flare",
+    "slug": "solar-flare",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solar+Mass",
+    "letter": "S",
+    "title": "Solar Mass",
+    "slug": "solar-mass",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solar+Wind",
+    "letter": "S",
+    "title": "Solar Wind",
+    "slug": "solar-wind",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solid+Angle",
+    "letter": "S",
+    "title": "Solid Angle",
+    "slug": "solid-angle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Solstice",
+    "letter": "S",
+    "title": "Solstice",
+    "slug": "solstice",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/South+Galactic+Pole",
+    "letter": "S",
+    "title": "South Galactic Pole",
+    "slug": "south-galactic-pole",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectral+Classification",
+    "letter": "S",
+    "title": "Spectral Classification",
+    "slug": "spectral-classification",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectral+Continuum",
+    "letter": "S",
+    "title": "Spectral Continuum",
+    "slug": "spectral-continuum",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectral+Line",
+    "letter": "S",
+    "title": "Spectral Line",
+    "slug": "spectral-line",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectral+Line+Broadening",
+    "letter": "S",
+    "title": "Spectral Line Broadening",
+    "slug": "spectral-line-broadening",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectral+Line+Profile",
+    "letter": "S",
+    "title": "Spectral Line Profile",
+    "slug": "spectral-line-profile",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectral+Type",
+    "letter": "S",
+    "title": "Spectral Type",
+    "slug": "spectral-type",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spectroscopy",
+    "letter": "S",
+    "title": "Spectroscopy",
+    "slug": "spectroscopy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Speed",
+    "letter": "S",
+    "title": "Speed",
+    "slug": "speed",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Speed+Of+Light",
+    "letter": "S",
+    "title": "Speed Of Light",
+    "slug": "speed-of-light",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spin-flip+Transition",
+    "letter": "S",
+    "title": "Spin-flip Transition",
+    "slug": "spin-flip-transition",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spiral+Arm",
+    "letter": "S",
+    "title": "Spiral Arm",
+    "slug": "spiral-arm",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spiral+Galaxy",
+    "letter": "S",
+    "title": "Spiral Galaxy",
+    "slug": "spiral-galaxy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Spiral+Galaxy+Formation",
+    "letter": "S",
+    "title": "Spiral Galaxy Formation",
+    "slug": "spiral-galaxy-formation",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Square+Kilometre+Array",
+    "letter": "S",
+    "title": "Square Kilometre Array",
+    "slug": "square-kilometre-array",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Standard+Candle",
+    "letter": "S",
+    "title": "Standard Candle",
+    "slug": "standard-candle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Standardised+Candle+Method+For+SNII",
+    "letter": "S",
+    "title": "Standardised Candle Method For SNII",
+    "slug": "standardised-candle-method-for-snii",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Star",
+    "letter": "S",
+    "title": "Star",
+    "slug": "star",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Starburst+Galaxy",
+    "letter": "S",
+    "title": "Starburst Galaxy",
+    "slug": "starburst-galaxy",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Association",
+    "letter": "S",
+    "title": "Stellar Association",
+    "slug": "stellar-association",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Black+Hole",
+    "letter": "S",
+    "title": "Stellar Black Hole",
+    "slug": "stellar-black-hole",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Evolution",
+    "letter": "S",
+    "title": "Stellar Evolution",
+    "slug": "stellar-evolution",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Halo",
+    "letter": "S",
+    "title": "Stellar Halo",
+    "slug": "stellar-halo",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Jets",
+    "letter": "S",
+    "title": "Stellar Jets",
+    "slug": "stellar-jets",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Luminosity+Class",
+    "letter": "S",
+    "title": "Stellar Luminosity Class",
+    "slug": "stellar-luminosity-class",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Populations+Of+Globular+Clusters",
+    "letter": "S",
+    "title": "Stellar Populations Of Globular Clusters",
+    "slug": "stellar-populations-of-globular-clusters",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Stellar+Winds",
+    "letter": "S",
+    "title": "Stellar Winds",
+    "slug": "stellar-winds",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Steradian",
+    "letter": "S",
+    "title": "Steradian",
+    "slug": "steradian",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Sublimation",
+    "letter": "S",
+    "title": "Sublimation",
+    "slug": "sublimation",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Summation",
+    "letter": "S",
+    "title": "Summation",
+    "slug": "summation",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Summer+Solstice",
+    "letter": "S",
+    "title": "Summer Solstice",
+    "slug": "summer-solstice",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Sun",
+    "letter": "S",
+    "title": "Sun",
+    "slug": "sun",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Sun-grazing+Comet",
+    "letter": "S",
+    "title": "Sun-grazing Comet",
+    "slug": "sun-grazing-comet",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Sunspot+Cycle",
+    "letter": "S",
+    "title": "Sunspot Cycle",
+    "slug": "sunspot-cycle",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supergalactic+Coordinate+System",
+    "letter": "S",
+    "title": "Supergalactic Coordinate System",
+    "slug": "supergalactic-coordinate-system",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Superior+Conjunction",
+    "letter": "S",
+    "title": "Superior Conjunction",
+    "slug": "superior-conjunction",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Superior+Planet",
+    "letter": "S",
+    "title": "Superior Planet",
+    "slug": "superior-planet",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supermassive+Black+Hole",
+    "letter": "S",
+    "title": "Supermassive Black Hole",
+    "slug": "supermassive-black-hole",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova",
+    "letter": "S",
+    "title": "Supernova",
+    "slug": "supernova",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova+Classification",
+    "letter": "S",
+    "title": "Supernova Classification",
+    "slug": "supernova-classification",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova+Remnant",
+    "letter": "S",
+    "title": "Supernova Remnant",
+    "slug": "supernova-remnant",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova+Remnant+Type",
+    "letter": "S",
+    "title": "Supernova Remnant Type",
+    "slug": "supernova-remnant-type",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova+Search",
+    "letter": "S",
+    "title": "Supernova Search",
+    "slug": "supernova-search",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova+Type+Ib+",
+    "letter": "S",
+    "title": "Supernova Type Ib ",
+    "slug": "supernova-type-ib",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Supernova-Gamma+Ray+Burst+Connection",
+    "letter": "S",
+    "title": "Supernova-Gamma Ray Burst Connection",
+    "slug": "supernova-gamma-ray-burst-connection",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Surface+Brightness+Profiles",
+    "letter": "S",
+    "title": "Surface Brightness Profiles",
+    "slug": "surface-brightness-profiles",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Synchrotron+Emission",
+    "letter": "S",
+    "title": "Synchrotron Emission",
+    "slug": "synchrotron-emission",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/T+Tauri+Stars",
+    "letter": "T",
+    "title": "T Tauri Stars",
+    "slug": "t-tauri-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Telescope",
+    "letter": "T",
+    "title": "Telescope",
+    "slug": "telescope",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Thales",
+    "letter": "T",
+    "title": "Thales",
+    "slug": "thales",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Thermal+Doppler+Broadening",
+    "letter": "T",
+    "title": "Thermal Doppler Broadening",
+    "slug": "thermal-doppler-broadening",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Thermal+Radiation",
+    "letter": "T",
+    "title": "Thermal Radiation",
+    "slug": "thermal-radiation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Thick+Disk",
+    "letter": "T",
+    "title": "Thick Disk",
+    "slug": "thick-disk",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Thin+Disk",
+    "letter": "T",
+    "title": "Thin Disk",
+    "slug": "thin-disk",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Tidal+Tails",
+    "letter": "T",
+    "title": "Tidal Tails",
+    "slug": "tidal-tails",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Time+Average",
+    "letter": "T",
+    "title": "Time Average",
+    "slug": "time-average",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Tired+Light",
+    "letter": "T",
+    "title": "Tired Light",
+    "slug": "tired-light",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Toomre+Sequence",
+    "letter": "T",
+    "title": "Toomre Sequence",
+    "slug": "toomre-sequence",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Trans-Neptunian+Objects",
+    "letter": "T",
+    "title": "Trans-Neptunian Objects",
+    "slug": "trans-neptunian-objects",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Transverse+velocity",
+    "letter": "T",
+    "title": "Transverse velocity",
+    "slug": "transverse-velocity",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Trigonometric+Parallax",
+    "letter": "T",
+    "title": "Trigonometric Parallax",
+    "slug": "trigonometric-parallax",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Triple+Alpha+Process",
+    "letter": "T",
+    "title": "Triple Alpha Process",
+    "slug": "triple-alpha-process",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Trojan+Asteroids",
+    "letter": "T",
+    "title": "Trojan Asteroids",
+    "slug": "trojan-asteroids",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Tropic+Of+Cancer",
+    "letter": "T",
+    "title": "Tropic Of Cancer",
+    "slug": "tropic-of-cancer",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Tropic+Of+Capricorn",
+    "letter": "T",
+    "title": "Tropic Of Capricorn",
+    "slug": "tropic-of-capricorn",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Tropical+Year",
+    "letter": "T",
+    "title": "Tropical Year",
+    "slug": "tropical-year",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+II+Supernova",
+    "letter": "T",
+    "title": "Type II Supernova",
+    "slug": "type-ii-supernova",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+II+Supernova+Light+Curves",
+    "letter": "T",
+    "title": "Type II Supernova Light Curves",
+    "slug": "type-ii-supernova-light-curves",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+IIn+Supernova",
+    "letter": "T",
+    "title": "Type IIn Supernova",
+    "slug": "type-iin-supernova",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+Ia+Supernova",
+    "letter": "T",
+    "title": "Type Ia Supernova",
+    "slug": "type-ia-supernova",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+Ia+Supernova+Explosion+Mechanism",
+    "letter": "T",
+    "title": "Type Ia Supernova Explosion Mechanism",
+    "slug": "type-ia-supernova-explosion-mechanism",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+Ia+Supernova+Light+Curves",
+    "letter": "T",
+    "title": "Type Ia Supernova Light Curves",
+    "slug": "type-ia-supernova-light-curves",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+Ia+Supernova+Progenitors",
+    "letter": "T",
+    "title": "Type Ia Supernova Progenitors",
+    "slug": "type-ia-supernova-progenitors",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+Ib+Supernova+Spectra",
+    "letter": "T",
+    "title": "Type Ib Supernova Spectra",
+    "slug": "type-ib-supernova-spectra",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/T/Type+Ic+Supernova",
+    "letter": "T",
+    "title": "Type Ic Supernova",
+    "slug": "type-ic-supernova",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/U/U+Geminorum+Stars",
+    "letter": "U",
+    "title": "U Geminorum Stars",
+    "slug": "u-geminorum-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/U/Ultra-high+Energy+Cosmic+Rays",
+    "letter": "U",
+    "title": "Ultra-high Energy Cosmic Rays",
+    "slug": "ultra-high-energy-cosmic-rays",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/U/Ultraviolet",
+    "letter": "U",
+    "title": "Ultraviolet",
+    "slug": "ultraviolet",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/U/Universe",
+    "letter": "U",
+    "title": "Universe",
+    "slug": "universe",
+    "transferred": true
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/U/Upper+Meridian",
+    "letter": "U",
+    "title": "Upper Meridian",
+    "slug": "upper-meridian",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/VLBI",
+    "letter": "V",
+    "title": "VLBI",
+    "slug": "vlbi",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/VSOP",
+    "letter": "V",
+    "title": "VSOP",
+    "slug": "vsop",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Vacuum",
+    "letter": "V",
+    "title": "Vacuum",
+    "slug": "vacuum",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Van+Den+Bergh+Luminosity+Class",
+    "letter": "V",
+    "title": "Van Den Bergh Luminosity Class",
+    "slug": "van-den-bergh-luminosity-class",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Variable+Stars",
+    "letter": "V",
+    "title": "Variable Stars",
+    "slug": "variable-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Velocity",
+    "letter": "V",
+    "title": "Velocity",
+    "slug": "velocity",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Velocity+Dispersion",
+    "letter": "V",
+    "title": "Velocity Dispersion",
+    "slug": "velocity-dispersion",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Vernal+Equinox",
+    "letter": "V",
+    "title": "Vernal Equinox",
+    "slug": "vernal-equinox",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Very+Large+Array+%28VLA%29",
+    "letter": "V",
+    "title": "Very Large Array %28VLA%29",
+    "slug": "very-large-array-%28vla%29",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Very+Long+Baseline+Array",
+    "letter": "V",
+    "title": "Very Long Baseline Array",
+    "slug": "very-long-baseline-array",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Virgo+Cluster",
+    "letter": "V",
+    "title": "Virgo Cluster",
+    "slug": "virgo-cluster",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Virial+Theorem",
+    "letter": "V",
+    "title": "Virial Theorem",
+    "slug": "virial-theorem",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Virtual+Image",
+    "letter": "V",
+    "title": "Virtual Image",
+    "slug": "virtual-image",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/V/Volume",
+    "letter": "V",
+    "title": "Volume",
+    "slug": "volume",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/W+Virginis+Stars",
+    "letter": "W",
+    "title": "W Virginis Stars",
+    "slug": "w-virginis-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Waning+Crescent+Moon",
+    "letter": "W",
+    "title": "Waning Crescent Moon",
+    "slug": "waning-crescent-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Waning+Gibbous+Moon",
+    "letter": "W",
+    "title": "Waning Gibbous Moon",
+    "slug": "waning-gibbous-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Warm+Intercloud+Medium",
+    "letter": "W",
+    "title": "Warm Intercloud Medium",
+    "slug": "warm-intercloud-medium",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Warps",
+    "letter": "W",
+    "title": "Warps",
+    "slug": "warps",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Wave+Equation",
+    "letter": "W",
+    "title": "Wave Equation",
+    "slug": "wave-equation",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Wave+Period",
+    "letter": "W",
+    "title": "Wave Period",
+    "slug": "wave-period",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Wavelength",
+    "letter": "W",
+    "title": "Wavelength",
+    "slug": "wavelength",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Waxing+Crescent+Moon",
+    "letter": "W",
+    "title": "Waxing Crescent Moon",
+    "slug": "waxing-crescent-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Waxing+Gibbous+Moon",
+    "letter": "W",
+    "title": "Waxing Gibbous Moon",
+    "slug": "waxing-gibbous-moon",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/White+Dwarf",
+    "letter": "W",
+    "title": "White Dwarf",
+    "slug": "white-dwarf",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Winding+Problem",
+    "letter": "W",
+    "title": "Winding Problem",
+    "slug": "winding-problem",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Winter+Solstice",
+    "letter": "W",
+    "title": "Winter Solstice",
+    "slug": "winter-solstice",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Wolf+Number",
+    "letter": "W",
+    "title": "Wolf Number",
+    "slug": "wolf-number",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/W/Wolf-Rayet+Star",
+    "letter": "W",
+    "title": "Wolf-Rayet Star",
+    "slug": "wolf-rayet-star",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/X-ray+Binary",
+    "letter": "X",
+    "title": "X-ray Binary",
+    "slug": "x-ray-binary",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/X-ray+Burst",
+    "letter": "X",
+    "title": "X-ray Burst",
+    "slug": "x-ray-burst",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/X-ray+Flash",
+    "letter": "X",
+    "title": "X-ray Flash",
+    "slug": "x-ray-flash",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/X-ray+Halos",
+    "letter": "X",
+    "title": "X-ray Halos",
+    "slug": "x-ray-halos",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/X-ray+Pulsar",
+    "letter": "X",
+    "title": "X-ray Pulsar",
+    "slug": "x-ray-pulsar",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/X-rays",
+    "letter": "X",
+    "title": "X-rays",
+    "slug": "x-rays",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/X/Xenophanes",
+    "letter": "X",
+    "title": "Xenophanes",
+    "slug": "xenophanes",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Y/Year",
+    "letter": "Y",
+    "title": "Year",
+    "slug": "year",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/ZZ+Ceti+Stars",
+    "letter": "Z",
+    "title": "ZZ Ceti Stars",
+    "slug": "zz-ceti-stars",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zeeman+effect",
+    "letter": "Z",
+    "title": "Zeeman effect",
+    "slug": "zeeman-effect",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zenith",
+    "letter": "Z",
+    "title": "Zenith",
+    "slug": "zenith",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zero+Age+Main+Sequence",
+    "letter": "Z",
+    "title": "Zero Age Main Sequence",
+    "slug": "zero-age-main-sequence",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zodiac",
+    "letter": "Z",
+    "title": "Zodiac",
+    "slug": "zodiac",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zodiacal+Light",
+    "letter": "Z",
+    "title": "Zodiacal Light",
+    "slug": "zodiacal-light",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zone+Of+Avoidance",
+    "letter": "Z",
+    "title": "Zone Of Avoidance",
+    "slug": "zone-of-avoidance",
+    "transferred": false
+  },
+  {
+    "url": "https://astronomy.swin.edu.au/cosmos/Z/Zurich+Sunspot+Number",
+    "letter": "Z",
+    "title": "Zurich Sunspot Number",
+    "slug": "zurich-sunspot-number",
+    "transferred": false
+  }
+]

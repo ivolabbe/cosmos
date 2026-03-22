@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correlator | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=C">C</a></li>
+        <li><span class="current">Correlator</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container container--narrow">
+        <header class="article__header">
+          <h1 class="article__title">Correlator</h1>
+        </header>
+        <div class="article__body">
+          <p>In <a class="lexicon-term" href="radio-astronomy.html">radio astronomy</a> the term &#8220;<a class="lexicon-term" href="correlator.html">correlator</a>&#8221; usually refers to a digital device that takes two <a class="lexicon-term" href="nyquist-rate.html">Nyquist</a>-sampled digital streams representing the voltages present in one or more radio receivers and computes the cross-<a class="lexicon-term" href="correlated.html">correlation</a> function as a function of time lag. Unlike the instantaneous voltages, the cross correlation function can be integrated without degradation of the signal, and dumped at a much lower data rate to a computer. Correlators are at the heart of all modern <a class="lexicon-term" href="telescope.html">radio telescope</a> <a class="lexicon-term" href="aperture.html">aperture</a> synthesis arrays such as the <span class="caps"><a class="lexicon-term" href="very-large-array-(vla).html">VLA</a></span>.</p>
+
+	<p>
+<div class="imageRight" style="width:200px; ">
+<div class="imageWrapper" style="width:200px; ">
+<img src="../images/HET608-m08a02_4-200x300.jpg" width="200" height="300" alt="2GHz SEST Correlator" title="2GHz SEST Correlator"/>
+<div class="caption">
+The 2 <a class="lexicon-term" href="hertz.html">GHz</a> <span class="caps">SEST</span> correlator is an example of a hardware correlator used in <a class="lexicon-term" href="spectroscopy.html">spectroscopy</a>.<br/><a href="http://www.atnf.csiro.au/" target="_blank">Credit</a>: ATNF
+</div>
+</div><!-- End of imageWrapper div -->
+</div><!-- End of alignment div -->
+</p>
+
+	<p><a class="lexicon-term" href="astronomy.html">Astronomers</a> make use of a remarkable property of the cross correlation function, which is that the <a class="lexicon-term" href="fourier-transform.html">Fourier transform</a> of it represents the <a class="lexicon-term" href="power-spectrum.html">power spectrum</a>, or power as a function of radio <a class="lexicon-term" href="frequency.html">frequency</a>. This is known in signal processing circles as the &#8220;Wiener-Kninchen&#8221; theorem.</p>
+
+	<p>The number of &#8220;lags&#8221; determines the spectral <a class="lexicon-term" href="resolution.html">resolution</a> of the correlator, which are usually some power of 2. Prior to the 1990s correlators were most often comprised of custom chips that could rapidly compute the cross-correlation function of two digital streams often only comprising of 2 bits of significance. These correlators could compute the cross correlation function over a set number of &#8220;lags&#8221; and the limited number of bits resulted in slight losses in signal to noise, and the need to make statistical corrections to estimate the true power &#8211; the so-called &#8220;van Vleck&#8221; correction.</p>
+
+	<p>Modern field programmable gate arrays (<span class="caps"><a class="lexicon-term" href="field-programmable-gate-array.html">FPGA</a></span>s) have now largely replaced custom hardware in correlator design and implementation. <span class="caps">FPGA</span>s can compute millions of <span class="caps"><a class="lexicon-term" href="fast-fourier-transform.html">FFT</a></span>s (fast <a class="lexicon-term" href="fourier-transform.html">Fourier transforms</a>) per <a class="lexicon-term" href="second.html">second</a> and produce the power spectrum with more bits of precision and less subsequent artefacts. For limited bandwidths, correlators can now be implemented in software on general purpose computers.</p>
+
+	<p>When a correlator is fed two streams that are identical, it acts as an &#8220;autocorrelation spectrometer&#8221; or autocorrelator.</p>
+
+	<p>There are two main &#8220;flavours&#8221; of correlator in multi-<a class="lexicon-term" href="element.html">element</a> telescopes, the so-called XF and FX versions. XF correlators compute the cross-correlation function first for each <a class="lexicon-term" href="baseline.html">baseline</a>, then <span class="caps">FFT</span> the result, whereas it is also possible to <span class="caps">FFT</span> the input data streams independently and cross-multiply the results for each baseline. The two approaches are mathematically identical.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

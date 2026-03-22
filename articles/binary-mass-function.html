@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary Mass Function | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=B">B</a></li>
+        <li><span class="current">Binary Mass Function</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container container--narrow">
+        <header class="article__header">
+          <h1 class="article__title">Binary Mass Function</h1>
+        </header>
+        <div class="article__body">
+          <p>When looking at binary systems in <a class="lexicon-term" href="astronomy.html">astronomy</a>, we sometimes only possess information about the <a class="lexicon-term" href="orbit.html">orbit</a> of one component of the system. This is because there are often rather large <a class="lexicon-term" href="luminosity.html">luminosity</a> differences between the components of a binary system, either because of extreme <a class="lexicon-term" href="mass.html">mass</a> ratios and hence <a class="lexicon-term" href="luminosity.html">luminosities</a>, or because one component is a <a class="lexicon-term" href="star.html">stellar</a> remnant such as a <a class="lexicon-term" href="white-dwarf.html">white dwarf</a>, <a class="lexicon-term" href="neutron-star.html">neutron star</a> or <a class="lexicon-term" href="black-hole.html">black hole</a>. Sometimes a source detected in the radio or X-ray <a class="lexicon-term" href="wavelength.html">wavelength</a> regime has a poorly known position and the companion cannot be unambiguously identified. In the case of these single-line <a class="lexicon-term" href="binary-star.html">spectroscopic binaries</a> or binary radio or X-ray <a class="lexicon-term" href="pulsar.html">pulsars</a>, we can only accurately measure the <a class="lexicon-term" href="period.html">orbital period</a> <strong><em>P<sub>b</sub></em></strong>, and <a class="lexicon-term" href="projected-semi-major-axis.html">projected semi-major axis</a> <strong><em>a sin i</em></strong> of one star.</p>
+
+	<p>By combining Newton&#8217;s laws of gravitation and motion we can still calculate a handy quantity <strong><em>f(m<sub>1</sub>,m<sub>2</sub>)</em></strong> known as the mass function.</p>
+
+	<p style="text-align:center;"><img class="teximage" src="../images/tex-da1c29764caa65db5804067bae27c2cceb7d4427.png" alt="$ f(m_1,m_2) = {{4\pi^2}\over{G}}{{(a \sin i)^3}\over{P_b^2}} = {{(m_2\sin i)^3}\over{(m_1+m_2)^2}} $"width="313" height="36" /></p>
+
+	<p>Here <strong><em>m<sub>1</sub></em></strong> and <strong><em>m<sub>2</sub></em></strong> are the masses of the star and companion respectively, <strong><em>G</em></strong> is Newton&#8217;s <a class="lexicon-term" href="gravitational-constant.html">gravitational constant</a> and <strong><em>i</em></strong> is the <a class="lexicon-term" href="orbit.htmlal+Inclination">inclination angle</a> of the binary (defined so <strong><em>i=90 deg</em></strong> is edge on).</p>
+
+	<p>The mass function has the units of mass, and is the minimum mass of the companion should the star for which we have orbital information be a test particle (or effectively massless). When additional information is available about the mass of the star with the orbital information, more accurate estimates of the companion mass can be obtained.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
