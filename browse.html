@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <script src="js/cosmos-index.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="index.html">COSMOS</a></li>
+        <li><span class="current" id="breadcrumb-letter">Browse</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- A-Z quick nav -->
+  <nav class="az-index" aria-label="Alphabetical index">
+    <div class="container">
+      <p class="az-index__heading">Browse by letter</p>
+      <div class="az-index__grid" id="az-grid"></div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section class="article">
+      <div class="container container--narrow">
+        <header class="article__header">
+          <h1 class="article__title" id="browse-title">All Entries</h1>
+        </header>
+        <div class="article__body" id="browse-results">
+          <p style="color:#808285;">Loading...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="index.html">COSMOS Home</a></li>
+          <li><a href="browse.html">All Entries</a></li>
+          <li><a href="search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var letter = (params.get('letter') || '').toUpperCase();
+      var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+      // Build A-Z grid dynamically, highlighting current letter
+      var gridEl = document.getElementById('az-grid');
+      alphabet.forEach(function(L) {
+        var a = document.createElement('a');
+        a.href = 'browse.html?letter=' + L;
+        a.className = 'az-index__letter' + (L === letter ? ' az-index__letter--active' : '');
+        a.textContent = L;
+        gridEl.appendChild(a);
+      });
+      var allLink = document.createElement('a');
+      allLink.href = 'browse.html';
+      allLink.className = 'az-index__letter az-index__letter--all' + (!letter ? ' az-index__letter--active' : '');
+      allLink.textContent = 'All';
+      gridEl.appendChild(allLink);
+
+      // Filter articles
+      var articles;
+      if (letter) {
+        articles = COSMOS_INDEX.filter(function(a) { return a.letter === letter; });
+        document.getElementById('browse-title').textContent = letter;
+        document.getElementById('breadcrumb-letter').textContent = letter;
+        document.title = letter + ' | COSMOS Encyclopedia';
+      } else {
+        articles = COSMOS_INDEX.slice().sort(function(a, b) {
+          return a.title.localeCompare(b.title);
+        });
+        document.getElementById('browse-title').textContent = 'All Entries';
+        document.title = 'All Entries | COSMOS Encyclopedia';
+      }
+
+      // Render results
+      var resultsDiv = document.getElementById('browse-results');
+      if (articles.length === 0) {
+        resultsDiv.innerHTML = '<p style="color:#808285;">No entries found' +
+          (letter ? ' for letter "' + letter + '"' : '') +
+          '. More entries are being added — check back soon.</p>';
+      } else {
+        var html = '<p style="color:#808285;margin-bottom:24px;">' + articles.length + ' entr' +
+          (articles.length === 1 ? 'y' : 'ies') +
+          (letter ? ' under ' + letter : ' total') + '</p>';
+        html += '<ul style="list-style:none; margin:0; padding:0; columns: 2; column-gap:40px;">';
+        articles.forEach(function(a) {
+          html += '<li style="margin-bottom:10px; break-inside:avoid;"><a href="articles/' + a.slug + '.html">' + a.title + '</a></li>';
+        });
+        html += '</ul>';
+        resultsDiv.innerHTML = html;
+      }
+    })();
+  </script>
+</body>
+</html>

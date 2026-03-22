@@ -1,0 +1,62 @@
+var COSMOS_INDEX = [
+  {
+    "slug": "astronomy",
+    "title": "Astronomy",
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Astronomy",
+    "letter": "A"
+  },
+  {
+    "slug": "planck-length",
+    "title": "Planck Length",
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planck+Length",
+    "letter": "P"
+  },
+  {
+    "slug": "dust-grain",
+    "title": "Dust Grain",
+    "url": "https://astronomy.swin.edu.au/cosmos/D/Dust+Grain",
+    "letter": "D"
+  },
+  {
+    "slug": "asteroid",
+    "title": "Asteroid",
+    "url": "https://astronomy.swin.edu.au/cosmos/A/Asteroid",
+    "letter": "A"
+  },
+  {
+    "slug": "moon",
+    "title": "Moon",
+    "url": "https://astronomy.swin.edu.au/cosmos/M/Moon",
+    "letter": "M"
+  },
+  {
+    "slug": "planet",
+    "title": "Planet",
+    "url": "https://astronomy.swin.edu.au/cosmos/P/Planet",
+    "letter": "P"
+  },
+  {
+    "slug": "star",
+    "title": "Star",
+    "url": "https://astronomy.swin.edu.au/cosmos/S/Star",
+    "letter": "S"
+  },
+  {
+    "slug": "galaxy",
+    "title": "Galaxy",
+    "url": "https://astronomy.swin.edu.au/cosmos/G/Galaxy",
+    "letter": "G"
+  },
+  {
+    "slug": "universe",
+    "title": "Universe",
+    "url": "https://astronomy.swin.edu.au/cosmos/U/Universe",
+    "letter": "U"
+  },
+  {
+    "slug": "equator",
+    "title": "Equator",
+    "url": "https://astronomy.swin.edu.au/cosmos/E/Equator",
+    "letter": "E"
+  }
+];
