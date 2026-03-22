@@ -70,6 +70,8 @@ For TeX images, give them descriptive names based on the `alt` attribute (e.g., 
 
 Download each to `images/` using the basename. **Skip if already downloaded** (file exists with non-zero size). Check for filename collisions — prefix with a short hash if needed.
 
+**WARNING: Filenames with `+` characters.** Some CMS filenames contain `+` (e.g., `galacticjets5+0.jpg`). Naive basename extraction splits at the `+`, producing broken names like `0.jpg`. Always use the FULL original filename, replacing `+` with `-` for the local copy.
+
 ## Step 5: Transform Content
 
 Apply these transformations to the extracted body HTML:
@@ -98,7 +100,16 @@ http(s)://astronomy.swin.edu.au/sao... →
 https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/
 ```
 
-### 5d. Keep external credit links
+### 5d. Swinburne staff/department credit links → new domain
+
+Credit links to Swinburne staff or departments on the old domain must also be rewritten:
+```
+http://astronomy.swin.edu.au/staff/...    → https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/
+http://astronomy.swin.edu.au/cosmology/   → (same CAS URL)
+http://www.astronomy.swin.edu.au/         → (same CAS URL)
+```
+
+### 5e. Keep external credit links
 
 Links to NASA, Hubble, AAO, NOAO, JPL etc. are legitimate credit links — leave them as-is.
 
@@ -148,3 +159,15 @@ Run these checks after every transfer batch. See `.agents/verify.sh` for the ful
 - **CMS:** Drupal 7
 - **Total articles:** 643
 - **Article counts by letter:** A:55 B:27 C:59 D:30 E:27 F:19 G:41 H:32 I:19 J:5 K:8 L:25 M:36 N:16 O:10 P:46 Q:2 R:25 S:83 T:28 U:5 V:14 W:15 X:7 Y:1 Z:8
+- **Status:** All 643 articles transferred (March 2026)
+
+## Lessons Learned
+
+These issues were encountered during the bulk transfer and should be pre-empted in any re-transfer:
+
+1. **Image filenames with `+`:** CMS filenames like `galacticjets5+0.jpg` get split at `+` during basename extraction, producing `0.jpg`. Fix: use FULL basename, replace `+` with `-`.
+2. **Swinburne staff credit links:** Some articles have `http://astronomy.swin.edu.au/staff/...` or `/cosmology/` credit links — not article links but still old domain. Fix: rewrite ALL `astronomy.swin.edu.au` URLs to new CAS URL.
+3. **`/cosmos/cosmos/` double-path links:** Internal Drupal links use double prefix. Fix: regex for both `https://astronomy.swin.edu.au/cosmos/X/Title` AND `/cosmos/cosmos/X/title`.
+4. **Non-article `/cosmos/` paths:** Links like `/cosmos/cosmos/-/-About` or `/cosmos/S/S0+galaxy` don't follow standard convention. Fix: convert to slug anyway, flag as warnings.
+5. **Agent load balancing:** Letter S has 83 articles (3x average). Assign biggest letters to dedicated agents, batch smaller ones together.
+6. **Post-transfer fixup pass is essential:** Even with good transform rules, a verify + fixup pass catches edge cases agents miss (filename collisions, unusual URL patterns).
