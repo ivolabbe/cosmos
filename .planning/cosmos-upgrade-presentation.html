@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMOS Encyclopedia — Upgrade Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --swin-charcoal: #343642;
+      --swin-red: #DC2D27;
+      --swin-light: #f6f6f6;
+      --swin-dark: #242323;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      color: var(--swin-charcoal);
+      background: #fff;
+    }
+
+    /* Slide system */
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      position: relative;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .slide--dark {
+      background: var(--swin-charcoal);
+      color: #fff;
+    }
+
+    .slide--red {
+      background: var(--swin-red);
+      color: #fff;
+    }
+
+    .slide--hero {
+      background: linear-gradient(135deg, #0c1445 0%, #1a0a2e 40%, #0d0d2b 100%);
+      color: #fff;
+      text-align: center;
+    }
+
+    .slide__number {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.4;
+    }
+
+    .slide__tag {
+      display: inline-block;
+      background: var(--swin-red);
+      color: #fff;
+      padding: 4px 14px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .slide--dark .slide__tag,
+    .slide--red .slide__tag {
+      background: rgba(255,255,255,0.2);
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 0.5em;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 0.5em;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.4em;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.8;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: #666;
+      margin-bottom: 1.5em;
+      max-width: 800px;
+    }
+
+    .slide--dark .lead { color: rgba(255,255,255,0.6); }
+
+    ul, ol { margin: 0.5em 0 1em 1.5em; }
+    li { margin-bottom: 0.4em; }
+
+    strong { font-weight: 700; }
+    .highlight { color: var(--swin-red); font-weight: 700; }
+    .slide--dark .highlight, .slide--red .highlight { color: #ffaa22; }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      margin-top: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    /* Cards */
+    .card {
+      background: #fff;
+      border-radius: 6px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .slide--dark .card {
+      background: rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+
+    .card h3 { color: var(--swin-red); }
+    .slide--dark .card h3 { color: #ffaa22; }
+
+    .card p { font-size: 0.95rem; }
+
+    /* Stat */
+    .stat { text-align: center; }
+    .stat__number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--swin-red);
+      line-height: 1;
+    }
+    .slide--dark .stat__number { color: #ffaa22; }
+    .stat__label {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 4px;
+    }
+    .slide--dark .stat__label { color: rgba(255,255,255,0.5); }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    th {
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+    }
+    .slide--dark th { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.1); }
+    .slide--dark td { border-color: rgba(255,255,255,0.1); }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge--green { background: #d4edda; color: #155724; }
+    .badge--yellow { background: #fff3cd; color: #856404; }
+    .badge--red { background: #f8d7da; color: #721c24; }
+    .badge--blue { background: #d1ecf1; color: #0c5460; }
+
+    /* Impact/Effort matrix */
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+      background: rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 700px;
+      margin: 24px auto;
+      height: 400px;
+    }
+    .matrix__cell {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .matrix__cell--highlight {
+      background: rgba(220, 45, 39, 0.15);
+    }
+    .matrix__label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+    .matrix__items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .matrix__items li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      padding-left: 0;
+    }
+
+    /* Footer on each slide */
+    .slide__footer {
+      position: absolute;
+      bottom: 16px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      opacity: 0.3;
+    }
+
+    /* Print styles */
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+    @media print {
+      body { background: #fff; }
+      .slide {
+        page-break-after: always;
+        page-break-inside: avoid;
+        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
+        padding: 40px 60px;
+        border: none;
+      }
+      .slide:last-child { page-break-after: auto; }
+      .slide__footer { display: none; }
+      .slide--hero, .slide--dark, .slide--red {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .badge {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<section class="slide slide--hero">
+  <div>
+    <div class="slide__tag">Centre for Astrophysics &amp; Supercomputing</div>
+    <h1>Upgrading COSMOS</h1>
+    <p class="subtitle">Making the SAO Encyclopedia of Astronomy the world's premier interactive astronomy reference — a proposal for the next generation of COSMOS.</p>
+    <p style="margin-top:2em; font-size:0.9rem; opacity:0.4;">Swinburne University of Technology &middot; March 2026</p>
+  </div>
+  <div class="slide__footer" style="color:rgba(255,255,255,0.3);">
+    <span>COSMOS Upgrade Proposal</span>
+    <span>1 / 12</span>
+  </div>
+</section>
+
+<!-- SLIDE 2: What COSMOS is today -->
+<section class="slide">
+  <span class="slide__number">2 / 12</span>
+  <div class="slide__tag">Current State</div>
+  <h2>COSMOS Today</h2>
+  <p class="lead">A respected, free astronomy encyclopedia — recently modernised with Swinburne house styling and fully self-hosted infrastructure.</p>
+  <div class="grid-4" style="margin-top:32px;">
+    <div class="stat">
+      <div class="stat__number">644</div>
+      <div class="stat__label">articles</div>
+    </div>
+    <div class="stat">
+      <div class="stat__number">866</div>
+      <div class="stat__label">images</div>
+    </div>
+    <div class="stat">
+      <div class="stat__number">20+</div>
+      <div class="stat__label">years of content</div>
+    </div>
+    <div class="stat">
+      <div class="stat__number">4</div>
+      <div class="stat__label">major citing platforms</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:32px; color:#888; font-size:0.95rem;">Cited by Universe Today &middot; Astronomy Cast &middot; Astronomy Picture of the Day &middot; timeanddate.com</p>
+</section>
+
+<!-- SLIDE 3: Competitive Landscape -->
+<section class="slide slide--dark">
+  <span class="slide__number" style="color:rgba(255,255,255,0.3);">3 / 12</span>
+  <div class="slide__tag">Landscape</div>
+  <h2>The Competition</h2>
+  <p class="lead">How COSMOS compares to other online astronomy resources.</p>
+  <table>
+    <thead>
+      <tr><th>Resource</th><th>Articles</th><th>Depth</th><th>Authority</th><th>Interactive</th><th>Free</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>COSMOS</strong></td><td>644</td><td><span class="badge badge--green">High</span></td><td><span class="badge badge--green">Research astronomers</span></td><td><span class="badge badge--red">Limited</span></td><td><span class="badge badge--green">Yes</span></td></tr>
+      <tr><td>Wikipedia</td><td>30,000+</td><td><span class="badge badge--yellow">Variable</span></td><td><span class="badge badge--yellow">Crowd-sourced</span></td><td><span class="badge badge--red">No</span></td><td><span class="badge badge--green">Yes</span></td></tr>
+      <tr><td>NASA (fragmented)</td><td>1,000s</td><td><span class="badge badge--yellow">Moderate</span></td><td><span class="badge badge--green">NASA</span></td><td><span class="badge badge--yellow">Some</span></td><td><span class="badge badge--green">Yes</span></td></tr>
+      <tr><td>HyperPhysics</td><td>~6,000</td><td><span class="badge badge--yellow">Moderate</span></td><td><span class="badge badge--green">Academic</span></td><td><span class="badge badge--yellow">Concept maps</span></td><td><span class="badge badge--green">Yes</span></td></tr>
+      <tr><td>Britannica</td><td>~500-800</td><td><span class="badge badge--yellow">Moderate</span></td><td><span class="badge badge--green">Editors</span></td><td><span class="badge badge--yellow">Quizzes</span></td><td><span class="badge badge--red">Paywalled</span></td></tr>
+      <tr><td>ESA/Hubble</td><td>41</td><td><span class="badge badge--red">Low</span></td><td><span class="badge badge--green">ESA</span></td><td><span class="badge badge--red">No</span></td><td><span class="badge badge--green">Yes</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SLIDE 4: COSMOS's unique position -->
+<section class="slide">
+  <span class="slide__number">4 / 12</span>
+  <div class="slide__tag">Positioning</div>
+  <h2>What Makes COSMOS Unique</h2>
+  <p class="lead">No other resource combines all four of these qualities.</p>
+  <div class="grid-2" style="max-width:800px;">
+    <div class="card">
+      <h3>Expert-Written</h3>
+      <p>Every article written by active research astronomers at Swinburne CAS. Unlike Wikipedia (crowd-sourced) or Britannica (generalist editors).</p>
+    </div>
+    <div class="card">
+      <h3>Free &amp; Open</h3>
+      <p>No paywall, no login, no ads. Unlike Britannica (paywalled) or NASA (fragmented across dozens of sub-sites).</p>
+    </div>
+    <div class="card">
+      <h3>Astronomy-Focused</h3>
+      <p>Dedicated astronomy encyclopedia with real depth. Unlike general encyclopedias where astronomy is one section among hundreds.</p>
+    </div>
+    <div class="card">
+      <h3>Full Control</h3>
+      <p>We own the entire site — code, content, hosting. Can add any feature without committee approval or platform constraints.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: The Gap -->
+<section class="slide slide--red">
+  <span class="slide__number" style="color:rgba(255,255,255,0.3);">5 / 12</span>
+  <h2>The Gap Nobody Fills</h2>
+  <p class="subtitle" style="max-width:800px;">No astronomy resource offers <strong>interactive visualisations</strong> tied to encyclopedic content. No one provides a <strong>navigable knowledge graph</strong>. No one bridges <strong>textbook definitions</strong> with <strong>current research</strong>. No one offers <strong>structured data</strong> for apps and LLMs to query.</p>
+  <p style="margin-top:2em; font-size:1.1rem; text-align:center; opacity:0.8;">These are all achievable with the infrastructure we now have.</p>
+</section>
+
+<!-- SLIDE 6: Proposal 1 - Interactive Viz -->
+<section class="slide">
+  <span class="slide__number">6 / 12</span>
+  <div class="slide__tag">Upgrade #1 &middot; Very High Impact</div>
+  <h2>Interactive Visualisations</h2>
+  <p class="lead">Replace static images with explorable 3D diagrams. A prototype already exists for the Zenith article.</p>
+  <div class="grid-2">
+    <div>
+      <h3>Flagship Targets</h3>
+      <ul>
+        <li><strong>HR Diagram</strong> — hover stars, see properties, click to articles</li>
+        <li><strong>Galaxy Classification</strong> — explore the Hubble tuning fork</li>
+        <li><strong>Cosmic Distance Ladder</strong> — step through each rung interactively</li>
+        <li><strong>Celestial Sphere</strong> — adjustable latitude, rotating sky</li>
+        <li><strong>EM Spectrum</strong> — slide through wavelengths, see telescopes</li>
+        <li><strong>Stellar Evolution</strong> — animate a star's life cycle</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Technical Approach</h3>
+      <ul>
+        <li>Three.js (3D) and D3.js (data viz) — no build step, CDN-loaded</li>
+        <li>Self-contained HTML+JS per visualisation</li>
+        <li>Embeddable in article pages or standalone</li>
+        <li>Mobile-responsive, touch-friendly</li>
+        <li>Each diagram links back to relevant COSMOS articles</li>
+      </ul>
+      <p style="margin-top:16px; color:var(--swin-red); font-weight:600;">Prototype: experimental/zenith-interactive.html</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7: Proposal 2 - Knowledge Graph -->
+<section class="slide slide--dark">
+  <span class="slide__number" style="color:rgba(255,255,255,0.3);">7 / 12</span>
+  <div class="slide__tag">Upgrade #2 &middot; High Impact, Low Effort</div>
+  <h2>Knowledge Graph Explorer</h2>
+  <p class="lead">COSMOS already has 644 densely cross-linked articles. Visualise the connections.</p>
+  <div class="grid-2">
+    <div>
+      <p>HyperPhysics pioneered concept-map navigation in 1998 — but with crude bubble diagrams frozen in time. We can build a modern, interactive force-directed graph where users visually explore how concepts connect.</p>
+      <p style="margin-top:16px;">Click "Black Hole" and see its connections radiate outward: Event Horizon, Singularity, Hawking Radiation, Neutron Star, Supernova, General Relativity...</p>
+    </div>
+    <div>
+      <h3>Why This Works</h3>
+      <ul>
+        <li>Data already exists — just parse existing cross-links</li>
+        <li>Single page with D3.js force-directed layout</li>
+        <li>Click any node to read the article</li>
+        <li>Filter by letter, topic cluster, or search</li>
+        <li>Visually demonstrates the depth and interconnectedness of COSMOS</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: Proposal 3 - Structured Data -->
+<section class="slide">
+  <span class="slide__number">8 / 12</span>
+  <div class="slide__tag">Upgrade #3 &middot; High Impact, Low Effort</div>
+  <h2>Structured Data &amp; SEO</h2>
+  <p class="lead">Make COSMOS machine-readable. Immediate SEO benefit, LLM integration, and app ecosystem.</p>
+  <div class="grid-3">
+    <div class="card">
+      <h3>JSON-LD Markup</h3>
+      <p>Add Schema.org Article markup to every page. Enables Google Knowledge Panels and rich search results. The single highest-ROI SEO action available.</p>
+    </div>
+    <div class="card">
+      <h3>Cross-Link Graph</h3>
+      <p>Export the article relationship graph as JSON. Apps, LLMs, and researchers can query how astronomy concepts connect — no other encyclopedia offers this.</p>
+    </div>
+    <div class="card">
+      <h3>Social Cards</h3>
+      <p>OpenGraph and Twitter Card meta tags for every article. When someone shares a COSMOS link, it displays with title, description, and image — driving engagement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 9: Proposal 4 - Latest Research -->
+<section class="slide slide--dark">
+  <span class="slide__number" style="color:rgba(255,255,255,0.3);">9 / 12</span>
+  <div class="slide__tag">Upgrade #4 &middot; High Impact</div>
+  <h2>Bridge Definitions &amp; Current Research</h2>
+  <p class="lead">Nobody links canonical astronomy definitions with the latest papers. COSMOS + NASA ADS can.</p>
+  <div class="grid-2">
+    <div>
+      <p>Each article gets a "Recent Research" sidebar, auto-populated from NASA ADS. A GitHub Actions workflow queries ADS weekly for papers matching each article's keywords.</p>
+      <p style="margin-top:16px;">The article on "Dark Energy" would show the 5 most recent relevant papers, with titles, authors, and links. No manual maintenance needed.</p>
+    </div>
+    <div>
+      <h3>Why This Matters</h3>
+      <ul>
+        <li>Positions COSMOS as a living, current resource</li>
+        <li>Connects undergraduate learning with the research frontier</li>
+        <li>Auto-updated — no editorial burden</li>
+        <li>Unique: Astrobites covers daily papers but doesn't link to definitions. COSMOS would do both.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 10: Implementation Roadmap -->
+<section class="slide">
+  <span class="slide__number">10 / 12</span>
+  <div class="slide__tag">Roadmap</div>
+  <h2>Phased Implementation</h2>
+  <div class="grid-3" style="margin-top:24px;">
+    <div class="card" style="border-left: 4px solid var(--swin-red);">
+      <h3>Phase 1: Quick Wins</h3>
+      <p style="color:#888; font-size:0.85rem; margin-bottom:12px;">Weeks</p>
+      <ul style="font-size:0.9rem;">
+        <li>JSON-LD schema markup</li>
+        <li>OpenGraph / Twitter cards</li>
+        <li>PWA offline capability</li>
+        <li>Knowledge graph data extraction</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left: 4px solid #ffaa22;">
+      <h3>Phase 2: Showcase</h3>
+      <p style="color:#888; font-size:0.85rem; margin-bottom:12px;">1-2 months</p>
+      <ul style="font-size:0.9rem;">
+        <li>5 flagship interactive visualisations</li>
+        <li>Knowledge graph explorer page</li>
+        <li>Social media sharing improvements</li>
+        <li>Embed support for educators</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left: 4px solid #2288cc;">
+      <h3>Phase 3: Sustained</h3>
+      <p style="color:#888; font-size:0.85rem; margin-bottom:12px;">Ongoing</p>
+      <ul style="font-size:0.9rem;">
+        <li>ADS research sidebar</li>
+        <li>Multi-level reading depth</li>
+        <li>New article contributions</li>
+        <li>Multilingual expansion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 11: What's already done -->
+<section class="slide slide--dark">
+  <span class="slide__number" style="color:rgba(255,255,255,0.3);">11 / 12</span>
+  <div class="slide__tag">Progress</div>
+  <h2>What's Already Built</h2>
+  <p class="lead">The foundation is in place. The entire COSMOS site has been modernised and migrated.</p>
+  <div class="grid-2" style="margin-top:24px;">
+    <div>
+      <h3>Completed</h3>
+      <ul>
+        <li>All 644 articles transferred to modern static site</li>
+        <li>866 images downloaded and served locally</li>
+        <li>Swinburne house style applied (responsive, mobile-friendly)</li>
+        <li>Client-side search and dynamic letter browsing</li>
+        <li>GitHub Pages hosting with auto-deploy on push</li>
+        <li>Zero dependencies on old astronomy.swin.edu.au server</li>
+        <li>Interactive zenith prototype built (Three.js)</li>
+        <li>Transfer automation and verification tooling</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Infrastructure</h3>
+      <ul>
+        <li><strong>Repo:</strong> github.com/ivolabbe/cosmos</li>
+        <li><strong>Live:</strong> ivolabbe.github.io/cosmos</li>
+        <li>Static HTML — fast, secure, no server maintenance</li>
+        <li>GitHub Actions CI/CD — push to deploy</li>
+        <li>Full transfer pipeline documented and automated</li>
+        <li>Verification script catches broken links/images</li>
+        <li>Agent architecture for parallel batch operations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12: Call to Action -->
+<section class="slide slide--hero">
+  <div>
+    <h1>Let's Make COSMOS<br>the World's Best<br>Astronomy Reference</h1>
+    <p class="subtitle" style="margin-top:1em;">Expert-written. Free. Interactive. Modern.<br>No other resource can claim all four.</p>
+    <p style="margin-top:3em; font-size:1rem; opacity:0.6;">
+      Live site: ivolabbe.github.io/cosmos<br>
+      Repository: github.com/ivolabbe/cosmos
+    </p>
+  </div>
+  <div class="slide__footer" style="color:rgba(255,255,255,0.3);">
+    <span>COSMOS Upgrade Proposal &middot; Centre for Astrophysics &amp; Supercomputing</span>
+    <span>12 / 12</span>
+  </div>
+</section>
+
+</body>
+</html>

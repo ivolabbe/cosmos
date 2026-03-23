@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Asteroid Belt | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #0a0a2e; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    #tooltip {
+      position: absolute; display: none;
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+      border-radius: 6px; padding: 10px 14px; font-size: 12px; max-width: 280px;
+      line-height: 1.5; pointer-events: none; z-index: 20;
+    }
+
+    #controls {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 14px; flex-wrap: nowrap; justify-content: center;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 12px 20px; z-index: 10;
+    }
+    #controls label { font-size: 12px; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    #controls input[type="range"] { width: 180px; accent-color: #DC2D27; cursor: pointer; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 6px 14px; border-radius: 4px; font-family: inherit; font-size: 12px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 8px; border-radius: 4px; font-family: inherit; font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="tooltip"></div>
+
+  <div id="controls">
+    <button id="btn-play" class="active">&#9654; Play</button>
+    <label>Speed
+      <select id="speed-select">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="3">3x</option>
+        <option value="10">10x</option>
+        <option value="30">30x</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="toggle-orbits" checked style="accent-color:#DC2D27;"> Orbits</label>
+    <label><input type="checkbox" id="toggle-labels" checked style="accent-color:#DC2D27;"> Labels</label>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+    import { Line2 } from 'three/addons/lines/Line2.js';
+    import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
+    import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
+
+    // ---- Scene ----
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 500);
+    camera.position.set(0, 20, 0.01);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x0a0a2e);
+    document.body.appendChild(renderer.domElement);
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(labelRenderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 2;
+    controls.maxDistance = 50;
+
+    // ---- Planet data (correct semi-major axes in AU) ----
+    const planets = [
+      { name: 'Mercury', a: 0.387, e: 0.206, period: 0.241, r: 0.05, color: 0xcccccc,
+        desc: 'The smallest planet, just 0.055 Earth masses. Orbital period: 88 days.' },
+      { name: 'Venus', a: 0.723, e: 0.007, period: 0.615, r: 0.07, color: 0xeecc66,
+        desc: 'Similar in size to Earth but with a thick CO\u2082 atmosphere. Period: 225 days.' },
+      { name: 'Earth', a: 1.0, e: 0.017, period: 1.0, r: 0.075, color: 0x44aaee,
+        desc: 'Our home planet. Orbital period: 365.25 days (1 year).' },
+      { name: 'Mars', a: 1.524, e: 0.093, period: 1.881, r: 0.06, color: 0xee5533,
+        desc: 'The Red Planet. The asteroid belt inner edge lies just beyond. Period: 687 days.' },
+      { name: 'Jupiter', a: 5.203, e: 0.049, period: 11.86, r: 0.25, color: 0xeebb88,
+        desc: 'The largest planet (318 Earth masses). Its gravity sculpts the asteroid belt and captures Trojans. Period: 11.86 years.' },
+    ];
+
+    // ---- Kepler solver ----
+    function solveKepler(M, e) {
+      let E = M;
+      for (let i = 0; i < 10; i++) E = E - (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+      return E;
+    }
+
+    function orbitXZ(a, e, period, time) {
+      const M = ((2 * Math.PI) / period) * time;
+      const E = solveKepler(M, e);
+      return [a * (Math.cos(E) - e), -a * Math.sqrt(1 - e * e) * Math.sin(E)];
+    }
+
+    function orbitXYZ(a, e, period, time, incl, omega) {
+      const M = ((2 * Math.PI) / period) * time;
+      const E = solveKepler(M, e);
+      const xO = a * (Math.cos(E) - e), yO = a * Math.sqrt(1 - e * e) * Math.sin(E);
+      const co = Math.cos(omega), so = Math.sin(omega), ci = Math.cos(incl), si = Math.sin(incl);
+      return [co * xO - so * yO, (so * xO + co * yO) * si, -(so * xO + co * yO) * ci];
+    }
+
+    function createOrbitRing(a, e, color, opacity) {
+      const group = new THREE.Group();
+      const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity });
+      // Draw 3 copies at tiny Y offsets to simulate thickness
+      for (const dy of [-0.008, 0, 0.008]) {
+        const pts = [], period = Math.pow(a, 1.5);
+        for (let i = 0; i <= 128; i++) {
+          const [x, z] = orbitXZ(a, e, period, (i / 128) * period);
+          pts.push(new THREE.Vector3(x, dy, z));
+        }
+        group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat));
+      }
+      return group;
+    }
+
+    // ---- Groups ----
+    const orbitGroup = new THREE.Group(); scene.add(orbitGroup);
+    const labelGroup = new THREE.Group(); scene.add(labelGroup);
+
+    // ---- Tooltip ----
+    const tipEl = document.getElementById('tooltip');
+    function makeLabel(text, pos, color, desc) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      div.style.cssText = `color:${color};font-size:11px;font-weight:600;font-family:"Open Sans",sans-serif;text-shadow:0 0 8px rgba(0,0,0,1),0 0 3px rgba(0,0,0,1);pointer-events:auto;cursor:default;padding:2px 4px;`;
+      if (desc) {
+        div.addEventListener('mouseenter', ev => { tipEl.innerHTML = `<strong>${text}</strong><br>${desc}`; tipEl.style.display = 'block'; tipEl.style.left = (ev.clientX+14)+'px'; tipEl.style.top = (ev.clientY-10)+'px'; });
+        div.addEventListener('mousemove', ev => { tipEl.style.left = (ev.clientX+14)+'px'; tipEl.style.top = (ev.clientY-10)+'px'; });
+        div.addEventListener('mouseleave', () => tipEl.style.display = 'none');
+      }
+      const label = new CSS2DObject(div);
+      label.position.set(pos.x||0, pos.y||0, pos.z||0);
+      labelGroup.add(label);
+      return label;
+    }
+
+    // ---- Sun ----
+    scene.add(new THREE.Mesh(new THREE.SphereGeometry(0.14, 32, 32), new THREE.MeshBasicMaterial({ color: 0xffee55 })));
+    scene.add(new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), new THREE.MeshBasicMaterial({ color: 0xffee55, transparent: true, opacity: 0.12 })));
+    makeLabel('Sun', { y: 0.1, z: -0.25 }, '#ffee55', 'Our star. All planets and asteroids orbit it.');
+
+    // ---- Planets ----
+    const planetObjs = planets.map(p => {
+      orbitGroup.add(createOrbitRing(p.a, p.e, p.color, 0.5));
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.r, 24, 24), new THREE.MeshBasicMaterial({ color: p.color }));
+      scene.add(mesh);
+      const label = makeLabel(p.name, {}, `#${p.color.toString(16).padStart(6,'0')}`,
+        `${p.desc}<br><em style="font-size:11px;opacity:0.5;">Semi-major axis: ${p.a} AU · e=${p.e} · P=${p.period} yr</em>`);
+      return { mesh, label, data: p, phase: Math.random() * p.period };
+    });
+
+    // ---- Kirkwood gaps ----
+    const gaps = [{c:2.502,w:0.05},{c:2.825,w:0.04},{c:2.958,w:0.04},{c:3.278,w:0.05}];
+    function inGap(a) { return gaps.some(g => Math.abs(a - g.c) < g.w); }
+
+    // ---- Asteroids & Trojans ----
+    let asteroidPoints, asteroidData = [], nAst = 2000;
+    let trojanL4Points, trojanL5Points, trojanL4Data = [], trojanL5Data = [];
+
+    function buildAll(count) {
+      nAst = count;
+      const nTroj = Math.max(80, Math.floor(count * 0.13));
+
+      // Main belt
+      asteroidData = [];
+      for (let i = 0; i < nAst; i++) {
+        let a; do { a = 2.06 + Math.random() * 1.28; } while (inGap(a));
+        asteroidData.push({ a, e: 0.01+Math.random()*0.2, incl: (Math.random()-0.5)*0.3,
+          omega: Math.random()*Math.PI*2, period: Math.pow(a,1.5), phase: Math.random()*Math.pow(a,1.5) });
+      }
+      if (asteroidPoints) scene.remove(asteroidPoints);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(nAst * 3), 3));
+      asteroidPoints = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xeeeedd, size: 0.05, transparent: true, opacity: 0.9, sizeAttenuation: true }));
+      scene.add(asteroidPoints);
+
+      // Trojans — arc-shaped clusters at ±60° from Jupiter
+      function makeTrojanData(angleDeg, n) {
+        const data = [], aRad = angleDeg * Math.PI / 180;
+        for (let i = 0; i < n; i++) {
+          const angSpread = ((Math.random()+Math.random()+Math.random())/3 - 0.5) * 0.87;
+          // Scatter: small offsets in x,z relative to the Lagrange point position
+          // (NOT radial from Sun — tangential and radial relative to the orbit)
+          data.push({
+            angOff: angSpread,
+            nom: aRad,
+            // Local offsets relative to the L-point (in AU), applied after position is computed
+            dTangent: (Math.random()-0.5) * 0.3,
+            dRadial: (Math.random()-0.5) * 0.3,
+            dY: (Math.random()-0.5) * 0.08,
+          });
+        }
+        return data;
+      }
+      trojanL4Data = makeTrojanData(60, nTroj);
+      trojanL5Data = makeTrojanData(-60, nTroj);
+
+      [trojanL4Points, trojanL5Points].forEach(p => { if (p) scene.remove(p); });
+      function mkTrojPts(data) {
+        const g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(data.length * 3), 3));
+        const p = new THREE.Points(g, new THREE.PointsMaterial({ color: 0x99ffbb, size: 0.05, transparent: true, opacity: 0.9, sizeAttenuation: true }));
+        scene.add(p); return p;
+      }
+      trojanL4Points = mkTrojPts(trojanL4Data);
+      trojanL5Points = mkTrojPts(trojanL5Data);
+    }
+    buildAll(2000);
+
+    // Belt boundaries
+    makeLabel('MAIN ASTEROID BELT', { x: -2.7, y: 0.1, z: 0 }, '#bbbbaa',
+      'Located 2.1\u20133.3 AU from the Sun, between Mars and Jupiter. Kirkwood gaps caused by orbital resonances with Jupiter.');
+
+    // ---- Distance scale on left side (vertical, along -X) ----
+    const scaleGroup = new THREE.Group(); scene.add(scaleGroup);
+    const scaleX = -6.5;
+    for (let au = 0; au <= 5; au++) {
+      // Horizontal tick (fat)
+      const tg = new LineGeometry(); tg.setPositions([scaleX-0.12, 0, -au, scaleX+0.12, 0, -au]);
+      scaleGroup.add(new Line2(tg, new LineMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.6, linewidth: 2, resolution: new THREE.Vector2(window.innerWidth, window.innerHeight) })));
+      if (au > 0) {
+        const d1 = document.createElement('div'); d1.textContent = au+' AU';
+        d1.style.cssText = 'color:rgba(255,255,255,0.5);font-size:10px;font-weight:600;font-family:"Open Sans",sans-serif;text-shadow:0 0 4px rgba(0,0,0,1);';
+        const l1 = new CSS2DObject(d1); l1.position.set(scaleX-0.5, 0, -au); scaleGroup.add(l1);
+        const d2 = document.createElement('div'); d2.textContent = (au*8.317).toFixed(1)+' lm';
+        d2.style.cssText = 'color:rgba(255,200,100,0.4);font-size:9px;font-family:"Open Sans",sans-serif;text-shadow:0 0 4px rgba(0,0,0,1);';
+        const l2 = new CSS2DObject(d2); l2.position.set(scaleX-0.5, 0, -au+0.3); scaleGroup.add(l2);
+      }
+    }
+    // Vertical bar line (fat)
+    const barGeo = new LineGeometry(); barGeo.setPositions([scaleX,0,0, scaleX,0,-5]);
+    scaleGroup.add(new Line2(barGeo, new LineMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.5, linewidth: 2, resolution: new THREE.Vector2(window.innerWidth, window.innerHeight) })));
+
+    // AU rings
+    for (let au = 1; au <= 6; au++) {
+      const pts = [];
+      for (let i = 0; i <= 128; i++) { const a = (i/128)*Math.PI*2; pts.push(new THREE.Vector3(au*Math.cos(a), -0.01, au*Math.sin(a))); }
+      const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineDashedMaterial({ color: 0x6666aa, transparent: true, opacity: 0.15, dashSize: 0.15, gapSize: 0.1 }));
+      l.computeLineDistances(); scaleGroup.add(l);
+    }
+
+    // ---- Stars ----
+    const starPos = [];
+    for (let i = 0; i < 800; i++) {
+      const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1), r = 40+Math.random()*80;
+      starPos.push(r*Math.sin(ph)*Math.cos(th), r*Math.sin(ph)*Math.sin(th), r*Math.cos(ph));
+    }
+    const sGeo = new THREE.BufferGeometry();
+    sGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
+    scene.add(new THREE.Points(sGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.1, transparent: true, opacity: 0.3 })));
+
+    // Trojan labels
+    const trL4Label = makeLabel('TROJAN ASTEROIDS', {}, '#88ddaa',
+      'Leading Trojans: 60\u00b0 ahead of Jupiter at the L4 Lagrange point. Locked in 1:1 orbital resonance.');
+    const trL5Label = makeLabel('TROJAN ASTEROIDS', {}, '#88ddaa',
+      'Trailing Trojans: 60\u00b0 behind Jupiter at the L5 Lagrange point. Locked in 1:1 orbital resonance.');
+
+    // ---- Animation ----
+    let time = 0, playing = true, speedMul = 1.0;
+    const jupObj = planetObjs.find(p => p.data.name === 'Jupiter');
+
+    function update(t) {
+      // Planets
+      planetObjs.forEach(({ mesh, label, data, phase }) => {
+        const [x, z] = orbitXZ(data.a, data.e, data.period, t + phase);
+        mesh.position.set(x, 0, z);
+        label.position.set(x, 0.1, z - data.r - 0.25);
+      });
+
+      // Main belt
+      if (asteroidPoints) {
+        const arr = asteroidPoints.geometry.attributes.position.array;
+        for (let i = 0; i < nAst; i++) {
+          const ad = asteroidData[i];
+          const [x, y, z] = orbitXYZ(ad.a, ad.e, ad.period, t + ad.phase, ad.incl, ad.omega);
+          arr[i*3]=x; arr[i*3+1]=y; arr[i*3+2]=z;
+        }
+        asteroidPoints.geometry.attributes.position.needsUpdate = true;
+      }
+
+      // Trojans — positioned at Jupiter's angle ±60°
+      const jupA = Math.atan2(-jupObj.mesh.position.z, jupObj.mesh.position.x);
+      const jupR = Math.sqrt(jupObj.mesh.position.x**2 + jupObj.mesh.position.z**2);
+      function updTroj(pts, data) {
+        if (!pts) return;
+        const arr = pts.geometry.attributes.position.array;
+        for (let i = 0; i < data.length; i++) {
+          const d = data[i];
+          // Compute the L-point position on Jupiter's orbit at ±60° offset
+          const lAngle = jupA + d.nom + d.angOff;
+          // Get the orbital radius at this angle using Jupiter's orbit parameters
+          // For Jupiter: a=5.203, e=0.049. Use the orbit equation r = a(1-e²)/(1+e·cos(trueAnomaly))
+          // Approximate: compute position on orbit at the offset time
+          const jupP = 11.86, jupE = 0.049, jupAA = 5.203;
+          const lTime = lAngle / (2 * Math.PI / jupP); // approximate time for this angle
+          const [lx, lz] = orbitXZ(jupAA, jupE, jupP, lTime);
+          // Apply local scatter (tangential and radial relative to orbit direction)
+          const radDir = Math.atan2(-lz, lx); // radial direction from Sun
+          const tanDir = radDir + Math.PI/2; // tangential direction
+          const x = lx + d.dRadial * Math.cos(radDir) + d.dTangent * Math.cos(tanDir);
+          const z = lz - d.dRadial * Math.sin(radDir) - d.dTangent * Math.sin(tanDir);
+          arr[i*3] = x;
+          arr[i*3+1] = d.dY;
+          arr[i*3+2] = z;
+        }
+        pts.geometry.attributes.position.needsUpdate = true;
+      }
+      updTroj(trojanL4Points, trojanL4Data);
+      updTroj(trojanL5Points, trojanL5Data);
+
+      // Label positions: compute L4/L5 on Jupiter's orbit
+      const jupP = 11.86, jupE = 0.049, jupAA = 5.203;
+      const l4Time = (jupA + Math.PI/3) / (2*Math.PI/jupP);
+      const l5Time = (jupA - Math.PI/3) / (2*Math.PI/jupP);
+      const [l4x, l4z] = orbitXZ(jupAA, jupE, jupP, l4Time);
+      const [l5x, l5z] = orbitXZ(jupAA, jupE, jupP, l5Time);
+      trL4Label.position.set(l4x, 0.3, l4z);
+      trL5Label.position.set(l5x, 0.3, l5z);
+
+    }
+
+    let lastT = performance.now();
+    function animate(now) {
+      requestAnimationFrame(animate);
+      if (playing) time += ((now - lastT) / 1000) * speedMul * 0.5;
+      lastT = now;
+      update(time);
+      controls.update();
+      renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
+    }
+    update(0);
+    animate(performance.now());
+
+    // ---- Controls ----
+    document.getElementById('btn-play').addEventListener('click', function() {
+      playing = !playing;
+      this.textContent = playing ? '\u25B6 Play' : '\u23F8 Pause';
+      this.classList.toggle('active', playing);
+    });
+    document.getElementById('speed-select').addEventListener('change', function() { speedMul = parseFloat(this.value); });
+    document.getElementById('toggle-orbits').addEventListener('change', function() { orbitGroup.visible = this.checked; });
+    document.getElementById('toggle-labels').addEventListener('change', function() { labelGroup.visible = this.checked; });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      labelRenderer.setSize(window.innerWidth, window.innerHeight);
+      // Update LineMaterial resolutions
+      scene.traverse(obj => { if (obj.material && obj.material.isLineMaterial) obj.material.resolution.set(window.innerWidth, window.innerHeight); });
+    });
+  </script>
+</body>
+</html>

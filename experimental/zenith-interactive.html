@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Zenith Diagram | COSMOS</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Open Sans", sans-serif;
+      background: #0c1020;
+      color: #e0e0e0;
+      overflow: hidden;
+    }
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    canvas { display: block; }
+
+    /* Info overlay */
+    #info {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(12, 16, 32, 0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 16px 20px;
+      max-width: 320px;
+      font-size: 14px;
+      line-height: 1.6;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #info h2 {
+      font-size: 18px;
+      font-weight: 300;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    #info .hint {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 8px;
+    }
+
+    /* Controls */
+    #controls {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    #controls label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      background: rgba(12, 16, 32, 0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 8px 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #controls input[type="range"] {
+      width: 100px;
+      accent-color: #DC2D27;
+    }
+    #controls input[type="checkbox"] {
+      accent-color: #DC2D27;
+    }
+
+    /* Tooltip for hovered elements */
+    #tooltip {
+      position: absolute;
+      display: none;
+      background: rgba(12, 16, 32, 0.92);
+      border: 1px solid rgba(220, 45, 39, 0.5);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      max-width: 260px;
+      line-height: 1.5;
+      pointer-events: none;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas-container">
+    <div id="info">
+      <h2>The Zenith &amp; Celestial Sphere</h2>
+      <p>The <strong>zenith</strong> is the point on the celestial sphere directly above an observer. The <strong>celestial meridian</strong> is the great circle passing through the zenith and both celestial poles.</p>
+      <p class="hint">Drag to rotate &middot; Scroll to zoom &middot; Hover labels for details</p>
+    </div>
+    <div id="tooltip"></div>
+    <div id="controls">
+      <label>Latitude <input type="range" id="lat-slider" min="-90" max="90" value="-38" step="1"><span id="lat-val">-38&deg;</span></label>
+      <label><input type="checkbox" id="toggle-grid" checked> Grid</label>
+      <label><input type="checkbox" id="toggle-labels" checked> Labels</label>
+      <label><input type="checkbox" id="toggle-auto" checked> Auto-rotate</label>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+    // --- Scene setup ---
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(3.5, 2.5, 3.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x0c1020);
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    // CSS2D label renderer
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.getElementById('canvas-container').appendChild(labelRenderer.domElement);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5;
+    controls.minDistance = 2;
+    controls.maxDistance = 12;
+
+    // --- Constants ---
+    const R = 2.0;  // celestial sphere radius
+    let latitude = -38;  // Melbourne default
+
+    // --- Materials ---
+    const matHorizon = new THREE.MeshBasicMaterial({
+      color: 0x2288cc, transparent: true, opacity: 0.15, side: THREE.DoubleSide
+    });
+    const matDome = new THREE.MeshBasicMaterial({
+      color: 0x1a3a6a, transparent: true, opacity: 0.08, side: THREE.BackSide, wireframe: false
+    });
+    const matMeridian = new THREE.LineBasicMaterial({ color: 0xff4422, linewidth: 2 });
+    const matEquator = new THREE.LineDashedMaterial({ color: 0xffaa22, dashSize: 0.1, gapSize: 0.05 });
+    const matGrid = new THREE.LineBasicMaterial({ color: 0x334466, transparent: true, opacity: 0.3 });
+    const matArrow = 0xff2222;
+    const matPole = 0xffaa00;
+
+    // --- Groups ---
+    const worldGroup = new THREE.Group();
+    scene.add(worldGroup);
+    const gridGroup = new THREE.Group();
+    worldGroup.add(gridGroup);
+    const labelGroup = new THREE.Group();
+    worldGroup.add(labelGroup);
+
+    // --- Earth (small sphere at center) ---
+    const earthGeo = new THREE.SphereGeometry(0.18, 32, 32);
+    const earthMat = new THREE.MeshBasicMaterial({ color: 0x2244aa });
+    const earth = new THREE.Mesh(earthGeo, earthMat);
+    worldGroup.add(earth);
+
+    // Earth surface texture pattern (simple gradient)
+    const earthCanvas = document.createElement('canvas');
+    earthCanvas.width = 256; earthCanvas.height = 128;
+    const ectx = earthCanvas.getContext('2d');
+    const grad = ectx.createLinearGradient(0, 0, 0, 128);
+    grad.addColorStop(0, '#1a4488'); grad.addColorStop(0.3, '#226644');
+    grad.addColorStop(0.5, '#228844'); grad.addColorStop(0.7, '#226644');
+    grad.addColorStop(1, '#1a4488');
+    ectx.fillStyle = grad; ectx.fillRect(0, 0, 256, 128);
+    // Add some "continent" blobs
+    ectx.fillStyle = '#2a7744';
+    [[60,40,30,20],[140,50,40,25],[180,70,20,15],[100,80,25,18]].forEach(([x,y,w,h]) => {
+      ectx.beginPath(); ectx.ellipse(x,y,w,h,0,0,Math.PI*2); ectx.fill();
+    });
+    const earthTex = new THREE.CanvasTexture(earthCanvas);
+    earth.material = new THREE.MeshBasicMaterial({ map: earthTex });
+
+    // --- Horizon plane ---
+    const horizonGeo = new THREE.CircleGeometry(R * 1.1, 64);
+    const horizon = new THREE.Mesh(horizonGeo, matHorizon);
+    horizon.rotation.x = -Math.PI / 2;
+    worldGroup.add(horizon);
+
+    // Horizon ring
+    const horizonRingGeo = new THREE.RingGeometry(R * 1.08, R * 1.1, 64);
+    const horizonRing = new THREE.Mesh(horizonRingGeo, new THREE.MeshBasicMaterial({
+      color: 0x44aadd, transparent: true, opacity: 0.5, side: THREE.DoubleSide
+    }));
+    horizonRing.rotation.x = -Math.PI / 2;
+    worldGroup.add(horizonRing);
+
+    // --- Celestial dome (upper hemisphere) ---
+    const domeGeo = new THREE.SphereGeometry(R, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2);
+    const dome = new THREE.Mesh(domeGeo, matDome);
+    worldGroup.add(dome);
+
+    // --- Helper: create arc ---
+    function createArc(center, radius, normal, startAngle, endAngle, segments, material) {
+      const pts = [];
+      const axis1 = new THREE.Vector3();
+      const axis2 = new THREE.Vector3();
+      // Find two vectors perpendicular to normal
+      if (Math.abs(normal.x) < 0.9) axis1.crossVectors(normal, new THREE.Vector3(1,0,0)).normalize();
+      else axis1.crossVectors(normal, new THREE.Vector3(0,1,0)).normalize();
+      axis2.crossVectors(normal, axis1).normalize();
+      for (let i = 0; i <= segments; i++) {
+        const a = startAngle + (endAngle - startAngle) * i / segments;
+        const p = new THREE.Vector3()
+          .addScaledVector(axis1, Math.cos(a) * radius)
+          .addScaledVector(axis2, Math.sin(a) * radius)
+          .add(center);
+        pts.push(p);
+      }
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      const line = new THREE.Line(geo, material);
+      if (material.isLineDashedMaterial) line.computeLineDistances();
+      return line;
+    }
+
+    // --- Grid lines ---
+    function buildGrid() {
+      gridGroup.clear();
+      // Altitude circles
+      for (let alt = 15; alt < 90; alt += 15) {
+        const r = R * Math.cos(alt * Math.PI / 180);
+        const y = R * Math.sin(alt * Math.PI / 180);
+        const geo = new THREE.BufferGeometry().setFromPoints(
+          Array.from({length: 65}, (_, i) => {
+            const a = (i / 64) * Math.PI * 2;
+            return new THREE.Vector3(r * Math.cos(a), y, r * Math.sin(a));
+          })
+        );
+        gridGroup.add(new THREE.Line(geo, matGrid));
+      }
+      // Azimuth lines
+      for (let az = 0; az < 360; az += 30) {
+        const a = az * Math.PI / 180;
+        const pts = Array.from({length: 20}, (_, i) => {
+          const elev = (i / 19) * Math.PI / 2;
+          return new THREE.Vector3(
+            R * Math.cos(elev) * Math.sin(a),
+            R * Math.sin(elev),
+            R * Math.cos(elev) * Math.cos(a)
+          );
+        });
+        gridGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), matGrid));
+      }
+    }
+    buildGrid();
+
+    // --- Helper: create label ---
+    const labels = [];
+    function makeLabel(text, position, color, description) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      div.style.cssText = `
+        color: ${color}; font-size: 13px; font-weight: 600; font-family: "Open Sans", sans-serif;
+        text-shadow: 0 0 6px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.5);
+        pointer-events: auto; cursor: default; padding: 2px 4px;
+      `;
+      if (description) {
+        div.addEventListener('mouseenter', (e) => {
+          const tip = document.getElementById('tooltip');
+          tip.innerHTML = `<strong>${text}</strong><br>${description}`;
+          tip.style.display = 'block';
+          tip.style.left = (e.clientX + 12) + 'px';
+          tip.style.top = (e.clientY - 8) + 'px';
+        });
+        div.addEventListener('mousemove', (e) => {
+          const tip = document.getElementById('tooltip');
+          tip.style.left = (e.clientX + 12) + 'px';
+          tip.style.top = (e.clientY - 8) + 'px';
+        });
+        div.addEventListener('mouseleave', () => {
+          document.getElementById('tooltip').style.display = 'none';
+        });
+      }
+      const label = new CSS2DObject(div);
+      label.position.copy(position);
+      labelGroup.add(label);
+      labels.push({ obj: label, div });
+      return label;
+    }
+
+    // --- Dynamic elements (rebuilt when latitude changes) ---
+    const dynamicGroup = new THREE.Group();
+    worldGroup.add(dynamicGroup);
+
+    function buildDynamic() {
+      dynamicGroup.clear();
+      // Remove old labels
+      labelGroup.clear();
+      labels.length = 0;
+
+      const latRad = latitude * Math.PI / 180;
+
+      // --- Zenith arrow ---
+      const zenithDir = new THREE.Vector3(0, 1, 0);
+      const zenithArrow = new THREE.ArrowHelper(zenithDir, new THREE.Vector3(0, 0.25, 0), R + 0.4, matArrow, 0.12, 0.08);
+      dynamicGroup.add(zenithArrow);
+
+      // --- Nadir arrow (below horizon, subtle) ---
+      const nadirArrow = new THREE.ArrowHelper(
+        new THREE.Vector3(0, -1, 0), new THREE.Vector3(0, -0.1, 0),
+        R * 0.5, 0x664444, 0.08, 0.06
+      );
+      dynamicGroup.add(nadirArrow);
+
+      // --- Celestial poles ---
+      // NCP direction: in the local frame, NCP is at altitude = latitude, toward north
+      const ncpAlt = latRad;
+      const ncp = new THREE.Vector3(0, Math.sin(ncpAlt), -Math.cos(ncpAlt)).multiplyScalar(R);
+      const scp = ncp.clone().negate();
+
+      // NCP marker
+      const ncpGeo = new THREE.SphereGeometry(0.05, 16, 16);
+      const ncpMesh = new THREE.Mesh(ncpGeo, new THREE.MeshBasicMaterial({ color: matPole }));
+      ncpMesh.position.copy(ncp);
+      dynamicGroup.add(ncpMesh);
+
+      // SCP marker (below horizon for southern latitudes shown dimmer)
+      const scpMesh = new THREE.Mesh(ncpGeo.clone(), new THREE.MeshBasicMaterial({
+        color: matPole, transparent: true, opacity: scp.y < 0 ? 0.3 : 0.8
+      }));
+      scpMesh.position.copy(scp);
+      dynamicGroup.add(scpMesh);
+
+      // Pole axis line
+      const poleLinePts = [ncp.clone().multiplyScalar(1.15), scp.clone().multiplyScalar(1.15)];
+      const poleLine = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(poleLinePts),
+        new THREE.LineDashedMaterial({ color: 0xffaa00, dashSize: 0.08, gapSize: 0.04, transparent: true, opacity: 0.5 })
+      );
+      poleLine.computeLineDistances();
+      dynamicGroup.add(poleLine);
+
+      // --- Celestial meridian (great circle through zenith and poles) ---
+      // This lies in the N-S vertical plane (xz plane with x=0)
+      const meridianPts = [];
+      for (let i = 0; i <= 64; i++) {
+        const a = (i / 64) * Math.PI;  // 0 to pi (south horizon -> zenith -> north horizon)
+        meridianPts.push(new THREE.Vector3(0, Math.sin(a) * R, Math.cos(a) * R));
+      }
+      const meridianLine = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(meridianPts),
+        new THREE.LineDashedMaterial({ color: 0xff4422, dashSize: 0.12, gapSize: 0.06 })
+      );
+      meridianLine.computeLineDistances();
+      dynamicGroup.add(meridianLine);
+
+      // --- Celestial equator ---
+      // The celestial equator is tilted relative to horizon by (90 - |latitude|) degrees
+      // It passes through E and W points, and its highest point is at altitude (90 - |lat|) in the south (for southern hemisphere)
+      const eqPts = [];
+      for (let i = 0; i <= 128; i++) {
+        const a = (i / 128) * Math.PI * 2;
+        // Equator in equatorial coords, then rotate by colatitude around E-W axis
+        const x = R * Math.cos(a);
+        const y0 = 0;
+        const z = R * Math.sin(a);
+        // Rotate around x-axis by (90-lat) degrees
+        const tilt = (Math.PI/2) - latRad;
+        const y = y0 * Math.cos(tilt) - z * Math.sin(tilt);
+        const zr = y0 * Math.sin(tilt) + z * Math.cos(tilt);
+        eqPts.push(new THREE.Vector3(x, y, zr));
+      }
+      const eqLine = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(eqPts),
+        new THREE.LineDashedMaterial({ color: 0xffaa22, dashSize: 0.1, gapSize: 0.05, transparent: true, opacity: 0.6 })
+      );
+      eqLine.computeLineDistances();
+      dynamicGroup.add(eqLine);
+
+      // --- Labels ---
+      makeLabel("Zenith", new THREE.Vector3(0, R + 0.55, 0), '#ff4444',
+        "The point on the celestial sphere directly above the observer. At altitude 90\u00b0.");
+
+      makeLabel("Nadir", new THREE.Vector3(0, -R * 0.6, 0), '#884444',
+        "The point on the celestial sphere directly below the observer, opposite the zenith.");
+
+      makeLabel("N", new THREE.Vector3(0, 0.08, -R * 1.15), '#44aadd',
+        "North point on the horizon. The celestial meridian passes through here.");
+      makeLabel("S", new THREE.Vector3(0, 0.08, R * 1.15), '#44aadd',
+        "South point on the horizon. The celestial meridian passes through here.");
+      makeLabel("E", new THREE.Vector3(R * 1.15, 0.08, 0), '#44aadd',
+        "East point on the horizon. The celestial equator passes through here.");
+      makeLabel("W", new THREE.Vector3(-R * 1.15, 0.08, 0), '#44aadd',
+        "West point on the horizon. The celestial equator passes through here.");
+
+      const ncpLabel = ncp.clone().multiplyScalar(1.15);
+      makeLabel("NCP", ncpLabel, '#ffaa00',
+        "North Celestial Pole. The sky appears to rotate around this point. Near the star Polaris.");
+
+      const scpLabel = scp.clone().multiplyScalar(1.15);
+      makeLabel("SCP", scpLabel, '#ffaa00',
+        "South Celestial Pole. The southern sky rotates around this point. No bright star marks it.");
+
+      makeLabel("celestial meridian", new THREE.Vector3(0.15, R * 0.7, -R * 0.7), '#ff6644',
+        "The great circle passing through the zenith, nadir, and both celestial poles. It divides the sky into eastern and western halves.");
+
+      makeLabel("celestial equator", new THREE.Vector3(R * 0.7, R * 0.3, 0), '#ffaa22',
+        "The projection of Earth\u2019s equator onto the celestial sphere. It always passes through the east and west points on the horizon.");
+
+      makeLabel("observer's horizon", new THREE.Vector3(R * 0.6, 0.12, R * 0.6), '#44aadd',
+        "The boundary between the visible sky and the ground. A plane perpendicular to the zenith\u2013nadir line.");
+
+      // Cardinal direction markers on horizon
+      const cardinals = [
+        { label: 'NE', az: -Math.PI/4 },
+        { label: 'NW', az: Math.PI/4 + Math.PI },
+        { label: 'SE', az: Math.PI/4 },
+        { label: 'SW', az: -Math.PI/4 + Math.PI },
+      ];
+      /* skip sub-cardinals to reduce clutter */
+    }
+
+    buildDynamic();
+
+    // --- Ambient stars ---
+    const starGeo = new THREE.BufferGeometry();
+    const starPositions = [];
+    for (let i = 0; i < 400; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = R * (3 + Math.random() * 5);
+      starPositions.push(
+        r * Math.sin(phi) * Math.cos(theta),
+        r * Math.sin(phi) * Math.sin(theta),
+        r * Math.cos(phi)
+      );
+    }
+    starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.03, transparent: true, opacity: 0.4 });
+    scene.add(new THREE.Points(starGeo, starMat));
+
+    // --- UI Controls ---
+    const latSlider = document.getElementById('lat-slider');
+    const latVal = document.getElementById('lat-val');
+    latSlider.addEventListener('input', () => {
+      latitude = parseInt(latSlider.value);
+      latVal.textContent = latitude + '\u00b0';
+      buildDynamic();
+    });
+
+    document.getElementById('toggle-grid').addEventListener('change', (e) => {
+      gridGroup.visible = e.target.checked;
+    });
+    document.getElementById('toggle-labels').addEventListener('change', (e) => {
+      labelGroup.visible = e.target.checked;
+    });
+    document.getElementById('toggle-auto').addEventListener('change', (e) => {
+      controls.autoRotate = e.target.checked;
+    });
+
+    // --- Animation loop ---
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
+    }
+    animate();
+
+    // --- Resize ---
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
