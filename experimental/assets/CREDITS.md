@@ -6,10 +6,10 @@ All third-party assets used in COSMOS interactive visualizations are listed here
 
 ## Planet & Solar System Textures
 
-**Source:** Solar System Scope
+**Source:** Solar System Scope (based on NASA imagery)
 **URL:** https://www.solarsystemscope.com/textures
 **Licence:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
-**Attribution:** Solar System Scope / solarsystemscope.com
+**Attribution:** Solar System Scope / solarsystemscope.com; original imagery NASA/JPL
 
 **Files:**
 - `textures/planets/8k_earth_daymap.jpg`
