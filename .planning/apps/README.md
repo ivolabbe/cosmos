@@ -19,3 +19,5 @@ Per-app dev logs track status, iteration history, open issues, and plans.
 | **Gravitational Waves** | `gravitational-waves-interactive.html`, `-article.html` | **Milestone 1 complete** | [gravitational-waves.md](gravitational-waves.md) |
 | **Asteroid Belt** | `asteroid-interactive.html`, `-article.html` | Prototype complete | [asteroid-belt.md](asteroid-belt.md) |
 | **Zenith Diagram** | `zenith-interactive.html` | Prototype | [zenith.md](zenith.md) |
+| **Sun** | `sun-interactive.html`, `-article.html` | **Complete** | [sun.md](sun.md) |
+| **Satellites & Orbits** | `satellites-interactive.html`, `satellite-article.html` | **Complete** | [satellites.md](satellites.md) |
