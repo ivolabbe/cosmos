@@ -61,26 +61,24 @@
   <div id="loading">Loading&hellip;</div>
 
   <div id="info">
-    <h2>Of Planes &amp; Satellites</h2>
-    <p class="desc">Orbital paths of satellites around Earth, colour-coded by type, with global airline routes.</p>
+    <h2>Satellites &amp; Orbits</h2>
+    <p class="desc">14,875 active satellites from the CelesTrak catalogue, colour-coded by orbit type, with global airline routes.</p>
     <p class="hint">Drag to orbit &middot; Scroll to zoom</p>
   </div>
 
   <div id="controls">
-    <label><input type="checkbox" id="cb-gps" checked> <span class="dot" style="background:#ff3333;"></span>GPS</label>
-    <label><input type="checkbox" id="cb-comms" checked> <span class="dot" style="background:#3377ff;"></span>Comms</label>
-    <label><input type="checkbox" id="cb-tech" checked> <span class="dot" style="background:#33cc55;"></span>Tech</label>
-    <label><input type="checkbox" id="cb-earth" checked> <span class="dot" style="background:#cccccc;"></span>Earth-obs</label>
+    <label><input type="checkbox" id="cb-leo" checked> <span class="dot" style="background:#44cccc;"></span>LEO</label>
+    <label><input type="checkbox" id="cb-meo" checked> <span class="dot" style="background:#ff4444;"></span>MEO</label>
+    <label><input type="checkbox" id="cb-geo" checked> <span class="dot" style="background:#4488ff;"></span>GEO</label>
+    <label><input type="checkbox" id="cb-heo" checked> <span class="dot" style="background:#44ff66;"></span>HEO</label>
     <div class="sep"></div>
     <label><input type="checkbox" id="cb-routes" checked> <span class="dot" style="background:#ff2200;"></span>Airlines</label>
     <div class="sep"></div>
     <label><input type="checkbox" id="cb-lights" checked> City lights</label>
     <label><input type="checkbox" id="cb-autorot" checked> Auto-rotate</label>
-    <div class="sep"></div>
-    <label><input type="checkbox" id="cb-catalog"> Real orbits</label>
   </div>
 
-  <div id="credit">Model: <a href="https://sketchfab.com/" target="_blank">Of Planes and Satellites</a></div>
+  <div id="credit">Orbits: <a href="https://celestrak.org/" target="_blank">CelesTrak</a> active catalogue. Textures: <a href="https://www.solarsystemscope.com/textures" target="_blank">Solar System Scope</a> (CC BY 4.0).</div>
 
   <script type="importmap">
   { "imports": {
@@ -159,31 +157,45 @@
     if (!child.material) return;
     const matName = child.material.name;
 
-    /* Replace line materials — additive for orbits, standard for dense airlines */
-    if ((child.isLineSegments || child.isLine) && LINE_COLORS[matName] !== undefined) {
-      const isRoutes = matName === 'routes_material';
-      const isNearEarth = matName === 'sat_earth_material';
-      const isComms = matName === 'sat_comms_material';
-      const isTech = matName === 'sat_tech_material';
-      child.material = new THREE.LineBasicMaterial({
-        color: LINE_COLORS[matName],
-        transparent: true,
-        opacity: isRoutes ? 0.05 : isNearEarth ? 0.02 : isComms ? 0.1 : isTech ? 0.18 : 0.45,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      });
+    /* Hide model satellite orbits — replaced by real catalog data */
+    if ((child.isLineSegments || child.isLine) && matName !== 'routes_material') {
+      child.visible = false;
     }
 
-    /* Store layer references */
-    if (matName === 'sat_gps_material')   layers.gps = child;
-    if (matName === 'sat_comms_material') layers.comms = child;
-    if (matName === 'sat_tech_material')  layers.tech = child;
-    if (matName === 'sat_earth_material') layers.earthObs = child;
-    if (matName === 'routes_material')    layers.routes = child;
-    if (matName === 'earth')              earthMesh = child;
+    /* Airline routes: keep with additive blending */
+    if (matName === 'routes_material') {
+      child.material = new THREE.LineBasicMaterial({
+        color: LINE_COLORS[matName], transparent: true, opacity: 0.05,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+      layers.routes = child;
+    }
+
+    if (matName === 'earth') earthMesh = child;
   });
 
   scene.add(gltf.scene);
+
+  /* ---- Load real satellite orbits from CelesTrak catalog ---- */
+  const CATALOG = {
+    leo: { file: 'models/satellites/catalog/cat_leo.bin', color: 0x44cccc, opacity: 0.015 },
+    meo: { file: 'models/satellites/catalog/cat_meo.bin', color: 0xff4444, opacity: 0.35  },
+    geo: { file: 'models/satellites/catalog/cat_geo.bin', color: 0x4488ff, opacity: 0.12  },
+    heo: { file: 'models/satellites/catalog/cat_heo.bin', color: 0x44ff66, opacity: 0.5   },
+  };
+  for (const [cat, cfg] of Object.entries(CATALOG)) {
+    const resp = await fetch(cfg.file);
+    const buf = await resp.arrayBuffer();
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(buf), 3));
+    const mat = new THREE.LineBasicMaterial({
+      color: cfg.color, transparent: true, opacity: cfg.opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const mesh = new THREE.LineSegments(geo, mat);
+    scene.add(mesh);
+    layers[cat] = mesh;
+  }
 
   /* ---- Enhance Earth material ---- */
   if (earthMesh) {
@@ -356,10 +368,10 @@
 
   /* ---- Controls wiring ---- */
   const cbMap = {
-    'cb-gps':     () => layers.gps,
-    'cb-comms':   () => layers.comms,
-    'cb-tech':    () => layers.tech,
-    'cb-earth':   () => layers.earthObs,
+    'cb-leo':     () => layers.leo,
+    'cb-meo':     () => layers.meo,
+    'cb-geo':     () => layers.geo,
+    'cb-heo':     () => layers.heo,
     'cb-routes':  () => layers.routes,
   };
 
@@ -378,49 +390,6 @@
 
   document.getElementById('cb-autorot').onchange = function() {
     controls.autoRotate = this.checked;
-  };
-
-  /* ---- Real catalog orbits (CelesTrak active catalog, 2026-03-27) ---- */
-  const CATALOG = {
-    leo:  { file: 'models/satellites/catalog/cat_leo.bin',  color: 0x44cccc, opacity: 0.015, label: '14k sats' },
-    meo:  { file: 'models/satellites/catalog/cat_meo.bin',  color: 0xff4444, opacity: 0.35,  label: '194 sats' },
-    geo:  { file: 'models/satellites/catalog/cat_geo.bin',  color: 0x4488ff, opacity: 0.12,  label: '601 sats' },
-    heo:  { file: 'models/satellites/catalog/cat_heo.bin',  color: 0x44ff66, opacity: 0.5,   label: '8 sats' },
-  };
-  const catalogMeshes = {};
-  let catalogLoaded = false;
-
-  async function loadCatalog() {
-    if (catalogLoaded) return;
-    for (const [cat, cfg] of Object.entries(CATALOG)) {
-      const resp = await fetch(cfg.file);
-      const buf = await resp.arrayBuffer();
-      const arr = new Float32Array(buf);
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
-      const mat = new THREE.LineBasicMaterial({
-        color: cfg.color, transparent: true, opacity: cfg.opacity,
-        blending: THREE.AdditiveBlending, depthWrite: false,
-      });
-      const mesh = new THREE.LineSegments(geo, mat);
-      mesh.visible = false;
-      scene.add(mesh);
-      catalogMeshes[cat] = mesh;
-    }
-    catalogLoaded = true;
-  }
-
-  document.getElementById('cb-catalog').onchange = async function() {
-    const on = this.checked;
-    if (on && !catalogLoaded) await loadCatalog();
-    /* Hide/show model orbits */
-    [layers.gps, layers.comms, layers.tech, layers.earthObs, layers.routes]
-      .forEach(m => { if (m) m.visible = !on && document.getElementById(
-        m === layers.gps ? 'cb-gps' : m === layers.comms ? 'cb-comms' :
-        m === layers.tech ? 'cb-tech' : m === layers.routes ? 'cb-routes' : 'cb-earth'
-      ).checked; });
-    /* Show/hide catalog orbits */
-    Object.values(catalogMeshes).forEach(m => m.visible = on);
   };
 
   /* ---- Animation loop ---- */
