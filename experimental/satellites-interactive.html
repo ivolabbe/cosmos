@@ -76,6 +76,8 @@
     <div class="sep"></div>
     <label><input type="checkbox" id="cb-lights" checked> City lights</label>
     <label><input type="checkbox" id="cb-autorot" checked> Auto-rotate</label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-catalog"> Real orbits</label>
   </div>
 
   <div id="credit">Model: <a href="https://sketchfab.com/" target="_blank">Of Planes and Satellites</a></div>
@@ -376,6 +378,49 @@
 
   document.getElementById('cb-autorot').onchange = function() {
     controls.autoRotate = this.checked;
+  };
+
+  /* ---- Real catalog orbits (CelesTrak active catalog, 2026-03-27) ---- */
+  const CATALOG = {
+    leo:  { file: 'models/satellites/catalog/cat_leo.bin',  color: 0x44cccc, opacity: 0.015, label: '14k sats' },
+    meo:  { file: 'models/satellites/catalog/cat_meo.bin',  color: 0xff4444, opacity: 0.35,  label: '194 sats' },
+    geo:  { file: 'models/satellites/catalog/cat_geo.bin',  color: 0x4488ff, opacity: 0.12,  label: '601 sats' },
+    heo:  { file: 'models/satellites/catalog/cat_heo.bin',  color: 0x44ff66, opacity: 0.5,   label: '8 sats' },
+  };
+  const catalogMeshes = {};
+  let catalogLoaded = false;
+
+  async function loadCatalog() {
+    if (catalogLoaded) return;
+    for (const [cat, cfg] of Object.entries(CATALOG)) {
+      const resp = await fetch(cfg.file);
+      const buf = await resp.arrayBuffer();
+      const arr = new Float32Array(buf);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+      const mat = new THREE.LineBasicMaterial({
+        color: cfg.color, transparent: true, opacity: cfg.opacity,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+      const mesh = new THREE.LineSegments(geo, mat);
+      mesh.visible = false;
+      scene.add(mesh);
+      catalogMeshes[cat] = mesh;
+    }
+    catalogLoaded = true;
+  }
+
+  document.getElementById('cb-catalog').onchange = async function() {
+    const on = this.checked;
+    if (on && !catalogLoaded) await loadCatalog();
+    /* Hide/show model orbits */
+    [layers.gps, layers.comms, layers.tech, layers.earthObs, layers.routes]
+      .forEach(m => { if (m) m.visible = !on && document.getElementById(
+        m === layers.gps ? 'cb-gps' : m === layers.comms ? 'cb-comms' :
+        m === layers.tech ? 'cb-tech' : m === layers.routes ? 'cb-routes' : 'cb-earth'
+      ).checked; });
+    /* Show/hide catalog orbits */
+    Object.values(catalogMeshes).forEach(m => m.visible = on);
   };
 
   /* ---- Animation loop ---- */
