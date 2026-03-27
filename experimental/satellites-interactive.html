@@ -72,6 +72,7 @@
     <label><input type="checkbox" id="cb-geo" checked> <span class="dot" style="background:#4488ff;"></span>GEO</label>
     <label><input type="checkbox" id="cb-heo" checked> <span class="dot" style="background:#44ff66;"></span>HEO</label>
     <div class="sep"></div>
+    <label><input type="checkbox" id="cb-positions"> <span class="dot" style="background:#ffffff;"></span>Positions</label>
     <label><input type="checkbox" id="cb-routes"> <span class="dot" style="background:#ff2200;"></span>Airlines</label>
     <div class="sep"></div>
     <label><input type="checkbox" id="cb-lights" checked> City lights</label>
@@ -196,6 +197,23 @@
     const mesh = new THREE.LineSegments(geo, mat);
     scene.add(mesh);
     layers[cat] = mesh;
+  }
+
+  /* ---- Satellite current positions (14,875 dots) ---- */
+  {
+    const resp = await fetch('models/satellites/catalog/all_positions.bin');
+    const buf = await resp.arrayBuffer();
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(buf), 3));
+    const mat = new THREE.PointsMaterial({
+      color: 0xffffff, size: 0.02, transparent: true, opacity: 0.7,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+      sizeAttenuation: true,
+    });
+    const points = new THREE.Points(geo, mat);
+    points.visible = false;
+    scene.add(points);
+    layers.positions = points;
   }
 
   /* ---- Enhance Earth material ---- */
@@ -369,11 +387,12 @@
 
   /* ---- Controls wiring ---- */
   const cbMap = {
-    'cb-leo':     () => layers.leo,
-    'cb-meo':     () => layers.meo,
-    'cb-geo':     () => layers.geo,
-    'cb-heo':     () => layers.heo,
-    'cb-routes':  () => layers.routes,
+    'cb-leo':       () => layers.leo,
+    'cb-meo':       () => layers.meo,
+    'cb-geo':       () => layers.geo,
+    'cb-heo':       () => layers.heo,
+    'cb-positions': () => layers.positions,
+    'cb-routes':    () => layers.routes,
   };
 
   Object.entries(cbMap).forEach(([id, getFn]) => {
