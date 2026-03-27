@@ -454,9 +454,8 @@
         float stepSize = (tEnd - tStart) / float(NUM_STEPS);
         if (stepSize <= 0.0) discard;
 
-        // Chirp phase: compute per-point frequency from retarded time
-        // (matching gwpv playground approach — creates realistic spiral arms)
-        float tau0 = max(u_timeToMerger, 0.01);  // time to merger at source
+        // Same wavenumber as 2D mode — same physics, just rendered volumetrically
+        float k = 6.2832 * u_gwFreq / u_waveSpeed;
 
         vec3 totalCol = vec3(0.0);
         float totalAlpha = 0.0;
@@ -471,56 +470,45 @@
           float cosT = n.y;
           float phi  = atan(n.z, n.x);
 
-          // Retarded time at this point: wave left source earlier
-          // Use much slower visual propagation for spiral structure
-          float tau_r = tau0 + r / (u_waveSpeed * 0.015);
-          // Local frequency from chirp: f ∝ τ^(-3/8)
-          float f_local = u_gwFreq * pow(tau0 / tau_r, 0.375);
-          // Phase from chirp formula: Φ(τ) ∝ -τ^(5/8)
-          // Phase at source = u_phase. Phase here scaled by retarded time ratio.
-          float localPhase = u_phase * pow(tau0 / tau_r, 0.625);
-          float phaseTerm = 2.0 * phi + localPhase;
+          // Same phase as 2D mode: outward-propagating quadrupolar wave
+          float phaseTerm = u_phase - k * r + 2.0 * phi;
+
+          // h+ and h× from (2,±2) modes
           float hPlus  = 0.5 * (1.0 + cosT * cosT) * cos(phaseTerm);
           float hCross = cosT * sin(phaseTerm);
 
-          // Smooth inner fade + gentle outer fade
-          float innerFade = smoothstep(1.5, 5.5, r);
-          float outerFade = 1.0 - smoothstep(R_MAX * 0.7, R_MAX, r);
-          // Pure oscillation field [-1, 1] for threshold (not modulated by envelope)
+          // Smooth inner/outer fade
+          float innerFade = smoothstep(1.5, 5.0, r);
+          float outerFade = 1.0 - smoothstep(R_MAX * 0.75, R_MAX, r);
+
+          // Pure oscillation for threshold (field in [-1, 1])
           float field = hPlus + hCross;
           float af = abs(field);
-
-          // Hard threshold on pure oscillation → crisp dark gaps
           if (af < 0.3) continue;
 
-          // Envelope controls brightness, not threshold
-          float diskWeight = exp(-pos.y * pos.y * 0.15);
-          float brightness = u_amplitude * innerFade * outerFade * diskWeight / max(r * 0.15, 1.0);
+          // Envelope controls brightness separately
+          float brightness = u_amplitude * innerFade * outerFade / max(r * 0.2, 1.0);
 
-          float s = field;
-          float as = af;
-
-          // Discrete color bands (3 positive, 3 negative) — deep saturated
+          // Warm colormap: positive → orange/gold, negative → magenta/pink
           vec3 col;
-          if (s > 0.6) {
-            col = vec3(1.8, 0.6, 0.08);  // bright orange-gold (HDR)
-          } else if (s > 0.4) {
-            col = vec3(1.1, 0.25, 0.02); // deep red-orange
-          } else if (s > 0.0) {
-            col = vec3(0.5, 0.08, 0.0);  // dark red
-          } else if (s > -0.4) {
-            col = vec3(0.3, 0.0, 0.15);  // dark purple
-          } else if (s > -0.6) {
-            col = vec3(0.6, 0.05, 0.4);  // deep magenta
+          if (field > 0.6) {
+            col = vec3(1.6, 0.6, 0.08);
+          } else if (field > 0.4) {
+            col = vec3(1.0, 0.3, 0.03);
+          } else if (field > 0.0) {
+            col = vec3(0.5, 0.1, 0.0);
+          } else if (field > -0.4) {
+            col = vec3(0.3, 0.0, 0.15);
+          } else if (field > -0.6) {
+            col = vec3(0.6, 0.05, 0.4);
           } else {
-            col = vec3(1.0, 0.15, 0.8);  // bright magenta (HDR)
+            col = vec3(1.0, 0.15, 0.7);
           }
 
-          // Depth fade + envelope → brightness
-          float depthFade = exp(-t * 0.06);
-          float alphaStep = min(as * brightness * 1.5 * stepSize, 0.25);
+          // Depth fade + brightness
+          float depthFade = exp(-t * 0.04);
+          float alphaStep = min(af * brightness * 1.2 * stepSize, 0.2);
 
-          // Front-to-back compositing
           totalCol  += (1.0 - totalAlpha) * col * depthFade * alphaStep;
           totalAlpha += (1.0 - totalAlpha) * alphaStep;
 
