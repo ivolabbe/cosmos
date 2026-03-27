@@ -208,3 +208,10 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Binary stars: Wolfram MathWorld Circle-Circle Intersection gives the exact analytical overlap area formula needed for uniform-disk eclipse light curves.
 - 2026-03-28 — Binary stars: The GW interactive is the ideal template (same architecture: two orbiting objects + 2D panel + sliders). Replace inspiral with periodic Kepler orbit, add second 2D panel for light curve.
 - 2026-03-28 — For multi-panel physics sims: the key architectural pattern is (3D scene center/left) + (stacked 2D canvas panels right) + (controls bar bottom) + (info panel top-left). Proven in GW and pulsar apps.
+- 2026-03-28 — Rotation curves: Sofue 2009 (PASJ 61, 227) is the authoritative Milky Way decomposition reference. Table 6 has best-fit parameters for bulge+disk+halo.
+- 2026-03-28 — Rotation curves: The pseudo-isothermal halo (rho = rho_0/(1+(r/Rc)^2)) is simpler and more pedagogical than NFW. Produces a truly flat curve at large R. Begeman+ 1991 is the standard reference.
+- 2026-03-28 — Rotation curves: The Freeman 1970 exponential disk formula requires modified Bessel functions (I0,K0,I1,K1). JavaScript has no built-in Bessel functions — use Abramowitz & Stegun polynomial approximations. This is the trickiest implementation detail.
+- 2026-03-28 — Rotation curves: No existing web tool combines 3D galaxy + linked rotation curve plot + dark matter slider. Wittman (UC Davis) has the best 2D-only version. Beltoforion has the best procedural galaxy visual. Our unique value is combining both.
+- 2026-03-28 — Rotation curves: SPARC database (Lelli, McGaugh & Schombert 2016) has 175 real galaxy rotation curves — could be used for "real data overlay" feature.
+- 2026-03-28 — Spiral galaxy visuals: Beltoforion's density wave approach (tilted ellipses with progressive angular offset) is the standard technique for procedural spirals. Logarithmic spiral winding creates realistic arm structure.
+- 2026-03-28 — Unit consistency is the #1 pitfall for galactic dynamics sims. G = 4.302e-3 pc (km/s)^2 / Msun. Always verify v(8 kpc) ~ 220 km/s before building anything else.
