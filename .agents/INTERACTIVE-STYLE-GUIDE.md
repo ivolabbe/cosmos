@@ -24,7 +24,7 @@ Each visualization is ONE `.html` file in `experimental/`. It contains all CSS, 
 
 ### Embed via iframe in articles
 ```html
-<div style="width:100%;max-width:700px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+<div style="width:100%;max-width:800px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
   <iframe src="../experimental/VIZNAME.html" style="width:100%;height:100%;border:none;" loading="lazy"></iframe>
 </div>
 ```
@@ -268,7 +268,7 @@ const gaps = [{c:2.502,w:0.05},{c:2.825,w:0.04},{c:2.958,w:0.04},{c:3.278,w:0.05
 - Copy the existing article from `articles/TOPIC.html`
 - Replace the static image with the iframe embed:
 ```html
-<div style="width:100%;max-width:700px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+<div style="width:100%;max-width:800px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
   <iframe src="TOPIC-interactive.html" style="width:100%;height:100%;border:none;" loading="lazy"></iframe>
 </div>
 <p style="text-align:center;font-size:0.8rem;color:#808285;">Interactive: drag to rotate, scroll to zoom, hover labels for details.</p>
