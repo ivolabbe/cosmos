@@ -156,7 +156,7 @@
     const TRAIL_LEN = 600;
     const TRAIL_PTS_PER_FRAME = 5;
     const AUDIO_SHIFT = 2;         // frequency multiplier: 1 octave up for audibility
-    const WELL_DEPTH = 0.35;       // gravity well depth scale (world units)
+    const WELL_DEPTH = 0.2;        // gravity well depth scale (world units)
 
     // ===================================================================
     //  Shaders
@@ -209,18 +209,36 @@
 
     const fragmentShader = /* glsl */`
       uniform float u_maxDisp;
+      uniform int u_gridOnly;
       varying vec2 vUv;
       varying float v_disp;
 
       void main() {
         float s = clamp(v_disp / u_maxDisp, -1.0, 1.0);
 
-        // Diverging colormap: blue ← dark → red, with HDR peaks for bloom
-        vec3 cZero = vec3(0.04, 0.04, 0.12);
-        vec3 cPos  = vec3(0.8, 0.13, 0.0);
-        vec3 cNeg  = vec3(0.0, 0.15, 0.8);
-        vec3 hotP  = vec3(1.5, 1.1, 0.8);
-        vec3 hotN  = vec3(0.8, 1.1, 1.5);
+        // Grid lines (spacetime fabric)
+        float gx = abs(fract(vUv.x * 30.0) - 0.5);
+        float gz = abs(fract(vUv.y * 30.0) - 0.5);
+        float grid = max(1.0 - smoothstep(0.0, 0.06, gx),
+                         1.0 - smoothstep(0.0, 0.06, gz));
+
+        // Edge fade
+        float edge = max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)) * 2.0;
+        float fade = 1.0 - smoothstep(0.82, 1.0, edge);
+
+        if (u_gridOnly == 1) {
+          // 3D mode: translucent grid lines only, no solid surface
+          float alpha = grid * 0.15 * fade;
+          gl_FragColor = vec4(vec3(0.45, 0.5, 0.65) * grid, alpha);
+          return;
+        }
+
+        // 2D mode: full colored surface + grid
+        vec3 cZero = vec3(0.05, 0.05, 0.15);
+        vec3 cPos  = vec3(1.0, 0.18, 0.0);
+        vec3 cNeg  = vec3(0.0, 0.2, 1.0);
+        vec3 hotP  = vec3(2.0, 1.4, 1.0);
+        vec3 hotN  = vec3(1.0, 1.4, 2.0);
 
         vec3 col;
         if (s > 0.0) {
@@ -231,16 +249,7 @@
           col = mix(col, hotN, smoothstep(0.4, 1.0, -s));
         }
 
-        // Grid lines (spacetime fabric)
-        float gx = abs(fract(vUv.x * 30.0) - 0.5);
-        float gz = abs(fract(vUv.y * 30.0) - 0.5);
-        float grid = max(1.0 - smoothstep(0.0, 0.06, gx),
-                         1.0 - smoothstep(0.0, 0.06, gz));
         col += vec3(0.25, 0.25, 0.4) * grid * (0.15 + 0.12 * abs(s));
-
-        // Edge fade to background
-        float edge = max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)) * 2.0;
-        float fade = 1.0 - smoothstep(0.82, 1.0, edge);
         col = mix(vec3(0.039, 0.039, 0.18), col, fade);
 
         gl_FragColor = vec4(col, 1.0);
@@ -391,6 +400,7 @@
         u_amplitude: { value: 0 },
         u_waveSpeed: { value: WAVE_SPEED },
         u_maxDisp:   { value: EXAGGERATION * 2.5 },
+        u_gridOnly:  { value: 0 },
         u_bh1:       { value: new THREE.Vector2(0, 0) },
         u_bh2:       { value: new THREE.Vector2(0, 0) },
         u_wd1:       { value: 0 },
@@ -481,33 +491,30 @@
           float innerFade = smoothstep(1.5, 5.0, r);
           float outerFade = 1.0 - smoothstep(R_MAX * 0.75, R_MAX, r);
 
-          // Pure oscillation for threshold (field in [-1, 1])
+          // Physical field
           float field = hPlus + hCross;
-          float af = abs(field);
-          if (af < 0.3) continue;
+          // Compressed amplitude for consistent visibility across all masses
+          // and throughout the inspiral (physical amplitude shown in 2D + spectrogram)
+          float amp = 0.3 + 0.5 * sqrt(max(u_amplitude, 0.01));
+          float envelope = amp * innerFade * outerFade / max(r * 0.2, 1.0);
+          float h = envelope * field;
 
-          // Envelope controls brightness separately
-          float brightness = u_amplitude * innerFade * outerFade / max(r * 0.2, 1.0);
+          // h² = GW energy density (physical quantity)
+          float h2 = h * h;
 
-          // Warm colormap: positive → orange/gold, negative → magenta/pink
-          vec3 col;
-          if (field > 0.6) {
-            col = vec3(1.6, 0.6, 0.08);
-          } else if (field > 0.4) {
-            col = vec3(1.0, 0.3, 0.03);
-          } else if (field > 0.0) {
-            col = vec3(0.5, 0.1, 0.0);
-          } else if (field > -0.4) {
-            col = vec3(0.3, 0.0, 0.15);
-          } else if (field > -0.6) {
-            col = vec3(0.6, 0.05, 0.4);
-          } else {
-            col = vec3(1.0, 0.15, 0.7);
-          }
+          // Visualization: gamma + threshold on h²
+          float vis = pow(h2, 3.0);  // gamma = 3.0 on h²
+          if (vis < 0.005) continue;
 
-          // Depth fade + brightness
-          float depthFade = exp(-t * 0.04);
-          float alphaStep = min(af * brightness * 1.2 * stepSize, 0.2);
+          // Color from sign of field
+          vec3 warmCol = vec3(1.6, 0.55, 0.06);  // orange-gold (brighter)
+          vec3 coolCol = vec3(0.8, 0.12, 0.65); // magenta (brighter)
+          vec3 col = field > 0.0 ? warmCol : coolCol;
+
+          // Depth fade based on distance from SOURCE (r), not camera
+          // Only dims within the volume, doesn't affect the whole scene
+          float depthFade = 1.0 / (1.0 + r * 0.03);
+          float alphaStep = min(vis * 30.0 * stepSize, 0.25);
 
           totalCol  += (1.0 - totalAlpha) * col * depthFade * alphaStep;
           totalAlpha += (1.0 - totalAlpha) * alphaStep;
@@ -917,7 +924,7 @@
 
       bh1.visible = true; bh2.visible = true;
       remnant.visible = false;
-      spacetimeMesh.visible = !mode3D;
+      spacetimeMesh.visible = true;
       sphereGroup.visible = mode3D;
       trail1.line.visible = !mode3D;
       trail2.line.visible = !mode3D;
@@ -1023,10 +1030,12 @@
     document.getElementById('toggle-3d').addEventListener('change', e => {
       mode3D = e.target.checked;
       sphereGroup.visible = mode3D;
-      spacetimeMesh.visible = !mode3D;
+      // In 3D: mesh shows translucent grid only; in 2D: full solid surface
+      meshMat.uniforms.u_gridOnly.value = mode3D ? 1 : 0;
+      meshMat.transparent = mode3D;
+      meshMat.depthWrite = !mode3D;
       trail1.line.visible = !mode3D;
       trail2.line.visible = !mode3D;
-      // Keep same camera limits in both modes
       orbit.maxPolarAngle = PI * 0.48;
     });
     document.getElementById('btn-reset').addEventListener('click', resetSim);
