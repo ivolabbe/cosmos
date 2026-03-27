@@ -1,6 +1,8 @@
 # COSMOS Interactive Visualizations — Style Guide & Lessons Learned
 
-*For creating embeddable Three.js astronomy visualizations that replace static images in COSMOS articles.*
+*For creating embeddable astronomy visualizations (Three.js / Babylon.js) that replace static images in COSMOS articles.*
+
+> **IMPORTANT:** Always consult this style guide before creating or modifying any interactive web app.
 
 ## Architecture
 
@@ -342,6 +344,132 @@ Run these tests for every new interactive visualization before considering it do
 
 - `experimental/TOPIC-interactive.html` — the embeddable visualization
 - `experimental/TOPIC-article.html` — article page with the embed (for testing)
+
+## Babylon.js Apps
+
+Some visualizations use Babylon.js instead of Three.js (e.g. the Sun particle system).
+
+### CDN setup
+```html
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+```
+
+### ParticleHelper presets
+Babylon ships pre-built particle systems (sun, fire, rain, etc.):
+```javascript
+const set = await BABYLON.ParticleHelper.CreateAsync("sun", scene);
+set.start();
+const systems = set.systems; // array of ParticleSystem objects
+```
+Properties can be tweaked post-load: `emitRate`, `updateSpeed`, `minScaleX/Y`, `maxScaleX/Y`, `minLifeTime/maxLifeTime`.
+
+### Camera
+```javascript
+const camera = new BABYLON.ArcRotateCamera('cam', alpha, beta, radius, target, scene);
+camera.panningSensibility = 0; // disable panning for globe/object viewers
+```
+
+---
+
+## Bloom Post-Processing
+
+Bloom makes bright elements glow by blurring pixels above a threshold and compositing them back.
+
+### Three.js (UnrealBloomPass)
+```javascript
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(resolution, strength, radius, threshold);
+composer.addPass(bloom);
+// Use composer.render() instead of renderer.render()
+```
+
+### Typical settings
+| Use case | Strength | Radius | Threshold | Notes |
+|---|---|---|---|---|
+| Subtle neon lines | 0.3–0.5 | 0.6–0.8 | 0.5–0.7 | Orbit lines, city lights |
+| Dramatic glow | 0.6–1.0 | 0.8–1.0 | 0.3–0.5 | Sun corona, explosions |
+| Minimal accent | 0.15–0.25 | 0.4 | 0.8–0.9 | Just the brightest spots |
+
+**Watch out:** dense additive lines (e.g. airline routes, 921K vertices) compound to extreme brightness — use very low opacity (0.03–0.05) or normal blending for dense layers.
+
+### Additive blending for orbit/trace lines
+```javascript
+new THREE.LineBasicMaterial({
+  color, transparent: true, opacity,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+});
+```
+Overlapping lines glow brighter where they cross — neon effect. Per-layer opacity tuning:
+- **GPS orbits** (sparse): 0.45
+- **Comms/Tech** (moderate density): 0.1–0.2
+- **Earth-obs** (dense near surface): 0.02–0.04
+- **Airlines** (very dense, 921K verts): 0.03–0.05
+
+---
+
+## Atmospheric Rendering
+
+### Ray-marched column density (recommended)
+Single FrontSide sphere at outer atmosphere boundary. Fragment shader ray-marches through the atmosphere shell, integrating `exp(-altitude/scaleHeight)` along the view ray. Produces physically-motivated limb brightening with smooth exponential falloff.
+
+```javascript
+// Atmosphere sphere — single mesh, no banding
+const ATMOS_R = 1.15;  // outer boundary (Earth r ≈ 1.0)
+const atmosMat = new THREE.ShaderMaterial({
+  transparent: true,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+  side: THREE.FrontSide,
+  uniforms: {
+    atmosColor:  { value: new THREE.Color(0x4499dd) },
+    earthRadius: { value: 1.005 },
+    atmosRadius: { value: ATMOS_R },
+    scaleHeight: { value: 0.04 },   // controls gradient steepness
+    intensity:   { value: 3.0 },     // tune to taste
+  },
+  // ... see satellites-interactive.html for full shader
+});
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(ATMOS_R, 64, 64), atmosMat));
+```
+
+Key shader technique: compute impact parameter `b = |cameraPos × rayDir|`, then numerically integrate `exp(-(|samplePos| - earthR) / H)` along 8 sample points from atmosphere entry to Earth surface (or far atmosphere boundary).
+
+### What doesn't work
+- **Single fresnel rim** (BackSide or FrontSide): creates a ring, not a gradient. Wrong profile direction.
+- **Multiple discrete shells with uniform opacity**: visible banding.
+- **Multiple shells with per-fragment fresnel**: still bands + wrong profile (bright at outside edge of each shell).
+- **Stemkoski glow shader** (`pow(c - dot(N, V), p)`): OK for stylized halos but can't produce the smooth exponential column-density look.
+
+---
+
+## Loading glTF/GLB Models
+
+### Three.js
+```javascript
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const gltf = await new GLTFLoader().loadAsync('model.gltf');
+scene.add(gltf.scene);
+
+// Override materials after loading:
+gltf.scene.traverse(child => {
+  if (child.material?.name === 'myMat') {
+    child.material = new THREE.LineBasicMaterial({ ... });
+  }
+});
+```
+
+### Texture alignment
+- glTF textures use `flipY = false`. Manually loaded textures via `TextureLoader` default to `flipY = true`.
+- Set `texture.flipY = false` on any texture that must align with glTF UV mapping.
+- Enable anisotropic filtering: `texture.anisotropy = renderer.capabilities.getMaxAnisotropy()`.
+
+---
 
 ## Candidate Visualizations
 
