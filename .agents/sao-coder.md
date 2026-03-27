@@ -120,3 +120,9 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Visual spin cap: for P < 0.5s, cap visual omega at 2π/0.5 (2 Hz). Physics runs at correct rate for pulse profile.
 - 2026-03-28 — Web Audio: for P < 50ms use continuous oscillator at 1/P Hz. For P > 50ms use discrete click bursts. Initialize AudioContext on user gesture.
 - 2026-03-28 — OutputPass needed after UnrealBloomPass in Three.js 0.170.0 for correct tone mapping.
+- 2026-03-28 — Binary star: Kepler solver + trueAnomaly + RV formula from spec work perfectly. omega=PI/2 default gives clean asymmetric RV curves for e>0.
+- 2026-03-28 — Binary star: MeshBasicMaterial for stellar cores + AdditiveBlending halos (BackSide) at opacity 0.15/0.06 = convincing glow without needing lights.
+- 2026-03-28 — Binary star: Two stacked 2D canvas panels work well on the right side. Precompute curves (360 pts) on param change, draw every frame with playhead.
+- 2026-03-28 — Binary star: Camera-from-inclination approach (camera position = f(i)) is cleaner than rotating the orbit group. OrbitControls still works for user drag.
+- 2026-03-28 — Binary star: Surface brightness B~T^4 gives B1/B2=16 for T1=10000K, T2=5000K. Primary eclipse depth dominates. R2 scaling with q^0.3 prevents invisible secondary at low q.
+- 2026-03-28 — Binary star: Phase wrapping must use `((M % TWO_PI) + TWO_PI) % TWO_PI` to handle negative time values from JS modulo.

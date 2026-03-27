@@ -201,3 +201,10 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — For physics sims: the spec's pseudocode MUST be tested (the anti-pole interpulse formula had a bug). Include a "test these values" section.
 - 2026-03-28 — NASA SVS (svs.gsfc.nasa.gov) has pre-rendered pulsar animations — excellent visual reference but not interactive. No open-source WebGL pulsar visualizations exist.
 - 2026-03-28 — Sketchfab has 3D pulsar models but with NoAI license — build procedural geometry instead.
+- 2026-03-28 — Binary stars: Tatum's Celestial Mechanics Ch.18 is the authoritative reference for spectroscopic binary RV formulas. Clubb (Caltech) has a clean derivation of the RV equation.
+- 2026-03-28 — Binary stars: Eggleton 1983 (ApJ 268, 368) gives the standard Roche lobe radius approximation, accurate to ~1% for all mass ratios.
+- 2026-03-28 — Binary stars: NAAP (astro.unl.edu) has separate simulators for eclipsing binaries and radial velocities. No existing tool unifies 3D + RV + light curve in one view — this is our unique value.
+- 2026-03-28 — Binary stars: CCNMTL/Columbia (github.com/ccnmtl/astro-simulations) has an open-source JS eclipsing binary simulator — useful algorithm reference for eclipse geometry.
+- 2026-03-28 — Binary stars: Wolfram MathWorld Circle-Circle Intersection gives the exact analytical overlap area formula needed for uniform-disk eclipse light curves.
+- 2026-03-28 — Binary stars: The GW interactive is the ideal template (same architecture: two orbiting objects + 2D panel + sliders). Replace inspiral with periodic Kepler orbit, add second 2D panel for light curve.
+- 2026-03-28 — For multi-panel physics sims: the key architectural pattern is (3D scene center/left) + (stacked 2D canvas panels right) + (controls bar bottom) + (info panel top-left). Proven in GW and pulsar apps.
