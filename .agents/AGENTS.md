@@ -249,3 +249,74 @@ cosmos/
 ├── browse.html                 # Dynamic letter index
 └── search.html                 # Client-side search
 ```
+
+---
+
+# SAO Interactive App Agents
+
+Autonomous development of 3D interactive visualizations and encyclopedia articles.
+
+## Architecture
+
+```
+          ┌──────────────────────────────────────┐
+          │  ORCHESTRATOR  (tracks phases only)   │
+          │  Dispatches agents, recovers failures │
+          └──────────┬───────────────────────────┘
+                     │
+    ┌────────────────┼────────────────┐
+    ▼                ▼                ▼
+  App 1            App 2            App N  (parallel)
+    │                │                │
+    ▼                ▼                ▼
+┌─────────┐    ┌─────────┐    ┌─────────┐
+│RESEARCHER│    │RESEARCHER│    │RESEARCHER│  Phase 1
+│→ SPEC    │    │→ SPEC    │    │→ SPEC    │
+└────┬─────┘    └────┬─────┘    └────┬─────┘
+     │               │               │
+     ▼               ▼               ▼
+  ┌──────┐        ┌──────┐        ┌──────┐
+  │CODER │◄──────►│CODER │◄──────►│CODER │  Phase 2
+  └──┬───┘feedback└──┬───┘        └──┬───┘
+     │   ▲           │               │
+     ▼   │           ▼               ▼
+  ┌──────┴──┐     ┌─────────┐    ┌─────────┐
+  │VERIFIER │     │VERIFIER │    │VERIFIER │
+  └─────────┘     └─────────┘    └─────────┘
+     │               │               │
+     ▼               ▼               ▼
+  ┌──────┐        ┌──────┐        ┌──────┐
+  │WRITER│        │WRITER│        │WRITER│  Phase 3
+  └──┬───┘        └──┬───┘        └──┬───┘
+     ▼               ▼               ▼
+  VERIFIER         VERIFIER        VERIFIER
+     │               │               │
+     ▼               ▼               ▼
+   Done             Done            Done     Phase 4
+```
+
+**The SPEC is the central artifact.** Researcher produces it. Coder, Verifier, and Writer all consume it.
+
+## Agent Files
+
+| Agent | File | Role | Runs as |
+|-------|------|------|---------|
+| **Orchestrator** | `sao-orchestrator.md` | Phase tracker. Dispatches agents, recovers failures. | Main context (lean) |
+| **Researcher** | `sao-researcher.md` | Produces the SPEC: science facts, state-of-the-art survey, implementation plan, verification requirements, comparison data. | Background agent |
+| **Coder** | `sao-coder.md` | Builds the interactive from the spec. Receives feedback from verifier, iterates. | Background agent |
+| **Verifier** | `sao-verify.md` | Quality gate. Tests against spec's verification requirements + comparison websites. Gives structured feedback to coder or writer. Does NOT fix — only reports. | Background agent |
+| **Writer** | `sao-writer.md` | Writes encyclopedia article from spec's facts. | Background agent |
+
+## Key Architecture Decisions
+
+1. **SPEC-driven.** Researcher produces `.planning/apps/[topic]-spec.md` containing everything: facts, visual references, implementation approach, verification criteria. All other agents read from it.
+
+2. **Orchestrator = phase tracker.** Knows which phase each app is in. Dispatches the right agent for the next phase. Puts things back on track when they go awry. Does NOT touch code, screenshots, or content.
+
+3. **Verifier is separate from coder.** Verifier has deep context on what "correct" looks like (from spec's comparison data). Gives specific, actionable feedback to the coder. Coder iterates until verifier passes.
+
+4. **Parallel by default.** Independent apps run through the pipeline simultaneously. Orchestrator manages 2-4 concurrent pipelines.
+
+## Self-Improvement
+
+Every agent file has a `## Learnings` section at the bottom. After each app is built, the orchestrator appends what worked and what failed. This makes each subsequent app faster and more reliable.

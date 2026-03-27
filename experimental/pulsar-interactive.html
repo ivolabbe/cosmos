@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Pulsar | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; max-width: 340px;
+      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 12px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    /* --- Pulse profile panel (top-right) --- */
+    #pulse-panel {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 10px 12px 6px; z-index: 10;
+    }
+    body.embedded #pulse-panel { top: 8px; right: 8px; }
+    #pulse-panel h3 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 4px; text-align: center;
+    }
+    #pulse-canvas { display: block; border-radius: 3px; }
+    #no-pulse-msg {
+      font-size: 10px; color: rgba(255,200,100,0.7); text-align: center;
+      margin-top: 2px; min-height: 14px;
+    }
+
+    /* --- Controls bar (bottom) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 12px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+    #controls input[type="range"] { width: 70px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .val { min-width: 36px; text-align: right; display: inline-block; font-size: 11px; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none;
+      white-space: nowrap;
+    }
+    #credit a { color: rgba(255,255,255,0.35); }
+
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4);
+      z-index: 20; pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Loading&hellip;</div>
+
+  <div id="info">
+    <h2>Pulsar</h2>
+    <p class="desc">A rapidly rotating neutron star with a tilted magnetic dipole. Radio beams sweep through space like a lighthouse.</p>
+    <div class="readout">
+      <div>Period: <span id="r-period">1.000 s</span></div>
+      <div>Beam angle: <span id="r-rho">5.8&deg;</span></div>
+      <div>B-field: <span id="r-bfield">~10<sup>12</sup> G</span></div>
+      <div>Age: <span id="r-age">~16 Myr</span></div>
+      <div>Spin-down: <span id="r-edot">~3&times;10<sup>31</sup> erg/s</span></div>
+    </div>
+    <p class="hint">Drag to orbit &middot; Scroll to zoom &middot; Toggle sound for pulse audio</p>
+  </div>
+
+  <div id="pulse-panel">
+    <h3>Pulse Profile (Intensity vs Phase)</h3>
+    <canvas id="pulse-canvas" width="300" height="130"></canvas>
+    <div id="no-pulse-msg"></div>
+  </div>
+
+  <div id="controls">
+    <button id="btn-play" class="active">&#9646;&#9646; Pause</button>
+    <div class="sep"></div>
+    <label>Period <input type="range" id="period-slider" min="-2.85" max="0.93" value="0" step="0.01">
+      <span class="val" id="period-val">1.00 s</span></label>
+    <div class="sep"></div>
+    <label>Tilt <input type="range" id="tilt-slider" min="0" max="90" value="45" step="1">
+      <span class="val" id="tilt-val">45&deg;</span></label>
+    <div class="sep"></div>
+    <label>View <input type="range" id="view-slider" min="0" max="90" value="60" step="1">
+      <span class="val" id="view-val">60&deg;</span></label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-sound"> Sound</label>
+  </div>
+
+  <div id="credit">Data: <a href="https://www.cv.nrao.edu/~sransom/web/Ch6.html" target="_blank">NRAO ERA Ch.6</a>. Beam model: <a href="https://ui.adsabs.harvard.edu/abs/1993ApJ...405..285R" target="_blank">Rankin 1993</a>.</div>
+
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+  import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+  // ===================================================================
+  //  Embedded mode
+  // ===================================================================
+  if (window.self !== window.top) document.body.classList.add('embedded');
+
+  // ===================================================================
+  //  Constants
+  // ===================================================================
+  const PI = Math.PI, TWO_PI = 2 * PI;
+  const DEG = PI / 180;
+
+  // ===================================================================
+  //  Renderer + Scene + Camera
+  // ===================================================================
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x000000);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  document.body.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 500);
+  camera.position.set(4, 3, 8);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.minDistance = 3;
+  controls.maxDistance = 30;
+
+  // ===================================================================
+  //  Bloom post-processing
+  // ===================================================================
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(innerWidth, innerHeight), 0.5, 0.6, 0.3
+  );
+  composer.addPass(bloomPass);
+  composer.addPass(new OutputPass());
+
+  // ===================================================================
+  //  Lights (subtle ambient for scene, no directional needed)
+  // ===================================================================
+  scene.add(new THREE.AmbientLight(0x222244, 0.3));
+
+  // ===================================================================
+  //  Physics state
+  // ===================================================================
+  let period = 1.0;          // seconds
+  let alpha = 45 * DEG;      // magnetic inclination (radians)
+  let zeta = 60 * DEG;       // observer viewing angle (radians)
+  let playing = true;
+  let soundEnabled = false;
+  let physicsTime = 0;        // accumulated physics time (for correct pulse rate)
+  let visualPhase = 0;        // visual rotation phase (may be slowed)
+
+  // Derived quantities
+  function beamHalfAngle(P) {
+    // rho = 5.75 * P^{-0.5} degrees (P in seconds)
+    // Clamp to max 80 degrees for visual sanity
+    return Math.min(5.75 * Math.pow(P, -0.5) * DEG, 80 * DEG);
+  }
+
+  let rho = beamHalfAngle(period);
+  let omega = TWO_PI / period;
+
+  // Visual spin rate: for P < 0.5s, slow down visual rotation
+  function visualOmega() {
+    if (period >= 0.5) return omega; // real rate
+    return TWO_PI / 0.5; // cap at 2 Hz visual rotation
+  }
+
+  // ===================================================================
+  //  Pulsar readout computations
+  // ===================================================================
+  // Representative P-dot for display: use B ~ 10^12 G for normal pulsars
+  // B = 3.2e19 * sqrt(P * Pdot) => Pdot = (B / 3.2e19)^2 / P
+  function getPdot(P) {
+    // Scale B-field with period: MSPs have weaker fields
+    // Simple model: B = 10^12 for P > 0.1s, B = 10^8 for P < 0.01s, interpolate
+    const logP = Math.log10(P);
+    const logB = logP < -2 ? 8 : logP > -1 ? 12 : 8 + 4 * (logP + 2);
+    const B = Math.pow(10, logB);
+    return (B / 3.2e19) ** 2 / P;
+  }
+
+  function formatPeriod(P) {
+    if (P < 0.01) return (P * 1000).toFixed(1) + ' ms';
+    if (P < 1) return (P * 1000).toFixed(0) + ' ms';
+    return P.toFixed(2) + ' s';
+  }
+
+  function formatSci(val, unit) {
+    if (val === 0) return '0 ' + unit;
+    const exp = Math.floor(Math.log10(Math.abs(val)));
+    const mant = val / Math.pow(10, exp);
+    if (exp === 0) return mant.toFixed(1) + ' ' + unit;
+    return '~' + mant.toFixed(1) + '&times;10<sup>' + exp + '</sup> ' + unit;
+  }
+
+  function updateReadouts() {
+    const Pdot = getPdot(period);
+    const B = 3.2e19 * Math.sqrt(period * Pdot);
+    const tauC = period / (2 * Pdot); // seconds
+    const I = 1e45; // moment of inertia g cm^2
+    const Edot = 4 * PI * PI * I * Pdot / (period * period * period);
+
+    document.getElementById('r-period').textContent = formatPeriod(period);
+    document.getElementById('r-rho').innerHTML = (rho / DEG).toFixed(1) + '&deg;';
+    document.getElementById('r-bfield').innerHTML = formatSci(B, 'G');
+
+    // Format age
+    const ageSec = tauC;
+    const ageYr = ageSec / (365.25 * 86400);
+    if (ageYr > 1e9) document.getElementById('r-age').innerHTML = '~' + (ageYr / 1e9).toFixed(1) + ' Gyr';
+    else if (ageYr > 1e6) document.getElementById('r-age').innerHTML = '~' + (ageYr / 1e6).toFixed(0) + ' Myr';
+    else if (ageYr > 1e3) document.getElementById('r-age').innerHTML = '~' + (ageYr / 1e3).toFixed(0) + ' kyr';
+    else document.getElementById('r-age').innerHTML = '~' + ageYr.toFixed(0) + ' yr';
+
+    document.getElementById('r-edot').innerHTML = formatSci(Edot, 'erg/s');
+  }
+
+  // ===================================================================
+  //  Stage 1: Neutron star sphere
+  // ===================================================================
+  const NS_RADIUS = 1.0;
+
+  // Glowing emissive sphere
+  const nsSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(NS_RADIUS, 48, 32),
+    new THREE.MeshBasicMaterial({ color: 0xccddff })
+  );
+  scene.add(nsSphere);
+
+  // Outer glow halo (triggers bloom)
+  const nsGlow = new THREE.Mesh(
+    new THREE.SphereGeometry(NS_RADIUS * 1.15, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0x8899cc, transparent: true, opacity: 0.25,
+      side: THREE.BackSide,
+    })
+  );
+  scene.add(nsGlow);
+
+  // Larger halo for extra bloom
+  const nsHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(NS_RADIUS * 1.5, 24, 24),
+    new THREE.MeshBasicMaterial({
+      color: 0x4455aa, transparent: true, opacity: 0.08,
+      side: THREE.BackSide,
+    })
+  );
+  scene.add(nsHalo);
+
+  // ===================================================================
+  //  Rotation axis indicator (dashed line along Y)
+  // ===================================================================
+  {
+    const axLen = 9;
+    const pts = [new THREE.Vector3(0, -axLen, 0), new THREE.Vector3(0, axLen, 0)];
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineDashedMaterial({
+      color: 0xffffff, transparent: true, opacity: 0.25,
+      dashSize: 0.3, gapSize: 0.15,
+    });
+    const line = new THREE.Line(geo, mat);
+    line.computeLineDistances();
+    scene.add(line);
+  }
+
+  // ===================================================================
+  //  Dipole group: contains field lines + beam cones + magnetic axis
+  //  Rotated each frame via quaternion: qSpin * qTilt
+  // ===================================================================
+  const dipoleGroup = new THREE.Group();
+  scene.add(dipoleGroup);
+
+  // ===================================================================
+  //  Stage 1: Dipole field lines
+  //  r(theta) = r0 * sin^2(theta) in dipole frame (dipole along +Y of group)
+  // ===================================================================
+  const FIELD_LINE_COLOR = 0x44aadd;
+
+  function dipoleFieldLine(r0, phi, nPoints = 120) {
+    const points = [];
+    for (let i = 0; i <= nPoints; i++) {
+      const theta = (i / nPoints) * PI;
+      const r = r0 * Math.sin(theta) ** 2;
+      if (r < 0.05) continue;
+      const x = r * Math.sin(theta) * Math.cos(phi);
+      const y = r * Math.cos(theta);  // along dipole axis (group's +Y)
+      const z = r * Math.sin(theta) * Math.sin(phi);
+      points.push(new THREE.Vector3(x, y, z));
+    }
+    return points;
+  }
+
+  const fieldLineMat = new THREE.LineBasicMaterial({
+    color: FIELD_LINE_COLOR, transparent: true, opacity: 0.4,
+  });
+
+  const r0Values = [3, 5];
+  const phiValues = [0, PI / 2, PI, 3 * PI / 2];
+  for (const r0 of r0Values) {
+    for (const phi of phiValues) {
+      const pts = dipoleFieldLine(r0, phi);
+      if (pts.length < 2) continue;
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      dipoleGroup.add(new THREE.Line(geo, fieldLineMat));
+    }
+  }
+
+  // Magnetic axis indicator (solid line through dipole group's Y)
+  {
+    const axLen = 8;
+    const pts = [new THREE.Vector3(0, -axLen, 0), new THREE.Vector3(0, axLen, 0)];
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({
+      color: 0x44ddff, transparent: true, opacity: 0.6,
+    });
+    dipoleGroup.add(new THREE.Line(geo, mat));
+  }
+
+  // ===================================================================
+  //  Stage 2: Emission beam cones
+  //  ConeGeometry along +Y and -Y of dipole group, half-angle = rho
+  // ===================================================================
+  const BEAM_LENGTH = 7;
+  const BEAM_SEGMENTS = 32;
+
+  // Custom cone shader for radial gradient (bright center, fading edges)
+  const beamVertexShader = /* glsl */`
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+
+  const beamFragmentShader = /* glsl */`
+    uniform vec3 uColor;
+    uniform float uOpacity;
+    varying vec2 vUv;
+    void main() {
+      // vUv.x maps around the circumference, vUv.y from tip (0) to base (1)
+      // Radial fade: bright at center axis, dim at edges
+      // Use distance from center in the cross-section plane
+      float distFromAxis = abs(vUv.x - 0.5) * 2.0; // 0 at center seam, 1 at edges
+      float radialFade = 1.0 - distFromAxis * distFromAxis;
+      // Axial fade: dimmer toward tip and base
+      float axialFade = smoothstep(0.0, 0.15, vUv.y) * (1.0 - smoothstep(0.7, 1.0, vUv.y));
+      float a = uOpacity * radialFade * axialFade;
+      gl_FragColor = vec4(uColor, a);
+    }
+  `;
+
+  function createBeamCone(direction) {
+    // direction: +1 for north pole, -1 for south pole
+    // Clamp cone radius for visual sanity at very wide beam angles
+    const coneRadius = Math.min(Math.tan(rho) * BEAM_LENGTH, BEAM_LENGTH * 3);
+    const geo = new THREE.ConeGeometry(
+      Math.max(coneRadius, 0.01), BEAM_LENGTH, BEAM_SEGMENTS, 1, true
+    );
+    const mat = new THREE.ShaderMaterial({
+      uniforms: {
+        uColor: { value: new THREE.Color(0.65, 0.85, 1.0) },
+        uOpacity: { value: 0.22 },
+      },
+      vertexShader: beamVertexShader,
+      fragmentShader: beamFragmentShader,
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      blending: THREE.AdditiveBlending,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    // ConeGeometry points up (+Y) with apex at top, base at bottom
+    // We need apex at center (NS surface) pointing outward
+    // Offset so apex is at origin of group (NS center)
+    if (direction > 0) {
+      // North beam: cone points up
+      mesh.position.y = NS_RADIUS + BEAM_LENGTH / 2;
+    } else {
+      // South beam: cone points down (rotate 180 around X)
+      mesh.rotation.x = PI;
+      mesh.position.y = -(NS_RADIUS + BEAM_LENGTH / 2);
+    }
+    return mesh;
+  }
+
+  let beamNorth = createBeamCone(+1);
+  let beamSouth = createBeamCone(-1);
+  dipoleGroup.add(beamNorth);
+  dipoleGroup.add(beamSouth);
+
+  function updateBeamCones() {
+    // Remove old cones
+    dipoleGroup.remove(beamNorth);
+    dipoleGroup.remove(beamSouth);
+    beamNorth.geometry.dispose();
+    beamSouth.geometry.dispose();
+    // Create new ones with updated rho
+    beamNorth = createBeamCone(+1);
+    beamSouth = createBeamCone(-1);
+    dipoleGroup.add(beamNorth);
+    dipoleGroup.add(beamSouth);
+  }
+
+  // ===================================================================
+  //  Observer line-of-sight indicator (dotted line)
+  // ===================================================================
+  const losGroup = new THREE.Group();
+  scene.add(losGroup);
+
+  function updateLOSLine() {
+    // Clear previous
+    while (losGroup.children.length) {
+      losGroup.children[0].geometry.dispose();
+      losGroup.remove(losGroup.children[0]);
+    }
+    // LOS direction: in XY plane (rotation axis = Y)
+    // los_hat = (sin(zeta), cos(zeta), 0)
+    const len = 12;
+    const dx = Math.sin(zeta) * len;
+    const dy = Math.cos(zeta) * len;
+    const pts = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(dx, dy, 0)];
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineDashedMaterial({
+      color: 0xffcc44, transparent: true, opacity: 0.35,
+      dashSize: 0.25, gapSize: 0.12,
+    });
+    const line = new THREE.Line(geo, mat);
+    line.computeLineDistances();
+    losGroup.add(line);
+  }
+  updateLOSLine();
+
+  // ===================================================================
+  //  Stage 3: Pulse profile (2D canvas panel)
+  // ===================================================================
+  const pulseCanvas = document.getElementById('pulse-canvas');
+  const pulseCtx = pulseCanvas.getContext('2d');
+  const PW = pulseCanvas.width, PH = pulseCanvas.height;
+  const P_PAD = { l: 32, r: 8, t: 8, b: 20 };
+  const plotW = PW - P_PAD.l - P_PAD.r;
+  const plotH = PH - P_PAD.t - P_PAD.b;
+
+  // Pulse intensity from one pole
+  function pulseIntensity(phase, a, z, r) {
+    const cosTheta = Math.sin(a) * Math.sin(z) * Math.cos(phase)
+                   + Math.cos(a) * Math.cos(z);
+    const theta = Math.acos(Math.max(-1, Math.min(1, cosTheta)));
+    const sigma = r / 2.35;
+    if (sigma < 1e-6) return 0;
+    return Math.exp(-theta * theta / (2 * sigma * sigma));
+  }
+
+  // Both poles: anti-pole angle is π - θ_north (since -m̂·los = -cos(θ_north))
+  function pulseIntensityBoth(phase, a, z, r) {
+    const cosTheta = Math.sin(a) * Math.sin(z) * Math.cos(phase)
+                   + Math.cos(a) * Math.cos(z);
+    const theta = Math.acos(Math.max(-1, Math.min(1, cosTheta)));
+    const thetaAnti = PI - theta;
+    const sigma = r / 2.35;
+    if (sigma < 1e-6) return 0;
+    const I1 = Math.exp(-theta * theta / (2 * sigma * sigma));
+    const I2 = Math.exp(-thetaAnti * thetaAnti / (2 * sigma * sigma));
+    return Math.max(I1, I2);
+  }
+
+  // Check if any pulse is visible at all
+  // North pole: impact parameter |zeta - alpha|. Anti-pole: |zeta - (PI - alpha)|
+  function isPulseVisible(a, z, r) {
+    const beta1 = Math.abs(z - a);
+    const beta2 = Math.abs(z - (PI - a));
+    // For the Gaussian tail: need beta < ~3*sigma where sigma = rho/2.35
+    const threshold = r * 3;
+    return beta1 < threshold || beta2 < threshold;
+  }
+
+  function drawPulseProfile(currentPhase) {
+    pulseCtx.clearRect(0, 0, PW, PH);
+    pulseCtx.fillStyle = 'rgba(6,6,30,1)';
+    pulseCtx.fillRect(0, 0, PW, PH);
+
+    // Grid lines
+    pulseCtx.strokeStyle = 'rgba(255,255,255,0.06)';
+    pulseCtx.lineWidth = 0.5;
+    // Horizontal: intensity 0.5
+    const y50 = P_PAD.t + plotH * 0.5;
+    pulseCtx.beginPath();
+    pulseCtx.moveTo(P_PAD.l, y50);
+    pulseCtx.lineTo(PW - P_PAD.r, y50);
+    pulseCtx.stroke();
+    // Vertical: 0, 90, 180, 270, 360 degrees
+    for (const deg of [0, 90, 180, 270, 360]) {
+      const x = P_PAD.l + (deg / 360) * plotW;
+      pulseCtx.beginPath();
+      pulseCtx.moveTo(x, P_PAD.t);
+      pulseCtx.lineTo(x, P_PAD.t + plotH);
+      pulseCtx.stroke();
+    }
+
+    // Axis labels
+    pulseCtx.fillStyle = 'rgba(255,255,255,0.35)';
+    pulseCtx.font = '9px "Open Sans", sans-serif';
+    pulseCtx.textAlign = 'center';
+    for (const deg of [0, 90, 180, 270, 360]) {
+      const x = P_PAD.l + (deg / 360) * plotW;
+      pulseCtx.fillText(deg + '\u00B0', x, PH - 4);
+    }
+    // Y-axis label
+    pulseCtx.save();
+    pulseCtx.translate(10, P_PAD.t + plotH / 2);
+    pulseCtx.rotate(-PI / 2);
+    pulseCtx.fillText('I', 0, 0);
+    pulseCtx.restore();
+
+    // Y-axis tick labels
+    pulseCtx.textAlign = 'right';
+    pulseCtx.fillText('1', P_PAD.l - 4, P_PAD.t + 4);
+    pulseCtx.fillText('0', P_PAD.l - 4, P_PAD.t + plotH + 4);
+
+    // Compute and draw pulse profile
+    const visible = isPulseVisible(alpha, zeta, rho);
+    const nBins = 360;
+
+    // Profile curve (filled)
+    pulseCtx.save();
+    pulseCtx.beginPath();
+    pulseCtx.rect(P_PAD.l, P_PAD.t, plotW, plotH);
+    pulseCtx.clip();
+
+    pulseCtx.beginPath();
+    pulseCtx.moveTo(P_PAD.l, P_PAD.t + plotH);
+    for (let i = 0; i <= nBins; i++) {
+      const phi = (i / nBins) * TWO_PI;
+      const I = visible ? pulseIntensityBoth(phi, alpha, zeta, rho) : 0;
+      const x = P_PAD.l + (i / nBins) * plotW;
+      const y = P_PAD.t + plotH - I * plotH * 0.92;
+      pulseCtx.lineTo(x, y);
+    }
+    pulseCtx.lineTo(P_PAD.l + plotW, P_PAD.t + plotH);
+    pulseCtx.closePath();
+    pulseCtx.fillStyle = 'rgba(100, 180, 255, 0.3)';
+    pulseCtx.fill();
+    pulseCtx.strokeStyle = '#6ab4ff';
+    pulseCtx.lineWidth = 1.5;
+    pulseCtx.stroke();
+
+    pulseCtx.restore();
+
+    // Border
+    pulseCtx.strokeStyle = 'rgba(255,255,255,0.12)';
+    pulseCtx.lineWidth = 0.5;
+    pulseCtx.strokeRect(P_PAD.l, P_PAD.t, plotW, plotH);
+
+    // Playhead
+    const phaseFrac = ((currentPhase % TWO_PI) + TWO_PI) % TWO_PI / TWO_PI;
+    const px = P_PAD.l + phaseFrac * plotW;
+    pulseCtx.strokeStyle = '#DC2D27';
+    pulseCtx.lineWidth = 2;
+    pulseCtx.beginPath();
+    pulseCtx.moveTo(px, P_PAD.t);
+    pulseCtx.lineTo(px, P_PAD.t + plotH);
+    pulseCtx.stroke();
+
+    // Current intensity dot on playhead
+    const curI = visible ? pulseIntensityBoth(currentPhase % TWO_PI, alpha, zeta, rho) : 0;
+    const dotY = P_PAD.t + plotH - curI * plotH * 0.92;
+    pulseCtx.fillStyle = '#fff';
+    pulseCtx.beginPath();
+    pulseCtx.arc(px, dotY, 3, 0, TWO_PI);
+    pulseCtx.fill();
+
+    // "Not visible" message
+    const msgEl = document.getElementById('no-pulse-msg');
+    if (!visible) {
+      msgEl.textContent = 'Beam does not cross this viewing angle';
+    } else {
+      msgEl.textContent = '';
+    }
+
+    return curI; // return current intensity for audio/visual feedback
+  }
+
+  // ===================================================================
+  //  Stage 4: Audio (Web Audio API)
+  // ===================================================================
+  let audioCtx = null;
+  let audioInitialized = false;
+
+  function initAudio() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioInitialized = true;
+  }
+
+  // Track last pulse to avoid rapid re-triggering
+  let lastPulseTime = 0;
+  let lastClickTime = 0;
+
+  // For fast pulsars: continuous oscillator approach
+  let continuousOsc = null;
+  let continuousGain = null;
+
+  function setupContinuousAudio() {
+    if (!audioCtx) return;
+    if (continuousOsc) return;
+    continuousOsc = audioCtx.createOscillator();
+    continuousOsc.type = 'sine';
+    continuousOsc.frequency.value = 1 / period;
+    continuousGain = audioCtx.createGain();
+    continuousGain.gain.value = 0;
+    continuousOsc.connect(continuousGain);
+    continuousGain.connect(audioCtx.destination);
+    continuousOsc.start();
+  }
+
+  function updateAudio(intensity) {
+    if (!audioCtx || !soundEnabled || !playing) {
+      if (continuousGain && audioCtx) {
+        continuousGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.02);
+      }
+      return;
+    }
+
+    const now = audioCtx.currentTime;
+
+    if (period < 0.05) {
+      // Millisecond pulsar: use continuous oscillator at pulse frequency
+      // The rapid clicks merge into a buzz/tone
+      setupContinuousAudio();
+      const freq = 1 / period;
+      continuousOsc.frequency.setTargetAtTime(Math.min(freq, 800), now, 0.02);
+      const vol = intensity * 0.2;
+      continuousGain.gain.setTargetAtTime(vol, now, 0.02);
+    } else {
+      // Slow pulsar: distinct clicks
+      if (continuousGain) {
+        continuousGain.gain.setTargetAtTime(0, now, 0.01);
+      }
+
+      // Fire a click when intensity is above threshold and enough time has passed
+      const minInterval = Math.max(period * 0.3, 0.03);
+      if (intensity > 0.1 && (now - lastClickTime) > minInterval) {
+        lastClickTime = now;
+        playClick(intensity);
+      }
+    }
+  }
+
+  function playClick(intensity) {
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = 700 + intensity * 300; // 700-1000 Hz
+    const dur = Math.min(0.02, period * 0.1);
+    gain.gain.setValueAtTime(intensity * 0.3, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + dur + 0.01);
+  }
+
+  // ===================================================================
+  //  Stage 5: Star field (two-layer with bloom)
+  // ===================================================================
+  {
+    // Dim background stars
+    const N = 800;
+    const pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const theta = Math.random() * TWO_PI;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 50 + Math.random() * 70;
+      pos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+      pos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i*3+2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({
+      color: 0xffffff, size: 0.12, sizeAttenuation: true,
+      transparent: true, opacity: 0.3,
+    })));
+
+    // Bright stars (trigger bloom)
+    const NB = 80;
+    const bpos = new Float32Array(NB * 3);
+    for (let i = 0; i < NB; i++) {
+      const theta = Math.random() * TWO_PI;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 40 + Math.random() * 60;
+      bpos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+      bpos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      bpos[i*3+2] = r * Math.cos(phi);
+    }
+    const bgeo = new THREE.BufferGeometry();
+    bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+    scene.add(new THREE.Points(bgeo, new THREE.PointsMaterial({
+      color: 0xffffff, size: 0.25, sizeAttenuation: true,
+      transparent: true, opacity: 0.9,
+    })));
+  }
+
+  // ===================================================================
+  //  Controls wiring
+  // ===================================================================
+  const btnPlay = document.getElementById('btn-play');
+  const periodSlider = document.getElementById('period-slider');
+  const tiltSlider = document.getElementById('tilt-slider');
+  const viewSlider = document.getElementById('view-slider');
+  const cbSound = document.getElementById('cb-sound');
+
+  btnPlay.addEventListener('click', () => {
+    playing = !playing;
+    btnPlay.classList.toggle('active', playing);
+    btnPlay.innerHTML = playing ? '&#9646;&#9646; Pause' : '&#9654; Play';
+    if (playing && soundEnabled) initAudio();
+  });
+
+  periodSlider.addEventListener('input', e => {
+    period = Math.pow(10, parseFloat(e.target.value));
+    omega = TWO_PI / period;
+    rho = beamHalfAngle(period);
+    document.getElementById('period-val').textContent = formatPeriod(period);
+    updateBeamCones();
+    updateReadouts();
+  });
+
+  tiltSlider.addEventListener('input', e => {
+    alpha = parseFloat(e.target.value) * DEG;
+    document.getElementById('tilt-val').innerHTML = e.target.value + '&deg;';
+    updateReadouts();
+  });
+
+  viewSlider.addEventListener('input', e => {
+    zeta = parseFloat(e.target.value) * DEG;
+    document.getElementById('view-val').innerHTML = e.target.value + '&deg;';
+    updateLOSLine();
+  });
+
+  cbSound.addEventListener('change', e => {
+    soundEnabled = e.target.checked;
+    if (soundEnabled) initAudio();
+  });
+
+  // ===================================================================
+  //  Beam brightness modulation based on pulse intensity
+  // ===================================================================
+  function updateBeamBrightness(intensity) {
+    // Brighten beam cones when pulse is detected
+    const baseOpacity = 0.22;
+    const boost = 0.35 * intensity;
+    if (beamNorth.material.uniforms) {
+      beamNorth.material.uniforms.uOpacity.value = baseOpacity + boost;
+      beamSouth.material.uniforms.uOpacity.value = baseOpacity + boost;
+    }
+    // Also pulse the NS glow
+    nsGlow.material.opacity = 0.25 + 0.2 * intensity;
+  }
+
+  // ===================================================================
+  //  Page Visibility API
+  // ===================================================================
+  let wasPlayingBeforeHide = false;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      wasPlayingBeforeHide = playing;
+      playing = false;
+    } else if (wasPlayingBeforeHide) {
+      playing = true;
+      lastFrameTime = performance.now();
+    }
+  });
+
+  // ===================================================================
+  //  Animation loop
+  // ===================================================================
+  let lastFrameTime = performance.now();
+
+  // Initialize readouts
+  updateReadouts();
+
+  // Remove loading indicator
+  document.getElementById('loading').style.display = 'none';
+
+  function animate(now) {
+    requestAnimationFrame(animate);
+
+    const dtWall = Math.max(0, Math.min((now - lastFrameTime) / 1000, 0.1));
+    lastFrameTime = now;
+
+    if (playing) {
+      // Advance physics time at real rate
+      physicsTime += dtWall;
+
+      // Visual phase: may be slowed for fast pulsars
+      const vOmega = visualOmega();
+      visualPhase += vOmega * dtWall;
+    }
+
+    // Current physics phase (for pulse detection and profile)
+    const physicsPhase = omega * physicsTime;
+
+    // === Rotate dipole group ===
+    // Quaternion: qSpin * qTilt
+    // Spin around world Y-axis at visual rate, tilt in local frame
+    const spinPhase = visualPhase;
+    const qSpin = new THREE.Quaternion().setFromAxisAngle(
+      new THREE.Vector3(0, 1, 0), spinPhase
+    );
+    const qTilt = new THREE.Quaternion().setFromAxisAngle(
+      new THREE.Vector3(1, 0, 0), alpha
+    );
+    dipoleGroup.quaternion.copy(qSpin).multiply(qTilt);
+
+    // === Pulse profile + detection ===
+    const curIntensity = drawPulseProfile(physicsPhase);
+
+    // === Beam brightness feedback ===
+    updateBeamBrightness(curIntensity);
+
+    // === Audio ===
+    updateAudio(curIntensity);
+
+    // === Camera controls ===
+    controls.update();
+
+    // === Render ===
+    composer.render();
+  }
+
+  requestAnimationFrame(animate);
+
+  // ===================================================================
+  //  Resize handler
+  // ===================================================================
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    composer.setSize(innerWidth, innerHeight);
+  });
+
+  </script>
+</body>
+</html>

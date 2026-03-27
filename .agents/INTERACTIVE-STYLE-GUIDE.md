@@ -41,7 +41,9 @@ Each interactive has an **info panel** (top-left overlay) with title, descriptio
 ## Visual Style
 
 ### Background
-- Deep navy: `#0a0a2e` — matches the astronomy theme, high contrast with white/colored elements
+- **Planet interactives**: pure black `#000` / `0x000000` — true dark space, planets pop
+- **Orbital diagrams** (asteroids, solar system): deep navy `#0a0a2e` — slight blue tint provides depth
+- Use `renderer.setClearColor(0x000000)` and `body { background: #000; }` for planet globes
 
 ### Typography (labels)
 - Font: `sans-serif` (system font, no Google Fonts load needed inside the viz)
@@ -80,10 +82,11 @@ Each interactive has an **info panel** (top-left overlay) with title, descriptio
 - Asteroid points: 0.05 size, sizeAttenuation: true
 - These are NOT to scale — they're sized for visibility
 
-### Stars background
-- 400-800 random points at r = 40-120 units
-- Color white, size 0.08, opacity 0.25
-- Provides depth without distraction
+### Stars background (two-layer with bloom)
+- **Dim layer**: 800 points, r=50-120, size 0.12, opacity 0.3 — subtle depth
+- **Bright layer**: 80 points, r=40-100, size 0.25, opacity 0.9 — triggers bloom for realistic star glow
+- Bloom settings for planet viewers: strength 0.35, radius 0.6, threshold 0.4
+- The bright stars exceed the bloom threshold and produce soft halos
 
 ---
 
