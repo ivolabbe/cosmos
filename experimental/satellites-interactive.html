@@ -199,16 +199,46 @@
     layers[cat] = mesh;
   }
 
-  /* ---- Space debris: 14,587 tracked debris objects (rocket bodies + fragments) ---- */
+  /* ---- Space debris: 14,587 tracked objects × 8 points each ---- */
   {
     const resp = await fetch('models/satellites/catalog/debris_positions.bin');
     const buf = await resp.arrayBuffer();
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(buf), 3));
-    const mat = new THREE.PointsMaterial({
-      color: 0xcccccc, size: 0.03, transparent: true, opacity: 0.8,
-      blending: THREE.AdditiveBlending, depthWrite: false,
-      sizeAttenuation: true,
+    /* Custom shader: round dots, brightness ramps with altitude */
+    const mat = new THREE.ShaderMaterial({
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      depthTest: true,
+      uniforms: {
+        ptSize:  { value: 3.0 },
+        color:   { value: new THREE.Color(0xcccccc) },
+      },
+      vertexShader: `
+        uniform float ptSize;
+        varying float vAlt;
+        void main() {
+          float r = length(position);
+          vAlt = r - 1.0;  /* altitude above Earth surface */
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = min(ptSize * (300.0 / -mv.z), 5.0);  /* perspective + cap */
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader: `
+        uniform vec3 color;
+        varying float vAlt;
+        void main() {
+          /* Round dot: discard outside circle */
+          float d = length(gl_PointCoord - vec2(0.5));
+          if (d > 0.5) discard;
+          /* Soft edge */
+          float alpha = smoothstep(0.5, 0.3, d);
+          /* Brightness ramps with altitude: dim near surface, bright far out */
+          float altFade = smoothstep(0.0, 0.5, vAlt);
+          alpha *= mix(0.15, 0.9, altFade);
+          gl_FragColor = vec4(color * alpha, alpha);
+        }`,
     });
     const points = new THREE.Points(geo, mat);
     points.visible = false;
