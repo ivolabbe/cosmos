@@ -107,7 +107,7 @@
     <div class="sep"></div>
     <button id="btn-play" class="active">&#9654; Play</button>
     <label><input type="checkbox" id="toggle-auto" checked> Auto</label>
-    <label>Speed <input type="range" id="speed-slider" min="-2" max="1" value="-0.3" step="0.01" disabled>
+    <label>Speed <input type="range" id="speed-slider" min="-1.7" max="1" value="-0.3" step="0.01" disabled>
       <span class="val" id="speed-val">auto</span></label>
     <div class="sep"></div>
     <label><input type="checkbox" id="toggle-sound" checked> Sound</label>
@@ -150,7 +150,7 @@
     const MESH_SIZE = 30;          // world units
     const MESH_SEG  = 512;         // vertices per side (high-res for smooth waves)
     const WAVE_SPEED = 140;        // visual propagation speed — wide waves like real sims (~2-3 crests at start)
-    const VIS_DURATION = 30;       // playback seconds at 1x
+    const VIS_DURATION = 16;       // playback seconds at 1x
     const ORBIT_VIS_R = 6.0;      // initial orbit radius in world units (larger = more spiral-in visible)
     const EXAGGERATION = 1.8;      // max wave displacement (world units)
     const TRAIL_LEN = 600;
@@ -405,100 +405,140 @@
     scene.add(spacetimeMesh);
 
     // ===================================================================
-    //  Volumetric layers (3D mode) — stacked transparent planes
+    //  3D GW strain — volumetric ray-marched sphere (gwpv-style)
+    //  Evaluates h+(r,θ,φ) at multiple radii along each view ray through
+    //  a bounding sphere, producing a true volumetric rendering of the
+    //  quadrupolar (l=2,m=2) GW pattern propagating outward in 3D.
     // ===================================================================
-    const volFragShader = /* glsl */`
-      uniform float u_maxDisp;
-      uniform float u_layerOpacity;
-      varying vec2 vUv;
-      varying float v_disp;
+    const SPHERE_RADIUS = 12.0;
 
+    const sphereVertShader = /* glsl */`
+      varying vec3 vWorldPos;
       void main() {
-        float s = clamp(v_disp / u_maxDisp, -1.0, 1.0);
-        vec3 cZero = vec3(0.0);
-        vec3 cPos  = vec3(0.9, 0.15, 0.0);
-        vec3 cNeg  = vec3(0.0, 0.2, 0.9);
-        vec3 hotP  = vec3(1.5, 0.8, 0.4);
-        vec3 hotN  = vec3(0.4, 0.8, 1.5);
-
-        vec3 col;
-        if (s > 0.0) {
-          col = mix(cZero, cPos, smoothstep(0.0, 0.3, s));
-          col = mix(col, hotP, smoothstep(0.3, 1.0, s));
-        } else {
-          col = mix(cZero, cNeg, smoothstep(0.0, 0.3, -s));
-          col = mix(col, hotN, smoothstep(0.3, 1.0, -s));
-        }
-
-        // Circular fade
-        float r = length(vUv - 0.5) * 2.0;
-        float fade = 1.0 - smoothstep(0.7, 1.0, r);
-
-        float alpha = abs(s) * u_layerOpacity * fade;
-        gl_FragColor = vec4(col, alpha);
+        vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }
     `;
 
-    const VOL_LAYERS = 12;
-    const VOL_SPREAD = 2.5;   // total height range (-spread/2 to +spread/2)
-    const VOL_RES = 128;      // lower res for performance
-    const volGroup = new THREE.Group();
-    const volMaterials = [];
+    const sphereFragShader = /* glsl */`
+      uniform float u_phase;
+      uniform float u_amplitude;
+      uniform float u_gwFreq;
+      uniform float u_waveSpeed;
+      uniform vec3  u_cameraPos;
 
-    {
-      const volGeo = new THREE.PlaneGeometry(MESH_SIZE, MESH_SIZE, VOL_RES, VOL_RES);
-      volGeo.rotateX(-PI / 2);
+      varying vec3 vWorldPos;
 
-      for (let i = 0; i < VOL_LAYERS; i++) {
-        const yFrac = (i / (VOL_LAYERS - 1)) * 2 - 1;  // -1 to +1
-        const yPos = yFrac * VOL_SPREAD / 2;
-        // Gaussian envelope: layers near y=0 are brighter
-        const gaussAmp = Math.exp(-yFrac * yFrac * 2);
+      #define NUM_STEPS 32
+      #define R_MAX 12.0
 
-        const mat = new THREE.ShaderMaterial({
-          uniforms: {
-            u_phase:     { value: 0 },
-            u_gwFreq:    { value: 20 },
-            u_amplitude: { value: 0 },
-            u_waveSpeed: { value: WAVE_SPEED },
-            u_maxDisp:   { value: EXAGGERATION * 2.5 },
-            u_bh1:       { value: new THREE.Vector2(0, 0) },
-            u_bh2:       { value: new THREE.Vector2(0, 0) },
-            u_wd1:       { value: 0 },
-            u_wd2:       { value: 0 },
-            u_orbitR:    { value: ORBIT_VIS_R },
-            u_layerOpacity: { value: 0.07 * gaussAmp },
-          },
-          vertexShader,
-          fragmentShader: volFragShader,
-          transparent: true,
-          depthWrite: false,
-          blending: THREE.AdditiveBlending,
-          side: THREE.DoubleSide,
-        });
-        volMaterials.push({ mat, gaussAmp });
-
-        const mesh = new THREE.Mesh(volGeo.clone(), mat);
-        mesh.position.y = yPos;
-        volGroup.add(mesh);
+      vec2 sphereHit(vec3 ro, vec3 rd, float r) {
+        float b = dot(ro, rd);
+        float c = dot(ro, ro) - r * r;
+        float disc = b * b - c;
+        if (disc < 0.0) return vec2(-1.0);
+        float sq = sqrt(disc);
+        return vec2(-b - sq, -b + sq);
       }
-    }
-    volGroup.visible = false;  // off by default
-    scene.add(volGroup);
 
-    // Sync volume layer uniforms with main mesh
-    function updateVolUniforms() {
-      for (const { mat } of volMaterials) {
-        mat.uniforms.u_phase.value     = meshMat.uniforms.u_phase.value;
-        mat.uniforms.u_gwFreq.value    = meshMat.uniforms.u_gwFreq.value;
-        mat.uniforms.u_amplitude.value = meshMat.uniforms.u_amplitude.value;
-        mat.uniforms.u_waveSpeed.value = meshMat.uniforms.u_waveSpeed.value;
-        mat.uniforms.u_bh1.value.copy(meshMat.uniforms.u_bh1.value);
-        mat.uniforms.u_bh2.value.copy(meshMat.uniforms.u_bh2.value);
-        mat.uniforms.u_wd1.value       = meshMat.uniforms.u_wd1.value;
-        mat.uniforms.u_wd2.value       = meshMat.uniforms.u_wd2.value;
-        mat.uniforms.u_orbitR.value    = meshMat.uniforms.u_orbitR.value;
+      void main() {
+        vec3 ro = u_cameraPos;
+        vec3 rd = normalize(vWorldPos - ro);
+
+        vec2 hit = sphereHit(ro, rd, R_MAX);
+        if (hit.x < 0.0) discard;
+
+        float tStart = max(hit.x, 0.0);
+        float tEnd   = hit.y;
+        float stepSize = (tEnd - tStart) / float(NUM_STEPS);
+        if (stepSize <= 0.0) discard;
+
+        float k = 6.2832 * u_gwFreq / u_waveSpeed;
+
+        vec3 totalCol = vec3(0.0);
+        float totalAlpha = 0.0;
+
+        for (int i = 0; i < NUM_STEPS; i++) {
+          float t = tStart + (float(i) + 0.5) * stepSize;
+          vec3 pos = ro + rd * t;
+          float r = length(pos);
+          if (r > R_MAX) continue;
+
+          vec3 n = pos / max(r, 0.01);
+          float cosT = n.y;
+          float phi  = atan(n.z, n.x);
+
+          // h+ and h× polarisations (l=2, m=2 quadrupole)
+          // h× is anti-symmetric about orbital plane → creates the
+          // phase offset between +z and −z seen in NR simulations
+          float phaseTerm = 2.0 * phi + u_phase - k * r;
+          float hPlus  = 0.5 * (1.0 + cosT * cosT) * cos(phaseTerm);
+          float hCross = cosT * sin(phaseTerm);
+
+          // Smooth inner fade + gentle outer fade (no hard cutoff)
+          float innerFade = smoothstep(1.5, 5.5, r);
+          float outerFade = 1.0 - smoothstep(R_MAX * 0.7, R_MAX, r);
+          float envelope = u_amplitude * innerFade * outerFade / max(r * 0.15, 1.0);
+
+          float h = envelope * (hPlus + hCross);
+          float s = clamp(h, -1.0, 1.0);
+          float as = abs(s);
+
+          vec3 col;
+          if (s > 0.0) {
+            col = mix(vec3(0.0), vec3(0.1, 0.65, 0.2), smoothstep(0.0, 0.2, as));
+            col = mix(col, vec3(0.8, 0.75, 0.0), smoothstep(0.2, 0.5, as));
+            col = mix(col, vec3(1.5, 0.4, 0.1), smoothstep(0.5, 1.0, as));
+          } else {
+            col = mix(vec3(0.0), vec3(0.0, 0.45, 0.5), smoothstep(0.0, 0.2, as));
+            col = mix(col, vec3(0.0, 0.3, 0.8), smoothstep(0.2, 0.5, as));
+            col = mix(col, vec3(0.3, 0.5, 1.5), smoothstep(0.5, 1.0, as));
+          }
+
+          // Scale density down at high freq (more crests pack into volume)
+          float freqScale = sqrt(20.0 / max(u_gwFreq, 20.0));
+          float density = as * 0.12 * freqScale;
+          totalCol += col * density * stepSize * 1.6;
+          totalAlpha += density * stepSize * 1.6;
+        }
+
+        if (totalAlpha < 0.001) discard;
+        gl_FragColor = vec4(totalCol, min(totalAlpha, 1.0));
       }
+    `;
+
+    const sphereGroup = new THREE.Group();
+    const sphereMat = new THREE.ShaderMaterial({
+      uniforms: {
+        u_phase:      { value: 0 },
+        u_amplitude:  { value: 0 },
+        u_gwFreq:     { value: 20 },
+        u_waveSpeed:  { value: WAVE_SPEED },
+        u_cameraPos:  { value: new THREE.Vector3() },
+      },
+      vertexShader: sphereVertShader,
+      fragmentShader: sphereFragShader,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      side: THREE.BackSide,   // render inside faces so camera inside sphere works
+    });
+    const sphereMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(SPHERE_RADIUS, 64, 32),
+      sphereMat
+    );
+    sphereGroup.add(sphereMesh);
+    sphereGroup.visible = false;
+    scene.add(sphereGroup);
+
+    let mode3D = false;
+
+    // Update sphere uniforms each frame
+    function updateSphereUniforms(phase, fGw, amplitude) {
+      sphereMat.uniforms.u_phase.value     = phase;
+      sphereMat.uniforms.u_gwFreq.value    = fGw;
+      sphereMat.uniforms.u_amplitude.value = amplitude;
+      sphereMat.uniforms.u_cameraPos.value.copy(camera.position);
     }
 
     // ===================================================================
@@ -641,21 +681,27 @@
     let merged = false;
     let finished = false;
 
-    // Auto-speed profile: slow start → chirp → smooth decel to very slow merger
-    // Uses a smooth cosine-based curve — no piecewise jumps
-    function getAutoSpeedMul(progress) {
-      // Smooth curve: ramp up → cruise → sharp but smooth decel in last 5%
-      const CRUISE = 1.5;
-      const END_SPEED = 0.028;  // 35Hz × 0.028 ≈ 1 orbit/sec
+    // Auto-speed profile: ramp up → cruise → smooth sigmoid decel → slow final moments
+    // Progress-based sigmoid — smooth by construction (no frame-skip issues)
+    function getAutoSpeedMul(progress, fISCO) {
+      const CRUISE = 2.0;
+      const END_SPEED = 2.0 / (1.5 * fISCO);  // ~1 orbit/s at 1.5×f_ISCO
+      const MERGER_BOOST = 0.1;
 
-      // Ramp up (0→5%): smooth start
-      if (progress < 0.05) {
-        const t = progress / 0.05;
-        return END_SPEED + (CRUISE - END_SPEED) * t * t;
+      // Ramp up (0→25%): slow start so user sees a few demo orbits
+      if (progress < 0.25) {
+        const t = progress / 0.25;
+        return 0.04 + (CRUISE - 0.04) * t * t;
       }
-      // Cruise + steep sigmoid decel in last ~5%, centered at 96%
-      const sig = 1 / (1 + Math.exp(150 * (progress - 0.965)));
-      return END_SPEED + (CRUISE - END_SPEED) * sig;
+
+      // Cruise + smooth sigmoid decel centered at 89% progress
+      let speed = END_SPEED + (CRUISE - END_SPEED)
+                / (1 + Math.exp(60 * (progress - 0.89)));
+
+      // Post-merger speedup (very late, p ≈ 0.998)
+      speed += MERGER_BOOST / (1 + Math.exp(-300 * (progress - 0.998)));
+
+      return speed;
     }
 
     // DOM refs
@@ -856,6 +902,10 @@
 
       bh1.visible = true; bh2.visible = true;
       remnant.visible = false;
+      spacetimeMesh.visible = !mode3D;
+      sphereGroup.visible = mode3D;
+      trail1.line.visible = !mode3D;
+      trail2.line.visible = !mode3D;
       clearTrail(trail1);
       clearTrail(trail2);
       specTrace = [];
@@ -877,7 +927,7 @@
       meshMat.uniforms.u_orbitR.value = sepVis;
       meshMat.uniforms.u_gwFreq.value = inspiral.freq[0];
       meshMat.uniforms.u_phase.value = 0;
-      if (volGroup.visible) updateVolUniforms();
+      if (mode3D) updateSphereUniforms(0, inspiral.freq[0], 0.15);
 
       updateReadout(0);
       drawSpectrogram(0, 20, 0, 0);
@@ -956,7 +1006,13 @@
       if (audioEnabled) initAudio();
     });
     document.getElementById('toggle-3d').addEventListener('change', e => {
-      volGroup.visible = e.target.checked;
+      mode3D = e.target.checked;
+      sphereGroup.visible = mode3D;
+      spacetimeMesh.visible = !mode3D;
+      trail1.line.visible = !mode3D;
+      trail2.line.visible = !mode3D;
+      // Keep same camera limits in both modes
+      orbit.maxPolarAngle = PI * 0.48;
     });
     document.getElementById('btn-reset').addEventListener('click', resetSim);
 
@@ -999,12 +1055,13 @@
       lastTime = now;
 
       if (playing && !finished) {
-        // Auto speed: compute speedMul from progress profile
+        // Auto speed: smooth progress-based sigmoid
         const progress = simTime / (inspiral.physDuration || 1);
         if (autoSpeed) {
-          speedMul = getAutoSpeedMul(progress);
+          speedMul = getAutoSpeedMul(progress, inspiral.f_ISCO);
           const sv = document.getElementById('speed-val');
-          sv.textContent = speedMul < 0.1 ? speedMul.toFixed(2)
+          sv.textContent = speedMul < 0.01 ? speedMul.toFixed(3)
+            : speedMul < 0.1 ? speedMul.toFixed(2)
             : speedMul < 1 ? speedMul.toFixed(1) : speedMul.toFixed(1);
         }
 
@@ -1029,7 +1086,7 @@
         meshMat.uniforms.u_amplitude.value = visAmp;
 
         // --- Update binary positions (anti-clockwise) ---
-        const BH_Y = 0.8;  // elevate BHs well above depressed mesh
+        const BH_Y = mode3D ? 0.0 : 0.8;  // centered in 3D, elevated above mesh in 2D
         const totalM = m1Msun + m2Msun;
 
         if (idx < inspiral.nInspiral) {
@@ -1086,8 +1143,8 @@
           bloomPass.strength = 2.5;
         }
 
-        // Sync volumetric layers if 3D mode is on
-        if (volGroup.visible) updateVolUniforms();
+        // Sync sphere shells if 3D mode is on
+        if (mode3D) updateSphereUniforms(visualPhase, fGw, amplitude);
 
         // Ringdown bloom decay
         if (merged) {
