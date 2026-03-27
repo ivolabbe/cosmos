@@ -14,7 +14,7 @@
     #info {
       position: absolute; top: 16px; left: 16px;
       background: rgba(6,6,24,0.9); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 16px 20px; max-width: 340px;
+      border-radius: 8px; padding: 16px 20px; max-width: 380px;
       font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
     }
     #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
@@ -86,7 +86,7 @@
       <div>GW freq: <span id="r-fgw">40.0</span> Hz</div>
       <div>Audio freq: <span id="r-afq">40</span> Hz (2&times;)</div>
       <div>Separation: <span id="r-sep">7.1</span> R<sub>s</sub></div>
-      <div>Time to merger: <span id="r-ttm">30.0</span> s</div>
+      <div>Time to merger: <span id="r-ttm">30.0 s</span></div>
       <div>Chirp mass: <span id="r-mc">26.1</span> M<sub>&#9737;</sub></div>
     </div>
     <p class="hint">Drag to rotate &middot; Scroll to zoom &middot; Best with headphones</p>
@@ -96,7 +96,7 @@
 
   <div id="spectrogram">
     <h3>Chirp Signal (frequency &times; time)</h3>
-    <canvas id="spec-canvas" width="300" height="170"></canvas>
+    <canvas id="spec-canvas" width="300" height="150"></canvas>
   </div>
 
   <div id="controls">
@@ -153,7 +153,7 @@
     const VIS_DURATION = 16;       // playback seconds at 1x
     const ORBIT_VIS_R = 6.0;      // initial orbit radius in world units (larger = more spiral-in visible)
     const EXAGGERATION = 1.8;      // max wave displacement (world units)
-    const TRAIL_LEN = 600;
+    const TRAIL_LEN = 210;
     const TRAIL_PTS_PER_FRAME = 5;
     const AUDIO_SHIFT = 2;         // frequency multiplier: 1 octave up for audibility
     const WELL_DEPTH = 0.2;        // gravity well depth scale (world units)
@@ -611,19 +611,20 @@
     // ===================================================================
     function createTrail(baseR, baseG, baseB) {
       const positions = new Float32Array(TRAIL_LEN * 3);
-      const colors    = new Float32Array(TRAIL_LEN * 3);
-      // Pre-compute gradient colours
+      const colors    = new Float32Array(TRAIL_LEN * 4); // RGBA
+      // Pre-compute gradient: constant color, fading alpha
       for (let i = 0; i < TRAIL_LEN; i++) {
-        const fade = Math.pow(1 - i / TRAIL_LEN, 2);
-        colors[i * 3]     = baseR * fade;
-        colors[i * 3 + 1] = baseG * fade;
-        colors[i * 3 + 2] = baseB * fade;
+        const alpha = Math.pow(1 - i / TRAIL_LEN, 2);
+        colors[i * 4]     = baseR;
+        colors[i * 4 + 1] = baseG;
+        colors[i * 4 + 2] = baseB;
+        colors[i * 4 + 3] = alpha;
       }
       const geo = new THREE.BufferGeometry();
       geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+      geo.setAttribute('color',    new THREE.BufferAttribute(colors, 4));
       geo.setDrawRange(0, 0);
-      const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.7 });
+      const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true });
       const line = new THREE.Line(geo, mat);
       line.frustumCulled = false;
       scene.add(line);
@@ -944,8 +945,8 @@
       bh1.visible = true; bh2.visible = true;
       remnant.visible = false;
       sphereGroup.visible = mode3D;
-      trail1.line.visible = !mode3D;
-      trail2.line.visible = !mode3D;
+      trail1.line.visible = true;
+      trail2.line.visible = true;
       // Apply same rendering settings as the 3D toggle handler
       meshMat.uniforms.u_gridOnly.value = mode3D ? 1 : 0;
       meshMat.transparent = mode3D;
@@ -961,8 +962,8 @@
       const sepVis = inspiral.sep[0] * orbitScale;
       const r1 = sepVis * m2Msun / totalM;
       const r2 = sepVis * m1Msun / totalM;
-      bh1.position.set(r1, 0.8, 0);
-      bh2.position.set(-r2, 0.8, 0);
+      bh1.position.set(r1, 0, 0);
+      bh2.position.set(-r2, 0, 0);
       computeBHSizes();
       meshMat.uniforms.u_bh1.value.set(r1, 0);
       meshMat.uniforms.u_bh2.value.set(-r2, 0);
@@ -1058,8 +1059,8 @@
       meshMat.uniforms.u_gridOnly.value = mode3D ? 1 : 0;
       meshMat.transparent = mode3D;
       meshMat.depthWrite = !mode3D;
-      trail1.line.visible = !mode3D;
-      trail2.line.visible = !mode3D;
+      trail1.line.visible = true;
+      trail2.line.visible = true;
       orbit.maxPolarAngle = PI * 0.48;
     });
     document.getElementById('btn-reset').addEventListener('click', resetSim);
@@ -1177,7 +1178,7 @@
           merged = true;
           bh1.visible = false; bh2.visible = false;
           remnant.visible = true;
-          remnant.position.set(0, 0.8, 0);
+          remnant.position.set(0, 0, 0);
           // Remnant size = Schwarzschild radius of combined mass (minus ~5% radiated)
           const mRemnant = (m1Msun + m2Msun) * 0.95;
           const rsRemnant = 2 * G * mRemnant * MSUN / (C * C) * orbitScale;

@@ -29,8 +29,10 @@ Each visualization is ONE `.html` file in `experimental/`. It contains all CSS, 
 </div>
 ```
 
-### No standalone chrome
-No info panels, no time displays, no "fullscreen" links. The visualization is always embedded. Keep only the essential controls bar.
+### Info panel & caption pattern
+Each interactive has an **info panel** (top-left overlay) with title, description, and live readouts.
+- **Fullscreen mode**: info panel shows title, description, hint text, and readouts.
+- **Embedded mode** (`body.embedded`): title, description, and hint are hidden — the info panel shows only the compact readout. The caption information (title + description) is provided by the article page underneath the `<iframe>`, not inside the interactive itself. This avoids duplicating text and keeps the embed compact.
 
 ---
 
