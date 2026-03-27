@@ -7,14 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Open Sans", sans-serif; background: #0a0a2e; color: #e0e0e0; overflow: hidden; }
+    body { font-family: "Open Sans", sans-serif; background: #060618; color: #e0e0e0; overflow: hidden; }
     canvas { display: block; }
 
     /* --- Info panel (top-left, fullscreen only) --- */
     #info {
       position: absolute; top: 16px; left: 16px;
-      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 16px 20px; max-width: 300px;
+      background: rgba(6,6,24,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; max-width: 340px;
       font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
     }
     #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
@@ -96,7 +96,7 @@
 
   <div id="spectrogram">
     <h3>Chirp Signal (frequency &times; time)</h3>
-    <canvas id="spec-canvas" width="300" height="220"></canvas>
+    <canvas id="spec-canvas" width="300" height="170"></canvas>
   </div>
 
   <div id="controls">
@@ -234,19 +234,19 @@
         }
 
         // 2D mode: full colored surface + grid
-        vec3 cZero = vec3(0.05, 0.05, 0.15);
-        vec3 cPos  = vec3(1.0, 0.18, 0.0);
-        vec3 cNeg  = vec3(0.0, 0.2, 1.0);
-        vec3 hotP  = vec3(2.0, 1.4, 1.0);
-        vec3 hotN  = vec3(1.0, 1.4, 2.0);
+        vec3 cZero = vec3(0.06, 0.06, 0.18);
+        vec3 cPos  = vec3(1.2, 0.22, 0.0);
+        vec3 cNeg  = vec3(0.0, 0.25, 1.2);
+        vec3 hotP  = vec3(2.4, 1.6, 1.1);
+        vec3 hotN  = vec3(1.1, 1.6, 2.4);
 
         vec3 col;
         if (s > 0.0) {
-          col = mix(cZero, cPos, smoothstep(0.0, 0.4, s));
-          col = mix(col, hotP, smoothstep(0.4, 1.0, s));
+          col = mix(cZero, cPos, smoothstep(0.0, 0.25, s));
+          col = mix(col, hotP, smoothstep(0.3, 0.8, s));
         } else {
-          col = mix(cZero, cNeg, smoothstep(0.0, 0.4, -s));
-          col = mix(col, hotN, smoothstep(0.4, 1.0, -s));
+          col = mix(cZero, cNeg, smoothstep(0.0, 0.25, -s));
+          col = mix(col, hotN, smoothstep(0.3, 0.8, -s));
         }
 
         col += vec3(0.25, 0.25, 0.4) * grid * (0.15 + 0.12 * abs(s));
@@ -368,7 +368,7 @@
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(innerWidth, innerHeight);
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    renderer.setClearColor(0x0a0a2e);
+    renderer.setClearColor(0x060618);
     document.body.appendChild(renderer.domElement);
 
     const orbit = new OrbitControls(camera, renderer.domElement);
@@ -412,6 +412,7 @@
       side: THREE.DoubleSide,
     });
     const spacetimeMesh = new THREE.Mesh(meshGeo, meshMat);
+    spacetimeMesh.position.y = -0.6;  // offset mesh below BHs (at y=0)
     scene.add(spacetimeMesh);
 
     // ===================================================================
@@ -491,38 +492,38 @@
           float innerFade = smoothstep(1.5, 5.0, r);
           float outerFade = 1.0 - smoothstep(R_MAX * 0.75, R_MAX, r);
 
-          // Physical field
+          // Pure oscillation field [-1, 1] — same range at ALL radii
           float field = hPlus + hCross;
-          // Compressed amplitude for consistent visibility across all masses
-          // and throughout the inspiral (physical amplitude shown in 2D + spectrogram)
-          float amp = 0.3 + 0.5 * sqrt(max(u_amplitude, 0.01));
-          float envelope = amp * innerFade * outerFade / max(r * 0.2, 1.0);
-          float h = envelope * field;
+          float af = abs(field);
 
-          // h² = GW energy density (physical quantity)
-          float h2 = h * h;
+          // Skip near-zero → dark gaps between wavefronts
+          if (af < 0.45) continue;
 
-          // Visualization: gamma + threshold on h²
-          float vis = pow(h2, 3.0);  // gamma = 3.0 on h²
-          if (vis < 0.005) continue;
+          // Discrete color bands with uniform color (hard edges, not gradual)
+          // Matching gwpv playground approach for crisp wavefront definition
+          vec3 col;
+          float bandOpacity;
+          if (field > 0.7)       { col = vec3(0.9, 0.2, 0.05);  bandOpacity = 2.0; }  // red-orange
+          else if (field > 0.5)  { col = vec3(0.7, 0.75, 0.05); bandOpacity = 0.45; } // yellow-green
+          else if (field > 0.3)  { col = vec3(0.1, 0.55, 0.15); bandOpacity = 0.15; } // green
+          else if (field < -0.7) { col = vec3(0.1, 0.7, 0.5);   bandOpacity = 2.0; }  // teal
+          else if (field < -0.5) { col = vec3(0.05, 0.4, 0.7);  bandOpacity = 0.45; } // blue
+          else                   { col = vec3(0.02, 0.15, 0.35); bandOpacity = 0.15; } // dark blue
 
-          // Color from sign of field
-          vec3 warmCol = vec3(1.6, 0.55, 0.06);  // orange-gold (brighter)
-          vec3 coolCol = vec3(0.8, 0.12, 0.65); // magenta (brighter)
-          vec3 col = field > 0.0 ? warmCol : coolCol;
+          // Radial screening (matching playground: activation/deactivation)
+          float screening = innerFade * outerFade;
 
-          // Depth fade based on distance from SOURCE (r), not camera
-          // Only dims within the volume, doesn't affect the whole scene
-          float depthFade = 1.0 / (1.0 + r * 0.03);
-          float alphaStep = min(vis * 30.0 * stepSize, 0.25);
+          // Very low optical density — only concentrated peaks accumulate
+          // (matching playground: opticalDensity * rayStride * color.a)
+          float alpha = screening * bandOpacity * bandOpacity * bandOpacity * 0.007 * stepSize;
 
-          totalCol  += (1.0 - totalAlpha) * col * depthFade * alphaStep;
-          totalAlpha += (1.0 - totalAlpha) * alphaStep;
-
-          if (totalAlpha > 0.95) break;
+          // Simple additive accumulation (matching playground exactly)
+          totalCol += alpha * col;
+          totalAlpha += alpha;
         }
 
         if (totalAlpha < 0.001) discard;
+        totalAlpha = min(totalAlpha, 1.0);
         gl_FragColor = vec4(totalCol, totalAlpha);
       }
     `;
@@ -541,7 +542,10 @@
       fragmentShader: sphereFragShader,
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      // Premultiplied alpha compositing: gaps are truly transparent (black)
+      blending: THREE.CustomBlending,
+      blendSrc: THREE.OneFactor,
+      blendDst: THREE.OneMinusSrcAlphaFactor,
       side: THREE.BackSide,   // render inside faces so camera inside sphere works
     });
     const sphereMesh = new THREE.Mesh(
@@ -590,7 +594,7 @@
       });
       group.add(new THREE.Mesh(haloGeo, haloMat));
 
-      group.position.y = 0.8;
+      group.position.y = 0.0;
       scene.add(group);
       return group;
     }
@@ -922,12 +926,31 @@
       playing = false;
       bloomPass.strength = 1.0;
 
+      // True reset: restore default masses
+      m1Msun = 15; m2Msun = 30;
+      document.getElementById('mass1').value = m1Msun;
+      document.getElementById('mass2').value = m2Msun;
+      document.getElementById('mass1-val').textContent = m1Msun;
+      document.getElementById('mass2-val').textContent = m2Msun;
+      inspiral = computeInspiral(m1Msun, m2Msun);
+      orbitScale = ORBIT_VIS_R / (inspiral.sep[0] || 1);
+
+      // Restore auto speed
+      autoSpeed = true;
+      document.getElementById('toggle-auto').checked = true;
+      document.getElementById('speed-slider').disabled = true;
+      document.getElementById('speed-val').textContent = 'auto';
+
       bh1.visible = true; bh2.visible = true;
       remnant.visible = false;
-      spacetimeMesh.visible = true;
       sphereGroup.visible = mode3D;
       trail1.line.visible = !mode3D;
       trail2.line.visible = !mode3D;
+      // Apply same rendering settings as the 3D toggle handler
+      meshMat.uniforms.u_gridOnly.value = mode3D ? 1 : 0;
+      meshMat.transparent = mode3D;
+      meshMat.depthWrite = !mode3D;
+      spacetimeMesh.visible = true;
       clearTrail(trail1);
       clearTrail(trail2);
       specTrace = [];
@@ -945,7 +968,8 @@
       meshMat.uniforms.u_bh2.value.set(-r2, 0);
       meshMat.uniforms.u_wd1.value = WELL_DEPTH * m1Msun / totalM;
       meshMat.uniforms.u_wd2.value = WELL_DEPTH * m2Msun / totalM;
-      meshMat.uniforms.u_amplitude.value = 0.15 * EXAGGERATION;
+      const initAmp = inspiral.amp[0] / inspiral.ampMax;
+      meshMat.uniforms.u_amplitude.value = (0.15 + 0.85 * initAmp) * EXAGGERATION;
       meshMat.uniforms.u_orbitR.value = sepVis;
       meshMat.uniforms.u_gwFreq.value = inspiral.freq[0];
       meshMat.uniforms.u_phase.value = 0;
@@ -1110,7 +1134,7 @@
         meshMat.uniforms.u_amplitude.value = visAmp;
 
         // --- Update binary positions (anti-clockwise) ---
-        const BH_Y = mode3D ? 0.0 : 0.8;  // centered in 3D, elevated above mesh in 2D
+        const BH_Y = 0.0;  // BHs always at y=0; mesh is offset down
         const totalM = m1Msun + m2Msun;
 
         if (idx < inspiral.nInspiral) {
