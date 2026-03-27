@@ -100,8 +100,8 @@
   </div>
 
   <div id="controls">
-    <label>m<sub>1</sub> <input type="range" id="mass1" min="1" max="50" value="30" step="0.5">
-      <span class="val" id="mass1-val">30</span>M<sub>&#9737;</sub></label>
+    <label>m<sub>1</sub> <input type="range" id="mass1" min="1" max="50" value="15" step="0.5">
+      <span class="val" id="mass1-val">15</span>M<sub>&#9737;</sub></label>
     <label>m<sub>2</sub> <input type="range" id="mass2" min="1" max="50" value="30" step="0.5">
       <span class="val" id="mass2-val">30</span>M<sub>&#9737;</sub></label>
     <div class="sep"></div>
@@ -485,9 +485,9 @@
           float s = clamp(h, -1.0, 1.0);
           float as = abs(s);
 
-          // h² ∝ GW energy density: concentrates opacity at peaks → thin bright
-          // sheets with dark transparent gaps between wavefronts
-          float sharp = as * as;  // |h|²
+          // h² ∝ GW energy density: bright at wavefront peaks, dark at
+          // zero-crossings → naturally creates visible spiral arm structure
+          float sharp = as * as;  // h²
 
           // Warm colormap matching SXS/gwpv style: orange/gold/pink
           vec3 col;
@@ -504,11 +504,11 @@
           float combined = sharp;
 
           // Depth attenuation: atmospheric perspective
-          float depthFade = exp(-t * 0.025);
+          float depthFade = exp(-t * 0.012);
 
           // Scale density down at high freq
           float freqScale = sqrt(20.0 / max(u_gwFreq, 20.0));
-          float alphaStep = min(combined * 3.0 * freqScale * stepSize, 0.9);
+          float alphaStep = min(combined * 8.0 * freqScale * stepSize, 0.9);
 
           // Front-to-back compositing with depth fade
           totalCol  += (1.0 - totalAlpha) * col * depthFade * alphaStep;
@@ -673,7 +673,7 @@
     // ===================================================================
     //  State
     // ===================================================================
-    let m1Msun = 30, m2Msun = 30;
+    let m1Msun = 15, m2Msun = 30;
     let inspiral = computeInspiral(m1Msun, m2Msun);
     let orbitScale = ORBIT_VIS_R / (inspiral.sep[0] || 1);
 
