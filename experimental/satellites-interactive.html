@@ -161,11 +161,12 @@
     if ((child.isLineSegments || child.isLine) && LINE_COLORS[matName] !== undefined) {
       const isRoutes = matName === 'routes_material';
       const isNearEarth = matName === 'sat_earth_material';
-      const isCommsOrTech = matName === 'sat_comms_material' || matName === 'sat_tech_material';
+      const isComms = matName === 'sat_comms_material';
+      const isTech = matName === 'sat_tech_material';
       child.material = new THREE.LineBasicMaterial({
         color: LINE_COLORS[matName],
         transparent: true,
-        opacity: isRoutes ? 0.05 : isNearEarth ? 0.02 : isCommsOrTech ? 0.1 : 0.45,
+        opacity: isRoutes ? 0.05 : isNearEarth ? 0.02 : isComms ? 0.1 : isTech ? 0.18 : 0.45,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       });
