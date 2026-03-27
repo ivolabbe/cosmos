@@ -222,7 +222,9 @@
           float r = length(position);
           vAlt = r - 1.0;  /* altitude above Earth surface */
           vec4 mv = modelViewMatrix * vec4(position, 1.0);
-          gl_PointSize = min(ptSize * (300.0 / -mv.z), 5.0);  /* perspective + cap */
+          /* Size scales with altitude: tiny near Earth, larger far out */
+          float altScale = mix(0.3, 1.0, smoothstep(0.0, 0.5, vAlt));
+          gl_PointSize = min(ptSize * altScale * (100.0 / -mv.z), 4.0);
           gl_Position = projectionMatrix * mv;
         }`,
       fragmentShader: `
@@ -236,7 +238,7 @@
           float alpha = smoothstep(0.5, 0.3, d);
           /* Brightness ramps with altitude: dim near surface, bright far out */
           float altFade = smoothstep(0.0, 0.5, vAlt);
-          alpha *= mix(0.15, 0.9, altFade);
+          alpha *= mix(0.08, 0.6, altFade);
           gl_FragColor = vec4(color * alpha, alpha);
         }`,
     });
