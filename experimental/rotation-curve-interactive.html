@@ -377,8 +377,8 @@
         // Bulge particles: exponential radial distribution concentrated at center
         isBulge = true;
         const u = Math.random();
-        R = -DEF.ab * Math.log(1 - u * 0.999);
-        R = Math.min(R, 3.0); // cap bulge extent
+        R = -DEF.ab * Math.log(1 - u * 0.95);
+        R = Math.min(R, DEF.ab * 3); // cap at ~3 scale radii
         R = Math.max(R, 0.05);
         theta = Math.random() * TWO_PI; // isotropic in bulge
 
@@ -560,7 +560,7 @@
     return sprite;
   }
   makeZoneLabel('BULGE', 0, 0.05, -1.2, '#ffddaa');
-  makeZoneLabel('DISK', 0, 0.05, -5, '#aabbff');
+  makeZoneLabel('DISK', -4, 0.05, -1.2, '#aabbff');
   // DM halo label is now a CSS element above the galaxy (see HTML)
 
   // ===================================================================
