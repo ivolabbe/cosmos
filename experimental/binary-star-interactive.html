@@ -335,14 +335,14 @@
   // ===================================================================
   //  Center-of-mass marker
   // ===================================================================
-  const comGeo = new THREE.SphereGeometry(0.06, 16, 16);
-  const comMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
+  const comGeo = new THREE.SphereGeometry(0.03, 12, 12);
+  const comMat = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.15 });
   const comMarker = new THREE.Mesh(comGeo, comMat);
   scene.add(comMarker);
 
   // Cross lines at COM
-  const crossLen = 0.2;
-  const crossMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.2 });
+  const crossLen = 0.12;
+  const crossMat = new THREE.LineBasicMaterial({ color: 0x888888, transparent: true, opacity: 0.1 });
   for (const axis of [[1,0,0], [0,0,1]]) {
     const pts = [
       new THREE.Vector3(-axis[0]*crossLen, -axis[1]*crossLen, -axis[2]*crossLen),
