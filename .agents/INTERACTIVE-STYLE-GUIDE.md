@@ -33,8 +33,8 @@ Each visualization is ONE `.html` file in `experimental/`. It contains all CSS, 
 
 ### Info panel & caption pattern
 Each interactive has an **info panel** (top-left overlay) with title, description, and live readouts.
-- **Fullscreen mode**: info panel shows title, description, hint text, and readouts.
-- **Embedded mode** (`body.embedded`): title, description, and hint are hidden — the info panel shows only the compact readout. The caption information (title + description) is provided by the article page underneath the `<iframe>`, not inside the interactive itself. This avoids duplicating text and keeps the embed compact.
+- **Fullscreen mode**: info panel shows title, description, hint text, and readouts. Panels should be **generously sized** — readers are exploring and want detail. Use `max-width: 380px`, `font-size: 15px`, readouts `13px`, title `20px`, padding `18px 24px`. 2D plot canvases: `380×220` or larger.
+- **Embedded mode** (`body.embedded`): title, description, and hint are hidden — the info panel shows only the compact readout (`max-width: 200px`, `padding: 8px 12px`). 2D canvases shrink via CSS (`width: 240px; height: 140px`). The caption information is provided by the article page underneath the `<iframe>`, not inside the interactive itself.
 
 ---
 
