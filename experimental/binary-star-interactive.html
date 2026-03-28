@@ -666,7 +666,7 @@
     rvCtx.clip();
 
     // Star 1 RV curve (display offset shifts x-axis, not data)
-    const rvIdxOff = Math.round(PLOT_PHASE_OFFSET * N_CURVE);
+    const rvIdxOff = Math.round(2 * PLOT_PHASE_OFFSET * N_CURVE);
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
       const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
@@ -698,7 +698,7 @@
     rvCtx.strokeRect(RV_PAD.l, RV_PAD.t, rvPlotW, rvPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = RV_PAD.l + ((phaseFrac + 2 * PLOT_PHASE_OFFSET) % 1) * rvPlotW;
+    const px = RV_PAD.l + ((phaseFrac + 3 * PLOT_PHASE_OFFSET) % 1) * rvPlotW;
     rvCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     rvCtx.lineWidth = 1.5;
     rvCtx.beginPath();
