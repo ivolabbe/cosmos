@@ -693,7 +693,7 @@
     rvCtx.strokeRect(RV_PAD.l, RV_PAD.t, rvPlotW, rvPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = RV_PAD.l + ((phaseFrac + PLOT_PHASE_OFFSET) % 1) * rvPlotW;
+    const px = RV_PAD.l + ((phaseFrac + 2 * PLOT_PHASE_OFFSET) % 1) * rvPlotW;
     rvCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     rvCtx.lineWidth = 1.5;
     rvCtx.beginPath();
@@ -809,7 +809,7 @@
     lcCtx.strokeRect(LC_PAD.l, LC_PAD.t, lcPlotW, lcPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = LC_PAD.l + ((phaseFrac + PLOT_PHASE_OFFSET) % 1) * lcPlotW;
+    const px = LC_PAD.l + ((phaseFrac + 2 * PLOT_PHASE_OFFSET) % 1) * lcPlotW;
     lcCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     lcCtx.lineWidth = 1.5;
     lcCtx.beginPath();
