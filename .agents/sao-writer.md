@@ -75,8 +75,8 @@ A single `.html` file in `experimental/` (for new articles) or `articles/` (for 
 
 When adding an interactive to an **existing** article:
 
-1. **Preserve the original text verbatim.** Do not rewrite, expand, restructure, or "enhance" existing article content. The web app team's scope is adding the interactive embed only.
-2. **Only fix factual errors** if they directly conflict with the interactive (e.g., an outdated number the user will see in the app). Flag other issues in Notes for CEO for the content team.
+1. **Preserve the original text.** Do not rewrite, expand, restructure, or "enhance" existing article content. The web app team's scope is adding the interactive embed, not rewriting articles.
+2. **Modifications under ~10% are acceptable** — correcting obvious factual mistakes (e.g., wrong numbers) or updating outdated data to present day (e.g., "1600 known pulsars" → "over 3500"). Keep corrections minimal and in-place.
 3. **Add only**: the iframe embed block (after the opening paragraph) and its caption. That's it.
 4. **Do not add**: new sections, data tables, equations, new paragraphs, expanded content, or restructured headings. These are out of scope for the JS web app team.
 5. **Do not remove**: any existing text, images, links, or content — even if you think it could be improved.
