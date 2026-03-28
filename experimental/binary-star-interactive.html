@@ -244,17 +244,15 @@
   let simTime = 0;
   let showOrbits = true;
 
-  // Temperatures
-  const T1 = 10000;  // hot, blue-white (star 1 = primary, more massive)
-  const T2 = 5000;   // cool, yellow-orange (star 2 = secondary)
+  // Temperatures and radii — mutable so presets can change them
+  let T1 = 10000;   // hot, blue-white (star 1 = primary, more massive)
+  let T2 = 5000;    // cool, yellow-orange (star 2 = secondary)
+  let R1_FRAC = 0.12;
+  let R2_FRAC = 0.08;
 
-  // Stellar radii as fraction of semi-major axis (visual, not physical)
-  const R1_FRAC = 0.12;
-  const R2_FRAC = 0.08;
-
-  // Surface brightness ratio (B ~ T^4)
-  const B1 = Math.pow(T1, 4);
-  const B2 = Math.pow(T2, 4);
+  // Surface brightness (B ~ T^4) — recomputed when T changes
+  let B1 = Math.pow(T1, 4);
+  let B2 = Math.pow(T2, 4);
 
   // ===================================================================
   //  Renderer + Scene + Camera
@@ -344,21 +342,56 @@
   }
 
   // ===================================================================
-  //  Binary stars (textured sun surface + color tint + single halo)
+  //  Binary stars — luminance-tinted texture shader
+  //  Converts sun texture to grayscale, then tints to star's temperature
+  //  colour. Preserves surface detail (granulation, spots) regardless of hue.
   // ===================================================================
   const sunTexture = new THREE.TextureLoader().load('assets/textures/planets/web/8k_sun.jpg');
+  sunTexture.colorSpace = THREE.SRGBColorSpace;
 
-  function makeStar(T, radius, texture) {
+  const starVertShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+  const starFragShader = `
+    uniform sampler2D uTex;
+    uniform vec3 uColor;
+    uniform float uBrightness;
+    varying vec2 vUv;
+    void main() {
+      vec4 texel = texture2D(uTex, vUv);
+      // Convert to luminance (preserves surface detail)
+      float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+      // Boost contrast slightly for more surface structure
+      lum = pow(lum, 0.8);
+      // Tint luminance to target colour, brighten for bloom
+      vec3 col = uColor * lum * uBrightness;
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function makeStar(T, radius) {
     const group = new THREE.Group();
-    const color = starColor(T);
+    const col = new THREE.Color(starColor(T));
 
-    // Textured sphere tinted to temperature color — bright enough to trigger bloom
+    // Hotter stars are brighter (more bloom)
+    const brightness = T > 15000 ? 2.0 : T > 8000 ? 1.5 : 1.2;
     const core = new THREE.Mesh(
       new THREE.SphereGeometry(1, 48, 32),
-      new THREE.MeshBasicMaterial({ map: texture, color })
+      new THREE.ShaderMaterial({
+        uniforms: {
+          uTex: { value: sunTexture },
+          uColor: { value: col },
+          uBrightness: { value: brightness },
+        },
+        vertexShader: starVertShader,
+        fragmentShader: starFragShader,
+      })
     );
     group.add(core);
-    // No extra halo spheres — bloom handles the glow
 
     group.scale.setScalar(radius);
     scene.add(group);
@@ -375,8 +408,8 @@
     R1_scene = R1_FRAC * A_VIS;
     R2_scene = R2_FRAC * A_VIS * Math.pow(q, 0.3); // secondary slightly smaller for low q
 
-    star1 = makeStar(T1, R1_scene, sunTexture);
-    star2 = makeStar(T2, R2_scene, sunTexture);
+    star1 = makeStar(T1, R1_scene);
+    star2 = makeStar(T2, R2_scene);
   }
   createStars();
 
@@ -402,8 +435,8 @@
   }
 
   function updateOrbitTrails() {
-    if (orbitLine1) { scene.remove(orbitLine1); orbitLine1.geometry.dispose(); orbitLine1.material.dispose(); }
-    if (orbitLine2) { scene.remove(orbitLine2); orbitLine2.geometry.dispose(); orbitLine2.material.dispose(); }
+    if (orbitLine1) { scene.remove(orbitLine1); orbitLine1.traverse(c => { if (c.geometry) c.geometry.dispose(); }); }
+    if (orbitLine2) { scene.remove(orbitLine2); orbitLine2.traverse(c => { if (c.geometry) c.geometry.dispose(); }); }
 
     const Mtot_frac = 1 + q; // M1=1, M2=q (normalized)
     const a1 = A_VIS * q / Mtot_frac;
@@ -418,11 +451,18 @@
     const col1 = new THREE.Color(starColor(T1));
     const col2 = new THREE.Color(starColor(T2));
 
-    const mat1 = new THREE.LineBasicMaterial({ color: col1, transparent: true, opacity: 0.4 });
-    const mat2 = new THREE.LineBasicMaterial({ color: col2, transparent: true, opacity: 0.4 });
+    const mat1 = new THREE.LineBasicMaterial({ color: col1, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
+    const mat2 = new THREE.LineBasicMaterial({ color: col2, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
 
-    orbitLine1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts1neg), mat1);
-    orbitLine2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), mat2);
+    // Stacked copies for thickness (linewidth > 1 ignored in WebGL)
+    orbitLine1 = new THREE.Group();
+    orbitLine2 = new THREE.Group();
+    for (const dy of [-0.015, 0, 0.015]) {
+      const o1 = pts1neg.map(p => new THREE.Vector3(p.x, p.y + dy, p.z));
+      const o2 = pts2.map(p => new THREE.Vector3(p.x, p.y + dy, p.z));
+      orbitLine1.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(o1), mat1));
+      orbitLine2.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(o2), mat2));
+    }
     orbitLine1.visible = showOrbits;
     orbitLine2.visible = showOrbits;
     scene.add(orbitLine1);
@@ -865,16 +905,18 @@
     const p = presetSel.value;
     if (!p) return;
     const presets = {
-      algol:     { q: 0.22, e: 0.0,  i: 82 },
-      equal:     { q: 1.0,  e: 0.0,  i: 60 },
-      eccentric: { q: 0.5,  e: 0.6,  i: 82 },
-      faceon:    { q: 0.7,  e: 0.3,  i: 10 },
-      wdmstar:   { q: 0.4,  e: 0.0,  i: 85 },
+      algol:     { q: 0.22, e: 0.0,  i: 82, t1: 10000, t2: 5000,  r1: 0.12, r2: 0.08 },
+      equal:     { q: 1.0,  e: 0.0,  i: 60, t1: 8000,  t2: 8000,  r1: 0.10, r2: 0.10 },
+      eccentric: { q: 0.5,  e: 0.6,  i: 82, t1: 10000, t2: 5000,  r1: 0.12, r2: 0.08 },
+      faceon:    { q: 0.7,  e: 0.3,  i: 10, t1: 10000, t2: 5000,  r1: 0.12, r2: 0.08 },
+      wdmstar:   { q: 0.4,  e: 0.0,  i: 87, t1: 25000, t2: 3500,  r1: 0.03, r2: 0.18 },
     };
     const cfg = presets[p];
     if (!cfg) return;
 
     q = cfg.q; ecc = cfg.e; incl = cfg.i;
+    T1 = cfg.t1; T2 = cfg.t2; R1_FRAC = cfg.r1; R2_FRAC = cfg.r2;
+    B1 = Math.pow(T1, 4); B2 = Math.pow(T2, 4);
     qSlider.value = q; qVal.textContent = q.toFixed(2);
     eSlider.value = ecc; eVal.textContent = ecc.toFixed(2);
     iSlider.value = incl; iVal.innerHTML = incl + '&deg;';
