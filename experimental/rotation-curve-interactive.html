@@ -529,10 +529,23 @@
   scene.add(new THREE.Mesh(
     new THREE.SphereGeometry(0.6, 32, 32),
     new THREE.MeshBasicMaterial({
-      color: 0xffddaa, transparent: true, opacity: 0.08,
+      color: 0xffddaa, transparent: true, opacity: 0.04,
       blending: THREE.AdditiveBlending, depthWrite: false,
     })
   ));
+
+  // Translucent disk shape (flat ring to show disk extent)
+  {
+    const diskR = DEF.Rd * 4 * KPC_TO_VIS; // ~4 scale lengths
+    const diskGeo = new THREE.RingGeometry(0.3, diskR, 64);
+    diskGeo.rotateX(-Math.PI / 2); // flat in XZ plane
+    const diskMat = new THREE.MeshBasicMaterial({
+      color: 0x6688cc, transparent: true, opacity: 0.03,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    scene.add(new THREE.Mesh(diskGeo, diskMat));
+  }
 
   // ===================================================================
   //  Zone labels (3D text sprites)
