@@ -407,7 +407,10 @@ composer.addPass(bloom);
 | Dramatic glow | 0.6–1.0 | 0.8–1.0 | 0.3–0.5 | Sun corona, explosions |
 | Minimal accent | 0.15–0.25 | 0.4 | 0.8–0.9 | Just the brightest spots |
 
-**Watch out:** dense additive lines (e.g. airline routes, 921K vertices) compound to extreme brightness — use very low opacity (0.03–0.05) or normal blending for dense layers.
+**Watch out — density vs bloom:** Dense particle/line regions compound through additive blending AND bloom, creating overblown bright blobs. Sparse regions of the same material look too dim. To balance:
+- **Dense regions** (bulge, cluster cores): reduce individual particle size AND brightness (dimmer colors, smaller points). The density itself provides the visual mass.
+- **Sparse regions** (outer disk, halo): increase particle size and brightness so individuals are visible and trigger bloom.
+- General rule: `brightness ∝ 1/√(local_density)` as a rough guide. If something looks like a white blob, the particles are too bright for their density.
 
 ### Additive blending for orbit/trace lines
 ```javascript
