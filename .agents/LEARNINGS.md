@@ -63,6 +63,11 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 - Speed ranges: match physics context (galaxy 0.01–1.0x, pulsar depends on period). Don't use generic ranges.
 - Reference curves (solid body, Keplerian): don't clamp to plot max — let canvas clip naturally.
 - Translucent reference shapes (disk ring, bulge sphere) at low opacity add spatial context.
+- Stars (stellar objects) should use textured spheres (e.g., sun texture tinted to temperature colour), NOT multi-sphere halos. Bloom handles the glow — no extra translucent shells.
+- Camera-physics linking: when camera angle IS a physical parameter (e.g., binary inclination), they must be two-way linked. OrbitControls 'change' event → update slider → recompute physics.
+- Defaults must show the key feature on first load: eclipsing binary should show eclipses (i > i_crit), pulsar should show a pulse (|beta| < rho).
+- Verifier must not just note issues as "minor" — if a directive was given (layout sizing, article corrections, visual research), failing to implement it is a FAIL, not a "minor note".
+- Writer agent: <15% correction permission means ACTUALLY making the correction, not just flagging it for a content team.
 - Visual spin cap: for P < 0.5s, cap visual omega at 2 Hz; physics runs at correct rate.
 - Web Audio: continuous oscillator for P < 50ms, discrete clicks for P > 50ms. Init on user gesture.
 - Binary star: camera-from-inclination approach is cleaner than rotating the orbit group.
