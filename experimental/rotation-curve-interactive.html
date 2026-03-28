@@ -48,6 +48,16 @@
     }
     .panel-box canvas { display: block; border-radius: 3px; }
 
+    /* --- DM halo label above galaxy --- */
+    #dm-halo-label {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: -200px;
+      font-size: 13px; font-weight: 600; color: rgba(220,100,220,0.6);
+      letter-spacing: 3px; text-align: center;
+      z-index: 10; pointer-events: none; white-space: nowrap;
+    }
+
     /* --- Controls bar (bottom) --- */
     #controls {
       position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
@@ -89,17 +99,21 @@
     <p class="desc">Why don't outer stars fly away? Dark matter holds galaxies together.</p>
     <div class="readout">
       <div>Dark Matter: <span id="r-dm">100%</span></div>
-      <div>Visible Mass: <span id="r-vm">1.0x</span></div>
+      <div>M<sub>b</sub> = <span id="r-mb">1.50</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
+      <div>M<sub>d</sub> = <span id="r-md">5.00</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
+      <div>M<sub>vis</sub> = <span id="r-mvis">6.50</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
       <div>v(8 kpc): <span id="r-v8">---</span> km/s</div>
       <div>v(20 kpc): <span id="r-v20">---</span> km/s</div>
     </div>
     <p class="hint">Drag to orbit &middot; Scroll to zoom &middot; Adjust sliders below</p>
   </div>
 
+  <div id="dm-halo-label">DARK MATTER HALO</div>
+
   <div id="panels">
     <div class="panel-box">
       <h3>Rotation Curve v(R)</h3>
-      <canvas id="rc-canvas" width="300" height="250"></canvas>
+      <canvas id="rc-canvas" width="300" height="175"></canvas>
     </div>
   </div>
 
@@ -110,13 +124,15 @@
       <span class="val" id="dm-val">100%</span></label>
     <label>Mass <input type="range" id="vm-slider" min="50" max="200" value="100" step="5">
       <span class="val" id="vm-val">1.0x</span></label>
+    <label>B/T <input type="range" id="bt-slider" min="5" max="80" value="23" step="1">
+      <span class="val" id="bt-val">0.23</span></label>
     <div class="sep"></div>
     <label>Speed
       <select id="speed-sel">
-        <option value="0.5">0.5x</option>
-        <option value="1" selected>1x</option>
-        <option value="3">3x</option>
-        <option value="10">10x</option>
+        <option value="0.1">0.1x</option>
+        <option value="0.2">0.2x</option>
+        <option value="0.5" selected>0.5x</option>
+        <option value="1">1.0x</option>
       </select>
     </label>
     <div class="sep"></div>
@@ -152,18 +168,9 @@
   // ===================================================================
   const PI = Math.PI, TWO_PI = 2 * PI;
 
-  // G in units where [M] = 10^10 Msun, [R] = kpc, [v] = km/s
-  // G = 4.302e-3 pc (km/s)^2 / Msun = 4.302e-3 * 1e3 * 1e10 kpc (km/s)^2 / (10^10 Msun)
-  const G_UNIT = 4.302e-3 * 1e3;  // = 4.302 kpc (km/s)^2 / (10^10 Msun)
-  // But masses are in 10^10 Msun, so: v^2 = G_UNIT * M * 1e10 / R ... wait
-  // Let's be careful. G = 4.302e-3 pc (km/s)^2 / Msun
-  // Convert pc to kpc: G = 4.302e-3 * 1e3 kpc (km/s)^2 / (1e3 Msun) ... no.
-  // 1 kpc = 1000 pc => 1 pc = 1e-3 kpc
-  // G = 4.302e-3 (pc) (km/s)^2 / Msun = 4.302e-3 * 1e-3 (kpc) (km/s)^2 / Msun
-  //   = 4.302e-6 kpc (km/s)^2 / Msun
-  // For M in 10^10 Msun: G*M = 4.302e-6 * M * 1e10 = 4.302e4 * M [kpc (km/s)^2]
-  // So v^2 = G'*M/R with G' = 4.302e4 when M is in 10^10 Msun and R in kpc, v in km/s
-  const G_ = 4.302e4;  // kpc (km/s)^2 per 10^10 Msun
+  // G in convenient units: M in 10^10 Msun, R in kpc, v in km/s
+  // G = 4.302e-6 kpc (km/s)^2 / Msun => G' = 4.302e4 for M in 10^10 Msun
+  const G_ = 4.302e4;
 
   // Default mass model parameters
   const DEF = {
@@ -178,6 +185,9 @@
   // Fix rho0 units: 0.035 Msun/pc^3 = 0.035 * (1e3)^3 Msun/kpc^3 = 0.035e9 Msun/kpc^3 = 3.5e7 Msun/kpc^3
   // In 10^10 Msun/kpc^3: 3.5e7 / 1e10 = 3.5e-3
   DEF.rho0 = 3.5e-3;
+
+  // Total visible mass (fixed reference for B/T redistribution)
+  const M_VIS_TOTAL = DEF.Mb + DEF.Md; // = 6.5
 
   // ===================================================================
   //  Modified Bessel functions — Abramowitz & Stegun polynomial fits
@@ -295,7 +305,8 @@
   //  State
   // ===================================================================
   let fDM = 1.0, fVM = 1.0;
-  let playing = true, speedMul = 1.0;
+  let BT = DEF.Mb / (DEF.Mb + DEF.Md); // ~0.2308
+  let playing = true, speedMul = 0.5;
   let simTime = 0; // in Myr
 
   // ===================================================================
@@ -320,11 +331,11 @@
   controls.minDistance = 4;
   controls.maxDistance = 40;
 
-  // Bloom
+  // Bloom (strength 0.4, radius 0.6, threshold 0.25 — lowered to catch bright particles)
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.4, 0.6, 0.35
+    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.4, 0.6, 0.25
   );
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
@@ -332,13 +343,12 @@
   // ===================================================================
   //  Galaxy particle system
   // ===================================================================
-  const N_PARTICLES = 6000;
+  const N_PARTICLES = 8000;
   const N_ARMS = 2;
-  const WIND_FACTOR = 0.6;  // tightness of spiral winding
+  const WIND_FACTOR = -0.6;  // negative = trailing arms (opposite rotation direction)
   const ARM_SIGMA = 0.3;    // radial spread around arm ridge (radians)
   const R_INNER = 0.3;      // innermost particle radius (kpc)
   const R_OUTER = 22;       // outermost particle radius (kpc)
-  const BULGE_FRAC = 0.15;  // fraction of particles in bulge
 
   // Visual scale: 1 kpc = 0.5 scene units
   const KPC_TO_VIS = 0.5;
@@ -352,97 +362,122 @@
   }
 
   // Generate particle data
-  const particles = [];
-  for (let i = 0; i < N_PARTICLES; i++) {
-    let R, theta;
+  let particles = [];
+  let galaxyGeo, galaxyMat, galaxyPoints;
 
-    if (i < N_PARTICLES * BULGE_FRAC) {
-      // Bulge particles: Hernquist-like radial distribution (concentrated)
-      const u = Math.random();
-      R = DEF.ab * Math.sqrt(u) / (1 - Math.sqrt(u) + 0.01);
-      R = Math.min(R, 3.0); // cap bulge extent
-      R = Math.max(R, 0.05);
-      theta = Math.random() * TWO_PI; // isotropic in bulge
-    } else {
-      // Disk particles: exponential radial distribution
-      // CDF inversion: R = -Rd * ln(1 - u) but we want to cap
-      const u = Math.random();
-      R = -DEF.Rd * Math.log(1 - u * 0.9999);
-      R = Math.max(R, R_INNER);
-      R = Math.min(R, R_OUTER);
+  function generateParticles() {
+    const nBulge = Math.round(BT * N_PARTICLES);
+    const nDisk = N_PARTICLES - nBulge;
+    particles = [];
 
-      // Spiral arm assignment
-      const armIdx = Math.floor(Math.random() * N_ARMS);
-      const armAngle = (TWO_PI * armIdx / N_ARMS) + WIND_FACTOR * Math.log(R / R_INNER);
-      theta = armAngle + gaussRand() * ARM_SIGMA;
-      // Additional inter-arm scatter for realism
-      if (Math.random() < 0.25) {
-        theta = Math.random() * TWO_PI; // some diffuse background particles
+    for (let i = 0; i < N_PARTICLES; i++) {
+      let R, theta, isBulge;
+
+      if (i < nBulge) {
+        // Bulge particles: exponential radial distribution concentrated at center
+        isBulge = true;
+        const u = Math.random();
+        R = -DEF.ab * Math.log(1 - u * 0.999);
+        R = Math.min(R, 3.0); // cap bulge extent
+        R = Math.max(R, 0.05);
+        theta = Math.random() * TWO_PI; // isotropic in bulge
+
+        // Pressure-supported: random orbital inclination and eccentricity
+        const inclination = Math.acos(2 * Math.random() - 1); // random 3D orientation
+        const eccentricity = 0.3 + Math.random() * 0.6; // moderate to high eccentricity
+        // Velocity dispersion: ~0.5-0.7 of circular velocity, random direction
+        const vCirc = vTotal(R, fDM, fVM);
+        const vDisp = vCirc * (0.4 + Math.random() * 0.3);
+        const omega_myr = (vDisp / R) * 1.0227e-3;
+
+        const ascNode = Math.random() * TWO_PI; // random ascending node
+        particles.push({
+          R,
+          theta,
+          omega_myr,
+          isBulge: true,
+          inclination,
+          ascNode,
+          orbPhase: Math.random() * TWO_PI,
+          eccentricity,
+        });
+      } else {
+        // Disk particles: exponential radial distribution
+        isBulge = false;
+        const u = Math.random();
+        R = -DEF.Rd * Math.log(1 - u * 0.9999);
+        R = Math.max(R, R_INNER);
+        R = Math.min(R, R_OUTER);
+
+        // Spiral arm assignment
+        const armIdx = Math.floor(Math.random() * N_ARMS);
+        const armAngle = (TWO_PI * armIdx / N_ARMS) + WIND_FACTOR * Math.log(R / R_INNER);
+        theta = armAngle + gaussRand() * ARM_SIGMA;
+        // Additional inter-arm scatter for realism
+        if (Math.random() < 0.25) {
+          theta = Math.random() * TWO_PI;
+        }
+
+        // omega = v/R in km/s/kpc, convert to rad/Myr
+        const omega_myr = (vTotal(R, fDM, fVM) / R) * 1.0227e-3;
+
+        particles.push({
+          R,
+          theta,
+          omega_myr,
+          isBulge: false,
+          inclination: 0,
+          orbPhase: 0,
+          eccentricity: 0,
+        });
       }
     }
-
-    const omega = vTotal(R, 1.0, 1.0) / R; // angular velocity in km/s / kpc
-    // Convert to rad/Myr: omega (km/s / kpc) * (3.086e16 km / kpc)^-1 * (3.156e13 s / Myr)
-    // omega_rad_per_Myr = omega_kms_per_kpc * 1.022e-3
-    // 1 km/s/kpc = 1 / 3.086e16 rad/s * 3.086e16... let me think
-    // v = omega * R => omega = v/R in rad/time
-    // If v in km/s, R in kpc = 3.086e16 km
-    // omega = v / (R * 3.086e16) rad/s = v / (R * 3.086e16) * 3.156e13 * 1e6 rad/Myr
-    // = v / R * (3.156e19 / 3.086e16) = v / R * 1022.7
-    // Wait: 1 Myr = 1e6 * 3.156e7 s = 3.156e13 s
-    // omega (rad/s) = (v km/s) / (R kpc * 3.086e16 km/kpc)
-    // omega (rad/Myr) = omega(rad/s) * 3.156e13
-    // = v / (R * 3.086e16) * 3.156e13
-    // = v / R * (3.156e13 / 3.086e16)
-    // = v / R * 1.0227e-3
-    const omega_myr = omega * 1.0227e-3; // rad/Myr
-
-    particles.push({
-      R,
-      theta,
-      omega_myr,
-      isBulge: i < N_PARTICLES * BULGE_FRAC,
-    });
   }
 
-  // Create Points geometry
-  const posArr = new Float32Array(N_PARTICLES * 3);
-  const colArr = new Float32Array(N_PARTICLES * 3);
-  const sizeArr = new Float32Array(N_PARTICLES);
+  // Color palettes
+  const colBulgeInner = new THREE.Color(0xffcc66);
+  const colBulgeOuter = new THREE.Color(0xffaa44);
+  const colDiskInner = new THREE.Color(0xaaccff);
+  const colDiskOuter = new THREE.Color(0x88bbff);
 
-  // Color ramp: warm center -> blue-white arms -> dim outer
-  const colCenter = new THREE.Color(0xffeedd);
-  const colMid = new THREE.Color(0xaabbff);
-  const colOuter = new THREE.Color(0x5577aa);
-  const colBulge = new THREE.Color(0xffddaa);
+  function buildGalaxyGeometry() {
+    const posArr = new Float32Array(N_PARTICLES * 3);
+    const colArr = new Float32Array(N_PARTICLES * 3);
+    const sizeArr = new Float32Array(N_PARTICLES);
 
-  for (let i = 0; i < N_PARTICLES; i++) {
-    const p = particles[i];
-    const t = Math.min(p.R / R_OUTER, 1);
+    for (let i = 0; i < N_PARTICLES; i++) {
+      const p = particles[i];
+      const t = Math.min(p.R / R_OUTER, 1);
 
-    let col;
-    if (p.isBulge) {
-      col = colBulge.clone().lerp(colCenter, Math.min(p.R / 2, 1));
-    } else if (t < 0.3) {
-      col = colCenter.clone().lerp(colMid, t / 0.3);
-    } else {
-      col = colMid.clone().lerp(colOuter, (t - 0.3) / 0.7);
+      let col;
+      if (p.isBulge) {
+        // Yellow-orange gradient for bulge
+        const bf = Math.min(p.R / 2.0, 1);
+        col = colBulgeInner.clone().lerp(colBulgeOuter, bf);
+      } else {
+        // Blue-white gradient for disk
+        const df = Math.min(t, 1);
+        col = colDiskInner.clone().lerp(colDiskOuter, df);
+      }
+      colArr[i * 3] = col.r;
+      colArr[i * 3 + 1] = col.g;
+      colArr[i * 3 + 2] = col.b;
+
+      // Size: larger near center, smaller at outskirts
+      sizeArr[i] = p.isBulge ? 0.12 : Math.max(0.04, 0.10 - t * 0.06);
     }
-    colArr[i * 3] = col.r;
-    colArr[i * 3 + 1] = col.g;
-    colArr[i * 3 + 2] = col.b;
 
-    // Size: larger near center, smaller at outskirts
-    sizeArr[i] = p.isBulge ? 0.12 : Math.max(0.04, 0.10 - t * 0.06);
+    if (galaxyGeo) galaxyGeo.dispose();
+    galaxyGeo = new THREE.BufferGeometry();
+    galaxyGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+    galaxyGeo.setAttribute('color', new THREE.BufferAttribute(colArr, 3));
+    galaxyGeo.setAttribute('size', new THREE.BufferAttribute(sizeArr, 1));
+
+    return galaxyGeo;
   }
-
-  const galaxyGeo = new THREE.BufferGeometry();
-  galaxyGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
-  galaxyGeo.setAttribute('color', new THREE.BufferAttribute(colArr, 3));
-  galaxyGeo.setAttribute('size', new THREE.BufferAttribute(sizeArr, 1));
 
   // Custom shader for sized + colored points with glow
-  const galaxyMat = new THREE.ShaderMaterial({
+  galaxyMat = new THREE.ShaderMaterial({
     uniforms: {
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
     },
@@ -472,8 +507,19 @@
     vertexColors: true,
   });
 
-  const galaxyPoints = new THREE.Points(galaxyGeo, galaxyMat);
+  // Initial build
+  generateParticles();
+  buildGalaxyGeometry();
+  galaxyPoints = new THREE.Points(galaxyGeo, galaxyMat);
   scene.add(galaxyPoints);
+
+  // Rebuild particles when B/T or mass changes
+  function rebuildParticleSystem() {
+    generateParticles();
+    const newGeo = buildGalaxyGeometry();
+    galaxyPoints.geometry = newGeo;
+    updateParticles(0);
+  }
 
   // Central glow (bulge glow)
   const glowGeo = new THREE.SphereGeometry(0.8, 32, 32);
@@ -490,30 +536,10 @@
   scene.add(new THREE.Mesh(new THREE.SphereGeometry(0.35, 32, 32), glowMat2));
 
   // ===================================================================
-  //  Background stars (two-layer)
-  // ===================================================================
-  function makeStars(count, rMin, rMax, size, opacity) {
-    const pos = [];
-    for (let i = 0; i < count; i++) {
-      const th = Math.random() * TWO_PI;
-      const ph = Math.acos(2 * Math.random() - 1);
-      const r = rMin + Math.random() * (rMax - rMin);
-      pos.push(r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th), r * Math.cos(ph));
-    }
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-    return new THREE.Points(g, new THREE.PointsMaterial({
-      color: 0xffffff, size, transparent: true, opacity, sizeAttenuation: false,
-    }));
-  }
-  scene.add(makeStars(800, 50, 120, 1.2, 0.3));  // dim layer
-  scene.add(makeStars(80, 40, 100, 2.0, 0.9));    // bright layer (triggers bloom)
-
-  // ===================================================================
   //  Zone labels (3D text sprites)
   // ===================================================================
   const labelSprites = [];
-  function makeZoneLabel(text, x, z, color) {
+  function makeZoneLabel(text, x, y, z, color) {
     const canvas = document.createElement('canvas');
     canvas.width = 256; canvas.height = 48;
     const ctx = canvas.getContext('2d');
@@ -527,15 +553,15 @@
     const tex = new THREE.CanvasTexture(canvas);
     const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.6, depthWrite: false });
     const sprite = new THREE.Sprite(mat);
-    sprite.position.set(x * KPC_TO_VIS, 0.05, z * KPC_TO_VIS);
+    sprite.position.set(x * KPC_TO_VIS, y, z * KPC_TO_VIS);
     sprite.scale.set(3, 0.6, 1);
     scene.add(sprite);
     labelSprites.push(sprite);
     return sprite;
   }
-  makeZoneLabel('BULGE', 0, -1.2, '#ffddaa');
-  makeZoneLabel('DISK', 0, -5, '#aabbff');
-  makeZoneLabel('DARK MATTER HALO', 0, -13, '#dd88dd');
+  makeZoneLabel('BULGE', 0, 0.05, -1.2, '#ffddaa');
+  makeZoneLabel('DISK', 0, 0.05, -5, '#aabbff');
+  // DM halo label is now a CSS element above the galaxy (see HTML)
 
   // ===================================================================
   //  Update particle positions
@@ -544,11 +570,33 @@
     const pos = galaxyGeo.attributes.position.array;
     for (let i = 0; i < N_PARTICLES; i++) {
       const p = particles[i];
-      p.theta += p.omega_myr * dt;
-      const vis = p.R * KPC_TO_VIS;
-      pos[i * 3]     = vis * Math.cos(p.theta);
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 0.02; // tiny vertical scatter
-      pos[i * 3 + 2] = vis * Math.sin(p.theta);
+
+      if (p.isBulge) {
+        // Pressure-supported: each particle orbits in its OWN random plane
+        // Only orbPhase advances — no collective disk rotation
+        p.orbPhase += p.omega_myr * dt;
+        const ecc = p.eccentricity;
+        // Elliptical radius
+        const rMod = p.R * (1 - ecc * ecc) / (1 + ecc * Math.cos(p.orbPhase));
+        const vis = rMod * KPC_TO_VIS;
+        // Position in orbital plane (x', y')
+        const xP = vis * Math.cos(p.orbPhase);
+        const yP = vis * Math.sin(p.orbPhase);
+        // Rotate orbital plane by inclination (i) and ascending node (Omega)
+        // R = Rz(Omega) * Rx(i): standard orbital mechanics rotation
+        const cosO = Math.cos(p.ascNode), sinO = Math.sin(p.ascNode);
+        const cosI = Math.cos(p.inclination), sinI = Math.sin(p.inclination);
+        pos[i * 3]     = cosO * xP - sinO * cosI * yP;
+        pos[i * 3 + 1] = sinI * yP; // vertical displacement
+        pos[i * 3 + 2] = sinO * xP + cosO * cosI * yP;
+      } else {
+        // Disk: flat circular orbits — advance theta
+        p.theta += p.omega_myr * dt;
+        const vis = p.R * KPC_TO_VIS;
+        pos[i * 3]     = vis * Math.cos(p.theta);
+        pos[i * 3 + 1] = (Math.random() - 0.5) * 0.02; // tiny vertical scatter
+        pos[i * 3 + 2] = vis * Math.sin(p.theta);
+      }
     }
     galaxyGeo.attributes.position.needsUpdate = true;
   }
@@ -558,7 +606,13 @@
     for (let i = 0; i < N_PARTICLES; i++) {
       const p = particles[i];
       const v = vTotal(p.R, fDM, fVM);
-      p.omega_myr = (v / p.R) * 1.0227e-3;
+      if (p.isBulge) {
+        // Velocity dispersion for bulge
+        const vDisp = v * (0.4 + 0.3 * (p.eccentricity - 0.3) / 0.6);
+        p.omega_myr = (vDisp / p.R) * 1.0227e-3;
+      } else {
+        p.omega_myr = (v / p.R) * 1.0227e-3;
+      }
     }
   }
 
@@ -667,27 +721,27 @@
       rcCtx.setLineDash([]);
     }
 
-    // Component curves (dashed)
+    // Component curves (dashed, lineWidth 2.0)
     // Bulge
-    drawCurve(R => vBulge(R, DEF.Mb * fVM, DEF.ab), 'rgba(255,160,60,0.7)', 1, [4, 3]);
+    drawCurve(R => vBulge(R, DEF.Mb * fVM, DEF.ab), 'rgba(255,160,60,0.7)', 2.0, [4, 3]);
     // Disk
-    drawCurve(R => vDisk(R, DEF.Md * fVM, DEF.Rd), 'rgba(80,200,220,0.7)', 1, [4, 3]);
+    drawCurve(R => vDisk(R, DEF.Md * fVM, DEF.Rd), 'rgba(80,200,220,0.7)', 2.0, [4, 3]);
     // Halo (scaled by fDM)
     drawCurve(R => {
       const vh = vHalo(R, DEF.rho0, DEF.Rc);
       return vh * Math.sqrt(fDM);
-    }, 'rgba(220,100,220,0.7)', 1, [4, 3]);
+    }, 'rgba(220,100,220,0.7)', 2.0, [4, 3]);
 
     // Total (solid white, thick)
-    drawCurve(R => vTotal(R, fDM, fVM), '#ffffff', 2.0, null);
+    drawCurve(R => vTotal(R, fDM, fVM), '#ffffff', 2.5, null);
 
     // Reference curves (toggles)
     if (showKeplerian) {
       const Mvis = (DEF.Mb + DEF.Md) * fVM;
-      drawCurve(R => Math.sqrt(G_ * Mvis / R), 'rgba(255,80,80,0.6)', 1, [6, 4]);
+      drawCurve(R => Math.min(Math.sqrt(G_ * Mvis / R), V_MAX_PLOT), 'rgba(255,80,80,0.6)', 1, [6, 4]);
     }
     if (showSolid) {
-      drawCurve(R => 220 * R / 8.2, 'rgba(80,255,80,0.6)', 1, [6, 4]);
+      drawCurve(R => Math.min(220 * R / 8.2, V_MAX_PLOT), 'rgba(80,255,80,0.6)', 1, [6, 4]);
     }
     if (showFlat) {
       drawCurve(R => 220, 'rgba(255,220,60,0.6)', 1, [6, 4]);
@@ -729,7 +783,7 @@
     legends.forEach((l, i) => {
       const y = legY + i * 11;
       rcCtx.strokeStyle = l.color;
-      rcCtx.lineWidth = l.dash ? 1 : 1.5;
+      rcCtx.lineWidth = l.dash ? 1.5 : 2;
       rcCtx.setLineDash(l.dash ? [3, 2] : []);
       rcCtx.beginPath();
       rcCtx.moveTo(legX, y + 4);
@@ -796,6 +850,7 @@
     document.getElementById('r-dm').textContent = dmSlider.value + '%';
     recomputeOmegas();
     drawRotationCurve();
+    updateReadouts();
   });
 
   const vmSlider = document.getElementById('vm-slider');
@@ -803,9 +858,25 @@
   vmSlider.addEventListener('input', () => {
     fVM = parseInt(vmSlider.value) / 100;
     vmVal.textContent = fVM.toFixed(1) + 'x';
-    document.getElementById('r-vm').textContent = fVM.toFixed(1) + 'x';
     recomputeOmegas();
     drawRotationCurve();
+    updateReadouts();
+  });
+
+  // B/T slider
+  const btSlider = document.getElementById('bt-slider');
+  const btVal = document.getElementById('bt-val');
+  btSlider.addEventListener('input', () => {
+    BT = parseInt(btSlider.value) / 100;
+    btVal.textContent = BT.toFixed(2);
+    // Redistribute mass keeping total visible mass constant
+    DEF.Mb = BT * M_VIS_TOTAL;
+    DEF.Md = (1 - BT) * M_VIS_TOTAL;
+    // Rebuild particle system with new B/T distribution
+    rebuildParticleSystem();
+    recomputeOmegas();
+    drawRotationCurve();
+    updateReadouts();
   });
 
   document.getElementById('cb-keplerian').addEventListener('change', e => {
@@ -822,6 +893,7 @@
   });
   document.getElementById('cb-labels').addEventListener('change', e => {
     labelSprites.forEach(s => s.visible = e.target.checked);
+    document.getElementById('dm-halo-label').style.display = e.target.checked ? '' : 'none';
   });
 
   // ===================================================================
@@ -830,6 +902,10 @@
   function updateReadouts() {
     document.getElementById('r-v8').textContent = vTotal(8, fDM, fVM).toFixed(0);
     document.getElementById('r-v20').textContent = vTotal(20, fDM, fVM).toFixed(0);
+    // Physical mass readouts
+    document.getElementById('r-mb').textContent = (DEF.Mb * fVM).toFixed(2);
+    document.getElementById('r-md').textContent = (DEF.Md * fVM).toFixed(2);
+    document.getElementById('r-mvis').textContent = ((DEF.Mb + DEF.Md) * fVM).toFixed(2);
   }
 
   // ===================================================================
@@ -871,6 +947,17 @@
     composer.setSize(window.innerWidth, window.innerHeight);
     bloom.resolution.set(window.innerWidth, window.innerHeight);
     galaxyMat.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
+  });
+
+  // ===================================================================
+  //  Visibility API — pause when hidden
+  // ===================================================================
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      playing = false;
+      btnPlay.innerHTML = '&#9654; Play';
+      btnPlay.classList.remove('active');
+    }
   });
 
   </script>

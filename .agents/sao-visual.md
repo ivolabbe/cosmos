@@ -156,3 +156,7 @@ When done, include:
 
 - 2026-03-28 — ConeGeometry apex direction matters for beam aesthetics — diverging beams look correct and dramatic; converging beams look physically wrong and visually weak.
 - 2026-03-28 — Rankin beam formula produces unrealistically wide cones for MSPs — clamp at 20° for visual quality AND physical validity.
+- 2026-03-28 — Panel layout: check that 2D panels don't overlap the 3D scene, especially in embedded mode. Reduce panel height and increase embed height if needed.
+- 2026-03-28 — Galaxy sim: no background stars (galaxies are viewed in isolation). Yellow bulge + blue disk = physically correct color gradient.
+- 2026-03-28 — Speed ranges must match physics context: galaxy rotation is slow (0.1–1.0x), not fast (no 10x). Let physics set sensible bounds.
+- 2026-03-28 — Spiral wind-up is expected for differential rotation — that's density wave theory territory, separate scope. Don't try to fix it here.
