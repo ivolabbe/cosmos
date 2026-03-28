@@ -289,7 +289,7 @@
   // Camera position determined by inclination
   function updateCameraFromInclination() {
     const i_rad = incl * DEG;
-    const dist = 14;
+    const dist = 11;
     // i=0 -> face-on (looking down +Y), i=90 -> edge-on (looking along Z)
     const camY = dist * Math.cos(i_rad);
     const camZ = dist * Math.sin(i_rad);
