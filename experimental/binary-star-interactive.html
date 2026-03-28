@@ -47,8 +47,7 @@
       margin-bottom: 4px; text-align: center;
     }
     .panel-box canvas { display: block; border-radius: 3px; }
-    body.embedded .panel-box canvas#rv-canvas { width: 240px; height: 100px; }
-    body.embedded .panel-box canvas#lc-canvas { width: 240px; height: 90px; }
+    body.embedded .panel-box canvas { width: 200px; height: 100px; }
     #no-eclipse-msg {
       font-size: 10px; color: rgba(255,200,100,0.7); text-align: center;
       margin-top: 2px; min-height: 14px;
@@ -726,8 +725,8 @@
     lcCtx.fillRect(0, 0, LC_W, LC_H);
 
     // Determine flux range for plot
-    const fluxMin = hasEclipses ? Math.max(0, minFlux - 0.05) : 0.85;
-    const fluxMax = 1.02;
+    const fluxMin = 0;
+    const fluxMax = 1.05;
 
     // Grid
     lcCtx.strokeStyle = 'rgba(255,255,255,0.06)';
