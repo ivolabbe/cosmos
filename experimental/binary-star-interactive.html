@@ -478,6 +478,20 @@
   // ===================================================================
   //  Compute orbital state at a given time
   // ===================================================================
+  // Helper: compute just positions for a given time (used for velocity finite difference)
+  function getPositions(t, a1, a2) {
+    const phase = TWO_PI * (t / P_BASE);
+    const M = ((phase % TWO_PI) + TWO_PI) % TWO_PI;
+    const E = solveKepler(M, ecc);
+    const v = trueAnomaly(E, ecc);
+    const r1 = a1 * (1 - ecc * ecc) / (1 + ecc * Math.cos(v));
+    const r2 = a2 * (1 - ecc * ecc) / (1 + ecc * Math.cos(v));
+    return {
+      x1: -r1 * Math.cos(v), z1: -r1 * Math.sin(v),
+      x2: r2 * Math.cos(v), z2: r2 * Math.sin(v),
+    };
+  }
+
   function getOrbitalState(t) {
     const Mtot_frac = 1 + q;
     const a1 = A_VIS * q / Mtot_frac;
@@ -497,14 +511,22 @@
     const x2 = r2 * Math.cos(v);
     const z2 = r2 * Math.sin(v);
 
-    // Radial velocities (normalized K values — use scene-unit velocities)
-    const i_rad = incl * DEG;
-    const K1 = (TWO_PI * a1 * Math.sin(i_rad)) / (P_BASE * Math.sqrt(1 - ecc * ecc));
-    const K2 = (TWO_PI * a2 * Math.sin(i_rad)) / (P_BASE * Math.sqrt(1 - ecc * ecc));
-
-    // RV is an orbital property — depends on omega, not camera azimuth
-    const vr1 = radialVelocity(K1, ecc, omega, v);
-    const vr2 = -radialVelocity(K2, ecc, omega, v);
+    // Radial velocities: project orbital velocity onto camera line of sight.
+    // Compute velocity via finite difference (dt = small fraction of period).
+    const dt_rv = P_BASE * 1e-4;
+    const s_fwd = getPositions(t + dt_rv, a1, a2);
+    const s_bwd = getPositions(t - dt_rv, a1, a2);
+    const vx1 = (s_fwd.x1 - s_bwd.x1) / (2 * dt_rv);
+    const vz1 = (s_fwd.z1 - s_bwd.z1) / (2 * dt_rv);
+    const vx2 = (s_fwd.x2 - s_bwd.x2) / (2 * dt_rv);
+    const vz2 = (s_fwd.z2 - s_bwd.z2) / (2 * dt_rv);
+    // Project velocity onto camera LOS (unit vector from origin to camera)
+    const cpx = camera.position.x, cpz = camera.position.z;
+    const cpLen = Math.sqrt(cpx*cpx + camera.position.y*camera.position.y + cpz*cpz) || 1;
+    const lx = cpx/cpLen, lz = cpz/cpLen;
+    const vr1 = vx1*lx + vz1*lz;
+    const vr2 = vx2*lx + vz2*lz;
+    const K1 = 0, K2 = 0; // placeholder — maxK_fixed handles scaling
 
     // Eclipse: projected separation
     const dProj = projectedSeparation(x1, z1, x2, z2);
