@@ -48,8 +48,11 @@ Dispatch sao-coder for [topic] (reads spec)
 Dispatch sao-writer for [topic] (reads spec's facts)
 → Output: experimental/[topic].html
 → Dispatch sao-verifier for article
+   (verifier's FIRST check is article preservation — diff against original,
+    reject if text was rewritten beyond scope. Factual corrections may
+    justify larger changes; the verifier judges on a case-by-case basis.)
 → If PASS: move to Phase 4
-→ If FAIL: send feedback to sao-writer
+→ If FAIL: send feedback to sao-writer, re-dispatch (max 3)
 ```
 
 ### Phase 4: Done
@@ -58,6 +61,44 @@ Log completion
 Update .planning/apps/ status
 Move to next app
 ```
+
+## Process Enforcement
+
+**Separation of concerns:** Writers write, coders code, verifiers verify. No agent self-checks — that doesn't work. The verifier is the sole judge of pass/fail.
+
+The orchestrator's role is to:
+1. Dispatch agents with the right inputs
+2. Check that verifier reports are complete (not rubber-stamped)
+3. Re-dispatch on failure (max 3 attempts before escalating to user)
+
+### What the orchestrator checks on VERIFIER reports:
+
+| Check | Reject report if |
+|-------|-----------------|
+| Has screenshots | No screenshot file paths in the report |
+| Checked both modes (interactives) | Only fullscreen OR only embedded checked |
+| Article preservation checked (articles) | No diff/word-count comparison in the report |
+| Implementation patterns checked (interactives) | No mention of checking against `.agents/snippets/` |
+| Used real browser | No Puppeteer/Chrome interaction evidence |
+
+If the verifier's report is incomplete → reject the REPORT (not the artifact) and re-dispatch the verifier with explicit instructions about what was missing.
+
+### What the VERIFIER checks (enforced by verifier, not orchestrator):
+
+**For interactives** (see sao-verify.md for full list):
+- Renders without JS errors
+- House style compliance (CSS, bloom, particles, embedded mode, spacebar)
+- Physics correctness
+- Visual quality (via sao-visual sub-agent)
+- Both fullscreen and embedded modes
+
+**For articles** (see sao-verify.md):
+- Article preservation: diff against original, judge scope of modifications
+- iframe present and rendering
+- Chrome intact (header, footer, breadcrumb)
+- Lexicon links, grammar, data-are-plural
+
+The verifier uses judgement — factual corrections may justify larger modifications. But a full rewrite always fails.
 
 ## Parallel execution
 

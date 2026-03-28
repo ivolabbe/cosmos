@@ -134,13 +134,28 @@ Take screenshots at:
 
 ## Article Verification
 
-### 1. Read the spec
+### 0. CRITICAL: Check article preservation FIRST
+
+**Before any other check**, compare the new article against the original in `articles/[topic].html`. You are the judge — the writer and coder do NOT self-verify.
+
+| Check | How | Judgement |
+|-------|-----|----------|
+| **Original text preserved** | Diff article body | Original paragraphs, links, formatting should be UNCHANGED. Only additions should be the iframe block + caption. |
+| **Modification scope** | Word count: added words (excluding iframe+caption) / original words | ~15% is the guideline. Small factual corrections justify slightly more. A full rewrite (e.g. 1 paragraph → 7) is always FAIL. |
+| **No removed content** | Diff | Nothing should be deleted from original — no text, images, links removed |
+| **No restructuring** | Scan for new `<h2>`, `<h3>`, `<strong>` blocks | New structural elements not in the original are a red flag |
+
+**Use judgement:** A factual correction that adds 20% may be acceptable. A rewrite that replaces the original text entirely is NEVER acceptable, regardless of quality. The writer's scope is embedding the interactive, not rewriting the encyclopedia.
+
+**If preservation fails → FAIL the article.** Include a word-count comparison and specific diff in the report so the writer knows exactly what to strip.
+
+### 1. Read the spec (if exists)
 Extract: expected title, key facts, required sections.
 
 ### 2. Open in browser
 Screenshot the article page.
 
-### 3. Checks
+### 3. Content checks
 
 | Check | How | Pass criteria |
 |-------|-----|---------------|
@@ -148,10 +163,10 @@ Screenshot the article page.
 | Breadcrumb | DOM query | Correct letter link |
 | iframe | DOM query | 800×500, src points to interactive |
 | Interactive renders | Visual | 3D scene visible inside iframe |
-| Caption credits | Text search | "Solar System Scope" or appropriate attribution present |
-| Content | Text search | Key facts from spec present in article text |
-| Lexicon links | DOM query | `class="lexicon-term"` links present |
+| Caption | Text search | Mentions drag/rotate/zoom, has "Open fullscreen" link |
+| Lexicon links | DOM query | `class="lexicon-term"` links present (original links preserved) |
 | Data plural | Text search | "data are" not "data is" (if "data" appears as subject) |
+| Swinburne chrome | Visual | Header, footer, breadcrumb match `articles/[topic].html` exactly |
 
 ## Output: Verification Report
 
@@ -235,3 +250,5 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-29 — **Must check implementation patterns against snippets.** For every visual element (particles, lines, glow, sun), read the source code and compare against `.agents/snippets/house-style.js` and `.agents/snippets/components.js`. Flag any deviation even if the visual result looks acceptable — wrong patterns break under different conditions.
 - 2026-03-29 — **Must verify BOTH embed and fullscreen.** Many issues only appear in one mode: overblown particles in embed, unreadable text at CSS-scaled sizes, hidden panels, label drift. Take screenshots at both modes and compare side by side.
 - 2026-03-29 — **A report without screenshots is automatically FAIL.** The verifier must produce actual screenshots saved to disk. A text-only report that says "looks good" proves nothing was actually rendered and must be rejected.
+- 2026-03-29 — **Article preservation is the FIRST check.** Before checking content, iframe, or chrome, diff the new article against `articles/[topic].html`. If original text was rewritten, expanded, restructured, or removed → automatic FAIL regardless of how good the new content is. The writer's scope is adding the iframe embed ONLY. A 1-paragraph original must stay 1 paragraph + iframe, not become 7 paragraphs. This was missed and caused a major process failure.
+- 2026-03-29 — **Read ALL agent instructions, not just your own.** The verifier must know what rules the writer and coder operate under (e.g. the <15% modification rule) so it can enforce them. A check that only validates "is content present?" misses "was content improperly added?"

@@ -81,6 +81,8 @@ When adding an interactive to an **existing** article:
 4. **Do not add**: new sections, data tables, equations, new paragraphs, expanded content, or restructured headings. These are out of scope for the JS web app team.
 5. **Do not remove**: any existing text, images, links, or content — even if you think it could be improved.
 
+**The verifier enforces this rule.** It will diff your output against the original and reject modifications that exceed scope. Factual corrections may justify larger changes, but the verifier decides — not you.
+
 When writing a **new** article (no existing article in `articles/`):
 - Read `.agents/cosmos-style-analysis.md` first — match the voice exactly
 - Match the level, length, and narrative style of existing COSMOS entries
