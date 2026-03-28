@@ -95,57 +95,42 @@ Before reporting completion, verify these yourself:
 
 ## Completion Report
 
-When done (pass or fail), include in your output:
+**Simple/Medium tier:** Append learnings to `.planning/apps/[topic].md` and the Learnings section below.
 
-```markdown
-## Notes for CEO
-- [What went well]: e.g. "Planet globe pattern adapted cleanly from Mercury template"
-- [What was hard]: e.g. "Ring UV mapping took 3 iterations to get right"
-- [What failed]: e.g. "MeshStandardMaterial on flat ring geometry — barely visible. Switched to MeshBasicMaterial."
-- [What's missing]: e.g. "Need a shared atmosphere shader module — copy-pasting it 8 times is fragile"
-- [Spec feedback]: e.g. "Spec didn't mention axial tilt — had to look it up myself"
-```
+**Hard/Hardest tier:** Also include a `## Notes for CEO` section: what went well, what was hard, what failed, what's missing, spec feedback.
 
-Also append new findings to the Learnings section below before completing.
+Append new findings to the Learnings section below before completing.
 
 ---
 
 ## Learnings
 
-*Append after each app built.*
+*Coder-specific learnings only. For general patterns, see `LEARNINGS.md` and `.agents/snippets/`.*
 
-- 2026-03-28 — Planet globe: SphereGeometry(1, 128, 64) + MeshStandardMaterial. Roughness 0.75-0.95 by surface type.
-- 2026-03-28 — Bloom threshold 0.4 + bright stars (opacity 0.9) = beautiful star glow on black.
-- 2026-03-28 — Saturn rings: MeshBasicMaterial (self-lit) not MeshStandardMaterial. Flat geometry + directional light = barely visible.
-- 2026-03-28 — Venus clouds: super-rotation at `BASE_ROT * speedMul * 1.15` gives subtle visible drift.
-- 2026-03-28 — Earth shader: MUST use world-space normals `(modelMatrix * vec4(normal, 0.0)).xyz`. View-space normals + world-space sunDir = shadow follows camera (wrong).
-- 2026-03-28 — Day mode: white ambient (0xffffff) at intensity 4.0, hide sunLight. Dark-colored ambient at high intensity is still dark.
-- 2026-03-28 — Headless Puppeteer can't render WebGL. If you need to self-test: `headless: false`.
-- 2026-03-28 — Texture compression: PIL binary search for JPEG quality → ~1/3 target. Works across all texture types.
-- 2026-03-28 — RingGeometry UVs need manual fix: map radius linearly to U for alpha strip textures.
-- 2026-03-28 — Pulsar: dipole field lines via r=r0*sin²(θ) in group frame, rotate group via quaternion qSpin*qTilt. 8 lines (4 azimuthal × 2 r0) is enough.
-- 2026-03-28 — Anti-pole interpulse: θ_anti = π - θ_north (NOT pulseIntensity(phase, PI-alpha, zeta, rho)). The spec's shorthand was wrong.
-- 2026-03-28 — ConeGeometry for beam cones: custom shader with radial+axial fade for convincing beam look. AdditiveBlending + depthWrite:false.
-- 2026-03-28 — Visual spin cap: for P < 0.5s, cap visual omega at 2π/0.5 (2 Hz). Physics runs at correct rate for pulse profile.
-- 2026-03-28 — Web Audio: for P < 50ms use continuous oscillator at 1/P Hz. For P > 50ms use discrete click bursts. Initialize AudioContext on user gesture.
-- 2026-03-28 — OutputPass needed after UnrealBloomPass in Three.js 0.170.0 for correct tone mapping.
-- 2026-03-28 — Binary star: Kepler solver + trueAnomaly + RV formula from spec work perfectly. omega=PI/2 default gives clean asymmetric RV curves for e>0.
-- 2026-03-28 — Binary star: MeshBasicMaterial for stellar cores + AdditiveBlending halos (BackSide) at opacity 0.15/0.06 = convincing glow without needing lights.
-- 2026-03-28 — Binary star: Two stacked 2D canvas panels work well on the right side. Precompute curves (360 pts) on param change, draw every frame with playhead.
-- 2026-03-28 — Binary star: Camera-from-inclination approach (camera position = f(i)) is cleaner than rotating the orbit group. OrbitControls still works for user drag.
-- 2026-03-28 — Binary star: Surface brightness B~T^4 gives B1/B2=16 for T1=10000K, T2=5000K. Primary eclipse depth dominates. R2 scaling with q^0.3 prevents invisible secondary at low q.
-- 2026-03-28 — Binary star: Phase wrapping must use `((M % TWO_PI) + TWO_PI) % TWO_PI` to handle negative time values from JS modulo.
-- 2026-03-28 — ConeGeometry apex is at +Y. For diverging beams (emission, jets): MUST rotate PI to flip apex toward source. Default orientation = converging (wrong).
-- 2026-03-28 — Circular particles: always use ShaderMaterial with `if (d > 1.0) discard; alpha = exp(-d*d*2.0);` — default PointsMaterial renders ugly squares.
-- 2026-03-28 — Bloom vs density: control bloom via particle SIZE not brightness. Dense regions (bulge) = tiny bright particles (less overlap). Sparse regions (disk) = larger particles.
-- 2026-03-28 — Galaxy sim: no background stars. Yellow bulge (pressure-supported, random 3D orbits) + blue disk (circular orbits). Separate populations with different dynamics.
-- 2026-03-28 — Speed ranges must match physics: galaxy 0.01–1.0x, pulsar depends on period, binary star 0.2–10x. Don't use one-size-fits-all.
-- 2026-03-28 — Readouts must be physically meaningful: show actual masses (10^10 M☉), DM fraction within a stated radius, not just slider percentages.
-- 2026-03-28 — Fullscreen panels should be generous (380px wide, 15px font, 380×220 canvases). Embedded panels shrink via CSS overrides.
-- 2026-03-28 — Pulse profiles: offset by PI so peak is centred in panel, not at the boundary. Playhead offset must match.
-- 2026-03-28 — Solid body reference curve v = ωR must NOT be clamped — let it go off-plot (canvas clips naturally).
-- 2026-03-28 — Rotation curve: G' = 4.302e4 kpc (km/s)^2 per 10^10 Msun. Must auto-tune rho0 at startup to nail v(8.2 kpc) = 220 km/s.
-- 2026-03-28 — Rotation curve: Modified Bessel I0/I1/K0/K1 from Abramowitz & Stegun polynomial fits work perfectly for Freeman disk. No external library needed.
-- 2026-03-28 — Rotation curve: Trailing spiral arms need NEGATIVE wind factor in `armAngle = base + wind * ln(R/R_inner)` when rotation is CCW (+theta direction).
-- 2026-03-28 — Rotation curve: ShaderMaterial with per-vertex size + color + AdditiveBlending + soft circle fragment = beautiful galaxy with 6000 particles at 60fps.
-- 2026-03-28 — Rotation curve: omega conversion from km/s/kpc to rad/Myr: multiply by 1.0227e-3. Derived from 3.156e13 s/Myr / 3.086e16 km/kpc.
+- Venus clouds: super-rotation at `BASE_ROT * speedMul * 1.15` gives subtle visible drift.
+- RingGeometry UVs need manual fix: map radius linearly to U for alpha strip textures.
+- Pulsar: dipole field lines via r=r0*sin²(θ) in group frame, rotate group via qSpin*qTilt. 8 lines enough.
+- Anti-pole interpulse: θ_anti = π - θ_north (NOT the spec's shorthand). Spec pseudocode can have bugs.
+- Binary star: omega=PI/2 default gives clean asymmetric RV curves for e>0.
+- Binary star: camera-from-inclination approach is cleaner than rotating the orbit group.
+- Binary star: phase wrapping `((M % TWO_PI) + TWO_PI) % TWO_PI` for JS negative modulo.
+- Rotation curve: G' = 4.302e4 in galactic units. Must auto-tune rho0 to nail v(8.2 kpc) = 220 km/s.
+- Rotation curve: Modified Bessel I0/I1/K0/K1 from Abramowitz & Stegun — no external library needed.
+- Rotation curve: trailing spirals need NEGATIVE wind factor when rotation is CCW.
+- HR diagram: Pure 2D Canvas app (no Three.js needed). Canvas 2D with DPR scaling is sufficient for scatter plots + animated tracks.
+- HR diagram: MS locus needs a piecewise-linear logT(logL) fit calibrated to ZAMS table — a single slope produces 0.04 dex errors at the hot end.
+- HR diagram: Catmull-Rom interpolation between waypoints gives smooth evolutionary tracks without sharp corners. 200 interpolation points is smooth enough.
+- Density wave: logarithmic spiral formula must use NEGATIVE `1/tan(pitch)` for trailing arms with CCW rotation: `phi_arm = Omega_p*t - (1/tan(i))*ln(R/R_ref)`. Positive sign produces leading arms (same lesson as rotation-curve wind factor).
+- Density wave: traffic jam ribbons rotate rigidly at Omega_p — build geometry at t=0 then rotate group via `group.rotation.y = Omega_p * simTime`. Rebuilding geometry each frame is O(N_segments * N_arms) per frame and wasteful.
+- CMB: hash-based 3D noise on sphere coordinates gives fast, seamless procedural CMB textures. Multi-octave noise with amplitudes weighted by approximate power spectrum shape. Avoid literal spherical harmonic sums (O(lmax^2 * pixels) is too slow).
+- CMB: for power spectrum without CAMB grid, interpolate from embedded reference data points and apply parameter-dependent distortions (peak shift via ell rescaling, baryon modulation via oscillation phase, Silk damping ratio). More accurate than pure Gaussian-peak model.
+- CMB: `MeshBasicMaterial` for the CMB sphere — it IS radiation, not a lit solid body. No directional lighting needed.
+- CMB: color-to-temperature inversion from texture: `(R - B) / 255` gives a robust hot/cold indicator. Map the signed result to the known ΔT range for the current layer.
+- CMB: angular scale estimation from texture gradient: scan progressively larger pixel radii until `|R-B|` changes by >60. Convert pixel distance to degrees via `(r/width)*360`.
+- Density wave: ribbon width should be angular (SIGMA_ARM * 0.7 radians), not fixed in kpc. Fixed kpc width looks wrong at both small and large radii.
+- Density wave: Gaussian arm proximity with sigma_arm ~ 0.25 rad creates natural colour gradient without explicit density wave potential computation. Threshold of 0.3 gives good arm/inter-arm contrast.
+- Density wave: epicyclic frequency kappa(R) via numerical differentiation of Omega(R) — central differences with dR=0.05 kpc, formula: kappa^2 = (2*Omega/R) * d(R^2*Omega)/dR.
+- Density wave: arm colour fade-out outside ILR-OLR range prevents density wave extending beyond physical limits. Use linear fade over 2 kpc beyond each resonance.
+- HR diagram: Cross-section labels work best as a top-aligned legend (colour swatch + text), not as labels inside the concentric circles (which overlap badly for small/thin shells).
+- HR diagram: Nebula stippling must use pre-generated dot positions to avoid flickering each animation frame.
+- HR diagram: Replay logic — must reset animFrac to 0 when user clicks Play after track finishes, otherwise the step immediately re-stops.

@@ -61,28 +61,40 @@ The reference code serves two purposes:
 
 For each reference found, document the **specific function/formula/algorithm** that we will adopt, not just a vague "this exists." Include the URL, the relevant code snippet or function name, and how it maps to our implementation.
 
-**Also look for visual references:**
-- WebGL/Three.js implementations (view source for techniques)
-- NASA/ESA interactive tools
-- University educational simulations (PhET, AstroBaki, etc.)
-- Commercial astronomy apps (Celestia, Universe Sandbox, SpaceEngine)
-- YouTube videos of physics simulations (for visual reference)
+## Phase 2b: Visual Competition Survey (MANDATORY)
 
-**For each reference found, document:**
+**Our goal is best-in-class.** Before the coder builds anything, we must know what the best existing visualizations of this topic look like, how they work, and where we can surpass them. This survey directly drives the coder's visual targets and the verifier's quality bar.
+
+**Survey these sources (all mandatory, in order):**
+
+1. **Wikipedia** — article images, diagrams, animations. This is what most students see first. Note the canonical visual representation.
+2. **NASA/ESA interactive tools** — `eyes.nasa.gov`, `svs.gsfc.nasa.gov`, mission-specific interactives. The gold standard. Fetch and describe their UI, visual techniques, interaction model.
+3. **GitHub repos** — search `[topic] WebGL`, `[topic] Three.js`, `[topic] simulation`. View source for shader code, geometry approaches, particle systems. Researchers' repos often have excellent physics-correct visualizations.
+4. **University/educational** — PhET, NAAP (`astro.unl.edu`), AstroBaki, Wolfram Demonstrations. Note what they do well pedagogically.
+5. **Commercial apps** — Celestia, Universe Sandbox, SpaceEngine, NASA's Eyes. Screenshot/describe the visual quality bar.
+6. **Existing COSMOS interactives** — which existing app is closest in structure? What visual level have we already achieved?
+
+**For each reference, document in the spec:**
 ```markdown
-### Reference: [Name/URL]
-- **What it does well**: [specific techniques, visual quality]
-- **What it does poorly**: [limitations, missing features]
+### Visual Reference: [Name/URL]
+- **Source**: [Wikipedia / NASA / GitHub / university / commercial]
+- **What it does well**: [specific visual qualities — lighting, colour, density, glow, composition]
+- **What it does poorly**: [limitations, missing features, areas we can beat]
 - **Key technique**: [how they achieved the core visual — shader? particles? geometry?]
-- **Screenshot/description**: [what it looks like]
-- **Applicable to our build?**: [yes/no, what to adopt]
+- **Our advantage**: [what we can do better — interactivity, physics accuracy, visual polish]
 ```
 
+**Aim for 4–6 strong references** covering: overall composition, specific element rendering, colour palette, interaction design, and pedagogical value.
+
 **Search strategy:**
-- WebSearch: "[topic] WebGL interactive", "[topic] Three.js simulation"
-- WebSearch: "[topic] 3D visualization astronomy"
-- WebSearch: "best [topic] simulation online"
+- WebSearch: `"[topic]" WebGL interactive`, `"[topic]" Three.js simulation`
+- WebSearch: `"[topic]" 3D visualization astronomy`, `best "[topic]" simulation online`
+- WebSearch: `"[topic]" site:github.com`, `"[topic]" site:nasa.gov`
+- WebSearch: `"[topic]" diagram site:wikipedia.org`
 - WebFetch: examine actual implementations (view source for shader code, geometry approaches)
+- WebFetch: NASA Eyes, PhET, or other interactive tools for the topic
+
+**The spec's `## Visual targets` section must answer:** "What does the best existing visualization of [topic] look like, and how will ours be better?"
 
 ## Phase 3: Produce the Spec
 
@@ -185,18 +197,11 @@ For simple apps (planet globes), the spec can be brief. For complex sims (HR dia
 
 ## Completion Report
 
-When done, include this in your output alongside the spec:
+**Simple/Medium tier:** Append learnings to `.planning/apps/[topic].md` and the Learnings section below.
 
-```markdown
-## Notes for CEO
-- [What went well]: e.g. "NASA fact sheet was comprehensive, no gaps"
-- [What was hard]: e.g. "No good WebGL references for this topic, had to adapt from a different domain"
-- [What's missing]: e.g. "Need a procedural texture generator for topics without existing textures"
-- [Inconsistencies]: e.g. "Wikipedia says X moons, NASA says Y — used NASA"
-- [Pitfalls for coder]: e.g. "The physics here requires double precision — standard floats will drift"
-```
+**Hard/Hardest tier:** Also include a `## Notes for CEO` section: what went well, what was hard, what's missing, inconsistencies found, pitfalls for coder.
 
-Also append new findings to the Learnings section below before completing.
+Append new findings to the Learnings section below before completing.
 
 ---
 
@@ -230,3 +235,55 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Spec must define physically meaningful readout quantities: actual masses in proper units, DM fraction within a stated radius — never just "100%" slider percentages. The reader must understand the physics from the readout.
 - 2026-03-28 — Spec must state what sensible speed ranges are for the physics. Galaxy: 0.01–1.0x. Pulsar: depends on period. Binary: 0.2–10x. Don't leave it to the coder to guess.
 - 2026-03-28 — Spec should explicitly state whether reference curves (Keplerian, solid body) should be clamped or extend beyond plot range.
+- 2026-03-29 — Large-scale structure: The Zel'dovich approximation (x = q + D(t)*Psi(q)) is the ideal approach for procedural cosmic web generation. It is textbook cosmology, trivially parallelizable, and the time slider reduces to a scalar multiply on a precomputed displacement array.
+- 2026-03-29 — Large-scale structure: No existing browser-based interactive cosmic web visualization exists. NASA SVS has pre-rendered fly-throughs; Illustris Explorer is 2D projections; Kim Albrecht is a network graph. Our app is genuinely novel.
+- 2026-03-29 — Large-scale structure: Power spectrum amplitude calibration is the trickiest parameter. RMS displacement of ~5-10 Mpc produces visible filaments without excessive shell-crossing. Too little = no structure; too much = single blob.
+- 2026-03-29 — Large-scale structure: apontzen/zeldovich2d (Python) is the cleanest reference implementation for the ZA displacement field. abacusorg/zeldovich-PLT is the full 3D reference.
+- 2026-03-29 — Large-scale structure: Carroll, Press & Turner 1992 (ApJ 394, 1) eq. 29 is the standard growth factor approximation for flat LCDM. Widely used in cosmological codes.
+- 2026-03-29 — Large-scale structure: For the baryon toggle, local density estimation on 50K particles requires a spatial hash grid — naive O(N^2) is ~2.5 billion operations. Hash grid reduces to O(N * ~30 neighbours).
+- 2026-03-29 — Large-scale structure: Periodic boundary conditions are essential. Particles displaced outside the box must wrap. Without wrapping, density spikes at edges.
+- 2026-03-29 — Large-scale structure: The satellites-interactive.html is the closest existing COSMOS app (large point cloud + ShaderMaterial + toggles). The asteroid belt app's makeCircleMat pattern also applies directly.
+- 2026-03-29 — For Hardest-tier apps: the "Data Approach Decision" section comparing procedural vs. real data vs. survey data is valuable for the CEO. Always justify the chosen approach explicitly.
+- 2026-03-29 — CMB: No analytical formula exists for the CMB power spectrum — must pre-compute with CAMB/CLASS and interpolate. A 5-point-per-parameter 4D grid (625 spectra, subsampled every 10th ℓ) is ~300-500 KB, embeddable in a single HTML file.
+- 2026-03-29 — CMB: ESA provides Planck CMB maps in equirectangular projection ready for sphere mapping (sci.esa.int/web/planck/-/60505). Galactic coordinates with l=0, b=0 at center.
+- 2026-03-29 — CMB: redshiftzero/cosmowebapp (github.com/redshiftzero/cosmowebapp) is the best open-source reference for pre-computed CAMB grid + client-side interpolation in JavaScript.
+- 2026-03-29 — CMB: CosmoSlider (arXiv:2601.16919) uses a TFLite neural network emulator for real-time CMB spectra. Impressive but complex. Pre-computed grid + interpolation is simpler and sufficient for our 4-parameter slider app.
+- 2026-03-29 — CMB: Wayne Hu's tutorials (background.uchicago.edu/~whu/intermediate/) are the definitive educational resource for how cosmological parameters affect the power spectrum. Essential for tooltip/annotation text.
+- 2026-03-29 — CMB: The CMB sphere needs MeshBasicMaterial (self-luminous, no directional lighting) — it represents radiation, not a solid body illuminated by a light source.
+- 2026-03-29 — CMB: For non-time-evolution apps (static snapshots like the CMB), no play/pause or speed slider is needed. The spec should explicitly state this to prevent the coder from adding unnecessary animation controls.
+- 2026-03-29 — CMB: Click-to-inspect on a textured sphere requires reading pixel color from a hidden canvas copy of the texture, then inverting the color scale to get ΔT. Approximate but sufficient for education.
+- 2026-03-29 — CMB: The Planck power spectrum uses a quasi-logarithmic x-axis (log for ℓ<50, linear above). A simple linear axis works fine — don't over-engineer.
+- 2026-03-29 — Density wave model: Beltoforion/Rougier implementations use tilted ellipses with uniform rotation — NOT true density wave physics. They bake the spiral into orbit orientations. For a physically correct density wave demo, use a separate pattern speed Omega_p with Keplerian material rotation.
+- 2026-03-29 — Milky Way pattern speed: Gaia DR2 consensus is Omega_p ~ 23-28 km/s/kpc, corotation near R_sun (~8.5 kpc). Dias+ 2019 (MNRAS 486, 5726) is the modern reference.
+- 2026-03-29 — Milky Way pitch angle: global mean ~13 deg (Vallee 2015). Typical Sa: 5-10 deg (tight), Sc: 20-30 deg (open). Default 15 deg for interactive.
+- 2026-03-29 — Black hole lensing: The Binet equation u'' = -u(1 - 1.5u^2) is the standard ODE for Schwarzschild null geodesics. Use leapfrog (symplectic) integration, NOT Euler. RK4 is overkill but safe. At least 200 steps needed for clean photon ring.
+- 2026-03-29 — Black hole lensing: oseiskar/black-hole is the best single reference — same stack (Three.js + GLSL), documented physics (physics.html), and includes accretion disk plane-crossing detection. Bruneton (arxiv 2010.08735) is the gold standard for quality but architecturally complex (precomputed tables, multi-file build).
+- 2026-03-29 — Black hole lensing: The critical impact parameter b_crit = (3sqrt(3)/2) r_s ~ 2.598 r_s defines the shadow boundary. The shadow is NOT the event horizon — it is ~2.6x larger than r_s in apparent angular size.
+- 2026-03-29 — Black hole lensing: Multiple accretion disk images are physically real. A ray passing behind the BH crosses the equatorial plane multiple times. All crossings must be alpha-composited. This is what makes the disk appear to wrap around the shadow.
+- 2026-03-29 — Black hole lensing: Doppler boosting of accretion disk scales as delta^3 (intensity) where delta is the Doppler factor. The approaching side is ~3-5x brighter than the receding side at ISCO. This asymmetry is the hallmark visual.
+- 2026-03-29 — Black hole lensing: NASA SVS 4851 (Milky Way panorama) is public domain and used by multiple black hole renderers as the background texture. 4K equirectangular is the minimum resolution — lensing magnifies background detail near the shadow edge.
+- 2026-03-29 — Black hole lensing: This app is architecturally unlike all other COSMOS apps. It renders a full-screen quad with a fragment shader, not Three.js geometry. OrbitControls feeds camera uniforms to the shader. The coder must be comfortable with ShaderMaterial on a PlaneGeometry(2,2) filling the screen.
+- 2026-03-29 — Black hole lensing: Performance concern — per-pixel ODE integration at 200+ steps is ~400M FP ops per frame at 1080p. Fallback: Bruneton's precomputed deflection table (1D texture indexed by impact parameter) makes the shader O(1) per pixel.
+- 2026-03-29 — Density wave star formation: OB stars form in compressed gas entering spiral arms, live only 3-10 Myr (too short to leave the arm). This is why arms are blue. Model as colour shift (warm -> blue-white) when arm_proximity exceeds threshold.
+- 2026-03-29 — Epicyclic frequency for flat rotation curve: kappa = sqrt(2) * v_c/R. For numerical computation from a general rotation curve, use finite differences on Omega(R) with smoothing.
+- 2026-03-29 — No existing web interactive combines: differential rotation + separate pattern speed + star formation triggering + interactive controls + resonance panel. Wikipedia GIFs are the closest educational tool but are non-interactive.
+- 2026-03-29 — The rotation-curve-interactive.html is the ideal template for density-wave: same mass model, same particle system, same UI layout. The density wave is the "Part 2" story (how spiral structure survives differential rotation).
+- 2026-03-29 — Roche lobe: No existing WebGL/Three.js Roche lobe interactive exists anywhere — this will be the first browser-based one. Zero prior art in JavaScript.
+- 2026-03-29 — Roche lobe: rozwadowski/Roche-lobe (GitHub) has the cleanest validated Python implementation of the Roche potential formula. Port directly to JS.
+- 2026-03-29 — Roche lobe: PyAstronomy's `rochepot_dl()` and pyroche (janvanroestel/pyroche) are good cross-check references for potential values and lobe radii.
+- 2026-03-29 — Roche lobe: Three.js `MarchingCubes` addon's `addBall()` computes 1/r^2 metaballs, NOT the Roche potential. Must use `setCell()` for custom scalar fields or implement standalone marching cubes.
+- 2026-03-29 — Roche lobe: The Stemkoski marching cubes demo (stemkoski.github.io) has a clean standalone JS implementation with custom scalar fields — easier to adapt than the Three.js addon.
+- 2026-03-29 — Roche lobe: Coriolis force sign conventions in the co-rotating frame are the #1 pitfall. Test: particle nudged from L1 toward star 2 must curve prograde (counterclockwise from above).
+- 2026-03-29 — Roche lobe: Coordinate mapping trap — reference code uses (x,y) as orbital plane, COSMOS uses (x,z). Coder must swap y/z when evaluating the potential.
+- 2026-03-29 — Roche lobe: 48^3 grid for marching cubes = ~110K evaluations, <5ms. Safe for real-time slider updates. 64^3 for final quality after slider release.
+- 2026-03-29 — Roche lobe: The binary-star-interactive.html is the natural template — same physical setting, same architecture. Extend it with Roche lobes + mass transfer + contour panel.
+- 2026-03-29 — HR diagram: Hurley, Pols & Tout 2000 (MNRAS 315, 543) provides comprehensive analytic formulae for stellar evolution — accurate to ~5% of full MESA models. The Swinburne SSE web interface uses this code. The Illinois Digital Demo Room implements it for HR diagram animation.
+- 2026-03-29 — HR diagram: MIST (waps.cfa.harvard.edu/MIST/) provides downloadable grids of evolutionary tracks from MESA. Solar-metallicity tracks for 0.1-300 M_sun. Use these to extract waypoint coordinates for the spec.
+- 2026-03-29 — HR diagram: For a web interactive, full SSE analytic formulae are overkill. A simpler approach: define 10-15 waypoints per mass track at evolutionary milestones (ZAMS, TAMS, RGB tip, HB, AGB tip, WD/SN) and interpolate with Catmull-Rom splines.
+- 2026-03-29 — HR diagram: The NAAP HR Diagram Explorer (astro.unl.edu) is the main educational competitor — clean overlays (iso-radius, spectral type, instability strip) but NO evolutionary tracks, NO animation, NO cross-section.
+- 2026-03-29 — HR diagram: No existing WebGL/Three.js HR diagram with animated evolutionary tracks exists. Illinois DDR (Java/Flash-era) is the closest but dated. Our app is genuinely novel.
+- 2026-03-29 — HR diagram: The ESA Gaia DR2 HR diagram (4M+ stars) is the gold standard observational target for background population morphology.
+- 2026-03-29 — HR diagram: Harre & Heller 2021 (Astronomische Nachrichten 342, 578) provides tabulated hex colour codes for stellar temperatures 2300-55000 K. Mitchell Charity's vendian.org table is also widely used.
+- 2026-03-29 — HR diagram: The cross-section sidebar (concentric burning shells) is architecturally different from previous COSMOS 2D panels (which are time-series plots). It needs custom drawing routines for concentric rings with labels.
+- 2026-03-29 — HR diagram: Key mass boundary: ~2.3 M_sun separates degenerate He core (He flash) from non-degenerate (smooth He ignition). ~8 M_sun separates PN+WD from core-collapse SN.
+- 2026-03-29 — HR diagram: The reversed X-axis (hot left, cool right) is the #1 thing to get right. Getting it wrong makes the entire diagram scientifically meaningless.

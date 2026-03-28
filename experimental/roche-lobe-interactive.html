@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roche Lobe Overflow | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    /* --- 2D panel (top-right) --- */
+    #panels {
+      position: absolute; top: 16px; right: 16px;
+      display: flex; flex-direction: column; gap: 8px; z-index: 10;
+    }
+    body.embedded #panels { top: 8px; right: 8px; }
+    .panel-box {
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 6px 8px 4px;
+    }
+    .panel-box h3 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 4px; text-align: center;
+    }
+    .panel-box canvas { display: block; border-radius: 3px; }
+    .panel-box canvas { width: 300px; height: 300px; }
+    body.embedded .panel-box canvas { width: 200px; height: 200px; }
+
+    /* --- Controls bar (bottom) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 97vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+    #controls input[type="range"] { width: 60px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .val { min-width: 28px; text-align: right; display: inline-block; font-size: 11px; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading...</div>
+
+  <div id="info">
+    <h2>Roche Lobe Overflow</h2>
+    <p class="desc">Two stars orbit their common centre of mass. When one fills its Roche lobe, mass streams through the L1 point to form an accretion disk around the companion.</p>
+    <div class="readout">
+      <div>Mass ratio q: <span id="r-q">0.50</span></div>
+      <div>Fill factor: <span id="r-fill">1.05</span></div>
+      <div>L1 position: <span id="r-l1">0.000</span> a</div>
+      <div>Roche radius: <span id="r-rl">0.000</span> a</div>
+      <div>Mass transfer: <span id="r-mt">Inactive</span></div>
+      <div>Mode: <span id="r-mode">Potential</span></div>
+    </div>
+    <p class="hint">Drag to orbit &middot; Scroll to zoom &middot; Adjust sliders below</p>
+  </div>
+
+  <div id="panels">
+    <div class="panel-box">
+      <h3>Equipotential Contours (Orbital Plane)</h3>
+      <canvas id="contour-canvas" width="280" height="280"></canvas>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="btn-play" class="active">&#9646;&#9646; Pause</button>
+    <div class="sep"></div>
+    <label>q <input type="range" id="q-slider" min="0.1" max="1.0" value="0.5" step="0.05">
+      <span class="val" id="q-val">0.50</span></label>
+    <label>Fill <input type="range" id="fill-slider" min="0.3" max="1.2" value="1.05" step="0.05">
+      <span class="val" id="fill-val">0.80</span></label>
+    <div class="sep"></div>
+    <label>Speed
+      <select id="speed-sel">
+        <option value="0.2">0.2x</option>
+        <option value="0.5" selected>0.5x</option>
+        <option value="1">1x</option>
+        <option value="3">3x</option>
+        <option value="10">10x</option>
+      </select>
+    </label>
+    <div class="sep"></div>
+    <button id="btn-mode">Gas</button>
+    <label><input type="checkbox" id="cb-orbits" checked> Orbits</label>
+    <label><input type="checkbox" id="cb-labels" checked> Labels</label>
+    <select id="preset-sel">
+      <option value="">Presets</option>
+      <option value="algol">Algol-like</option>
+      <option value="equal">Equal masses</option>
+      <option value="extreme">Extreme ratio</option>
+      <option value="detached">Detached</option>
+      <option value="contact">Contact binary</option>
+    </select>
+  </div>
+
+  <div id="credit">COSMOS &middot; Swinburne Astronomy Online</div>
+
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+  import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+  import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+  // ===================================================================
+  //  Embedded mode
+  // ===================================================================
+  const isEmbedded = window.self !== window.top || new URLSearchParams(location.search).has('embed');
+  if (isEmbedded) document.body.classList.add('embedded');
+
+  // ===================================================================
+  //  Constants
+  // ===================================================================
+  const PI = Math.PI, TWO_PI = 2 * PI, DEG = PI / 180;
+  const A_VIS = 3.0;       // visual scale: binary separation in scene units
+  const P_BASE = 6.0;      // orbital period at 1x speed (seconds)
+
+  // ===================================================================
+  //  Physics: Roche Potential
+  // ===================================================================
+
+  // Roche potential in co-rotating frame (dimensionless, separation a=1)
+  // Star 1 (mass M1) at x1 = 1/(1+q), Star 2 (mass M2) at x2 = -q/(1+q)
+  // q = M2/M1
+  // COSMOS convention: orbital plane = XZ, Y = up
+  // So we map: physics(x,y,z) -> scene(x, z_scene, y_scene)
+  // meaning: rochePotential(sceneX, sceneY, sceneZ, q)
+  //   where sceneY is perpendicular to orbital plane
+  function rochePotential(x, y, z, q) {
+    const x1 = 1.0 / (q + 1);
+    const x2 = -q / (q + 1);
+    const r1 = Math.sqrt((x - x1) ** 2 + y ** 2 + z ** 2);
+    const r2 = Math.sqrt((x - x2) ** 2 + y ** 2 + z ** 2);
+    // Clamp to avoid singularity at star centres
+    const r1s = Math.max(r1, 0.001);
+    const r2s = Math.max(r2, 0.001);
+    const phi1 = -q / ((q + 1) * r1s);
+    const phi2 = -1.0 / ((q + 1) * r2s);
+    // Centrifugal term: uses x and z (orbital plane coords)
+    const phi3 = -0.5 * (x * x + z * z);
+    return phi1 + phi2 + phi3;
+  }
+
+  // Gradient of potential (for equations of motion and normals)
+  function potentialGradient(x, y, z, q) {
+    const eps = 0.0005;
+    const dPdx = (rochePotential(x + eps, y, z, q) - rochePotential(x - eps, y, z, q)) / (2 * eps);
+    const dPdy = (rochePotential(x, y + eps, z, q) - rochePotential(x, y - eps, z, q)) / (2 * eps);
+    const dPdz = (rochePotential(x, y, z + eps, q) - rochePotential(x, y, z - eps, q)) / (2 * eps);
+    return [dPdx, dPdy, dPdz];
+  }
+
+  // Eggleton 1983 Roche lobe radius (r_L / a)
+  function eggleton(q) {
+    const q23 = Math.pow(q, 2 / 3);
+    const q13 = Math.pow(q, 1 / 3);
+    return 0.49 * q23 / (0.6 * q23 + Math.log(1 + q13));
+  }
+
+  // Find L1 by bisection (between x2 and x1 on x-axis, y=z=0)
+  function findL1(q) {
+    const x1 = 1.0 / (q + 1);
+    const x2 = -q / (q + 1);
+    // dPhi/dx on x-axis
+    function dPhidx(x) {
+      const eps = 1e-7;
+      return (rochePotential(x + eps, 0, 0, q) - rochePotential(x - eps, 0, 0, q)) / (2 * eps);
+    }
+    let lo = x2 + 0.01, hi = x1 - 0.01;
+    // dPhidx is positive at lo (near star2) and negative at hi (near star1)
+    // Zero crossing: when dPhidx > 0, root is to the right -> lo = mid
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (dPhidx(mid) > 0) lo = mid;
+      else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  // Find L2 (beyond star 2, x < x2)
+  function findL2(q) {
+    const x2 = -q / (q + 1);
+    function dPhidx(x) {
+      const eps = 1e-7;
+      return (rochePotential(x + eps, 0, 0, q) - rochePotential(x - eps, 0, 0, q)) / (2 * eps);
+    }
+    // Between -2 and x2: dPhidx transitions from negative (far left) to positive (near star2)
+    let lo = -2.0, hi = x2 - 0.01;
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (dPhidx(mid) < 0) lo = mid;
+      else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  // Find L3 (beyond star 1, x > x1)
+  function findL3(q) {
+    const x1 = 1.0 / (q + 1);
+    function dPhidx(x) {
+      const eps = 1e-7;
+      return (rochePotential(x + eps, 0, 0, q) - rochePotential(x - eps, 0, 0, q)) / (2 * eps);
+    }
+    // Beyond star 1: dPhidx transitions from negative (near star1) to positive (far right)
+    let lo = x1 + 0.01, hi = 2.0;
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (dPhidx(mid) < 0) lo = mid;
+      else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  // ===================================================================
+  //  Marching Cubes (standalone implementation)
+  // ===================================================================
+  // Edge table and tri table for marching cubes
+  // Compact implementation following the classic Lorensen & Cline algorithm
+
+  const MC_EDGE_TABLE = [
+    0x0,0x109,0x203,0x30a,0x406,0x50f,0x605,0x70c,0x80c,0x905,0xa0f,0xb06,0xc0a,0xd03,0xe09,0xf00,
+    0x190,0x99,0x393,0x29a,0x596,0x49f,0x795,0x69c,0x99c,0x895,0xb9f,0xa96,0xd9a,0xc93,0xf99,0xe90,
+    0x230,0x339,0x33,0x13a,0x636,0x73f,0x435,0x53c,0xa3c,0xb35,0x83f,0x936,0xe3a,0xf33,0xc39,0xd30,
+    0x3a0,0x2a9,0x1a3,0xaa,0x7a6,0x6af,0x5a5,0x4ac,0xbac,0xaa5,0x9af,0x8a6,0xfaa,0xea3,0xda9,0xca0,
+    0x460,0x569,0x663,0x76a,0x66,0x16f,0x265,0x36c,0xc6c,0xd65,0xe6f,0xf66,0x86a,0x963,0xa69,0xb60,
+    0x5f0,0x4f9,0x7f3,0x6fa,0x1f6,0xff,0x3f5,0x2fc,0xdfc,0xcf5,0xfff,0xef6,0x9fa,0x8f3,0xbf9,0xaf0,
+    0x650,0x759,0x453,0x55a,0x256,0x35f,0x55,0x15c,0xe5c,0xf55,0xc5f,0xd56,0xa5a,0xb53,0x859,0x950,
+    0x7c0,0x6c9,0x5c3,0x4ca,0x3c6,0x2cf,0x1c5,0xcc,0xfcc,0xec5,0xdcf,0xcc6,0xbca,0xac3,0x9c9,0x8c0,
+    0x8c0,0x9c9,0xac3,0xbca,0xcc6,0xdcf,0xec5,0xfcc,0xcc,0x1c5,0x2cf,0x3c6,0x4ca,0x5c3,0x6c9,0x7c0,
+    0x950,0x859,0xb53,0xa5a,0xd56,0xc5f,0xf55,0xe5c,0x15c,0x55,0x35f,0x256,0x55a,0x453,0x759,0x650,
+    0xaf0,0xbf9,0x8f3,0x9fa,0xef6,0xfff,0xcf5,0xdfc,0x2fc,0x3f5,0xff,0x1f6,0x6fa,0x7f3,0x4f9,0x5f0,
+    0xb60,0xa69,0x963,0x86a,0xf66,0xe6f,0xd65,0xc6c,0x36c,0x265,0x16f,0x66,0x76a,0x663,0x569,0x460,
+    0xca0,0xda9,0xea3,0xfaa,0x8a6,0x9af,0xaa5,0xbac,0x4ac,0x5a5,0x6af,0x7a6,0xaa,0x1a3,0x2a9,0x3a0,
+    0xd30,0xc39,0xf33,0xe3a,0x936,0x83f,0xb35,0xa3c,0x53c,0x435,0x73f,0x636,0x13a,0x33,0x339,0x230,
+    0xe90,0xf99,0xc93,0xd9a,0xa96,0xb9f,0x895,0x99c,0x69c,0x795,0x49f,0x596,0x29a,0x393,0x99,0x190,
+    0xf00,0xe09,0xd03,0xc0a,0xb06,0xa0f,0x905,0x80c,0x70c,0x605,0x50f,0x406,0x30a,0x203,0x109,0x0
+  ];
+
+  const MC_TRI_TABLE = [
+    [-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1]
+  ];
+
+  // Full tri table - generated inline
+  (function buildTriTable() {
+    // Standard MC tri table (256 entries, each up to 16 indices terminated by -1)
+    const t = MC_TRI_TABLE;
+    t[0x00]=[-1];t[0x01]=[0,8,3,-1];t[0x02]=[0,1,9,-1];t[0x03]=[1,8,3,9,8,1,-1];
+    t[0x04]=[1,2,10,-1];t[0x05]=[0,8,3,1,2,10,-1];t[0x06]=[9,2,10,0,2,9,-1];
+    t[0x07]=[2,8,3,2,10,8,10,9,8,-1];t[0x08]=[3,11,2,-1];t[0x09]=[0,11,2,8,11,0,-1];
+    t[0x0a]=[1,9,0,2,3,11,-1];t[0x0b]=[1,11,2,1,9,11,9,8,11,-1];t[0x0c]=[3,10,1,11,10,3,-1];
+    t[0x0d]=[0,10,1,0,8,10,8,11,10,-1];t[0x0e]=[3,9,0,3,11,9,11,10,9,-1];
+    t[0x0f]=[9,8,10,10,8,11,-1];t[0x10]=[4,7,8,-1];t[0x11]=[4,3,0,7,3,4,-1];
+    t[0x12]=[0,1,9,8,4,7,-1];t[0x13]=[4,1,9,4,7,1,7,3,1,-1];t[0x14]=[1,2,10,8,4,7,-1];
+    t[0x15]=[3,4,7,3,0,4,1,2,10,-1];t[0x16]=[9,2,10,9,0,2,8,4,7,-1];
+    t[0x17]=[2,10,9,2,9,7,2,7,3,7,9,4,-1];t[0x18]=[8,4,7,3,11,2,-1];
+    t[0x19]=[11,4,7,11,2,4,2,0,4,-1];t[0x1a]=[9,0,1,8,4,7,2,3,11,-1];
+    t[0x1b]=[4,7,11,9,4,11,9,11,2,9,2,1,-1];t[0x1c]=[3,10,1,3,11,10,7,8,4,-1];
+    t[0x1d]=[1,11,10,1,4,11,1,0,4,7,11,4,-1];t[0x1e]=[4,7,8,9,0,11,9,11,10,11,0,3,-1];
+    t[0x1f]=[4,7,11,4,11,9,9,11,10,-1];t[0x20]=[9,5,4,-1];t[0x21]=[9,5,4,0,8,3,-1];
+    t[0x22]=[0,5,4,1,5,0,-1];t[0x23]=[8,5,4,8,3,5,3,1,5,-1];t[0x24]=[1,2,10,9,5,4,-1];
+    t[0x25]=[3,0,8,1,2,10,4,9,5,-1];t[0x26]=[5,2,10,5,4,2,4,0,2,-1];
+    t[0x27]=[2,10,5,3,2,5,3,5,4,3,4,8,-1];t[0x28]=[9,5,4,2,3,11,-1];
+    t[0x29]=[0,11,2,0,8,11,4,9,5,-1];t[0x2a]=[0,5,4,0,1,5,2,3,11,-1];
+    t[0x2b]=[2,1,5,2,5,8,2,8,11,4,8,5,-1];t[0x2c]=[10,3,11,10,1,3,9,5,4,-1];
+    t[0x2d]=[4,9,5,0,8,1,8,10,1,8,11,10,-1];t[0x2e]=[5,4,0,5,0,11,5,11,10,11,0,3,-1];
+    t[0x2f]=[5,4,8,5,8,10,10,8,11,-1];t[0x30]=[9,7,8,5,7,9,-1];t[0x31]=[9,3,0,9,5,3,5,7,3,-1];
+    t[0x32]=[0,7,8,0,1,7,1,5,7,-1];t[0x33]=[1,5,3,3,5,7,-1];t[0x34]=[9,7,8,9,5,7,10,1,2,-1];
+    t[0x35]=[10,1,2,9,5,0,5,3,0,5,7,3,-1];t[0x36]=[8,0,2,8,2,5,8,5,7,10,5,2,-1];
+    t[0x37]=[2,10,5,2,5,3,3,5,7,-1];t[0x38]=[7,9,5,7,8,9,3,11,2,-1];
+    t[0x39]=[9,5,7,9,7,2,9,2,0,2,7,11,-1];t[0x3a]=[2,3,11,0,1,8,1,7,8,1,5,7,-1];
+    t[0x3b]=[11,2,1,11,1,7,7,1,5,-1];t[0x3c]=[9,5,8,8,5,7,10,1,3,10,3,11,-1];
+    t[0x3d]=[5,7,0,5,0,9,7,11,0,1,0,10,11,10,0,-1];t[0x3e]=[11,10,0,11,0,3,10,5,0,8,0,7,5,7,0,-1];
+    t[0x3f]=[11,10,5,7,11,5,-1];t[0x40]=[10,6,5,-1];t[0x41]=[0,8,3,5,10,6,-1];
+    t[0x42]=[9,0,1,5,10,6,-1];t[0x43]=[1,8,3,1,9,8,5,10,6,-1];t[0x44]=[1,6,5,2,6,1,-1];
+    t[0x45]=[1,6,5,1,2,6,3,0,8,-1];t[0x46]=[9,6,5,9,0,6,0,2,6,-1];
+    t[0x47]=[5,9,8,5,8,2,5,2,6,3,2,8,-1];t[0x48]=[2,3,11,10,6,5,-1];
+    t[0x49]=[11,0,8,11,2,0,10,6,5,-1];t[0x4a]=[0,1,9,2,3,11,5,10,6,-1];
+    t[0x4b]=[5,10,6,1,9,2,9,11,2,9,8,11,-1];t[0x4c]=[6,3,11,6,5,3,5,1,3,-1];
+    t[0x4d]=[0,8,11,0,11,5,0,5,1,5,11,6,-1];t[0x4e]=[3,11,6,0,3,6,0,6,5,0,5,9,-1];
+    t[0x4f]=[6,5,9,6,9,11,11,9,8,-1];t[0x50]=[5,10,6,4,7,8,-1];
+    t[0x51]=[4,3,0,4,7,3,6,5,10,-1];t[0x52]=[1,9,0,5,10,6,8,4,7,-1];
+    t[0x53]=[10,6,5,1,9,7,1,7,3,7,9,4,-1];t[0x54]=[6,1,2,6,5,1,4,7,8,-1];
+    t[0x55]=[1,2,5,5,2,6,3,0,4,3,4,7,-1];t[0x56]=[8,4,7,9,0,5,0,6,5,0,2,6,-1];
+    t[0x57]=[7,3,9,7,9,4,3,2,9,5,9,6,2,6,9,-1];t[0x58]=[3,11,2,7,8,4,10,6,5,-1];
+    t[0x59]=[5,10,6,4,7,2,4,2,0,2,7,11,-1];t[0x5a]=[0,1,9,4,7,8,2,3,11,5,10,6,-1];
+    t[0x5b]=[9,2,1,9,11,2,9,4,11,7,11,4,5,10,6,-1];t[0x5c]=[8,4,7,3,11,5,3,5,1,5,11,6,-1];
+    t[0x5d]=[5,1,11,5,11,6,1,0,11,7,11,4,0,4,11,-1];t[0x5e]=[0,5,9,0,6,5,0,3,6,11,6,3,8,4,7,-1];
+    t[0x5f]=[6,5,9,6,9,11,4,7,9,7,11,9,-1];t[0x60]=[10,4,9,6,4,10,-1];
+    t[0x61]=[4,10,6,4,9,10,0,8,3,-1];t[0x62]=[10,0,1,10,6,0,6,4,0,-1];
+    t[0x63]=[8,3,1,8,1,6,8,6,4,6,1,10,-1];t[0x64]=[1,4,9,1,2,4,2,6,4,-1];
+    t[0x65]=[3,0,8,1,2,9,2,4,9,2,6,4,-1];t[0x66]=[0,2,4,4,2,6,-1];
+    t[0x67]=[8,3,2,8,2,4,4,2,6,-1];t[0x68]=[10,4,9,10,6,4,11,2,3,-1];
+    t[0x69]=[0,8,2,2,8,11,4,9,10,4,10,6,-1];t[0x6a]=[3,11,2,0,1,6,0,6,4,6,1,10,-1];
+    t[0x6b]=[6,4,1,6,1,10,4,8,1,2,1,11,8,11,1,-1];t[0x6c]=[9,6,4,9,3,6,9,1,3,11,6,3,-1];
+    t[0x6d]=[8,11,1,8,1,0,11,6,1,9,1,4,6,4,1,-1];t[0x6e]=[3,11,6,3,6,0,0,6,4,-1];
+    t[0x6f]=[6,4,8,11,6,8,-1];t[0x70]=[7,10,6,7,8,10,8,9,10,-1];
+    t[0x71]=[0,7,3,0,10,7,0,9,10,6,7,10,-1];t[0x72]=[10,6,7,1,10,7,1,7,8,1,8,0,-1];
+    t[0x73]=[10,6,7,10,7,1,1,7,3,-1];t[0x74]=[1,2,6,1,6,8,1,8,9,8,6,7,-1];
+    t[0x75]=[2,6,9,2,9,1,6,7,9,0,9,3,7,3,9,-1];t[0x76]=[7,8,0,7,0,6,6,0,2,-1];
+    t[0x77]=[7,3,2,6,7,2,-1];t[0x78]=[2,3,11,10,6,8,10,8,9,8,6,7,-1];
+    t[0x79]=[2,0,7,2,7,11,0,9,7,6,7,10,9,10,7,-1];t[0x7a]=[1,8,0,1,7,8,1,10,7,6,7,10,2,3,11,-1];
+    t[0x7b]=[11,2,1,11,1,7,10,6,1,6,7,1,-1];t[0x7c]=[8,9,6,8,6,7,9,1,6,11,6,3,1,3,6,-1];
+    t[0x7d]=[0,9,1,11,6,7,-1];t[0x7e]=[7,8,0,7,0,6,3,11,0,11,6,0,-1];t[0x7f]=[7,11,6,-1];
+    t[0x80]=[7,6,11,-1];t[0x81]=[3,0,8,11,7,6,-1];t[0x82]=[0,1,9,11,7,6,-1];
+    t[0x83]=[8,1,9,8,3,1,11,7,6,-1];t[0x84]=[10,1,2,6,11,7,-1];t[0x85]=[1,2,10,3,0,8,6,11,7,-1];
+    t[0x86]=[2,9,0,2,10,9,6,11,7,-1];t[0x87]=[6,11,7,2,10,3,10,8,3,10,9,8,-1];
+    t[0x88]=[7,2,3,6,2,7,-1];t[0x89]=[7,0,8,7,6,0,6,2,0,-1];t[0x8a]=[2,7,6,2,3,7,0,1,9,-1];
+    t[0x8b]=[1,6,2,1,8,6,1,9,8,8,7,6,-1];t[0x8c]=[10,7,6,10,1,7,1,3,7,-1];
+    t[0x8d]=[10,7,6,1,7,10,1,8,7,1,0,8,-1];t[0x8e]=[0,3,7,0,7,10,0,10,9,6,10,7,-1];
+    t[0x8f]=[7,6,10,7,10,8,8,10,9,-1];t[0x90]=[6,8,4,11,8,6,-1];
+    t[0x91]=[3,6,11,3,0,6,0,4,6,-1];t[0x92]=[8,6,11,8,4,6,9,0,1,-1];
+    t[0x93]=[9,4,6,9,6,3,9,3,1,11,3,6,-1];t[0x94]=[6,8,4,6,11,8,2,10,1,-1];
+    t[0x95]=[1,2,10,3,0,11,0,6,11,0,4,6,-1];t[0x96]=[4,11,8,4,6,11,0,2,9,2,10,9,-1];
+    t[0x97]=[10,9,3,10,3,2,9,4,3,11,3,6,4,6,3,-1];t[0x98]=[8,2,3,8,4,2,4,6,2,-1];
+    t[0x99]=[0,4,2,4,6,2,-1];t[0x9a]=[1,9,0,2,3,4,2,4,6,4,3,8,-1];
+    t[0x9b]=[1,9,4,1,4,2,2,4,6,-1];t[0x9c]=[8,1,3,8,6,1,8,4,6,6,10,1,-1];
+    t[0x9d]=[10,1,0,10,0,6,6,0,4,-1];t[0x9e]=[4,6,3,4,3,8,6,10,3,0,3,9,10,9,3,-1];
+    t[0x9f]=[10,9,4,6,10,4,-1];t[0xa0]=[4,9,5,7,6,11,-1];t[0xa1]=[0,8,3,4,9,5,11,7,6,-1];
+    t[0xa2]=[5,0,1,5,4,0,7,6,11,-1];t[0xa3]=[11,7,6,8,3,4,3,5,4,3,1,5,-1];
+    t[0xa4]=[9,5,4,10,1,2,7,6,11,-1];t[0xa5]=[6,11,7,1,2,10,0,8,3,4,9,5,-1];
+    t[0xa6]=[7,6,11,5,4,10,4,2,10,4,0,2,-1];t[0xa7]=[3,4,8,3,5,4,3,2,5,10,5,2,11,7,6,-1];
+    t[0xa8]=[7,2,3,7,6,2,5,4,9,-1];t[0xa9]=[9,5,4,0,8,6,0,6,2,6,8,7,-1];
+    t[0xaa]=[3,6,2,3,7,6,1,5,0,5,4,0,-1];t[0xab]=[6,2,8,6,8,7,2,1,8,4,8,5,1,5,8,-1];
+    t[0xac]=[9,5,4,10,1,6,1,7,6,1,3,7,-1];t[0xad]=[1,6,10,1,7,6,1,0,7,8,7,0,9,5,4,-1];
+    t[0xae]=[4,0,10,4,10,5,0,3,10,6,10,7,3,7,10,-1];t[0xaf]=[7,6,10,7,10,8,5,4,10,4,8,10,-1];
+    t[0xb0]=[6,9,5,6,11,9,11,8,9,-1];t[0xb1]=[3,6,11,0,6,3,0,5,6,0,9,5,-1];
+    t[0xb2]=[0,11,8,0,5,11,0,1,5,5,6,11,-1];t[0xb3]=[6,11,3,6,3,5,5,3,1,-1];
+    t[0xb4]=[1,2,10,9,5,11,9,11,8,11,5,6,-1];t[0xb5]=[0,11,3,0,6,11,0,9,6,5,6,9,1,2,10,-1];
+    t[0xb6]=[11,8,5,11,5,6,8,0,5,10,5,2,0,2,5,-1];t[0xb7]=[6,11,3,6,3,5,2,10,3,10,5,3,-1];
+    t[0xb8]=[5,8,9,5,2,8,5,6,2,3,8,2,-1];t[0xb9]=[9,5,6,9,6,0,0,6,2,-1];
+    t[0xba]=[1,5,8,1,8,0,5,6,8,3,8,2,6,2,8,-1];t[0xbb]=[1,5,6,2,1,6,-1];
+    t[0xbc]=[1,3,6,1,6,10,3,8,6,5,6,9,8,9,6,-1];t[0xbd]=[10,1,0,10,0,6,9,5,0,5,6,0,-1];
+    t[0xbe]=[0,3,8,5,6,10,-1];t[0xbf]=[10,5,6,-1];t[0xc0]=[11,5,10,7,5,11,-1];
+    t[0xc1]=[11,5,10,11,7,5,8,3,0,-1];t[0xc2]=[5,11,7,5,10,11,1,9,0,-1];
+    t[0xc3]=[10,7,5,10,11,7,9,8,1,8,3,1,-1];t[0xc4]=[11,1,2,11,7,1,7,5,1,-1];
+    t[0xc5]=[0,8,3,1,2,7,1,7,5,7,2,11,-1];t[0xc6]=[9,7,5,9,2,7,9,0,2,2,11,7,-1];
+    t[0xc7]=[7,5,2,7,2,11,5,9,2,3,2,8,9,8,2,-1];t[0xc8]=[2,5,10,2,3,5,3,7,5,-1];
+    t[0xc9]=[8,2,0,8,5,2,8,7,5,10,2,5,-1];t[0xca]=[9,0,1,5,10,3,5,3,7,3,10,2,-1];
+    t[0xcb]=[9,8,2,9,2,1,8,7,2,10,2,5,7,5,2,-1];t[0xcc]=[1,3,5,3,7,5,-1];
+    t[0xcd]=[0,8,7,0,7,1,1,7,5,-1];t[0xce]=[9,0,3,9,3,5,5,3,7,-1];t[0xcf]=[9,8,7,5,9,7,-1];
+    t[0xd0]=[5,8,4,5,10,8,10,11,8,-1];t[0xd1]=[5,0,4,5,11,0,5,10,11,11,3,0,-1];
+    t[0xd2]=[0,1,9,8,4,10,8,10,11,10,4,5,-1];t[0xd3]=[10,11,4,10,4,5,11,3,4,9,4,1,3,1,4,-1];
+    t[0xd4]=[2,5,1,2,8,5,2,11,8,4,5,8,-1];t[0xd5]=[0,4,11,0,11,3,4,5,11,2,11,1,5,1,11,-1];
+    t[0xd6]=[0,2,5,0,5,9,2,11,5,4,5,8,11,8,5,-1];t[0xd7]=[9,4,5,2,11,3,-1];
+    t[0xd8]=[2,5,10,3,5,2,3,4,5,3,8,4,-1];t[0xd9]=[5,10,2,5,2,4,4,2,0,-1];
+    t[0xda]=[3,10,2,3,5,10,3,8,5,4,5,8,0,1,9,-1];t[0xdb]=[5,10,2,5,2,4,1,9,2,9,4,2,-1];
+    t[0xdc]=[8,4,5,8,5,3,3,5,1,-1];t[0xdd]=[0,4,5,1,0,5,-1];
+    t[0xde]=[8,4,5,8,5,3,9,0,5,0,3,5,-1];t[0xdf]=[9,4,5,-1];
+    t[0xe0]=[4,11,7,4,9,11,9,10,11,-1];t[0xe1]=[0,8,3,4,9,7,9,11,7,9,10,11,-1];
+    t[0xe2]=[1,10,11,1,11,4,1,4,0,7,4,11,-1];t[0xe3]=[3,1,4,3,4,8,1,10,4,7,4,11,10,11,4,-1];
+    t[0xe4]=[4,11,7,9,11,4,9,2,11,9,1,2,-1];t[0xe5]=[9,7,4,9,11,7,9,1,11,2,11,1,0,8,3,-1];
+    t[0xe6]=[11,7,4,11,4,2,2,4,0,-1];t[0xe7]=[11,7,4,11,4,2,8,3,4,3,2,4,-1];
+    t[0xe8]=[2,9,10,2,7,9,2,3,7,7,4,9,-1];t[0xe9]=[9,10,7,9,7,4,10,2,7,8,7,0,2,0,7,-1];
+    t[0xea]=[3,7,10,3,10,2,7,4,10,1,10,0,4,0,10,-1];t[0xeb]=[1,10,2,8,7,4,-1];
+    t[0xec]=[4,9,1,4,1,7,7,1,3,-1];t[0xed]=[4,9,1,4,1,7,0,8,1,8,7,1,-1];
+    t[0xee]=[4,0,3,7,4,3,-1];t[0xef]=[4,8,7,-1];t[0xf0]=[9,10,8,10,11,8,-1];
+    t[0xf1]=[3,0,9,3,9,11,11,9,10,-1];t[0xf2]=[0,1,10,0,10,8,8,10,11,-1];
+    t[0xf3]=[3,1,10,11,3,10,-1];t[0xf4]=[1,2,11,1,11,9,9,11,8,-1];
+    t[0xf5]=[3,0,9,3,9,11,1,2,9,2,11,9,-1];t[0xf6]=[0,2,11,8,0,11,-1];t[0xf7]=[3,2,11,-1];
+    t[0xf8]=[2,3,8,2,8,10,10,8,9,-1];t[0xf9]=[9,10,2,0,9,2,-1];
+    t[0xfa]=[2,3,8,2,8,10,0,1,8,1,10,8,-1];t[0xfb]=[1,10,2,-1];
+    t[0xfc]=[1,3,8,9,1,8,-1];t[0xfd]=[0,9,1,-1];t[0xfe]=[0,3,8,-1];t[0xff]=[-1];
+  })();
+
+  // Edge vertex indices
+  const MC_EDGE_VERTS = [
+    [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]
+  ];
+
+  // Cube corner offsets
+  const MC_CORNERS = [
+    [0,0,0],[1,0,0],[1,1,0],[0,1,0],
+    [0,0,1],[1,0,1],[1,1,1],[0,1,1]
+  ];
+
+  function marchingCubes(field, nx, ny, nz, isoLevel, bounds) {
+    const [xmin, xmax] = [bounds[0], bounds[1]];
+    const [ymin, ymax] = [bounds[2], bounds[3]];
+    const [zmin, zmax] = [bounds[4], bounds[5]];
+    const dx = (xmax - xmin) / (nx - 1);
+    const dy = (ymax - ymin) / (ny - 1);
+    const dz = (zmax - zmin) / (nz - 1);
+
+    const vertices = [];
+    const normals = [];
+
+    function getVal(i, j, k) {
+      return field[i + j * nx + k * nx * ny];
+    }
+
+    function interp(p1, p2, v1, v2) {
+      if (Math.abs(isoLevel - v1) < 1e-10) return p1.slice();
+      if (Math.abs(isoLevel - v2) < 1e-10) return p2.slice();
+      if (Math.abs(v1 - v2) < 1e-10) return p1.slice();
+      const t = (isoLevel - v1) / (v2 - v1);
+      return [p1[0] + t * (p2[0] - p1[0]), p1[1] + t * (p2[1] - p1[1]), p1[2] + t * (p2[2] - p1[2])];
+    }
+
+    for (let k = 0; k < nz - 1; k++) {
+      for (let j = 0; j < ny - 1; j++) {
+        for (let i = 0; i < nx - 1; i++) {
+          // Gather 8 corner values
+          const vals = [];
+          const pts = [];
+          for (let c = 0; c < 8; c++) {
+            const ci = i + MC_CORNERS[c][0];
+            const cj = j + MC_CORNERS[c][1];
+            const ck = k + MC_CORNERS[c][2];
+            vals.push(getVal(ci, cj, ck));
+            pts.push([
+              xmin + ci * dx,
+              ymin + cj * dy,
+              zmin + ck * dz
+            ]);
+          }
+
+          // Build cube index
+          let cubeIndex = 0;
+          for (let c = 0; c < 8; c++) {
+            if (vals[c] < isoLevel) cubeIndex |= (1 << c);
+          }
+          if (MC_EDGE_TABLE[cubeIndex] === 0) continue;
+
+          // Find edge intersection points
+          const edgeVerts = new Array(12);
+          for (let e = 0; e < 12; e++) {
+            if (MC_EDGE_TABLE[cubeIndex] & (1 << e)) {
+              const [a, b] = MC_EDGE_VERTS[e];
+              edgeVerts[e] = interp(pts[a], pts[b], vals[a], vals[b]);
+            }
+          }
+
+          // Generate triangles
+          const triList = MC_TRI_TABLE[cubeIndex];
+          for (let t = 0; triList[t] !== -1; t += 3) {
+            const v0 = edgeVerts[triList[t]];
+            const v1 = edgeVerts[triList[t + 1]];
+            const v2 = edgeVerts[triList[t + 2]];
+            vertices.push(...v0, ...v1, ...v2);
+            // Compute face normal
+            const ax = v1[0] - v0[0], ay = v1[1] - v0[1], az = v1[2] - v0[2];
+            const bx = v2[0] - v0[0], by = v2[1] - v0[1], bz = v2[2] - v0[2];
+            let nx_ = ay * bz - az * by;
+            let ny_ = az * bx - ax * bz;
+            let nz_ = ax * by - ay * bx;
+            const len = Math.sqrt(nx_ * nx_ + ny_ * ny_ + nz_ * nz_) || 1;
+            nx_ /= len; ny_ /= len; nz_ /= len;
+            normals.push(nx_, ny_, nz_, nx_, ny_, nz_, nx_, ny_, nz_);
+          }
+        }
+      }
+    }
+    return { vertices: new Float32Array(vertices), normals: new Float32Array(normals) };
+  }
+
+  // ===================================================================
+  //  State
+  // ===================================================================
+  let q = 0.5;           // mass ratio M2/M1
+  let fillFactor = 1.05;  // R_star / R_Roche (>1 = mass transfer visible on load)
+  let playing = true;
+  let speedMul = 0.5;
+  let simTime = 0;
+  let showOrbits = true;
+  let showLabels = true;
+  let gasMode = false;    // false = Potential mode, true = Gas mode
+
+  // Derived physics (recomputed when q changes)
+  let xL1 = 0, phiL1 = 0, rL1_egg = 0, rL2_egg = 0;
+  let xL2 = 0, xL3 = 0;
+  let x1Pos = 0, x2Pos = 0; // star positions on x-axis (dimensionless)
+
+  // Star temperatures
+  const T1 = 5000;   // donor (cooler, fills lobe)
+  const T2 = 10000;  // accretor (hotter)
+
+  function starColor(T) {
+    if (T < 3500) return 0xaa1100;
+    if (T < 5000) return 0xffaa33;
+    if (T < 6000) return 0xffdd66;
+    if (T < 7500) return 0xffeedd;
+    if (T < 10000) return 0xaaccff;
+    if (T < 20000) return 0x88aaff;
+    return 0xddeeff;
+  }
+
+  function recomputePhysics() {
+    x1Pos = 1.0 / (q + 1);
+    x2Pos = -q / (q + 1);
+    xL1 = findL1(q);
+    xL2 = findL2(q);
+    xL3 = findL3(q);
+    phiL1 = rochePotential(xL1, 0, 0, q);
+    rL1_egg = eggleton(q);       // primary's Roche lobe radius
+    rL2_egg = eggleton(1 / q);   // secondary's Roche lobe radius
+  }
+  recomputePhysics();
+
+  // ===================================================================
+  //  Renderer + Scene + Camera
+  // ===================================================================
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x000000);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  document.body.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.01, 500);
+  camera.position.set(0, 6, 8);
+  camera.lookAt(0, 0, 0);
+
+  const orbitControls = new OrbitControls(camera, renderer.domElement);
+  orbitControls.enableDamping = true;
+  orbitControls.dampingFactor = 0.06;
+  orbitControls.minDistance = 2;
+  orbitControls.maxDistance = 30;
+  orbitControls.target.set(0, 0, 0);
+
+  // CSS2D label renderer
+  const labelRenderer = new CSS2DRenderer();
+  labelRenderer.setSize(innerWidth, innerHeight);
+  labelRenderer.domElement.style.position = 'absolute';
+  labelRenderer.domElement.style.top = '0';
+  labelRenderer.domElement.style.pointerEvents = 'none';
+  document.body.appendChild(labelRenderer.domElement);
+
+  // ===================================================================
+  //  Bloom post-processing
+  // ===================================================================
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(innerWidth, innerHeight), 0.5, 0.6, 0.3
+  );
+  composer.addPass(bloomPass);
+  composer.addPass(new OutputPass());
+
+  // ===================================================================
+  //  Circular particle material (mandatory — no PointsMaterial)
+  // ===================================================================
+  function makeCircleMat(color, size, opacity, blending) {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uColor: { value: new THREE.Color(color) },
+        uSize: { value: size },
+        uOpacity: { value: opacity },
+        uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+      },
+      vertexShader: `
+        uniform float uSize;
+        uniform float uPixelRatio;
+        void main() {
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = max(uSize * uPixelRatio * (200.0 / -mv.z), 1.2);
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uColor;
+        uniform float uOpacity;
+        void main() {
+          float d = length(gl_PointCoord - 0.5) * 2.0;
+          if (d > 1.0) discard;
+          float alpha = exp(-d * d * 3.0) * uOpacity;
+          gl_FragColor = vec4(uColor, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: blending || THREE.NormalBlending,
+    });
+  }
+
+  // Per-vertex color+size variant for stream particles
+  function makeStreamMat() {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+      },
+      vertexShader: `
+        attribute float size;
+        varying vec3 vColor;
+        uniform float uPixelRatio;
+        void main() {
+          vColor = color;
+          vec4 mv = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = max(size * uPixelRatio * (200.0 / -mv.z), 1.2);
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vColor;
+        void main() {
+          float d = length(gl_PointCoord - 0.5) * 2.0;
+          if (d > 1.0) discard;
+          float alpha = exp(-d * d * 2.0);
+          gl_FragColor = vec4(vColor, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexColors: true,
+    });
+  }
+
+  // ===================================================================
+  //  Stars background (two-layer)
+  // ===================================================================
+  function addStars() {
+    const N = 800, pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const th = Math.random() * TWO_PI;
+      const ph = Math.acos(2 * Math.random() - 1);
+      const r = 50 + Math.random() * 70;
+      pos[i * 3] = r * Math.sin(ph) * Math.cos(th);
+      pos[i * 3 + 1] = r * Math.sin(ph) * Math.sin(th);
+      pos[i * 3 + 2] = r * Math.cos(ph);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(geo, makeCircleMat(0xffffff, 0.25, 0.3)));
+
+    const NB = 80, bpos = new Float32Array(NB * 3);
+    for (let i = 0; i < NB; i++) {
+      const th = Math.random() * TWO_PI;
+      const ph = Math.acos(2 * Math.random() - 1);
+      const r = 40 + Math.random() * 60;
+      bpos[i * 3] = r * Math.sin(ph) * Math.cos(th);
+      bpos[i * 3 + 1] = r * Math.sin(ph) * Math.sin(th);
+      bpos[i * 3 + 2] = r * Math.cos(ph);
+    }
+    const bgeo = new THREE.BufferGeometry();
+    bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+    scene.add(new THREE.Points(bgeo, makeCircleMat(0xffffff, 0.5, 0.9)));
+  }
+  addStars();
+
+  // ===================================================================
+  //  Binary stars — luminance-tinted texture shader
+  // ===================================================================
+  const sunTexture = new THREE.TextureLoader().load('assets/textures/planets/web/8k_sun.jpg');
+  sunTexture.colorSpace = THREE.SRGBColorSpace;
+
+  const starVertShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+  const starFragShader = `
+    uniform sampler2D uTex;
+    uniform vec3 uColor;
+    uniform float uBrightness;
+    varying vec2 vUv;
+    void main() {
+      vec4 texel = texture2D(uTex, vUv);
+      float lum = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+      lum = pow(lum, 0.8);
+      vec3 col = uColor * lum * uBrightness;
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function makeStarMesh(T, radius) {
+    const group = new THREE.Group();
+    const col = new THREE.Color(starColor(T));
+    const brightness = T > 20000 ? 3.0 : T > 10000 ? 2.0 : T > 7000 ? 1.5 : T > 4000 ? 0.8 : 0.5;
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(1, 48, 32),
+      new THREE.ShaderMaterial({
+        uniforms: {
+          uTex: { value: sunTexture },
+          uColor: { value: col },
+          uBrightness: { value: brightness },
+        },
+        vertexShader: starVertShader,
+        fragmentShader: starFragShader,
+      })
+    );
+    group.add(core);
+    group.scale.setScalar(radius);
+    return group;
+  }
+
+  // The rotating group holds everything in the co-rotating frame
+  const coRotGroup = new THREE.Group();
+  scene.add(coRotGroup);
+
+  // Star visual radii
+  // Star 1 = donor (fills its Roche lobe, controlled by fill factor)
+  // Star 2 = accretor (compact, much smaller than its Roche lobe)
+  const STAR2_FIXED_R = 0.06; // accretor is compact (fraction of separation)
+
+  let star1 = makeStarMesh(T1, 1.0); // scale set dynamically
+  let star2 = makeStarMesh(T2, STAR2_FIXED_R * A_VIS);
+  coRotGroup.add(star1);
+  coRotGroup.add(star2);
+
+  function updateStarPositions() {
+    // Stars in the co-rotating frame (fixed positions)
+    star1.position.set(x1Pos * A_VIS, 0, 0);
+    star2.position.set(x2Pos * A_VIS, 0, 0);
+
+    // Scale star 1 by fill factor (its visual radius = fillFactor * rL1_egg * A_VIS)
+    // rL1_egg is the volume-equivalent Roche lobe radius / a
+    const r1vis = fillFactor * rL1_egg * A_VIS;
+    star1.scale.setScalar(Math.max(r1vis, 0.05));
+    // Star 2 stays at fixed compact size
+    star2.scale.setScalar(STAR2_FIXED_R * A_VIS);
+  }
+
+  // ===================================================================
+  //  Orbit trails (circular orbits)
+  // ===================================================================
+  let orbitLine1, orbitLine2;
+
+  function updateOrbitTrails() {
+    if (orbitLine1) { scene.remove(orbitLine1); orbitLine1.geometry.dispose(); }
+    if (orbitLine2) { scene.remove(orbitLine2); orbitLine2.geometry.dispose(); }
+
+    const a1 = Math.abs(x1Pos) * A_VIS;
+    const a2 = Math.abs(x2Pos) * A_VIS;
+
+    const pts1 = [], pts2 = [];
+    for (let i = 0; i <= 128; i++) {
+      const angle = (i / 128) * TWO_PI;
+      pts1.push(new THREE.Vector3(a1 * Math.cos(angle), 0, a1 * Math.sin(angle)));
+      pts2.push(new THREE.Vector3(-a2 * Math.cos(angle), 0, -a2 * Math.sin(angle)));
+    }
+
+    const col1 = new THREE.Color(starColor(T1));
+    const col2 = new THREE.Color(starColor(T2));
+    const mat1 = new THREE.LineBasicMaterial({ color: col1, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthWrite: false });
+    const mat2 = new THREE.LineBasicMaterial({ color: col2, transparent: true, opacity: 0.25, blending: THREE.AdditiveBlending, depthWrite: false });
+
+    orbitLine1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts1), mat1);
+    orbitLine2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), mat2);
+    orbitLine1.visible = showOrbits;
+    orbitLine2.visible = showOrbits;
+    scene.add(orbitLine1);
+    scene.add(orbitLine2);
+  }
+
+  // ===================================================================
+  //  COM marker
+  // ===================================================================
+  const comMarker = new THREE.Mesh(
+    new THREE.SphereGeometry(0.03, 12, 12),
+    new THREE.MeshBasicMaterial({ color: 0xcccccc, transparent: true, opacity: 0.3 })
+  );
+  scene.add(comMarker);
+
+  // ===================================================================
+  //  L-point labels (CSS2D)
+  // ===================================================================
+  const lLabels = {};
+  const lMarkers = {};
+
+  function makeLLabel(name) {
+    const div = document.createElement('div');
+    div.textContent = name;
+    div.style.cssText = `font-family:"Open Sans",sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);text-shadow:0 0 6px #000,0 0 2px #000;pointer-events:none;`;
+    const label = new CSS2DObject(div);
+    coRotGroup.add(label);
+    lLabels[name] = label;
+
+    const marker = new THREE.Mesh(
+      new THREE.SphereGeometry(0.025, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0xffcc44, transparent: true, opacity: 0.6 })
+    );
+    coRotGroup.add(marker);
+    lMarkers[name] = marker;
+  }
+
+  ['L1', 'L2', 'L3', 'L4', 'L5'].forEach(makeLLabel);
+
+  function updateLPoints() {
+    const off = 0.12; // label offset above
+    // L1
+    lLabels.L1.position.set(xL1 * A_VIS, off, 0);
+    lMarkers.L1.position.set(xL1 * A_VIS, 0, 0);
+    // L2
+    lLabels.L2.position.set(xL2 * A_VIS, off, 0);
+    lMarkers.L2.position.set(xL2 * A_VIS, 0, 0);
+    // L3
+    lLabels.L3.position.set(xL3 * A_VIS, off, 0);
+    lMarkers.L3.position.set(xL3 * A_VIS, 0, 0);
+    // L4, L5: equilateral triangle vertices
+    const xL45 = (0.5 - q / (1 + q)) * A_VIS;
+    const zL4 = Math.sqrt(3) / 2 * A_VIS;
+    lLabels.L4.position.set(xL45, off, zL4);
+    lMarkers.L4.position.set(xL45, 0, zL4);
+    lLabels.L5.position.set(xL45, off, -zL4);
+    lMarkers.L5.position.set(xL45, 0, -zL4);
+
+    // Toggle visibility
+    Object.values(lLabels).forEach(l => l.visible = showLabels);
+    Object.values(lMarkers).forEach(m => m.visible = showLabels);
+  }
+
+  // ===================================================================
+  //  Roche lobe isosurface (marching cubes)
+  // ===================================================================
+  let lobeMesh = null;
+
+  function buildRocheIsosurface() {
+    if (lobeMesh) {
+      coRotGroup.remove(lobeMesh);
+      lobeMesh.geometry.dispose();
+      lobeMesh.material.dispose();
+    }
+
+    const N = 52; // grid resolution per axis
+    // Domain: must encompass both lobes fully
+    // L2 is beyond star2, L3 is beyond star1 — extend beyond both
+    const margin = 0.15;
+    const xmin = Math.min(xL2, x2Pos) - margin;
+    const xmax = Math.max(xL3, x1Pos) + margin;
+    const yspan = 0.6; // half-extent in Y (perpendicular to orbital plane)
+    const zspan = 0.6; // half-extent in Z (orbital plane transverse)
+
+    const field = new Float32Array(N * N * N);
+    const dxG = (xmax - xmin) / (N - 1);
+    const dyG = (2 * yspan) / (N - 1);
+    const dzG = (2 * zspan) / (N - 1);
+
+    for (let k = 0; k < N; k++) {
+      const zv = -zspan + k * dzG;
+      for (let j = 0; j < N; j++) {
+        const yv = -yspan + j * dyG;
+        for (let i = 0; i < N; i++) {
+          const xv = xmin + i * dxG;
+          field[i + j * N + k * N * N] = rochePotential(xv, yv, zv, q);
+        }
+      }
+    }
+
+    const result = marchingCubes(field, N, N, N, phiL1,
+      [xmin, xmax, -yspan, yspan, -zspan, zspan]);
+
+    if (result.vertices.length === 0) return;
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(result.vertices, 3));
+    geo.setAttribute('normal', new THREE.BufferAttribute(result.normals, 3));
+
+    // Scale from dimensionless to visual
+    geo.scale(A_VIS, A_VIS, A_VIS);
+
+    // Compute smooth normals from potential gradient
+    const posArr = geo.attributes.position.array;
+    const normArr = geo.attributes.normal.array;
+    for (let i = 0; i < posArr.length; i += 3) {
+      // Convert back to dimensionless coords
+      const px = posArr[i] / A_VIS;
+      const py = posArr[i + 1] / A_VIS;
+      const pz = posArr[i + 2] / A_VIS;
+      const grad = potentialGradient(px, py, pz, q);
+      const len = Math.sqrt(grad[0] ** 2 + grad[1] ** 2 + grad[2] ** 2) || 1;
+      // Normal points outward (away from lower potential = toward higher potential)
+      normArr[i] = grad[0] / len;
+      normArr[i + 1] = grad[1] / len;
+      normArr[i + 2] = grad[2] / len;
+    }
+    geo.attributes.normal.needsUpdate = true;
+
+    const alpha = gasMode ? 0.04 : 0.18;
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: 0x88ccff,
+      transparent: true,
+      opacity: alpha,
+      side: THREE.DoubleSide,
+      roughness: 0.2,
+      metalness: 0.1,
+      depthWrite: false,
+    });
+
+    lobeMesh = new THREE.Mesh(geo, mat);
+    coRotGroup.add(lobeMesh);
+  }
+
+  // ===================================================================
+  //  Precomputed stream trajectory line (visible path from L1)
+  // ===================================================================
+  let streamLine = null;
+
+  function buildStreamLine() {
+    if (streamLine) {
+      coRotGroup.remove(streamLine);
+      streamLine.geometry.dispose();
+    }
+    if (fillFactor < 1.0) {
+      streamLine = null;
+      return;
+    }
+
+    // Integrate one reference particle from L1
+    const pts = [];
+    let px = xL1 - 0.005;
+    let pz = 0;
+    let pvx = -0.015;
+    let pvz = 0;
+    const h = 0.002;
+    const maxSteps = 2000;
+
+    for (let i = 0; i < maxSteps; i++) {
+      pts.push(new THREE.Vector3(px * A_VIS, 0, pz * A_VIS));
+      // RK2 integration
+      const [ax1, az1] = streamAccel(px, pz, pvx, pvz);
+      const mx = px + pvx * h * 0.5;
+      const mz = pz + pvz * h * 0.5;
+      const mvx = pvx + ax1 * h * 0.5;
+      const mvz = pvz + az1 * h * 0.5;
+      const [ax2, az2] = streamAccel(mx, mz, mvx, mvz);
+      pvx += ax2 * h;
+      pvz += az2 * h;
+      px += mvx * h;
+      pz += mvz * h;
+
+      // Stop if too close to accretor or too far
+      const dx2 = px - x2Pos;
+      const r2 = Math.sqrt(dx2 * dx2 + pz * pz);
+      if (r2 < 0.03 || Math.abs(px) > 2 || Math.abs(pz) > 2) break;
+    }
+
+    if (pts.length < 2) return;
+
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({
+      color: 0xff8844,
+      transparent: true,
+      opacity: gasMode ? 0.5 : 0.25,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    streamLine = new THREE.Line(geo, mat);
+    coRotGroup.add(streamLine);
+  }
+
+  // ===================================================================
+  //  Mass transfer particle stream
+  // ===================================================================
+  const MAX_PARTICLES = 800;
+  const streamPositions = new Float32Array(MAX_PARTICLES * 3);
+  const streamColors = new Float32Array(MAX_PARTICLES * 3);
+  const streamSizes = new Float32Array(MAX_PARTICLES);
+  const streamGeo = new THREE.BufferGeometry();
+  streamGeo.setAttribute('position', new THREE.BufferAttribute(streamPositions, 3));
+  streamGeo.setAttribute('color', new THREE.BufferAttribute(streamColors, 3));
+  streamGeo.setAttribute('size', new THREE.BufferAttribute(streamSizes, 1));
+  const streamMat = makeStreamMat();
+  const streamPoints = new THREE.Points(streamGeo, streamMat);
+  coRotGroup.add(streamPoints);
+
+  // Particle state arrays (dimensionless coords in co-rotating frame)
+  const particles = [];
+
+  // Accretion disk particles
+  const MAX_DISK = 400;
+  const diskPositions = new Float32Array(MAX_DISK * 3);
+  const diskColors = new Float32Array(MAX_DISK * 3);
+  const diskSizes = new Float32Array(MAX_DISK);
+  const diskGeo = new THREE.BufferGeometry();
+  diskGeo.setAttribute('position', new THREE.BufferAttribute(diskPositions, 3));
+  diskGeo.setAttribute('color', new THREE.BufferAttribute(diskColors, 3));
+  diskGeo.setAttribute('size', new THREE.BufferAttribute(diskSizes, 1));
+  const diskMat = makeStreamMat();
+  const diskPoints = new THREE.Points(diskGeo, diskMat);
+  coRotGroup.add(diskPoints);
+
+  // Disk particle state
+  const diskParticles = [];
+
+  // Circularization radius (Verbunt & Rappaport 1988)
+  function circRadius(q) {
+    return (1 + q) * Math.pow(0.500 - 0.227 * Math.log10(q), 4);
+  }
+
+  // Initialize disk particles in Keplerian orbits around accretor
+  function initDiskParticles() {
+    diskParticles.length = 0;
+    const rCirc = circRadius(q);
+    // Disk inner edge ~ 0.3 * rCirc, outer ~ rCirc
+    for (let i = 0; i < MAX_DISK; i++) {
+      const r = (0.3 + Math.random() * 0.7) * rCirc;
+      const angle = Math.random() * TWO_PI;
+      // Keplerian angular velocity around accretor (in dimensionless units)
+      // v_K = sqrt(M2 / ((q+1) * r)) in our units where Omega=1
+      // Actually we use approximate orbital period
+      const omegaK = Math.sqrt(1.0 / ((q + 1) * r * r * r));
+      diskParticles.push({
+        r,
+        angle,
+        omegaK,
+        yOff: (Math.random() - 0.5) * 0.02, // slight vertical spread
+      });
+    }
+  }
+
+  // Stream acceleration in co-rotating frame
+  // x'' = 2*vz - dPhi/dx   (Coriolis + effective force)
+  // z'' = -2*vx - dPhi/dz
+  // Note: Omega=1, along +Y axis. Coriolis = 2*(v cross Omega)
+  // v cross Omega_hat = (vx,vy,vz) cross (0,1,0) = (vz, 0, -vx)
+  // So 2*(v cross Omega) = (2*vz, 0, -2*vx)
+  // Acceleration = -grad(Phi) + 2*(v cross Omega)
+  // a_x = -dPhi/dx + 2*vz
+  // a_z = -dPhi/dz - 2*vx
+  function streamAccel(x, z, vx, vz) {
+    const eps = 0.0005;
+    const dPdx = (rochePotential(x + eps, 0, z, q) - rochePotential(x - eps, 0, z, q)) / (2 * eps);
+    const dPdz = (rochePotential(x, 0, z + eps, q) - rochePotential(x, 0, z - eps, q)) / (2 * eps);
+    // -grad(Phi) + Coriolis
+    const ax = -dPdx + 2 * vz;
+    const az = -dPdz - 2 * vx;
+    return [ax, az];
+  }
+
+  function emitParticle() {
+    // Emit from L1 with small velocity toward star 2 (accretor)
+    // L1 is on the x-axis between the two stars
+    // Star 2 (accretor) is at x2Pos (negative x), so direction is -x
+    const vMag = 0.01 + Math.random() * 0.02; // slow initial velocity (sound speed)
+    const vz = (Math.random() - 0.5) * 0.005; // tiny transverse scatter
+    particles.push({
+      x: xL1 - 0.005, // just past L1 toward accretor
+      z: (Math.random() - 0.5) * 0.003,
+      vx: -vMag,
+      vz: vz,
+      age: 0,
+      maxAge: 6.0 + Math.random() * 4.0, // longer lifetime
+    });
+  }
+
+  function updateStream(dt) {
+    const massTransferActive = fillFactor >= 1.0;
+    streamPoints.visible = massTransferActive;
+    diskPoints.visible = massTransferActive;
+
+    if (!massTransferActive) {
+      particles.length = 0;
+      return;
+    }
+
+    // Emit new particles
+    const emitRate = gasMode ? 10 : 5;
+    for (let i = 0; i < emitRate; i++) {
+      if (particles.length < MAX_PARTICLES) emitParticle();
+    }
+
+    // Integrate each particle (symplectic Euler in 2D orbital plane)
+    const subSteps = 8;
+    const h = dt / subSteps;
+    const rCirc = circRadius(q);
+    const rAccretor = 0.03; // inner boundary near star 2
+
+    for (let p = particles.length - 1; p >= 0; p--) {
+      const part = particles[p];
+      for (let s = 0; s < subSteps; s++) {
+        const [ax, az] = streamAccel(part.x, part.z, part.vx, part.vz);
+        part.vx += ax * h;
+        part.vz += az * h;
+        part.x += part.vx * h;
+        part.z += part.vz * h;
+      }
+      part.age += dt;
+
+      // Distance to accretor (star 2)
+      const dx2 = part.x - x2Pos;
+      const dz2 = part.z;
+      const r2 = Math.sqrt(dx2 * dx2 + dz2 * dz2);
+
+      // Recycle if too old, too far, or reached disk
+      if (part.age > part.maxAge || Math.abs(part.x) > 2.5 || Math.abs(part.z) > 2.5 || r2 < rAccretor) {
+        particles.splice(p, 1);
+      }
+    }
+
+    // Update GPU buffers
+    const posArr = streamGeo.attributes.position.array;
+    const colArr = streamGeo.attributes.color.array;
+    const sizeArr = streamGeo.attributes.size.array;
+    for (let i = 0; i < MAX_PARTICLES; i++) {
+      if (i < particles.length) {
+        const p = particles[i];
+        posArr[i * 3] = p.x * A_VIS;
+        posArr[i * 3 + 1] = 0;
+        posArr[i * 3 + 2] = p.z * A_VIS;
+        // Color: warm near donor (x > xL1) -> hot near accretor (x < x2Pos)
+        const t = Math.min(1, p.age / 2.0);
+        // Orange(1,0.5,0.1) -> White(1,1,1) -> Blue(0.4,0.6,1)
+        let r, g, b;
+        if (t < 0.5) {
+          const s = t * 2;
+          r = 1.0;
+          g = 0.5 + 0.5 * s;
+          b = 0.1 + 0.9 * s;
+        } else {
+          const s = (t - 0.5) * 2;
+          r = 1.0 - 0.6 * s;
+          g = 1.0 - 0.4 * s;
+          b = 1.0;
+        }
+        colArr[i * 3] = r;
+        colArr[i * 3 + 1] = g;
+        colArr[i * 3 + 2] = b;
+        sizeArr[i] = gasMode ? 0.12 : 0.07;
+      } else {
+        posArr[i * 3] = 0;
+        posArr[i * 3 + 1] = -100;
+        posArr[i * 3 + 2] = 0;
+        sizeArr[i] = 0;
+      }
+    }
+    streamGeo.attributes.position.needsUpdate = true;
+    streamGeo.attributes.color.needsUpdate = true;
+    streamGeo.attributes.size.needsUpdate = true;
+    streamGeo.setDrawRange(0, particles.length);
+
+    // Update disk particles
+    if (diskParticles.length === 0 && massTransferActive) initDiskParticles();
+    const dposArr = diskGeo.attributes.position.array;
+    const dcolArr = diskGeo.attributes.color.array;
+    const dsizeArr = diskGeo.attributes.size.array;
+    for (let i = 0; i < MAX_DISK; i++) {
+      if (i < diskParticles.length) {
+        const dp = diskParticles[i];
+        dp.angle += dp.omegaK * dt;
+        const px = x2Pos + dp.r * Math.cos(dp.angle);
+        const pz = dp.r * Math.sin(dp.angle);
+        dposArr[i * 3] = px * A_VIS;
+        dposArr[i * 3 + 1] = dp.yOff * A_VIS;
+        dposArr[i * 3 + 2] = pz * A_VIS;
+        // Color by radius: inner = blue-white, outer = orange
+        const rFrac = (dp.r - 0.3 * rCirc) / (0.7 * rCirc);
+        const rf = Math.max(0, Math.min(1, rFrac));
+        dcolArr[i * 3] = 0.4 + 0.6 * rf;
+        dcolArr[i * 3 + 1] = 0.6 + 0.2 * rf;
+        dcolArr[i * 3 + 2] = 1.0 - 0.5 * rf;
+        dsizeArr[i] = gasMode ? 0.10 : 0.06;
+      } else {
+        dposArr[i * 3] = 0;
+        dposArr[i * 3 + 1] = -100;
+        dposArr[i * 3 + 2] = 0;
+        dsizeArr[i] = 0;
+      }
+    }
+    diskGeo.attributes.position.needsUpdate = true;
+    diskGeo.attributes.color.needsUpdate = true;
+    diskGeo.attributes.size.needsUpdate = true;
+    diskGeo.setDrawRange(0, diskParticles.length);
+  }
+
+  // ===================================================================
+  //  2D Contour panel
+  // ===================================================================
+  const contourCanvas = document.getElementById('contour-canvas');
+  const contourCtx = contourCanvas.getContext('2d');
+  const CW = contourCanvas.width, CH = contourCanvas.height;
+  const C_PAD = 20;
+  const cpW = CW - 2 * C_PAD, cpH = CH - 2 * C_PAD;
+
+  let contourImageData = null;
+
+  function drawContourPanel(orbitAngle) {
+    contourCtx.clearRect(0, 0, CW, CH);
+    contourCtx.fillStyle = 'rgba(6,6,30,1)';
+    contourCtx.fillRect(0, 0, CW, CH);
+
+    // Potential field spans: x from -1.5 to 1.5, z from -1.5 to 1.5 (dimensionless)
+    const span = 1.8;
+    const N = 200;
+    const dg = (2 * span) / (N - 1);
+
+    // Compute potential on grid
+    const grid = new Float32Array(N * N);
+    let pMin = 1e10, pMax = -1e10;
+    for (let j = 0; j < N; j++) {
+      const zv = -span + j * dg;
+      for (let i = 0; i < N; i++) {
+        const xv = -span + i * dg;
+        const val = rochePotential(xv, 0, zv, q);
+        grid[j * N + i] = val;
+        if (isFinite(val) && val > -20) {
+          pMin = Math.min(pMin, val);
+          pMax = Math.max(pMax, val);
+        }
+      }
+    }
+
+    // Draw filled potential map
+    const imgData = contourCtx.createImageData(cpW, cpH);
+    for (let py = 0; py < cpH; py++) {
+      for (let px = 0; px < cpW; px++) {
+        // Map pixel to grid
+        const gi = (px / cpW) * (N - 1);
+        const gj = (py / cpH) * (N - 1);
+        const i0 = Math.min(Math.floor(gi), N - 2);
+        const j0 = Math.min(Math.floor(gj), N - 2);
+        const fi = gi - i0, fj = gj - j0;
+        const val = (1 - fi) * (1 - fj) * grid[j0 * N + i0]
+                  + fi * (1 - fj) * grid[j0 * N + i0 + 1]
+                  + (1 - fi) * fj * grid[(j0 + 1) * N + i0]
+                  + fi * fj * grid[(j0 + 1) * N + i0 + 1];
+
+        // Map to colour: deep blue (low potential) -> cyan -> white (high)
+        const clamped = Math.max(-5, Math.min(-0.5, val));
+        const t = (clamped - (-5)) / ((-0.5) - (-5));
+        const idx = (py * cpW + px) * 4;
+        // Dark blue -> cyan -> pale
+        imgData.data[idx] = Math.round(5 + 30 * t);
+        imgData.data[idx + 1] = Math.round(5 + 60 * t);
+        imgData.data[idx + 2] = Math.round(20 + 80 * t);
+        imgData.data[idx + 3] = 255;
+      }
+    }
+    contourCtx.putImageData(imgData, C_PAD, C_PAD);
+
+    // Draw contour lines via marching squares (simple)
+    function drawContourLine(level, color, lineWidth) {
+      contourCtx.strokeStyle = color;
+      contourCtx.lineWidth = lineWidth;
+      contourCtx.beginPath();
+      for (let j = 0; j < N - 1; j++) {
+        for (let i = 0; i < N - 1; i++) {
+          const v00 = grid[j * N + i];
+          const v10 = grid[j * N + i + 1];
+          const v01 = grid[(j + 1) * N + i];
+          const v11 = grid[(j + 1) * N + i + 1];
+          // Check if contour crosses this cell
+          const above00 = v00 > level ? 1 : 0;
+          const above10 = v10 > level ? 1 : 0;
+          const above01 = v01 > level ? 1 : 0;
+          const above11 = v11 > level ? 1 : 0;
+          const sum = above00 + above10 + above01 + above11;
+          if (sum === 0 || sum === 4) continue;
+
+          // Find edge crossings
+          const edges = [];
+          function interpEdge(va, vb, xa, ya, xb, yb) {
+            const t = (level - va) / (vb - va);
+            return [xa + t * (xb - xa), ya + t * (yb - ya)];
+          }
+          const x0 = C_PAD + (i / (N - 1)) * cpW;
+          const x1_ = C_PAD + ((i + 1) / (N - 1)) * cpW;
+          const y0 = C_PAD + (j / (N - 1)) * cpH;
+          const y1_ = C_PAD + ((j + 1) / (N - 1)) * cpH;
+
+          if (above00 !== above10) edges.push(interpEdge(v00, v10, x0, y0, x1_, y0));
+          if (above10 !== above11) edges.push(interpEdge(v10, v11, x1_, y0, x1_, y1_));
+          if (above01 !== above11) edges.push(interpEdge(v01, v11, x0, y1_, x1_, y1_));
+          if (above00 !== above01) edges.push(interpEdge(v00, v01, x0, y0, x0, y1_));
+
+          if (edges.length >= 2) {
+            contourCtx.moveTo(edges[0][0], edges[0][1]);
+            contourCtx.lineTo(edges[1][0], edges[1][1]);
+            if (edges.length === 4) {
+              contourCtx.moveTo(edges[2][0], edges[2][1]);
+              contourCtx.lineTo(edges[3][0], edges[3][1]);
+            }
+          }
+        }
+      }
+      contourCtx.stroke();
+    }
+
+    // Draw several equipotential levels
+    const phiL2 = rochePotential(xL2, 0, 0, q);
+    const phiL3 = rochePotential(xL3, 0, 0, q);
+
+    // Inner contours (below L1)
+    for (let k = 0; k < 6; k++) {
+      const level = phiL1 - (k + 1) * 0.15;
+      drawContourLine(level, 'rgba(100,180,255,0.15)', 0.5);
+    }
+    // Outer contours (above L1)
+    for (let k = 1; k <= 4; k++) {
+      const level = phiL1 + k * 0.08;
+      drawContourLine(level, 'rgba(100,180,255,0.12)', 0.5);
+    }
+    // Critical contour (L1 level) — bright
+    drawContourLine(phiL1, 'rgba(255,255,100,0.9)', 1.5);
+    // L2 contour
+    drawContourLine(phiL2, 'rgba(255,200,100,0.4)', 0.8);
+
+    // Map dimensionless coord to pixel
+    function toPixel(xd, zd) {
+      return [
+        C_PAD + ((xd + span) / (2 * span)) * cpW,
+        C_PAD + ((zd + span) / (2 * span)) * cpH
+      ];
+    }
+
+    // Mark star positions
+    const [sx1, sy1] = toPixel(x1Pos, 0);
+    const [sx2, sy2] = toPixel(x2Pos, 0);
+    contourCtx.fillStyle = starColorCSS(T1);
+    contourCtx.beginPath();
+    contourCtx.arc(sx1, sy1, 4, 0, TWO_PI);
+    contourCtx.fill();
+    contourCtx.fillStyle = starColorCSS(T2);
+    contourCtx.beginPath();
+    contourCtx.arc(sx2, sy2, 4, 0, TWO_PI);
+    contourCtx.fill();
+
+    // Mark Lagrange points
+    const lPts = [
+      { name: 'L1', x: xL1, z: 0 },
+      { name: 'L2', x: xL2, z: 0 },
+      { name: 'L3', x: xL3, z: 0 },
+      { name: 'L4', x: 0.5 - q / (1 + q), z: Math.sqrt(3) / 2 },
+      { name: 'L5', x: 0.5 - q / (1 + q), z: -Math.sqrt(3) / 2 },
+    ];
+    contourCtx.font = '10px "Open Sans", sans-serif';
+    contourCtx.textAlign = 'center';
+    for (const lp of lPts) {
+      const [lx, ly] = toPixel(lp.x, lp.z);
+      contourCtx.fillStyle = 'rgba(255,200,80,0.8)';
+      contourCtx.beginPath();
+      contourCtx.arc(lx, ly, 2.5, 0, TWO_PI);
+      contourCtx.fill();
+      contourCtx.fillStyle = 'rgba(255,255,255,0.6)';
+      contourCtx.fillText(lp.name, lx, ly - 6);
+    }
+
+    // Border
+    contourCtx.strokeStyle = 'rgba(255,255,255,0.12)';
+    contourCtx.lineWidth = 0.5;
+    contourCtx.strokeRect(C_PAD, C_PAD, cpW, cpH);
+  }
+
+  function starColorCSS(T) {
+    return '#' + starColor(T).toString(16).padStart(6, '0');
+  }
+
+  // ===================================================================
+  //  Readout updates
+  // ===================================================================
+  const elQ = document.getElementById('r-q');
+  const elFill = document.getElementById('r-fill');
+  const elL1 = document.getElementById('r-l1');
+  const elRL = document.getElementById('r-rl');
+  const elMT = document.getElementById('r-mt');
+  const elMode = document.getElementById('r-mode');
+
+  function updateReadout() {
+    elQ.textContent = q.toFixed(2);
+    elFill.textContent = fillFactor.toFixed(2);
+    elL1.textContent = xL1.toFixed(3);
+    elRL.textContent = rL1_egg.toFixed(3);
+    elMT.textContent = fillFactor >= 1.0 ? 'Active' : 'Inactive';
+    elMT.style.color = fillFactor >= 1.0 ? '#ff6644' : 'rgba(255,255,255,0.8)';
+    elMode.textContent = gasMode ? 'Gas' : 'Potential';
+  }
+
+  // ===================================================================
+  //  Parameter change handler
+  // ===================================================================
+  let needsIsosurfaceRebuild = true;
+  let needsContourRedraw = true;
+
+  function onParameterChange() {
+    recomputePhysics();
+    updateStarPositions();
+    updateOrbitTrails();
+    updateLPoints();
+    needsIsosurfaceRebuild = true;
+    needsContourRedraw = true;
+    // Reset disk and stream when q changes
+    diskParticles.length = 0;
+    particles.length = 0;
+    buildStreamLine();
+    updateReadout();
+  }
+
+  // ===================================================================
+  //  Controls wiring
+  // ===================================================================
+  const btnPlay = document.getElementById('btn-play');
+  btnPlay.addEventListener('click', () => {
+    playing = !playing;
+    btnPlay.innerHTML = playing ? '&#9646;&#9646; Pause' : '&#9654; Play';
+    btnPlay.classList.toggle('active', playing);
+  });
+
+  // Spacebar toggles play/pause
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      btnPlay.click();
+    }
+  });
+
+  const qSlider = document.getElementById('q-slider');
+  const qVal = document.getElementById('q-val');
+  qSlider.addEventListener('input', () => {
+    q = parseFloat(qSlider.value);
+    qVal.textContent = q.toFixed(2);
+    onParameterChange();
+  });
+
+  const fillSlider = document.getElementById('fill-slider');
+  const fillVal = document.getElementById('fill-val');
+  fillSlider.addEventListener('input', () => {
+    fillFactor = parseFloat(fillSlider.value);
+    fillVal.textContent = fillFactor.toFixed(2);
+    updateStarPositions();
+    buildStreamLine();
+    updateReadout();
+  });
+
+  const speedSel = document.getElementById('speed-sel');
+  speedSel.addEventListener('change', () => {
+    speedMul = parseFloat(speedSel.value);
+  });
+
+  const btnMode = document.getElementById('btn-mode');
+  btnMode.addEventListener('click', () => {
+    gasMode = !gasMode;
+    btnMode.textContent = gasMode ? 'Potential' : 'Gas';
+    btnMode.classList.toggle('active', gasMode);
+    // Update bloom
+    bloomPass.strength = gasMode ? 0.8 : 0.5;
+    bloomPass.threshold = gasMode ? 0.2 : 0.3;
+    // Update isosurface opacity
+    if (lobeMesh) {
+      lobeMesh.material.opacity = gasMode ? 0.03 : 0.12;
+    }
+    updateReadout();
+  });
+
+  const cbOrbits = document.getElementById('cb-orbits');
+  cbOrbits.addEventListener('change', () => {
+    showOrbits = cbOrbits.checked;
+    if (orbitLine1) orbitLine1.visible = showOrbits;
+    if (orbitLine2) orbitLine2.visible = showOrbits;
+  });
+
+  const cbLabels = document.getElementById('cb-labels');
+  cbLabels.addEventListener('change', () => {
+    showLabels = cbLabels.checked;
+    Object.values(lLabels).forEach(l => l.visible = showLabels);
+    Object.values(lMarkers).forEach(m => m.visible = showLabels);
+  });
+
+  // Presets
+  const presetSel = document.getElementById('preset-sel');
+  presetSel.addEventListener('change', () => {
+    const p = presetSel.value;
+    if (!p) return;
+    const presets = {
+      algol:    { q: 0.22, fill: 1.05 },
+      equal:    { q: 1.0,  fill: 0.7 },
+      extreme:  { q: 0.1,  fill: 1.1 },
+      detached: { q: 0.5,  fill: 0.5 },
+      contact:  { q: 0.8,  fill: 1.2 },
+    };
+    const cfg = presets[p];
+    if (!cfg) return;
+    q = cfg.q; fillFactor = cfg.fill;
+    qSlider.value = q; qVal.textContent = q.toFixed(2);
+    fillSlider.value = fillFactor; fillVal.textContent = fillFactor.toFixed(2);
+    onParameterChange();
+    presetSel.value = '';
+  });
+
+  // ===================================================================
+  //  Visibility API: pause when tab hidden
+  // ===================================================================
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) playing = false;
+  });
+
+  // ===================================================================
+  //  Initial setup
+  // ===================================================================
+  onParameterChange();
+  updateStarPositions();
+
+  // ===================================================================
+  //  Animation loop
+  // ===================================================================
+  let lastTime = 0;
+
+  function animate(time) {
+    requestAnimationFrame(animate);
+
+    const dt = lastTime ? Math.min((time - lastTime) / 1000, 0.1) : 0;
+    lastTime = time;
+
+    // Physics timestep in dimensionless units (orbital period = P_BASE seconds)
+    const dtPhys = dt * speedMul * (TWO_PI / P_BASE);
+
+    if (playing) {
+      simTime += dt * speedMul;
+      // Rotate the co-rotating group (orbital motion)
+      coRotGroup.rotation.y += dtPhys;
+      // Update mass transfer stream
+      updateStream(dtPhys);
+    }
+
+    // Rebuild isosurface if needed (deferred to avoid lag during slider drag)
+    if (needsIsosurfaceRebuild) {
+      buildRocheIsosurface();
+      needsIsosurfaceRebuild = false;
+    }
+
+    // Redraw contour panel if needed
+    if (needsContourRedraw) {
+      drawContourPanel(coRotGroup.rotation.y);
+      needsContourRedraw = false;
+    }
+
+    // Update controls
+    orbitControls.update();
+
+    // Render
+    composer.render();
+    labelRenderer.render(scene, camera);
+  }
+
+  // ===================================================================
+  //  Resize handler
+  // ===================================================================
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    composer.setSize(innerWidth, innerHeight);
+    bloomPass.resolution.set(innerWidth, innerHeight);
+    labelRenderer.setSize(innerWidth, innerHeight);
+  });
+
+  // ===================================================================
+  //  Start
+  // ===================================================================
+  document.getElementById('loading').style.display = 'none';
+  requestAnimationFrame(animate);
+
+  </script>
+</body>
+</html>

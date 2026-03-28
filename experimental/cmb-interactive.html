@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Microwave Background | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    /* --- Tooltip --- */
+    #tooltip {
+      position: absolute; display: none;
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+      border-radius: 6px; padding: 10px 14px; font-size: 12px; max-width: 280px;
+      line-height: 1.5; pointer-events: none; z-index: 20; color: #e0e0e0;
+    }
+
+    /* --- Power spectrum panel (top-right) --- */
+    #spectrum-panel {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 10px 12px 6px; z-index: 10;
+    }
+    body.embedded #spectrum-panel { top: 8px; right: 8px; max-width: 260px; }
+    body.embedded #spectrum-canvas { width: 240px; height: 140px; }
+    #spectrum-panel h3 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 4px; text-align: center;
+    }
+    #spectrum-canvas { display: block; border-radius: 3px; }
+
+    /* --- Color bar (right of sphere) --- */
+    #colorbar {
+      position: absolute; top: 50%; right: auto; left: auto;
+      transform: translateY(-50%);
+      z-index: 10; pointer-events: none;
+    }
+    #colorbar canvas { border-radius: 3px; }
+    #colorbar .cb-label {
+      font-size: 9px; color: rgba(255,255,255,0.5); text-align: center;
+      font-family: "Open Sans", sans-serif;
+    }
+
+    /* --- Controls bar (bottom center) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls input[type="range"] { width: 55px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .val { min-width: 28px; text-align: right; display: inline-block; font-size: 11px; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    /* --- Layer buttons group --- */
+    .layer-group { display: flex; gap: 4px; }
+    .layer-group button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+
+    /* --- Loading / Credit --- */
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap;
+    }
+    #credit a { color: rgba(255,255,255,0.35); }
+
+    /* --- Responsive --- */
+    @media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Loading CMB…</div>
+
+  <div id="info">
+    <h2>Cosmic Microwave Background</h2>
+    <p class="desc">The oldest light in the universe — a snapshot of the cosmos at 380,000 years.</p>
+    <div class="readout">
+      <div>Layer: <span id="r-layer">CMB Anisotropies</span></div>
+      <div>T₀ = <span>2.7255 K</span></div>
+      <div>H₀ = <span id="r-h0">67.4</span> km/s/Mpc</div>
+      <div>Ω<sub>m</sub> = <span id="r-omm">0.315</span></div>
+      <div>Ω<sub>b</sub>h² = <span id="r-ombh2">0.0224</span></div>
+      <div>Ω<sub>Λ</sub> = <span id="r-oml">0.685</span></div>
+    </div>
+    <p class="hint">Drag to rotate · Click for details · Adjust sliders to change cosmology</p>
+  </div>
+
+  <div id="tooltip"></div>
+
+  <div id="spectrum-panel">
+    <h3>Angular Power Spectrum (D<sub>ℓ</sub> vs ℓ)</h3>
+    <canvas id="spectrum-canvas" width="400" height="220"></canvas>
+  </div>
+
+  <div id="colorbar">
+    <div class="cb-label" id="cb-top">+300 μK</div>
+    <canvas id="cb-canvas" width="16" height="120"></canvas>
+    <div class="cb-label" id="cb-bot">−300 μK</div>
+  </div>
+
+  <div id="controls">
+    <div class="layer-group">
+      <button id="btn-raw">Raw Sky</button>
+      <button id="btn-nofg">Galaxy Removed</button>
+      <button id="btn-cmb" class="active">CMB Only</button>
+    </div>
+    <div class="sep"></div>
+    <label>H₀ <input type="range" id="sl-h0" min="60" max="80" value="67.4" step="0.1">
+      <span class="val" id="v-h0">67.4</span></label>
+    <label>Ω<sub>b</sub>h² <input type="range" id="sl-ombh2" min="0.018" max="0.026" value="0.0224" step="0.0001">
+      <span class="val" id="v-ombh2">0.0224</span></label>
+    <label>Ω<sub>m</sub> <input type="range" id="sl-omm" min="0.20" max="0.45" value="0.315" step="0.001">
+      <span class="val" id="v-omm">0.315</span></label>
+    <label>Ω<sub>Λ</sub> <input type="range" id="sl-oml" min="0.55" max="0.80" value="0.685" step="0.001">
+      <span class="val" id="v-oml">0.685</span></label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-labels" checked> Peaks</label>
+    <button id="btn-reset">Reset</button>
+  </div>
+
+  <div id="credit">COSMOS — Swinburne Astronomy Online | CMB data: ESA/Planck Collaboration</div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+    // ================================================================
+    //  Embedded mode
+    // ================================================================
+    const isEmbedded = window.self !== window.top ||
+      new URLSearchParams(location.search).has('embed');
+    if (isEmbedded) document.body.classList.add('embedded');
+
+    // ================================================================
+    //  Constants
+    // ================================================================
+    const PI = Math.PI, TWO_PI = 2 * PI;
+    const DEG = PI / 180;
+
+    // Planck 2018 best-fit values
+    const PLANCK = { H0: 67.36, ombh2: 0.02237, omm: 0.3153, omL: 0.6847 };
+
+    // Dipole parameters (galactic coords)
+    const DIPOLE_L = 264.021 * DEG;
+    const DIPOLE_B = 48.253 * DEG;
+    const DIPOLE_AMP = 3.362; // mK
+
+    // ================================================================
+    //  Procedural CMB texture generation
+    //  (Placeholder — to be replaced with ESA Planck equirectangular
+    //   images. Download from:
+    //   https://sci.esa.int/web/planck/-/60505-planck-s-cosmic-microwave-background-equirectangular-projection
+    //   Save as experimental/assets/textures/cmb/planck_smica_2048.jpg
+    //   and experimental/assets/textures/cmb/planck_143ghz_2048.jpg )
+    // ================================================================
+
+    // Simple hash-based noise for fast procedural CMB texture
+    function hash(x, y, z) {
+      let h = x * 374761393 + y * 668265263 + z * 1274126177;
+      h = (h ^ (h >> 13)) * 1274126177;
+      return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
+    }
+    function smoothNoise3D(x, y, z) {
+      const ix = Math.floor(x), iy = Math.floor(y), iz = Math.floor(z);
+      const fx = x - ix, fy = y - iy, fz = z - iz;
+      const sx = fx * fx * (3 - 2 * fx);
+      const sy = fy * fy * (3 - 2 * fy);
+      const sz = fz * fz * (3 - 2 * fz);
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const n000 = hash(ix, iy, iz), n100 = hash(ix+1, iy, iz);
+      const n010 = hash(ix, iy+1, iz), n110 = hash(ix+1, iy+1, iz);
+      const n001 = hash(ix, iy, iz+1), n101 = hash(ix+1, iy, iz+1);
+      const n011 = hash(ix, iy+1, iz+1), n111 = hash(ix+1, iy+1, iz+1);
+      return lerp(
+        lerp(lerp(n000, n100, sx), lerp(n010, n110, sx), sy),
+        lerp(lerp(n001, n101, sx), lerp(n011, n111, sx), sy), sz);
+    }
+
+    function generateCMBTexture(width, height) {
+      // Generate CMB-like anisotropy using multi-octave noise on the sphere
+      // This produces the characteristic mottled pattern at ~1-2 degree scale
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      const imgData = ctx.createImageData(width, height);
+      const data = imgData.data;
+
+      for (let py = 0; py < height; py++) {
+        const lat = (0.5 - py / height) * PI;
+        const cosLat = Math.cos(lat), sinLat = Math.sin(lat);
+        for (let px = 0; px < width; px++) {
+          const lon = (px / width) * TWO_PI;
+          // 3D point on unit sphere (for seamless wrapping)
+          const nx = cosLat * Math.cos(lon);
+          const ny = sinLat;
+          const nz = cosLat * Math.sin(lon);
+
+          // Multi-octave noise mimicking CMB power spectrum
+          // Large-scale modes (Sachs-Wolfe) + medium (acoustic peaks) + fine (damped)
+          let T = 0;
+          T += 0.45 * (smoothNoise3D(nx * 3, ny * 3, nz * 3) - 0.5);     // l~6, SW
+          T += 0.35 * (smoothNoise3D(nx * 6, ny * 6, nz * 6) - 0.5);     // l~12
+          T += 0.55 * (smoothNoise3D(nx * 12, ny * 12, nz * 12) - 0.5);  // l~24
+          T += 0.70 * (smoothNoise3D(nx * 24, ny * 24, nz * 24) - 0.5);  // l~48 peak power
+          T += 0.50 * (smoothNoise3D(nx * 48, ny * 48, nz * 48) - 0.5);  // l~96
+          T += 0.30 * (smoothNoise3D(nx * 80, ny * 80, nz * 80) - 0.5);  // l~160, damped
+          T += 0.15 * (smoothNoise3D(nx * 140, ny * 140, nz * 140) - 0.5); // fine detail
+
+          // Normalize to ~[-1, 1]
+          T = T * 1.5;
+          const [r, g, bl] = cmbColorMap(T);
+          const idx = (py * width + px) * 4;
+          data[idx] = r; data[idx + 1] = g; data[idx + 2] = bl; data[idx + 3] = 255;
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+      return canvas;
+    }
+
+    // Planck-like blue-black-red color map
+    function cmbColorMap(val) {
+      // val in roughly [-1, 1], 0 = black
+      const t = Math.max(-1, Math.min(1, val));
+      if (t < 0) {
+        // Cold: blue
+        const s = -t;
+        return [Math.floor(10 * (1 - s)), Math.floor(30 * (1 - s) + 80 * s), Math.floor(40 + 215 * s)];
+      } else {
+        // Hot: red/yellow
+        const s = t;
+        return [Math.floor(40 + 215 * s), Math.floor(30 * (1 - s) + 40 * s * s), Math.floor(10 * (1 - s))];
+      }
+    }
+
+    function generateDipoleTexture(width, height, cmbCanvas) {
+      // Take the CMB texture and add the dipole pattern
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext('2d');
+
+      // Draw CMB base
+      ctx.drawImage(cmbCanvas, 0, 0);
+      const imgData = ctx.getImageData(0, 0, width, height);
+      const data = imgData.data;
+
+      // Dipole direction vector
+      const dx = Math.cos(DIPOLE_B) * Math.cos(DIPOLE_L);
+      const dy = Math.sin(DIPOLE_B);
+      const dz = Math.cos(DIPOLE_B) * Math.sin(DIPOLE_L);
+
+      for (let py = 0; py < height; py++) {
+        const lat = (0.5 - py / height) * PI;
+        const cosLat = Math.cos(lat), sinLat = Math.sin(lat);
+        for (let px = 0; px < width; px++) {
+          const lon = (px / width) * TWO_PI;
+          // Direction vector for this pixel
+          const vx = cosLat * Math.cos(lon);
+          const vy = sinLat;
+          const vz = cosLat * Math.sin(lon);
+          // Dot product with dipole direction
+          const dot = vx * dx + vy * dy + vz * dz;
+          // Dipole adds ~3.4mK, much larger than anisotropies (~0.1mK visual)
+          // Scale so dipole is visually dominant
+          const dipoleT = dot * 0.8; // strong dipole overlay
+
+          const idx = (py * width + px) * 4;
+          // Blend: shift existing colors toward warm/cool
+          if (dipoleT > 0) {
+            data[idx] = Math.min(255, data[idx] + dipoleT * 200);
+            data[idx + 1] = Math.min(255, data[idx + 1] + dipoleT * 40);
+          } else {
+            data[idx + 2] = Math.min(255, data[idx + 2] - dipoleT * 200);
+            data[idx + 1] = Math.min(255, data[idx + 1] - dipoleT * 40);
+          }
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+      return canvas;
+    }
+
+    function generateRawSkyTexture(width, height, dipoleCanvas) {
+      // Take dipole+CMB texture and add a fake galactic plane
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(dipoleCanvas, 0, 0);
+      const imgData = ctx.getImageData(0, 0, width, height);
+      const data = imgData.data;
+
+      for (let py = 0; py < height; py++) {
+        const lat = (0.5 - py / height) * PI;
+        // Galactic plane intensity: bright near b=0, exponential falloff
+        const galactic = Math.exp(-lat * lat / 0.03);
+        // Some structure along the plane
+        for (let px = 0; px < width; px++) {
+          const lon = (px / width) * TWO_PI;
+          // Brighten toward galactic center (l=0)
+          const lFactor = 0.5 + 0.5 * Math.exp(-Math.pow(Math.min(lon, TWO_PI - lon) / 0.8, 2));
+          const brightness = galactic * lFactor;
+
+          // Add galactic structure noise
+          const cosL = Math.cos(lat), sinL = Math.sin(lat);
+          const gx = cosL * Math.cos(lon), gy = sinL, gz = cosL * Math.sin(lon);
+          const galNoise = 0.7 + 0.3 * smoothNoise3D(gx * 20, gy * 20, gz * 20);
+
+          // Add warm white emission from galaxy
+          const b2 = brightness * galNoise;
+          const idx = (py * width + px) * 4;
+          data[idx] = Math.min(255, data[idx] + b2 * 240);
+          data[idx + 1] = Math.min(255, data[idx + 1] + b2 * 200);
+          data[idx + 2] = Math.min(255, data[idx + 2] + b2 * 140);
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+      return canvas;
+    }
+
+    // ================================================================
+    //  Planck 2018 binned TT power spectrum data (approximate)
+    //  D_l = l(l+1)C_l/(2pi) in μK²
+    //  Based on Planck 2018 results V, Table 1 and Fig. 1
+    // ================================================================
+    const PLANCK_DATA = [
+      { l: 2, Dl: 1010, eUp: 1300, eDn: 600 },
+      { l: 5, Dl: 1060, eUp: 250, eDn: 250 },
+      { l: 10, Dl: 1100, eUp: 200, eDn: 200 },
+      { l: 20, Dl: 1020, eUp: 120, eDn: 120 },
+      { l: 30, Dl: 820, eUp: 100, eDn: 100 },
+      { l: 50, Dl: 1560, eUp: 80, eDn: 80 },
+      { l: 70, Dl: 2100, eUp: 70, eDn: 70 },
+      { l: 100, Dl: 2310, eUp: 50, eDn: 50 },
+      { l: 130, Dl: 2780, eUp: 45, eDn: 45 },
+      { l: 160, Dl: 4000, eUp: 50, eDn: 50 },
+      { l: 190, Dl: 5200, eUp: 55, eDn: 55 },
+      { l: 210, Dl: 5650, eUp: 50, eDn: 50 },
+      { l: 220, Dl: 5780, eUp: 40, eDn: 40 },
+      { l: 235, Dl: 5650, eUp: 40, eDn: 40 },
+      { l: 260, Dl: 4900, eUp: 40, eDn: 40 },
+      { l: 300, Dl: 3650, eUp: 35, eDn: 35 },
+      { l: 340, Dl: 2650, eUp: 30, eDn: 30 },
+      { l: 380, Dl: 2250, eUp: 30, eDn: 30 },
+      { l: 420, Dl: 2680, eUp: 30, eDn: 30 },
+      { l: 460, Dl: 3200, eUp: 30, eDn: 30 },
+      { l: 500, Dl: 3400, eUp: 30, eDn: 30 },
+      { l: 540, Dl: 3500, eUp: 30, eDn: 30 },
+      { l: 580, Dl: 3200, eUp: 30, eDn: 30 },
+      { l: 620, Dl: 2600, eUp: 30, eDn: 30 },
+      { l: 660, Dl: 2150, eUp: 30, eDn: 30 },
+      { l: 700, Dl: 2100, eUp: 30, eDn: 30 },
+      { l: 740, Dl: 2300, eUp: 30, eDn: 30 },
+      { l: 780, Dl: 2600, eUp: 35, eDn: 35 },
+      { l: 810, Dl: 2800, eUp: 35, eDn: 35 },
+      { l: 850, Dl: 2650, eUp: 35, eDn: 35 },
+      { l: 900, Dl: 2200, eUp: 35, eDn: 35 },
+      { l: 950, Dl: 1900, eUp: 35, eDn: 35 },
+      { l: 1000, Dl: 1750, eUp: 35, eDn: 35 },
+      { l: 1050, Dl: 1800, eUp: 40, eDn: 40 },
+      { l: 1100, Dl: 1850, eUp: 40, eDn: 40 },
+      { l: 1150, Dl: 1650, eUp: 40, eDn: 40 },
+      { l: 1200, Dl: 1350, eUp: 40, eDn: 40 },
+      { l: 1300, Dl: 1050, eUp: 40, eDn: 40 },
+      { l: 1400, Dl: 900, eUp: 45, eDn: 45 },
+      { l: 1500, Dl: 700, eUp: 45, eDn: 45 },
+      { l: 1600, Dl: 550, eUp: 50, eDn: 50 },
+      { l: 1700, Dl: 420, eUp: 50, eDn: 50 },
+      { l: 1800, Dl: 350, eUp: 55, eDn: 55 },
+      { l: 1900, Dl: 290, eUp: 55, eDn: 55 },
+      { l: 2000, Dl: 250, eUp: 60, eDn: 60 },
+      { l: 2100, Dl: 200, eUp: 65, eDn: 65 },
+      { l: 2200, Dl: 160, eUp: 70, eDn: 70 },
+      { l: 2300, Dl: 130, eUp: 75, eDn: 75 },
+      { l: 2500, Dl: 80, eUp: 80, eDn: 80 },
+    ];
+
+    // ================================================================
+    //  Analytical power spectrum model
+    //  Approximate D_l using known acoustic physics:
+    //  - Sachs-Wolfe plateau at low l
+    //  - Acoustic peaks modeled as damped cosine series
+    //  - Peak positions shift with H0, Omega_m (angular diameter distance)
+    //  - Odd/even ratio controlled by Omega_b
+    //  - Silk damping at high l
+    //  - ISW rise at very low l from Omega_Lambda
+    //
+    //  This is an APPROXIMATION for pedagogical slider interaction.
+    //  For production, replace with pre-computed CAMB grid + 4D interpolation.
+    // ================================================================
+
+    function computeSpectrum(H0, ombh2, omm, omL) {
+      const h = H0 / 100;
+      const omb = ombh2 / (h * h);
+
+      // Angular diameter distance scaling relative to Planck
+      // Higher H0 -> smaller angular diameter distance -> peaks shift to higher l
+      // More matter -> earlier equality -> peaks shift
+      // Curvature (1 - omm - omL) shifts peaks via angular diameter distance
+      const omk = 1 - omm - omL;
+
+      // Sound horizon angle: theta_s ~ r_s / D_A
+      // r_s depends on ombh2 and omm*h2 (weakly)
+      // D_A depends on H0, omm, omL, omk
+
+      // Approximate first peak position
+      // Baseline: l1 = 220 at Planck parameters
+      // Shift with H0: l1 ~ H0 * const (through D_A)
+      const h0Ratio = H0 / PLANCK.H0;
+      // Curvature shifts the first peak position significantly
+      const omk_planck = 1 - PLANCK.omm - PLANCK.omL;
+      const curvatureShift = 1 - 1.8 * (omk - omk_planck);
+      // Matter density affects sound horizon
+      const matterShift = Math.pow(omm / PLANCK.omm, 0.15);
+
+      const l1 = 220 * h0Ratio * curvatureShift * matterShift;
+
+      // Peak spacing: ~ 300 * (l1/220)
+      const peakSpacing = 302 * (l1 / 220);
+
+      // Baryon loading: R_b = 3*rho_b/(4*rho_gamma) at decoupling
+      // Higher ombh2 -> more baryon loading -> odd peaks enhanced
+      const Rb = ombh2 / 0.02237;
+      const oddBoost = 1 + 0.35 * (Rb - 1);   // odd peaks grow
+      const evenSuppress = 1 - 0.25 * (Rb - 1); // even peaks shrink
+
+      // Overall amplitude scaling with matter density
+      const ampScale = Math.pow(omm / PLANCK.omm, 0.3);
+
+      // Silk damping scale: depends on ombh2 and H0
+      // Higher ombh2 -> more damping at slightly larger scales
+      // Higher H0 -> slightly more damping
+      const lSilk = 1200 * Math.pow(ombh2 / 0.02237, -0.3) * Math.pow(H0 / 67.36, -0.2);
+
+      // ISW contribution at low l from dark energy
+      const iswAmp = 200 * Math.max(0, omL / PLANCK.omL - 0.5);
+
+      // Build a reference spectrum by fitting to known Planck data points,
+      // then shift peaks/amplitudes with parameters.
+      // Reference data (Planck best-fit approximate D_l at key ell values):
+      const refPts = [
+        [2, 1010], [10, 1100], [20, 1020], [30, 820], [50, 1560],
+        [70, 2100], [100, 2310], [130, 2780], [160, 4000], [190, 5200],
+        [210, 5650], [220, 5780], [235, 5650], [260, 4900], [300, 3650],
+        [340, 2650], [380, 2250], [420, 2680], [460, 3200], [500, 3400],
+        [540, 3500], [580, 3200], [620, 2600], [660, 2150], [700, 2100],
+        [740, 2300], [780, 2600], [810, 2800], [850, 2650], [900, 2200],
+        [950, 1900], [1000, 1750], [1050, 1800], [1100, 1850], [1150, 1650],
+        [1200, 1350], [1300, 1050], [1400, 900], [1500, 700], [1600, 550],
+        [1700, 420], [1800, 350], [1900, 290], [2000, 250], [2200, 160],
+        [2500, 80]
+      ];
+
+      // Interpolation from reference points — gives exact Planck shape at default params
+      function interpRef(ell) {
+        if (ell <= refPts[0][0]) return refPts[0][1];
+        if (ell >= refPts[refPts.length - 1][0]) return refPts[refPts.length - 1][1];
+        for (let i = 0; i < refPts.length - 1; i++) {
+          if (ell >= refPts[i][0] && ell <= refPts[i + 1][0]) {
+            const t = (ell - refPts[i][0]) / (refPts[i + 1][0] - refPts[i][0]);
+            return refPts[i][1] + t * (refPts[i + 1][1] - refPts[i][1]);
+          }
+        }
+        return 0;
+      }
+
+      // At default Planck params, return exact reference. Otherwise, apply
+      // parameter-dependent distortions to the reference curve.
+      const result = [];
+      for (let ell = 2; ell <= 2500; ell += 2) {
+        // Transform ell to account for peak shift: map ell back to "reference ell"
+        // Higher H0 shifts peaks to higher ell, so to get the same physical mode,
+        // we evaluate the reference at a lower ell.
+        const ellRef = ell / (l1 / 220);
+
+        // Get base D_l from reference curve
+        let Dl = interpRef(ellRef);
+
+        // Apply baryon loading modulation — affects odd/even peak ratio
+        // Determine if we are near an odd or even peak by checking oscillation phase
+        // Peaks at l1, 2.45*l1, 3.68*l1, 4.90*l1... oscillation period ~peakSpacing
+        if (ell > 100) {
+          const phase = (ell - l1) / peakSpacing;
+          // cos is positive at odd peaks (n=0,2,4...), negative at even peaks
+          const oscillation = Math.cos(PI * phase);
+          // Baryon boost: positive oscillation -> odd peak -> boost
+          // Negative oscillation -> even peak -> suppress
+          const baryonMod = oscillation > 0
+            ? 1 + (oddBoost - 1) * oscillation
+            : 1 + (evenSuppress - 1) * (-oscillation);
+          Dl *= baryonMod;
+        }
+
+        // Apply overall amplitude scaling from matter density
+        Dl *= ampScale;
+
+        // Apply Silk damping modification (relative to reference damping)
+        // Reference damping is built into the curve; apply differential
+        const refLSilk = 1200;
+        const dampingRatio = Math.exp(-Math.pow(ell / lSilk, 1.8) + Math.pow(ell / refLSilk, 1.8));
+        Dl *= dampingRatio;
+
+        // ISW modification at low ell from dark energy change
+        if (ell < 30) {
+          const iswMod = 1 + (iswAmp / 1000) * Math.exp(-ell / 10);
+          Dl *= iswMod;
+        }
+
+        Dl = Math.max(0, Dl);
+        result.push({ l: ell, Dl });
+      }
+      return result;
+    }
+
+    // ================================================================
+    //  Renderer, Scene, Camera
+    // ================================================================
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    document.body.prepend(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.01, 500);
+    camera.position.set(0, 0.3, 2.8);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 1.5;
+    controls.maxDistance = 8;
+    controls.enablePan = false;
+
+    // ================================================================
+    //  Bloom (subtle — stars only, CMB sphere should not bloom)
+    // ================================================================
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(
+      new THREE.Vector2(innerWidth, innerHeight), 0.3, 0.6, 0.5));
+    composer.addPass(new OutputPass());
+
+    // ================================================================
+    //  Stars background
+    // ================================================================
+    function makeCircleMat(color, size, opacity) {
+      return new THREE.ShaderMaterial({
+        uniforms: {
+          uColor: { value: new THREE.Color(color) },
+          uSize: { value: size },
+          uOpacity: { value: opacity },
+          uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+        },
+        vertexShader: `
+          uniform float uSize;
+          uniform float uPixelRatio;
+          void main() {
+            vec4 mv = modelViewMatrix * vec4(position, 1.0);
+            gl_PointSize = max(uSize * uPixelRatio * (200.0 / -mv.z), 1.2);
+            gl_Position = projectionMatrix * mv;
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 uColor;
+          uniform float uOpacity;
+          void main() {
+            float d = length(gl_PointCoord - 0.5) * 2.0;
+            if (d > 1.0) discard;
+            float alpha = exp(-d * d * 3.0) * uOpacity;
+            gl_FragColor = vec4(uColor, alpha);
+          }
+        `,
+        transparent: true,
+        depthWrite: false,
+      });
+    }
+
+    function addStars() {
+      const N = 800, pos = new Float32Array(N * 3);
+      for (let i = 0; i < N; i++) {
+        const th = Math.random() * TWO_PI;
+        const ph = Math.acos(2 * Math.random() - 1);
+        const r = 50 + Math.random() * 70;
+        pos[i*3] = r * Math.sin(ph) * Math.cos(th);
+        pos[i*3+1] = r * Math.sin(ph) * Math.sin(th);
+        pos[i*3+2] = r * Math.cos(ph);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      scene.add(new THREE.Points(geo, makeCircleMat(0xffffff, 0.25, 0.3)));
+
+      const NB = 80, bpos = new Float32Array(NB * 3);
+      for (let i = 0; i < NB; i++) {
+        const th = Math.random() * TWO_PI;
+        const ph = Math.acos(2 * Math.random() - 1);
+        const r = 40 + Math.random() * 60;
+        bpos[i*3] = r * Math.sin(ph) * Math.cos(th);
+        bpos[i*3+1] = r * Math.sin(ph) * Math.sin(th);
+        bpos[i*3+2] = r * Math.cos(ph);
+      }
+      const bgeo = new THREE.BufferGeometry();
+      bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+      scene.add(new THREE.Points(bgeo, makeCircleMat(0xffffff, 0.5, 0.9)));
+    }
+    addStars();
+
+    // ================================================================
+    //  CMB Sphere — Three texture layers
+    // ================================================================
+    const TEX_W = 1024, TEX_H = 512;
+
+    // Generate procedural textures
+    const cmbCanvas = generateCMBTexture(TEX_W, TEX_H);
+    const dipoleCanvas = generateDipoleTexture(TEX_W, TEX_H, cmbCanvas);
+    const rawCanvas = generateRawSkyTexture(TEX_W, TEX_H, dipoleCanvas);
+
+    function canvasToTexture(cvs) {
+      const tex = new THREE.CanvasTexture(cvs);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const textures = {
+      cmb: canvasToTexture(cmbCanvas),
+      dipole: canvasToTexture(dipoleCanvas),
+      raw: canvasToTexture(rawCanvas),
+    };
+
+    // Store canvases for click sampling
+    const textureCanvases = { cmb: cmbCanvas, dipole: dipoleCanvas, raw: rawCanvas };
+
+    const sphereGeo = new THREE.SphereGeometry(1, 128, 64);
+    const sphereMat = new THREE.MeshBasicMaterial({ map: textures.cmb });
+    const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+    scene.add(sphere);
+
+    let currentLayer = 'cmb';
+
+    function setLayer(layer) {
+      currentLayer = layer;
+      sphereMat.map = textures[layer];
+      sphereMat.needsUpdate = true;
+
+      // Update layer buttons
+      document.getElementById('btn-raw').classList.toggle('active', layer === 'raw');
+      document.getElementById('btn-nofg').classList.toggle('active', layer === 'dipole');
+      document.getElementById('btn-cmb').classList.toggle('active', layer === 'cmb');
+
+      // Update readout
+      const labels = { cmb: 'CMB Anisotropies', dipole: 'Galaxy Removed', raw: 'Raw Sky' };
+      document.getElementById('r-layer').textContent = labels[layer];
+
+      // Update color bar
+      updateColorBar(layer);
+    }
+
+    // ================================================================
+    //  Color bar
+    // ================================================================
+    const cbCanvas = document.getElementById('cb-canvas');
+    const cbCtx = cbCanvas.getContext('2d');
+
+    function updateColorBar(layer) {
+      const ranges = {
+        cmb: { min: -300, max: 300, unit: 'μK' },
+        dipole: { min: -4, max: 4, unit: 'mK' },
+        raw: { min: -4, max: 4, unit: 'mK' },
+      };
+      const range = ranges[layer];
+
+      // Draw gradient
+      for (let y = 0; y < cbCanvas.height; y++) {
+        const t = 1 - 2 * y / cbCanvas.height; // +1 at top, -1 at bottom
+        const [r, g, b] = cmbColorMap(t);
+        cbCtx.fillStyle = `rgb(${r},${g},${b})`;
+        cbCtx.fillRect(0, y, cbCanvas.width, 1);
+      }
+
+      document.getElementById('cb-top').textContent = `+${range.max} ${range.unit}`;
+      document.getElementById('cb-bot').textContent = `−${Math.abs(range.min)} ${range.unit}`;
+    }
+    updateColorBar('cmb');
+
+    // Position color bar to the right of the sphere (screen-space)
+    function positionColorBar() {
+      const cbEl = document.getElementById('colorbar');
+      // Place it at a fixed offset from center-right
+      const cx = innerWidth / 2;
+      cbEl.style.left = (cx + 160) + 'px';
+    }
+    positionColorBar();
+
+    // ================================================================
+    //  Click-to-inspect (raycaster)
+    // ================================================================
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    const tooltipEl = document.getElementById('tooltip');
+
+    renderer.domElement.addEventListener('click', (ev) => {
+      mouse.x = (ev.clientX / innerWidth) * 2 - 1;
+      mouse.y = -(ev.clientY / innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const hits = raycaster.intersectObject(sphere);
+      if (hits.length > 0) {
+        const hit = hits[0];
+        const uv = hit.uv;
+        if (!uv) return;
+
+        // Convert UV to galactic coordinates
+        let lon = uv.x * 360; // 0 to 360 degrees
+        let lat = (uv.y - 0.5) * 180; // -90 to +90 degrees
+
+        // Sample temperature from texture canvas
+        const cvs = textureCanvases[currentLayer];
+        const ctx2 = cvs.getContext('2d');
+        const px = Math.floor(uv.x * cvs.width) % cvs.width;
+        const py = Math.floor((1 - uv.y) * cvs.height) % cvs.height;
+        const pixel = ctx2.getImageData(px, py, 1, 1).data;
+
+        // Map pixel color back to temperature
+        const r = pixel[0], g = pixel[1], b = pixel[2];
+        let deltaT;
+        const ranges = { cmb: 300, dipole: 4000, raw: 4000 };
+        const range = ranges[currentLayer];
+
+        // Determine if hot or cold from red vs blue dominance
+        const warmth = (r - b) / 255;
+        deltaT = warmth * range;
+
+        // Estimate angular scale from local gradient
+        const angScale = estimateAngularScale(uv, cvs);
+
+        // Format tooltip
+        const unit = currentLayer === 'cmb' ? 'μK' : 'mK';
+        const dTDisplay = currentLayer === 'cmb' ? deltaT.toFixed(0) : (deltaT / 1000).toFixed(2);
+        const sign = deltaT >= 0 ? '+' : '';
+        const tempStr = currentLayer === 'cmb'
+          ? `${sign}${deltaT.toFixed(0)} μK`
+          : `${sign}${(deltaT / 1000).toFixed(2)} mK`;
+        const spotType = deltaT >= 0 ? 'hot spot' : 'cold spot';
+
+        tooltipEl.innerHTML = `
+          <b>(l, b) = (${lon.toFixed(0)}°, ${lat >= 0 ? '+' : ''}${lat.toFixed(0)}°)</b><br>
+          ΔT ≈ ${tempStr} (${spotType})<br>
+          <em style="opacity:0.5">Angular scale: ~${angScale}° (ℓ ~ ${Math.round(180 / angScale)})</em>
+        `;
+        tooltipEl.style.display = 'block';
+        tooltipEl.style.left = (ev.clientX + 14) + 'px';
+        tooltipEl.style.top = (ev.clientY - 10) + 'px';
+
+        // Highlight corresponding ell range on spectrum
+        highlightEll = Math.round(180 / angScale);
+        drawSpectrum();
+        setTimeout(() => { highlightEll = null; drawSpectrum(); }, 2000);
+      }
+    });
+
+    // Dismiss tooltip on drag (not on click — click shows new tooltip)
+    let isDragging = false;
+    renderer.domElement.addEventListener('mousedown', () => { isDragging = false; });
+    renderer.domElement.addEventListener('mousemove', () => { isDragging = true; });
+    renderer.domElement.addEventListener('mouseup', () => {
+      if (isDragging) tooltipEl.style.display = 'none';
+    });
+
+    function estimateAngularScale(uv, cvs) {
+      // Estimate local feature size from color gradient
+      const ctx2 = cvs.getContext('2d');
+      const px = Math.floor(uv.x * cvs.width);
+      const py = Math.floor((1 - uv.y) * cvs.height);
+
+      // Sample a small neighborhood and find the scale at which color changes significantly
+      const center = ctx2.getImageData(px, py, 1, 1).data;
+      const centerVal = center[0] - center[2]; // R - B
+
+      // Check progressively larger radii
+      for (let r = 2; r < 40; r += 2) {
+        const nx = (px + r) % cvs.width;
+        const neighbor = ctx2.getImageData(nx, py, 1, 1).data;
+        const neighborVal = neighbor[0] - neighbor[2];
+        if (Math.abs(neighborVal - centerVal) > 60) {
+          // Convert pixel distance to angular scale
+          return Math.max(0.5, (r / cvs.width) * 360);
+        }
+      }
+      return 2.0; // default ~2 degrees if smooth region
+    }
+
+    // ================================================================
+    //  Power spectrum panel
+    // ================================================================
+    const specCanvas = document.getElementById('spectrum-canvas');
+    const specCtx = specCanvas.getContext('2d');
+
+    // Plot layout
+    const PAD = { l: 48, r: 12, t: 14, b: 30 };
+    const PLOT_W = specCanvas.width - PAD.l - PAD.r;
+    const PLOT_H = specCanvas.height - PAD.t - PAD.b;
+    const L_MIN = 2, L_MAX = 2500;
+    const D_MIN = 0, D_MAX = 7000;
+
+    // Quasi-logarithmic x-axis: log for l<50, linear for l>=50
+    // Using a smooth transition
+    function mapL(l) {
+      // Simple linear mapping (spec says "don't over-engineer the axis")
+      return PAD.l + (l - L_MIN) / (L_MAX - L_MIN) * PLOT_W;
+    }
+    function mapD(d) {
+      return PAD.t + PLOT_H - (d - D_MIN) / (D_MAX - D_MIN) * PLOT_H;
+    }
+
+    let showPeakLabels = true;
+    let highlightEll = null;
+
+    // Current slider values
+    let slH0 = 67.4, slOmbh2 = 0.0224, slOmm = 0.315, slOmL = 0.685;
+
+    // Reference spectrum (Planck best-fit)
+    const refSpectrum = computeSpectrum(PLANCK.H0, PLANCK.ombh2, PLANCK.omm, PLANCK.omL);
+
+    function drawSpectrum() {
+      const ctx = specCtx;
+      const w = specCanvas.width, h = specCanvas.height;
+
+      // Background
+      ctx.fillStyle = 'rgba(6,6,30,1)';
+      ctx.fillRect(0, 0, w, h);
+
+      // Grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 0.5;
+      const lTicks = [100, 500, 1000, 1500, 2000, 2500];
+      for (const lt of lTicks) {
+        const x = mapL(lt);
+        ctx.beginPath(); ctx.moveTo(x, PAD.t); ctx.lineTo(x, PAD.t + PLOT_H); ctx.stroke();
+      }
+      const dTicks = [1000, 2000, 3000, 4000, 5000, 6000];
+      for (const dt of dTicks) {
+        const y = mapD(dt);
+        ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(PAD.l + PLOT_W, y); ctx.stroke();
+      }
+
+      // Axes border
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(PAD.l, PAD.t, PLOT_W, PLOT_H);
+
+      // Axis labels
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.font = '10px "Open Sans", sans-serif';
+      ctx.textAlign = 'center';
+      for (const lt of lTicks) {
+        ctx.fillText(lt, mapL(lt), h - PAD.b + 14);
+      }
+      ctx.fillText('Multipole ℓ', PAD.l + PLOT_W / 2, h - 2);
+
+      ctx.textAlign = 'right';
+      for (const dt of dTicks) {
+        ctx.fillText(dt, PAD.l - 4, mapD(dt) + 4);
+      }
+      ctx.save();
+      ctx.translate(10, PAD.t + PLOT_H / 2);
+      ctx.rotate(-PI / 2);
+      ctx.textAlign = 'center';
+      ctx.fillText('Dℓ (μK²)', 0, 0);
+      ctx.restore();
+
+      // Reference spectrum (dashed white)
+      ctx.setLineDash([4, 3]);
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      let first = true;
+      for (const pt of refSpectrum) {
+        const x = mapL(pt.l), y = mapD(pt.Dl);
+        if (y < PAD.t || y > PAD.t + PLOT_H) continue;
+        if (first) { ctx.moveTo(x, y); first = false; }
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Current model spectrum (glow + sharp)
+      const userSpectrum = computeSpectrum(slH0, slOmbh2, slOmm, slOmL);
+
+      // Check if parameters match Planck (skip drawing user curve if same as reference)
+      const isDefault = Math.abs(slH0 - PLANCK.H0) < 0.5 &&
+                        Math.abs(slOmbh2 - PLANCK.ombh2) < 0.0005 &&
+                        Math.abs(slOmm - PLANCK.omm) < 0.005 &&
+                        Math.abs(slOmL - PLANCK.omL) < 0.005;
+
+      if (!isDefault) {
+        // Glow
+        ctx.strokeStyle = 'rgba(100,200,255,0.2)';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        first = true;
+        for (const pt of userSpectrum) {
+          const x = mapL(pt.l), y = mapD(pt.Dl);
+          if (y < PAD.t - 10 || y > PAD.t + PLOT_H + 10) continue;
+          if (first) { ctx.moveTo(x, y); first = false; }
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Sharp
+        ctx.strokeStyle = '#55ccff';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        first = true;
+        for (const pt of userSpectrum) {
+          const x = mapL(pt.l), y = mapD(pt.Dl);
+          if (y < PAD.t - 10 || y > PAD.t + PLOT_H + 10) continue;
+          if (first) { ctx.moveTo(x, y); first = false; }
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      } else {
+        // Draw single solid white curve at default
+        ctx.setLineDash([]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        first = true;
+        for (const pt of refSpectrum) {
+          const x = mapL(pt.l), y = mapD(pt.Dl);
+          if (y < PAD.t - 10 || y > PAD.t + PLOT_H + 10) continue;
+          if (first) { ctx.moveTo(x, y); first = false; }
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // Planck data points with error bars
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+      ctx.lineWidth = 0.8;
+      for (const d of PLANCK_DATA) {
+        const x = mapL(d.l), y = mapD(d.Dl);
+        if (x < PAD.l || x > PAD.l + PLOT_W) continue;
+
+        // Error bar
+        const yUp = mapD(d.Dl + d.eUp);
+        const yDn = mapD(d.Dl - d.eDn);
+        ctx.beginPath(); ctx.moveTo(x, yUp); ctx.lineTo(x, yDn); ctx.stroke();
+
+        // Data point
+        ctx.beginPath();
+        ctx.arc(x, y, 2, 0, TWO_PI);
+        ctx.fill();
+      }
+
+      // Peak labels
+      if (showPeakLabels) {
+        ctx.fillStyle = 'rgba(255,200,100,0.7)';
+        ctx.font = '9px "Open Sans", sans-serif';
+        ctx.textAlign = 'center';
+        const peaks = [
+          { l: 220, label: '1st peak', yOff: -12 },
+          { l: 540, label: '2nd', yOff: -10 },
+          { l: 810, label: '3rd', yOff: -10 },
+        ];
+        for (const pk of peaks) {
+          const x = mapL(pk.l);
+          // Find approximate Dl at this l from data
+          const nearPt = PLANCK_DATA.reduce((a, b) =>
+            Math.abs(b.l - pk.l) < Math.abs(a.l - pk.l) ? b : a);
+          const y = mapD(nearPt.Dl);
+          ctx.fillText(pk.label, x, y + pk.yOff);
+
+          // Small tick
+          ctx.strokeStyle = 'rgba(255,200,100,0.4)';
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(x, y + pk.yOff + 2);
+          ctx.lineTo(x, y - 3);
+          ctx.stroke();
+        }
+      }
+
+      // Highlight ell from click
+      if (highlightEll !== null) {
+        const hx = mapL(highlightEll);
+        if (hx >= PAD.l && hx <= PAD.l + PLOT_W) {
+          ctx.strokeStyle = 'rgba(220,45,39,0.7)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(hx, PAD.t);
+          ctx.lineTo(hx, PAD.t + PLOT_H);
+          ctx.stroke();
+
+          ctx.fillStyle = 'rgba(220,45,39,0.8)';
+          ctx.font = '9px "Open Sans", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(`ℓ ≈ ${highlightEll}`, hx, PAD.t - 3);
+        }
+      }
+
+      // Legend (when user model differs)
+      if (!isDefault) {
+        ctx.font = '9px "Open Sans", sans-serif';
+        ctx.textAlign = 'left';
+        const lx = PAD.l + 8, ly = PAD.t + 14;
+
+        ctx.setLineDash([4, 3]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 16, ly); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.fillText('Planck best-fit', lx + 20, ly + 3);
+
+        ctx.strokeStyle = '#55ccff';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(lx, ly + 14); ctx.lineTo(lx + 16, ly + 14); ctx.stroke();
+        ctx.fillStyle = '#55ccff';
+        ctx.fillText('Your model', lx + 20, ly + 17);
+      }
+    }
+
+    // ================================================================
+    //  Controls wiring
+    // ================================================================
+
+    // Layer buttons
+    document.getElementById('btn-raw').addEventListener('click', () => setLayer('raw'));
+    document.getElementById('btn-nofg').addEventListener('click', () => setLayer('dipole'));
+    document.getElementById('btn-cmb').addEventListener('click', () => setLayer('cmb'));
+
+    // Parameter sliders
+    function wireSlider(id, valId, readoutId, setter) {
+      const sl = document.getElementById(id);
+      const valEl = document.getElementById(valId);
+      const readEl = document.getElementById(readoutId);
+      sl.addEventListener('input', () => {
+        const v = parseFloat(sl.value);
+        setter(v);
+        valEl.textContent = sl.value;
+        if (readEl) readEl.textContent = sl.value;
+        drawSpectrum();
+      });
+    }
+
+    wireSlider('sl-h0', 'v-h0', 'r-h0', v => slH0 = v);
+    wireSlider('sl-ombh2', 'v-ombh2', 'r-ombh2', v => slOmbh2 = v);
+    wireSlider('sl-omm', 'v-omm', 'r-omm', v => slOmm = v);
+    wireSlider('sl-oml', 'v-oml', 'r-oml', v => slOmL = v);
+
+    // Peak labels toggle
+    document.getElementById('cb-labels').addEventListener('change', (e) => {
+      showPeakLabels = e.target.checked;
+      drawSpectrum();
+    });
+
+    // Reset button
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      slH0 = 67.4; slOmbh2 = 0.0224; slOmm = 0.315; slOmL = 0.685;
+      document.getElementById('sl-h0').value = 67.4;
+      document.getElementById('sl-ombh2').value = 0.0224;
+      document.getElementById('sl-omm').value = 0.315;
+      document.getElementById('sl-oml').value = 0.685;
+      document.getElementById('v-h0').textContent = '67.4';
+      document.getElementById('v-ombh2').textContent = '0.0224';
+      document.getElementById('v-omm').textContent = '0.315';
+      document.getElementById('v-oml').textContent = '0.685';
+      document.getElementById('r-h0').textContent = '67.4';
+      document.getElementById('r-ombh2').textContent = '0.0224';
+      document.getElementById('r-omm').textContent = '0.315';
+      document.getElementById('r-oml').textContent = '0.685';
+      drawSpectrum();
+    });
+
+    // Spacebar: cycle layers
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        const layers = ['cmb', 'dipole', 'raw'];
+        const idx = layers.indexOf(currentLayer);
+        setLayer(layers[(idx + 1) % 3]);
+      }
+    });
+
+    // ================================================================
+    //  Slow auto-rotation
+    // ================================================================
+    let autoRotate = true;
+    const BASE_ROT = 0.0005; // very slow
+
+    // ================================================================
+    //  Animation loop
+    // ================================================================
+    function animate() {
+      requestAnimationFrame(animate);
+
+      if (autoRotate) {
+        sphere.rotation.y += BASE_ROT;
+      }
+
+      controls.update();
+      composer.render();
+    }
+
+    // ================================================================
+    //  Resize handler
+    // ================================================================
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+      composer.setSize(innerWidth, innerHeight);
+      positionColorBar();
+    });
+
+    // ================================================================
+    //  Page visibility — pause when hidden
+    // ================================================================
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) autoRotate = false;
+      else autoRotate = true;
+    });
+
+    // ================================================================
+    //  Init
+    // ================================================================
+    drawSpectrum();
+    document.getElementById('loading').style.display = 'none';
+    animate();
+
+  </script>
+</body>
+</html>

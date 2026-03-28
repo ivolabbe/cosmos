@@ -12,10 +12,10 @@ You track phases. For each app you know:
 ## Phases per app
 
 ```
-Phase 1: RESEARCHER → SPEC
-Phase 2: CODER (builds) ↔ VERIFIER (checks, gives feedback) → loop until pass
-Phase 3: WRITER (article) → VERIFIER (checks article) → pass
-Phase 4: Done
+Phase 1: RESEARCHER → SPEC (science + visual references + implementation plan)
+Phase 2: WRITER (article) → VERIFIER (checks article) → pass
+Phase 3: CODER (builds) ↔ VERIFIER (checks, gives feedback) → loop until pass
+Phase 4: Done — log learnings, update agent docs, commit
 ```
 
 ## The SPEC
@@ -27,24 +27,16 @@ The spec (`.planning/apps/[topic]-spec.md`) is the central document:
 
 ## Dispatching
 
-### Phase 1: Research
+### Phase 1: Research (science + visual references)
 ```
 Dispatch sao-researcher for [topic]
 → Output: .planning/apps/[topic]-spec.md
+   (includes: facts, physics, visual competition survey,
+    reference implementations, staged build plan, verification criteria)
 → When done: move to Phase 2
 ```
 
-### Phase 2: Build + Verify loop
-```
-Dispatch sao-coder for [topic] (reads spec)
-→ Output: experimental/[topic]-interactive.html
-→ Then dispatch sao-verifier for [topic] (reads spec's verification reqs)
-→ If PASS: move to Phase 3
-→ If FAIL: send feedback to sao-coder, re-verify → loop (max 3)
-→ If still failing after 3: flag PROBLEM in app.md, move on, don't block
-```
-
-### Phase 3: Article + Verify
+### Phase 2: Article + Verify
 ```
 Dispatch sao-writer for [topic] (reads spec's facts)
 → Output: experimental/[topic].html
@@ -52,14 +44,25 @@ Dispatch sao-writer for [topic] (reads spec's facts)
    (verifier's FIRST check is article preservation — diff against original,
     reject if text was rewritten beyond scope. Factual corrections may
     justify larger changes; the verifier judges on a case-by-case basis.)
-→ If PASS: move to Phase 4
+→ If PASS: move to Phase 3
 → If FAIL: send feedback to sao-writer, re-dispatch (max 3)
+→ If still failing after 3: flag PROBLEM in app.md, move on, don't block
+```
+
+### Phase 3: Build + Verify loop
+```
+Dispatch sao-coder for [topic] (reads spec incl. visual references)
+→ Output: experimental/[topic]-interactive.html
+→ Then dispatch sao-verifier for [topic] (reads spec's verification reqs)
+   (verifier dispatches sao-visual as sub-agent for visual QA)
+→ If PASS: move to Phase 4
+→ If FAIL: send feedback to sao-coder, re-verify → loop (max 3)
 → If still failing after 3: flag PROBLEM in app.md, move on, don't block
 ```
 
 ### Phase 4: Done
 ```
-Log completion
+Log learnings, update agent docs, commit
 Update .planning/apps/ status
 Move to next app
 ```
@@ -88,18 +91,15 @@ If the verifier's report is incomplete → reject the REPORT (not the artifact) 
 
 ### What the VERIFIER checks (enforced by verifier, not orchestrator):
 
-**For interactives** (see sao-verify.md for full list):
-- Renders without JS errors
-- House style compliance (CSS, bloom, particles, embedded mode, spacebar)
-- Physics correctness
-- Visual quality (via sao-visual sub-agent)
-- Both fullscreen and embedded modes
+**Automated via `verify.js`** (run first — mechanical checks):
+- Renders without JS errors, canvas present, loading hidden
+- House style: bloom pipeline, circular particles, spacebar handler, embedded mode, credit line
+- Article mode: iframe present, text preservation diff, word count ratio, lexicon links, data-are-plural
 
-**For articles** (see sao-verify.md):
-- Article preservation: diff against original, judge scope of modifications
-- iframe present and rendering
-- Chrome intact (header, footer, breadcrumb)
-- Lexicon links, grammar, data-are-plural
+**Manual by verifier agent** (run after verify.js passes):
+- Physics correctness (equations, measurable values, edge cases)
+- Visual quality (via sao-visual sub-agent with Puppeteer screenshots)
+- Both fullscreen and embedded modes (screenshot comparison)
 
 The verifier uses judgement — factual corrections may justify larger modifications. But a full rewrite always fails.
 
@@ -107,9 +107,9 @@ The verifier uses judgement — factual corrections may justify larger modificat
 
 Independent apps can run in parallel at any phase:
 ```
-App 1: Phase 2 (building)
+App 1: Phase 3 (building)
 App 2: Phase 1 (researching)
-App 3: Phase 3 (writing article)
+App 3: Phase 2 (writing article)
 App 4: Phase 4 (done)
 ```
 
@@ -120,9 +120,9 @@ Dispatch up to 3-4 simultaneous pipelines.
 ```markdown
 | App | Phase | Status | Notes |
 |-----|-------|--------|-------|
-| HR Diagram | 2 | Coder iteration 2 | Verifier found axis labels wrong |
+| HR Diagram | 3 | Coder iteration 2 | Verifier found axis labels wrong |
 | Galaxy Classification | 1 | Researching | — |
-| Cosmic Distance Ladder | 3 | Writing article | Interactive verified |
+| Cosmic Distance Ladder | 2 | Writing article | — |
 | EM Spectrum | 4 | Done | — |
 ```
 
@@ -178,7 +178,10 @@ From agent notes, extract:
 - Are agent instructions still accurate after this round of learnings?
 
 ### Agent report format
-Every agent must include a `## Notes for CEO` section in their completion report:
+
+**Simple/Medium tier apps:** Agents append learnings directly to `.planning/apps/[topic].md` and their own Learnings section. No structured report needed — keep it lightweight.
+
+**Hard/Hardest tier apps:** Agents include a `## Notes for CEO` section in their completion report:
 ```markdown
 ## Notes for CEO
 - [What went well / what to repeat]
@@ -245,10 +248,11 @@ When a coder agent's context fills up mid-build:
 
 - 2026-03-28 — For simple apps (planet globes): phases 1-4 can complete in one builder agent. For complex sims: keep phases separate with dedicated agents.
 - 2026-03-28 — Style/pattern changes (background color, star field) affect ALL apps. Settle these before dispatching builders.
-- 2026-03-28 — Texture compression is a shared dependency — do it before Phase 2 for all apps that need textures.
+- 2026-03-28 — Texture compression is a shared dependency — do it before Phase 3 for all apps that need textures.
 - 2026-03-28 — Pulsar pipeline (first medium-tier app) completed in one session: research→build→verify→fix→article→verify.
 - 2026-03-28 — Spec pseudocode can have bugs. The researcher's anti-pole formula was wrong — the verifier caught it via code analysis. Always have the verifier check physics equations, not just visuals.
 - 2026-03-28 — For physics sims without textures: no loading time, so `loading` indicator can be removed immediately.
 - 2026-03-28 — The GW interactive is an excellent template for physics sim apps (2D panel + sliders + audio + readouts).
 - 2026-03-28 — Verifier should be dispatched even before the coder fully completes — can run in parallel. The orchestrator can apply fixes from verifier feedback directly.
-- 2026-03-28 — Article verify.js gives false failures for article pages (iframe content invisible to script). Need article-specific verify checks.
+- 2026-03-28 — Article verify.js gave false failures for article pages — now resolved with `--article` mode.
+- 2026-03-29 — Pipeline simplified: 5 phases → 4 phases. Visual research folded into Researcher (Phase 1). verify.js now automates all mechanical checks.

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cosmic Web | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls input[type="range"] { width: 70px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .val { min-width: 32px; text-align: right; display: inline-block; font-size: 11px; font-family: "Courier New", monospace; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap;
+    }
+    #credit a { color: rgba(255,255,255,0.35); }
+
+    @media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Generating cosmic web&hellip;</div>
+
+  <div id="info">
+    <h2>The Cosmic Web</h2>
+    <p class="desc">Dark matter filaments connecting galaxy clusters &mdash; the largest structures in the Universe. Generated via the Zel&rsquo;dovich approximation with Planck 2018 cosmology.</p>
+    <p class="hint">Drag to orbit &middot; Scroll to zoom &middot; Slider to travel through cosmic time</p>
+    <div class="readout">
+      <div>Redshift  <span id="r-z">z = 0.0</span></div>
+      <div>Lookback  <span id="r-lb">0.0 Gyr</span></div>
+      <div>Scale     <span id="r-a">a = 1.00</span></div>
+      <div>Mode      <span id="r-mode">Dark Matter</span></div>
+      <div>Particles <span id="r-np">50,653</span></div>
+      <div>Box       <span id="r-box">200 Mpc</span></div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="btn-play">&#9654; Play</button>
+    <div class="sep"></div>
+    <label>Speed
+      <select id="sel-speed">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="3">3x</option>
+      </select>
+    </label>
+    <div class="sep"></div>
+    <label>z<input type="range" id="sl-z" min="0" max="10" step="0.1" value="0"><span class="val" id="v-z">0.0</span></label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-baryon"> Galaxies</label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-grid" checked> Grid</label>
+    <label><input type="checkbox" id="cb-labels" checked> Labels</label>
+  </div>
+
+  <div id="credit">Zel'dovich approximation &middot; Planck 2018 (&Omega;<sub>m</sub>=0.315) &middot; <a href="https://astronomy.swin.edu.au/cosmos/" target="_blank">COSMOS</a> &mdash; Swinburne Astronomy Online</div>
+
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+  import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+  /* ========== Embedded mode ========== */
+  const isEmbedded = window.self !== window.top ||
+    new URLSearchParams(location.search).get('embed') === '1';
+  if (isEmbedded) document.body.classList.add('embedded');
+
+  /* ========== Constants ========== */
+  const BOX = 200;
+  const HALF = BOX / 2;
+  const N_SIDE = 37;
+  const N_PARTICLES = N_SIDE * N_SIDE * N_SIDE; // 50,653
+  const N_MODES_MAX = 10; // max integer wavenumber per axis
+  const Omega_m = 0.315;
+  const Omega_L = 0.685;
+
+  /* ========== Renderer ========== */
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x000000);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.5;
+  document.body.prepend(renderer.domElement);
+
+  /* ========== Scene, Camera, Controls ========== */
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x000000, 0.005);
+
+  const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.5, 800);
+  camera.position.set(60, 100, 180);
+
+  const orbitControls = new OrbitControls(camera, renderer.domElement);
+  orbitControls.enableDamping = true;
+  orbitControls.dampingFactor = 0.06;
+  orbitControls.minDistance = 5;
+  orbitControls.maxDistance = 350;
+  orbitControls.target.set(0, 0, 0);
+
+  /* ========== Bloom ========== */
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  composer.addPass(new UnrealBloomPass(
+    new THREE.Vector2(innerWidth, innerHeight), 0.4, 0.7, 0.4));
+  composer.addPass(new OutputPass());
+
+  /* ========== Growth factor D(z) — numerical integration ========== */
+  // Numerical integration of the ODE: D''+ (2-3/2 Omega_m(a)) D'/a = 3/2 Omega_m(a) D/a^2
+  // More accurate than Carroll+1992 approximation at high z
+  // Use the integral form: D(a) = 5/2 Omega_m H0^2 H(a) * integral(da'/(a'H(a'))^3, 0, a)
+  function hubbleE(a) {
+    // E(a) = H(a)/H0
+    return Math.sqrt(Omega_m / (a * a * a) + Omega_L);
+  }
+
+  function growthFactorIntegral(z) {
+    const a = 1.0 / (1.0 + z);
+    if (a < 1e-6) return 0;
+    const N = 500;
+    const da = a / N;
+    let integral = 0;
+    for (let i = 0; i < N; i++) {
+      const ai = (i + 0.5) * da;
+      const Ea = hubbleE(ai);
+      const aE3 = ai * Ea;
+      integral += da / (aE3 * aE3 * aE3);
+    }
+    const Ea = hubbleE(a);
+    return 2.5 * Omega_m * Ea * integral;
+  }
+
+  const D_at_0 = growthFactorIntegral(0);
+  function growthFactor(z) {
+    return growthFactorIntegral(z) / D_at_0;
+  }
+
+  // Verify test values (spec: z=0→1.000, z=0.5→0.773, z=1→0.613, z=2→0.394, z=5→0.155, z=10→0.079)
+  console.log('D(z) verification:');
+  [0, 0.5, 1, 2, 5, 10].forEach(z =>
+    console.log(`  D(${z}) = ${growthFactor(z).toFixed(3)}`)
+  );
+
+  /* ========== Lookback time ========== */
+  function lookbackTime(z) {
+    const H0_inv_Gyr = 1.0 / (67.4 * 3.2408e-20 * 3.1557e16);
+    const N = 300;
+    const dz = z / N;
+    let sum = 0;
+    for (let i = 0; i < N; i++) {
+      const zi = (i + 0.5) * dz;
+      const Ez = Math.sqrt(Omega_m * Math.pow(1 + zi, 3) + Omega_L);
+      sum += dz / ((1 + zi) * Ez);
+    }
+    return sum * H0_inv_Gyr;
+  }
+
+  // Verify lookback times
+  console.log('Lookback time verification:');
+  [0, 1, 2, 5, 10].forEach(z =>
+    console.log(`  t_lb(${z}) = ${lookbackTime(z).toFixed(1)} Gyr`)
+  );
+
+  /* ========== Power spectrum ========== */
+  function powerSpectrum(k) {
+    const n_s = 0.965;
+    const k_eq = 0.01;
+    const q = k / k_eq;
+    // Bardeen+ 1986 / Eisenstein-Hu simplified transfer function shape
+    const T_k = Math.log(1 + 2.34 * q) / (2.34 * q) *
+      Math.pow(1 + 3.89 * q + Math.pow(16.1 * q, 2) + Math.pow(5.46 * q, 3) + Math.pow(6.71 * q, 4), -0.25);
+    return Math.pow(k, n_s) * T_k * T_k;
+  }
+
+  /* ========== Seeded random ========== */
+  let seedState = 42;
+  function srand() {
+    seedState = (seedState * 16807) % 2147483647;
+    return (seedState - 1) / 2147483646;
+  }
+
+  /* ========== Generate grid positions ========== */
+  const q = new Float32Array(N_PARTICLES * 3);
+  const psi = new Float32Array(N_PARTICLES * 3);
+  const positions = new Float32Array(N_PARTICLES * 3);
+
+  {
+    let idx = 0;
+    for (let ix = 0; ix < N_SIDE; ix++) {
+      for (let iy = 0; iy < N_SIDE; iy++) {
+        for (let iz = 0; iz < N_SIDE; iz++) {
+          q[idx++] = ((ix + 0.5) / N_SIDE - 0.5) * BOX;
+          q[idx++] = ((iy + 0.5) / N_SIDE - 0.5) * BOX;
+          q[idx++] = ((iz + 0.5) / N_SIDE - 0.5) * BOX;
+        }
+      }
+    }
+  }
+
+  /* ========== Generate displacement field (grid-based Fourier modes) ========== */
+  // Use k-vectors commensurate with the periodic box: k = (2pi/L) * (nx, ny, nz)
+  // This ensures a truly periodic Gaussian random field with no aliasing artifacts.
+  const kf = 2 * Math.PI / BOX; // fundamental wavenumber
+
+  // Collect all modes up to N_MODES_MAX per axis
+  const modes = [];
+  for (let nx = -N_MODES_MAX; nx <= N_MODES_MAX; nx++) {
+    for (let ny = -N_MODES_MAX; ny <= N_MODES_MAX; ny++) {
+      for (let nz = -N_MODES_MAX; nz <= N_MODES_MAX; nz++) {
+        if (nx === 0 && ny === 0 && nz === 0) continue; // skip DC
+        // Only keep half-space to avoid conjugate pairs (Hermitian symmetry)
+        if (nx < 0) continue;
+        if (nx === 0 && ny < 0) continue;
+        if (nx === 0 && ny === 0 && nz < 0) continue;
+        const k_mag = kf * Math.sqrt(nx*nx + ny*ny + nz*nz);
+        if (k_mag > kf * N_MODES_MAX * 1.01) continue; // spherical cutoff
+        modes.push({ nx, ny, nz, k_mag });
+      }
+    }
+  }
+  console.log(`Fourier modes: ${modes.length}`);
+
+  console.time('Displacement field');
+  for (const mode of modes) {
+    const { nx, ny, nz, k_mag } = mode;
+    const kx = kf * nx, ky = kf * ny, kz = kf * nz;
+
+    // Gaussian random amplitude with variance P(k)
+    // Box-Muller for Gaussian: amplitude = sqrt(P(k)) * gaussian
+    const u1 = srand(), u2 = srand();
+    const gauss = Math.sqrt(-2 * Math.log(u1 + 1e-10)) * Math.cos(2 * Math.PI * u2);
+    const amp = Math.sqrt(powerSpectrum(k_mag)) * gauss;
+    const phase = srand() * 2 * Math.PI;
+
+    const k2inv = 1.0 / (k_mag * k_mag);
+    for (let i = 0; i < N_PARTICLES; i++) {
+      const i3 = i * 3;
+      const dot = kx * q[i3] + ky * q[i3 + 1] + kz * q[i3 + 2];
+      const val = amp * Math.cos(dot + phase) * k2inv;
+      psi[i3]     += kx * val;
+      psi[i3 + 1] += ky * val;
+      psi[i3 + 2] += kz * val;
+    }
+  }
+  console.timeEnd('Displacement field');
+
+  // Calibrate RMS displacement to target
+  {
+    let sumSq = 0;
+    for (let i = 0; i < N_PARTICLES; i++) {
+      const i3 = i * 3;
+      sumSq += psi[i3] * psi[i3] + psi[i3 + 1] * psi[i3 + 1] + psi[i3 + 2] * psi[i3 + 2];
+    }
+    const rmsRaw = Math.sqrt(sumSq / N_PARTICLES);
+    const target = 9.0; // Mpc — tuned for clear filaments without blob collapse
+    const scale = target / rmsRaw;
+    for (let i = 0; i < N_PARTICLES * 3; i++) psi[i] *= scale;
+    console.log(`RMS displacement: ${(rmsRaw * scale).toFixed(2)} Mpc (raw ${rmsRaw.toFixed(2)}, scale ${scale.toFixed(3)})`);
+  }
+
+  /* ========== Compute z=0 positions and density ========== */
+  function applyDisplacements(z) {
+    const D = growthFactor(z);
+    for (let i = 0; i < N_PARTICLES; i++) {
+      const i3 = i * 3;
+      let x = q[i3]     + D * psi[i3];
+      let y = q[i3 + 1] + D * psi[i3 + 1];
+      let zz = q[i3 + 2] + D * psi[i3 + 2];
+      // Periodic wrapping
+      x = ((x + HALF) % BOX + BOX) % BOX - HALF;
+      y = ((y + HALF) % BOX + BOX) % BOX - HALF;
+      zz = ((zz + HALF) % BOX + BOX) % BOX - HALF;
+      positions[i3] = x;
+      positions[i3 + 1] = y;
+      positions[i3 + 2] = zz;
+    }
+  }
+
+  applyDisplacements(0);
+
+  /* ========== Local density estimation ========== */
+  const densityValues = new Float32Array(N_PARTICLES);
+  const CELL = 6; // Mpc smoothing cell
+
+  console.time('Density estimation');
+  {
+    const grid = new Map();
+    for (let i = 0; i < N_PARTICLES; i++) {
+      const i3 = i * 3;
+      const cx = Math.floor((positions[i3] + HALF) / CELL);
+      const cy = Math.floor((positions[i3 + 1] + HALF) / CELL);
+      const cz = Math.floor((positions[i3 + 2] + HALF) / CELL);
+      const key = cx + cy * 1000 + cz * 1000000;
+      let arr = grid.get(key);
+      if (!arr) { arr = []; grid.set(key, arr); }
+      arr.push(i);
+    }
+
+    const R2 = CELL * CELL;
+    for (let i = 0; i < N_PARTICLES; i++) {
+      const i3 = i * 3;
+      const px = positions[i3], py = positions[i3 + 1], pz = positions[i3 + 2];
+      const cx = Math.floor((px + HALF) / CELL);
+      const cy = Math.floor((py + HALF) / CELL);
+      const cz = Math.floor((pz + HALF) / CELL);
+      let count = 0;
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dz = -1; dz <= 1; dz++) {
+            const arr = grid.get((cx+dx) + (cy+dy)*1000 + (cz+dz)*1000000);
+            if (!arr) continue;
+            for (let j = 0; j < arr.length; j++) {
+              const j3 = arr[j] * 3;
+              const ex = positions[j3] - px, ey = positions[j3+1] - py, ez = positions[j3+2] - pz;
+              if (ex*ex + ey*ey + ez*ez < R2) count++;
+            }
+          }
+        }
+      }
+      densityValues[i] = count;
+    }
+  }
+  console.timeEnd('Density estimation');
+
+  // Sort for thresholds
+  const sortedDensity = Float32Array.from(densityValues).sort();
+  const baryonThreshold = sortedDensity[Math.floor(N_PARTICLES * 0.84)]; // top 16%
+  const maxDensity = sortedDensity[N_PARTICLES - 1];
+  const minDensity = sortedDensity[0];
+  const densityRange = maxDensity - minDensity + 1;
+
+  // Per-particle normalized density (0-1)
+  const dNorm = new Float32Array(N_PARTICLES);
+  for (let i = 0; i < N_PARTICLES; i++) {
+    dNorm[i] = (densityValues[i] - minDensity) / densityRange;
+  }
+
+  // Baryon mask
+  const isBaryon = new Uint8Array(N_PARTICLES);
+  for (let i = 0; i < N_PARTICLES; i++) {
+    isBaryon[i] = densityValues[i] >= baryonThreshold ? 1 : 0;
+  }
+
+  console.log(`Density: min=${minDensity}, max=${maxDensity}, baryon threshold=${baryonThreshold}`);
+
+  /* ========== Two particle systems: DM (purple) and Baryon (gold) ========== */
+  // DM: all particles, purple palette
+  // Baryon: only dense particles, warm gold palette
+  // Toggle by visibility, not by rewriting attributes
+
+  const dmColors = new Float32Array(N_PARTICLES * 3);
+  const dmSizes = new Float32Array(N_PARTICLES);
+  const barColors = new Float32Array(N_PARTICLES * 3);
+  const barSizes = new Float32Array(N_PARTICLES);
+
+  const dmLo = new THREE.Color(0x5533cc);
+  const dmMid = new THREE.Color(0xbb77ff);
+  const dmHi = new THREE.Color(0xeeddff);
+  const barLo = new THREE.Color(0xff8822);  // warm orange
+  const barMid = new THREE.Color(0xffcc66); // gold
+  const barHi = new THREE.Color(0xffeedd);  // warm white
+
+  let baryonCount = 0;
+  for (let i = 0; i < N_PARTICLES; i++) {
+    const i3 = i * 3;
+    const d = dNorm[i];
+
+    // DM: all particles with purple palette
+    if (d < 0.4) {
+      const t = d / 0.4;
+      dmColors[i3]   = dmLo.r + (dmMid.r - dmLo.r) * t;
+      dmColors[i3+1] = dmLo.g + (dmMid.g - dmLo.g) * t;
+      dmColors[i3+2] = dmLo.b + (dmMid.b - dmLo.b) * t;
+    } else {
+      const t = (d - 0.4) / 0.6;
+      dmColors[i3]   = dmMid.r + (dmHi.r - dmMid.r) * t;
+      dmColors[i3+1] = dmMid.g + (dmHi.g - dmMid.g) * t;
+      dmColors[i3+2] = dmMid.b + (dmHi.b - dmMid.b) * t;
+    }
+    dmSizes[i] = 0.3 + (1.0 - d) * 0.6;
+
+    // Baryons: only dense particles, gold palette
+    if (isBaryon[i]) {
+      baryonCount++;
+      const t = Math.pow(d, 0.4);
+      if (t < 0.5) {
+        const s = t * 2;
+        barColors[i3]   = barLo.r + (barMid.r - barLo.r) * s;
+        barColors[i3+1] = barLo.g + (barMid.g - barLo.g) * s;
+        barColors[i3+2] = barLo.b + (barMid.b - barLo.b) * s;
+      } else {
+        const s = (t - 0.5) * 2;
+        barColors[i3]   = barMid.r + (barHi.r - barMid.r) * s;
+        barColors[i3+1] = barMid.g + (barHi.g - barMid.g) * s;
+        barColors[i3+2] = barMid.b + (barHi.b - barMid.b) * s;
+      }
+      barSizes[i] = 0.5 + (1.0 - d) * 0.8;
+    } else {
+      barSizes[i] = 0; // hidden
+    }
+  }
+
+  let baryonMode = false;
+  let visibleCount = N_PARTICLES;
+
+  // Shared shader
+  const ptVert = `
+    attribute float size;
+    varying vec3 vCol;
+    varying float vSize;
+    uniform float uPR;
+    void main() {
+      vCol = color;
+      vSize = size;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = size < 0.01 ? 0.0 : max(size * uPR * (200.0 / -mv.z), 0.8);
+      gl_Position = projectionMatrix * mv;
+    }`;
+  const ptFrag = `
+    varying vec3 vCol;
+    varying float vSize;
+    void main() {
+      if (vSize < 0.01) discard;
+      float d = length(gl_PointCoord - 0.5) * 2.0;
+      if (d > 1.0) discard;
+      float a = exp(-d * d * 2.0);
+      gl_FragColor = vec4(vCol, a);
+    }`;
+  const ptUniforms = { uPR: { value: Math.min(devicePixelRatio, 2) } };
+
+  // DM Points
+  const dmGeom = new THREE.BufferGeometry();
+  dmGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  dmGeom.setAttribute('color', new THREE.Float32BufferAttribute(dmColors, 3));
+  dmGeom.setAttribute('size', new THREE.Float32BufferAttribute(dmSizes, 1));
+  const dmPts = new THREE.Points(dmGeom, new THREE.ShaderMaterial({
+    uniforms: ptUniforms, vertexShader: ptVert, fragmentShader: ptFrag,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexColors: true,
+  }));
+  scene.add(dmPts);
+
+  // Baryon Points (shares position buffer!)
+  const barGeom = new THREE.BufferGeometry();
+  barGeom.setAttribute('position', dmGeom.attributes.position); // share position
+  barGeom.setAttribute('color', new THREE.Float32BufferAttribute(barColors, 3));
+  barGeom.setAttribute('size', new THREE.Float32BufferAttribute(barSizes, 1));
+  const barPts = new THREE.Points(barGeom, new THREE.ShaderMaterial({
+    uniforms: ptUniforms, vertexShader: ptVert, fragmentShader: ptFrag,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, vertexColors: true,
+  }));
+  barPts.visible = false;
+  scene.add(barPts);
+
+  /* ========== 50 Mpc grid ========== */
+  const gridGroup = new THREE.Group();
+  {
+    const step = 50;
+    const gridMat = new THREE.LineDashedMaterial({
+      color: 0x666666, transparent: true, opacity: 0.07,
+      dashSize: 3, gapSize: 2,
+    });
+    // Only draw edge-frame lines (box outline + internal 50 Mpc divisions)
+    // Edges of the box + internal planes, just the face lines (not full 3D grid which is too many)
+    const vals = [];
+    for (let v = -HALF; v <= HALF; v += step) vals.push(v);
+
+    for (let a = 0; a < 3; a++) {
+      for (let vi = 0; vi < vals.length; vi++) {
+        for (let vj = 0; vj < vals.length; vj++) {
+          // Only draw if on a face (one of the two coords is at ±HALF)
+          const v1 = vals[vi], v2 = vals[vj];
+          if (Math.abs(v1) !== HALF && Math.abs(v2) !== HALF) continue;
+          const p1 = new THREE.Vector3(), p2 = new THREE.Vector3();
+          if (a === 0) { p1.set(-HALF, v1, v2); p2.set(HALF, v1, v2); }
+          else if (a === 1) { p1.set(v1, -HALF, v2); p2.set(v1, HALF, v2); }
+          else { p1.set(v1, v2, -HALF); p2.set(v1, v2, HALF); }
+          const g = new THREE.BufferGeometry().setFromPoints([p1, p2]);
+          const l = new THREE.Line(g, gridMat);
+          l.computeLineDistances();
+          gridGroup.add(l);
+        }
+      }
+    }
+  }
+  scene.add(gridGroup);
+
+  /* ========== BAO sphere ========== */
+  const baoGroup = new THREE.Group();
+  {
+    const g = new THREE.SphereGeometry(75, 32, 16);
+    const m = new THREE.MeshBasicMaterial({
+      color: 0x4488cc, transparent: true, opacity: 0.03, wireframe: true,
+    });
+    baoGroup.add(new THREE.Mesh(g, m));
+  }
+  scene.add(baoGroup);
+
+  /* ========== Labels (sprites) ========== */
+  const labelsGroup = new THREE.Group();
+  const structureLabels = [];
+
+  function makeSprite(text, size, col) {
+    const c = document.createElement('canvas');
+    const ctx = c.getContext('2d');
+    const f = `${size}px "Open Sans", sans-serif`;
+    ctx.font = f;
+    const tw = ctx.measureText(text).width + 12;
+    c.width = tw * 2;
+    c.height = (size + 10) * 2;
+    ctx.scale(2, 2);
+    ctx.font = f;
+    ctx.fillStyle = col;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, tw / 2, (size + 10) / 2);
+    const tex = new THREE.CanvasTexture(c);
+    tex.minFilter = THREE.LinearFilter;
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: false });
+    const sp = new THREE.Sprite(mat);
+    sp.scale.set(tw / 3, (size + 10) / 3, 1);
+    return sp;
+  }
+
+  // Scale labels
+  const lsz = isEmbedded ? 11 : 14;
+  [
+    { t: '50 Mpc', p: [50, -HALF - 6, -HALF] },
+    { t: '100 Mpc', p: [HALF, -HALF - 6, -HALF] },
+  ].forEach(({ t, p }) => {
+    const s = makeSprite(t, lsz, 'rgba(255,255,255,0.45)');
+    s.position.set(...p);
+    labelsGroup.add(s);
+  });
+
+  // BAO label
+  const baoLabel = makeSprite('BAO scale ~150 Mpc', isEmbedded ? 10 : 13, 'rgba(100,160,220,0.5)');
+  baoLabel.position.set(0, 82, 0);
+  labelsGroup.add(baoLabel);
+
+  // Find features for structural labels
+  function findAndLabelFeatures() {
+    structureLabels.forEach(s => labelsGroup.remove(s));
+    structureLabels.length = 0;
+
+    // Densest point → cluster
+    let maxI = 0;
+    for (let i = 1; i < N_PARTICLES; i++) {
+      if (densityValues[i] > densityValues[maxI]) maxI = i;
+    }
+    const ci = maxI * 3;
+    const cs = makeSprite('Galaxy Cluster', isEmbedded ? 10 : 13, 'rgba(255,200,100,0.7)');
+    cs.position.set(positions[ci], positions[ci+1] + 6, positions[ci+2]);
+    labelsGroup.add(cs); structureLabels.push(cs);
+
+    // Lowest density → void
+    let minI = 0;
+    for (let i = 1; i < N_PARTICLES; i++) {
+      if (densityValues[i] < densityValues[minI]) minI = i;
+    }
+    const vi = minI * 3;
+    const vs = makeSprite('Void', isEmbedded ? 10 : 13, 'rgba(100,140,255,0.5)');
+    vs.position.set(positions[vi], positions[vi+1] + 6, positions[vi+2]);
+    labelsGroup.add(vs); structureLabels.push(vs);
+
+    // Medium-high density far from cluster → filament
+    const clPos = new THREE.Vector3(positions[ci], positions[ci+1], positions[ci+2]);
+    const fLo = sortedDensity[Math.floor(N_PARTICLES * 0.72)];
+    const fHi = sortedDensity[Math.floor(N_PARTICLES * 0.88)];
+    let bestF = -1, bestD = 0;
+    for (let i = 0; i < N_PARTICLES; i += 5) {
+      if (densityValues[i] >= fLo && densityValues[i] <= fHi) {
+        const j = i * 3;
+        const d = clPos.distanceToSquared(new THREE.Vector3(positions[j], positions[j+1], positions[j+2]));
+        if (d > bestD && d > 900) { bestD = d; bestF = i; }
+      }
+    }
+    if (bestF >= 0) {
+      const fi = bestF * 3;
+      const fs = makeSprite('Filament', isEmbedded ? 10 : 13, 'rgba(180,140,255,0.6)');
+      fs.position.set(positions[fi], positions[fi+1] + 6, positions[fi+2]);
+      labelsGroup.add(fs); structureLabels.push(fs);
+    }
+  }
+  findAndLabelFeatures();
+  scene.add(labelsGroup);
+
+  /* ========== Background stars ========== */
+  {
+    function makeStarMat(sz, op) {
+      return new THREE.ShaderMaterial({
+        uniforms: {
+          uColor: { value: new THREE.Color(0xffffff) },
+          uSize: { value: sz }, uOpacity: { value: op },
+          uPR: { value: Math.min(devicePixelRatio, 2) },
+        },
+        vertexShader: `
+          uniform float uSize, uPR;
+          void main() {
+            vec4 mv = modelViewMatrix * vec4(position, 1.0);
+            gl_PointSize = max(uSize * uPR * (200.0 / -mv.z), 1.2);
+            gl_Position = projectionMatrix * mv;
+          }`,
+        fragmentShader: `
+          uniform vec3 uColor; uniform float uOpacity;
+          void main() {
+            float d = length(gl_PointCoord - 0.5) * 2.0;
+            if (d > 1.0) discard;
+            gl_FragColor = vec4(uColor, exp(-d*d*3.0) * uOpacity);
+          }`,
+        transparent: true, depthWrite: false,
+      });
+    }
+    function scatterSphere(n, rMin, rMax) {
+      const p = new Float32Array(n * 3);
+      for (let i = 0; i < n; i++) {
+        const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1);
+        const r = rMin + Math.random()*(rMax - rMin);
+        p[i*3] = r*Math.sin(ph)*Math.cos(th);
+        p[i*3+1] = r*Math.sin(ph)*Math.sin(th);
+        p[i*3+2] = r*Math.cos(ph);
+      }
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+      return g;
+    }
+    scene.add(new THREE.Points(scatterSphere(600, 250, 380), makeStarMat(0.3, 0.25)));
+    scene.add(new THREE.Points(scatterSphere(50, 220, 350), makeStarMat(0.5, 0.8)));
+  }
+
+  /* ========== Ambient ========== */
+  scene.add(new THREE.AmbientLight(0x222244, 0.2));
+
+  /* ========== State ========== */
+  let currentZ = 0;
+  let playing = false;
+  let speedMul = 1.0;
+
+  /* ========== Update positions for z ========== */
+  function updatePositions(z) {
+    applyDisplacements(z);
+    dmGeom.attributes.position.needsUpdate = true;
+    // barGeom shares the same position buffer, so needsUpdate propagates
+  }
+
+  /* ========== Readout ========== */
+  const elZ = document.getElementById('r-z');
+  const elLB = document.getElementById('r-lb');
+  const elA = document.getElementById('r-a');
+  const elMode = document.getElementById('r-mode');
+  const elNP = document.getElementById('r-np');
+
+  function updateReadout() {
+    const a = 1.0 / (1.0 + currentZ);
+    elZ.textContent = `z = ${currentZ.toFixed(1)}`;
+    elLB.textContent = `${lookbackTime(currentZ).toFixed(1)} Gyr`;
+    elA.textContent = `a = ${a.toFixed(2)}`;
+    elMode.textContent = baryonMode ? 'Galaxies' : 'Dark Matter';
+    elNP.textContent = visibleCount.toLocaleString();
+  }
+
+  /* ========== Controls ========== */
+  const btnPlay = document.getElementById('btn-play');
+  const slZ = document.getElementById('sl-z');
+  const vZ = document.getElementById('v-z');
+  const cbBaryon = document.getElementById('cb-baryon');
+  const cbGrid = document.getElementById('cb-grid');
+  const cbLabels = document.getElementById('cb-labels');
+  const selSpeed = document.getElementById('sel-speed');
+
+  btnPlay.addEventListener('click', () => {
+    playing = !playing;
+    btnPlay.innerHTML = playing ? '&#9646;&#9646; Pause' : '&#9654; Play';
+    btnPlay.classList.toggle('active', playing);
+    if (playing && currentZ <= 0.05) {
+      currentZ = 10;
+      slZ.value = currentZ;
+    }
+  });
+
+  selSpeed.addEventListener('change', () => { speedMul = parseFloat(selSpeed.value); });
+
+  slZ.addEventListener('input', () => {
+    currentZ = parseFloat(slZ.value);
+    vZ.textContent = currentZ.toFixed(1);
+    updatePositions(currentZ);
+    updateReadout();
+  });
+
+  cbBaryon.addEventListener('change', () => {
+    baryonMode = cbBaryon.checked;
+    dmPts.visible = !baryonMode;
+    barPts.visible = baryonMode;
+    visibleCount = baryonMode ? baryonCount : N_PARTICLES;
+    updateReadout();
+  });
+
+  cbGrid.addEventListener('change', () => {
+    gridGroup.visible = cbGrid.checked;
+    baoGroup.visible = cbGrid.checked;
+  });
+
+  cbLabels.addEventListener('change', () => {
+    labelsGroup.visible = cbLabels.checked;
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') { e.preventDefault(); btnPlay.click(); }
+  });
+
+  /* ========== Animation loop ========== */
+  const clock = new THREE.Clock();
+
+  updatePositions(0);
+  updateReadout();
+  document.getElementById('loading').style.display = 'none';
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    if (playing) {
+      const dt = clock.getDelta();
+      const dz = dt * speedMul * (10 / 15);
+      currentZ = Math.max(0, currentZ - dz);
+      slZ.value = currentZ;
+      vZ.textContent = currentZ.toFixed(1);
+      updatePositions(currentZ);
+      updateReadout();
+      if (currentZ <= 0) {
+        playing = false;
+        btnPlay.innerHTML = '&#9654; Play';
+        btnPlay.classList.remove('active');
+      }
+    } else {
+      clock.getDelta();
+    }
+
+    orbitControls.update();
+    composer.render();
+  }
+  animate();
+
+  /* ========== Resize ========== */
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    composer.setSize(innerWidth, innerHeight);
+  });
+
+  </script>
+</body>
+</html>

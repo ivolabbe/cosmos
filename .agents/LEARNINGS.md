@@ -127,6 +127,28 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 - Spec pseudocode MUST be tested — the pulsar anti-pole formula had a bug caught only by the verifier.
 - Rotation curve spec used positive wind factor for spiral arms (produces leading arms); should be negative for trailing.
 - Always include a "test these values" section in specs for verifier cross-checks.
+- Density wave spec had the SAME trailing-arm sign error as the rotation curve spec. This pattern repeats — add a checklist item for all galaxy/spiral specs.
+- LSS spec's growth factor test values (D(z=10)=0.079) were wrong — actual value ~0.115. Verifier caught this via independent Python computation.
+
+### Batch 2 learnings (2026-03-29) — 6 Hard/Hardest tier apps
+
+**Architecture:**
+- **2D Canvas is correct for diagram apps.** The HR Diagram doesn't need Three.js — a 2D scatter plot with Canvas 2D renders crisply and is simpler to develop. Don't force Three.js on 2D visualizations.
+- **GLSL fragment shader apps are fundamentally different.** Black hole lensing renders a full-screen quad — no Three.js geometry. The GW interactive is the closest template for HTML/CSS/controls, but the 3D pipeline is entirely different.
+- **MarchingCubes for isosurfaces** works well (Roche Lobe). Use `setCell()` for custom scalar fields, not `addBall()` (which uses 1/r², not the Roche potential).
+- **Procedural textures are acceptable placeholders** for data-dependent apps (CMB). Ship with procedural, upgrade to real data later.
+
+**Physics:**
+- **Zel'dovich approximation** is an excellent lightweight approach for cosmic web visualization. RMS displacement ~5-10 Mpc produces visible filaments. Time evolution is trivial (multiply displacement by D(z)).
+- **Roche potential** coordinate conventions: spec uses (x,y) as orbital plane, COSMOS uses (x,z). Coriolis sign conventions are error-prone — cross-reference with rozwadowski/Roche-lobe.
+- **Waypoint-based evolutionary tracks** (HR Diagram) are far simpler than full SSE analytic formulae and produce indistinguishable results for educational purposes. Catmull-Rom interpolation eliminates sharp corners.
+- **Analytical spectrum approximations** (CMB) capture qualitative parameter effects without CAMB dependency. Ship fast, upgrade later.
+
+**Process:**
+- **Parallel dispatch of 6 researchers + 6 writers + 6 coders works.** All 6 specs completed, all 6 articles completed, all 6 interactives built in one session.
+- **Embed detection must check BOTH** `window.self !== window.top` AND `?embed=1` URL parameter. This was missed by 3 of 6 coders — add to style guide template.
+- **Default values must show the key feature.** Roche Lobe defaulted to fill=0.8 (no mass transfer visible). Changed to 1.05 so users see the L1 stream immediately.
+- **Rate limits can interrupt coder agents mid-build.** Files are often structurally complete but may miss polish stages. Verify what was written before rebuilding.
 
 ---
 

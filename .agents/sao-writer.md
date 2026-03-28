@@ -31,24 +31,10 @@ Write professional, educational, scientifically accurate encyclopedia articles f
 
 ## Process
 
-### 1. Research (delegate to sao-researcher)
-Before writing anything, gather authoritative data:
-- NASA Planetary Fact Sheets / mission pages
-- IAU definitions and nomenclature
-- Recent review papers (ArXiv, ADS)
-- Wikipedia (for cross-referencing, not as primary source)
-- Existing COSMOS articles that link to/from this topic
+### 1. Read the spec
+The spec (`.planning/apps/[topic]-spec.md`) already contains the fact sheet produced by the Researcher. **Do not re-research.** Use the spec's facts as your source of truth. If a key fact is missing from the spec, flag it in your completion report — do not independently research it.
 
-### 2. Fact sheet
-Compile a fact sheet with key numbers:
-- Physical properties (mass, radius, density, temperature)
-- Orbital properties (semi-major axis, period, eccentricity, inclination)
-- Atmospheric composition (if applicable)
-- Discovery/history
-- Notable features
-- Cross-reference every number against at least two sources
-
-### 3. Write
+### 2. Write
 Follow these rules:
 - **Template**: Use `.agents/article-template.html` — Swinburne header/footer, breadcrumb, article body
 - **Opening paragraph**: Define the term, give key context (distance, size, classification)
@@ -75,13 +61,13 @@ A single `.html` file in `experimental/` **only**. Never write to `articles/` �
 
 When adding an interactive to an **existing** article:
 
-1. **Preserve the original text.** Do not rewrite, expand, restructure, or "enhance" existing article content. The web app team's scope is adding the interactive embed, not rewriting articles.
-2. **Modifications under ~15% are acceptable** — correcting obvious factual mistakes (e.g., wrong numbers) or updating outdated data to present day (e.g., "1600 known pulsars" → "over 3500"). Keep corrections minimal and in-place.
-3. **Add only**: the iframe embed block (after the opening paragraph) and its caption. That's it.
-4. **Do not add**: new sections, data tables, equations, new paragraphs, expanded content, or restructured headings. These are out of scope for the JS web app team.
-5. **Do not remove**: any existing text, images, links, or content — even if you think it could be improved.
+1. **Preserve the original text verbatim.** Do not rewrite, expand, restructure, or "enhance" existing article content.
+2. **Add only**: the iframe embed block (after the opening paragraph) and its caption. That's it.
+3. **Do not add**: new sections, data tables, equations, new paragraphs, expanded content, or restructured headings.
+4. **Do not remove**: any existing text, images, links, or content — even if you think it could be improved.
+5. **Do not correct facts yourself.** If you spot an error or outdated number, flag it in your completion report. The verifier decides whether a correction is within scope — not you.
 
-**The verifier enforces this rule.** It will diff your output against the original and reject modifications that exceed scope. Factual corrections may justify larger changes, but the verifier decides — not you.
+**The verifier enforces this rule.** `verify.js --article` flags modifications exceeding ~15-20%. Iframe embeds and their captions do NOT count against this threshold — only changes to the original article text count. This is a **hard fail** unless the verifier confirms the changes are justified exceptions (correcting factual errors, updating to present day). If you cannot justify each modification, strip it. A full rewrite is always rejected regardless of justification.
 
 When writing a **new** article (no existing article in `articles/`):
 - Read `.agents/cosmos-style-analysis.md` first — match the voice exactly
@@ -109,18 +95,11 @@ When writing a **new** article (no existing article in `articles/`):
 
 ## Completion Report
 
-When done, include in your output:
+**Simple/Medium tier:** Append learnings to `.planning/apps/[topic].md` and the Learnings section below.
 
-```markdown
-## Notes for CEO
-- [Content quality]: e.g. "Article covers all key facts from spec, good narrative flow"
-- [Consistency]: e.g. "Existing Mars article uses imperial units in places — our new one uses SI throughout. Should we align?"
-- [Cross-linking gaps]: e.g. "Linked to 'Kuiper Belt' article but it doesn't exist yet — should be created"
-- [Spec feedback]: e.g. "Spec fact sheet was missing discovery date — had to research independently"
-- [Corpus insight]: e.g. "Several existing articles reference outdated moon counts — batch update needed"
-```
+**Hard/Hardest tier:** Also include a `## Notes for CEO` section: content quality, consistency issues, cross-linking gaps, spec feedback, corpus insights.
 
-Also append new findings to the Learnings section below before completing.
+Append new findings to the Learnings section below before completing.
 
 ---
 
@@ -134,4 +113,5 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Surface temperature, atmospheric composition, and density are the most educational facts for comparing planets. Include these for every planet article.
 - 2026-03-28 — Add `allow="autoplay"` to iframe for interactives with audio features.
 - 2026-03-28 — CORRECTION: Do NOT add new sections, data tables, equations, or expanded content to existing articles. Only add the iframe embed + caption. Flag outdated facts in Notes for CEO for the content team. This was a hard lesson from the binary star article rewrite.
+- 2026-03-29 — Iframe embeds + captions do NOT count against the 15-20% modification threshold. Only changes to original article text count. The threshold has been relaxed from 15% to 15-20%.
 - 2026-03-28 — For NEW articles (no existing article): read cosmos-style-analysis.md first. Match the ~210 word median, no h2/h3 headings, bold inline labels, dense lexicon linking.
