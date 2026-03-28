@@ -14,13 +14,13 @@
     #info {
       position: absolute; top: 16px; left: 16px;
       background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 16px 20px; max-width: 340px;
-      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
     }
-    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
     #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
     #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
-    .readout { margin-top: 10px; font-size: 12px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
     .readout div { margin-bottom: 2px; }
     .readout span { color: #fff; font-weight: 600; }
 
@@ -28,7 +28,7 @@
     body.embedded #info h2,
     body.embedded #info .desc,
     body.embedded #info .hint { display: none; }
-    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
     body.embedded #info .readout { margin-top: 0; font-size: 11px; }
     body.embedded #credit { display: none; }
 
@@ -47,6 +47,8 @@
       margin-bottom: 4px; text-align: center;
     }
     .panel-box canvas { display: block; border-radius: 3px; }
+    body.embedded .panel-box canvas#rv-canvas { width: 240px; height: 100px; }
+    body.embedded .panel-box canvas#lc-canvas { width: 240px; height: 90px; }
     #no-eclipse-msg {
       font-size: 10px; color: rgba(255,200,100,0.7); text-align: center;
       margin-top: 2px; min-height: 14px;
@@ -94,7 +96,7 @@
     <div class="readout">
       <div>Mass ratio q: <span id="r-q">0.50</span></div>
       <div>Eccentricity: <span id="r-ecc">0.00</span></div>
-      <div>Inclination: <span id="r-inc">75&deg;</span></div>
+      <div>Inclination: <span id="r-inc">82&deg;</span></div>
       <div>K<sub>1</sub>: <span id="r-k1">0</span> &nbsp; K<sub>2</sub>: <span id="r-k2">0</span></div>
       <div>Eclipse: <span id="r-eclipse">Yes</span></div>
     </div>
@@ -104,11 +106,11 @@
   <div id="panels">
     <div class="panel-box">
       <h3>Radial Velocity (v<sub>r</sub> vs Phase)</h3>
-      <canvas id="rv-canvas" width="300" height="140"></canvas>
+      <canvas id="rv-canvas" width="380" height="160"></canvas>
     </div>
     <div class="panel-box">
       <h3>Light Curve (Flux vs Phase)</h3>
-      <canvas id="lc-canvas" width="300" height="120"></canvas>
+      <canvas id="lc-canvas" width="380" height="140"></canvas>
       <div id="no-eclipse-msg"></div>
     </div>
   </div>
@@ -120,8 +122,8 @@
       <span class="val" id="q-val">0.50</span></label>
     <label>e <input type="range" id="e-slider" min="0" max="0.9" value="0.0" step="0.01">
       <span class="val" id="e-val">0.00</span></label>
-    <label>i <input type="range" id="i-slider" min="0" max="90" value="75" step="1">
-      <span class="val" id="i-val">75&deg;</span></label>
+    <label>i <input type="range" id="i-slider" min="0" max="90" value="82" step="1">
+      <span class="val" id="i-val">82&deg;</span></label>
     <div class="sep"></div>
     <label>Speed
       <select id="speed-sel">
@@ -139,6 +141,7 @@
       <option value="algol">Algol-like</option>
       <option value="equal">Equal masses</option>
       <option value="eccentric">Eccentric</option>
+      <option value="wdmstar">WD + M-star</option>
       <option value="faceon">Face-on</option>
     </select>
   </div>
@@ -234,7 +237,7 @@
   // ===================================================================
   let q = 0.5;       // mass ratio M2/M1
   let ecc = 0.0;     // eccentricity
-  let incl = 75;     // inclination (degrees)
+  let incl = 82;     // inclination (degrees)
   let omega = PI / 2; // argument of periapsis (90 deg default)
   let playing = true;
   let speedMul = 1.0;
@@ -292,7 +295,7 @@
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(innerWidth, innerHeight), 0.25, 0.5, 0.6
+    new THREE.Vector2(innerWidth, innerHeight), 0.6, 0.8, 0.3
   );
   composer.addPass(bloomPass);
   composer.addPass(new OutputPass());
@@ -341,40 +344,21 @@
   }
 
   // ===================================================================
-  //  Binary stars
+  //  Binary stars (textured sun surface + color tint + single halo)
   // ===================================================================
-  function makeStar(T, radius) {
+  const sunTexture = new THREE.TextureLoader().load('assets/textures/planets/web/8k_sun.jpg');
+
+  function makeStar(T, radius, texture) {
     const group = new THREE.Group();
     const color = starColor(T);
 
-    // Core sphere (emissive)
+    // Textured sphere tinted to temperature color — bright enough to trigger bloom
     const core = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 32, 32),
-      new THREE.MeshBasicMaterial({ color })
+      new THREE.SphereGeometry(1, 48, 32),
+      new THREE.MeshBasicMaterial({ map: texture, color })
     );
     group.add(core);
-
-    // Glow halo (additive, triggers bloom)
-    const halo = new THREE.Mesh(
-      new THREE.SphereGeometry(1.4, 24, 24),
-      new THREE.MeshBasicMaterial({
-        color, transparent: true, opacity: 0.15,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false, side: THREE.BackSide,
-      })
-    );
-    group.add(halo);
-
-    // Outer soft halo
-    const outerHalo = new THREE.Mesh(
-      new THREE.SphereGeometry(1.8, 16, 16),
-      new THREE.MeshBasicMaterial({
-        color, transparent: true, opacity: 0.06,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false, side: THREE.BackSide,
-      })
-    );
-    group.add(outerHalo);
+    // No extra halo spheres — bloom handles the glow
 
     group.scale.setScalar(radius);
     scene.add(group);
@@ -391,8 +375,8 @@
     R1_scene = R1_FRAC * A_VIS;
     R2_scene = R2_FRAC * A_VIS * Math.pow(q, 0.3); // secondary slightly smaller for low q
 
-    star1 = makeStar(T1, R1_scene);
-    star2 = makeStar(T2, R2_scene);
+    star1 = makeStar(T1, R1_scene, sunTexture);
+    star2 = makeStar(T2, R2_scene, sunTexture);
   }
   createStars();
 
@@ -839,10 +823,27 @@
 
   const iSlider = document.getElementById('i-slider');
   const iVal = document.getElementById('i-val');
+  let sliderDriving = false; // true while slider input drives the camera
   iSlider.addEventListener('input', () => {
     incl = parseFloat(iSlider.value);
     iVal.innerHTML = incl + '&deg;';
+    sliderDriving = true;
     updateCameraFromInclination();
+    recomputeCurves();
+    sliderDriving = false;
+  });
+
+  // Two-way link: camera drag updates inclination
+  orbitControls.addEventListener('change', () => {
+    if (sliderDriving) return; // avoid feedback loop when slider drives camera
+    const camDir = new THREE.Vector3();
+    camera.getWorldDirection(camDir);
+    // elevation = angle between camera direction and XZ plane
+    const elevation = Math.asin(Math.abs(camDir.y)); // 0 = edge-on, PI/2 = face-on
+    incl = Math.round(90 - elevation * 180 / Math.PI);
+    incl = Math.max(0, Math.min(90, incl));
+    iSlider.value = incl;
+    iVal.innerHTML = incl + '&deg;';
     recomputeCurves();
   });
 
@@ -866,8 +867,9 @@
     const presets = {
       algol:     { q: 0.22, e: 0.0,  i: 82 },
       equal:     { q: 1.0,  e: 0.0,  i: 60 },
-      eccentric: { q: 0.5,  e: 0.6,  i: 75 },
+      eccentric: { q: 0.5,  e: 0.6,  i: 82 },
       faceon:    { q: 0.7,  e: 0.3,  i: 10 },
+      wdmstar:   { q: 0.4,  e: 0.0,  i: 85 },
     };
     const cfg = presets[p];
     if (!cfg) return;
