@@ -669,7 +669,7 @@
     const rvIdxOff = Math.round(PLOT_PHASE_OFFSET * N_CURVE);
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
+      const idx = (i + rvIdxOff) % N_CURVE;
       const x = RV_PAD.l + (i / N_CURVE) * rvPlotW;
       const y = yZero - (rvCurve1[idx] / maxK_fixed) * (rvPlotH * 0.45);
       if (i === 0) rvCtx.moveTo(x, y); else rvCtx.lineTo(x, y);
@@ -681,7 +681,7 @@
     // Star 2 RV curve
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
+      const idx = (i + rvIdxOff) % N_CURVE;
       const x = RV_PAD.l + (i / N_CURVE) * rvPlotW;
       const y = yZero - (rvCurve2[idx] / maxK_fixed) * (rvPlotH * 0.45);
       if (i === 0) rvCtx.moveTo(x, y); else rvCtx.lineTo(x, y);
@@ -698,7 +698,7 @@
     rvCtx.strokeRect(RV_PAD.l, RV_PAD.t, rvPlotW, rvPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = RV_PAD.l + ((phaseFrac + 2 * PLOT_PHASE_OFFSET) % 1) * rvPlotW;
+    const px = RV_PAD.l + ((phaseFrac + 3 * PLOT_PHASE_OFFSET) % 1) * rvPlotW;
     rvCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     rvCtx.lineWidth = 1.5;
     rvCtx.beginPath();
