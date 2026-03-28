@@ -99,10 +99,10 @@
     <h2>Galaxy Rotation Curves</h2>
     <p class="desc">Why don't outer stars fly away? Dark matter holds galaxies together.</p>
     <div class="readout">
-      <div>Dark Matter: <span id="r-dm">100%</span></div>
       <div>M<sub>b</sub> = <span id="r-mb">1.50</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
       <div>M<sub>d</sub> = <span id="r-md">5.00</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
-      <div>M<sub>vis</sub> = <span id="r-mvis">6.50</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
+      <div>M<sub>halo</sub>(&lt;20 kpc) = <span id="r-mhalo">---</span> &times; 10<sup>10</sup> M<sub>&odot;</sub></div>
+      <div>DM fraction: <span id="r-dmfrac">---</span></div>
       <div>v(8 kpc): <span id="r-v8">---</span> km/s</div>
       <div>v(20 kpc): <span id="r-v20">---</span> km/s</div>
     </div>
@@ -860,7 +860,6 @@
   dmSlider.addEventListener('input', () => {
     fDM = parseInt(dmSlider.value) / 100;
     dmVal.textContent = dmSlider.value + '%';
-    document.getElementById('r-dm').textContent = dmSlider.value + '%';
     recomputeOmegas();
     drawRotationCurve();
     updateReadouts();
@@ -912,13 +911,24 @@
   // ===================================================================
   //  Readouts
   // ===================================================================
+  // Halo mass within radius R: M_halo(R) = 4*pi*rho0*Rc^3 * (R/Rc - atan(R/Rc))
+  function mHaloWithin(R) {
+    return 4 * PI * DEF.rho0 * DEF.Rc**3 * (R / DEF.Rc - Math.atan(R / DEF.Rc));
+  }
+
   function updateReadouts() {
     document.getElementById('r-v8').textContent = vTotal(8, fDM, fVM).toFixed(0);
     document.getElementById('r-v20').textContent = vTotal(20, fDM, fVM).toFixed(0);
     // Physical mass readouts
-    document.getElementById('r-mb').textContent = (DEF.Mb * fVM).toFixed(2);
-    document.getElementById('r-md').textContent = (DEF.Md * fVM).toFixed(2);
-    document.getElementById('r-mvis').textContent = ((DEF.Mb + DEF.Md) * fVM).toFixed(2);
+    const Mb = DEF.Mb * fVM, Md = DEF.Md * fVM;
+    const Mvis = Mb + Md;
+    const Mhalo20 = mHaloWithin(20) * fDM; // DM mass within 20 kpc, scaled by slider
+    const Mtot20 = Mvis + Mhalo20;
+    const dmFrac = Mtot20 > 0 ? (Mhalo20 / Mtot20 * 100) : 0;
+    document.getElementById('r-mb').textContent = Mb.toFixed(2);
+    document.getElementById('r-md').textContent = Md.toFixed(2);
+    document.getElementById('r-mhalo').textContent = Mhalo20.toFixed(1);
+    document.getElementById('r-dmfrac').textContent = dmFrac.toFixed(0) + '% (< 20 kpc)';
   }
 
   // ===================================================================
