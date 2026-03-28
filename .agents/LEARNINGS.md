@@ -9,8 +9,14 @@
 ### Physics correctness is non-negotiable
 All physics in interactive visualizations must be correct. This is an educational tool for a university astronomy encyclopedia — incorrect physics misleads students. When unsure about physics, say so rather than guessing. Don't speculate about what reference visualizations are doing — verify from source code or papers.
 
+### Reference code before implementation
+Before writing physics formulas in a spec, find **reference code** from authoritative sources (astropy, galpy, NASA/STScI repos, published researchers' GitHub). This validates the physics AND gives the coder a cross-check. Prefer code over Wikipedia derivations.
+
 ### Verify in browser, never assume
 Never assume code works. After writing any interactive: start server, open in Chrome, screenshot, check console errors. Compare output to reference sources (NASA imagery, etc.) for visual quality. Don't theorize — measure, print, and know. If something fails: log the failure, diagnose, fix, re-test.
+
+### Physics verification is generic, not app-specific
+Every physics element must be checked for: (1) direction sanity — beams diverge, orbits are prograde, flows go the right way; (2) geometry — shapes match physics (dipole loops, elliptical orbits); (3) scale relationships — parameter changes produce correct relative effects; (4) interaction consistency — if camera angle and a control both affect the same physical quantity, they must agree.
 
 ### Minimal article modifications
 When adding an interactive to an existing article: ONLY add the iframe embed block and its caption. Do not rewrite, expand, restructure, or "enhance" article content. Slight modifications (<10%) are acceptable — correcting obvious mistakes or updating to present day. A different team handles substantial text changes. For new articles, match the COSMOS voice per `cosmos-style-analysis.md`.
@@ -42,7 +48,7 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 - GW interactive is the canonical template for physics sims (2D panels + sliders + audio + readouts).
 - Kepler solver: 10–12 Newton-Raphson iterations, `atan2`-based true anomaly.
 - Pulsar anti-pole: θ_anti = π − θ_north (NOT `pulseIntensity(phase, PI−alpha, zeta, rho)`).
-- Beam cones: ConeGeometry + custom shader with radial/axial fade + `AdditiveBlending`.
+- Beam cones: ConeGeometry + custom shader with radial/axial fade + `AdditiveBlending`. **IMPORTANT**: ConeGeometry apex is at +Y — must flip (rotate PI) for beams that diverge outward from a source. Unfixed, beams converge (physically wrong).
 - Visual spin cap: for P < 0.5s, cap visual omega at 2 Hz; physics runs at correct rate.
 - Web Audio: continuous oscillator for P < 50ms, discrete clicks for P > 50ms. Init on user gesture.
 - Binary star: camera-from-inclination approach is cleaner than rotating the orbit group.

@@ -61,22 +61,41 @@ const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox']
 |-------|-----|---------------|
 | Renders | Screenshot | 3D scene visible, not black/blank |
 | No errors | Console messages | No JS errors (ignore favicon 404) |
-| Texture loads | Loading indicator | `#loading` display = none |
 | Canvas exists | DOM query | Canvas element with width × height |
-| Rotate control | Click `#cb-rotate` | Checkbox exists and toggles |
-| Speed control | Read `#speed-select` | Default value = "0.5" |
-| Day control | Click `#cb-day` | Exists, planet becomes fully lit |
-| Topic controls | Check spec | Any additional toggles specified in spec |
+| Controls exist | DOM query | All controls specified in spec are present |
+| Controls respond | Interact | Changing a control visibly changes the scene/plots |
 
 ### 4. Physics correctness checks
 
-Read the spec's `## Eye candy & verification targets` section. For each physical correctness check listed:
-- Measure/verify the stated criterion against the actual render
-- If measurable (e.g. "ring radius should be X pixels"): measure from the screenshot or inject a measurement `console.log` via Puppeteer
-- If behavioral (e.g. "curve should be flat beyond R"): test by interacting with controls
-- If visual (e.g. "arms should be trailing"): compare screenshot to reference
+**This is the most important section. Every physics element must be verified.**
 
-**Report each physics check as PASS/FAIL with measured vs expected values.**
+#### 4a. Geometry and direction sanity
+For every visual physics element (beams, orbits, field lines, particles, curves), verify:
+- **Direction**: do things point/flow the right way? (e.g., emission beams must diverge outward from source, not converge; orbits must be prograde)
+- **Shape**: do geometries match physics? (e.g., dipole field lines are loops not rays; orbits are ellipses not circles when e > 0)
+- **Scale relationships**: are relative sizes/distances physically reasonable? (e.g., beam opening angle vs period, orbit size vs mass ratio)
+
+#### 4b. Spec-based checks
+Read the spec's verification criteria. For each check:
+- Measure/verify against the actual render
+- If measurable: inject `console.log` via Puppeteer to read values
+- If behavioral: test by interacting with controls
+- If visual: compare screenshot to reference
+
+**Report each check as PASS/FAIL with measured vs expected values.**
+
+#### 4c. Cross-check against external references
+For key physics outputs, verify against credible external sources:
+- Compare to spec's reference code (if provided — e.g., astropy, galpy, published repos)
+- Check against university educational resources or NASA tools
+- The spec should provide specific test values; if not, derive reasonable ones
+
+#### 4d. Interaction ↔ controls consistency
+When camera rotation and a control parameter are linked to the same physical quantity, verify they stay consistent:
+- **Example**: binary star inclination slider vs camera angle — rotating the camera should implicitly change the physical viewing angle, which affects RV curves and eclipses. If both exist, they must agree.
+- **Example**: if the user rotates to edge-on view, the inclination readout should reflect ~90°, and the light curve should show eclipses.
+- **Example**: pulsar viewing angle — if the sightline is defined as a parameter, rotating the camera should NOT independently change the pulse profile (the sightline is fixed in the physics frame, separate from camera).
+- **Rule**: document whether camera rotation is cosmetic-only (user explores the scene) or physics-linked (camera angle IS the physical viewing angle). The spec should state which.
 
 ### 5. Visual quality comparison (eye candy)
 

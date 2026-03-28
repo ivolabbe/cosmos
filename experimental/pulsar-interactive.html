@@ -201,9 +201,10 @@
 
   // Derived quantities
   function beamHalfAngle(P) {
-    // rho = 5.75 * P^{-0.5} degrees (P in seconds)
-    // Clamp to max 80 degrees for visual sanity
-    return Math.min(5.75 * Math.pow(P, -0.5) * DEG, 80 * DEG);
+    // rho = 5.75 * P^{-0.5} degrees (Rankin 1993, valid for P > ~30ms)
+    // For MSPs the formula extrapolates past its validity — clamp at 20 deg
+    // (observational beam widths for MSPs are typically 5-20 degrees)
+    return Math.min(5.75 * Math.pow(P, -0.5) * DEG, 20 * DEG);
   }
 
   let rho = beamHalfAngle(period);
@@ -419,15 +420,14 @@
       blending: THREE.AdditiveBlending,
     });
     const mesh = new THREE.Mesh(geo, mat);
-    // ConeGeometry points up (+Y) with apex at top, base at bottom
-    // We need apex at center (NS surface) pointing outward
-    // Offset so apex is at origin of group (NS center)
+    // ConeGeometry: apex at +Y (top), base at -Y (bottom).
+    // Beams must DIVERGE outward: apex at star surface, base far away.
     if (direction > 0) {
-      // North beam: cone points up
+      // North beam: flip cone so apex points down (toward star), base up (outward)
+      mesh.rotation.x = PI;
       mesh.position.y = NS_RADIUS + BEAM_LENGTH / 2;
     } else {
-      // South beam: cone points down (rotate 180 around X)
-      mesh.rotation.x = PI;
+      // South beam: default orientation — apex at top (toward star), base down (outward)
       mesh.position.y = -(NS_RADIUS + BEAM_LENGTH / 2);
     }
     return mesh;

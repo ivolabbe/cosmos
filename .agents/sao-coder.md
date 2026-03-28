@@ -75,6 +75,15 @@ When the verifier reports a failure:
 3. If the issue is unclear: add `console.log()` to measure actual values
 4. Don't guess — the verifier's screenshot is truth
 
+## Physics sanity checks (before calling done)
+
+Before reporting completion, verify these yourself:
+
+1. **Direction**: do beams/jets/flows diverge outward from sources (not converge)? Do orbits go the right way (prograde = counter-clockwise from above for solar system)?
+2. **Geometry**: do field lines close, orbits have correct eccentricity shape, cones open the right way?
+3. **Scales**: when a slider changes a parameter, does the visual change scale correctly? (e.g., wider beams at shorter periods, larger orbits for lighter stars)
+4. **Interaction ↔ controls**: if the camera angle corresponds to a physical viewing angle (e.g., inclination in eclipsing binaries), document clearly whether camera rotation is cosmetic-only or physics-linked. If linked, ensure rotating the camera updates the relevant physics and readouts.
+
 ## What you do NOT do
 
 - Write article text (that's the writer)
@@ -126,3 +135,8 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Binary star: Camera-from-inclination approach (camera position = f(i)) is cleaner than rotating the orbit group. OrbitControls still works for user drag.
 - 2026-03-28 — Binary star: Surface brightness B~T^4 gives B1/B2=16 for T1=10000K, T2=5000K. Primary eclipse depth dominates. R2 scaling with q^0.3 prevents invisible secondary at low q.
 - 2026-03-28 — Binary star: Phase wrapping must use `((M % TWO_PI) + TWO_PI) % TWO_PI` to handle negative time values from JS modulo.
+- 2026-03-28 — Rotation curve: G' = 4.302e4 kpc (km/s)^2 per 10^10 Msun. Must auto-tune rho0 at startup to nail v(8.2 kpc) = 220 km/s.
+- 2026-03-28 — Rotation curve: Modified Bessel I0/I1/K0/K1 from Abramowitz & Stegun polynomial fits work perfectly for Freeman disk. No external library needed.
+- 2026-03-28 — Rotation curve: Trailing spiral arms need NEGATIVE wind factor in `armAngle = base + wind * ln(R/R_inner)` when rotation is CCW (+theta direction).
+- 2026-03-28 — Rotation curve: ShaderMaterial with per-vertex size + color + AdditiveBlending + soft circle fragment = beautiful galaxy with 6000 particles at 60fps.
+- 2026-03-28 — Rotation curve: omega conversion from km/s/kpc to rad/Myr: multiply by 1.0227e-3. Derived from 3.156e13 s/Myr / 3.086e16 km/kpc.

@@ -45,11 +45,23 @@ Gather authoritative data for the topic:
 - [discrepancies, caveats, recent updates]
 ```
 
-## Phase 2: State-of-the-Art Survey
+## Phase 2: Reference Code & Implementations
 
-This is critical for complex sims. Search for and evaluate the best existing implementations:
+**CRITICAL:** Before writing any physics formula in the spec, find **reference code** that implements the same physics. Prefer code from:
 
-**What to look for:**
+1. **Scientific software packages** — astropy, galpy, pynbody, MESA, etc.
+2. **Researcher GitHub repos** — published scientists' simulation code
+3. **NASA / STScI / ESA tools** — authoritative institutional code
+4. **University course materials** — physics simulations with documented derivations
+5. **Peer-reviewed papers** — with algorithm pseudocode or supplementary code
+
+The reference code serves two purposes:
+- **Validates the physics** — if a published researcher implemented it this way, we can trust the formula
+- **Provides the coder a cross-check** — the coder can compare their output against the reference
+
+For each reference found, document the **specific function/formula/algorithm** that we will adopt, not just a vague "this exists." Include the URL, the relevant code snippet or function name, and how it maps to our implementation.
+
+**Also look for visual references:**
 - WebGL/Three.js implementations (view source for techniques)
 - NASA/ESA interactive tools
 - University educational simulations (PhET, AstroBaki, etc.)
