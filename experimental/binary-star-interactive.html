@@ -293,7 +293,7 @@
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(innerWidth, innerHeight), 0.6, 0.8, 0.3
+    new THREE.Vector2(innerWidth, innerHeight), 0.8, 1.0, 0.2
   );
   composer.addPass(bloomPass);
   composer.addPass(new OutputPass());
