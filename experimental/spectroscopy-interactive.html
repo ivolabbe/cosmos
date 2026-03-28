@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spectroscopy Explorer | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    /* --- Tooltip --- */
+    #tooltip {
+      position: absolute; display: none;
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+      border-radius: 6px; padding: 10px 14px; font-size: 12px; max-width: 280px;
+      line-height: 1.5; pointer-events: none; z-index: 20; color: #e0e0e0;
+    }
+
+    /* --- Controls bar (bottom center) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls input[type="range"] { width: 70px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls select option { background: #1a1a3e; color: #fff; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    /* --- Element buttons --- */
+    .elem-btn {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 8px; border-radius: 4px; font-family: inherit;
+      font-size: 11px; cursor: pointer; font-weight: 600;
+    }
+    .elem-btn:hover { background: rgba(255,255,255,0.18); }
+    .elem-btn.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+
+    /* --- Mode buttons --- */
+    .mode-btn {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 8px; border-radius: 4px; font-family: inherit;
+      font-size: 11px; cursor: pointer;
+    }
+    .mode-btn:hover { background: rgba(255,255,255,0.18); }
+    .mode-btn.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+
+    /* --- Main canvas --- */
+    #main-canvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;
+    }
+
+    /* --- Loading / Credit --- */
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap;
+    }
+    #credit a { color: rgba(255,255,255,0.35); }
+
+    @media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading Spectroscopy Explorer...</div>
+
+  <canvas id="main-canvas"></canvas>
+
+  <div id="info">
+    <h2>Spectroscopy Explorer</h2>
+    <div class="desc">Kirchhoff's three laws of spectroscopy: see how hot dense sources, cool gas clouds, and thin hot gas each produce different spectra.</div>
+    <div class="hint">Click spectral lines for details. Use controls to change mode, element, and temperature.</div>
+    <div class="readout" id="readout"></div>
+  </div>
+
+  <div id="tooltip"></div>
+
+  <div id="controls">
+    <button class="mode-btn active" data-mode="continuous">Continuous</button>
+    <button class="mode-btn" data-mode="absorption">Absorption</button>
+    <button class="mode-btn" data-mode="emission">Emission</button>
+    <div class="sep"></div>
+    <button class="elem-btn" data-elem="H">H</button>
+    <button class="elem-btn" data-elem="He">He</button>
+    <button class="elem-btn" data-elem="Na">Na</button>
+    <button class="elem-btn" data-elem="Ca">Ca</button>
+    <button class="elem-btn" data-elem="Fe">Fe</button>
+    <button class="elem-btn" data-elem="Ne">Ne</button>
+    <div class="sep"></div>
+    <label>T <input type="range" id="temp-slider" min="2000" max="30000" value="5800" step="100"><span class="val" id="temp-val">5800 K</span></label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-classify"> Spectral class</label>
+  </div>
+
+  <div id="credit">COSMOS Encyclopedia &mdash; <a href="https://astronomy.swin.edu.au" target="_blank">Swinburne Astronomy</a> | Line data: NIST ASD</div>
+
+  <script>
+    // ---- Embedded mode ----
+    if (window.self !== window.top || new URLSearchParams(location.search).has('embed')) {
+      document.body.classList.add('embedded');
+    }
+
+    // ================================================================
+    //  ELEMENT LINE DATA (NIST approximate wavelengths, nm)
+    // ================================================================
+    const ELEMENTS = {
+      H: {
+        name: 'Hydrogen', color: '#ff6666',
+        lines: [
+          { nm: 656.3, label: 'H\u03b1', series: 'Balmer', transition: 'n=3 \u2192 2' },
+          { nm: 486.1, label: 'H\u03b2', series: 'Balmer', transition: 'n=4 \u2192 2' },
+          { nm: 434.0, label: 'H\u03b3', series: 'Balmer', transition: 'n=5 \u2192 2' },
+          { nm: 410.2, label: 'H\u03b4', series: 'Balmer', transition: 'n=6 \u2192 2' },
+        ]
+      },
+      He: {
+        name: 'Helium', color: '#ffcc44',
+        lines: [
+          { nm: 587.6, label: 'He I', series: 'Singlet', transition: '2p\u00b9P \u2192 1s2s\u00b9S' },
+          { nm: 501.6, label: 'He I', series: 'Singlet', transition: '3s\u00b9S \u2192 2p\u00b9P' },
+          { nm: 447.1, label: 'He I', series: 'Triplet', transition: '4d\u00b3D \u2192 2p\u00b3P' },
+        ]
+      },
+      Na: {
+        name: 'Sodium', color: '#ffaa22',
+        lines: [
+          { nm: 589.6, label: 'Na D\u2081', series: 'D doublet', transition: '3p \u00b2P\u2081/\u2082 \u2192 3s' },
+          { nm: 589.0, label: 'Na D\u2082', series: 'D doublet', transition: '3p \u00b2P\u2083/\u2082 \u2192 3s' },
+        ]
+      },
+      Ca: {
+        name: 'Calcium', color: '#aa88ff',
+        lines: [
+          { nm: 393.4, label: 'Ca K', series: 'H & K', transition: '4p \u00b2P\u2083/\u2082 \u2192 4s' },
+          { nm: 396.8, label: 'Ca H', series: 'H & K', transition: '4p \u00b2P\u2081/\u2082 \u2192 4s' },
+        ]
+      },
+      Fe: {
+        name: 'Iron', color: '#66bbff',
+        lines: [
+          { nm: 527.0, label: 'Fe I', series: '', transition: 'Multiplet 15' },
+          { nm: 516.7, label: 'Fe I', series: '', transition: 'Multiplet 15' },
+          { nm: 495.8, label: 'Fe I', series: '', transition: 'Multiplet 16' },
+          { nm: 438.4, label: 'Fe I', series: '', transition: 'Multiplet 2' },
+        ]
+      },
+      Ne: {
+        name: 'Neon', color: '#ff4444',
+        lines: [
+          { nm: 640.2, label: 'Ne I', series: '', transition: '2p\u2085 \u2192 1s\u2084' },
+          { nm: 585.2, label: 'Ne I', series: '', transition: '2p\u2082 \u2192 1s\u2083' },
+          { nm: 540.1, label: 'Ne I', series: '', transition: '2p\u2081 \u2192 1s\u2082' },
+        ]
+      },
+    };
+
+    // ================================================================
+    //  SPECTRAL CLASSIFICATION DATA
+    //  Relative line strength by spectral type (0-1 scale)
+    // ================================================================
+    const SPECTRAL_CLASSES = [
+      { type: 'O', T: 40000, color: '#9bb0ff' },
+      { type: 'B', T: 20000, color: '#aabfff' },
+      { type: 'A', T: 9500,  color: '#cad7ff' },
+      { type: 'F', T: 7200,  color: '#f8f7ff' },
+      { type: 'G', T: 5800,  color: '#fff4ea' },
+      { type: 'K', T: 4400,  color: '#ffd2a1' },
+      { type: 'M', T: 3200,  color: '#ffcc6f' },
+    ];
+
+    // Line strength vs spectral type (which elements are strongest where)
+    const LINE_STRENGTH = {
+      H:  [0.15, 0.45, 1.0, 0.7, 0.4, 0.15, 0.05],
+      He: [1.0,  0.7,  0.15, 0.02, 0.0, 0.0,  0.0],
+      Na: [0.0,  0.0,  0.05, 0.15, 0.4, 0.7,  0.5],
+      Ca: [0.0,  0.02, 0.15, 0.4,  0.7, 1.0,  0.8],
+      Fe: [0.0,  0.02, 0.1,  0.3,  0.6, 1.0,  0.9],
+      Ne: [0.3,  0.15, 0.05, 0.02, 0.0, 0.0,  0.0],
+    };
+
+    // ================================================================
+    //  STATE
+    // ================================================================
+    let currentMode = 'continuous';  // continuous | absorption | emission
+    let selectedElements = new Set();
+    let temperature = 5800;
+    let classifyMode = false;
+    let hoveredLine = null;
+    let clickedLine = null;
+
+    // ================================================================
+    //  CANVAS SETUP
+    // ================================================================
+    const canvas = document.getElementById('main-canvas');
+    const ctx = canvas.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio, 2);
+
+    function resize() {
+      canvas.width = window.innerWidth * DPR;
+      canvas.height = window.innerHeight * DPR;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    // ================================================================
+    //  PHYSICS: Planck function and wavelength-to-colour
+    // ================================================================
+    const h = 6.626e-34, c = 3e8, kB = 1.381e-23;
+
+    function planck(lambda_nm, T) {
+      const lam = lambda_nm * 1e-9;
+      const x = h * c / (lam * kB * T);
+      if (x > 500) return 0;
+      return (2 * h * c * c / Math.pow(lam, 5)) / (Math.exp(x) - 1);
+    }
+
+    // Wien's displacement law: peak wavelength in nm
+    function wienPeak(T) {
+      return 2.898e6 / T;
+    }
+
+    // Wavelength (nm) to RGB — CIE-based approximation
+    function wavelengthToRGB(nm) {
+      let r = 0, g = 0, b = 0;
+      if (nm >= 380 && nm < 440) {
+        r = -(nm - 440) / (440 - 380);
+        b = 1.0;
+      } else if (nm >= 440 && nm < 490) {
+        g = (nm - 440) / (490 - 440);
+        b = 1.0;
+      } else if (nm >= 490 && nm < 510) {
+        g = 1.0;
+        b = -(nm - 510) / (510 - 490);
+      } else if (nm >= 510 && nm < 580) {
+        r = (nm - 510) / (580 - 510);
+        g = 1.0;
+      } else if (nm >= 580 && nm < 645) {
+        r = 1.0;
+        g = -(nm - 645) / (645 - 580);
+      } else if (nm >= 645 && nm <= 700) {
+        r = 1.0;
+      }
+      // Intensity falloff at edges
+      let factor;
+      if (nm >= 380 && nm < 420) factor = 0.3 + 0.7 * (nm - 380) / (420 - 380);
+      else if (nm > 680 && nm <= 700) factor = 0.3 + 0.7 * (700 - nm) / (700 - 680);
+      else if (nm >= 420 && nm <= 680) factor = 1.0;
+      else factor = 0;
+      return [r * factor, g * factor, b * factor];
+    }
+
+    // Get spectral intensity at a wavelength, normalised by Planck peak
+    function spectralIntensity(nm, T) {
+      const peak = wienPeak(T);
+      const peakVal = planck(peak < 380 ? 380 : (peak > 700 ? 700 : peak), T);
+      const val = planck(nm, T);
+      return peakVal > 0 ? val / peakVal : 0;
+    }
+
+    // ================================================================
+    //  LAYOUT — compute regions based on canvas size
+    // ================================================================
+    function getLayout() {
+      const W = canvas.width / DPR;
+      const H = canvas.height / DPR;
+      const isEmbed = document.body.classList.contains('embedded');
+
+      // Spectrum strip — the hero
+      const specLeft = isEmbed ? 20 : 60;
+      const specRight = W - (isEmbed ? 20 : 60);
+      const specW = specRight - specLeft;
+      const specH = isEmbed ? 70 : 100;
+      const specY = H * 0.42;
+
+      // Geometry diagram above spectrum
+      const diagY = isEmbed ? specY - specH - 30 : specY - specH - 60;
+      const diagH = isEmbed ? 80 : 120;
+
+      // Wavelength axis below spectrum
+      const axisY = specY + specH + 8;
+
+      // Classification strip below axis (when enabled)
+      const classY = axisY + 30;
+      const classH = isEmbed ? 50 : 70;
+
+      return { W, H, specLeft, specRight, specW, specH, specY, diagY, diagH, axisY, classY, classH, isEmbed };
+    }
+
+    // ================================================================
+    //  Convert nm to x-pixel position
+    // ================================================================
+    function nmToX(nm, layout) {
+      return layout.specLeft + ((nm - 380) / (700 - 380)) * layout.specW;
+    }
+    function xToNm(x, layout) {
+      return 380 + ((x - layout.specLeft) / layout.specW) * (700 - 380);
+    }
+
+    // ================================================================
+    //  DRAW GEOMETRY DIAGRAM (source -> gas -> observer)
+    // ================================================================
+    function drawDiagram(layout) {
+      const { W, diagY, diagH, isEmbed } = layout;
+      const cx = W / 2;
+      const cy = diagY + diagH / 2;
+      const spread = isEmbed ? 100 : 160;
+      const iconR = isEmbed ? 14 : 20;
+
+      ctx.save();
+      ctx.scale(DPR, DPR);
+
+      // Source (hot body / hot gas)
+      const srcX = cx - spread;
+      const gasX = cx;
+      const obsX = cx + spread;
+
+      // Arrow line
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 3]);
+      ctx.beginPath();
+      ctx.moveTo(srcX + iconR + 6, cy);
+      ctx.lineTo(obsX - iconR - 6, cy);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Light rays between source and observer
+      if (currentMode !== 'emission') {
+        const rayColors = ['#ff4444', '#ffaa00', '#44ff44', '#4488ff', '#8844ff'];
+        const raySpread = isEmbed ? 6 : 10;
+        for (let i = 0; i < rayColors.length; i++) {
+          const offset = (i - 2) * raySpread;
+          ctx.strokeStyle = rayColors[i];
+          ctx.globalAlpha = 0.25;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(srcX + iconR + 8, cy + offset * 0.3);
+          if (currentMode === 'absorption') {
+            ctx.lineTo(gasX - iconR - 4, cy + offset * 0.6);
+            // Lines absorbed by gas — some rays stop or weaken
+          } else {
+            ctx.lineTo(obsX - iconR - 8, cy + offset);
+          }
+          ctx.stroke();
+          if (currentMode === 'absorption') {
+            ctx.globalAlpha = 0.12;
+            ctx.beginPath();
+            ctx.moveTo(gasX + iconR + 4, cy + offset * 0.6);
+            ctx.lineTo(obsX - iconR - 8, cy + offset);
+            ctx.stroke();
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      // Emission mode: rays from gas only
+      if (currentMode === 'emission') {
+        const selElems = Array.from(selectedElements);
+        if (selElems.length > 0) {
+          selElems.forEach(elem => {
+            const el = ELEMENTS[elem];
+            el.lines.forEach(line => {
+              const rgb = wavelengthToRGB(line.nm);
+              ctx.strokeStyle = `rgba(${Math.round(rgb[0]*255)},${Math.round(rgb[1]*255)},${Math.round(rgb[2]*255)},0.4)`;
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.moveTo(gasX + iconR + 6, cy - 3);
+              ctx.lineTo(obsX - iconR - 8, cy - 8);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(gasX + iconR + 6, cy + 3);
+              ctx.lineTo(obsX - iconR - 8, cy + 8);
+              ctx.stroke();
+            });
+          });
+        } else {
+          ctx.strokeStyle = 'rgba(255,200,100,0.2)';
+          ctx.lineWidth = 1.5;
+          for (let i = -2; i <= 2; i++) {
+            ctx.beginPath();
+            ctx.moveTo(gasX + iconR + 6, cy + i * 4);
+            ctx.lineTo(obsX - iconR - 8, cy + i * 6);
+            ctx.stroke();
+          }
+        }
+      }
+
+      const fontSize = isEmbed ? 9 : 11;
+
+      // Source
+      if (currentMode === 'emission') {
+        // No hot dense source in emission mode — dim it
+        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+        ctx.beginPath();
+        ctx.arc(srcX, cy, iconR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.font = `${fontSize}px "Open Sans"`;
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.textAlign = 'center';
+        ctx.fillText('(none)', srcX, cy + iconR + 14);
+      } else {
+        // Hot dense source — glowing circle
+        const grad = ctx.createRadialGradient(srcX, cy, 0, srcX, cy, iconR);
+        grad.addColorStop(0, '#ffffaa');
+        grad.addColorStop(0.6, '#ffaa33');
+        grad.addColorStop(1, '#ff4400');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(srcX, cy, iconR, 0, Math.PI * 2);
+        ctx.fill();
+        // Outer glow
+        ctx.shadowColor = '#ffaa33';
+        ctx.shadowBlur = 15;
+        ctx.beginPath();
+        ctx.arc(srcX, cy, iconR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.font = `${fontSize}px "Open Sans"`;
+        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+        ctx.textAlign = 'center';
+        ctx.fillText('Hot dense source', srcX, cy + iconR + 14);
+      }
+
+      // Gas cloud
+      if (currentMode === 'continuous') {
+        // No gas in continuous mode — dim
+        ctx.fillStyle = 'rgba(100,150,255,0.08)';
+        ctx.beginPath();
+        ctx.ellipse(gasX, cy, iconR * 1.3, iconR, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.font = `${fontSize}px "Open Sans"`;
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.textAlign = 'center';
+        ctx.fillText('(no gas)', gasX, cy + iconR + 14);
+      } else {
+        // Gas cloud — visible
+        const gasGrad = ctx.createRadialGradient(gasX, cy, 0, gasX, cy, iconR * 1.3);
+        if (currentMode === 'absorption') {
+          gasGrad.addColorStop(0, 'rgba(80,120,200,0.5)');
+          gasGrad.addColorStop(1, 'rgba(40,60,150,0.15)');
+        } else {
+          gasGrad.addColorStop(0, 'rgba(200,120,255,0.6)');
+          gasGrad.addColorStop(1, 'rgba(150,60,200,0.15)');
+        }
+        ctx.fillStyle = gasGrad;
+        ctx.beginPath();
+        ctx.ellipse(gasX, cy, iconR * 1.3, iconR, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Glow
+        ctx.shadowColor = currentMode === 'emission' ? '#aa66ff' : '#4488ff';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.ellipse(gasX, cy, iconR * 1.3, iconR, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.font = `${fontSize}px "Open Sans"`;
+        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+        ctx.textAlign = 'center';
+        const gasLabel = currentMode === 'absorption' ? 'Cool gas cloud' : 'Hot thin gas';
+        ctx.fillText(gasLabel, gasX, cy + iconR + 14);
+      }
+
+      // Observer (eye icon simplified)
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.beginPath();
+      // Simple eye shape
+      ctx.ellipse(obsX, cy, iconR * 0.9, iconR * 0.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#000';
+      ctx.beginPath();
+      ctx.arc(obsX, cy, iconR * 0.25, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.font = `${fontSize}px "Open Sans"`;
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.textAlign = 'center';
+      ctx.fillText('Observer', obsX, cy + iconR + 14);
+
+      // Mode title
+      const modeNames = {
+        continuous: 'Continuous Spectrum',
+        absorption: 'Absorption Spectrum',
+        emission: 'Emission Spectrum'
+      };
+      ctx.font = `600 ${isEmbed ? 12 : 15}px "Open Sans"`;
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.fillText(modeNames[currentMode], cx, diagY + (isEmbed ? 6 : 10));
+
+      // Kirchhoff law description
+      const lawDescs = {
+        continuous: 'A hot, dense source produces light at all wavelengths (blackbody radiation).',
+        absorption: 'Light from a hot source passes through cool gas. The gas absorbs specific wavelengths, producing dark lines.',
+        emission: 'A hot, thin gas emits light only at specific wavelengths, producing bright lines on a dark background.',
+      };
+      ctx.font = `${isEmbed ? 9 : 11}px "Open Sans"`;
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillText(lawDescs[currentMode], cx, diagY + (isEmbed ? 18 : 26));
+
+      ctx.restore();
+    }
+
+    // ================================================================
+    //  DRAW SPECTRUM STRIP
+    // ================================================================
+    function drawSpectrum(layout) {
+      const { specLeft, specW, specH, specY, isEmbed } = layout;
+
+      ctx.save();
+      ctx.scale(DPR, DPR);
+
+      // Background of spectrum area
+      ctx.fillStyle = '#000';
+      ctx.fillRect(specLeft - 2, specY - 2, specW + 4, specH + 4);
+
+      // Border
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(specLeft - 1, specY - 1, specW + 2, specH + 2);
+
+      // Draw pixel-by-pixel spectrum
+      const stepPx = 1;
+      for (let px = 0; px < specW; px += stepPx) {
+        const nm = 380 + (px / specW) * 320;
+        const rgb = wavelengthToRGB(nm);
+
+        if (currentMode === 'continuous' || currentMode === 'absorption') {
+          // Planck-modulated continuous spectrum
+          let intensity = spectralIntensity(nm, temperature);
+          intensity = Math.pow(intensity, 0.45); // gamma correction for visibility
+          intensity = Math.min(intensity, 1);
+
+          ctx.fillStyle = `rgb(${Math.round(rgb[0]*intensity*255)},${Math.round(rgb[1]*intensity*255)},${Math.round(rgb[2]*intensity*255)})`;
+          ctx.fillRect(specLeft + px, specY, stepPx, specH);
+
+        } else {
+          // Emission mode: dark background
+          ctx.fillStyle = 'rgb(3,3,8)';
+          ctx.fillRect(specLeft + px, specY, stepPx, specH);
+        }
+      }
+
+      // Draw absorption or emission lines for selected elements
+      selectedElements.forEach(elem => {
+        const el = ELEMENTS[elem];
+        el.lines.forEach(line => {
+          if (line.nm < 380 || line.nm > 700) return;
+          const x = nmToX(line.nm, layout);
+          const lineWidth = isEmbed ? 2 : 3;
+
+          if (currentMode === 'absorption') {
+            // Dark line on continuous background
+            ctx.fillStyle = 'rgba(0,0,0,0.92)';
+            ctx.fillRect(x - lineWidth / 2, specY, lineWidth, specH);
+            // Subtle Gaussian wings
+            for (let dx = -6; dx <= 6; dx++) {
+              const alpha = 0.4 * Math.exp(-dx * dx / 4);
+              ctx.fillStyle = `rgba(0,0,0,${alpha})`;
+              ctx.fillRect(x + dx - 0.5, specY, 1, specH);
+            }
+          } else if (currentMode === 'emission') {
+            // Bright line on dark background
+            const rgb = wavelengthToRGB(line.nm);
+            // Glow
+            for (let dx = -8; dx <= 8; dx++) {
+              const alpha = 0.5 * Math.exp(-dx * dx / 6);
+              ctx.fillStyle = `rgba(${Math.round(rgb[0]*255)},${Math.round(rgb[1]*255)},${Math.round(rgb[2]*255)},${alpha})`;
+              ctx.fillRect(x + dx - 0.5, specY, 1, specH);
+            }
+            // Core
+            ctx.fillStyle = `rgba(${Math.round(rgb[0]*255)},${Math.round(rgb[1]*255)},${Math.round(rgb[2]*255)},1)`;
+            ctx.fillRect(x - lineWidth / 2, specY, lineWidth, specH);
+            // Bright white center
+            ctx.fillStyle = `rgba(255,255,255,0.5)`;
+            ctx.fillRect(x - 0.5, specY, 1, specH);
+          }
+        });
+      });
+
+      // Line labels above spectrum
+      const labelSize = isEmbed ? 8 : 10;
+      ctx.font = `600 ${labelSize}px "Open Sans"`;
+      ctx.textAlign = 'center';
+      selectedElements.forEach(elem => {
+        const el = ELEMENTS[elem];
+        el.lines.forEach(line => {
+          if (line.nm < 380 || line.nm > 700) return;
+          const x = nmToX(line.nm, layout);
+          ctx.fillStyle = el.color;
+          ctx.fillText(line.label, x, specY - 5);
+          // Tick mark
+          ctx.strokeStyle = el.color;
+          ctx.globalAlpha = 0.5;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x, specY - 2);
+          ctx.lineTo(x, specY);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        });
+      });
+
+      ctx.restore();
+    }
+
+    // ================================================================
+    //  DRAW WAVELENGTH AXIS
+    // ================================================================
+    function drawAxis(layout) {
+      const { specLeft, specW, axisY, isEmbed } = layout;
+
+      ctx.save();
+      ctx.scale(DPR, DPR);
+
+      const fontSize = isEmbed ? 9 : 11;
+      ctx.font = `${fontSize}px "Open Sans"`;
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.textAlign = 'center';
+
+      // Tick marks every 20nm, labels every 40nm
+      for (let nm = 380; nm <= 700; nm += 20) {
+        const x = nmToX(nm, layout);
+        const isMajor = nm % 40 === 0 || nm === 380;
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, axisY);
+        ctx.lineTo(x, axisY + (isMajor ? 6 : 3));
+        ctx.stroke();
+        if (isMajor) {
+          ctx.fillText(nm + ' nm', x, axisY + 16);
+        }
+      }
+
+      // Wien peak marker
+      const peakNm = wienPeak(temperature);
+      if (peakNm >= 380 && peakNm <= 700) {
+        const peakX = nmToX(peakNm, layout);
+        ctx.strokeStyle = 'rgba(220,45,39,0.6)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 2]);
+        ctx.beginPath();
+        ctx.moveTo(peakX, axisY - 4);
+        ctx.lineTo(peakX, axisY + 22);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(220,45,39,0.8)';
+        ctx.font = `${isEmbed ? 8 : 10}px "Open Sans"`;
+        ctx.fillText('\u03bb_peak ' + Math.round(peakNm) + ' nm', peakX, axisY + 30);
+      } else {
+        // Peak outside visible range — note it
+        ctx.fillStyle = 'rgba(220,45,39,0.5)';
+        ctx.font = `${isEmbed ? 8 : 10}px "Open Sans"`;
+        const side = peakNm < 380 ? 'UV' : 'IR';
+        ctx.textAlign = 'right';
+        const noteX = peakNm < 380 ? nmToX(390, layout) : nmToX(690, layout);
+        ctx.fillText('\u03bb_peak in ' + side + ' (' + Math.round(peakNm) + ' nm)', noteX, axisY + 30);
+      }
+
+      ctx.restore();
+    }
+
+    // ================================================================
+    //  DRAW SPECTRAL CLASSIFICATION STRIP
+    // ================================================================
+    function drawClassification(layout) {
+      if (!classifyMode) return;
+      const { specLeft, specW, classY, classH, W, isEmbed } = layout;
+
+      ctx.save();
+      ctx.scale(DPR, DPR);
+
+      // Title
+      ctx.font = `600 ${isEmbed ? 10 : 12}px "Open Sans"`;
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.textAlign = 'center';
+      ctx.fillText('Spectral Classification (O B A F G K M)', W / 2, classY - 4);
+
+      // One sub-strip per spectral type
+      const typeW = specW / SPECTRAL_CLASSES.length;
+
+      SPECTRAL_CLASSES.forEach((cls, idx) => {
+        const x0 = specLeft + idx * typeW;
+
+        // Background — faint tint of the star colour
+        ctx.fillStyle = cls.color;
+        ctx.globalAlpha = 0.08;
+        ctx.fillRect(x0, classY, typeW, classH);
+        ctx.globalAlpha = 1;
+
+        // Border
+        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.lineWidth = 0.5;
+        ctx.strokeRect(x0, classY, typeW, classH);
+
+        // Type label
+        ctx.font = `700 ${isEmbed ? 11 : 14}px "Open Sans"`;
+        ctx.fillStyle = cls.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(cls.type, x0 + typeW / 2, classY + (isEmbed ? 14 : 18));
+
+        // Temperature
+        ctx.font = `${isEmbed ? 7 : 9}px "Open Sans"`;
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.fillText(cls.T >= 10000 ? (cls.T / 1000) + 'k K' : cls.T + ' K', x0 + typeW / 2, classY + (isEmbed ? 24 : 30));
+
+        // Line strength bars for each element
+        const barH = isEmbed ? 3 : 4;
+        const barW = typeW * 0.6;
+        const barX = x0 + (typeW - barW) / 2;
+        let barY0 = classY + (isEmbed ? 28 : 36);
+
+        const elems = ['H', 'He', 'Ca', 'Fe'];
+        elems.forEach((elem, ei) => {
+          const strength = LINE_STRENGTH[elem][idx];
+          const y = barY0 + ei * (barH + 2);
+          // Background bar
+          ctx.fillStyle = 'rgba(255,255,255,0.06)';
+          ctx.fillRect(barX, y, barW, barH);
+          // Filled portion
+          ctx.fillStyle = ELEMENTS[elem].color;
+          ctx.globalAlpha = 0.7;
+          ctx.fillRect(barX, y, barW * strength, barH);
+          ctx.globalAlpha = 1;
+          // Element label
+          if (idx === 0) {
+            ctx.font = `${isEmbed ? 7 : 8}px "Open Sans"`;
+            ctx.fillStyle = ELEMENTS[elem].color;
+            ctx.textAlign = 'right';
+            ctx.fillText(elem, barX - 3, y + barH);
+          }
+        });
+      });
+
+      ctx.restore();
+    }
+
+    // ================================================================
+    //  DRAW READOUT
+    // ================================================================
+    function updateReadout() {
+      const readout = document.getElementById('readout');
+      const peakNm = wienPeak(temperature);
+      const elems = Array.from(selectedElements).join(', ') || 'none';
+      readout.innerHTML =
+        `<div>T = <span>${temperature.toLocaleString()} K</span></div>` +
+        `<div>\u03bb<sub>peak</sub> = <span>${Math.round(peakNm)} nm</span></div>` +
+        `<div>Elements: <span>${elems}</span></div>`;
+    }
+
+    // ================================================================
+    //  DRAW EVERYTHING
+    // ================================================================
+    function draw() {
+      const layout = getLayout();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Background
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      drawDiagram(layout);
+      drawSpectrum(layout);
+      drawAxis(layout);
+      drawClassification(layout);
+      updateReadout();
+    }
+
+    // ================================================================
+    //  HIT TESTING — find line under cursor
+    // ================================================================
+    function findLineAtX(px, py) {
+      const layout = getLayout();
+      // Check if within spectrum strip vertical bounds
+      if (py < layout.specY - 20 || py > layout.specY + layout.specH + 10) return null;
+
+      let closest = null;
+      let closestDist = Infinity;
+
+      selectedElements.forEach(elem => {
+        const el = ELEMENTS[elem];
+        el.lines.forEach(line => {
+          if (line.nm < 380 || line.nm > 700) return;
+          const lx = nmToX(line.nm, layout);
+          const dist = Math.abs(px - lx);
+          if (dist < 12 && dist < closestDist) {
+            closestDist = dist;
+            closest = { elem, ...line, elemData: el };
+          }
+        });
+      });
+      return closest;
+    }
+
+    // ================================================================
+    //  TOOLTIP
+    // ================================================================
+    const tooltip = document.getElementById('tooltip');
+
+    function showTooltip(x, y, line) {
+      const rgb = wavelengthToRGB(line.nm);
+      const colorStr = `rgb(${Math.round(rgb[0]*255)},${Math.round(rgb[1]*255)},${Math.round(rgb[2]*255)})`;
+      tooltip.innerHTML =
+        `<div style="color:${line.elemData.color};font-weight:600;margin-bottom:4px;">${line.elemData.name} (${line.elem})</div>` +
+        `<div><span style="display:inline-block;width:10px;height:10px;background:${colorStr};border-radius:2px;margin-right:4px;vertical-align:middle;"></span>${line.label} &mdash; ${line.nm} nm</div>` +
+        (line.series ? `<div style="margin-top:2px;color:rgba(255,255,255,0.5);">Series: ${line.series}</div>` : '') +
+        `<div style="margin-top:2px;color:rgba(255,255,255,0.5);">Transition: ${line.transition}</div>`;
+      tooltip.style.display = 'block';
+      // Position
+      const tW = tooltip.offsetWidth;
+      const tH = tooltip.offsetHeight;
+      let tx = x + 15;
+      let ty = y - 10;
+      if (tx + tW > window.innerWidth - 10) tx = x - tW - 10;
+      if (ty + tH > window.innerHeight - 10) ty = y - tH;
+      if (ty < 10) ty = 10;
+      tooltip.style.left = tx + 'px';
+      tooltip.style.top = ty + 'px';
+    }
+
+    function hideTooltip() {
+      tooltip.style.display = 'none';
+    }
+
+    // ================================================================
+    //  MOUSE / TOUCH INTERACTION
+    // ================================================================
+    canvas.addEventListener('mousemove', (e) => {
+      const line = findLineAtX(e.clientX, e.clientY);
+      if (line) {
+        hoveredLine = line;
+        canvas.style.cursor = 'pointer';
+        showTooltip(e.clientX, e.clientY, line);
+      } else {
+        hoveredLine = null;
+        canvas.style.cursor = 'default';
+        if (!clickedLine) hideTooltip();
+      }
+    });
+
+    canvas.addEventListener('click', (e) => {
+      const line = findLineAtX(e.clientX, e.clientY);
+      if (line) {
+        clickedLine = line;
+        showTooltip(e.clientX, e.clientY, line);
+      } else {
+        clickedLine = null;
+        hideTooltip();
+      }
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      hoveredLine = null;
+      if (!clickedLine) hideTooltip();
+      canvas.style.cursor = 'default';
+    });
+
+    // ================================================================
+    //  CONTROLS WIRING
+    // ================================================================
+
+    // Mode buttons
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentMode = btn.dataset.mode;
+        draw();
+      });
+    });
+
+    // Element buttons (toggle)
+    document.querySelectorAll('.elem-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const elem = btn.dataset.elem;
+        if (selectedElements.has(elem)) {
+          selectedElements.delete(elem);
+          btn.classList.remove('active');
+        } else {
+          selectedElements.add(elem);
+          btn.classList.add('active');
+        }
+        draw();
+      });
+    });
+
+    // Temperature slider
+    const tempSlider = document.getElementById('temp-slider');
+    const tempVal = document.getElementById('temp-val');
+    tempSlider.addEventListener('input', () => {
+      temperature = parseInt(tempSlider.value);
+      tempVal.textContent = temperature.toLocaleString() + ' K';
+      draw();
+    });
+
+    // Classification checkbox
+    const cbClassify = document.getElementById('cb-classify');
+    cbClassify.addEventListener('change', () => {
+      classifyMode = cbClassify.checked;
+      draw();
+    });
+
+    // Spacebar toggles classification
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        cbClassify.checked = !cbClassify.checked;
+        classifyMode = cbClassify.checked;
+        draw();
+      }
+    });
+
+    // ================================================================
+    //  INIT
+    // ================================================================
+    // Default: show H lines in absorption mode
+    selectedElements.add('H');
+    document.querySelector('.elem-btn[data-elem="H"]').classList.add('active');
+    currentMode = 'absorption';
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.mode-btn[data-mode="absorption"]').classList.add('active');
+
+    document.getElementById('loading').style.display = 'none';
+    resize();
+  </script>
+</body>
+</html>
