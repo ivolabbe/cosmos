@@ -770,7 +770,7 @@
 
     // Legend
     const legX = rcPad.left + 6, legY = rcPad.top + 6;
-    rcCtx.font = '12px "Open Sans", sans-serif';
+    rcCtx.font = '14px "Open Sans", sans-serif';
     const legends = [
       { color: 'rgba(255,160,60,0.9)', label: 'Bulge', dash: true },
       { color: 'rgba(80,200,220,0.9)', label: 'Disk', dash: true },
@@ -778,7 +778,7 @@
       { color: '#ffffff', label: 'Total', dash: false },
     ];
     legends.forEach((l, i) => {
-      const y = legY + i * 15;
+      const y = legY + i * 18;
       rcCtx.strokeStyle = l.color;
       rcCtx.lineWidth = l.dash ? 2.5 : 3;
       rcCtx.setLineDash(l.dash ? [3, 2] : []);
