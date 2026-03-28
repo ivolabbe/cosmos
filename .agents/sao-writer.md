@@ -69,7 +69,7 @@ Follow these rules:
 
 ## Output
 
-A single `.html` file in `experimental/` (for new articles) or `articles/` (for updates to existing articles).
+A single `.html` file in `experimental/` **only**. Never write to `articles/` — that directory is the production reference and must stay untouched so we can compare before/after. Migration from `experimental/` to `articles/` happens later as a deliberate step.
 
 ## CRITICAL: Minimal Article Modifications
 
