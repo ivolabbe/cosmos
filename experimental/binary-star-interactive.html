@@ -217,13 +217,13 @@
 
   // Star color from temperature (approximate blackbody)
   function starColor(T) {
-    if (T < 3500) return 0xff3300;
-    if (T < 5000) return 0xffaa33;
-    if (T < 6000) return 0xffdd66;
-    if (T < 7500) return 0xffeedd;
-    if (T < 10000) return 0xccddff;
-    if (T < 20000) return 0x88aaff;
-    return 0x5577ff;
+    if (T < 3500) return 0xaa1100;  // M-star: deep red
+    if (T < 5000) return 0xffaa33;  // K-star: orange
+    if (T < 6000) return 0xffdd66;  // G-star: yellow
+    if (T < 7500) return 0xffeedd;  // F-star: warm white
+    if (T < 10000) return 0xaaccff; // A-star: blue-white
+    if (T < 20000) return 0x88aaff; // B-star: blue
+    return 0xddeeff;                // O/WD: white (very hot = white, not deep blue)
   }
 
   // Star color as CSS string for canvas
@@ -377,8 +377,8 @@
     const group = new THREE.Group();
     const col = new THREE.Color(starColor(T));
 
-    // Hotter stars are brighter (more bloom)
-    const brightness = T > 15000 ? 2.0 : T > 8000 ? 1.5 : 1.2;
+    // Hotter stars are brighter — much more bloom for hot stars
+    const brightness = T > 20000 ? 3.0 : T > 10000 ? 2.0 : T > 7000 ? 1.5 : T > 4000 ? 0.8 : 0.5;
     const core = new THREE.Mesh(
       new THREE.SphereGeometry(1, 48, 32),
       new THREE.ShaderMaterial({
@@ -503,10 +503,10 @@
     // Eclipse: projected separation
     const dProj = projectedSeparation(x1, z1, x2, z2, i_rad);
 
-    // Which star is in front (larger y-toward-observer component)
-    const y1 = -z1 * Math.sin(i_rad);
-    const y2 = -z2 * Math.sin(i_rad);
-    const star1InFront = y1 > y2;
+    // Which star is in front — camera is at +Z for edge-on, so larger Z = closer to observer
+    const depth1 = z1 * Math.sin(i_rad);
+    const depth2 = z2 * Math.sin(i_rad);
+    const star1InFront = depth1 > depth2;
 
     // Overlap area using scene radii
     const aOverlap = overlapArea(R1_scene, R2_scene, dProj);
