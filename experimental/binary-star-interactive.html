@@ -782,7 +782,7 @@
     lcCtx.beginPath();
     lcCtx.moveTo(LC_PAD.l, LC_PAD.t + lcPlotH);
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i + 2 * lcIdxOff) % N_CURVE;
+      const idx = (i + lcIdxOff) % N_CURVE;
       const x = LC_PAD.l + (i / N_CURVE) * lcPlotW;
       const frac = (lcCurve[idx] - fluxMin) / (fluxMax - fluxMin);
       const y = LC_PAD.t + lcPlotH * (1 - Math.max(0, Math.min(1, frac)));
@@ -796,7 +796,7 @@
     // Light curve line
     lcCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i + 2 * lcIdxOff) % N_CURVE;
+      const idx = (i + lcIdxOff) % N_CURVE;
       const x = LC_PAD.l + (i / N_CURVE) * lcPlotW;
       const frac = (lcCurve[idx] - fluxMin) / (fluxMax - fluxMin);
       const y = LC_PAD.t + lcPlotH * (1 - Math.max(0, Math.min(1, frac)));
@@ -814,7 +814,7 @@
     lcCtx.strokeRect(LC_PAD.l, LC_PAD.t, lcPlotW, lcPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = LC_PAD.l + ((phaseFrac + 3 * PLOT_PHASE_OFFSET) % 1) * lcPlotW;
+    const px = LC_PAD.l + ((phaseFrac + 2 * PLOT_PHASE_OFFSET) % 1) * lcPlotW;
     lcCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     lcCtx.lineWidth = 1.5;
     lcCtx.beginPath();
