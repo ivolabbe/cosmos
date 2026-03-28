@@ -553,6 +553,18 @@
   let maxK = 1;
   let hasEclipses = false;
   let minFlux = 1;
+  // Fixed RV scale: compute maxK at i=90 so amplitude visually changes with inclination
+  let maxK_fixed = 0;
+  {
+    const savedIncl = incl;
+    incl = 90;
+    for (let i = 0; i < 360; i++) {
+      const s = getOrbitalState((i / 360) * P_BASE);
+      maxK_fixed = Math.max(maxK_fixed, Math.abs(s.vr1), Math.abs(s.vr2));
+    }
+    incl = savedIncl;
+    if (maxK_fixed < 0.001) maxK_fixed = 1;
+  }
 
   // Display phase offset: shifts the x-axis so primary dip is centred.
   // Primary eclipse is at orbital phase ~0.25 (v=PI/2 with omega=PI/2).
@@ -652,9 +664,9 @@
     const rvIdxOff = Math.round(PLOT_PHASE_OFFSET * N_CURVE);
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i + rvIdxOff) % N_CURVE;
+      const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
       const x = RV_PAD.l + (i / N_CURVE) * rvPlotW;
-      const y = yZero - (rvCurve1[idx] / maxK) * (rvPlotH * 0.45);
+      const y = yZero - (rvCurve1[idx] / maxK_fixed) * (rvPlotH * 0.45);
       if (i === 0) rvCtx.moveTo(x, y); else rvCtx.lineTo(x, y);
     }
     rvCtx.strokeStyle = starColorCSS(T1);
@@ -664,9 +676,9 @@
     // Star 2 RV curve
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i + rvIdxOff) % N_CURVE;
+      const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
       const x = RV_PAD.l + (i / N_CURVE) * rvPlotW;
-      const y = yZero - (rvCurve2[idx] / maxK) * (rvPlotH * 0.45);
+      const y = yZero - (rvCurve2[idx] / maxK_fixed) * (rvPlotH * 0.45);
       if (i === 0) rvCtx.moveTo(x, y); else rvCtx.lineTo(x, y);
     }
     rvCtx.strokeStyle = starColorCSS(T2);
@@ -681,7 +693,7 @@
     rvCtx.strokeRect(RV_PAD.l, RV_PAD.t, rvPlotW, rvPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = RV_PAD.l + ((phaseFrac - PLOT_PHASE_OFFSET + 1) % 1) * rvPlotW;
+    const px = RV_PAD.l + ((phaseFrac + PLOT_PHASE_OFFSET) % 1) * rvPlotW;
     rvCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     rvCtx.lineWidth = 1.5;
     rvCtx.beginPath();
@@ -765,7 +777,7 @@
     lcCtx.beginPath();
     lcCtx.moveTo(LC_PAD.l, LC_PAD.t + lcPlotH);
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i + lcIdxOff) % N_CURVE;
+      const idx = (i - lcIdxOff + N_CURVE) % N_CURVE;
       const x = LC_PAD.l + (i / N_CURVE) * lcPlotW;
       const frac = (lcCurve[idx] - fluxMin) / (fluxMax - fluxMin);
       const y = LC_PAD.t + lcPlotH * (1 - Math.max(0, Math.min(1, frac)));
@@ -779,7 +791,7 @@
     // Light curve line
     lcCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i + lcIdxOff) % N_CURVE;
+      const idx = (i - lcIdxOff + N_CURVE) % N_CURVE;
       const x = LC_PAD.l + (i / N_CURVE) * lcPlotW;
       const frac = (lcCurve[idx] - fluxMin) / (fluxMax - fluxMin);
       const y = LC_PAD.t + lcPlotH * (1 - Math.max(0, Math.min(1, frac)));
@@ -797,7 +809,7 @@
     lcCtx.strokeRect(LC_PAD.l, LC_PAD.t, lcPlotW, lcPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = LC_PAD.l + ((phaseFrac - PLOT_PHASE_OFFSET + 1) % 1) * lcPlotW;
+    const px = LC_PAD.l + ((phaseFrac + PLOT_PHASE_OFFSET) % 1) * lcPlotW;
     lcCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     lcCtx.lineWidth = 1.5;
     lcCtx.beginPath();
@@ -840,9 +852,22 @@
   // ===================================================================
   //  Parameter update (called when sliders change)
   // ===================================================================
+  function recomputeMaxK() {
+    const savedIncl = incl;
+    incl = 90;
+    maxK_fixed = 0;
+    for (let i = 0; i < 360; i++) {
+      const s = getOrbitalState((i / 360) * P_BASE);
+      maxK_fixed = Math.max(maxK_fixed, Math.abs(s.vr1), Math.abs(s.vr2));
+    }
+    incl = savedIncl;
+    if (maxK_fixed < 0.001) maxK_fixed = 1;
+  }
+
   function onParameterChange() {
     createStars();
     updateOrbitTrails();
+    recomputeMaxK();
     recomputeCurves();
   }
 
