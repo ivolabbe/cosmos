@@ -130,8 +130,8 @@
     <div class="sep"></div>
     <label>Speed
       <select id="speed-sel">
-        <option value="0.01" selected>0.01x</option>
-        <option value="0.05">0.05x</option>
+        <option value="0.01">0.01x</option>
+        <option value="0.05" selected>0.05x</option>
         <option value="0.1">0.1x</option>
         <option value="0.2">0.2x</option>
         <option value="0.5">0.5x</option>
@@ -309,7 +309,7 @@
   // ===================================================================
   let fDM = 1.0, fVM = 1.0;
   let BT = DEF.Mb / (DEF.Mb + DEF.Md); // ~0.2308
-  let playing = true, speedMul = 0.01;
+  let playing = true, speedMul = 0.05;
   let simTime = 0; // in Myr
 
   // ===================================================================
