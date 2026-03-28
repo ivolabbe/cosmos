@@ -51,10 +51,6 @@
     .panel-box canvas { width: 400px; height: 185px; }
     /* Embedded: native resolution (labels readable) */
     body.embedded .panel-box canvas { width: 280px; height: 130px; }
-    #no-eclipse-msg {
-      font-size: 10px; color: rgba(255,200,100,0.7); text-align: center;
-      margin-top: 2px; min-height: 14px;
-    }
 
     /* --- Controls bar (bottom) --- */
     #controls {
@@ -113,7 +109,6 @@
     <div class="panel-box">
       <h3>Light Curve (Flux vs Phase)</h3>
       <canvas id="lc-canvas" width="280" height="130"></canvas>
-      <div id="no-eclipse-msg"></div>
     </div>
   </div>
 
@@ -644,19 +639,23 @@
 
     // Axis labels — consistent style
     rvCtx.fillStyle = 'rgba(255,255,255,0.6)';
-    rvCtx.font = '13px "Open Sans", sans-serif';
-    // X-axis: tick values just above "Phase" label
+    // X-axis tick values
+    rvCtx.font = '11px "Open Sans", sans-serif';
     rvCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
-      rvCtx.fillText(p.toFixed(1), RV_PAD.l + p * rvPlotW, RV_PAD.t + rvPlotH + 14);
+      rvCtx.fillText(p.toFixed(1), RV_PAD.l + p * rvPlotW, RV_PAD.t + rvPlotH + 13);
     }
-    rvCtx.fillText('Phase', RV_PAD.l + rvPlotW / 2, RV_PAD.t + rvPlotH + 26);
-    // Y-axis: tick values right-aligned to plot edge
+    // X-axis title
+    rvCtx.font = '12px "Open Sans", sans-serif';
+    rvCtx.fillText('Phase', RV_PAD.l + rvPlotW / 2, RV_PAD.t + rvPlotH + 27);
+    // Y-axis tick values
+    rvCtx.font = '11px "Open Sans", sans-serif';
     rvCtx.textAlign = 'right';
     rvCtx.fillText('+K', RV_PAD.l - 5, RV_PAD.t + 10);
     rvCtx.fillText('0', RV_PAD.l - 5, yZero + 4);
     rvCtx.fillText('\u2212K', RV_PAD.l - 5, RV_PAD.t + rvPlotH - 2);
-    // Y-axis label (rotated)
+    // Y-axis title (rotated)
+    rvCtx.font = '12px "Open Sans", sans-serif';
     rvCtx.save();
     rvCtx.translate(10, RV_PAD.t + rvPlotH / 2);
     rvCtx.rotate(-PI / 2);
@@ -754,18 +753,22 @@
 
     // Axis labels — consistent style (same as RV panel)
     lcCtx.fillStyle = 'rgba(255,255,255,0.6)';
-    lcCtx.font = '13px "Open Sans", sans-serif';
-    // X-axis: tick values just above "Phase" label
+    // X-axis tick values
+    lcCtx.font = '11px "Open Sans", sans-serif';
     lcCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
-      lcCtx.fillText(p.toFixed(1), LC_PAD.l + p * lcPlotW, LC_PAD.t + lcPlotH + 14);
+      lcCtx.fillText(p.toFixed(1), LC_PAD.l + p * lcPlotW, LC_PAD.t + lcPlotH + 13);
     }
-    lcCtx.fillText('Phase', LC_PAD.l + lcPlotW / 2, LC_PAD.t + lcPlotH + 26);
-    // Y-axis: tick values right-aligned to plot edge
+    // X-axis title
+    lcCtx.font = '12px "Open Sans", sans-serif';
+    lcCtx.fillText('Phase', LC_PAD.l + lcPlotW / 2, LC_PAD.t + lcPlotH + 27);
+    // Y-axis tick values
+    lcCtx.font = '11px "Open Sans", sans-serif';
     lcCtx.textAlign = 'right';
     lcCtx.fillText(fluxMax.toFixed(1), LC_PAD.l - 5, LC_PAD.t + 10);
-    lcCtx.fillText(fluxMin.toFixed(2), LC_PAD.l - 5, LC_PAD.t + lcPlotH - 2);
-    // Y-axis label (rotated)
+    lcCtx.fillText(fluxMin.toFixed(1), LC_PAD.l - 5, LC_PAD.t + lcPlotH - 2);
+    // Y-axis title (rotated)
+    lcCtx.font = '12px "Open Sans", sans-serif';
     lcCtx.save();
     lcCtx.translate(10, LC_PAD.t + lcPlotH / 2);
     lcCtx.rotate(-PI / 2);
@@ -825,11 +828,11 @@
     lcCtx.stroke();
 
     // No-eclipse message
-    const msgEl = document.getElementById('no-eclipse-msg');
     if (!hasEclipses) {
-      msgEl.textContent = 'No eclipses at this inclination';
-    } else {
-      msgEl.textContent = '';
+      lcCtx.fillStyle = 'rgba(255,200,100,0.5)';
+      lcCtx.font = '11px "Open Sans", sans-serif';
+      lcCtx.textAlign = 'center';
+      lcCtx.fillText('No eclipses at this inclination', LC_PAD.l + lcPlotW / 2, LC_PAD.t + lcPlotH / 2);
     }
   }
 
