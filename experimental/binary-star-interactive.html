@@ -337,8 +337,8 @@
   // ===================================================================
   //  Center-of-mass marker
   // ===================================================================
-  const comGeo = new THREE.SphereGeometry(0.03, 12, 12);
-  const comMat = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.15 });
+  const comGeo = new THREE.SphereGeometry(0.04, 12, 12);
+  const comMat = new THREE.MeshBasicMaterial({ color: 0xcccccc, transparent: true, opacity: 0.3 });
   const comMarker = new THREE.Mesh(comGeo, comMat);
   scene.add(comMarker);
 
@@ -502,8 +502,10 @@
     const K1 = (TWO_PI * a1 * Math.sin(i_rad)) / (P_BASE * Math.sqrt(1 - ecc * ecc));
     const K2 = (TWO_PI * a2 * Math.sin(i_rad)) / (P_BASE * Math.sqrt(1 - ecc * ecc));
 
-    const vr1 = radialVelocity(K1, ecc, omega, v);
-    const vr2 = -radialVelocity(K2, ecc, omega, v);
+    // Effective omega accounts for camera azimuth — RV is velocity along camera LOS
+    const omegaEff = omega - camAzimuth;
+    const vr1 = radialVelocity(K1, ecc, omegaEff, v);
+    const vr2 = -radialVelocity(K2, ecc, omegaEff, v);
 
     // Eclipse: projected separation
     const dProj = projectedSeparation(x1, z1, x2, z2);
@@ -575,7 +577,7 @@
   // These shift the x-axis so features are centred, not at edges.
   // Display phase offsets: positive = shift curve RIGHT on plot.
   // Applied as: idx = (i + shift*N) % N for curves, x = (phase + shift) % 1 for playheads.
-  const RV_CURVE_SHIFT = 0.25;
+  const RV_CURVE_SHIFT = 0.0;  // no display shift needed — omega_eff handles camera orientation
   const LC_CURVE_SHIFT = 0.0;
   const PLAYHEAD_SHIFT = 0.0;
 
