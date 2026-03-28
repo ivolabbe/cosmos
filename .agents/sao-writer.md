@@ -71,14 +71,35 @@ Follow these rules:
 
 A single `.html` file in `experimental/` (for new articles) or `articles/` (for updates to existing articles).
 
+## CRITICAL: Minimal Article Modifications
+
+When adding an interactive to an **existing** article:
+
+1. **Preserve the original text verbatim.** Do not rewrite, expand, restructure, or "enhance" existing article content. The web app team's scope is adding the interactive embed only.
+2. **Only fix factual errors** if they directly conflict with the interactive (e.g., an outdated number the user will see in the app). Flag other issues in Notes for CEO for the content team.
+3. **Add only**: the iframe embed block (after the opening paragraph) and its caption. That's it.
+4. **Do not add**: new sections, data tables, equations, new paragraphs, expanded content, or restructured headings. These are out of scope for the JS web app team.
+5. **Do not remove**: any existing text, images, links, or content — even if you think it could be improved.
+
+When writing a **new** article (no existing article in `articles/`):
+- Read `.agents/cosmos-style-analysis.md` first — match the voice exactly
+- Match the level, length, and narrative style of existing COSMOS entries
+- Median article is ~210 words. Major topics stay under ~1000 words.
+- No `<h2>`/`<h3>` headings — use bold inline labels (`<strong>`) for sub-types
+- Open with direct definition, no preamble
+- No equations unless strictly necessary
+- Dense lexicon cross-linking (~4.5 links per 100 words)
+
 ## Quality Checklist
 
+- [ ] **Existing article text preserved verbatim** (if modifying an existing article)
+- [ ] Only iframe embed + caption added (no new sections, tables, or content)
 - [ ] Every numerical claim traced to an authoritative source
 - [ ] All astronomy terms linked as lexicon-term
 - [ ] HTML validates (no unclosed tags, proper entities)
 - [ ] 3D interactive embedded if available
 - [ ] Article matches template structure exactly
-- [ ] Tone is educational, not conversational
+- [ ] Tone matches COSMOS encyclopedia voice (see cosmos-style-analysis.md)
 - [ ] No speculation — only established science
 - [ ] Cross-links to related COSMOS articles included
 
@@ -109,7 +130,6 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Always verify moon counts against NASA's latest data — these change frequently as new small moons are discovered.
 - 2026-03-28 — For planets with interactives: place the 3D embed immediately after the opening paragraph (replaces the lead static image). Caption goes below with "Open fullscreen" link.
 - 2026-03-28 — Surface temperature, atmospheric composition, and density are the most educational facts for comparing planets. Include these for every planet article.
-- 2026-03-28 — Pulsar article: update outdated numbers (known pulsar count, fastest pulsar). Add lighthouse model section with beam angle formula.
-- 2026-03-28 — For physics topics: add a data table at the end with key numbers and formulas. Include characteristic equations (age, B-field, spin-down luminosity).
 - 2026-03-28 — Add `allow="autoplay"` to iframe for interactives with audio features.
-- 2026-03-28 — New sections (e.g. magnetars) can be added to existing articles where the original was incomplete, but keep the original structure.
+- 2026-03-28 — CORRECTION: Do NOT add new sections, data tables, equations, or expanded content to existing articles. Only add the iframe embed + caption. Flag outdated facts in Notes for CEO for the content team. This was a hard lesson from the binary star article rewrite.
+- 2026-03-28 — For NEW articles (no existing article): read cosmos-style-analysis.md first. Match the ~210 word median, no h2/h3 headings, bold inline labels, dense lexicon linking.
