@@ -212,17 +212,22 @@
   // Camera azimuthal angle in XZ plane — updated each frame
   let camAzimuth = 0;
 
-  function projectedSeparation(x1, z1, x2, z2, incl) {
-    // Project separation perpendicular to the camera's line of sight
-    // Camera looks from azimuth angle camAzimuth in XZ plane
-    const cosA = Math.cos(camAzimuth), sinA = Math.sin(camAzimuth);
-    // Tangential separation (perpendicular to LOS in XZ)
+  function projectedSeparation(x1, z1, x2, z2) {
+    // True projected separation on the sky, using actual camera direction.
+    // D = separation vector (in orbital plane, y=0)
+    // L = unit vector from origin toward camera
+    // Projected = |D - (D·L)L| = sqrt(|D|² - (D·L)²)
     const dx = x2 - x1, dz = z2 - z1;
-    const dTan = -dx * sinA + dz * cosA; // across the sky
-    const dRad = dx * cosA + dz * sinA;  // along LOS (depth)
-    // Project depth by cos(incl) for the elevation component
-    const dPerp = dRad * Math.cos(incl);
-    return Math.sqrt(dTan * dTan + dPerp * dPerp);
+    const cx = camera.position.x, cy = camera.position.y, cz = camera.position.z;
+    const cLen = Math.sqrt(cx*cx + cy*cy + cz*cz);
+    if (cLen < 1e-6) return Math.sqrt(dx*dx + dz*dz);
+    // L = camera direction unit vector
+    const lx = cx/cLen, ly = cy/cLen, lz = cz/cLen;
+    // D·L (separation projected onto LOS — the invisible depth component)
+    const dot = dx*lx + dz*lz; // dy=0 since orbit is in XZ plane
+    // |D_perp|² = |D|² - (D·L)²
+    const d2 = dx*dx + dz*dz;
+    return Math.sqrt(Math.max(0, d2 - dot*dot));
   }
 
   // Star color from temperature (approximate blackbody)
@@ -504,12 +509,12 @@
     const vr2 = -radialVelocity(K2, ecc, omega, v);
 
     // Eclipse: projected separation
-    const dProj = projectedSeparation(x1, z1, x2, z2, i_rad);
+    const dProj = projectedSeparation(x1, z1, x2, z2);
 
-    // Which star is closer to camera — project along camera LOS direction
-    const cosA = Math.cos(camAzimuth), sinA = Math.sin(camAzimuth);
-    const depth1 = (x1 * cosA + z1 * sinA) * Math.sin(i_rad);
-    const depth2 = (x2 * cosA + z2 * sinA) * Math.sin(i_rad);
+    // Which star is closer to camera — dot position with camera direction
+    const cx = camera.position.x, cy = camera.position.y, cz = camera.position.z;
+    const depth1 = x1 * cx + z1 * cz; // y=0 for both stars
+    const depth2 = x2 * cx + z2 * cz;
     const star1InFront = depth1 > depth2;
 
     // Overlap area using scene radii
