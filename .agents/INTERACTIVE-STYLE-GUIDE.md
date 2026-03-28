@@ -241,6 +241,13 @@ const gaps = [{c:2.502,w:0.05},{c:2.825,w:0.04},{c:2.958,w:0.04},{c:3.278,w:0.05
 
 - Default asteroid count: 2000 (good balance of density and performance)
 - Use `THREE.Points` with `BufferGeometry` for large particle sets
+- **Circular particles (mandatory):** Default `PointsMaterial` renders squares. Always use a custom `ShaderMaterial` with `gl_PointCoord` to discard corners and apply soft falloff:
+```glsl
+float d = length(gl_PointCoord - 0.5) * 2.0;
+if (d > 1.0) discard;
+float alpha = exp(-d * d * 3.0) * 0.9; // Gaussian bright-center falloff
+gl_FragColor = vec4(color, alpha);
+```
 - Update position arrays in-place, set `needsUpdate = true`
 - Stars: 400-800 points, far away (r=40-120), no animation needed
 - `requestAnimationFrame` loop, update time only when `playing`

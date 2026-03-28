@@ -331,11 +331,11 @@
   controls.minDistance = 4;
   controls.maxDistance = 40;
 
-  // Bloom (strength 0.4, radius 0.6, threshold 0.25 — lowered to catch bright particles)
+  // Bloom (strength 0.6, radius 0.8, threshold 0.15 — visible glow on galaxy particles)
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.4, 0.6, 0.25
+    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.6, 0.8, 0.15
   );
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
@@ -496,8 +496,9 @@
       varying vec3 vColor;
       void main() {
         float d = length(gl_PointCoord - 0.5) * 2.0;
-        float alpha = 1.0 - smoothstep(0.0, 1.0, d);
-        alpha *= 0.85;
+        if (d > 1.0) discard;
+        // Soft circular falloff with bright center
+        float alpha = exp(-d * d * 3.0) * 0.9;
         gl_FragColor = vec4(vColor, alpha);
       }
     `,
@@ -521,19 +522,14 @@
     updateParticles(0);
   }
 
-  // Central glow (bulge glow)
-  const glowGeo = new THREE.SphereGeometry(0.8, 32, 32);
-  const glowMat = new THREE.MeshBasicMaterial({
-    color: 0xffddaa, transparent: true, opacity: 0.08,
-    blending: THREE.AdditiveBlending, depthWrite: false,
-  });
-  scene.add(new THREE.Mesh(glowGeo, glowMat));
-  // Brighter inner glow
-  const glowMat2 = new THREE.MeshBasicMaterial({
-    color: 0xffeedd, transparent: true, opacity: 0.15,
-    blending: THREE.AdditiveBlending, depthWrite: false,
-  });
-  scene.add(new THREE.Mesh(new THREE.SphereGeometry(0.35, 32, 32), glowMat2));
+  // Central bulge glow (single sphere)
+  scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(0.6, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0xffddaa, transparent: true, opacity: 0.12,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    })
+  ));
 
   // ===================================================================
   //  Zone labels (3D text sprites)
