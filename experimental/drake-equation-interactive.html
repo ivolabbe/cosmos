@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drake Equation Explorer | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow-y: auto; overflow-x: hidden; }
+
+    /* --- Embedded mode --- */
+    body.embedded #header-area { display: none; }
+    body.embedded #credit { display: none; }
+    body.embedded #main-wrap { padding-top: 12px; }
+    body.embedded .hint { display: none; }
+
+    /* --- Layout --- */
+    #main-wrap {
+      max-width: 820px; margin: 0 auto; padding: 24px 24px 80px;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    /* --- Header --- */
+    #header-area { margin-bottom: 20px; }
+    #header-area h1 {
+      font-size: 24px; font-weight: 300; color: #fff; margin-bottom: 6px;
+    }
+    #header-area .desc {
+      font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 4px;
+    }
+    .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+    /* --- Result display --- */
+    #result-panel {
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 20px 24px; margin-bottom: 20px; text-align: center;
+    }
+    #result-panel .equation {
+      font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 8px;
+      font-family: "Courier New", monospace; letter-spacing: 0.5px;
+    }
+    #result-panel .n-label {
+      font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 4px;
+    }
+    #result-panel .n-value {
+      font-size: 48px; font-weight: 300; color: #fff; line-height: 1.1;
+      font-family: "Open Sans", sans-serif;
+    }
+    #result-panel .n-desc {
+      font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px;
+    }
+
+    /* --- Preset buttons --- */
+    #presets {
+      display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    #presets button {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8); padding: 6px 14px; border-radius: 6px;
+      font-family: inherit; font-size: 12px; cursor: pointer; transition: background 0.15s;
+    }
+    #presets button:hover { background: rgba(255,255,255,0.12); }
+    #presets button.active { background: rgba(220,45,39,0.4); border-color: #DC2D27; color: #fff; }
+
+    /* --- Sliders --- */
+    #sliders { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+
+    .slider-row {
+      background: rgba(10,10,46,0.6); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 14px;
+    }
+    .slider-label {
+      min-width: 36px; text-align: right; flex-shrink: 0;
+    }
+    .slider-label .sym {
+      font-size: 16px; font-weight: 600; color: #fff;
+      font-family: "Courier New", monospace;
+    }
+    .slider-mid { flex: 1; min-width: 0; }
+    .slider-mid .slider-desc {
+      font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 4px; line-height: 1.3;
+    }
+    .slider-mid input[type="range"] {
+      width: 100%; accent-color: #DC2D27; cursor: pointer; height: 6px;
+    }
+    .slider-val {
+      min-width: 80px; text-align: right; flex-shrink: 0;
+      font-family: "Courier New", monospace; font-size: 15px; font-weight: 600; color: #fff;
+    }
+
+    /* --- Sensitivity chart --- */
+    #sensitivity-panel {
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 14px 18px;
+    }
+    #sensitivity-panel h3 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 10px; text-align: center; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .sens-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+    }
+    .sens-label {
+      min-width: 28px; text-align: right; font-size: 12px;
+      font-family: "Courier New", monospace; color: rgba(255,255,255,0.7);
+    }
+    .sens-bar-wrap {
+      flex: 1; height: 10px; background: rgba(255,255,255,0.04); border-radius: 3px;
+      overflow: hidden; position: relative;
+    }
+    .sens-bar {
+      height: 100%; border-radius: 3px; transition: width 0.3s ease, background 0.3s ease;
+      min-width: 2px;
+    }
+    .sens-value {
+      min-width: 44px; text-align: right; font-size: 11px;
+      font-family: "Courier New", monospace; color: rgba(255,255,255,0.4);
+    }
+
+    /* --- Credit --- */
+    #credit {
+      text-align: center; margin-top: 20px;
+      font-size: 10px; color: rgba(255,255,255,0.25);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      #main-wrap { padding: 16px 12px 60px; }
+      .slider-row { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+      .slider-label { min-width: auto; text-align: left; }
+      .slider-val { min-width: 60px; font-size: 13px; }
+      #result-panel .n-value { font-size: 36px; }
+      #presets { gap: 6px; }
+      #presets button { padding: 5px 10px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="main-wrap">
+  <div id="header-area">
+    <h1>Drake Equation Explorer</h1>
+    <p class="desc">Estimate the number of communicating civilisations in the Milky Way by adjusting seven parameters of the Drake Equation.</p>
+    <p class="hint">Spacebar: reset to defaults</p>
+  </div>
+
+  <div id="result-panel">
+    <div class="equation">N = R* &times; f<sub>p</sub> &times; n<sub>e</sub> &times; f<sub>l</sub> &times; f<sub>i</sub> &times; f<sub>c</sub> &times; L</div>
+    <div class="n-label">Communicating civilisations in the Galaxy</div>
+    <div class="n-value" id="n-result">0.003</div>
+    <div class="n-desc" id="n-desc">Expected number at any given time</div>
+  </div>
+
+  <div id="presets">
+    <button id="preset-drake" title="Drake's original 1961 estimates">Drake 1961</button>
+    <button id="preset-optimistic" title="Modern optimistic estimates">Optimistic Modern</button>
+    <button id="preset-pessimistic" title="Conservative estimates">Pessimistic</button>
+  </div>
+
+  <div id="sliders">
+    <div class="slider-row" data-param="Rstar">
+      <div class="slider-label"><span class="sym">R*</span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Rate of star formation (stars per year)</div>
+        <input type="range" id="sl-Rstar" min="1" max="20" step="0.5" value="1.5">
+      </div>
+      <div class="slider-val" id="val-Rstar">1.5 yr<sup>-1</sup></div>
+    </div>
+
+    <div class="slider-row" data-param="fp">
+      <div class="slider-label"><span class="sym">f<sub>p</sub></span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Fraction of stars with planetary systems</div>
+        <input type="range" id="sl-fp" min="0.01" max="1" step="0.01" value="1.0">
+      </div>
+      <div class="slider-val" id="val-fp">1.00</div>
+    </div>
+
+    <div class="slider-row" data-param="ne">
+      <div class="slider-label"><span class="sym">n<sub>e</sub></span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Habitable planets per system with planets</div>
+        <input type="range" id="sl-ne" min="0.1" max="5" step="0.1" value="0.2">
+      </div>
+      <div class="slider-val" id="val-ne">0.2</div>
+    </div>
+
+    <div class="slider-row" data-param="fl">
+      <div class="slider-label"><span class="sym">f<sub>l</sub></span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Fraction of habitable planets where life develops</div>
+        <input type="range" id="sl-fl" min="0.01" max="1" step="0.01" value="1.0">
+      </div>
+      <div class="slider-val" id="val-fl">1.00</div>
+    </div>
+
+    <div class="slider-row" data-param="fi">
+      <div class="slider-label"><span class="sym">f<sub>i</sub></span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Fraction of life-bearing planets with intelligence</div>
+        <input type="range" id="sl-fi" min="0.01" max="1" step="0.01" value="0.01">
+      </div>
+      <div class="slider-val" id="val-fi">0.01</div>
+    </div>
+
+    <div class="slider-row" data-param="fc">
+      <div class="slider-label"><span class="sym">f<sub>c</sub></span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Fraction of intelligent civilisations that communicate</div>
+        <input type="range" id="sl-fc" min="0.01" max="1" step="0.01" value="0.01">
+      </div>
+      <div class="slider-val" id="val-fc">0.01</div>
+    </div>
+
+    <div class="slider-row" data-param="L">
+      <div class="slider-label"><span class="sym">L</span></div>
+      <div class="slider-mid">
+        <div class="slider-desc">Lifetime of a communicating civilisation (years)</div>
+        <input type="range" id="sl-L" min="0" max="1" step="0.001" value="0.4">
+      </div>
+      <div class="slider-val" id="val-L">10,000 yr</div>
+    </div>
+  </div>
+
+  <div id="sensitivity-panel">
+    <h3>Parameter sensitivity — impact on N</h3>
+    <div id="sens-bars"></div>
+  </div>
+
+  <div id="credit">COSMOS &middot; Swinburne Astronomy Online</div>
+</div>
+
+<script>
+// ---- Embedded mode ----
+if (window.self !== window.top || new URLSearchParams(window.location.search).get('embed') === '1') {
+  document.body.classList.add('embedded');
+}
+
+// ---- Parameter definitions ----
+const params = [
+  { id: 'Rstar', label: 'R*', min: 1, max: 20, step: 0.5, default: 1.5, unit: ' yr\u207B\u00B9', decimals: 1 },
+  { id: 'fp',    label: 'f\u209A', min: 0.01, max: 1, step: 0.01, default: 1.0, unit: '', decimals: 2 },
+  { id: 'ne',    label: 'n\u2091', min: 0.1, max: 5, step: 0.1, default: 0.2, unit: '', decimals: 1 },
+  { id: 'fl',    label: 'f\u2097', min: 0.01, max: 1, step: 0.01, default: 1.0, unit: '', decimals: 2 },
+  { id: 'fi',    label: 'f\u1D62', min: 0.01, max: 1, step: 0.01, default: 0.01, unit: '', decimals: 2 },
+  { id: 'fc',    label: 'f\u1D04', min: 0.01, max: 1, step: 0.01, default: 0.01, unit: '', decimals: 2 },
+  { id: 'L',     label: 'L',  min: 100, max: 10000000, default: 10000, unit: ' yr', log: true, decimals: 0 },
+];
+
+// ---- Presets ----
+const presets = {
+  drake:       { Rstar: 1, fp: 0.5, ne: 2, fl: 1, fi: 1, fc: 0.1, L: 10000 },
+  optimistic:  { Rstar: 3, fp: 1.0, ne: 0.4, fl: 1, fi: 0.5, fc: 0.2, L: 1000000 },
+  pessimistic: { Rstar: 1.5, fp: 0.5, ne: 0.1, fl: 0.1, fi: 0.01, fc: 0.01, L: 500 },
+};
+
+// ---- DOM refs ----
+const sliders = {};
+const valEls = {};
+params.forEach(p => {
+  sliders[p.id] = document.getElementById('sl-' + p.id);
+  valEls[p.id] = document.getElementById('val-' + p.id);
+});
+const nResult = document.getElementById('n-result');
+const nDesc = document.getElementById('n-desc');
+const sensBars = document.getElementById('sens-bars');
+
+// Build sensitivity bar rows
+params.forEach(p => {
+  const row = document.createElement('div');
+  row.className = 'sens-row';
+  row.innerHTML = `<div class="sens-label">${p.label}</div>` +
+    `<div class="sens-bar-wrap"><div class="sens-bar" id="sb-${p.id}"></div></div>` +
+    `<div class="sens-value" id="sv-${p.id}"></div>`;
+  sensBars.appendChild(row);
+});
+
+// ---- Logarithmic slider helpers for L ----
+// L slider goes 0..1, mapped to 100..10,000,000 logarithmically
+const L_MIN_LOG = Math.log10(100);
+const L_MAX_LOG = Math.log10(10000000);
+
+function sliderToL(t) {
+  return Math.pow(10, L_MIN_LOG + t * (L_MAX_LOG - L_MIN_LOG));
+}
+
+function LToSlider(L) {
+  return (Math.log10(L) - L_MIN_LOG) / (L_MAX_LOG - L_MIN_LOG);
+}
+
+// ---- Get current values ----
+function getValues() {
+  const v = {};
+  params.forEach(p => {
+    if (p.log) {
+      v[p.id] = sliderToL(parseFloat(sliders[p.id].value));
+    } else {
+      v[p.id] = parseFloat(sliders[p.id].value);
+    }
+  });
+  return v;
+}
+
+// ---- Compute N ----
+function computeN(v) {
+  return v.Rstar * v.fp * v.ne * v.fl * v.fi * v.fc * v.L;
+}
+
+// ---- Format number for display ----
+function formatN(n) {
+  if (n < 0.001) return n.toExponential(1);
+  if (n < 1) return n.toFixed(3);
+  if (n < 10) return n.toFixed(2);
+  if (n < 1000) return n.toFixed(1);
+  if (n < 1000000) return Math.round(n).toLocaleString('en-US');
+  if (n < 1e9) return (n / 1e6).toFixed(1) + ' million';
+  return (n / 1e9).toFixed(1) + ' billion';
+}
+
+function formatL(val) {
+  if (val < 1000) return Math.round(val).toLocaleString('en-US') + ' yr';
+  if (val < 1000000) return Math.round(val).toLocaleString('en-US') + ' yr';
+  return (val / 1e6).toFixed(1) + 'M yr';
+}
+
+function formatVal(p, val) {
+  if (p.id === 'L') return formatL(val);
+  if (p.id === 'Rstar') return val.toFixed(p.decimals) + p.unit;
+  return val.toFixed(p.decimals) + p.unit;
+}
+
+// ---- Sensitivity: ratio of max/min N when sweeping each parameter ----
+function computeSensitivity(v) {
+  const sens = [];
+  params.forEach(p => {
+    // N at max / N at min for this parameter, holding others fixed
+    const vMin = { ...v };
+    const vMax = { ...v };
+    vMin[p.id] = p.min;
+    vMax[p.id] = p.max;
+    const ratio = computeN(vMax) / computeN(vMin);
+    sens.push({ id: p.id, label: p.label, ratio: ratio });
+  });
+  return sens;
+}
+
+// ---- Colour for sensitivity bar ----
+function sensColor(ratio, maxRatio) {
+  const t = Math.log10(ratio) / Math.log10(maxRatio);
+  // Gradient from muted blue-white to warm gold to Swinburne red
+  if (t < 0.5) {
+    const u = t / 0.5;
+    const r = Math.round(100 + u * 155);
+    const g = Math.round(140 + u * 80);
+    const b = Math.round(180 - u * 80);
+    return `rgb(${r},${g},${b})`;
+  } else {
+    const u = (t - 0.5) / 0.5;
+    const r = Math.round(255 - u * 35);
+    const g = Math.round(220 - u * 175);
+    const b = Math.round(100 - u * 61);
+    return `rgb(${r},${g},${b})`;
+  }
+}
+
+// ---- Update everything ----
+function update() {
+  const v = getValues();
+  const N = computeN(v);
+
+  // Display values
+  params.forEach(p => {
+    valEls[p.id].innerHTML = formatVal(p, v[p.id]);
+  });
+
+  // N result
+  nResult.textContent = formatN(N);
+  if (N < 1) {
+    nDesc.textContent = 'We are likely alone in the Galaxy';
+  } else if (N < 2) {
+    nDesc.textContent = 'Roughly one civilisation — perhaps just us';
+  } else if (N < 100) {
+    nDesc.textContent = 'A handful of civilisations, very far apart';
+  } else if (N < 10000) {
+    nDesc.textContent = 'Thousands — but still separated by vast distances';
+  } else if (N < 1000000) {
+    nDesc.textContent = 'A busy Galaxy — average separation a few hundred light-years';
+  } else {
+    nDesc.textContent = 'An extraordinarily crowded Galaxy';
+  }
+
+  // Sensitivity bars
+  const sens = computeSensitivity(v);
+  const maxRatio = Math.max(...sens.map(s => s.ratio));
+  const maxLog = Math.log10(maxRatio);
+
+  sens.forEach(s => {
+    const bar = document.getElementById('sb-' + s.id);
+    const val = document.getElementById('sv-' + s.id);
+    const logR = Math.log10(s.ratio);
+    const pct = maxLog > 0 ? (logR / maxLog) * 100 : 0;
+    bar.style.width = Math.max(pct, 1) + '%';
+    bar.style.background = sensColor(s.ratio, maxRatio);
+    val.textContent = '\u00D7' + (s.ratio < 100 ? s.ratio.toFixed(1) : Math.round(s.ratio).toLocaleString('en-US'));
+  });
+
+  // Clear active preset highlight
+  document.querySelectorAll('#presets button').forEach(b => b.classList.remove('active'));
+}
+
+// ---- Wire slider events ----
+params.forEach(p => {
+  sliders[p.id].addEventListener('input', update);
+});
+
+// ---- Preset buttons ----
+function applyPreset(name) {
+  const preset = presets[name];
+  params.forEach(p => {
+    if (p.log) {
+      sliders[p.id].value = LToSlider(preset[p.id]);
+    } else {
+      sliders[p.id].value = preset[p.id];
+    }
+  });
+  update();
+  // Highlight active preset
+  document.querySelectorAll('#presets button').forEach(b => b.classList.remove('active'));
+  document.getElementById('preset-' + name).classList.add('active');
+}
+
+document.getElementById('preset-drake').addEventListener('click', () => applyPreset('drake'));
+document.getElementById('preset-optimistic').addEventListener('click', () => applyPreset('optimistic'));
+document.getElementById('preset-pessimistic').addEventListener('click', () => applyPreset('pessimistic'));
+
+// ---- Spacebar: reset to defaults ----
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON') {
+    e.preventDefault();
+    params.forEach(p => {
+      if (p.log) {
+        sliders[p.id].value = LToSlider(p.default);
+      } else {
+        sliders[p.id].value = p.default;
+      }
+    });
+    update();
+  }
+});
+
+// ---- Initial update ----
+// Set L slider to correct initial position
+sliders.L.value = LToSlider(10000);
+update();
+</script>
+</body>
+</html>

@@ -67,6 +67,102 @@ Update .planning/apps/ status
 Move to next app
 ```
 
+## Iteration Mode (refine existing apps)
+
+Not every app is built right the first time. When an app exists but doesn't meet the bar — or when style/requirements have evolved — run the pipeline again as an **iteration**, not a do-over.
+
+### When to iterate
+- App built but doesn't visually match the quality bar
+- Style guide has been updated since the app was built
+- Verifier flagged issues that weren't fixed
+- User requests upgrades or new features
+- SEO data suggests the app needs better engagement hooks
+
+### Iteration pipeline
+
+```
+Phase 1i: RESEARCHER (reads existing app + spec + dev log + verifier feedback)
+  → Output: updated spec with "## Iteration changes" section
+  → The researcher notes what works, what to keep, what to change
+  → NOT a blank-slate rewrite — builds on what exists
+
+Phase 2i: WRITER (if article needs updating)
+  → Only if the iteration changes the embed caption or adds content
+  → Skip if article is unchanged
+
+Phase 3i: CODER (reads existing HTML + updated spec + feedback)
+  → Modifies the existing file, not a fresh build
+  → Preserves working features, changes only what the iteration spec says
+  → Verifier loop as usual
+
+Phase 4i: Done — log learnings, commit with "Iterate: [topic]" message
+```
+
+### Key differences from fresh build
+- Researcher receives the **existing HTML file** and **previous verifier reports** as input
+- Spec has a `## What to keep` section (things that already work)
+- Spec has a `## What to change` section (targeted improvements)
+- Coder starts from the existing file, not a template
+- Fewer stages — iterate on specific issues, not full rebuilds
+
+### When NOT to iterate
+- If the fundamental approach is wrong (e.g., wrong physics model) → fresh build
+- If the file is so broken it's faster to start over → fresh build
+- If >70% of the code needs changing → fresh build
+
+## Do-Over Mode (rebuild from scratch)
+
+When the fundamental approach is wrong, or >70% of the code needs changing, or it's simply faster to start fresh — use do-over mode instead of iteration.
+
+### When to use do-over (not iteration)
+- Wrong physics model or rendering approach
+- Architecture doesn't support the required features
+- Code is too tangled to iterate on productively
+- Style has changed so much the app looks out of place
+- User explicitly requests "start over" or "rebuild"
+
+### Do-over pipeline
+
+```
+Phase 0d: ARCHIVE the existing version
+  → cp experimental/[topic]-interactive.html experimental/archive/[topic]-interactive-v[N].html
+  → cp .planning/apps/[topic]-spec.md .planning/apps/archive/[topic]-spec-v[N].md
+  → cp .planning/apps/[topic].md .planning/apps/archive/[topic]-v[N].md
+  → Log in dev log: "Archived v[N] → do-over. Reason: [why]"
+  → Create archive/ dirs if they don't exist
+
+Phase 1d: RESEARCHER (reads archived version + its verifier reports + learnings)
+  → Output: fresh spec, but with a "## Lessons from v[N]" section
+  → Documents what went wrong and what to avoid this time
+  → May reuse good ideas from old spec — this is informed, not amnesiac
+
+Phase 2d-4d: Standard pipeline (writer, coder, verifier)
+  → Fresh build from the new spec
+  → Coder starts from a template, NOT the archived file
+```
+
+### Versioning convention
+- `experimental/archive/` holds all archived versions
+- `.planning/apps/archive/` holds archived specs and dev logs
+- Version numbers: v1, v2, v3... (v1 = first build, v2 = first do-over, etc.)
+- The live file at `experimental/[topic]-interactive.html` is always the current version
+- To compare: diff the live file against `experimental/archive/[topic]-interactive-v[N].html`
+
+### Archive naming
+```
+experimental/archive/
+├── black-hole-interactive-v1.html
+├── black-hole-interactive-v2.html
+├── ...
+.planning/apps/archive/
+├── black-hole-spec-v1.md
+├── black-hole-v1.md          (dev log)
+├── ...
+```
+
+### Key principle
+**Never delete — always archive.** The old version may have good ideas, and comparison is valuable. But the coder builds fresh, informed by what failed.
+
 ## Process Enforcement
 
 **Separation of concerns:** Writers write, coders code, verifiers verify. No agent self-checks — that doesn't work. The verifier is the sole judge of pass/fail.
@@ -256,3 +352,5 @@ When a coder agent's context fills up mid-build:
 - 2026-03-28 — Verifier should be dispatched even before the coder fully completes — can run in parallel. The orchestrator can apply fixes from verifier feedback directly.
 - 2026-03-28 — Article verify.js gave false failures for article pages — now resolved with `--article` mode.
 - 2026-03-29 — Pipeline simplified: 5 phases → 4 phases. Visual research folded into Researcher (Phase 1). verify.js now automates all mechanical checks.
+- 2026-03-29 — All 6 Hard/Hardest tier apps built in parallel (6 researchers + 6 writers + 6 coders simultaneously). Rate limits can interrupt agents mid-build — check file state before rebuilding.
+- 2026-03-29 — Added Iteration Mode for refining existing apps. Not a do-over — researcher reads existing app, spec says what to keep vs change, coder modifies existing file.
