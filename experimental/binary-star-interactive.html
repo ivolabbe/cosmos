@@ -576,10 +576,11 @@
   // To put it at plot centre (0.5), offset = 0.25.
   // Display phase offsets (fraction of orbit, 0.25 = 90°)
   // These shift the x-axis so features are centred, not at edges.
-  const RV_CURVE_SHIFT = 1.25;  // RV curve data offset (subtract)
-  const RV_PLAY_SHIFT  = 0.0;   // RV playhead — no offset
-  const LC_CURVE_SHIFT = 0.25;  // LC curve data offset (add)
-  const LC_PLAY_SHIFT  = 0.0;   // LC playhead — no offset
+  // Display phase offsets: positive = shift curve RIGHT on plot.
+  // Applied as: idx = (i + shift*N) % N for curves, x = (phase + shift) % 1 for playheads.
+  const RV_CURVE_SHIFT = 0.0;
+  const LC_CURVE_SHIFT = 0.25;
+  const PLAYHEAD_SHIFT = 0.0;
 
   function recomputeCurves() {
     maxK = 0;
@@ -671,10 +672,10 @@
     rvCtx.clip();
 
     // Star 1 RV curve (display offset shifts x-axis, not data)
-    const rvIdxOff = Math.round(RV_CURVE_SHIFT * N_CURVE);
+    const rvIdxOff = Math.round(((RV_CURVE_SHIFT % 1) + 1) % 1 * N_CURVE);
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
+      const idx = (i + rvIdxOff) % N_CURVE;
       const x = RV_PAD.l + (i / N_CURVE) * rvPlotW;
       const y = yZero - (rvCurve1[idx] / maxK_fixed) * (rvPlotH * 0.45);
       if (i === 0) rvCtx.moveTo(x, y); else rvCtx.lineTo(x, y);
@@ -686,7 +687,7 @@
     // Star 2 RV curve
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
+      const idx = (i + rvIdxOff) % N_CURVE;
       const x = RV_PAD.l + (i / N_CURVE) * rvPlotW;
       const y = yZero - (rvCurve2[idx] / maxK_fixed) * (rvPlotH * 0.45);
       if (i === 0) rvCtx.moveTo(x, y); else rvCtx.lineTo(x, y);
@@ -703,7 +704,7 @@
     rvCtx.strokeRect(RV_PAD.l, RV_PAD.t, rvPlotW, rvPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = RV_PAD.l + ((phaseFrac + RV_PLAY_SHIFT) % 1) * rvPlotW;
+    const px = RV_PAD.l + ((phaseFrac + PLAYHEAD_SHIFT) % 1) * rvPlotW;
     rvCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     rvCtx.lineWidth = 1.5;
     rvCtx.beginPath();
@@ -819,7 +820,7 @@
     lcCtx.strokeRect(LC_PAD.l, LC_PAD.t, lcPlotW, lcPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = LC_PAD.l + ((phaseFrac + LC_PLAY_SHIFT) % 1) * lcPlotW;
+    const px = LC_PAD.l + ((phaseFrac + PLAYHEAD_SHIFT) % 1) * lcPlotW;
     lcCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     lcCtx.lineWidth = 1.5;
     lcCtx.beginPath();
