@@ -32,7 +32,8 @@ Search for the best existing visualizations of this topic. Look in:
 "[topic]" diagram site:wikipedia.org
 ```
 
-For each good reference, save:
+For each good reference, save to the **app's spec document** (`.planning/apps/[topic]-spec.md`). Append or update the `## Visual References` section in that file. This keeps all references for an app in one place — the researcher's initial visual notes and the visual agent's deeper research live in the same document and don't conflict.
+
 ```markdown
 ### Visual Reference: [Name/URL]
 - **Source**: [GitHub repo / NASA press release / university page]
