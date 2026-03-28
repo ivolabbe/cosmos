@@ -4,7 +4,7 @@
 
 ## Files
 - `experimental/satellites-interactive.html` — Three.js interactive
-- `experimental/satellite-article.html` — COSMOS article with embed
+- `experimental/satellite.html` — COSMOS article with embed
 - `experimental/models/satellites/` — glTF model (Earth globe, airline routes)
 - `experimental/models/satellites/catalog/` — CelesTrak/SATCAT orbit data
   - `cat_leo.bin` (2000 subsampled from 14,071), `cat_meo.bin` (168), `cat_geo.bin` (595), `cat_heo.bin` (41)

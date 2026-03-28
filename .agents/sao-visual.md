@@ -61,7 +61,7 @@ For each visual element, compare our build against the best reference:
 | Element | Reference | Ours | Verdict | Change needed |
 |---------|-----------|------|---------|---------------|
 | Star glow | Warm bloom, soft falloff | Too bright, hard edge | ADJUST | Reduce bloom strength to 0.3, add halo sprite |
-| Orbit lines | Thin, colour-coded, 0.5 opacity | Too thick, faint | ADJUST | opacity 0.6, stacked 3-line technique |
+| Orbit lines | Thin, colour-coded, 0.5 opacity | Too thick, faint | ADJUST | plain THREE.Line + additive blending, opacity 0.35 |
 | Background | Pure black, subtle stars | Match | OK | — |
 | ... | ... | ... | ... | ... |
 
@@ -72,7 +72,7 @@ These are project-wide rules from the style guide and user feedback:
 ### Rendering
 - **Additive opacity** — favour `THREE.AdditiveBlending` for glowing elements (beams, halos, orbits). It creates natural light-accumulation effects.
 - **Bloom** — use tastefully. Subtle bloom (strength 0.2–0.4) adds atmosphere; heavy bloom (>0.6) washes out detail. Bright stars and emission regions should trigger bloom; everything else should be below threshold.
-- **Line visibility** — sparse lines (orbits, axes, field lines) must be thick enough to see. Use the stacked-`THREE.Line` technique (3 copies offset by ±0.008) for visible width. Single-pixel lines disappear on high-DPI screens.
+- **Line visibility** — sparse lines (orbits, axes, field lines) must be visible. Use plain `THREE.Line` with additive blending — 1px on screen, but additive overlap creates natural glow. Do NOT stack THREE.Line copies at Y offsets (breaks at zoom). Do NOT use Line2 with transparency (stippled artifacts). If truly opaque thick lines are needed (scale bar ticks), use Line2 with `transparent: false`.
 - **Point/particle density** — enough to convey structure, not so many that performance suffers. 2000–6000 particles for galaxy-scale, 800+80 for star background.
 
 ### Objects
@@ -90,7 +90,7 @@ These are project-wide rules from the style guide and user feedback:
 - **Panel sizing** — panels must not overlap the 3D scene or controls. On small viewports, check that panels remain visible.
 
 ### Composition
-- **Black background** (`#000`) for space scenes. Deep navy (`#0a0a2e`) only for orbital diagram overviews.
+- **Black background** (`#000`) for ALL space scenes including orbital diagrams. Deep navy (`#0a0a2e`) looks murky — only use for non-space scenes (e.g. abstract data-viz with dense overlapping elements).
 - **Depth** — use stars at different distances (near bright, far dim) + bloom to create depth perception.
 - **Camera** — default position should showcase the most informative view. Not too close (claustrophobic), not too far (can't see detail).
 
@@ -169,3 +169,11 @@ When done, include:
 - 2026-03-28 — Fullscreen panels should be generous (380px, 15px font, 380×220 canvases). In embedded mode, shrink via CSS. The visual agent must verify both modes.
 - 2026-03-28 — Readouts must be physically grounded: actual masses, DM fraction within a stated radius — never just slider percentages. The reader should understand the physics from the readout alone.
 - 2026-03-28 — Pulse/periodic profiles: offset display so peak is centred in panel, not at the boundary (phase 0/360 split).
+- 2026-03-29 — **No wide diffuse halos.** Never add a large sprite (2x scale, 0.3 alpha) stacked behind a core object to simulate glow. It looks ugly and painted. One compact sprite or mesh is enough; let bloom handle the soft outer glow naturally.
+- 2026-03-29 — **No painted glow — let bloom handle it.** For small schematic markers (planets in orbital diagrams), a bright MeshBasicMaterial colour is sufficient. Bloom produces natural-looking glow without extra halo layers. Adding halos at diagram scale wastes draw calls and often looks worse.
+- 2026-03-29 — **Line2 with transparency produces stippled/dotted artifacts.** Never use Line2 for any line that has `transparent: true` or uses additive blending. Only use Line2 for fully opaque elements (e.g. scale bar ticks with `transparent: false`).
+- 2026-03-29 — **Plain THREE.Line + additive blending is the correct approach for orbit lines.** 1px on screen, glow from additive overlap, artifact-free at all zoom levels. Do NOT stack THREE.Line copies at Y offsets — they separate at close zoom and collapse at far zoom.
+- 2026-03-29 — **Test embed and fullscreen side by side.** Many issues only appear in one mode: overblown particle bloom in embed (dense fields compound), unreadable CSS-scaled text, label drift, hidden panels. Always screenshot both modes and compare before approving.
+- 2026-03-29 — **Sun in orbital diagrams: radial-gradient sprite.** Use a CanvasTexture with radial gradient (white core, warm falloff to transparent) on a Sprite with AdditiveBlending. Not a flat disc + sphere. Not a mesh with halo layers. The sprite approach is smooth, bloom-friendly, and looks like a point source of light.
+- 2026-03-29 — **Background must be #000 for all space scenes.** Deep navy (#0a0a2e) makes scenes look murky. Pure black makes stars and objects pop.
+- 2026-03-29 — **Bloom threshold tuning matters per scene.** Too low: everything glows (including glass panels). Too high: small bright objects miss the threshold. Test by toggling between values and checking that only intentionally luminous objects bloom.

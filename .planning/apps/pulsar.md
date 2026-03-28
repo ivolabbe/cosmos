@@ -7,7 +7,7 @@
 
 ### Files
 - Interactive: `experimental/pulsar-interactive.html` (895 lines)
-- Article: `experimental/pulsar-article.html` (206 lines)
+- Article: `experimental/pulsar.html` (206 lines)
 - Spec: `.planning/apps/pulsar-spec.md` (581 lines)
 
 ### Features

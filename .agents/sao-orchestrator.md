@@ -46,7 +46,7 @@ Dispatch sao-coder for [topic] (reads spec)
 ### Phase 3: Article + Verify
 ```
 Dispatch sao-writer for [topic] (reads spec's facts)
-→ Output: experimental/[topic]-article.html
+→ Output: experimental/[topic].html
 → Dispatch sao-verifier for article
 → If PASS: move to Phase 4
 → If FAIL: send feedback to sao-writer

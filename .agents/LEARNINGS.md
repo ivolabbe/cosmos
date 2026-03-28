@@ -28,7 +28,7 @@ When adding an interactive to an existing article: ONLY add the iframe embed blo
 The user iterates rapidly by testing visually in Chrome and queuing corrections. Physical accuracy is as important as visual appeal. Don't over-engineer before testing — make the minimal change, let the user evaluate, iterate. The user references real physics papers/tools as visual quality targets — take these seriously.
 
 ### Visual quality via sub-agent
-Visual verification is context-heavy (web searches, image comparisons). The verifier dispatches `sao-visual` as a sub-agent. Visual rules: favour additive blending for glow, use bloom tastefully (0.2–0.4), make sparse lines thick enough to see (stacked copies), find appropriate textures for spherical bodies. **Never change physics to match visuals** — only adjust visual parameters (zoom, brightness, opacity, line thickness, colour, bloom).
+Visual verification is context-heavy (web searches, image comparisons). The verifier dispatches `sao-visual` as a sub-agent. Visual rules: favour additive blending for glow, use bloom tastefully (0.2–0.4), use plain THREE.Line + additive for orbit lines (no stacking, no Line2 with transparency), find appropriate textures for spherical bodies. **Never change physics to match visuals** — only adjust visual parameters (zoom, brightness, opacity, line thickness, colour, bloom).
 
 ### Continuous learning
 After every successful result, write learnings to the project. Update agent files, dev logs, and style guides with new knowledge. Pattern: build → test → verify → log → improve skill → next iteration.
@@ -46,7 +46,7 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 - Bloom: `UnrealBloomPass` + `OutputPass` (OutputPass required in Three.js 0.170.0+).
 - Saturn rings: `MeshBasicMaterial` (self-lit), not Standard — flat geometry + directional light = barely visible.
 - Earth shader: MUST use world-space normals for day/night, not view-space.
-- `Line2` with transparency causes dotted artifacts — use stacked `THREE.Line` copies instead.
+- `Line2` with transparency causes dotted artifacts — use plain `THREE.Line` with additive blending instead. Do NOT stack copies at Y offsets (breaks at zoom).
 - Headless Puppeteer CANNOT render WebGL. Always `headless: false` for verification.
 - `const` declarations don't hoist — any function referencing a const must be called AFTER the const is defined (binary star `orbitControls` bug).
 
@@ -74,6 +74,55 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 - Binary star: camera-from-inclination approach is cleaner than rotating the orbit group.
 - Rotation curve: `G' = 4.302×10⁴` in galactic units (10¹⁰ M☉, kpc, km/s).
 
+### Visual polish — mistakes and corrections (2026-03-29)
+- **PointsMaterial renders squares.** Always use ShaderMaterial with `gl_PointCoord` discard + Gaussian falloff (`makeCircleMat`). This was the first mistake made on the asteroid app and has been caught on multiple other apps too — it is the single most common visual error.
+- **Double-FrontSide spheres for glow are wrong.** Use BackSide halos (for 3D bodies) or radial-gradient sprites with AdditiveBlending (for point sources in diagrams). FrontSide double-spheres produce an ugly hard-edge disc.
+- **Stacked `THREE.Line` copies (±0.008 Y offset) break at zoom.** The copies separate when zoomed in and collapse when zoomed out. This hack should NOT be used. Plain `THREE.Line` + additive blending is the correct approach — 1px on screen, glow from additive overlap, artifact-free at all zoom levels.
+- **`Line2`/`LineMaterial` with transparency produces stippled/dotted artifacts.** Only use `Line2` for fully opaque elements (e.g. scale bar ticks where `transparent: false`). For any transparent or additive line, use plain `THREE.Line`.
+- **Wide diffuse halo sprites (2x scale, 0.3 alpha stacked behind core) look ugly.** One compact sprite is enough; let bloom handle the soft glow naturally. Never paint a wide halo to simulate bloom.
+- **Background `#0a0a2e` is too bright/blue.** Use `#000` for all space scenes. Deep navy was an early experiment that made scenes look murky.
+- **Different bloom/particle parameters for embed vs fullscreen breaks consistency.** Never change bloom strength, sprite scales, or line widths per mode. The ONE exception: particle opacity and size may be reduced in embedded mode for dense particle fields that compound with bloom into overblown white masses.
+- **Sun as flat disc + sphere is wrong for diagram-scale views.** Use a radial-gradient CanvasTexture on a Sprite with AdditiveBlending. The gradient provides a compact bright core with smooth falloff; bloom handles the outer glow.
+- **Planet glow halos are unnecessary for small schematic markers.** In diagram-scale views where planets are tiny dots, bloom on a bright MeshBasicMaterial colour is sufficient. Adding halo layers at this scale just wastes draw calls.
+- **Bloom threshold tuning:** too low makes everything glow (including the UI glass panels); too high misses small bright objects. Tune per scene and test. For the asteroid diagram: strength 0.45, radius 0.7, threshold 0.4.
+
+### Physics implementation — asteroid belt (2026-03-29)
+- **Asteroid z-phases need random RAAN.** Without independent `raan` values, asteroids at similar semi-major axes oscillate in correlated sinusoidal "marching" patterns. Applying a random RAAN rotation (`cos/sin` rotation in the XZ plane) decorrelates the vertical oscillation.
+- **Kirkwood gaps must be wide enough to be visually obvious.** The real gaps are narrow, but at 5000-10000 particles the density dip must be unmistakable. Use exclusion half-widths of 0.12-0.20 AU, wider for stronger resonances (2:1 widest at 0.20, 3:1 at 0.18).
+- **Realistic belt distribution:** Use a piecewise-linear density table traced from an observed reference histogram, not uniform random or simple Gaussian sampling. Build a CDF from the table and use inverse-transform sampling for physically correct asteroid placement.
+- **Trojan naming:** L4 = Greeks (leading), L5 = Trojans (trailing). Historically correct — the L4 group was named after Greek heroes, the L5 group after Trojan defenders.
+- **Hildas are NOT trapped at equilibrium points.** Unlike Trojans (which librate around L4/L5), Hildas orbit independently on eccentric ellipses in 3:2 resonance with Jupiter. The triangular pattern is a "traffic jam" — Hildas slow at aphelion, and with 3 aphelion directions 120 degrees apart, the density peaks form a triangle.
+- **Pure Keplerian Hildas drift relative to Jupiter** without gravitational feedback. Fix: derive Hilda time from Jupiter time (`hildaTime = 3/2 * jupTime`) to enforce resonance lock. This keeps the triangle locked to Jupiter's orbital motion.
+- **All Hildas need the same forced period** for the triangle to be stable (the real resonance enforces this). Individual `a` values can vary (3.7-4.1 AU) for visual spread, but the period is forced to `P = a0^1.5` for the reference semi-major axis.
+- **Hilda aphelion direction:** In the `orbitXYZ` coordinate convention, aphelion points at angle `(pi - omega)` in the XZ plane. Therefore, to aim aphelion at `targetAngle`, set `omega = pi - targetAngle`.
+- **Hilda phase distribution biased toward aphelion:** 60% of phases near M=pi (aphelion) with Gaussian scatter, 40% uniformly distributed. This mimics resonance libration, which keeps Hildas near aphelion longer than pure Kepler predicts.
+- **Trojan inclination distribution:** Use Gaussian-weighted inclination (sum of 3 random values minus 1.5, divided by 1.5, times max amplitude). This approximates the observed distribution (mean ~10 degrees, rare above 25 degrees). Uniform distribution to +/-35 degrees is unrealistic.
+- **Population ratios:** Trojans ~1% of belt (use 5% for visibility), Hildas ~0.4% of belt (use 2-6% for visibility with minimum count for triangle to be visible).
+
+### UI/UX lessons (2026-03-29)
+- **Play/Pause label convention:** Show what clicking WILL DO. When playing: "Pause" (with pause icon, button has `.active` class with red bg). When paused: "Play" (with play icon, default style).
+- **Spacebar must toggle play/pause in every app.** This is a project-wide rule. Add a `keydown` listener for `Space` that calls `preventDefault()` and triggers the play button click.
+- **Labels should be close to objects.** Use offsets of 0.05-0.08 world units. Offsets of 0.25+ cause labels to drift away when zoomed in.
+- **Tooltip should trigger on planet mesh hover (raycaster)**, not only on label text. Labels are small and hard to hover; the mesh is a larger hit target. Use `Raycaster.intersectObjects` on `pointermove`.
+- **Distance scale should be HTML overlay (fixed screen X), not 3D geometry.** The scale bar tracks zoom via camera FOV projection but does NOT rotate or tilt with the scene. This ensures the scale is always readable and always in the same screen position.
+- **Panel titles: keep short, use standard `.panel-box h3`** (11px, weight 400, 50% opacity white).
+- **Histogram needs log scale** to show small populations (Hildas, Trojans) alongside the large main belt population.
+- **Embed panel sizes must be tested.** CSS scaling of a native canvas can make text unreadable. Always verify both fullscreen and embedded modes.
+- **Adapt label font sizes for embed vs fullscreen** using the `isEmbedded` flag. Distance scale labels: 14px fullscreen, 11px embedded. Secondary (light-minute) labels: 12px fullscreen, 9px embedded.
+
+### Verification process lessons (2026-03-29)
+- **Code-reading verification is useless for visual quality.** Must use actual browser (Puppeteer headed or Chrome). A code review cannot catch visual artifacts, alignment issues, or bloom interactions.
+- **Visual verification must check IMPLEMENTATION patterns**, not just visual outcomes. A wrong implementation (e.g. double-FrontSide spheres) that happens to look passable under one set of bloom settings will break under different conditions.
+- **Always dispatch both sao-verify + sao-visual agents.** Never substitute manual code review for visual inspection.
+- **A "PASS" report without screenshots is invalid.** The verifier must produce actual screenshots. A text-only report proves nothing was actually rendered.
+
+### Process mistakes to avoid (2026-03-29)
+- **Read the style guide BEFORE implementing.** Many mistakes in the asteroid app were patterns already documented as "don't do this" in the style guide.
+- **Simpler is better.** Over-engineering (wide halos, stacked lines, per-mode bloom parameters) always produced worse results than the simple approach (plain lines + additive, bloom alone, identical 3D settings both modes).
+- **Don't make the same mistake multiple times.** If a correction is given (e.g. "no Line2 with transparency"), apply it consistently to ALL similar elements, not just the one that was flagged.
+- **Test embed and fullscreen side by side** before declaring done. Many issues (unreadable text, overblown particles, hidden panels) only appear in one mode.
+- **Don't accept verification reports at face value.** Check that the report includes screenshots and specific measured values, not just "looks good".
+
 ### Spec-writing pitfalls
 - Spec pseudocode MUST be tested — the pulsar anti-pole formula had a bug caught only by the verifier.
 - Rotation curve spec used positive wind factor for spiral arms (produces leading arms); should be negative for trailing.
@@ -93,7 +142,7 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 | `.planning/apps/*.md` | Per-app dev logs |
 | `.planning/apps/*-spec.md` | Build specs for physics sim apps |
 | `experimental/*-interactive.html` | Interactive visualizations |
-| `experimental/*-article.html` | Article pages with embedded interactives |
+| `experimental/*.html` (non-interactive) | Article pages with embedded interactives |
 | `experimental/assets/` | Textures, models, credits |
 
 ---

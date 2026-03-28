@@ -4,7 +4,7 @@
 
 ## Files
 - `experimental/sun-interactive.html` — Babylon.js particle sun
-- `experimental/sun-article.html` — Article page with embed
+- `experimental/sun.html` — Article page with embed
 - `experimental/textures/sun/T_SunSurface.png`, `T_SunFlare.png`, `T_Star.png` — Particle textures (Patrick Ryan / Microsoft)
 
 ## Architecture

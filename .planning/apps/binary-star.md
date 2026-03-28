@@ -7,7 +7,7 @@
 
 ### Files
 - Interactive: `experimental/binary-star-interactive.html` (946 lines)
-- Article: `experimental/binary-star-article.html` (246 lines)
+- Article: `experimental/binary-star.html` (246 lines)
 - Spec: `.planning/apps/binary-star-spec.md` (666 lines)
 
 ### Features

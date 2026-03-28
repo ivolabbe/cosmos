@@ -1,6 +1,6 @@
 # Gravitational Waves Interactive — Dev Log
 
-**Files:** `experimental/gravitational-waves-interactive.html`, `experimental/gravitational-waves-article.html`
+**Files:** `experimental/gravitational-waves-interactive.html`, `experimental/gravitational-waves.html`
 **Status:** Milestone 1 complete (2026-03-27)
 **Started:** 2026-03-26
 

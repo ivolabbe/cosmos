@@ -170,9 +170,10 @@ Must run **headed** (`headless: false`) — WebGL requires GPU.
 **Pipeline per app:**
 ```
 Phase 1: Dispatch researcher → .planning/apps/[topic]-spec.md
-Phase 2: Dispatch coder (reads spec) → dispatch verifier → loop until pass
+Phase 2: Dispatch visual sub agent → .planning/apps/[topic]-spec.md researches visual implementation and references
 Phase 3: Dispatch writer (reads spec) → add iframe to article
-Phase 4: Log learnings, update agent docs, commit
+Phase 4: Dispatch coder (reads spec) → dispatch verifier → loop until pass
+Phase 5: Log learnings, update agent docs, commit
 ```
 
 **Current state:** 3/10 built (pulsar, binary star, rotation curve) on `dev` branch, pending physics + visual review. 7 remaining (see PROJECT-STATUS.md).

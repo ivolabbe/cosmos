@@ -1,0 +1,208 @@
+/* ====================================================================
+   SAO COSMOS Interactive — House Style CSS
+   Copy this into every new interactive's <style> tag.
+   ==================================================================== */
+
+
+/* ====================================================================
+   DESIGN PRINCIPLES  (read before adapting for new app types)
+   ====================================================================
+
+   BACKGROUND
+   Pure black #000 for ALL space scenes (planet globes, orbital diagrams,
+   schematic views — everything set in space). Deep navy (#0a0a2e) was tried
+   but makes scenes look murky. The only exception is #060618 for abstract
+   data-viz with dense overlapping elements (GW spacetime mesh).
+   Renderer setClearColor must match the body background.
+
+   GLASS PANELS
+   All overlays use the same "dark glass" idiom: ~92% opaque navy with 12%
+   white hairline border. This unifies info panels, chart boxes, controls,
+   and tooltips. The tint should match the scene:
+   - Standard (most apps):  rgba(10,10,46,0.92)
+   - Deep-space scenes:     rgba(6,6,24,0.92)
+   - Warm objects (Sun):    rgba(10,6,0,0.92)
+   Controls bar is slightly more transparent (0.9) so the scene breathes.
+
+   TEXT HIERARCHY
+   Five opacity levels on white create the information hierarchy.
+   Use them consistently — never invent intermediate opacities:
+   #fff → 0.7 → 0.5 → 0.35 → 0.25
+   (title → description → tertiary ��� hint → ghost)
+
+   ACCENT COLOUR
+   Swinburne red #DC2D27 is the ONLY accent colour. It marks:
+   - Active/selected states (buttons, checkboxes, range inputs)
+   - The current-time marker on every chart
+   - Tooltip borders
+   Never introduce a second accent. Data-viz colours (gold, blue, teal)
+   are for DATA, not UI chrome.
+
+   CONTROLS
+   Minimal. One row. No time sliders, no element-count selectors,
+   no configuration modals. If the user needs more than ~8 controls,
+   the app is too complex — simplify the interaction model instead.
+   Group related controls with 1px .sep dividers.
+
+   EMBEDDED MODE
+   Every app runs standalone AND in an iframe. In embedded mode the
+   article provides context, so hide title/description/hint/credit.
+   Keep only the compact readout and controls.
+
+   RESPONSIVE
+   At <700px the controls bar wraps. Nothing else changes — the 3D
+   scene is full-viewport and scales naturally.
+
+   TYPOGRAPHY
+   One font: "Open Sans" via Google Fonts (300, 400, 600, 700).
+   - Titles: weight 300 (light) — elegant, not bold
+   - Body/labels: weight 400
+   - Readout values: weight 600
+   - Monospace data: "Courier New", monospace
+   Minimum readable size: 11px (controls, hints). Below that, omit.
+   ====================================================================
+*/
+
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+canvas { display: block; }
+
+
+/* --- Info panel (top-left) ---
+   For simple viewers (planet globes), use the compact variant:
+     padding: 16px 20px; max-width: 340px; font-size: 14px;
+     h2: 18px; desc: 13px; hint: 11px
+   For complex sims with readouts/charts, use the full variant below.
+   For 2D-only apps (no 3D scene), position may shift — but keep
+   the same glass style, border, and text hierarchy.
+*/
+#info {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 18px 24px; max-width: 380px;
+  font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+}
+#info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+#info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+#info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+.readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+.readout div { margin-bottom: 2px; }
+.readout span { color: #fff; font-weight: 600; }
+
+
+/* --- Embedded mode ---
+   Always identical. No per-app variation.
+*/
+body.embedded #info h2,
+body.embedded #info .desc,
+body.embedded #info .hint { display: none; }
+body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+body.embedded #credit { display: none; }
+
+
+/* --- Tooltip ---
+   Appears on hover over CSS2D labels or interactive elements.
+   Swinburne-red border is the only splash of colour in the chrome.
+   For apps without hover targets, omit the tooltip div entirely.
+*/
+#tooltip {
+  position: absolute; display: none;
+  background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+  border-radius: 6px; padding: 10px 14px; font-size: 12px; max-width: 280px;
+  line-height: 1.5; pointer-events: none; z-index: 20; color: #e0e0e0;
+}
+
+
+/* --- Controls bar (bottom center) ---
+   All interactive parameters live here. Single row, centred.
+   For apps with many controls (>6 items): widen range inputs to 70px
+   to give them more travel. For apps with ≤3 controls: consider using
+   only checkboxes and a speed select — no sliders needed.
+
+   Button label convention:
+     Playing state:  "⏸ Pause"  (class="active", red bg)
+     Paused state:   "▶ Play"   (default style)
+   The label tells the user what clicking will DO, not the current state.
+*/
+#controls {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+  background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+}
+#controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+#controls input[type="range"] { width: 55px; accent-color: #DC2D27; cursor: pointer; }
+#controls input[type="checkbox"] { accent-color: #DC2D27; }
+#controls select {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+}
+#controls button {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+}
+#controls button:hover { background: rgba(255,255,255,0.18); }
+#controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+.val { min-width: 28px; text-align: right; display: inline-block; font-size: 11px; }
+.sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+
+/* --- 2D chart panels ---
+   Position: top-right for 3D+chart apps. For 2D-only apps (HR diagram,
+   EM spectrum), the chart may BE the main canvas — no panel-box needed.
+   Panels can stack vertically (flex-direction: column, gap: 8px) or
+   sit side-by-side (flex-direction: row, gap: 10px).
+   Embedded mode: shrink to 240×130 or so. Native resolution stays fixed.
+*/
+.panel-box {
+  background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 10px 12px 6px;
+}
+.panel-box h3 { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5); margin-bottom: 4px; text-align: center; }
+.panel-box canvas { display: block; border-radius: 3px; }
+
+
+/* --- Loading / Credit --- */
+#loading {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+}
+#credit {
+  position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap;
+}
+#credit a { color: rgba(255,255,255,0.35); }
+
+
+/* --- Responsive ---
+   Only the controls bar wraps. Everything else is absolute-positioned
+   and adapts via the 3D viewport / canvas resize handler.
+*/
+@media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+
+
+/* ====================================================================
+   EXTENDING FOR NEW APP TYPES
+
+   Tabbed panels / step-through (e.g. Cosmic Distance Ladder):
+     Add a .step-nav bar above or below the main content.
+     Use the same glass style as .panel-box. Active step gets the
+     Swinburne red bottom-border, not a background fill.
+
+   Full-canvas 2D (e.g. HR Diagram, EM Spectrum):
+     Body background #000. No 3D scene. The <canvas> IS the content.
+     Info panel and controls overlay as usual. Chart drawing uses the
+     standard 2D conventions (see house-style.js).
+
+   Gallery / grid (e.g. Galaxy Classification):
+     Items use .panel-box styling. Selected item gets Swinburne red
+     border: border-color: rgba(220,45,39,0.7). Hover is the standard
+     button-hover rgba(255,255,255,0.18) tint.
+
+   Split-pane (e.g. Stellar Evolution timeline + HR diagram):
+     Use a single controls bar at bottom for shared parameters.
+     Each pane is a .panel-box with its own canvas. No extra borders
+     between panes — the gap (10px) is enough visual separation.
+   ==================================================================== */

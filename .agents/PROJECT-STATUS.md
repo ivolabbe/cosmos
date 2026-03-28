@@ -2,7 +2,7 @@
 
 *Current state of all interactive apps and infrastructure. Updated after each milestone.*
 
-Last updated: 2026-03-28
+Last updated: 2026-03-29
 
 ---
 
@@ -12,18 +12,18 @@ Last updated: 2026-03-28
 
 | App | Interactive | Article | Type | Notes |
 |-----|-----------|---------|------|-------|
-| Gravitational Waves | `gravitational-waves-interactive.html` | `gravitational-waves-article.html` | Physics sim | 2D mesh + 3D volume + WebAudio chirp + spectrogram |
-| Sun | `sun-interactive.html` | `sun-article.html` | Babylon.js | ParticleHelper preset, activity controls |
-| Satellites | `satellites-interactive.html` | `satellite-article.html` | Data viz | CelesTrak catalog, 14K+ orbits, glTF Earth, debris |
-| Asteroids | `asteroid-interactive.html` | `asteroid-article.html` | Orbital mech | Kepler solver, Kirkwood gaps, Trojans |
-| Mercury | `mercury-interactive.html` | `mercury-article.html` | Planet globe | 8K texture, simplest template |
-| Venus | `venus-interactive.html` | `venus-article.html` | Planet globe | Cloud toggle, super-rotation |
-| Earth | `earth-interactive.html` | `earth-article.html` | Planet globe | Custom day/night shader, city lights |
-| Mars | `mars-interactive.html` | `mars-article.html` | Planet globe | Thin CO₂ atmosphere |
-| Jupiter | `jupiter-interactive.html` | `jupiter-article.html` | Planet globe | 4K bands + GRS |
-| Saturn | `saturn-interactive.html` | `saturn-article.html` | Planet globe | Ring system (alpha texture) |
-| Uranus | `uranus-interactive.html` | `uranus-article.html` | Planet globe | 97.77° axial tilt |
-| Neptune | `neptune-interactive.html` | `neptune-article.html` | Planet globe | Methane blue |
+| Gravitational Waves | `gravitational-waves-interactive.html` | `gravitational-waves.html` | Physics sim | 2D mesh + 3D volume + WebAudio chirp + spectrogram |
+| Sun | `sun-interactive.html` | `sun.html` | Babylon.js | ParticleHelper preset, activity controls |
+| Satellites | `satellites-interactive.html` | `satellite.html` | Data viz | CelesTrak catalog, 14K+ orbits, glTF Earth, debris |
+| Asteroids | `asteroid-interactive.html` | `asteroid.html` | Orbital mech | 10K particles, realistic belt distribution, Kirkwood gaps, Greeks/Trojans, Hildas (3:2 resonance triangle), Ceres/Vesta, histogram panel |
+| Mercury | `mercury-interactive.html` | `mercury.html` | Planet globe | 8K texture, simplest template |
+| Venus | `venus-interactive.html` | `venus.html` | Planet globe | Cloud toggle, super-rotation |
+| Earth | `earth-interactive.html` | `earth.html` | Planet globe | Custom day/night shader, city lights |
+| Mars | `mars-interactive.html` | `mars.html` | Planet globe | Thin CO₂ atmosphere |
+| Jupiter | `jupiter-interactive.html` | `jupiter.html` | Planet globe | 4K bands + GRS |
+| Saturn | `saturn-interactive.html` | `saturn.html` | Planet globe | Ring system (alpha texture) |
+| Uranus | `uranus-interactive.html` | `uranus.html` | Planet globe | 97.77° axial tilt |
+| Neptune | `neptune-interactive.html` | `neptune.html` | Planet globe | Methane blue |
 
 ### On `dev` branch (pending review)
 
@@ -46,13 +46,35 @@ Last updated: 2026-03-28
 
 ---
 
-## Pending Review (2026-03-28)
+## Completed (2026-03-29)
 
-User gave 3 categories of feedback on the 3 new physics sim apps:
+### House style system established
+- Deep analysis of all 7 production interactives → comprehensive visual reference in `INTERACTIVE-STYLE-GUIDE.md`
+- Copy-paste snippet files: `.agents/snippets/house-style.css`, `house-style.js`, `components.js`
+- Per-app reference table with exact bloom, camera, lighting values
+- Sphere rendering decision tree, line rendering rules, particle material rules
+- Generalized design principles for novel app types
 
-1. **Article content** — DONE. Articles reverted to original text + iframe only. <15% correction rule.
-2. **Physics of simulations** — DONE. Beam direction fixed, angle clamped, reference code/formula requirement added, generic physics verification checklist.
-3. **Visual style** — DONE. Visual agent created, bloom/density rules, circular particles, panel sizing, layout checks, readout requirements.
+### Asteroid belt major upgrade
+- 10,000 particles (from 2,000) with realistic radial distribution traced from observed histogram
+- Kirkwood gaps (3:1, 5:2, 7:3, 2:1) as zero-density zones in piecewise PDF
+- Greeks (L4) and Trojans (L5) with Gaussian inclination distribution, z-oscillation
+- Hildas: real Keplerian orbits locked to Jupiter via `hildaTime = 3/2 × jupTime`, triangle from aphelion clustering
+- Ceres and Vesta as named objects with labels and raycaster tooltips
+- Semi-major axis distribution histogram panel (log scale, colour-coded by population)
+- HTML distance scale overlay (tracks zoom, ignores rotation/tilt)
+- Circular particle shader with min-size clamp, radial-gradient Sun sprite
+- Spacebar play/pause, proper embedded mode handling
+
+### File renames
+- All `experimental/*-article.html` → `experimental/*.html` (12 files, all references updated)
+
+### Zenith interactive house-style update
+- CSS/chrome aligned, embedded mode, toneMapping, background #000
+
+## Pending Review
+
+- Pulsar, Binary Star, Rotation Curve: on `dev`, physics reviewed, visual review pending
 
 ---
 

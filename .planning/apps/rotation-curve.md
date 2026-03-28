@@ -7,7 +7,7 @@ Face-on spiral galaxy with orbiting particle-stars and linked rotation curve v(R
 
 ### Files
 - Interactive: `experimental/rotation-curve-interactive.html` (878 lines)
-- Article: `experimental/rotation-curve-article.html` (211 lines)
+- Article: `experimental/rotation-curve.html` (211 lines)
 - Spec: `.planning/apps/rotation-curve-spec.md` (510 lines)
 
 ### Features
