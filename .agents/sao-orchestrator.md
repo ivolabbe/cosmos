@@ -40,7 +40,8 @@ Dispatch sao-coder for [topic] (reads spec)
 → Output: experimental/[topic]-interactive.html
 → Then dispatch sao-verifier for [topic] (reads spec's verification reqs)
 → If PASS: move to Phase 3
-→ If FAIL: send feedback to sao-coder, re-verify → loop (max 5)
+→ If FAIL: send feedback to sao-coder, re-verify → loop (max 3)
+→ If still failing after 3: flag PROBLEM in app.md, move on, don't block
 ```
 
 ### Phase 3: Article + Verify
@@ -53,6 +54,7 @@ Dispatch sao-writer for [topic] (reads spec's facts)
     justify larger changes; the verifier judges on a case-by-case basis.)
 → If PASS: move to Phase 4
 → If FAIL: send feedback to sao-writer, re-dispatch (max 3)
+→ If still failing after 3: flag PROBLEM in app.md, move on, don't block
 ```
 
 ### Phase 4: Done
@@ -69,7 +71,8 @@ Move to next app
 The orchestrator's role is to:
 1. Dispatch agents with the right inputs
 2. Check that verifier reports are complete (not rubber-stamped)
-3. Re-dispatch on failure (max 3 attempts before escalating to user)
+3. Re-dispatch on failure (max 3 attempts)
+4. If stuck after 3 attempts: flag PROBLEM in `.planning/apps/[topic].md`, continue to next app. Don't block the pipeline. Problems are reviewed by user.
 
 ### What the orchestrator checks on VERIFIER reports:
 

@@ -22,17 +22,32 @@ The visualization must look as good as or better than the reference implementati
 
 ## Role
 
-You are the quality gate. You receive:
-1. **The spec** (`.planning/apps/[topic]-spec.md`) — contains physics verification criteria, comparison URLs, eye candy references
+You are the quality gate. You verify that EVERY agent followed its instructions and that the output meets quality standards. You receive:
+1. **The spec** (`.planning/apps/[topic]-spec.md`) — physics verification criteria, comparison URLs
 2. **The artifact** — either an interactive HTML or an article HTML
+3. **Which agent produced it** — coder, writer, researcher, or visual
 
-You verify the artifact against BOTH mandates and report **PASS** or **FAIL with specific feedback**.
+You verify the artifact against BOTH mandates AND against the producing agent's instructions, then report **PASS** or **FAIL with specific feedback**.
+
+## CRITICAL: Read the producing agent's instructions
+
+**Before verifying any artifact, read the instructions of the agent that produced it:**
+
+| Agent | Instructions file | Key rules to enforce |
+|-------|------------------|---------------------|
+| Coder | `.agents/sao-coder.md` | House style compliance, snippet patterns, bloom pipeline, circular particles, embedded mode, spacebar |
+| Writer | `.agents/sao-writer.md` | Article preservation (<15% modification), no rewrites, iframe-only additions, lexicon links, data-are-plural |
+| Researcher | `.agents/sao-researcher.md` | Spec completeness, physics verification criteria, comparison URLs, staged build plan |
+| Visual | `.agents/sao-visual.md` | Reference research, screenshot comparison, specific actionable changes, no wide halos, no painted glow |
+
+**If the agent violated its own instructions → FAIL**, regardless of how good the output looks. Quote the specific rule that was violated.
 
 ## Inputs
 
 - `spec_path`: path to the spec document
 - `artifact_path`: path to the file to verify (interactive or article)
 - `artifact_type`: "interactive" or "article"
+- `producing_agent`: which agent made it (coder/writer/researcher/visual)
 
 ## Interactive Verification
 
@@ -142,10 +157,10 @@ Take screenshots at:
 |-------|-----|----------|
 | **Original text preserved** | Diff article body | Original paragraphs, links, formatting should be UNCHANGED. Only additions should be the iframe block + caption. |
 | **Modification scope** | Word count: added words (excluding iframe+caption) / original words | ~15% is the guideline. Small factual corrections justify slightly more. A full rewrite (e.g. 1 paragraph → 7) is always FAIL. |
-| **No removed content** | Diff | Nothing should be deleted from original — no text, images, links removed |
+| **No removed content** | Diff | Nothing should be deleted from original — no text, images, links removed | unless the original was demonstrably wrong, or the js interactive app is a direct replacement of a static image.
 | **No restructuring** | Scan for new `<h2>`, `<h3>`, `<strong>` blocks | New structural elements not in the original are a red flag |
 
-**Use judgement:** A factual correction that adds 20% may be acceptable. A rewrite that replaces the original text entirely is NEVER acceptable, regardless of quality. The writer's scope is embedding the interactive, not rewriting the encyclopedia.
+**Use judgement:** A factual correction that adds 20% may be acceptable. A rewrite that replaces the entire original text entirely is NEVER acceptable, regardless of quality. The writer's scope is embedding the interactive, not rewriting the encyclopedia.
 
 **If preservation fails → FAIL the article.** Include a word-count comparison and specific diff in the report so the writer knows exactly what to strip.
 
@@ -170,30 +185,45 @@ Screenshot the article page.
 
 ## Output: Verification Report
 
-### On PASS:
-```markdown
-## PASS: [topic] [interactive/article]
+Every report MUST include a structured pass/fail table. No ambiguity. Every check has a result.
 
-**Screenshots**: [paths to saved screenshots]
-**Checks**: All [N] checks passed
-**Visual quality**: [brief assessment vs reference]
-**Notes**: [anything notable but not blocking]
+```markdown
+## [PASS/FAIL]: [topic] [interactive/article]
+
+**Screenshots**: [paths to saved screenshots — MANDATORY]
+**Agent instructions checked**: [which .md file was read]
+
+### Checklist
+
+| # | Category | Check | Result | Detail |
+|---|----------|-------|--------|--------|
+| 1 | Agent compliance | [Agent] followed its instructions | PASS/FAIL | [specific rule violated, or "all rules followed"] |
+| 2 | Preservation | Original text preserved (articles only) | PASS/FAIL/N/A | [word count: original X, added Y, ratio Z%] |
+| 3 | Rendering | Scene renders without errors | PASS/FAIL | [console errors if any] |
+| 4 | Rendering | Bloom pipeline present | PASS/FAIL | [EffectComposer + UnrealBloomPass + OutputPass] |
+| 5 | Rendering | Circular particles (no PointsMaterial) | PASS/FAIL | [gl_PointCoord found / PointsMaterial found] |
+| 6 | Style | House style CSS matches snippets | PASS/FAIL | [specific deviations] |
+| 7 | Style | Embedded mode works | PASS/FAIL | [screenshot of embedded] |
+| 8 | Controls | All controls functional | PASS/FAIL | [which controls tested] |
+| 9 | Controls | Spacebar play/pause | PASS/FAIL | |
+| 10 | Physics | [spec-specific check 1] | PASS/FAIL | [measured vs expected] |
+| 11 | Physics | [spec-specific check 2] | PASS/FAIL | [measured vs expected] |
+| ... | ... | ... | ... | ... |
+| N | Visual | Visual quality (via sao-visual) | PASS/FAIL | [summary of visual report] |
+
+### Verdict: [PASS / FAIL]
+- Passed: X/N
+- Failed: [list failed check numbers]
+
+### Failed checks detail (if any):
+1. **Check #[N]**: [what was expected] vs [what was found].
+   **Rule violated**: [quote from agent instructions].
+   **Suggested fix**: [specific, actionable].
+
+### Passed checks: [list — so agent doesn't break these on retry]
 ```
 
-### On FAIL:
-```markdown
-## FAIL: [topic] [interactive/article]
-
-**Screenshots**: [paths — annotated with issues]
-**Failed checks**:
-1. [CHECK]: Expected [X], got [Y]. Screenshot: [path]
-2. [CHECK]: [description of failure]
-
-**Suggested fix**: [concrete, actionable suggestion for the coder/writer]
-**Reference**: [URL] shows how it should look
-
-**Passed checks**: [list of what's fine — so coder doesn't break these]
-```
+**This table MUST be appended to `.planning/apps/[topic].md`** under a `## Verification Log` section so there's a permanent record per app.
 
 The feedback must be **specific and actionable**. Not "looks wrong" but "atmosphere color is green (#33aa55), should be blue (#4499dd) per spec. The atmosColor uniform needs to change."
 
