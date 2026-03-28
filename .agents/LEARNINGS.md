@@ -24,6 +24,9 @@ When adding an interactive to an existing article: ONLY add the iframe embed blo
 ### Rapid visual iteration
 The user iterates rapidly by testing visually in Chrome and queuing corrections. Physical accuracy is as important as visual appeal. Don't over-engineer before testing — make the minimal change, let the user evaluate, iterate. The user references real physics papers/tools as visual quality targets — take these seriously.
 
+### Visual quality via sub-agent
+Visual verification is context-heavy (web searches, image comparisons). The verifier dispatches `sao-visual` as a sub-agent. Visual rules: favour additive blending for glow, use bloom tastefully (0.2–0.4), make sparse lines thick enough to see (stacked copies), find appropriate textures for spherical bodies. **Never change physics to match visuals** — only adjust visual parameters (zoom, brightness, opacity, line thickness, colour, bloom).
+
 ### Continuous learning
 After every successful result, write learnings to the project. Update agent files, dev logs, and style guides with new knowledge. Pattern: build → test → verify → log → improve skill → next iteration.
 

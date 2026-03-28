@@ -304,16 +304,17 @@ Autonomous development of 3D interactive visualizations and encyclopedia article
 | **Orchestrator** | `sao-orchestrator.md` | Phase tracker. Dispatches agents, recovers failures. | Main context (lean) |
 | **Researcher** | `sao-researcher.md` | Produces the SPEC: science facts, state-of-the-art survey, implementation plan, verification requirements, comparison data. | Background agent |
 | **Coder** | `sao-coder.md` | Builds the interactive from the spec. Receives feedback from verifier, iterates. | Background agent |
-| **Verifier** | `sao-verify.md` | Quality gate. Tests against spec's verification requirements + comparison websites. Gives structured feedback to coder or writer. Does NOT fix — only reports. | Background agent |
-| **Writer** | `sao-writer.md` | Writes encyclopedia article from spec's facts. | Background agent |
+| **Verifier** | `sao-verify.md` | Quality gate. Physics checks in-house, dispatches visual sub-agent. Gives structured feedback to coder or writer. Does NOT fix — only reports. | Background agent |
+| **Visual Designer** | `sao-visual.md` | Visual quality specialist. Researches reference styles, compares screenshots, reports to verifier. Dispatched BY verifier, not by orchestrator. | Sub-agent of verifier |
+| **Writer** | `sao-writer.md` | Adds iframe embed to existing articles (minimal modifications). Writes new articles matching COSMOS voice. | Background agent |
 
 ## Key Architecture Decisions
 
-1. **SPEC-driven.** Researcher produces `.planning/apps/[topic]-spec.md` containing everything: facts, visual references, implementation approach, verification criteria. All other agents read from it.
+1. **SPEC-driven.** Researcher produces `.planning/apps/[topic]-spec.md` containing everything: facts, reference code, visual references, implementation approach, verification criteria. All other agents read from it.
 
 2. **Orchestrator = phase tracker.** Knows which phase each app is in. Dispatches the right agent for the next phase. Puts things back on track when they go awry. Does NOT touch code, screenshots, or content.
 
-3. **Verifier is separate from coder.** Verifier has deep context on what "correct" looks like (from spec's comparison data). Gives specific, actionable feedback to the coder. Coder iterates until verifier passes.
+3. **Verifier is the single quality gate.** Combines physics checks (in-house, lightweight) with visual quality (delegated to visual sub-agent, context-heavy). This separation keeps the verifier lean while allowing deep visual research. The verifier gives specific, actionable feedback to the coder.
 
 4. **Parallel by default.** Independent apps run through the pipeline simultaneously. Orchestrator manages 2-4 concurrent pipelines.
 

@@ -58,7 +58,7 @@ User gave 3 categories of feedback on the 3 new physics sim apps:
 
 ## Infrastructure
 
-- **Agent system**: 5 agents in `.agents/sao-*.md` (orchestrator, researcher, coder, verifier, writer)
+- **Agent system**: 6 agents in `.agents/sao-*.md` (orchestrator, researcher, coder, verifier, visual designer, writer)
 - **Startup**: `.agents/STARTUP.md` — bootstrap instructions for any orchestrator
 - **Style guide**: `.agents/INTERACTIVE-STYLE-GUIDE.md` — Three.js visual/architecture rules
 - **Style analysis**: `.agents/cosmos-style-analysis.md` — 643-article corpus voice characterization

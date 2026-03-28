@@ -97,28 +97,40 @@ When camera rotation and a control parameter are linked to the same physical qua
 - **Example**: pulsar viewing angle — if the sightline is defined as a parameter, rotating the camera should NOT independently change the pulse profile (the sightline is fixed in the physics frame, separate from camera).
 - **Rule**: document whether camera rotation is cosmetic-only (user explores the scene) or physics-linked (camera angle IS the physical viewing angle). The spec should state which.
 
-### 5. Visual quality comparison (eye candy)
+### 5. Visual quality — dispatch the visual sub-agent
 
-Fetch each reference URL from the spec's eye candy section:
+Visual quality assessment is context-heavy (web searches, image comparisons, screenshot analysis). **Dispatch the sao-visual agent** as a sub-agent rather than doing this in your own context.
+
+**Dispatch prompt:**
 ```
-WebFetch(url, "Describe the visual quality — colors, lighting, effects, overall impression")
+You are the SAO Visual Designer. Read your instructions at .agents/sao-visual.md.
+
+Verify visual quality for: [topic]
+- Spec: .planning/apps/[topic]-spec.md
+- Build URL: http://localhost:8765/experimental/[topic]-interactive.html
+- Style guide: .agents/INTERACTIVE-STYLE-GUIDE.md
+
+Produce a structured visual report with references, comparison, and specific changes.
 ```
 
-Compare our render to each reference:
-- **Quality bar**: Is ours at least 80% of the reference quality?
-- **Color accuracy**: Right hues and saturation for this phenomenon?
-- **Visual impact**: Does it look impressive? Would a student want to play with it?
-- **Polish**: No artifacts, no z-fighting, smooth animation, clean controls?
+**Read the visual agent's report.** It will contain:
+- Reference URLs (saved for future comparison)
+- Element-by-element comparison table
+- Specific changes for the coder (exact parameter values)
+- Verdict: PASS or NEEDS_WORK
 
-If our render is significantly below the reference quality, FAIL with specific description of what's lacking and what the reference does better.
+**Combine with your physics verdict** for the overall result:
+- Physics PASS + Visual PASS → **PASS**
+- Physics PASS + Visual NEEDS_WORK → **FAIL** (visual feedback to coder)
+- Physics FAIL → **FAIL** regardless of visual quality (physics first)
 
-### 5. Screenshot at multiple states
+### 6. Screenshot at multiple states
 
 Take screenshots at:
 1. Initial render (t=3s)
-2. After rotation (t=8s) — verify shadow moves across surface
-3. Day mode ON — verify full illumination
-4. Any topic-specific states (rings off, clouds off, etc.)
+2. After interaction (t=8s) — verify animation/rotation works
+3. Key parameter states from spec
+4. Any state the visual agent flagged as needing comparison
 
 ## Article Verification
 
