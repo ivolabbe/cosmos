@@ -55,6 +55,14 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 - Kepler solver: 10–12 Newton-Raphson iterations, `atan2`-based true anomaly.
 - Pulsar anti-pole: θ_anti = π − θ_north (NOT `pulseIntensity(phase, PI−alpha, zeta, rho)`).
 - Beam cones: ConeGeometry + custom shader with radial/axial fade + `AdditiveBlending`. **IMPORTANT**: ConeGeometry apex is at +Y — must flip (rotate PI) for beams that diverge outward from a source. Unfixed, beams converge (physically wrong).
+- Circular particles: mandatory for all particle apps. Use ShaderMaterial with `if (d > 1.0) discard; alpha = exp(-d*d*2.0);`. Default PointsMaterial = ugly squares.
+- Bloom vs density: control bloom via particle SIZE not brightness. Dense regions (bulge/cores) = tiny bright particles. Sparse regions (disk/outskirts) = larger particles. Never dim particles to control bloom.
+- Fullscreen panels: generous sizing (380px, 15px font, 380×220 canvases). Embedded: shrink via CSS. Visual agent checks both.
+- Periodic profiles: offset display by half-period so peaks are centred, not split at plot boundary.
+- Readouts: always physically meaningful (actual masses in units, DM fraction within stated radius). Never just slider percentages.
+- Speed ranges: match physics context (galaxy 0.01–1.0x, pulsar depends on period). Don't use generic ranges.
+- Reference curves (solid body, Keplerian): don't clamp to plot max — let canvas clip naturally.
+- Translucent reference shapes (disk ring, bulge sphere) at low opacity add spatial context.
 - Visual spin cap: for P < 0.5s, cap visual omega at 2 Hz; physics runs at correct rate.
 - Web Audio: continuous oscillator for P < 50ms, discrete clicks for P > 50ms. Init on user gesture.
 - Binary star: camera-from-inclination approach is cleaner than rotating the orbit group.

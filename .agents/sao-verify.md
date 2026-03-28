@@ -224,3 +224,8 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — For physics sims: verify by injecting JS via Puppeteer to compute expected values and compare to displayed values.
 - 2026-03-28 — Beam angle clamping (80°) is acceptable for visual quality — note as minor deviation, not a failure.
 - 2026-03-28 — Article pages: verify.js reports false failures (no canvas, no controls) because they're in the iframe. Check iframe src instead.
+- 2026-03-28 — Direction sanity is critical: ConeGeometry beams were converging (apex wrong way). Always check that beams/jets diverge from source.
+- 2026-03-28 — Readouts must be physically consistent with the rotation curve/plot. "DM 100%" is meaningless — show actual mass and fraction.
+- 2026-03-28 — Solid body reference curve should NOT be clamped — it's a straight line that goes off-plot.
+- 2026-03-28 — Check panel layout in both fullscreen and embedded mode. Panels must not obscure the main 3D content.
+- 2026-03-28 — Periodic signals: check that pulse/peak is centred in the profile panel, not split at the boundary.

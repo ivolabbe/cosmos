@@ -160,3 +160,9 @@ When done, include:
 - 2026-03-28 — Galaxy sim: no background stars (galaxies are viewed in isolation). Yellow bulge + blue disk = physically correct color gradient.
 - 2026-03-28 — Speed ranges must match physics context: galaxy rotation is slow (0.1–1.0x), not fast (no 10x). Let physics set sensible bounds.
 - 2026-03-28 — Spiral wind-up is expected for differential rotation — that's density wave theory territory, separate scope. Don't try to fix it here.
+- 2026-03-28 — Bloom vs density: control bloom via particle SIZE, not brightness. Dense regions need tiny but bright particles (less overlap = less bloom compounding). Sparse regions need larger particles. Never dim particles to control bloom — that kills visibility.
+- 2026-03-28 — Circular particles are mandatory. Default PointsMaterial renders squares. Always use ShaderMaterial with gl_PointCoord discard + Gaussian falloff.
+- 2026-03-28 — Translucent reference shapes (disk ring at opacity 0.06–0.10, bulge sphere at 0.04) add spatial context without obscuring particles.
+- 2026-03-28 — Fullscreen panels should be generous (380px, 15px font, 380×220 canvases). In embedded mode, shrink via CSS. The visual agent must verify both modes.
+- 2026-03-28 — Readouts must be physically grounded: actual masses, DM fraction within a stated radius — never just slider percentages. The reader should understand the physics from the readout alone.
+- 2026-03-28 — Pulse/periodic profiles: offset display so peak is centred in panel, not at the boundary (phase 0/360 split).

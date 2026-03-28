@@ -29,9 +29,9 @@ Last updated: 2026-03-28
 
 | App | Interactive | Article | Type | Review status |
 |-----|-----------|---------|------|---------------|
-| Pulsar | `pulsar-interactive.html` | `pulsar-article.html` | Physics sim | Nominally working. Pending physics + visual review. |
-| Binary Star | `binary-star-interactive.html` | `binary-star-article.html` | Physics sim | Nominally working. Pending physics + visual review. |
-| Rotation Curve | `rotation-curve-interactive.html` | `rotation-curve-article.html` | Physics sim | Nominally working. Pending physics + visual review. |
+| Pulsar | `pulsar-interactive.html` | `pulsar.html` | Physics sim | Reviewed: beam direction fixed, angle clamped at 20°, pulse centred, camera zoomed out |
+| Binary Star | `binary-star-interactive.html` | `binary-star.html` | Physics sim | Reviewed: orbitControls bug fixed. Visual review pending. |
+| Rotation Curve | `rotation-curve-interactive.html` | `rotation-curve.html` | Physics sim | Reviewed: yellow bulge + blue disk, B/T slider, physical DM readouts, bloom balanced, panel sizing |
 
 ### Not yet started (from Top 10 list)
 
@@ -50,9 +50,9 @@ Last updated: 2026-03-28
 
 User gave 3 categories of feedback on the 3 new physics sim apps:
 
-1. **Article content** — ADDRESSED. Articles reverted to original text + iframe only.
-2. **Physics of simulations** — PENDING. Expect corrections to physics models.
-3. **Visual style** — PENDING. Expect corrections to appearance, controls, or layout.
+1. **Article content** — DONE. Articles reverted to original text + iframe only. <15% correction rule.
+2. **Physics of simulations** — DONE. Beam direction fixed, angle clamped, reference code/formula requirement added, generic physics verification checklist.
+3. **Visual style** — DONE. Visual agent created, bloom/density rules, circular particles, panel sizing, layout checks, readout requirements.
 
 ---
 

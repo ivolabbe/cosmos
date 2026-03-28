@@ -135,6 +135,15 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Binary star: Camera-from-inclination approach (camera position = f(i)) is cleaner than rotating the orbit group. OrbitControls still works for user drag.
 - 2026-03-28 — Binary star: Surface brightness B~T^4 gives B1/B2=16 for T1=10000K, T2=5000K. Primary eclipse depth dominates. R2 scaling with q^0.3 prevents invisible secondary at low q.
 - 2026-03-28 — Binary star: Phase wrapping must use `((M % TWO_PI) + TWO_PI) % TWO_PI` to handle negative time values from JS modulo.
+- 2026-03-28 — ConeGeometry apex is at +Y. For diverging beams (emission, jets): MUST rotate PI to flip apex toward source. Default orientation = converging (wrong).
+- 2026-03-28 — Circular particles: always use ShaderMaterial with `if (d > 1.0) discard; alpha = exp(-d*d*2.0);` — default PointsMaterial renders ugly squares.
+- 2026-03-28 — Bloom vs density: control bloom via particle SIZE not brightness. Dense regions (bulge) = tiny bright particles (less overlap). Sparse regions (disk) = larger particles.
+- 2026-03-28 — Galaxy sim: no background stars. Yellow bulge (pressure-supported, random 3D orbits) + blue disk (circular orbits). Separate populations with different dynamics.
+- 2026-03-28 — Speed ranges must match physics: galaxy 0.01–1.0x, pulsar depends on period, binary star 0.2–10x. Don't use one-size-fits-all.
+- 2026-03-28 — Readouts must be physically meaningful: show actual masses (10^10 M☉), DM fraction within a stated radius, not just slider percentages.
+- 2026-03-28 — Fullscreen panels should be generous (380px wide, 15px font, 380×220 canvases). Embedded panels shrink via CSS overrides.
+- 2026-03-28 — Pulse profiles: offset by PI so peak is centred in panel, not at the boundary. Playhead offset must match.
+- 2026-03-28 — Solid body reference curve v = ωR must NOT be clamped — let it go off-plot (canvas clips naturally).
 - 2026-03-28 — Rotation curve: G' = 4.302e4 kpc (km/s)^2 per 10^10 Msun. Must auto-tune rho0 at startup to nail v(8.2 kpc) = 220 km/s.
 - 2026-03-28 — Rotation curve: Modified Bessel I0/I1/K0/K1 from Abramowitz & Stegun polynomial fits work perfectly for Freeman disk. No external library needed.
 - 2026-03-28 — Rotation curve: Trailing spiral arms need NEGATIVE wind factor in `armAngle = base + wind * ln(R/R_inner)` when rotation is CCW (+theta direction).

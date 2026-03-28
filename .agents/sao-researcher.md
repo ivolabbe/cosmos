@@ -227,3 +227,6 @@ Also append new findings to the Learnings section below before completing.
 - 2026-03-28 — Rotation curves: SPARC database (Lelli, McGaugh & Schombert 2016) has 175 real galaxy rotation curves — could be used for "real data overlay" feature.
 - 2026-03-28 — Spiral galaxy visuals: Beltoforion's density wave approach (tilted ellipses with progressive angular offset) is the standard technique for procedural spirals. Logarithmic spiral winding creates realistic arm structure.
 - 2026-03-28 — Unit consistency is the #1 pitfall for galactic dynamics sims. G = 4.302e-3 pc (km/s)^2 / Msun. Always verify v(8 kpc) ~ 220 km/s before building anything else.
+- 2026-03-28 — Spec must define physically meaningful readout quantities: actual masses in proper units, DM fraction within a stated radius — never just "100%" slider percentages. The reader must understand the physics from the readout.
+- 2026-03-28 — Spec must state what sensible speed ranges are for the physics. Galaxy: 0.01–1.0x. Pulsar: depends on period. Binary: 0.2–10x. Don't leave it to the coder to guess.
+- 2026-03-28 — Spec should explicitly state whether reference curves (Keplerian, solid body) should be clamped or extend beyond plot range.
