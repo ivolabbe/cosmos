@@ -37,7 +37,7 @@
       position: absolute; top: 16px; right: 16px;
       display: flex; flex-direction: row; gap: 10px; z-index: 10;
     }
-    body.embedded #panels { top: 8px; right: 8px; flex-direction: column; }
+    body.embedded #panels { top: 8px; right: 8px; }
     .panel-box {
       background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
       border-radius: 8px; padding: 10px 12px 6px;
@@ -646,7 +646,7 @@
     rvCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
       const x = RV_PAD.l + p * rvPlotW;
-      rvCtx.fillText(p.toFixed(1), x, RV_H - 5);
+      rvCtx.fillText(p.toFixed(1), x, RV_H - 16);
     }
     // Y-axis
     rvCtx.save();
@@ -759,7 +759,7 @@
     lcCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
       const x = LC_PAD.l + p * lcPlotW;
-      lcCtx.fillText(p.toFixed(1), x, LC_H - 5);
+      lcCtx.fillText(p.toFixed(1), x, LC_H - 16);
     }
     // Y-axis label
     lcCtx.save();
