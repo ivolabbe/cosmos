@@ -407,10 +407,11 @@ composer.addPass(bloom);
 | Dramatic glow | 0.6–1.0 | 0.8–1.0 | 0.3–0.5 | Sun corona, explosions |
 | Minimal accent | 0.15–0.25 | 0.4 | 0.8–0.9 | Just the brightest spots |
 
-**Watch out — density vs bloom:** Dense particle/line regions compound through additive blending AND bloom, creating overblown bright blobs. Sparse regions of the same material look too dim. To balance:
-- **Dense regions** (bulge, cluster cores): reduce individual particle size AND brightness (dimmer colors, smaller points). The density itself provides the visual mass.
-- **Sparse regions** (outer disk, halo): increase particle size and brightness so individuals are visible and trigger bloom.
-- General rule: `brightness ∝ 1/√(local_density)` as a rough guide. If something looks like a white blob, the particles are too bright for their density.
+**Watch out — bloom is effectively density-dependent:** Bloom is a global post-process, but additive blending makes it compound with local particle density. Dense regions (bulge, cluster cores) overlap and create overblown bright blobs; sparse regions (outer disk) look too dim. To balance:
+- **Control bloom via particle SIZE, not brightness.** Keep particles individually bright (visible), but make them smaller in dense regions so they overlap less. Less overlap → less additive compounding → less bloom.
+- **Dense regions** (bulge, cluster cores): small particles (e.g. 0.035), full colour. The count provides visual mass; the small size prevents bloom blowout.
+- **Sparse regions** (outer disk, halo): larger particles (e.g. 0.10–0.14) so individuals are visible and trigger bloom for a soft glow.
+- Never dim particles to control bloom — that makes them invisible. Size is the lever.
 
 ### Additive blending for orbit/trace lines
 ```javascript
