@@ -502,10 +502,9 @@
     const K1 = (TWO_PI * a1 * Math.sin(i_rad)) / (P_BASE * Math.sqrt(1 - ecc * ecc));
     const K2 = (TWO_PI * a2 * Math.sin(i_rad)) / (P_BASE * Math.sqrt(1 - ecc * ecc));
 
-    // Effective omega accounts for camera azimuth — RV is velocity along camera LOS
-    const omegaEff = omega - camAzimuth;
-    const vr1 = radialVelocity(K1, ecc, omegaEff, v);
-    const vr2 = -radialVelocity(K2, ecc, omegaEff, v);
+    // RV is an orbital property — depends on omega, not camera azimuth
+    const vr1 = radialVelocity(K1, ecc, omega, v);
+    const vr2 = -radialVelocity(K2, ecc, omega, v);
 
     // Eclipse: projected separation
     const dProj = projectedSeparation(x1, z1, x2, z2);
