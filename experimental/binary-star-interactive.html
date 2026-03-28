@@ -250,7 +250,7 @@
   let q = 0.5;       // mass ratio M2/M1
   let ecc = 0.0;     // eccentricity
   let incl = 82;     // inclination (degrees)
-  let omega = PI / 2; // argument of periapsis (90 deg default)
+  let omega = 0; // argument of periapsis — must be 0 because positions use x=r*cos(v), z=r*sin(v) without omega
   let playing = true;
   let speedMul = 0.5;
   let simTime = 0;
