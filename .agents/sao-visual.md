@@ -83,7 +83,8 @@ These are project-wide rules from the style guide and user feedback:
 ### 2D panels and figures
 - **Content must be readable** — check that plot content (peaks, curves, labels) is not clipped by panel edges, not split across boundaries, and clearly visible.
 - **Phase/offset** — if a periodic signal has its peak at the plot boundary (e.g., pulse at 0°/360°), offset the display so the peak is centred in the panel.
-- **Axis labels** — must be legible (≥9px), not overlapping data, with clear units.
+- **Axis labels** — 11px minimum, opacity 0.6 (`rgba(255,255,255,0.6)`). Never use 9px or 0.35 opacity — too faint.
+- **Multi-panel layout** — when two or more 2D panels exist, prefer side-by-side horizontally (if viewport width allows) over vertical stacking. Side-by-side keeps the 3D scene taller and panels can share the same y-axis height. Stack vertically only when width is limited (embedded mode). Place panels at the top to keep the 3D scene unobstructed below.
 - **Playhead** — must visually track the 3D animation and cross the data features at the right moment.
 - **Panel sizing** — panels must not overlap the 3D scene or controls. On small viewports, check that panels remain visible.
 
