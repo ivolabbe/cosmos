@@ -574,7 +574,12 @@
   // Display phase offset: shifts the x-axis so primary dip is centred.
   // Primary eclipse is at orbital phase ~0.25 (v=PI/2 with omega=PI/2).
   // To put it at plot centre (0.5), offset = 0.25.
-  const PLOT_PHASE_OFFSET = 0.25;
+  // Display phase offsets (fraction of orbit, 0.25 = 90°)
+  // These shift the x-axis so features are centred, not at edges.
+  const RV_CURVE_SHIFT = 0.5;   // RV curve data offset (subtract)
+  const RV_PLAY_SHIFT  = 0.75;  // RV playhead offset
+  const LC_CURVE_SHIFT = 0.25;  // LC curve data offset (add)
+  const LC_PLAY_SHIFT  = 0.5;   // LC playhead offset
 
   function recomputeCurves() {
     maxK = 0;
@@ -666,7 +671,7 @@
     rvCtx.clip();
 
     // Star 1 RV curve (display offset shifts x-axis, not data)
-    const rvIdxOff = Math.round(2 * PLOT_PHASE_OFFSET * N_CURVE);
+    const rvIdxOff = Math.round(RV_CURVE_SHIFT * N_CURVE);
     rvCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
       const idx = (i - rvIdxOff + N_CURVE) % N_CURVE;
@@ -698,7 +703,7 @@
     rvCtx.strokeRect(RV_PAD.l, RV_PAD.t, rvPlotW, rvPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = RV_PAD.l + ((phaseFrac + 3 * PLOT_PHASE_OFFSET) % 1) * rvPlotW;
+    const px = RV_PAD.l + ((phaseFrac + RV_PLAY_SHIFT) % 1) * rvPlotW;
     rvCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     rvCtx.lineWidth = 1.5;
     rvCtx.beginPath();
@@ -778,7 +783,7 @@
     lcCtx.clip();
 
     // Light curve (filled area) — display offset puts primary dip at centre
-    const lcIdxOff = Math.round(PLOT_PHASE_OFFSET * N_CURVE);
+    const lcIdxOff = Math.round(LC_CURVE_SHIFT * N_CURVE);
     lcCtx.beginPath();
     lcCtx.moveTo(LC_PAD.l, LC_PAD.t + lcPlotH);
     for (let i = 0; i <= N_CURVE; i++) {
@@ -814,7 +819,7 @@
     lcCtx.strokeRect(LC_PAD.l, LC_PAD.t, lcPlotW, lcPlotH);
 
     // Playhead (shifted by same display offset)
-    const px = LC_PAD.l + ((phaseFrac + 2 * PLOT_PHASE_OFFSET) % 1) * lcPlotW;
+    const px = LC_PAD.l + ((phaseFrac + LC_PLAY_SHIFT) % 1) * lcPlotW;
     lcCtx.strokeStyle = 'rgba(220,45,39,0.8)';
     lcCtx.lineWidth = 1.5;
     lcCtx.beginPath();
