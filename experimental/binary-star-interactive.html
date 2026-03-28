@@ -47,6 +47,9 @@
       margin-bottom: 4px; text-align: center;
     }
     .panel-box canvas { display: block; border-radius: 3px; }
+    /* Fullscreen: scale canvas up from native 280×130 */
+    .panel-box canvas { width: 400px; height: 185px; }
+    /* Embedded: native resolution (labels readable) */
     body.embedded .panel-box canvas { width: 280px; height: 130px; }
     #no-eclipse-msg {
       font-size: 10px; color: rgba(255,200,100,0.7); text-align: center;
@@ -105,11 +108,11 @@
   <div id="panels">
     <div class="panel-box">
       <h3>Radial Velocity (v<sub>r</sub> vs Phase)</h3>
-      <canvas id="rv-canvas" width="420" height="180"></canvas>
+      <canvas id="rv-canvas" width="280" height="130"></canvas>
     </div>
     <div class="panel-box">
       <h3>Light Curve (Flux vs Phase)</h3>
-      <canvas id="lc-canvas" width="420" height="180"></canvas>
+      <canvas id="lc-canvas" width="280" height="130"></canvas>
       <div id="no-eclipse-msg"></div>
     </div>
   </div>
