@@ -128,8 +128,8 @@
     <label>Speed
       <select id="speed-sel">
         <option value="0.2">0.2x</option>
-        <option value="0.5">0.5x</option>
-        <option value="1" selected>1x</option>
+        <option value="0.5" selected>0.5x</option>
+        <option value="1">1x</option>
         <option value="3">3x</option>
         <option value="10">10x</option>
       </select>
@@ -250,7 +250,7 @@
   let incl = 82;     // inclination (degrees)
   let omega = PI / 2; // argument of periapsis (90 deg default)
   let playing = true;
-  let speedMul = 1.0;
+  let speedMul = 0.5;
   let simTime = 0;
   let showOrbits = true;
 
