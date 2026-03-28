@@ -606,7 +606,7 @@
   const rvCanvas = document.getElementById('rv-canvas');
   const rvCtx = rvCanvas.getContext('2d');
   const RV_W = rvCanvas.width, RV_H = rvCanvas.height;
-  const RV_PAD = { l: 36, r: 8, t: 10, b: 28 };
+  const RV_PAD = { l: 30, r: 6, t: 6, b: 24 };
   const rvPlotW = RV_W - RV_PAD.l - RV_PAD.r;
   const rvPlotH = RV_H - RV_PAD.t - RV_PAD.b;
 
@@ -641,7 +641,7 @@
 
     // Axis labels — consistent style
     rvCtx.fillStyle = 'rgba(255,255,255,0.6)';
-    rvCtx.font = '11px "Open Sans", sans-serif';
+    rvCtx.font = '12px "Open Sans", sans-serif';
     // X-axis: tick values just above "Phase" label
     rvCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
@@ -715,7 +715,7 @@
   const lcCanvas = document.getElementById('lc-canvas');
   const lcCtx = lcCanvas.getContext('2d');
   const LC_W = lcCanvas.width, LC_H = lcCanvas.height;
-  const LC_PAD = { l: 36, r: 8, t: 10, b: 28 };
+  const LC_PAD = { l: 30, r: 6, t: 6, b: 24 };
   const lcPlotW = LC_W - LC_PAD.l - LC_PAD.r;
   const lcPlotH = LC_H - LC_PAD.t - LC_PAD.b;
 
@@ -751,7 +751,7 @@
 
     // Axis labels — consistent style (same as RV panel)
     lcCtx.fillStyle = 'rgba(255,255,255,0.6)';
-    lcCtx.font = '11px "Open Sans", sans-serif';
+    lcCtx.font = '12px "Open Sans", sans-serif';
     // X-axis: tick values just above "Phase" label
     lcCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
