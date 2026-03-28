@@ -333,11 +333,11 @@
   controls.minDistance = 4;
   controls.maxDistance = 40;
 
-  // Bloom (strength 0.6, radius 0.8, threshold 0.15 — visible glow on galaxy particles)
+  // Bloom (strength 0.5, radius 0.7, threshold 0.3 — selective glow, less bloom on dense center)
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.6, 0.8, 0.15
+    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.5, 0.7, 0.3
   );
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
@@ -501,7 +501,7 @@
         float d = length(gl_PointCoord - 0.5) * 2.0;
         if (d > 1.0) discard;
         // Soft circular falloff with bright center
-        float alpha = exp(-d * d * 3.0) * 0.9;
+        float alpha = exp(-d * d * 2.0);
         gl_FragColor = vec4(vColor, alpha);
       }
     `,
