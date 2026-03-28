@@ -465,8 +465,8 @@
       colArr[i * 3 + 1] = col.g;
       colArr[i * 3 + 2] = col.b;
 
-      // Size: bulge tiny (dense → less overlap → controlled bloom), disk larger (sparse → visible)
-      sizeArr[i] = p.isBulge ? 0.035 : Math.max(0.06, 0.14 - t * 0.06);
+      // Size: same visibility for both, but bulge slightly smaller to reduce bloom overlap
+      sizeArr[i] = p.isBulge ? 0.07 : Math.max(0.06, 0.14 - t * 0.06);
     }
 
     if (galaxyGeo) galaxyGeo.dispose();
@@ -537,7 +537,7 @@
   //  Zone labels (3D text sprites)
   // ===================================================================
   const labelSprites = [];
-  function makeZoneLabel(text, x, y, z, color) {
+  function makeZoneLabel(text, x, y, z, color, opac) {
     const canvas = document.createElement('canvas');
     canvas.width = 256; canvas.height = 48;
     const ctx = canvas.getContext('2d');
@@ -549,7 +549,7 @@
     ctx.shadowBlur = 6;
     ctx.fillText(text, 128, 24);
     const tex = new THREE.CanvasTexture(canvas);
-    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.6, depthWrite: false });
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: opac || 0.6, depthWrite: false });
     const sprite = new THREE.Sprite(mat);
     sprite.position.set(x * KPC_TO_VIS, y, z * KPC_TO_VIS);
     sprite.scale.set(3, 0.6, 1);
@@ -557,7 +557,7 @@
     labelSprites.push(sprite);
     return sprite;
   }
-  makeZoneLabel('BULGE', 0, 0.05, -1.2, '#ffddaa');
+  makeZoneLabel('BULGE', 0, 0.05, -1.2, '#ffddaa', 0.9);
   makeZoneLabel('DISK', -4, 0.05, -1.2, '#aabbff');
   // DM halo label is now a CSS element above the galaxy (see HTML)
 
@@ -739,7 +739,7 @@
       drawCurve(R => Math.min(Math.sqrt(G_ * Mvis / R), V_MAX_PLOT), 'rgba(255,80,80,0.6)', 1, [6, 4]);
     }
     if (showSolid) {
-      drawCurve(R => Math.min(220 * R / 8.2, V_MAX_PLOT), 'rgba(80,255,80,0.6)', 1, [6, 4]);
+      drawCurve(R => 220 * R / 8.2, 'rgba(80,255,80,0.6)', 1, [6, 4]);
     }
     if (showFlat) {
       drawCurve(R => 220, 'rgba(255,220,60,0.6)', 1, [6, 4]);
