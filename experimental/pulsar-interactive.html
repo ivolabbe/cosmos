@@ -14,14 +14,14 @@
     #info {
       position: absolute; top: 16px; left: 16px;
       background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 16px 20px; max-width: 340px;
-      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
     }
-    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
-    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
-    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
-    .readout { margin-top: 10px; font-size: 12px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
-    .readout div { margin-bottom: 2px; }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 8px; color: #fff; }
+    #info .desc { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+    #info .hint { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 10px; }
+    .readout { margin-top: 12px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 3px; }
     .readout span { color: #fff; font-weight: 600; }
 
     /* --- Embedded mode --- */
@@ -39,6 +39,7 @@
       border-radius: 8px; padding: 10px 12px 6px; z-index: 10;
     }
     body.embedded #pulse-panel { top: 8px; right: 8px; }
+    body.embedded #pulse-canvas { width: 240px; height: 130px; }
     #pulse-panel h3 {
       font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
       margin-bottom: 4px; text-align: center;
@@ -105,7 +106,7 @@
 
   <div id="pulse-panel">
     <h3>Pulse Profile (Intensity vs Phase)</h3>
-    <canvas id="pulse-canvas" width="300" height="130"></canvas>
+    <canvas id="pulse-canvas" width="380" height="200"></canvas>
     <div id="no-pulse-msg"></div>
   </div>
 
@@ -342,17 +343,23 @@
   }
 
   const fieldLineMat = new THREE.LineBasicMaterial({
-    color: FIELD_LINE_COLOR, transparent: true, opacity: 0.4,
+    color: FIELD_LINE_COLOR, transparent: true, opacity: 0.5,
   });
 
-  const r0Values = [3, 5];
-  const phiValues = [0, PI / 2, PI, 3 * PI / 2];
+  // More field lines (3 radii × 8 azimuthal = 24 lines) with stacked copies for thickness
+  const r0Values = [2.5, 4, 6];
+  const phiValues = [];
+  for (let k = 0; k < 8; k++) phiValues.push(k * PI / 4);
   for (const r0 of r0Values) {
     for (const phi of phiValues) {
       const pts = dipoleFieldLine(r0, phi);
       if (pts.length < 2) continue;
-      const geo = new THREE.BufferGeometry().setFromPoints(pts);
-      dipoleGroup.add(new THREE.Line(geo, fieldLineMat));
+      // Stacked copies for visual thickness (linewidth > 1 ignored in WebGL)
+      for (const dy of [-0.012, 0, 0.012]) {
+        const offset = pts.map(p => new THREE.Vector3(p.x, p.y + dy, p.z));
+        const geo = new THREE.BufferGeometry().setFromPoints(offset);
+        dipoleGroup.add(new THREE.Line(geo, fieldLineMat));
+      }
     }
   }
 
@@ -850,12 +857,10 @@
       visualPhase += vOmega * dtWall;
     }
 
-    // Current physics phase (for pulse detection and profile)
-    const physicsPhase = omega * physicsTime;
-
-    // === Rotate dipole group ===
-    // Quaternion: qSpin * qTilt
-    // Spin around world Y-axis at visual rate, tilt in local frame
+    // Use the VISUAL phase for both 3D rotation AND pulse profile display,
+    // so the beam sweep and pulse peak are always in sync visually.
+    // For P >= 0.5s, visual rate = physics rate so this is exact.
+    // For P < 0.5s, the visual is slowed but the profile matches what you see.
     const spinPhase = visualPhase;
     const qSpin = new THREE.Quaternion().setFromAxisAngle(
       new THREE.Vector3(0, 1, 0), spinPhase
@@ -865,8 +870,8 @@
     );
     dipoleGroup.quaternion.copy(qSpin).multiply(qTilt);
 
-    // === Pulse profile + detection ===
-    const curIntensity = drawPulseProfile(physicsPhase);
+    // === Pulse profile + detection (uses visual phase so beam sweep and peak are in sync) ===
+    const curIntensity = drawPulseProfile(spinPhase);
 
     // === Beam brightness feedback ===
     updateBeamBrightness(curIntensity);
