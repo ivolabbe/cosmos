@@ -209,10 +209,20 @@
     return part1 + part2 - part3;
   }
 
+  // Camera azimuthal angle in XZ plane — updated each frame
+  let camAzimuth = 0;
+
   function projectedSeparation(x1, z1, x2, z2, incl) {
-    const dx = x2 - x1;
-    const dz = (z2 - z1) * Math.cos(incl);
-    return Math.sqrt(dx * dx + dz * dz);
+    // Project separation perpendicular to the camera's line of sight
+    // Camera looks from azimuth angle camAzimuth in XZ plane
+    const cosA = Math.cos(camAzimuth), sinA = Math.sin(camAzimuth);
+    // Tangential separation (perpendicular to LOS in XZ)
+    const dx = x2 - x1, dz = z2 - z1;
+    const dTan = -dx * sinA + dz * cosA; // across the sky
+    const dRad = dx * cosA + dz * sinA;  // along LOS (depth)
+    // Project depth by cos(incl) for the elevation component
+    const dPerp = dRad * Math.cos(incl);
+    return Math.sqrt(dTan * dTan + dPerp * dPerp);
   }
 
   // Star color from temperature (approximate blackbody)
@@ -435,8 +445,8 @@
   }
 
   function updateOrbitTrails() {
-    if (orbitLine1) { scene.remove(orbitLine1); orbitLine1.traverse(c => { if (c.geometry) c.geometry.dispose(); }); }
-    if (orbitLine2) { scene.remove(orbitLine2); orbitLine2.traverse(c => { if (c.geometry) c.geometry.dispose(); }); }
+    if (orbitLine1) { scene.remove(orbitLine1); orbitLine1.geometry.dispose(); }
+    if (orbitLine2) { scene.remove(orbitLine2); orbitLine2.geometry.dispose(); }
 
     const Mtot_frac = 1 + q; // M1=1, M2=q (normalized)
     const a1 = A_VIS * q / Mtot_frac;
@@ -454,15 +464,8 @@
     const mat1 = new THREE.LineBasicMaterial({ color: col1, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
     const mat2 = new THREE.LineBasicMaterial({ color: col2, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false });
 
-    // Stacked copies for thickness (linewidth > 1 ignored in WebGL)
-    orbitLine1 = new THREE.Group();
-    orbitLine2 = new THREE.Group();
-    for (const dy of [-0.015, 0, 0.015]) {
-      const o1 = pts1neg.map(p => new THREE.Vector3(p.x, p.y + dy, p.z));
-      const o2 = pts2.map(p => new THREE.Vector3(p.x, p.y + dy, p.z));
-      orbitLine1.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(o1), mat1));
-      orbitLine2.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(o2), mat2));
-    }
+    orbitLine1 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts1neg), mat1);
+    orbitLine2 = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2), mat2);
     orbitLine1.visible = showOrbits;
     orbitLine2.visible = showOrbits;
     scene.add(orbitLine1);
@@ -503,9 +506,10 @@
     // Eclipse: projected separation
     const dProj = projectedSeparation(x1, z1, x2, z2, i_rad);
 
-    // Which star is in front — camera is at +Z for edge-on, so larger Z = closer to observer
-    const depth1 = z1 * Math.sin(i_rad);
-    const depth2 = z2 * Math.sin(i_rad);
+    // Which star is closer to camera — project along camera LOS direction
+    const cosA = Math.cos(camAzimuth), sinA = Math.sin(camAzimuth);
+    const depth1 = (x1 * cosA + z1 * sinA) * Math.sin(i_rad);
+    const depth2 = (x2 * cosA + z2 * sinA) * Math.sin(i_rad);
     const star1InFront = depth1 > depth2;
 
     // Overlap area using scene radii
@@ -947,6 +951,9 @@
     if (playing) {
       simTime += dt * speedMul;
     }
+
+    // Update camera azimuth for projection calculations
+    camAzimuth = Math.atan2(camera.position.x, camera.position.z);
 
     // Get current orbital state
     const state = getOrbitalState(simTime);
