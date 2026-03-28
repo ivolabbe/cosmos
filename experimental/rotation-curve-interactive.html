@@ -112,7 +112,7 @@
   <div id="panels">
     <div class="panel-box">
       <h3>Rotation Curve v(R)</h3>
-      <canvas id="rc-canvas" width="380" height="220"></canvas>
+      <canvas id="rc-canvas" width="420" height="240"></canvas>
     </div>
   </div>
 
@@ -137,10 +137,8 @@
       </select>
     </label>
     <div class="sep"></div>
-    <label><input type="checkbox" id="cb-keplerian"> Kepler</label>
-    <label><input type="checkbox" id="cb-solid"> Solid</label>
-    <label><input type="checkbox" id="cb-flat"> Flat</label>
     <label><input type="checkbox" id="cb-labels" checked> Labels</label>
+    <button id="btn-reset">Reset</button>
   </div>
 
   <div id="credit">COSMOS &middot; Swinburne Astronomy Online</div>
@@ -657,7 +655,7 @@
   }
 
   // Toggle states for reference curves
-  let showKeplerian = false, showSolid = false, showFlat = false;
+  // Reference curves removed — reset button instead
 
   function drawRotationCurve() {
     rcCtx.clearRect(0, 0, rcW, rcH);
@@ -693,7 +691,7 @@
 
     // Axis labels
     rcCtx.fillStyle = 'rgba(255,255,255,0.6)';
-    rcCtx.font = '11px "Open Sans", sans-serif';
+    rcCtx.font = '13px "Open Sans", sans-serif';
     rcCtx.textAlign = 'center';
     for (let R = 0; R <= 25; R += 5) {
       rcCtx.fillText(R, rToX(R), rcPad.top + plotH + 14);
@@ -732,31 +730,19 @@
       rcCtx.setLineDash([]);
     }
 
-    // Component curves (dashed, lineWidth 2.0)
+    // Component curves (dashed, thicker)
     // Bulge
-    drawCurve(R => vBulge(R, DEF.Mb * fVM, DEF.ab), 'rgba(255,160,60,0.7)', 2.0, [4, 3]);
+    drawCurve(R => vBulge(R, DEF.Mb * fVM, DEF.ab), 'rgba(255,160,60,0.7)', 2.5, [4, 3]);
     // Disk
-    drawCurve(R => vDisk(R, DEF.Md * fVM, DEF.Rd), 'rgba(80,200,220,0.7)', 2.0, [4, 3]);
+    drawCurve(R => vDisk(R, DEF.Md * fVM, DEF.Rd), 'rgba(80,200,220,0.7)', 2.5, [4, 3]);
     // Halo (scaled by fDM)
     drawCurve(R => {
       const vh = vHalo(R, DEF.rho0, DEF.Rc);
       return vh * Math.sqrt(fDM);
-    }, 'rgba(220,100,220,0.7)', 2.0, [4, 3]);
+    }, 'rgba(220,100,220,0.7)', 2.5, [4, 3]);
 
     // Total (solid white, thick)
-    drawCurve(R => vTotal(R, fDM, fVM), '#ffffff', 2.5, null);
-
-    // Reference curves (toggles)
-    if (showKeplerian) {
-      const Mvis = (DEF.Mb + DEF.Md) * fVM;
-      drawCurve(R => Math.min(Math.sqrt(G_ * Mvis / R), V_MAX_PLOT), 'rgba(255,80,80,0.6)', 1, [6, 4]);
-    }
-    if (showSolid) {
-      drawCurve(R => 220 * R / 8.2, 'rgba(80,255,80,0.6)', 1, [6, 4]);
-    }
-    if (showFlat) {
-      drawCurve(R => 220, 'rgba(255,220,60,0.6)', 1, [6, 4]);
-    }
+    drawCurve(R => vTotal(R, fDM, fVM), '#ffffff', 3.0, null);
 
     // Observed data points (always shown)
     for (const d of obsData) {
@@ -794,7 +780,7 @@
     legends.forEach((l, i) => {
       const y = legY + i * 11;
       rcCtx.strokeStyle = l.color;
-      rcCtx.lineWidth = l.dash ? 1.5 : 2;
+      rcCtx.lineWidth = l.dash ? 2.5 : 3;
       rcCtx.setLineDash(l.dash ? [3, 2] : []);
       rcCtx.beginPath();
       rcCtx.moveTo(legX, y + 4);
@@ -806,37 +792,6 @@
       rcCtx.fillText(l.label, legX + 20, y + 7);
     });
 
-    // Additional reference curve legends if active
-    let refLegY = legY + legends.length * 11 + 2;
-    if (showKeplerian) {
-      rcCtx.strokeStyle = 'rgba(255,80,80,0.8)';
-      rcCtx.setLineDash([4, 3]);
-      rcCtx.lineWidth = 1;
-      rcCtx.beginPath(); rcCtx.moveTo(legX, refLegY + 4); rcCtx.lineTo(legX + 16, refLegY + 4); rcCtx.stroke();
-      rcCtx.setLineDash([]);
-      rcCtx.fillStyle = 'rgba(255,80,80,0.8)';
-      rcCtx.fillText('Keplerian', legX + 20, refLegY + 7);
-      refLegY += 11;
-    }
-    if (showSolid) {
-      rcCtx.strokeStyle = 'rgba(80,255,80,0.8)';
-      rcCtx.setLineDash([4, 3]);
-      rcCtx.lineWidth = 1;
-      rcCtx.beginPath(); rcCtx.moveTo(legX, refLegY + 4); rcCtx.lineTo(legX + 16, refLegY + 4); rcCtx.stroke();
-      rcCtx.setLineDash([]);
-      rcCtx.fillStyle = 'rgba(80,255,80,0.8)';
-      rcCtx.fillText('Solid body', legX + 20, refLegY + 7);
-      refLegY += 11;
-    }
-    if (showFlat) {
-      rcCtx.strokeStyle = 'rgba(255,220,60,0.8)';
-      rcCtx.setLineDash([4, 3]);
-      rcCtx.lineWidth = 1;
-      rcCtx.beginPath(); rcCtx.moveTo(legX, refLegY + 4); rcCtx.lineTo(legX + 16, refLegY + 4); rcCtx.stroke();
-      rcCtx.setLineDash([]);
-      rcCtx.fillStyle = 'rgba(255,220,60,0.8)';
-      rcCtx.fillText('Flat (220)', legX + 20, refLegY + 7);
-    }
   }
 
   // ===================================================================
@@ -889,17 +844,19 @@
     updateReadouts();
   });
 
-  document.getElementById('cb-keplerian').addEventListener('change', e => {
-    showKeplerian = e.target.checked;
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    fDM = 1; fVM = 1; BT = 0.23;
+    document.getElementById('dm-slider').value = 100;
+    document.getElementById('dm-val').textContent = '100%';
+    document.getElementById('vm-slider').value = 100;
+    document.getElementById('vm-val').textContent = '1.0x';
+    document.getElementById('bt-slider').value = 23;
+    document.getElementById('bt-val').textContent = '0.23';
+    DEF.Mb = 6.5 * BT; DEF.Md = 6.5 * (1 - BT);
+    rebuildParticleSystem();
+    recomputeOmegas();
     drawRotationCurve();
-  });
-  document.getElementById('cb-solid').addEventListener('change', e => {
-    showSolid = e.target.checked;
-    drawRotationCurve();
-  });
-  document.getElementById('cb-flat').addEventListener('change', e => {
-    showFlat = e.target.checked;
-    drawRotationCurve();
+    updateReadouts();
   });
   document.getElementById('cb-labels').addEventListener('change', e => {
     labelSprites.forEach(s => s.visible = e.target.checked);
