@@ -79,6 +79,13 @@ These are project-wide rules from the style guide and user feedback:
 - **Stars** (as points of light) — `MeshBasicMaterial` for core + `AdditiveBlending` halo at `BackSide`. Two-size system: bright core + softer extended glow.
 - **Axes/indicators** — dashed lines, low opacity (0.2–0.35), labelled if in fullscreen mode.
 
+### 2D panels and figures
+- **Content must be readable** — check that plot content (peaks, curves, labels) is not clipped by panel edges, not split across boundaries, and clearly visible.
+- **Phase/offset** — if a periodic signal has its peak at the plot boundary (e.g., pulse at 0°/360°), offset the display so the peak is centred in the panel.
+- **Axis labels** — must be legible (≥9px), not overlapping data, with clear units.
+- **Playhead** — must visually track the 3D animation and cross the data features at the right moment.
+- **Panel sizing** — panels must not overlap the 3D scene or controls. On small viewports, check that panels remain visible.
+
 ### Composition
 - **Black background** (`#000`) for space scenes. Deep navy (`#0a0a2e`) only for orbital diagram overviews.
 - **Depth** — use stars at different distances (near bright, far dim) + bloom to create depth perception.

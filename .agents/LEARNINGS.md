@@ -9,8 +9,8 @@
 ### Physics correctness is non-negotiable
 All physics in interactive visualizations must be correct. This is an educational tool for a university astronomy encyclopedia — incorrect physics misleads students. When unsure about physics, say so rather than guessing. Don't speculate about what reference visualizations are doing — verify from source code or papers.
 
-### Reference code before implementation
-Before writing physics formulas in a spec, find **reference code** from authoritative sources (astropy, galpy, NASA/STScI repos, published researchers' GitHub). This validates the physics AND gives the coder a cross-check. Prefer code over Wikipedia derivations.
+### Reference code or formula before implementation
+Before writing physics in a spec, find **reference code or authoritative formulas** from credible sources (astropy, galpy, NASA/STScI repos, published researchers' GitHub, textbooks, peer-reviewed papers). This validates the physics AND gives the coder a cross-check.
 
 ### Verify in browser, never assume
 Never assume code works. After writing any interactive: start server, open in Chrome, screenshot, check console errors. Compare output to reference sources (NASA imagery, etc.) for visual quality. Don't theorize — measure, print, and know. If something fails: log the failure, diagnose, fix, re-test.
@@ -19,7 +19,7 @@ Never assume code works. After writing any interactive: start server, open in Ch
 Every physics element must be checked for: (1) direction sanity — beams diverge, orbits are prograde, flows go the right way; (2) geometry — shapes match physics (dipole loops, elliptical orbits); (3) scale relationships — parameter changes produce correct relative effects; (4) interaction consistency — if camera angle and a control both affect the same physical quantity, they must agree.
 
 ### Minimal article modifications
-When adding an interactive to an existing article: ONLY add the iframe embed block and its caption. Do not rewrite, expand, restructure, or "enhance" article content. Slight modifications (<10%) are acceptable — correcting obvious mistakes or updating to present day. A different team handles substantial text changes. For new articles, match the COSMOS voice per `cosmos-style-analysis.md`.
+When adding an interactive to an existing article: ONLY add the iframe embed block and its caption. Do not rewrite, expand, restructure, or "enhance" article content. Slight modifications (<15%) are acceptable — correcting obvious mistakes or updating to present day. A different team handles substantial text changes. For new articles, match the COSMOS voice per `cosmos-style-analysis.md`.
 
 ### Rapid visual iteration
 The user iterates rapidly by testing visually in Chrome and queuing corrections. Physical accuracy is as important as visual appeal. Don't over-engineer before testing — make the minimal change, let the user evaluate, iterate. The user references real physics papers/tools as visual quality targets — take these seriously.

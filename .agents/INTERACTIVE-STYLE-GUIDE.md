@@ -345,8 +345,10 @@ Run these tests for every new interactive visualization before considering it do
 
 ## File Naming Convention
 
-- `experimental/TOPIC-interactive.html` — the embeddable visualization
-- `experimental/TOPIC-article.html` — article page with the embed (for testing)
+- `experimental/TOPIC-interactive.html` — the embeddable 3D visualization (stays in experimental/ permanently)
+- `experimental/TOPIC.html` — article page with the embed (mirrors `articles/TOPIC.html` for easy migration)
+
+When ready to go live: copy `experimental/TOPIC.html` → `articles/TOPIC.html` and update iframe `src` to `../experimental/TOPIC-interactive.html`.
 
 ## Babylon.js Apps
 

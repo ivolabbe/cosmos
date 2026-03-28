@@ -118,8 +118,8 @@
     <label>Tilt <input type="range" id="tilt-slider" min="0" max="90" value="45" step="1">
       <span class="val" id="tilt-val">45&deg;</span></label>
     <div class="sep"></div>
-    <label>View <input type="range" id="view-slider" min="0" max="90" value="60" step="1">
-      <span class="val" id="view-val">60&deg;</span></label>
+    <label>View <input type="range" id="view-slider" min="0" max="90" value="48" step="1">
+      <span class="val" id="view-val">48&deg;</span></label>
     <div class="sep"></div>
     <label><input type="checkbox" id="cb-sound"> Sound</label>
   </div>
@@ -193,7 +193,7 @@
   // ===================================================================
   let period = 1.0;          // seconds
   let alpha = 45 * DEG;      // magnetic inclination (radians)
-  let zeta = 60 * DEG;       // observer viewing angle (radians)
+  let zeta = 48 * DEG;       // observer viewing angle (close to alpha so pulse is visible)
   let playing = true;
   let soundEnabled = false;
   let physicsTime = 0;        // accumulated physics time (for correct pulse rate)
@@ -579,7 +579,8 @@
     pulseCtx.beginPath();
     pulseCtx.moveTo(P_PAD.l, P_PAD.t + plotH);
     for (let i = 0; i <= nBins; i++) {
-      const phi = (i / nBins) * TWO_PI;
+      // Offset by PI so the main pulse is centered in the plot, not at the edge
+      const phi = (i / nBins) * TWO_PI + PI;
       const I = visible ? pulseIntensityBoth(phi, alpha, zeta, rho) : 0;
       const x = P_PAD.l + (i / nBins) * plotW;
       const y = P_PAD.t + plotH - I * plotH * 0.92;
@@ -600,8 +601,8 @@
     pulseCtx.lineWidth = 0.5;
     pulseCtx.strokeRect(P_PAD.l, P_PAD.t, plotW, plotH);
 
-    // Playhead
-    const phaseFrac = ((currentPhase % TWO_PI) + TWO_PI) % TWO_PI / TWO_PI;
+    // Playhead (offset by PI to match the centered profile)
+    const phaseFrac = (((currentPhase + PI) % TWO_PI) + TWO_PI) % TWO_PI / TWO_PI;
     const px = P_PAD.l + phaseFrac * plotW;
     pulseCtx.strokeStyle = '#DC2D27';
     pulseCtx.lineWidth = 2;
