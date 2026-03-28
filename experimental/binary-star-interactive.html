@@ -106,11 +106,11 @@
   <div id="panels">
     <div class="panel-box">
       <h3>Radial Velocity (v<sub>r</sub> vs Phase)</h3>
-      <canvas id="rv-canvas" width="380" height="160"></canvas>
+      <canvas id="rv-canvas" width="420" height="180"></canvas>
     </div>
     <div class="panel-box">
       <h3>Light Curve (Flux vs Phase)</h3>
-      <canvas id="lc-canvas" width="380" height="140"></canvas>
+      <canvas id="lc-canvas" width="420" height="180"></canvas>
       <div id="no-eclipse-msg"></div>
     </div>
   </div>
@@ -292,7 +292,7 @@
   // Camera position determined by inclination
   function updateCameraFromInclination() {
     const i_rad = incl * DEG;
-    const dist = 18;
+    const dist = 14;
     // i=0 -> face-on (looking down +Y), i=90 -> edge-on (looking along Z)
     const camY = dist * Math.cos(i_rad);
     const camZ = dist * Math.sin(i_rad);
@@ -607,7 +607,7 @@
   const rvCanvas = document.getElementById('rv-canvas');
   const rvCtx = rvCanvas.getContext('2d');
   const RV_W = rvCanvas.width, RV_H = rvCanvas.height;
-  const RV_PAD = { l: 36, r: 8, t: 10, b: 22 };
+  const RV_PAD = { l: 36, r: 8, t: 10, b: 28 };
   const rvPlotW = RV_W - RV_PAD.l - RV_PAD.r;
   const rvPlotH = RV_H - RV_PAD.t - RV_PAD.b;
 
@@ -640,30 +640,27 @@
       rvCtx.stroke();
     }
 
-    // Axis labels
+    // Axis labels — consistent style
     rvCtx.fillStyle = 'rgba(255,255,255,0.6)';
     rvCtx.font = '11px "Open Sans", sans-serif';
+    // X-axis: tick values just above "Phase" label
     rvCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
-      const x = RV_PAD.l + p * rvPlotW;
-      rvCtx.fillText(p.toFixed(1), x, RV_H - 16);
+      rvCtx.fillText(p.toFixed(1), RV_PAD.l + p * rvPlotW, RV_PAD.t + rvPlotH + 14);
     }
-    // Y-axis
+    rvCtx.fillText('Phase', RV_PAD.l + rvPlotW / 2, RV_PAD.t + rvPlotH + 26);
+    // Y-axis: tick values right-aligned to plot edge
+    rvCtx.textAlign = 'right';
+    rvCtx.fillText('+K', RV_PAD.l - 5, RV_PAD.t + 10);
+    rvCtx.fillText('0', RV_PAD.l - 5, yZero + 4);
+    rvCtx.fillText('\u2212K', RV_PAD.l - 5, RV_PAD.t + rvPlotH - 2);
+    // Y-axis label (rotated)
     rvCtx.save();
-    rvCtx.translate(9, RV_PAD.t + rvPlotH / 2);
+    rvCtx.translate(10, RV_PAD.t + rvPlotH / 2);
     rvCtx.rotate(-PI / 2);
+    rvCtx.textAlign = 'center';
     rvCtx.fillText('v\u1D63', 0, 0);
     rvCtx.restore();
-
-    // Y-axis ticks
-    rvCtx.textAlign = 'right';
-    rvCtx.fillText('+K', RV_PAD.l - 4, RV_PAD.t + 8);
-    rvCtx.fillText('0', RV_PAD.l - 4, yZero + 3);
-    rvCtx.fillText('\u2212K', RV_PAD.l - 4, RV_PAD.t + rvPlotH);
-
-    // Phase label
-    rvCtx.textAlign = 'center';
-    rvCtx.fillText('Phase', RV_PAD.l + rvPlotW / 2, RV_H - 1);
 
     // Clip to plot area
     rvCtx.save();
@@ -719,7 +716,7 @@
   const lcCanvas = document.getElementById('lc-canvas');
   const lcCtx = lcCanvas.getContext('2d');
   const LC_W = lcCanvas.width, LC_H = lcCanvas.height;
-  const LC_PAD = { l: 36, r: 8, t: 8, b: 22 };
+  const LC_PAD = { l: 36, r: 8, t: 10, b: 28 };
   const lcPlotW = LC_W - LC_PAD.l - LC_PAD.r;
   const lcPlotH = LC_H - LC_PAD.t - LC_PAD.b;
 
@@ -753,29 +750,26 @@
     lcCtx.stroke();
     lcCtx.setLineDash([]);
 
-    // Axis labels
+    // Axis labels — consistent style (same as RV panel)
     lcCtx.fillStyle = 'rgba(255,255,255,0.6)';
     lcCtx.font = '11px "Open Sans", sans-serif';
+    // X-axis: tick values just above "Phase" label
     lcCtx.textAlign = 'center';
     for (const p of [0, 0.5, 1]) {
-      const x = LC_PAD.l + p * lcPlotW;
-      lcCtx.fillText(p.toFixed(1), x, LC_H - 16);
+      lcCtx.fillText(p.toFixed(1), LC_PAD.l + p * lcPlotW, LC_PAD.t + lcPlotH + 14);
     }
-    // Y-axis label
+    lcCtx.fillText('Phase', LC_PAD.l + lcPlotW / 2, LC_PAD.t + lcPlotH + 26);
+    // Y-axis: tick values right-aligned to plot edge
+    lcCtx.textAlign = 'right';
+    lcCtx.fillText(fluxMax.toFixed(1), LC_PAD.l - 5, LC_PAD.t + 10);
+    lcCtx.fillText(fluxMin.toFixed(2), LC_PAD.l - 5, LC_PAD.t + lcPlotH - 2);
+    // Y-axis label (rotated)
     lcCtx.save();
-    lcCtx.translate(9, LC_PAD.t + lcPlotH / 2);
+    lcCtx.translate(10, LC_PAD.t + lcPlotH / 2);
     lcCtx.rotate(-PI / 2);
+    lcCtx.textAlign = 'center';
     lcCtx.fillText('Flux', 0, 0);
     lcCtx.restore();
-
-    // Y ticks
-    lcCtx.textAlign = 'right';
-    lcCtx.fillText(fluxMax.toFixed(1), LC_PAD.l - 4, LC_PAD.t + 6);
-    lcCtx.fillText(fluxMin.toFixed(2), LC_PAD.l - 4, LC_PAD.t + lcPlotH);
-
-    // Phase label
-    lcCtx.textAlign = 'center';
-    lcCtx.fillText('Phase', LC_PAD.l + lcPlotW / 2, LC_H - 1);
 
     // Clip
     lcCtx.save();
