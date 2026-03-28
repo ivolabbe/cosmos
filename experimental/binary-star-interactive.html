@@ -777,7 +777,7 @@
     lcCtx.beginPath();
     lcCtx.moveTo(LC_PAD.l, LC_PAD.t + lcPlotH);
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i - lcIdxOff + N_CURVE) % N_CURVE;
+      const idx = (i + lcIdxOff) % N_CURVE;
       const x = LC_PAD.l + (i / N_CURVE) * lcPlotW;
       const frac = (lcCurve[idx] - fluxMin) / (fluxMax - fluxMin);
       const y = LC_PAD.t + lcPlotH * (1 - Math.max(0, Math.min(1, frac)));
@@ -791,7 +791,7 @@
     // Light curve line
     lcCtx.beginPath();
     for (let i = 0; i <= N_CURVE; i++) {
-      const idx = (i - lcIdxOff + N_CURVE) % N_CURVE;
+      const idx = (i + lcIdxOff) % N_CURVE;
       const x = LC_PAD.l + (i / N_CURVE) * lcPlotW;
       const frac = (lcCurve[idx] - fluxMin) / (fluxMax - fluxMin);
       const y = LC_PAD.t + lcPlotH * (1 - Math.max(0, Math.min(1, frac)));
