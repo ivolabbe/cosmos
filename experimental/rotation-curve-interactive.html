@@ -117,7 +117,7 @@
   </div>
 
   <div id="controls">
-    <button id="btn-play" class="active">&#9646;&#9646; Pause</button>
+    <button id="btn-play">&#9654; Play</button>
     <div class="sep"></div>
     <label>DM <input type="range" id="dm-slider" min="0" max="100" value="100" step="1">
       <span class="val" id="dm-val">100%</span></label>
@@ -305,7 +305,7 @@
   // ===================================================================
   let fDM = 1.0, fVM = 1.0;
   let BT = DEF.Mb / (DEF.Mb + DEF.Md); // ~0.2308
-  let playing = true, speedMul = 0.05;
+  let playing = false, speedMul = 0.05;
   let simTime = 0; // in Myr
 
   // ===================================================================

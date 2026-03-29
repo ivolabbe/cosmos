@@ -105,7 +105,7 @@
   </div>
 
   <div id="controls">
-    <button id="btn-play" class="active">&#9646;&#9646; Pause</button>
+    <button id="btn-play">&#9654; Play</button>
     <div class="sep"></div>
     <label>Speed
       <select id="speed-sel">
@@ -335,7 +335,7 @@
   let omegaP_kms_kpc = 25; // pattern speed in km/s/kpc
   let nArms = 2;
   let pitchDeg = 15;
-  let playing = true, speedMul = 0.05;
+  let playing = false, speedMul = 0.05;
   let simTime = 0; // in Myr
   let showTraffic = false;
   let showZones = false;

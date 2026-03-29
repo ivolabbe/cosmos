@@ -111,7 +111,7 @@
   </div>
 
   <div id="controls">
-    <button id="btn-play" class="active">&#9646;&#9646; Pause</button>
+    <button id="btn-play">&#9654; Play</button>
     <div class="sep"></div>
     <label>Period <input type="range" id="period-slider" min="-2.85" max="0.93" value="0" step="0.01">
       <span class="val" id="period-val">1.00 s</span></label>
@@ -195,7 +195,7 @@
   let period = 1.0;          // seconds
   let alpha = 45 * DEG;      // magnetic inclination (radians)
   let zeta = 48 * DEG;       // observer viewing angle (close to alpha so pulse is visible)
-  let playing = true;
+  let playing = false;
   let soundEnabled = false;
   let physicsTime = 0;        // accumulated physics time (for correct pulse rate)
   let visualPhase = 0;        // visual rotation phase (may be slowed)
