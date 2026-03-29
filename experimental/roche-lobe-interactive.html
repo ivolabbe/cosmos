@@ -79,13 +79,12 @@
       white-space: nowrap;
     }
 
-    @media (max-width: 700px) {
-      #controls { flex-wrap: wrap; justify-content: center; }
-    }
-  </style>
     #loading {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
@@ -120,8 +119,8 @@
     <div class="sep"></div>
     <label>q <input type="range" id="q-slider" min="0.1" max="1.0" value="0.5" step="0.05">
       <span class="val" id="q-val">0.50</span></label>
-    <label>Fill <input type="range" id="fill-slider" min="0.3" max="1.2" value="1.05" step="0.05">
-      <span class="val" id="fill-val">0.80</span></label>
+    <label>Fill <input type="range" id="fill-slider" min="0.3" max="1.2" value="1.05" step="0.01">
+      <span class="val" id="fill-val">1.05</span></label>
     <div class="sep"></div>
     <label>Speed
       <select id="speed-sel">
@@ -558,6 +557,97 @@
   recomputePhysics();
 
   // ===================================================================
+  //  Roche-deformed donor star geometry
+  // ===================================================================
+  // Deform a SphereGeometry so vertices follow the Roche equipotential.
+  // phiTarget = lerp(phiCenter, phiL1, fill).  At fill=0 -> tiny sphere
+  // deep in the well; fill=1 -> L1 critical surface (teardrop); fill>1
+  // -> slightly larger than the lobe.
+
+  // Cache key so we only rebuild when q or fill actually change
+  let _donorCacheQ = -1, _donorCacheFill = -1;
+  // Original unit-sphere direction vectors (stored on first call)
+  let _donorDirs = null;
+  // Cached Roche lobe radii per direction (recomputed when q changes)
+  let _donorLobeRadii = null;
+
+  // Find radius along a ray from donor centre where Roche potential = phiTarget
+  function findSurfaceRadius(nx, ny, nz, phiTarget) {
+    const rMin = 0.001, rMax = 2.0;
+    const MARCH_STEPS = 40;
+    const dr = (rMax - rMin) / MARCH_STEPS;
+    let lo = rMin, hi = -1;
+    let phiPrev = rochePotential(x1Pos + rMin * nx, rMin * ny, rMin * nz, q);
+    if (phiPrev >= phiTarget) return rMin;
+    for (let s = 1; s <= MARCH_STEPS; s++) {
+      const rr = rMin + s * dr;
+      const phiCur = rochePotential(x1Pos + rr * nx, rr * ny, rr * nz, q);
+      if (phiCur >= phiTarget) { lo = rr - dr; hi = rr; break; }
+      phiPrev = phiCur;
+    }
+    if (hi > 0) {
+      for (let iter = 0; iter < 14; iter++) {
+        const mid = (lo + hi) * 0.5;
+        const phiMid = rochePotential(x1Pos + mid * nx, mid * ny, mid * nz, q);
+        if (phiMid < phiTarget) lo = mid; else hi = mid;
+      }
+      return (lo + hi) * 0.5;
+    }
+    return rL1_egg; // fallback
+  }
+
+  function deformDonorGeometry(geometry) {
+    const posAttr = geometry.attributes.position;
+    const count = posAttr.count;
+
+    // On first call, snapshot the unit-sphere directions
+    if (!_donorDirs) {
+      _donorDirs = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        const dx = posAttr.getX(i);
+        const dy = posAttr.getY(i);
+        const dz = posAttr.getZ(i);
+        const len = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+        _donorDirs[i * 3]     = dx / len;
+        _donorDirs[i * 3 + 1] = dy / len;
+        _donorDirs[i * 3 + 2] = dz / len;
+      }
+    }
+
+    // Step 1: Compute the FULL Roche lobe surface (at phiL1) for each ray.
+    // Cache this per q value so we only recompute when mass ratio changes.
+    if (!_donorLobeRadii || _donorCacheQ !== q) {
+      _donorLobeRadii = new Float32Array(count);
+      for (let i = 0; i < count; i++) {
+        const nx = _donorDirs[i * 3];
+        const ny = _donorDirs[i * 3 + 1];
+        const nz = _donorDirs[i * 3 + 2];
+        _donorLobeRadii[i] = findSurfaceRadius(nx, ny, nz, phiL1);
+      }
+    }
+
+    // Step 2: Scale the lobe radii by fillFactor.
+    // fill=0.5 → star is 50% of lobe in every direction
+    // fill=1.0 → exact Roche lobe (teardrop)
+    // fill=1.1 → 110% (overflowing)
+    for (let i = 0; i < count; i++) {
+      const nx = _donorDirs[i * 3];
+      const ny = _donorDirs[i * 3 + 1];
+      const nz = _donorDirs[i * 3 + 2];
+      const r = _donorLobeRadii[i] * fillFactor;
+      posAttr.setXYZ(i,
+        (x1Pos + r * nx) * A_VIS,
+        r * ny * A_VIS,
+        r * nz * A_VIS
+      );
+    }
+
+    posAttr.needsUpdate = true;
+    geometry.computeVertexNormals();
+    geometry.computeBoundingSphere();
+  }
+
+  // ===================================================================
   //  Renderer + Scene + Camera
   // ===================================================================
   const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -579,8 +669,7 @@
   orbitControls.minDistance = 2;
   orbitControls.maxDistance = 30;
   orbitControls.target.set(0, 0, 0);
-  orbitControls.autoRotate = true;
-  orbitControls.autoRotateSpeed = 0.3;
+  orbitControls.autoRotate = false;
 
   // CSS2D label renderer
   const labelRenderer = new CSS2DRenderer();
@@ -729,22 +818,27 @@
     }
   `;
 
-  function makeStarMesh(T, radius) {
-    const group = new THREE.Group();
+  function makeStarMaterial(T) {
     const col = new THREE.Color(starColor(T));
-    // Donor star (T~5000K) needs to be visibly stellar — warm glow that triggers bloom
     const brightness = T > 20000 ? 3.0 : T > 10000 ? 2.0 : T > 7000 ? 1.5 : T > 4000 ? 1.8 : 1.2;
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uTex: { value: sunTexture },
+        uColor: { value: col },
+        uBrightness: { value: brightness },
+      },
+      vertexShader: starVertShader,
+      fragmentShader: starFragShader,
+    });
+  }
+
+  function makeStarMesh(T, radius, highRes) {
+    const group = new THREE.Group();
+    const segs = highRes ? 96 : 48;
+    const rings = highRes ? 48 : 32;
     const core = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 48, 32),
-      new THREE.ShaderMaterial({
-        uniforms: {
-          uTex: { value: sunTexture },
-          uColor: { value: col },
-          uBrightness: { value: brightness },
-        },
-        vertexShader: starVertShader,
-        fragmentShader: starFragShader,
-      })
+      new THREE.SphereGeometry(1, segs, rings),
+      makeStarMaterial(T)
     );
     group.add(core);
     group.scale.setScalar(radius);
@@ -760,23 +854,235 @@
   // Star 2 = accretor (compact, much smaller than its Roche lobe)
   const STAR2_FIXED_R = 0.06; // accretor is compact (fraction of separation)
 
-  let star1 = makeStarMesh(T1, 1.0); // scale set dynamically
+  let star1 = makeStarMesh(T1, 1.0, true); // highRes for Roche deformation
   let star2 = makeStarMesh(T2, STAR2_FIXED_R * A_VIS);
+  // Reference to donor core mesh (first child of group) for vertex deformation
+  let donorCoreMesh = star1.children[0];
   coRotGroup.add(star1);
   coRotGroup.add(star2);
 
-  function updateStarPositions() {
-    // Stars in the co-rotating frame (fixed positions)
-    star1.position.set(x1Pos * A_VIS, 0, 0);
-    star2.position.set(x2Pos * A_VIS, 0, 0);
+  function updateDonorShape() {
+    // Skip if nothing changed
+    if (_donorCacheQ === q && _donorCacheFill === fillFactor) return;
+    _donorCacheQ = q;
+    _donorCacheFill = fillFactor;
 
-    // Scale star 1 by fill factor (its visual radius = fillFactor * rL1_egg * A_VIS)
-    // rL1_egg is the volume-equivalent Roche lobe radius / a
-    const r1vis = fillFactor * rL1_egg * A_VIS;
-    star1.scale.setScalar(Math.max(r1vis, 0.05));
-    // Star 2 stays at fixed compact size
+    // Deform vertices directly in visual coords — star1 group has scale=1
+    // and position at the donor centre. The deformDonorGeometry function
+    // writes absolute visual positions, so the group must sit at the origin
+    // with unit scale.
+    star1.position.set(0, 0, 0);
+    star1.scale.setScalar(1);
+    deformDonorGeometry(donorCoreMesh.geometry);
+  }
+
+  function updateStarPositions() {
+    // Star 1 (donor): Roche-deformed — position baked into vertices
+    updateDonorShape();
+    // Star 2 (accretor): stays at fixed compact size, uniform sphere
+    star2.position.set(x2Pos * A_VIS, 0, 0);
     star2.scale.setScalar(STAR2_FIXED_R * A_VIS);
   }
+
+  // ===================================================================
+  //  Donor surface gas skin (particles on L1-facing hemisphere)
+  // ===================================================================
+  const SKIN_COUNT = 600;
+  const skinPositions = new Float32Array(SKIN_COUNT * 3);
+  const skinColors = new Float32Array(SKIN_COUNT * 3);
+  const skinSizes = new Float32Array(SKIN_COUNT);
+  const skinGeo = new THREE.BufferGeometry();
+  skinGeo.setAttribute('position', new THREE.BufferAttribute(skinPositions, 3));
+  skinGeo.setAttribute('color', new THREE.BufferAttribute(skinColors, 3));
+  skinGeo.setAttribute('size', new THREE.BufferAttribute(skinSizes, 1));
+  const skinMat = makeStreamMat();
+  const skinPoints = new THREE.Points(skinGeo, skinMat);
+  coRotGroup.add(skinPoints);
+
+  // Each skin particle tracks its state
+  // state: 'bound' (sitting on surface, jittering) or 'free' (drifting toward L1)
+  const skinState = [];
+  for (let i = 0; i < SKIN_COUNT; i++) {
+    skinState.push({
+      // Direction on the unit sphere (in donor-centred dimensionless coords)
+      dirX: 0, dirY: 0, dirZ: 0,
+      // Current position (dimensionless, co-rotating frame)
+      px: 0, py: 0, pz: 0,
+      // Velocity (only used when free)
+      vx: 0, vy: 0, vz: 0,
+      // Surface radius (set when placed on surface)
+      rSurface: 0,
+      state: 'bound',
+      jitterPhase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  // Cache key: only redistribute when q or fill changes
+  let _skinCacheQ = -1, _skinCacheFill = -1;
+
+  // Place a single particle on the donor surface, biased toward L1
+  function placeSkinParticle(s) {
+    // Generate direction biased toward L1 (negative x relative to donor centre,
+    // since L1 is at xL1 < x1Pos in dimensionless coords, i.e. toward the accretor)
+    const l1Dir = xL1 - x1Pos; // negative
+    const l1DirNorm = l1Dir / Math.abs(l1Dir); // -1
+
+    // 70% of particles within 60 degrees of L1 direction
+    let dx, dy, dz;
+    if (Math.random() < 0.7) {
+      // Cone around L1 direction: cos(theta) > cos(60deg) = 0.5
+      const cosTheta = 0.5 + 0.5 * Math.random(); // [0.5, 1.0]
+      const sinTheta = Math.sqrt(1 - cosTheta * cosTheta);
+      const phi = Math.random() * TWO_PI;
+      // L1 direction is along -x in donor-centred coords
+      dx = -cosTheta;
+      dy = sinTheta * Math.cos(phi);
+      dz = sinTheta * Math.sin(phi);
+    } else {
+      // Uniform on full sphere
+      const cosTheta = 2 * Math.random() - 1;
+      const sinTheta = Math.sqrt(1 - cosTheta * cosTheta);
+      const phi = Math.random() * TWO_PI;
+      dx = sinTheta * Math.cos(phi);
+      dy = cosTheta;
+      dz = sinTheta * Math.sin(phi);
+    }
+
+    const len = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+    s.dirX = dx / len;
+    s.dirY = dy / len;
+    s.dirZ = dz / len;
+
+    // Find the Roche lobe radius along this ray, then scale by fill
+    const rLobe = findSurfaceRadius(s.dirX, s.dirY, s.dirZ, phiL1);
+    const rSurface = rLobe * fillFactor;
+    s.rSurface = rSurface;
+    s.px = x1Pos + rSurface * s.dirX;
+    s.py = rSurface * s.dirY;
+    s.pz = rSurface * s.dirZ;
+    s.vx = 0; s.vy = 0; s.vz = 0;
+    s.state = 'bound';
+    s.jitterPhase = Math.random() * TWO_PI;
+  }
+
+  function initSkinParticles() {
+    for (let i = 0; i < SKIN_COUNT; i++) {
+      placeSkinParticle(skinState[i]);
+    }
+    _skinCacheQ = q;
+    _skinCacheFill = fillFactor;
+  }
+
+  function updateSkinParticles(dt) {
+    // Rebuild positions if q or fill changed
+    if (_skinCacheQ !== q || _skinCacheFill !== fillFactor) {
+      initSkinParticles();
+    }
+
+    const posArr = skinGeo.attributes.position.array;
+    const colArr = skinGeo.attributes.color.array;
+    const sizeArr = skinGeo.attributes.size.array;
+
+    // Donor star colour (warm yellow-orange)
+    const donorR = 1.0, donorG = 0.67, donorB = 0.2;
+    // Stream colour (orange -> white transition endpoint)
+    const streamR = 1.0, streamG = 0.85, streamB = 0.5;
+
+    const thermalAmp = 0.015 * rL1_egg; // jitter amplitude: ~1.5% of Roche radius
+
+    for (let i = 0; i < SKIN_COUNT; i++) {
+      const s = skinState[i];
+
+      if (s.state === 'bound') {
+        // Compute Roche potential at the particle's surface position
+        const phi = rochePotential(s.px, s.py, s.pz, q);
+
+        // Check if this particle is unbound (phi > phiL1) AND fill > 1.0
+        if (fillFactor > 1.0 && phi > phiL1) {
+          // Transition to free: start drifting toward L1
+          s.state = 'free';
+          // Initial velocity proportional to (phi - phiL1), directed toward L1
+          const speed = 0.02 + 0.08 * Math.min(1.0, (phi - phiL1) / 0.1);
+          const toL1x = xL1 - s.px;
+          const toL1y = -s.py;
+          const toL1z = -s.pz;
+          const toL1Len = Math.sqrt(toL1x * toL1x + toL1y * toL1y + toL1z * toL1z) || 1;
+          s.vx = speed * toL1x / toL1Len;
+          s.vy = speed * toL1y / toL1Len;
+          s.vz = speed * toL1z / toL1Len;
+        } else {
+          // Jitter in place (thermal motion)
+          s.jitterPhase += dt * (3.0 + Math.sin(i * 0.7) * 2.0);
+          const jx = Math.sin(s.jitterPhase) * thermalAmp;
+          const jy = Math.cos(s.jitterPhase * 1.3 + 1.0) * thermalAmp;
+          const jz = Math.sin(s.jitterPhase * 0.9 + 2.0) * thermalAmp;
+
+          posArr[i * 3]     = (s.px + jx) * A_VIS;
+          posArr[i * 3 + 1] = (s.py + jy) * A_VIS;
+          posArr[i * 3 + 2] = (s.pz + jz) * A_VIS;
+          colArr[i * 3]     = donorR;
+          colArr[i * 3 + 1] = donorG;
+          colArr[i * 3 + 2] = donorB;
+          sizeArr[i] = gasMode ? 0.06 : 0.04;
+          continue;
+        }
+      }
+
+      // Free particle: drift toward L1 with Roche potential gradient + Coriolis
+      if (s.state === 'free') {
+        const subSteps = 4;
+        const h = dt / subSteps;
+        for (let step = 0; step < subSteps; step++) {
+          // 3D gradient of Roche potential
+          const grad = potentialGradient(s.px, s.py, s.pz, q);
+          // Acceleration = -grad(Phi) + Coriolis (2 * v cross Omega_y)
+          // Omega along +Y: Coriolis = 2*(vx,vy,vz)x(0,1,0) = (2*vz, 0, -2*vx)
+          const ax = -grad[0] + 2 * s.vz;
+          const ay = -grad[1];
+          const az = -grad[2] - 2 * s.vx;
+          s.vx += ax * h;
+          s.vy += ay * h;
+          s.vz += az * h;
+          s.px += s.vx * h;
+          s.py += s.vy * h;
+          s.pz += s.vz * h;
+        }
+
+        // Distance to L1
+        const dxL1 = s.px - xL1;
+        const distL1 = Math.sqrt(dxL1 * dxL1 + s.py * s.py + s.pz * s.pz);
+
+        // Distance from donor centre
+        const dxD = s.px - x1Pos;
+        const distDonor = Math.sqrt(dxD * dxD + s.py * s.py + s.pz * s.pz);
+
+        // Fade colour from donor colour -> stream colour as it approaches L1
+        const fadeT = Math.min(1.0, distDonor / (Math.abs(xL1 - x1Pos) + 0.001));
+        colArr[i * 3]     = donorR + (streamR - donorR) * fadeT;
+        colArr[i * 3 + 1] = donorG + (streamG - donorG) * fadeT;
+        colArr[i * 3 + 2] = donorB + (streamB - donorB) * fadeT;
+        sizeArr[i] = gasMode ? 0.06 : 0.04;
+
+        posArr[i * 3]     = s.px * A_VIS;
+        posArr[i * 3 + 1] = s.py * A_VIS;
+        posArr[i * 3 + 2] = s.pz * A_VIS;
+
+        // Recycle: if past L1 toward accretor, or too far from donor, respawn
+        const pastL1 = (s.px < xL1 - 0.03);
+        const tooFar = distDonor > 1.5 || Math.abs(s.py) > 1.0;
+        if (pastL1 || tooFar) {
+          placeSkinParticle(s);
+        }
+      }
+    }
+
+    skinGeo.attributes.position.needsUpdate = true;
+    skinGeo.attributes.color.needsUpdate = true;
+    skinGeo.attributes.size.needsUpdate = true;
+  }
+
+  // Initialize on first load
+  initSkinParticles();
 
   // ===================================================================
   //  Orbit trails (circular orbits)
@@ -1025,7 +1331,7 @@
   const particles = [];
 
   // Accretion disk particles
-  const MAX_DISK = 400;
+  const MAX_DISK = 1200;
   const diskPositions = new Float32Array(MAX_DISK * 3);
   const diskColors = new Float32Array(MAX_DISK * 3);
   const diskSizes = new Float32Array(MAX_DISK);
@@ -1350,14 +1656,20 @@
           if (!diskParticles[dIdx]) {
             // Initialize new disk particle
             angle = Math.random() * TWO_PI;
-            diskParticles[dIdx] = { angle, yOff: (Math.random() - 0.5) * 0.015 };
+            diskParticles[dIdx] = { angle, rFrac: Math.random(), yOff: (Math.random() - 0.5) * 0.06 };
           } else {
             diskParticles[dIdx].angle += omegaK * dt;
+            // Slow inward spiral — particles visually drift inward over time
+            diskParticles[dIdx].rFrac -= 0.003 * dt;
+            if (diskParticles[dIdx].rFrac < 0) diskParticles[dIdx].rFrac = Math.random();
             angle = diskParticles[dIdx].angle;
           }
 
-          const px = x2Pos + ringR[i] * Math.cos(angle);
-          const pz = ringR[i] * Math.sin(angle);
+          // Interpolate radius within ring ± half-spacing for visual spread
+          const dr = (i < N_RINGS - 1) ? (ringR[i + 1] - ringR[i]) : (ringR[i] - ringR[i - 1]);
+          const rVis = ringR[i] + (diskParticles[dIdx].rFrac - 0.5) * dr * 0.8;
+          const px = x2Pos + rVis * Math.cos(angle);
+          const pz = rVis * Math.sin(angle);
           dposArr[dIdx * 3] = px * A_VIS;
           dposArr[dIdx * 3 + 1] = (diskParticles[dIdx].yOff || 0) * A_VIS;
           dposArr[dIdx * 3 + 2] = pz * A_VIS;
@@ -1365,12 +1677,12 @@
           // Hotspot brightness boost: particles near the hotspot angle get brighter
           let angleDiff = Math.abs(angle - hotspotAngle) % TWO_PI;
           if (angleDiff > PI) angleDiff = TWO_PI - angleDiff;
-          const hotBoost = angleDiff < 0.3 ? 1.0 + 1.0 * (1 - angleDiff / 0.3) : 1.0;
+          const hotBoost = angleDiff < 0.4 ? 1.0 + 2.5 * (1 - angleDiff / 0.4) : 1.0;
 
           dcolArr[dIdx * 3] = Math.min(1, cr * hotBoost);
           dcolArr[dIdx * 3 + 1] = Math.min(1, cg * hotBoost);
           dcolArr[dIdx * 3 + 2] = Math.min(1, cb * hotBoost);
-          dsizeArr[dIdx] = gasMode ? 0.10 : 0.06;
+          dsizeArr[dIdx] = gasMode ? 0.18 : 0.12;
           dIdx++;
         }
       }
@@ -1616,10 +1928,11 @@
     updateLPoints();
     needsIsosurfaceRebuild = true;
     needsContourRedraw = true;
-    // Reset disk and stream when q changes
+    // Reset disk, stream and skin when q changes
     initDiskRings();
     diskParticles.length = 0;
     particles.length = 0;
+    initSkinParticles();
     buildStreamLine();
     updateReadout();
   }
@@ -1744,8 +2057,10 @@
 
     if (playing) {
       simTime += dt * speedMul;
-      // Rotate the co-rotating group (orbital motion)
-      coRotGroup.rotation.y += dtPhys;
+      // Co-rotating frame: stars are stationary, no orbital rotation
+      // (the Roche potential is defined in the co-rotating frame)
+      // Update donor surface gas skin
+      updateSkinParticles(dtPhys);
       // Update mass transfer stream
       updateStream(dtPhys);
       // Update readouts for live disk mass and luminosity
