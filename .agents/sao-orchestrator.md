@@ -163,6 +163,53 @@ experimental/archive/
 ### Key principle
 **Never delete — always archive.** The old version may have good ideas, and comparison is valuable. But the coder builds fresh, informed by what failed.
 
+## Interactive Mode (user-directed changes)
+
+For targeted modifications where the user knows exactly what they want changed. No researcher needed — the user IS the researcher. This is the lightest-weight mode: modify, build, verify, accept.
+
+### When to use interactive mode
+- User says "make the particles bigger" or "change the colour to blue"
+- User wants a specific UI tweak, control added, or visual adjustment
+- Quick fixes from user review of an existing app
+- "Can you add a toggle for X" or "Move the panel to the left"
+- Any change the user can describe in a sentence or two
+
+### Interactive pipeline
+
+```
+Phase 1u: ORCHESTRATOR updates the spec
+  → User specifies wish / change
+  → Orchestrator modifies [topic]-spec.md with a "## User-directed changes" section
+  → Documents what to change and why (user's words)
+  → No researcher dispatch needed
+
+Phase 2u: CODER implements
+  → sao-coder reads updated spec + existing HTML
+  → Makes the targeted change(s)
+  → Keeps everything else intact
+
+Phase 3u: VERIFIER checks
+  → sao-verify agent runs standard checks
+  → Reports pass/fail
+  → User may override: accept despite verifier warnings, or reject despite pass
+
+Phase 4u: ORCHESTRATOR updates docs
+  → Upon user acceptance: update PROJECT-STATUS.md, dev log, learnings
+  → Commit with "Interactive: [topic] — [what changed]" message
+```
+
+### Key differences from other modes
+- **No researcher phase** — user provides the direction directly
+- **Spec gets a lightweight addendum**, not a full rewrite
+- **User has final say** on pass/fail, not the verifier
+- **Fastest mode** — can be a single coder dispatch + verify cycle
+- **Multiple rounds**: user can keep requesting changes → coder → verify → accept/reject in a loop until satisfied
+
+### When NOT to use interactive mode
+- If the change requires research (new physics, different algorithm) → use iteration mode
+- If the change is so large it's effectively a rebuild → use do-over mode
+- If the user isn't sure what they want → use iteration mode (researcher explores options)
+
 ## Process Enforcement
 
 **Separation of concerns:** Writers write, coders code, verifiers verify. No agent self-checks — that doesn't work. The verifier is the sole judge of pass/fail.
@@ -354,3 +401,5 @@ When a coder agent's context fills up mid-build:
 - 2026-03-29 — Pipeline simplified: 5 phases → 4 phases. Visual research folded into Researcher (Phase 1). verify.js now automates all mechanical checks.
 - 2026-03-29 — All 6 Hard/Hardest tier apps built in parallel (6 researchers + 6 writers + 6 coders simultaneously). Rate limits can interrupt agents mid-build — check file state before rebuilding.
 - 2026-03-29 — Added Iteration Mode for refining existing apps. Not a do-over — researcher reads existing app, spec says what to keep vs change, coder modifies existing file.
+- 2026-03-29 — Added Do-Over Mode: archive old version, rebuild from scratch informed by failures. Never delete — always archive.
+- 2026-03-29 — Added Interactive Mode: user-directed changes, no researcher needed, fastest mode. User has final say on pass/fail.
