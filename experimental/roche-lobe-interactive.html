@@ -125,8 +125,8 @@
     <label>Speed
       <select id="speed-sel">
         <option value="0.2">0.2x</option>
-        <option value="0.5" selected>0.5x</option>
-        <option value="1">1x</option>
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
         <option value="3">3x</option>
         <option value="10">10x</option>
       </select>
@@ -519,7 +519,7 @@
   let q = 0.5;           // mass ratio M2/M1
   let fillFactor = 1.05;  // R_star / R_Roche (>1 = mass transfer visible on load)
   let playing = true;
-  let speedMul = 0.5;
+  let speedMul = 1.0;
   let simTime = 0;
   let showOrbits = true;
   let showLabels = true;
@@ -591,7 +591,10 @@
         const phiMid = rochePotential(x1Pos + mid * nx, mid * ny, mid * nz, q);
         if (phiMid < phiTarget) lo = mid; else hi = mid;
       }
-      return (lo + hi) * 0.5;
+      const r = (lo + hi) * 0.5;
+      // Cap at L1 distance to prevent spike through to the other star
+      const dL1 = Math.abs(xL1 - x1Pos);
+      return Math.min(r, dL1 * 1.05);
     }
     return rL1_egg; // fallback
   }
@@ -1396,7 +1399,7 @@
   let diskTotalMass = 0;
   let accretedMdot = 0;    // mass accretion rate (running average)
   let accretedMass = 0;    // total mass that has accreted onto compact object
-  const ALPHA_VISC = 0.02; // alpha-disk viscosity parameter
+  const ALPHA_VISC = 0.15; // alpha-disk viscosity parameter (boosted for visual timescales)
   const R_INNER_FRAC = 0.15; // inner disk edge as fraction of R_circ
 
   function initDiskRings() {
@@ -1450,7 +1453,9 @@
       vx: -vMag,
       vz: vz,
       age: 0,
-      maxAge: 6.0 + Math.random() * 4.0, // longer lifetime
+      maxAge: 8.0 + Math.random() * 6.0,
+      orbits: 0,       // track how far the particle has orbited the accretor
+      lastAngle: null,  // for orbit tracking
     });
   }
 
@@ -1494,27 +1499,41 @@
       }
       part.age += dt;
 
-      // Distance to accretor (star 2)
+      // Distance and angle to accretor (star 2)
       const dx2 = part.x - x2Pos;
       const dz2 = part.z;
       const r2 = Math.sqrt(dx2 * dx2 + dz2 * dz2);
+      const angle2 = Math.atan2(dz2, dx2);
 
-      // When stream particle reaches vicinity of circularisation radius, deposit mass
+      // Track orbital angle around accretor to know when particle has orbited
+      if (r2 < rCirc * 1.5) {
+        if (part.lastAngle !== null) {
+          let dAngle = angle2 - part.lastAngle;
+          // Normalize to [-PI, PI]
+          if (dAngle > PI) dAngle -= TWO_PI;
+          if (dAngle < -PI) dAngle += TWO_PI;
+          part.orbits += Math.abs(dAngle) / TWO_PI;
+        }
+        part.lastAngle = angle2;
+      }
+
+      // Deposit mass into disk only AFTER the particle has completed
+      // at least 0.7 orbits around the accretor (arrives tangentially,
+      // not head-on). This models circularisation.
       let remove = false;
-      if (r2 < rCirc * 1.1 && r2 > rInner) {
-        // Deposit mass into the nearest ring
-        const ringIdx = Math.round((r2 - rInner) / ((rCirc - rInner) / (N_RINGS - 1)));
-        const ri = Math.max(0, Math.min(N_RINGS - 1, ringIdx));
-        ringMass[ri] += MASS_PER_PARTICLE;
+      if (r2 < rCirc * 1.2 && r2 > rInner && part.orbits > 0.7) {
+        // Deposit at the outer ring (circularisation radius)
+        const outerRingIdx = N_RINGS - 1;
+        ringMass[outerRingIdx] += MASS_PER_PARTICLE;
         diskTotalMass += MASS_PER_PARTICLE;
 
         // Record hotspot angle from this impact
-        hotspotAngle = Math.atan2(dz2, dx2);
+        hotspotAngle = angle2;
         remove = true;
       }
 
-      // Also remove if too old, too far, or inside accretor
-      if (remove || part.age > part.maxAge || Math.abs(part.x) > 2.5 || Math.abs(part.z) > 2.5 || r2 < rInner * 0.5) {
+      // Remove if too old, too far, or inside accretor
+      if (remove || part.age > part.maxAge || Math.abs(part.x) > 2.5 || Math.abs(part.z) > 2.5 || r2 < rInner * 0.3) {
         particles.splice(p, 1);
       }
     }
