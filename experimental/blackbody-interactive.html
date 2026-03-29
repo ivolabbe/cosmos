@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackbody Radiation Explorer | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    /* --- Controls bar (bottom center) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls input[type="range"] { width: 120px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="number"] {
+      width: 62px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+      text-align: right;
+    }
+    #controls input[type="number"]::-webkit-inner-spin-button { opacity: 0.5; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls select option { background: #1a1a3e; color: #fff; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+    .val { min-width: 28px; text-align: right; display: inline-block; font-size: 11px; }
+    .preset-btn { cursor: pointer; }
+    .preset-btn.selected { background: rgba(220,45,39,0.5) !important; border-color: #DC2D27 !important; }
+
+    /* --- Loading / Credit --- */
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap;
+    }
+    #credit a { color: rgba(255,255,255,0.35); }
+
+    @media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Loading...</div>
+
+  <div id="info">
+    <h2>Blackbody Radiation</h2>
+    <p class="desc">Explore the Planck function and Wien's displacement law across the electromagnetic spectrum.</p>
+    <div class="readout">
+      <div>Temperature: <span id="r-temp">5800 K</span></div>
+      <div>Spectral type: <span id="r-sptype">G2</span></div>
+      <div>Peak wavelength: <span id="r-peak">500 nm</span></div>
+      <div>Total flux: <span id="r-flux">-</span></div>
+    </div>
+    <p class="hint">Drag the slider or type a temperature. Toggle star overlay to compare.</p>
+  </div>
+
+  <div id="controls">
+    <label>T <input type="range" id="slider-temp" min="0" max="1000" value="500">
+      <input type="number" id="input-temp" value="5800" min="100" max="50000" step="100"> K</label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-stars"> Stars</label>
+    <div class="sep"></div>
+    <button class="preset-btn" data-t="2.725">CMB</button>
+    <button class="preset-btn" data-t="3000">M dwarf</button>
+    <button class="preset-btn selected" data-t="5800">Sun</button>
+    <button class="preset-btn" data-t="10000">A star</button>
+    <button class="preset-btn" data-t="30000">O star</button>
+  </div>
+
+  <div id="credit">
+    COSMOS Encyclopedia &mdash; <a href="https://astronomy.swin.edu.au" target="_blank">Swinburne Astronomy</a>
+  </div>
+
+  <canvas id="plot-canvas"></canvas>
+
+  <script>
+  // ---- Embedded mode ----
+  if (window.self !== window.top || new URLSearchParams(window.location.search).get('embed') === '1') {
+    document.body.classList.add('embedded');
+  }
+
+  // ---- Physics constants ----
+  const h  = 6.62607015e-34;   // Planck constant (J s)
+  const c  = 2.99792458e8;     // speed of light (m/s)
+  const kB = 1.380649e-23;     // Boltzmann constant (J/K)
+  const sigma = 5.670374419e-8; // Stefan-Boltzmann constant (W/m^2/K^4)
+  const WIEN_B = 2.897771955e-3; // Wien displacement constant (m K)
+
+  // ---- Planck function B(lambda, T) in W/m^2/sr/m ----
+  function planck(lambda_m, T) {
+    if (T <= 0) return 0;
+    const x = h * c / (lambda_m * kB * T);
+    if (x > 500) return 0; // avoid underflow
+    return (2 * h * c * c / Math.pow(lambda_m, 5)) / (Math.exp(x) - 1);
+  }
+
+  // ---- Wien peak ----
+  function wienPeak(T) {
+    return WIEN_B / T; // metres
+  }
+
+  // ---- Stefan-Boltzmann total flux ----
+  function stefanBoltzmann(T) {
+    return sigma * Math.pow(T, 4);
+  }
+
+  // ---- Spectral type from temperature ----
+  function spectralType(T) {
+    if (T >= 30000) return 'O';
+    if (T >= 10000) return 'B';
+    if (T >= 7500) return 'A';
+    if (T >= 6000) return 'F';
+    if (T >= 5200) return 'G';
+    if (T >= 3700) return 'K';
+    if (T >= 2400) return 'M';
+    return 'L';
+  }
+
+  // ---- Wavelength to visible colour ----
+  function wavelengthToRGB(lambda_nm) {
+    // Attempt to approximate visible colour for wavelengths 380-700nm
+    let r = 0, g = 0, b = 0;
+    if (lambda_nm < 380 || lambda_nm > 700) return null;
+
+    if (lambda_nm < 440) {
+      r = -(lambda_nm - 440) / (440 - 380);
+      b = 1.0;
+    } else if (lambda_nm < 490) {
+      g = (lambda_nm - 440) / (490 - 440);
+      b = 1.0;
+    } else if (lambda_nm < 510) {
+      g = 1.0;
+      b = -(lambda_nm - 510) / (510 - 490);
+    } else if (lambda_nm < 580) {
+      r = (lambda_nm - 510) / (580 - 510);
+      g = 1.0;
+    } else if (lambda_nm < 645) {
+      r = 1.0;
+      g = -(lambda_nm - 645) / (645 - 580);
+    } else {
+      r = 1.0;
+    }
+
+    // Intensity falloff at edges
+    let factor;
+    if (lambda_nm < 420) factor = 0.3 + 0.7 * (lambda_nm - 380) / (420 - 380);
+    else if (lambda_nm > 680) factor = 0.3 + 0.7 * (700 - lambda_nm) / (700 - 680);
+    else factor = 1.0;
+
+    r = Math.round(255 * Math.pow(r * factor, 0.8));
+    g = Math.round(255 * Math.pow(g * factor, 0.8));
+    b = Math.round(255 * Math.pow(b * factor, 0.8));
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // ---- Temperature to approximate star colour (for UI) ----
+  function tempToColor(T) {
+    if (T < 3500) return '#ff4422';
+    if (T < 4500) return '#ff8844';
+    if (T < 5500) return '#ffcc44';
+    if (T < 6500) return '#ffeeaa';
+    if (T < 8000) return '#ffffff';
+    if (T < 15000) return '#aaccff';
+    return '#8899ff';
+  }
+
+  // ---- Preset star data for overlay mode ----
+  const starPresets = [
+    { name: 'Red dwarf', spType: 'M5', T: 3000, color: '#ff4422' },
+    { name: 'Sun', spType: 'G2', T: 5800, color: '#ffdd44' },
+    { name: 'Sirius', spType: 'A1', T: 10000, color: '#ffffff' },
+    { name: 'Rigel', spType: 'B8', T: 12000, color: '#aaccff' },
+    { name: 'O star', spType: 'O5', T: 30000, color: '#8899ff' },
+  ];
+
+  // ---- Canvas setup ----
+  const canvas = document.getElementById('plot-canvas');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  // ---- State ----
+  let temperature = 5800;
+  let showStars = false;
+
+  // ---- DOM refs ----
+  const sliderTemp = document.getElementById('slider-temp');
+  const inputTemp = document.getElementById('input-temp');
+  const cbStars = document.getElementById('cb-stars');
+  const rTemp = document.getElementById('r-temp');
+  const rSptype = document.getElementById('r-sptype');
+  const rPeak = document.getElementById('r-peak');
+  const rFlux = document.getElementById('r-flux');
+  const presetBtns = document.querySelectorAll('.preset-btn');
+
+  // ---- Slider is logarithmic: maps 0-1000 to ~2.7 K - 50000 K ----
+  // Use log mapping: T = 10^(log10(Tmin) + frac * (log10(Tmax) - log10(Tmin)))
+  const T_MIN = 2.5;
+  const T_MAX = 50000;
+  const LOG_T_MIN = Math.log10(T_MIN);
+  const LOG_T_MAX = Math.log10(T_MAX);
+
+  function sliderToTemp(val) {
+    const frac = val / 1000;
+    return Math.pow(10, LOG_T_MIN + frac * (LOG_T_MAX - LOG_T_MIN));
+  }
+
+  function tempToSlider(T) {
+    const frac = (Math.log10(T) - LOG_T_MIN) / (LOG_T_MAX - LOG_T_MIN);
+    return Math.round(frac * 1000);
+  }
+
+  // ---- Format helpers ----
+  function fmtWavelength(lambda_m) {
+    const nm = lambda_m * 1e9;
+    if (nm < 1000) return nm.toFixed(1) + ' nm';
+    const um = lambda_m * 1e6;
+    if (um < 1000) return um.toFixed(1) + ' \u03BCm';
+    const mm = lambda_m * 1e3;
+    if (mm < 10) return mm.toFixed(2) + ' mm';
+    return mm.toFixed(1) + ' mm';
+  }
+
+  function fmtFlux(F) {
+    if (F < 1e-3) return F.toExponential(2) + ' W/m\u00B2';
+    if (F < 1e3) return F.toFixed(2) + ' W/m\u00B2';
+    if (F < 1e6) return (F / 1e3).toFixed(1) + ' kW/m\u00B2';
+    if (F < 1e9) return (F / 1e6).toFixed(2) + ' MW/m\u00B2';
+    return F.toExponential(2) + ' W/m\u00B2';
+  }
+
+  // ---- Plot dimensions ----
+  let plotLeft, plotRight, plotTop, plotBottom, plotW, plotH;
+
+  // Wavelength range for the plot (in metres)
+  const LAMBDA_MIN = 1e-8;   // 10 nm
+  const LAMBDA_MAX = 1e-1;   // 100 mm (for CMB peak at ~1mm)
+
+  function lambdaToX(lambda_m) {
+    const logL = Math.log10(lambda_m);
+    const logMin = Math.log10(LAMBDA_MIN);
+    const logMax = Math.log10(LAMBDA_MAX);
+    return plotLeft + (logL - logMin) / (logMax - logMin) * plotW;
+  }
+
+  function xToLambda(x) {
+    const logMin = Math.log10(LAMBDA_MIN);
+    const logMax = Math.log10(LAMBDA_MAX);
+    const logL = logMin + (x - plotLeft) / plotW * (logMax - logMin);
+    return Math.pow(10, logL);
+  }
+
+  // Y-axis: log scale for B(lambda, T)
+  // Dynamic range: adjust based on current temperature
+  let yLogMin, yLogMax;
+
+  function computeYRange(T) {
+    const peak = wienPeak(T);
+    const Bpeak = planck(peak, T);
+    if (Bpeak <= 0) { yLogMin = -10; yLogMax = 5; return; }
+    const logPeak = Math.log10(Bpeak);
+    yLogMin = logPeak - 14;
+    yLogMax = logPeak + 1.5;
+  }
+
+  function bToY(B) {
+    if (B <= 0) return plotBottom + 100; // off screen below
+    const logB = Math.log10(B);
+    return plotBottom - (logB - yLogMin) / (yLogMax - yLogMin) * plotH;
+  }
+
+  // ---- Compute curve points ----
+  function computeCurve(T, nPoints) {
+    const pts = [];
+    const logMin = Math.log10(LAMBDA_MIN);
+    const logMax = Math.log10(LAMBDA_MAX);
+    for (let i = 0; i <= nPoints; i++) {
+      const logL = logMin + (i / nPoints) * (logMax - logMin);
+      const lambda = Math.pow(10, logL);
+      const B = planck(lambda, T);
+      pts.push({ lambda, B, x: lambdaToX(lambda), y: bToY(B) });
+    }
+    return pts;
+  }
+
+  // ---- Y range for multi-star mode ----
+  function computeYRangeMulti(temps) {
+    let maxB = 0;
+    let minB = Infinity;
+    for (const T of temps) {
+      const peak = wienPeak(T);
+      const Bpeak = planck(peak, T);
+      if (Bpeak > maxB) maxB = Bpeak;
+      // Find the minimum non-trivial B at the extremes
+      const Bmin1 = planck(LAMBDA_MIN, T);
+      const Bmin2 = planck(LAMBDA_MAX, T);
+      const bm = Math.max(Bmin1, Bmin2, 1e-30);
+      if (bm < minB) minB = bm;
+    }
+    if (maxB <= 0) { yLogMin = -10; yLogMax = 5; return; }
+    const logMax = Math.log10(maxB);
+    yLogMin = logMax - 14;
+    yLogMax = logMax + 1.5;
+  }
+
+  // ---- Resize ----
+  function resize() {
+    canvas.width = window.innerWidth * DPR;
+    canvas.height = window.innerHeight * DPR;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    // Plot margins
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    plotLeft = 90;
+    plotRight = W - 30;
+    plotTop = 30;
+    plotBottom = H - 80;
+    plotW = plotRight - plotLeft;
+    plotH = plotBottom - plotTop;
+
+    draw();
+  }
+
+  // ---- Draw everything ----
+  function draw() {
+    const W = window.innerWidth;
+    const H = window.innerHeight;
+    ctx.clearRect(0, 0, W, H);
+
+    // Background
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+
+    // Determine Y range
+    if (showStars) {
+      const temps = starPresets.map(s => s.T);
+      temps.push(temperature);
+      computeYRangeMulti(temps);
+    } else {
+      computeYRange(temperature);
+    }
+
+    // ---- Draw visible band highlight ----
+    drawVisibleBand();
+
+    // ---- Grid and axes ----
+    drawGrid();
+
+    // ---- Curves ----
+    if (showStars) {
+      // Draw preset star curves
+      for (const star of starPresets) {
+        const pts = computeCurve(star.T, 500);
+        drawCurve(pts, star.color, 1.2, 0.6, false);
+      }
+    }
+
+    // Main temperature curve
+    const mainPts = computeCurve(temperature, 500);
+    const mainColor = tempToColor(temperature);
+
+    // Draw coloured fill under curve in visible range
+    drawVisibleFill(mainPts);
+
+    // Draw the main curve with glow-then-sharp
+    drawCurve(mainPts, mainColor, 3.5, 0.25, true); // glow
+    drawCurve(mainPts, mainColor, 1.5, 1.0, false); // sharp
+
+    // ---- Wien peak marker ----
+    drawWienMarker(temperature, mainColor);
+
+    // ---- Star labels (overlay mode) ----
+    if (showStars) {
+      for (const star of starPresets) {
+        drawStarLabel(star);
+      }
+    }
+
+    // ---- Axis labels ----
+    drawAxisLabels();
+
+    // ---- Update readouts ----
+    updateReadouts();
+  }
+
+  // ---- Draw visible band (380-700nm) ----
+  function drawVisibleBand() {
+    const x1 = lambdaToX(380e-9);
+    const x2 = lambdaToX(700e-9);
+    if (x2 < plotLeft || x1 > plotRight) return;
+
+    const clampX1 = Math.max(x1, plotLeft);
+    const clampX2 = Math.min(x2, plotRight);
+
+    // Draw rainbow gradient
+    const nSteps = 80;
+    const stepW = (clampX2 - clampX1) / nSteps;
+    for (let i = 0; i < nSteps; i++) {
+      const x = clampX1 + i * stepW;
+      const lambda = xToLambda(x + stepW / 2);
+      const nm = lambda * 1e9;
+      const col = wavelengthToRGB(nm);
+      if (col) {
+        ctx.fillStyle = col;
+        ctx.globalAlpha = 0.08;
+        ctx.fillRect(x, plotTop, stepW + 0.5, plotH);
+      }
+    }
+    ctx.globalAlpha = 1.0;
+
+    // Borders
+    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(clampX1, plotTop);
+    ctx.lineTo(clampX1, plotBottom);
+    ctx.moveTo(clampX2, plotTop);
+    ctx.lineTo(clampX2, plotBottom);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Label
+    const midX = (clampX1 + clampX2) / 2;
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.font = '10px "Open Sans"';
+    ctx.textAlign = 'center';
+    ctx.fillText('VISIBLE', midX, plotTop + 14);
+  }
+
+  // ---- Draw coloured fill under curve in visible range ----
+  function drawVisibleFill(pts) {
+    const x1 = lambdaToX(380e-9);
+    const x2 = lambdaToX(700e-9);
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(Math.max(x1, plotLeft), plotTop, Math.min(x2, plotRight) - Math.max(x1, plotLeft), plotH);
+    ctx.clip();
+
+    // Draw thin vertical strips coloured by wavelength
+    let started = false;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p = pts[i];
+      const pn = pts[i + 1];
+      if (p.x < x1 - 2 || p.x > x2 + 2) continue;
+      if (p.y > plotBottom && pn.y > plotBottom) continue;
+
+      const nm = p.lambda * 1e9;
+      const col = wavelengthToRGB(nm);
+      if (!col) continue;
+
+      const yTop = Math.max(Math.min(p.y, plotBottom), plotTop);
+
+      ctx.fillStyle = col;
+      ctx.globalAlpha = 0.2;
+      ctx.fillRect(p.x, yTop, Math.max(pn.x - p.x, 1), plotBottom - yTop);
+    }
+    ctx.globalAlpha = 1.0;
+    ctx.restore();
+  }
+
+  // ---- Draw grid ----
+  function drawGrid() {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(plotLeft, plotTop, plotW, plotH);
+    ctx.clip();
+
+    // X grid: wavelength decades
+    const logMin = Math.log10(LAMBDA_MIN);
+    const logMax = Math.log10(LAMBDA_MAX);
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 0.5;
+
+    for (let exp = Math.ceil(logMin); exp <= Math.floor(logMax); exp++) {
+      // Major grid at each decade
+      const x = lambdaToX(Math.pow(10, exp));
+      ctx.beginPath();
+      ctx.moveTo(x, plotTop);
+      ctx.lineTo(x, plotBottom);
+      ctx.stroke();
+
+      // Minor grid at 2,3,5 within decade
+      for (const sub of [2, 3, 5]) {
+        const xs = lambdaToX(sub * Math.pow(10, exp));
+        if (xs > plotLeft && xs < plotRight) {
+          ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+          ctx.beginPath();
+          ctx.moveTo(xs, plotTop);
+          ctx.lineTo(xs, plotBottom);
+          ctx.stroke();
+          ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        }
+      }
+    }
+
+    // Y grid: every 2 decades
+    for (let ylog = Math.ceil(yLogMin); ylog <= Math.floor(yLogMax); ylog += 2) {
+      const y = bToY(Math.pow(10, ylog));
+      if (y < plotTop || y > plotBottom) continue;
+      ctx.beginPath();
+      ctx.moveTo(plotLeft, y);
+      ctx.lineTo(plotRight, y);
+      ctx.stroke();
+    }
+
+    ctx.restore();
+
+    // Plot border
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(plotLeft, plotTop, plotW, plotH);
+  }
+
+  // ---- Draw a Planck curve ----
+  function drawCurve(pts, color, lineWidth, alpha, isGlow) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(plotLeft, plotTop - 2, plotW + 2, plotH + 4);
+    ctx.clip();
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.globalAlpha = alpha;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+
+    let started = false;
+    for (const p of pts) {
+      if (p.y > plotBottom + 50 || p.y < plotTop - 50) {
+        started = false;
+        continue;
+      }
+      if (!started) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        started = true;
+      } else {
+        ctx.lineTo(p.x, p.y);
+      }
+    }
+    ctx.stroke();
+    ctx.globalAlpha = 1.0;
+    ctx.restore();
+  }
+
+  // ---- Draw Wien peak marker ----
+  function drawWienMarker(T, color) {
+    if (T <= 0) return;
+    const peakLambda = wienPeak(T);
+    const x = lambdaToX(peakLambda);
+    if (x < plotLeft || x > plotRight) return;
+
+    const Bpeak = planck(peakLambda, T);
+    const yPeak = bToY(Bpeak);
+    const yTop = Math.max(yPeak - 20, plotTop);
+
+    // Dashed vertical line
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(plotLeft, plotTop, plotW, plotH);
+    ctx.clip();
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.6;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(x, plotBottom);
+    ctx.lineTo(x, yTop);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Small diamond at peak
+    ctx.globalAlpha = 1.0;
+    ctx.fillStyle = color;
+    const clampY = Math.max(Math.min(yPeak, plotBottom), plotTop);
+    ctx.beginPath();
+    ctx.moveTo(x, clampY - 5);
+    ctx.lineTo(x + 4, clampY);
+    ctx.lineTo(x, clampY + 5);
+    ctx.lineTo(x - 4, clampY);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+
+    // Label above plot
+    const labelY = Math.max(yTop - 6, plotTop - 2);
+    ctx.fillStyle = color;
+    ctx.globalAlpha = 0.9;
+    ctx.font = '600 11px "Open Sans"';
+    ctx.textAlign = 'center';
+    const peakLabel = '\u03BB_max = ' + fmtWavelength(peakLambda);
+    ctx.fillText(peakLabel, x, labelY);
+    ctx.globalAlpha = 1.0;
+  }
+
+  // ---- Draw star label in overlay mode ----
+  function drawStarLabel(star) {
+    const peakLambda = wienPeak(star.T);
+    const Bpeak = planck(peakLambda, star.T);
+    const x = lambdaToX(peakLambda);
+    const y = bToY(Bpeak);
+
+    if (x < plotLeft || x > plotRight) return;
+    const clampY = Math.max(Math.min(y, plotBottom - 10), plotTop + 20);
+
+    ctx.fillStyle = star.color;
+    ctx.globalAlpha = 0.9;
+    ctx.font = '600 11px "Open Sans"';
+    ctx.textAlign = 'left';
+    ctx.fillText(star.name + ' (' + star.spType + ', ' + star.T + ' K)', x + 8, clampY - 6);
+    ctx.globalAlpha = 1.0;
+  }
+
+  // ---- Axis labels ----
+  function drawAxisLabels() {
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.font = '12px "Open Sans"';
+    ctx.textAlign = 'center';
+
+    // X-axis: wavelength tick labels
+    const logMin = Math.log10(LAMBDA_MIN);
+    const logMax = Math.log10(LAMBDA_MAX);
+
+    const wavelengthLabels = [
+      { val: 1e-8, label: '10 nm' },
+      { val: 1e-7, label: '100 nm' },
+      { val: 1e-6, label: '1 \u03BCm' },
+      { val: 1e-5, label: '10 \u03BCm' },
+      { val: 1e-4, label: '100 \u03BCm' },
+      { val: 1e-3, label: '1 mm' },
+      { val: 1e-2, label: '10 mm' },
+      { val: 1e-1, label: '100 mm' },
+    ];
+
+    for (const wl of wavelengthLabels) {
+      const x = lambdaToX(wl.val);
+      if (x >= plotLeft - 5 && x <= plotRight + 5) {
+        ctx.fillText(wl.label, x, plotBottom + 18);
+
+        // Tick mark
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, plotBottom);
+        ctx.lineTo(x, plotBottom + 5);
+        ctx.stroke();
+      }
+    }
+
+    // X-axis title
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '13px "Open Sans"';
+    ctx.fillText('Wavelength', (plotLeft + plotRight) / 2, plotBottom + 38);
+
+    // Spectral band labels
+    ctx.font = '9px "Open Sans"';
+    ctx.fillStyle = 'rgba(255,255,255,0.2)';
+    const bands = [
+      { min: 1e-8, max: 1e-7, label: 'UV' },
+      { min: 3.8e-7, max: 7e-7, label: 'Vis' },
+      { min: 7e-7, max: 1e-3, label: 'Infrared' },
+      { min: 1e-3, max: 1e-1, label: 'Microwave' },
+    ];
+    for (const band of bands) {
+      const x1 = lambdaToX(band.min);
+      const x2 = lambdaToX(band.max);
+      const mx = (x1 + x2) / 2;
+      if (mx > plotLeft && mx < plotRight) {
+        ctx.fillText(band.label, mx, plotBottom + 52);
+      }
+    }
+
+    // Y-axis tick labels
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '10px "Open Sans"';
+    ctx.textAlign = 'right';
+    for (let ylog = Math.ceil(yLogMin); ylog <= Math.floor(yLogMax); ylog += 2) {
+      const y = bToY(Math.pow(10, ylog));
+      if (y < plotTop + 5 || y > plotBottom - 5) continue;
+      ctx.fillText('10' + superscript(ylog), plotLeft - 8, y + 4);
+
+      // Tick
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(plotLeft, y);
+      ctx.lineTo(plotLeft - 4, y);
+      ctx.stroke();
+    }
+
+    // Y-axis title (rotated)
+    ctx.save();
+    ctx.translate(16, (plotTop + plotBottom) / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '13px "Open Sans"';
+    ctx.textAlign = 'center';
+    ctx.fillText('Spectral Radiance B(\u03BB, T)  [W/m\u00B2/sr/m]', 0, 0);
+    ctx.restore();
+  }
+
+  function superscript(n) {
+    const sup = { '0': '\u2070', '1': '\u00B9', '2': '\u00B2', '3': '\u00B3', '4': '\u2074',
+                  '5': '\u2075', '6': '\u2076', '7': '\u2077', '8': '\u2078', '9': '\u2079', '-': '\u207B' };
+    return String(n).split('').map(c => sup[c] || c).join('');
+  }
+
+  // ---- Update readouts ----
+  function updateReadouts() {
+    const T = temperature;
+    rTemp.textContent = T < 10 ? T.toFixed(3) + ' K' : Math.round(T) + ' K';
+    rSptype.textContent = spectralType(T);
+    rPeak.textContent = fmtWavelength(wienPeak(T));
+    rFlux.textContent = fmtFlux(stefanBoltzmann(T));
+  }
+
+  // ---- Set temperature ----
+  function setTemperature(T, source) {
+    T = Math.max(T_MIN, Math.min(T_MAX, T));
+    temperature = T;
+
+    if (source !== 'slider') {
+      sliderTemp.value = tempToSlider(T);
+    }
+    if (source !== 'input') {
+      inputTemp.value = T < 10 ? T.toFixed(3) : Math.round(T);
+    }
+
+    // Update preset button highlight
+    presetBtns.forEach(btn => {
+      const presetT = parseFloat(btn.dataset.t);
+      btn.classList.toggle('selected', Math.abs(T - presetT) < 1);
+    });
+
+    draw();
+  }
+
+  // ---- Event listeners ----
+  sliderTemp.addEventListener('input', () => {
+    setTemperature(sliderToTemp(parseFloat(sliderTemp.value)), 'slider');
+  });
+
+  inputTemp.addEventListener('change', () => {
+    const v = parseFloat(inputTemp.value);
+    if (!isNaN(v) && v > 0) setTemperature(v, 'input');
+  });
+  inputTemp.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.target.blur();
+    }
+  });
+
+  cbStars.addEventListener('change', () => {
+    showStars = cbStars.checked;
+    draw();
+  });
+
+  presetBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const T = parseFloat(btn.dataset.t);
+      setTemperature(T, 'preset');
+    });
+  });
+
+  // ---- Init ----
+  window.addEventListener('resize', resize);
+  document.getElementById('loading').style.display = 'none';
+
+  // Set initial slider position
+  sliderTemp.value = tempToSlider(temperature);
+  resize();
+  </script>
+</body>
+</html>
