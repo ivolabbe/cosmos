@@ -1027,7 +1027,7 @@
           colArr[i * 3]     = donorR;
           colArr[i * 3 + 1] = donorG;
           colArr[i * 3 + 2] = donorB;
-          sizeArr[i] = gasMode ? 0.06 : 0.04;
+          sizeArr[i] = gasMode ? 0.10 : 0.06;
           continue;
         }
       }
@@ -1065,7 +1065,7 @@
         colArr[i * 3]     = donorR + (streamR - donorR) * fadeT;
         colArr[i * 3 + 1] = donorG + (streamG - donorG) * fadeT;
         colArr[i * 3 + 2] = donorB + (streamB - donorB) * fadeT;
-        sizeArr[i] = gasMode ? 0.06 : 0.04;
+        sizeArr[i] = gasMode ? 0.10 : 0.06;
 
         posArr[i * 3]     = s.px * A_VIS;
         posArr[i * 3 + 1] = s.py * A_VIS;
@@ -1243,14 +1243,11 @@
     }
     geo.attributes.normal.needsUpdate = true;
 
-    const alpha = gasMode ? 0.04 : 0.18;
-    const mat = new THREE.MeshPhysicalMaterial({
+    const mat = new THREE.MeshBasicMaterial({
       color: 0x88ccff,
+      wireframe: true,
       transparent: true,
-      opacity: alpha,
-      side: THREE.DoubleSide,
-      roughness: 0.2,
-      metalness: 0.1,
+      opacity: gasMode ? 0.05 : 0.15,
       depthWrite: false,
     });
 
@@ -1523,14 +1520,17 @@
       // path) AND has orbited enough, it collides with the incoming gas.
       // This self-collision dissipates energy and forms the initial ring.
       //
-      // Detection: particle has done >= 0.4 orbits AND is close to the
-      // stream path (x-axis, L1-side) in the accretor frame.
-      // 0.4 orbits = particle has swung around enough to arrive tangentially.
+      // --- Stream-on-stream collision detection ---
+      // The orbiting particle has swung around the accretor. It deposits
+      // mass when it returns to where the INCOMING stream is — that's the
+      // L1-facing side near the x-axis. The collision point is near rCirc
+      // (not inside it, not far outside).
       let remove = false;
-      const nearStreamPath = Math.abs(dz2) < rCirc * 0.4 && dx2 > 0;
+      const nearStreamPath = Math.abs(dz2) < rCirc * 0.2 && dx2 > rCirc * 0.3;
       const hasOrbited = part.orbits >= 0.3;
+      const nearCircRadius = r2 > rCirc * 0.6 && r2 < rCirc * 1.3;
 
-      if (hasOrbited && nearStreamPath && r2 < rCirc * 1.5 && r2 > rInner) {
+      if (hasOrbited && nearStreamPath && nearCircRadius) {
         // Stream-on-stream impact! Deposit mass at this radius.
         // This is the circularisation radius.
         const ringIdx = Math.round((r2 - rInner) / ((rCirc - rInner) / (N_RINGS - 1)));
@@ -2023,7 +2023,8 @@
     bloomPass.threshold = gasMode ? 0.2 : 0.3;
     // Update isosurface opacity
     if (lobeMesh) {
-      lobeMesh.material.opacity = gasMode ? 0.03 : 0.12;
+      lobeMesh.material.opacity = gasMode ? 0.03 : 0.15;
+      lobeMesh.material.wireframe = true; // always wireframe for visibility
     }
     updateReadout();
   });
