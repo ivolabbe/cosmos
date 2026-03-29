@@ -1523,13 +1523,14 @@
       // path) AND has orbited enough, it collides with the incoming gas.
       // This self-collision dissipates energy and forms the initial ring.
       //
-      // Detection: particle has done >= 0.85 orbits AND is close to the
-      // x-axis (where the stream from L1 arrives) in the accretor frame.
+      // Detection: particle has done >= 0.4 orbits AND is close to the
+      // stream path (x-axis, L1-side) in the accretor frame.
+      // 0.4 orbits = particle has swung around enough to arrive tangentially.
       let remove = false;
-      const nearStreamPath = Math.abs(dz2) < rCirc * 0.25 && dx2 > 0; // near L1-side of accretor
-      const hasOrbited = part.orbits >= 0.85;
+      const nearStreamPath = Math.abs(dz2) < rCirc * 0.4 && dx2 > 0;
+      const hasOrbited = part.orbits >= 0.4;
 
-      if (hasOrbited && nearStreamPath && r2 < rCirc * 1.3 && r2 > rInner) {
+      if (hasOrbited && nearStreamPath && r2 < rCirc * 1.5 && r2 > rInner) {
         // Stream-on-stream impact! Deposit mass at this radius.
         // This is the circularisation radius.
         const ringIdx = Math.round((r2 - rInner) / ((rCirc - rInner) / (N_RINGS - 1)));
@@ -1548,53 +1549,58 @@
       }
     }
 
-    // --- Viscous spreading of disk rings ---
+    // --- Viscous spreading of disk rings (CFL-stable subcycling) ---
     if (dt > 0 && diskTotalMass > 0) {
       const dr = (rCirc - rInner) / (N_RINGS - 1);
-      // Compute surface density sigma = mass / (2 pi r dr)
-      const sigma = new Float32Array(N_RINGS);
-      for (let i = 0; i < N_RINGS; i++) {
-        sigma[i] = ringMass[i] / (TWO_PI * ringR[i] * dr + 1e-20);
-      }
+      // CFL constraint: dt_sub < 0.4 * dr^2 / nu_max
+      const nu_max = ALPHA_VISC * Math.sqrt(ringR[N_RINGS - 1]);
+      const dt_cfl = 0.4 * dr * dr / (nu_max + 1e-10);
+      const nSub = Math.max(1, Math.min(50, Math.ceil(dt / dt_cfl)));
+      const dtSub = dt / nSub;
+      let totalAccreted = 0;
 
-      // Viscous mass flux: dM_i/dt = nu * (sigma_{i+1} - sigma_i) / dr * (2 pi r dr)
-      // nu scales as alpha * r^(1/2) for Shakura-Sunyaev
-      const dM = new Float32Array(N_RINGS);
-      for (let i = 1; i < N_RINGS - 1; i++) {
-        const nu = ALPHA_VISC * Math.sqrt(ringR[i]);
-        const flux_in  = nu * (sigma[i + 1] - sigma[i]) / dr * TWO_PI * ringR[i] * dr;
-        const flux_out = nu * (sigma[i] - sigma[i - 1]) / dr * TWO_PI * ringR[i] * dr;
-        dM[i] = (flux_in - flux_out) * dt;
-      }
-      // Outer ring loses mass inward
-      if (N_RINGS > 1) {
-        const nu0 = ALPHA_VISC * Math.sqrt(ringR[N_RINGS - 1]);
-        dM[N_RINGS - 1] = -nu0 * (sigma[N_RINGS - 1] - sigma[N_RINGS - 2]) / dr * TWO_PI * ringR[N_RINGS - 1] * dr * dt;
-      }
-      // Inner ring: mass flows onto compact object
-      const nu_inner = ALPHA_VISC * Math.sqrt(ringR[0]);
-      const innerFlux = nu_inner * sigma[0] / dr * TWO_PI * ringR[0] * dr * dt;
-      dM[0] = -innerFlux;
-      if (N_RINGS > 1) {
-        const nuI = ALPHA_VISC * Math.sqrt(ringR[1]);
-        dM[0] += nuI * (sigma[1] - sigma[0]) / dr * TWO_PI * ringR[1] * dr * dt;
-      }
-
-      // Apply mass changes
-      let accreted = 0;
-      for (let i = 0; i < N_RINGS; i++) {
-        ringMass[i] += dM[i];
-        if (ringMass[i] < 0) {
-          if (i === 0) accreted += -ringMass[i];
-          ringMass[i] = 0;
+      for (let sub = 0; sub < nSub; sub++) {
+        const sigma = new Float32Array(N_RINGS);
+        for (let i = 0; i < N_RINGS; i++) {
+          sigma[i] = ringMass[i] / (TWO_PI * ringR[i] * dr + 1e-20);
         }
+
+        const dM = new Float32Array(N_RINGS);
+        for (let i = 1; i < N_RINGS - 1; i++) {
+          const nu = ALPHA_VISC * Math.sqrt(ringR[i]);
+          const flux_in  = nu * (sigma[i + 1] - sigma[i]) / dr * TWO_PI * ringR[i] * dr;
+          const flux_out = nu * (sigma[i] - sigma[i - 1]) / dr * TWO_PI * ringR[i] * dr;
+          dM[i] = (flux_in - flux_out) * dtSub;
+        }
+        // Outer ring loses mass inward
+        if (N_RINGS > 1) {
+          const nu0 = ALPHA_VISC * Math.sqrt(ringR[N_RINGS - 1]);
+          dM[N_RINGS - 1] = -nu0 * (sigma[N_RINGS - 1] - sigma[N_RINGS - 2]) / dr * TWO_PI * ringR[N_RINGS - 1] * dr * dtSub;
+        }
+        // Inner ring: mass flows onto compact object
+        const nu_inner = ALPHA_VISC * Math.sqrt(ringR[0]);
+        const innerFlux = nu_inner * sigma[0] / dr * TWO_PI * ringR[0] * dr * dtSub;
+        dM[0] = -innerFlux;
+        if (N_RINGS > 1) {
+          const nuI = ALPHA_VISC * Math.sqrt(ringR[1]);
+          dM[0] += nuI * (sigma[1] - sigma[0]) / dr * TWO_PI * ringR[1] * dr * dtSub;
+        }
+
+        for (let i = 0; i < N_RINGS; i++) {
+          ringMass[i] += dM[i];
+          if (ringMass[i] < 0) {
+            if (i === 0) totalAccreted += -ringMass[i];
+            ringMass[i] = 0;
+          }
+        }
+        totalAccreted += Math.max(0, innerFlux);
       }
-      accreted += Math.max(0, innerFlux);
-      accretedMass += accreted;
+
+      accretedMass += totalAccreted;
       // Running average Mdot (exponential smoothing)
       const tauSmooth = 0.5;
       const alpha_s = 1 - Math.exp(-dt / tauSmooth);
-      accretedMdot = accretedMdot * (1 - alpha_s) + (accreted / (dt + 1e-10)) * alpha_s;
+      accretedMdot = accretedMdot * (1 - alpha_s) + (totalAccreted / (dt + 1e-10)) * alpha_s;
 
       // Recompute total disk mass
       diskTotalMass = 0;
@@ -1940,7 +1946,7 @@
     const rCirc = circRadius(q);
     const rI = R_INNER_FRAC * rCirc;
     const Lacc = accretedMdot / (2 * rI + 1e-10) / (q + 1);
-    elLacc.textContent = Lacc.toFixed(3);
+    elLacc.textContent = Lacc < 0.001 && Lacc > 0 ? Lacc.toExponential(2) : Lacc.toFixed(3);
     elMode.textContent = gasMode ? 'Gas' : 'Potential';
   }
 
