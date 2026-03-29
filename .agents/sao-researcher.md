@@ -47,7 +47,26 @@ Gather authoritative data for the topic:
 
 ## Phase 2: Reference Code & Implementations
 
-**CRITICAL:** Before writing any physics formula in the spec, find **reference code** that implements the same physics. Prefer code from:
+**CRITICAL:** Before writing any physics formula or designing the visualization approach, **search GitHub for existing simulation and visualization code first.** This is your most valuable research step — existing implementations solve both physics and rendering in one shot.
+
+### Step 1: Search GitHub for simulation/visualization code
+
+Search GitHub using targeted queries. Examples:
+- `"[topic] simulation" language:javascript` or `language:python`
+- `"[topic] visualization" three.js OR webgl OR d3`
+- `"[topic] interactive" astronomy OR physics`
+- `"[physics keyword]" shader OR glsl OR webgl`
+- `"[topic] explorer" OR "[topic] simulator"`
+
+Look for repos that:
+- **Render the thing we're building** (WebGL/Canvas/Three.js/D3 implementations we can study or adapt)
+- **Implement the core physics** (even in Python — the math translates to JS)
+- **Have live demos** (GitHub Pages links we can screenshot for the visual competition survey)
+- **Are well-documented** (README explains the physics and algorithm)
+
+For each promising repo, document: URL, what it implements, language, quality, license, key algorithms/functions to reference.
+
+### Step 2: Find reference implementations in scientific packages
 
 1. **Scientific software packages** — astropy, galpy, pynbody, MESA, etc.
 2. **Researcher GitHub repos** — published scientists' simulation code
