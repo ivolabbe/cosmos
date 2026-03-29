@@ -49,12 +49,12 @@ A 3D interactive visualization of the Roche potential in a close binary star sys
 
 ## State-of-the-Art Survey
 
-### Visual Reference 1: Wikipedia Roche Lobe Diagrams
-- **Source**: Wikipedia (Roche_lobe, Lagrange_point)
-- **What it does well**: Canonical 2D equipotential contour plots with L1-L5 marked. The figure-of-eight at the critical potential is immediately recognizable. 3D wireframe surface plots show the "gravitational wells" clearly.
-- **What it does poorly**: Static images only. No interactivity. The 3D wireframe plots are from a fixed viewpoint.
-- **Key technique**: Matplotlib-style contour plot on a grid; 3D wireframe of Phi(x,y,0).
-- **Our advantage**: Real-time 3D with adjustable mass ratio. Interactive orbit + zoom. Toggle between contour and gas views. The contour plot updates live as q changes.
+### Visual Reference 1: artist rendering of rochelobe transfer in x-ray binary
+- **Source**: university researcher
+- **URL**: https://vikdhillon.staff.shef.ac.uk/seminars/ras/xrb.html
+- **What it does well**: beautiful rendering of scene, with light shining onto companion star.
+- **What it does poorly**: image only
+- **Our advantage**: Full 3D visualization with equipotential surfaces. Particle stream shows mass transfer, not just test particle trajectories. Accretion disk formation.
 
 ### Visual Reference 2: Wolfram Demonstrations -- Trajectory of a Test Mass in a Roche Potential
 - **Source**: Wolfram Demonstrations Project
@@ -64,15 +64,8 @@ A 3D interactive visualization of the Roche potential in a close binary star sys
 - **Key technique**: Numerical ODE integration of equations of motion in the co-rotating frame, with Coriolis and centrifugal forces.
 - **Our advantage**: Full 3D visualization with equipotential surfaces. Particle stream shows mass transfer, not just test particle trajectories. Accretion disk formation.
 
-### Visual Reference 3: NC State 3D Accretion Disk Simulations (Blondin)
-- **Source**: University research (NC State, John Blondin)
-- **URL**: http://wonka.physics.ncsu.edu/~blondin/XRB/
-- **What it does well**: Research-grade 3D hydrodynamic simulations of Roche lobe overflow. Multiple iso-density surfaces rendered semi-transparently. Beautifully shows the mass stream from L1 wrapping into a disk. Time animations available.
-- **What it does poorly**: Pre-rendered, not interactive. Research visualization, not educational. Requires downloading video files.
-- **Key technique**: 3D hydro (VH-1 code), iso-density surface rendering with semi-transparency, multiple nested surfaces for density structure.
-- **Our advantage**: Real-time interactivity. User controls mass ratio. Toggle views. Educational annotations (L-point labels, readouts). Runs in browser.
 
-### Visual Reference 4: Penn State ASTRO 801 -- Roche Lobe Wireframe
+### Visual Reference 3: Penn State ASTRO 801 -- Roche Lobe Wireframe
 - **Source**: University educational material
 - **URL**: https://courses.ems.psu.edu/astro801/content/l6_p6.html
 - **What it does well**: Clear 3D wireframe representation of the Roche potential showing the "gravitational wells" of each star and the saddle point at L1. Good pedagogical explanation of how Roche lobe overflow works.
@@ -80,7 +73,7 @@ A 3D interactive visualization of the Roche potential in a close binary star sys
 - **Key technique**: 3D surface plot of -Phi(x,y) (inverted so wells appear as actual depressions).
 - **Our advantage**: Interactive 3D. Smooth isosurface rendering with translucency and bloom. Mass transfer particles.
 
-### Visual Reference 5: rozwadowski/Roche-lobe (GitHub)
+### Visual Reference 4: rozwadowski/Roche-lobe (GitHub)
 - **Source**: GitHub research code
 - **URL**: https://github.com/rozwadowski/Roche-lobe
 - **What it does well**: Clean Python implementation of the Roche potential with contour plots and volume calculation. The Roche potential formula is clear and validated. Animated GIFs show lobes reshaping as q varies. Computes Lagrange points via numerical derivative.
@@ -88,7 +81,7 @@ A 3D interactive visualization of the Roche potential in a close binary star sys
 - **Key technique**: Grid evaluation of Phi(x,y,0), contourf at Phi_L1, numerical L-point finding via derivative zero-crossing.
 - **Our advantage**: Port the exact same potential formula to WebGL. Add 3D isosurface, particle stream, and real-time interaction.
 
-### Visual Reference 6: COSMOS Binary Star Interactive (our own)
+### Visual Reference 5: COSMOS Binary Star Interactive (our own)
 - **Source**: Existing COSMOS app
 - **URL**: `experimental/binary-star-interactive.html`
 - **What it does well**: Two orbiting stars with adjustable mass ratio. RV + light curve panels. Established COSMOS visual style. Bloom, star shaders, orbit trails.
@@ -99,6 +92,8 @@ A 3D interactive visualization of the Roche potential in a close binary star sys
 ---
 
 ## Physics / Algorithm
+
+for source code see also: https://github.com/morganemacleod/RLOF/
 
 ### 1. Coordinate System
 
@@ -626,3 +621,55 @@ The app should show mass transfer on first load (this is the key feature):
 - Mode = Potential (show the lobes; user can toggle to Gas)
 - Speed = 0.5x (slow enough to see the stream)
 - Camera: slightly elevated (30-40 degrees above orbital plane) to see both the 3D lobes and the stream trajectory
+- Auto-rotate enabled by default (slow orbit around the system)
+
+---
+
+## User-directed changes (Interactive Mode, 2026-03-29)
+
+### Change 1: Donor star must look like a star
+The overfilling donor star must be **visibly stellar** — yellow/orange, bloomy, glowing. Currently it's too dim/geometric. Use a luminance-tint shader or bright MeshBasicMaterial with a warm colour that triggers bloom. It's a star — it should glow.
+
+### Change 2: Accretion disk built by gas physics, not pre-populated
+**Current problem:** The accretion disk particles are pre-populated in Keplerian orbits — they magically appear. The stream particles just orbit the accretor frictionlessly.
+
+**Required behaviour — gas physics, not just orbits:**
+1. The accretion disk starts **empty** (no pre-populated particles)
+2. Gas particles flow from L1 along the ballistic stream
+3. When a stream particle reaches the vicinity of the accretor, it **impacts the accretion disk** at the circularisation radius
+4. At the impact point, a **hotspot** forms — a bright glowing region where kinetic energy dissipates
+5. The particle's mass is **added to the disk** — the disk grows over time as mass accumulates
+6. The disk is NOT frictionless: viscous dissipation causes gas to **spiral inward** through the disk toward the accretor
+7. Gas reaching the inner disk edge **accretes onto the compact object**, releasing energy
+8. The accretion disk has a **temperature profile**: T(r) ∝ r^(-3/4) — hotter (bluer/whiter) near the accretor, cooler (redder) at the outer edge
+9. The accretion luminosity L_acc = GM_accretor × Mdot / (2 R_inner) should be displayed as a readout
+
+**Implementation approach:**
+- Track disk as a set of annular rings (not individual particles), each with a mass and temperature
+- Stream particles impact at R_circ, depositing mass into that ring
+- Viscous spreading: each timestep, mass moves inward (and some outward) between rings — use simple alpha-disk viscosity
+- Inner ring mass accretes onto compact object → luminosity readout
+- Render disk as particles coloured by local temperature (blackbody colour ramp)
+- The hotspot is a bright glow at the azimuthal angle where the stream meets the disk outer edge
+
+### Change 3: Hotspot at stream-disk impact
+Where the ballistic stream hits the outer disk edge:
+- A **bright hotspot** (white-yellow glow, ~2× the local disk brightness)
+- The hotspot position is fixed in the co-rotating frame (it's always where the stream arrives)
+- Hotspot size ≈ H (disk scale height) ≈ a few % of disk radius
+- The stream kinetic energy dissipates here — this is often the brightest point in the system
+
+### Change 4: Auto-rotate
+- Enable slow auto-rotation by default (OrbitControls autoRotate)
+- User can still drag to override
+
+### Summary of physics flow
+```
+Donor overflows Roche lobe
+  → Gas streams through L1 (ballistic trajectory with Coriolis)
+  → Stream impacts disk at circularisation radius → HOTSPOT
+  → Mass added to outer disk ring
+  → Viscous spreading moves mass inward through disk
+  → Inner disk accretes onto compact object → releases energy (L_acc readout)
+  → Disk colour: T(r) ∝ r^(-3/4) — hot inner (blue-white) to cool outer (red-orange)
+```
