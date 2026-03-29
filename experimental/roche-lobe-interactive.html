@@ -103,6 +103,11 @@
       <div>Mass transfer: <span id="r-mt">Inactive</span></div>
       <div>Disk seed: <span id="r-dseed">---</span></div>
       <div>Disk mass: <span id="r-dmass">0.000</span></div>
+      <div>WD surface: <span id="r-surf">0</span>
+        <div id="nova-meter" style="width:100%;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-top:3px;overflow:hidden;">
+          <div id="nova-fill" style="width:0%;height:100%;border-radius:3px;transition:background 0.3s;"></div>
+        </div>
+      </div>
       <div>L<sub>acc</sub>: <span id="r-lacc">0</span></div>
       <div>Mode: <span id="r-mode">Potential</span></div>
     </div>
@@ -137,6 +142,7 @@
     <button id="btn-mode" class="active">Potential</button>
     <label><input type="checkbox" id="cb-orbits" checked> Orbits</label>
     <label><input type="checkbox" id="cb-labels" checked> Labels</label>
+    <label><input type="checkbox" id="cb-bfield"> B-field</label>
     <select id="preset-sel">
       <option value="">Presets</option>
       <option value="algol">Algol-like</option>
@@ -710,7 +716,7 @@
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(innerWidth, innerHeight), 0.5, 0.4, 0.5
+    new THREE.Vector2(innerWidth, innerHeight), 0.7, 0.5, 0.35
   );
   composer.addPass(bloomPass);
   composer.addPass(new OutputPass());
@@ -880,7 +886,6 @@
       // Irradiation: blue-white glow on accretor-facing side
       float irr = vIrrad * vIrrad; // limb-darken
       // Stream shadow: stream cylinder blocks X-rays in equatorial band.
-      // Width = angular size of stream as seen from disk, projected onto donor.
       float shadow = smoothstep(0.0, uShadowWidth, abs(vElevation));
       irr *= shadow;
       vec3 irradCol = vec3(0.6, 0.75, 1.0) * uIrradiation * irr;
@@ -1208,7 +1213,7 @@
       // After well past periapsis, test returning arc against incoming arc.
       // Only test against the first 60% of the incoming arc to avoid false
       // crossings near the tight periapsis turn.
-      const incomingEnd = Math.floor(periIdx * 0.6);
+      const incomingEnd = Math.floor(periIdx * 0.85);
       if (!diskSeedFound && traj.length > periIdx + 40 && incomingEnd > 5) {
         const cur = traj[traj.length - 1];
         const prev = traj[traj.length - 2];
@@ -1295,24 +1300,31 @@
   const JET_THRESHOLD = 0.02; // minimum accretedMdot to launch jet
 
   function emitJetParticle(sign) {
-    // Launch from WD position along ±Y (rotation axis)
-    const spread = 0.008 + Math.random() * 0.005; // narrow cone half-angle
-    const speed = 0.3 + Math.random() * 0.4; // fast — magnetically accelerated
+    // Launch from WD along ±Y. Jet speed ~20–40× stream (~few 1000 km/s).
+    // Particles spiral helically along B-field lines.
+    const halfAngle = (0.08 + Math.random() * 0.12);
+    const speed = 0.8 + Math.random() * 1.2;
     const theta = Math.random() * TWO_PI;
+    const vLateral = speed * halfAngle;
+    // Helical rotation: each particle has a phase and angular velocity
+    // along the jet axis (following wound-up magnetic field lines).
+    const helixR = (0.005 + Math.random() * 0.015); // helix radius (dimensionless)
+    const helixOmega = sign * (8 + Math.random() * 12); // rad/dim-time, fast spin
     jetParticles.push({
-      x: x2Pos + (Math.random() - 0.5) * 0.01,
-      y: sign * 0.02,
-      z: (Math.random() - 0.5) * 0.01,
-      vx: spread * Math.cos(theta),
+      x: x2Pos + (Math.random() - 0.5) * STAR2_FIXED_R * 2,
+      y: sign * STAR2_FIXED_R,
+      z: (Math.random() - 0.5) * STAR2_FIXED_R * 2,
+      vx: vLateral * Math.cos(theta),
       vy: sign * speed,
-      vz: spread * Math.sin(theta),
+      vz: vLateral * Math.sin(theta),
+      helixR, helixOmega, helixPhase: theta,
       age: 0,
       maxAge: 2.0 + Math.random() * 1.5,
     });
   }
 
   function updateJet(dt) {
-    const active = accretedMdot > JET_THRESHOLD && diskTotalMass > 0.1;
+    const active = strongBField && accretedMdot > JET_THRESHOLD && diskTotalMass > 0.1;
     jetPoints.visible = active || jetParticles.length > 0;
 
     if (active) {
@@ -1333,14 +1345,16 @@
 
     for (let i = jetParticles.length - 1; i >= 0; i--) {
       const jp = jetParticles[i];
-      // Accelerate along Y (magnetic collimation)
-      jp.vy *= 1.0 + 0.8 * dt; // continuous acceleration
-      // Slight collimation: push x,z toward axis
-      jp.vx *= 0.97;
-      jp.vz *= 0.97;
+      // Accelerate along Y (magnetic pressure)
+      jp.vy *= 1.0 + 0.5 * dt;
+      // Mild collimation
+      jp.vx *= 0.995;
+      jp.vz *= 0.995;
       jp.x += jp.vx * dt;
       jp.y += jp.vy * dt;
       jp.z += jp.vz * dt;
+      // Advance helix phase
+      jp.helixPhase += jp.helixOmega * dt;
       jp.age += dt;
 
       if (jp.age > jp.maxAge) {
@@ -1349,21 +1363,30 @@
       }
     }
 
-    // Write to GPU buffers
+    // Write to GPU buffers — render as streaks using 2 points per particle
+    // (head + tail offset along velocity) for wispy spiral look
+    const ptsPerJet = 2;
     for (let i = 0; i < MAX_JET; i++) {
-      if (i < jetParticles.length) {
-        const jp = jetParticles[i];
-        posArr[i * 3]     = jp.x * A_VIS;
-        posArr[i * 3 + 1] = jp.y * A_VIS;
-        posArr[i * 3 + 2] = jp.z * A_VIS;
-        // Colour: blue-white at base → purple/magenta → fading
+      const ji = Math.floor(i / ptsPerJet);
+      const sub = i % ptsPerJet; // 0=head, 1=tail
+      if (ji < jetParticles.length) {
+        const jp = jetParticles[ji];
+        // Helical offset: spiral around jet axis
+        const hx = jp.helixR * Math.cos(jp.helixPhase) * A_VIS;
+        const hz = jp.helixR * Math.sin(jp.helixPhase) * A_VIS;
+        // Streak: tail is offset backwards along velocity
+        const streak = sub * 0.015; // tail offset (dim time backwards)
+        posArr[i * 3]     = (jp.x - jp.vx * streak) * A_VIS + hx;
+        posArr[i * 3 + 1] = (jp.y - jp.vy * streak) * A_VIS;
+        posArr[i * 3 + 2] = (jp.z - jp.vz * streak) * A_VIS + hz;
         const t = jp.age / jp.maxAge;
         const dist = Math.abs(jp.y);
         const fade = 1 - t * t;
-        colArr[i * 3]     = (0.4 + 0.3 * t) * fade;  // red rises with distance
-        colArr[i * 3 + 1] = (0.3 + 0.1 * t) * fade;  // green fades
-        colArr[i * 3 + 2] = (1.0 - 0.2 * t) * fade;  // blue dominant
-        sizeArr[i] = (0.06 + 0.04 * t) * fade;
+        const tailDim = sub === 0 ? 1.0 : 0.5; // tail point dimmer
+        colArr[i * 3]     = (0.4 + 0.3 * t) * fade * tailDim;
+        colArr[i * 3 + 1] = (0.3 + 0.1 * t) * fade * tailDim;
+        colArr[i * 3 + 2] = (1.0 - 0.2 * t) * fade * tailDim;
+        sizeArr[i] = (0.06 + 0.04 * t) * fade * (sub === 0 ? 1.0 : 0.7);
       } else {
         posArr[i * 3] = x2Pos * A_VIS;
         posArr[i * 3 + 1] = 0;
@@ -1374,7 +1397,7 @@
     jetGeo.attributes.position.needsUpdate = true;
     jetGeo.attributes.color.needsUpdate = true;
     jetGeo.attributes.size.needsUpdate = true;
-    jetGeo.setDrawRange(0, Math.min(jetParticles.length, MAX_JET));
+    jetGeo.setDrawRange(0, Math.min(jetParticles.length * ptsPerJet, MAX_JET));
   }
 
   // Hotspot sprite at stream-disk impact point
@@ -1395,12 +1418,77 @@
       blending: THREE.AdditiveBlending,
       transparent: true,
       depthWrite: false,
-      opacity: 0.25,
+      opacity: 0.6,
     })
   );
   hotspotSprite.scale.setScalar(0.15 * A_VIS);
   hotspotSprite.visible = false;
   coRotGroup.add(hotspotSprite);
+
+  // --- Nova shell sphere: expanding translucent nebula ---
+  // Procedural texture: radial glow with noise for filamentary look
+  // Nova shell texture: radial shell + core glow modulated by real noise
+  const novaTexCanvas = document.createElement('canvas');
+  novaTexCanvas.width = 256; novaTexCanvas.height = 256;
+  const ntx = novaTexCanvas.getContext('2d');
+  // Generate a noise field first (value noise with multiple octaves)
+  const noiseGrid = new Float32Array(256 * 256);
+  // Seed random low-res grids and interpolate for organic look
+  function makeNoiseOctave(size) {
+    const g = [];
+    for (let i = 0; i < size * size; i++) g.push(Math.random());
+    return g;
+  }
+  const oct1 = makeNoiseOctave(16), oct2 = makeNoiseOctave(32), oct3 = makeNoiseOctave(64);
+  function sampleOctave(oct, size, x, y) {
+    const fx = (x / 256) * size, fy = (y / 256) * size;
+    const ix = Math.floor(fx) % size, iy = Math.floor(fy) % size;
+    const tx = fx - Math.floor(fx), ty = fy - Math.floor(fy);
+    const v00 = oct[iy * size + ix], v10 = oct[iy * size + (ix + 1) % size];
+    const v01 = oct[((iy + 1) % size) * size + ix], v11 = oct[((iy + 1) % size) * size + (ix + 1) % size];
+    return (1-tx)*(1-ty)*v00 + tx*(1-ty)*v10 + (1-tx)*ty*v01 + tx*ty*v11;
+  }
+  for (let y = 0; y < 256; y++) {
+    for (let x = 0; x < 256; x++) {
+      noiseGrid[y * 256 + x] = sampleOctave(oct1, 16, x, y) * 0.5
+        + sampleOctave(oct2, 32, x, y) * 0.3
+        + sampleOctave(oct3, 64, x, y) * 0.2;
+    }
+  }
+  // Paint texture
+  const imgData = ntx.createImageData(256, 256);
+  for (let y = 0; y < 256; y++) {
+    for (let x = 0; x < 256; x++) {
+      const dx = x - 128, dy = y - 128;
+      const r = Math.sqrt(dx * dx + dy * dy) / 128;
+      const idx = (y * 256 + x) * 4;
+      if (r > 1) { imgData.data[idx+3] = 0; continue; }
+      const shell = Math.exp(-Math.pow((r - 0.8) / 0.15, 2));
+      const core = Math.exp(-r * r * 4);
+      const pattern = 0.7 + 0.3 * Math.sin(dx * 0.3 + dy * 0.2) * Math.cos(dy * 0.4 - dx * 0.15);
+      const noise = 0.5 + 0.5 * noiseGrid[y * 256 + x];
+      const bright = (shell * 0.7 + core * 0.5) * pattern * noise;
+      imgData.data[idx]     = Math.min(255, Math.round(255 * bright));
+      imgData.data[idx + 1] = Math.min(255, Math.round(200 * bright));
+      imgData.data[idx + 2] = Math.min(255, Math.round(120 * bright));
+      imgData.data[idx + 3] = Math.min(255, Math.round(220 * bright));
+    }
+  }
+  ntx.putImageData(imgData, 0, 0);
+  const novaShellTex = new THREE.CanvasTexture(novaTexCanvas);
+  const novaShellMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 32, 24),
+    new THREE.MeshBasicMaterial({
+      map: novaShellTex,
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    })
+  );
+  novaShellMesh.visible = false;
+  coRotGroup.add(novaShellMesh);
 
   // Circularization radius (Verbunt & Rappaport 1988)
   function circRadius(q) {
@@ -1427,6 +1515,14 @@
   let diskTotalMass = 0;
   let accretedMdot = 0;    // mass accretion rate (running average)
   let _lastLacc = 0;       // last computed L_acc in L_sun (for irradiation)
+  let strongBField = false; // magnetic WD mode
+  let surfaceMass = 0;      // mass piled on WD surface (non-magnetic: triggers nova)
+  const NOVA_THRESHOLD = 1.5e-4; // M_sun — 3x slower than debug, 3x faster than physical
+  let novaTimer = 0;        // >0 during nova flash (seconds)
+  let novaAge = 0;          // time since nova started (persists for long fade)
+  let novaShellParticles = []; // expanding nova shell
+
+  // (Nova shell rendered via sphere mesh — no particles needed)
   let accretedMass = 0;    // total mass that has accreted onto compact object
   const ALPHA_VISC = 0.15; // alpha-disk viscosity parameter (boosted for visual timescales)
   const R_INNER_FRAC = 0.15; // inner disk edge as fraction of circularization radius
@@ -1541,7 +1637,7 @@
     const massTransferActive = fillFactor >= 1.0;
     streamPoints.visible = massTransferActive;
     diskPoints.visible = massTransferActive || diskTotalMass > 0;
-    hotspotSprite.visible = massTransferActive && diskTotalMass > 0.001;
+    hotspotSprite.visible = massTransferActive && diskTotalMass > 0.5 && diskSeedFound;
 
     if (!massTransferActive && diskTotalMass <= 0) {
       particles.length = 0;
@@ -1563,7 +1659,7 @@
         }
         // Direct mass transfer for the skipped particles
         const skipped = baseRate - Math.max(1, visualRate);
-        if (skipped > 0 && diskSeedFound) {
+        if (skipped > 0 && diskSeedFound && ringR[0] > 0) {
           const directMass = skipped * MASS_PER_PARTICLE;
           // 70% to outer ring (hotspot), 30% steady-state profile
           ringMass[N_RINGS - 1] += directMass * 0.7;
@@ -1584,7 +1680,8 @@
     }
 
     // Integrate each particle (symplectic Euler in 2D orbital plane)
-    const subSteps = 8;
+    // Scale substeps with speed to keep h stable
+    const subSteps = Math.max(8, Math.round(8 * speedMul));
     const h = dt / subSteps;
     // Use dynamically found self-intersection radius; fall back to analytical
     const rSeed = diskSeedFound ? diskSeedRadius : circRadius(q);
@@ -1621,7 +1718,7 @@
 
       // --- Stream-disk / stream-stream collision ---
       let remove = false;
-      const hasOrbited = part.orbits >= 0.5;
+      const hasOrbited = part.orbits >= 0.85;
       let collided = false;
 
       if (diskSeedFound) {
@@ -1631,29 +1728,27 @@
             collided = true;
           }
         } else if (hasOrbited) {
-          // No disk mass yet: self-intersection collision only
+          // No disk mass yet: self-intersection collision.
+          // Wide zone — the returning stream crosses the incoming stream
+          // over a broad region, not a single point.
           const dxS = part.x - diskSeedX;
           const dzS = part.z - diskSeedZ;
           const distSeed = Math.sqrt(dxS * dxS + dzS * dzS);
-          collided = distSeed < diskSeedRadius * 0.4;
+          collided = distSeed < diskSeedRadius * 0.8;
         }
       }
 
       if (collided) {
-        if (diskTotalMass < 0.5) {
-          // Early buildup: deposit at outer edge only (hotspot)
-          ringMass[N_RINGS - 1] += MASS_PER_PARTICLE;
-        } else {
-          // Steady state established: distribute mass following
-          // steady-state sigma ∝ r^(-3/4) to fill inner disk quickly.
-          // 70% at outer edge (hotspot), 30% distributed by profile.
-          ringMass[N_RINGS - 1] += MASS_PER_PARTICLE * 0.7;
+        // Gradually fill inner disk as mass accumulates.
+        // spreadFrac ramps from 0 (all at outer edge) to 0.3 (steady state).
+        const spreadFrac = Math.min(0.3, diskTotalMass * 0.1);
+        const outerFrac = 1.0 - spreadFrac;
+        ringMass[N_RINGS - 1] += MASS_PER_PARTICLE * outerFrac;
+        if (spreadFrac > 0.001) {
           let profileSum = 0;
+          for (let ri = 0; ri < N_RINGS; ri++) profileSum += Math.pow(ringR[ri] + 1e-10, -0.75);
           for (let ri = 0; ri < N_RINGS; ri++) {
-            profileSum += Math.pow(ringR[ri] + 1e-10, -0.75);
-          }
-          for (let ri = 0; ri < N_RINGS; ri++) {
-            ringMass[ri] += MASS_PER_PARTICLE * 0.3 * Math.pow(ringR[ri] + 1e-10, -0.75) / profileSum;
+            ringMass[ri] += MASS_PER_PARTICLE * spreadFrac * Math.pow(ringR[ri] + 1e-10, -0.75) / profileSum;
           }
         }
         diskTotalMass += MASS_PER_PARTICLE;
@@ -1722,8 +1817,13 @@
       }
 
       accretedMass += totalAccreted;
-      // Mass accreted onto WD
-      M2 += totalAccreted * MASS_SCALE;
+      if (strongBField) {
+        // Magnetic WD: mass accretes along field lines → adds to WD
+        M2 += totalAccreted * MASS_SCALE;
+      } else {
+        // Non-magnetic: mass piles on WD surface → triggers nova
+        surfaceMass += totalAccreted * MASS_SCALE;
+      }
       // Running average Mdot (exponential smoothing)
       const tauSmooth = 0.5;
       const alpha_s = 1 - Math.exp(-dt / tauSmooth);
@@ -1832,10 +1932,10 @@
         // Inner disk (hot): bright blue-white. Outer disk (cool): dim red-orange.
         // Brightness scales steeply with T (Stefan-Boltzmann: flux ∝ T^4 ∝ r^-3)
         const tFrac = Math.min(1, (T_local - 3000) / (T_INNER - 3000)); // 0=cool, 1=hot
-        const brightness = 0.3 + 0.7 * tFrac * tFrac;      // dim outer, bright inner
-        const cr = (0.85 - 0.45 * tFrac) * brightness;   // orange → blue-white
-        const cg = (0.45 + 0.45 * tFrac) * brightness;   // dim → bright
-        const cb = (0.15 + 0.85 * tFrac) * brightness;   // red → deep blue
+        const brightness = 0.4 + 0.4 * tFrac * tFrac;      // dim outer, bright inner
+        const cr = (0.8 - 0.32 * tFrac) * brightness;    // orange → blue-white
+        const cg = (0.48 + 0.32 * tFrac) * brightness;   // dim → bright
+        const cb = (0.2 + 0.6 * tFrac) * brightness;     // red → deep blue
 
         // Keplerian angular velocity at this ring
         const omegaK = Math.sqrt(1.0 / ((q + 1) * ringR[i] * ringR[i] * ringR[i]));
@@ -1869,7 +1969,7 @@
           // Hotspot brightness boost: particles near the hotspot angle get brighter
           let angleDiff = Math.abs(angle - hotspotAngle) % TWO_PI;
           if (angleDiff > PI) angleDiff = TWO_PI - angleDiff;
-          const hotBoost = angleDiff < 0.3 ? 1.0 + 1.2 * (1 - angleDiff / 0.3) : 1.0;
+          const hotBoost = angleDiff < 0.3 ? 1.0 + 2.0 * (1 - angleDiff / 0.3) : 1.0;
 
           dcolArr[dIdx * 3] = Math.min(1, cr * hotBoost);
           dcolArr[dIdx * 3 + 1] = Math.min(1, cg * hotBoost);
@@ -2129,6 +2229,39 @@
       elLacc.textContent = '0';
     }
     elMode.textContent = gasMode ? 'Gas' : 'Potential';
+    // WD surface mass meter (non-magnetic: building toward nova)
+    const elSurf = document.getElementById('r-surf');
+    const novaFill = document.getElementById('nova-fill');
+    const novaMeter = document.getElementById('nova-meter');
+    if (elSurf) {
+      if (strongBField) {
+        elSurf.textContent = 'B-field (direct accretion)';
+        elSurf.style.color = 'rgba(255,255,255,0.8)';
+        novaMeter.style.display = 'none';
+      } else if (novaTimer > 0) {
+        elSurf.textContent = 'NOVA!';
+        elSurf.style.color = '#ff4444';
+        novaFill.style.width = '100%';
+        novaFill.style.background = '#ff2222';
+        novaMeter.style.display = '';
+      } else {
+        const pct = Math.min(100, surfaceMass / NOVA_THRESHOLD * 100);
+        elSurf.textContent = pct.toFixed(0) + '% to nova';
+        novaMeter.style.display = '';
+        novaFill.style.width = pct + '%';
+        // Colour ramps: green → yellow → orange → red
+        if (pct < 50) {
+          novaFill.style.background = 'rgba(80,200,120,0.8)';
+          elSurf.style.color = 'rgba(255,255,255,0.8)';
+        } else if (pct < 90) {
+          novaFill.style.background = 'rgba(220,180,40,0.9)';
+          elSurf.style.color = '#ddcc44';
+        } else {
+          novaFill.style.background = 'rgba(220,40,20,0.95)';
+          elSurf.style.color = '#ff4422';
+        }
+      }
+    }
   }
 
   // ===================================================================
@@ -2197,14 +2330,22 @@
     speedMul = parseFloat(speedSel.value);
   });
 
+  const cbBField = document.getElementById('cb-bfield');
+  cbBField.addEventListener('change', () => {
+    strongBField = cbBField.checked;
+    surfaceMass = 0;
+    novaTimer = 0;
+    novaShellParticles = [];
+  });
+
   const btnMode = document.getElementById('btn-mode');
   btnMode.addEventListener('click', () => {
     gasMode = !gasMode;
     btnMode.textContent = gasMode ? 'Potential' : 'Gas';
     btnMode.classList.toggle('active', gasMode);
     // Update bloom
-    bloomPass.strength = gasMode ? 0.5 : 0.3;
-    bloomPass.threshold = gasMode ? 0.5 : 0.6;
+    bloomPass.strength = gasMode ? 0.7 : 0.4;
+    bloomPass.threshold = gasMode ? 0.35 : 0.5;
     // Update isosurface opacity
     if (lobeMesh) {
       lobeMesh.material.opacity = gasMode ? 0.03 : 0.15;
@@ -2283,20 +2424,100 @@
       updateStream(dtPhys);
       updateJet(dtPhys);
 
-      // Donor irradiation consistent with L_acc
+      // Donor irradiation consistent with L_acc + nova flash (front side only)
       const donorMat = donorCoreMesh.material;
       if (donorMat.uniforms.uIrradiation) {
-        const irrad = _lastLacc > 1e-4 ? Math.min(1.5, 0.3 * Math.log10(_lastLacc + 1e-10) + 0.9) : 0;
+        let irrad = _lastLacc > 1e-4 ? Math.min(0.65, 0.156 * Math.log10(_lastLacc + 1e-10) + 0.39) : 0;
+        // Nova irradiation: light travels at c across binary separation.
+        // Delay = a / c. In dim time: ~0.001, but use 0.05 for visible causality.
+        // Ramp up over 0.02 dim time once light arrives, then fade with nova.
+        if (novaShellMesh.visible) {
+          const lightDelay = 0.0018; // physical: 2.3s real / 1259s per dim time
+          if (novaAge > lightDelay) {
+            const arrived = novaAge - lightDelay;
+            const ramp = Math.min(1, arrived / 0.02); // fast ramp once light hits
+            const fade = Math.exp(-arrived * 1.5); // fade as nova dims
+            irrad = Math.max(irrad, 1.5 * ramp * fade);
+          }
+        }
         donorMat.uniforms.uIrradiation.value = Math.max(0, irrad);
         donorMat.uniforms.uAccretorPos.value.set(x2Pos * A_VIS, 0, 0);
         // Shadow width: stream cylinder radius projected onto donor surface.
         // streamWidth at disk edge, viewed from disk across separation a.
         // Shadow half-angle = streamWidth / a, projected onto donor at radius rL.
         const excess = Math.max(0, fillFactor - 1.0);
+        // Shadow width on donor = stream diameter as seen from the accretor.
+        // The stream subtends angle ~ 2*streamR / separation at the WD.
+        // Projected onto donor at distance sep: shadow ~ 2*streamR (close to 1:1).
         const streamR = (0.002 + 0.06 * Math.sqrt(excess)) * A_VIS;
-        const sep = Math.abs(x1Pos - x2Pos) * A_VIS;
-        const donorR = rL1_egg * A_VIS;
-        donorMat.uniforms.uShadowWidth.value = streamR * (donorR / (sep + 0.01));
+        donorMat.uniforms.uShadowWidth.value = Math.max(0.08, streamR * 2.5);
+
+      }
+
+      // --- Nova check (non-magnetic mode) ---
+      if (!strongBField && surfaceMass >= NOVA_THRESHOLD) {
+        // Thermonuclear runaway! Eject shell, flash, reset surface mass
+        novaTimer = 3.0;
+        novaAge = 0;
+        // Activate expanding translucent sphere
+        novaShellMesh.visible = true;
+        novaShellMesh.position.set(x2Pos * A_VIS, 0, 0);
+        novaShellMesh.scale.setScalar(0.01);
+        novaShellMesh.material.opacity = 1.0;
+        // Nova flash: WD goes superbright. Bloom kept moderate so it
+        // doesn't wash the donor's shielded back side.
+        star2.children[0].material.uniforms.uBrightness.value = 30.0;
+        bloomPass.strength = 0.85;
+        bloomPass.threshold = 0.3;
+        // 10% of accreted mass retained by WD, 90% ejected
+        M2 += surfaceMass * 0.1;
+        surfaceMass = 0;
+      }
+
+      // --- Nova shell animation (sphere only) ---
+      if (novaShellMesh.visible) {
+        if (novaTimer > 0) novaTimer -= dt;
+        novaAge += dtPhys; // tied to physics time so shell speed scales with sim speed
+
+        // R(t) = Rmax * (1 - exp(-t/tau)): fast launch, decelerates.
+        // Initial velocity = Rmax/tau ≈ 1.0 dimensionless ≈ 20× stream speed.
+        // Nova ejecta ~2000 km/s, stream ~100 km/s. Shell decelerates as it
+        // sweeps up surrounding material.
+        // v_initial = Rmax/tau. For ~0.5% c: v = 2.8 dim/dim-time.
+        // tau = Rmax_dim / 2.8. With Rmax = 2 separations: tau = 2/2.8 = 0.7
+        const tau = 0.7; // dim time — fast initial expansion, decelerates
+        const maxRadius = 2.0 * A_VIS; // asymptotic: ~2× binary separation
+        const shellR = maxRadius * (1 - Math.exp(-novaAge / tau));
+        novaShellMesh.scale.setScalar(Math.max(0.01, shellR));
+
+        // Surface brightness ∝ 1/R² (mass conserved, spread over 4πR²).
+        // At R=1 visual unit (~0.33 separation): opacity ~50%.
+        // At R=3 (1 separation): ~10%. At R=6 (2 sep): ~3%.
+        const ramp = Math.min(1, novaAge / 0.1); // fast flash ramp
+        const fade = 1.0 / (1 + shellR * shellR); // strict 1/R²
+        novaShellMesh.material.opacity = ramp * fade;
+
+        // Slow rotation for visual life
+        novaShellMesh.rotation.y += dt * 0.15;
+        novaShellMesh.rotation.x += dt * 0.06;
+
+        // Fade WD brightness back to normal (exponential decay)
+        const wdMat = star2.children[0].material;
+        const wdBaseBright = 3.0;
+        wdMat.uniforms.uBrightness.value = wdBaseBright + (30.0 - wdBaseBright) * Math.exp(-novaAge * 2.0);
+
+        // Fade bloom back to normal
+        const bloomFade = Math.exp(-novaAge * 1.5);
+        bloomPass.strength = (gasMode ? 0.7 : 0.4) + 0.3 * bloomFade;
+        bloomPass.threshold = (gasMode ? 0.35 : 0.5) - 0.15 * bloomFade;
+
+        // Remove when too dim to see
+        if (novaShellMesh.material.opacity < 0.01) {
+          novaShellMesh.visible = false;
+          wdMat.uniforms.uBrightness.value = wdBaseBright;
+          bloomPass.strength = gasMode ? 0.7 : 0.4;
+          bloomPass.threshold = gasMode ? 0.35 : 0.5;
+        }
       }
 
       // Update readouts for live disk mass and luminosity
