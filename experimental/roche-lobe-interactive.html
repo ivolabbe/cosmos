@@ -1446,7 +1446,7 @@
     // Emit from L1 with small velocity toward star 2 (accretor)
     // L1 is on the x-axis between the two stars
     // Star 2 (accretor) is at x2Pos (negative x), so direction is -x
-    const vMag = 0.01 + Math.random() * 0.02; // slow initial velocity (sound speed)
+    const vMag = 0.04 + Math.random() * 0.03; // initial velocity (boosted for visual timescales)
     const vz = (Math.random() - 0.5) * 0.005; // tiny transverse scatter
     particles.push({
       x: xL1 - 0.005, // just past L1 toward accretor
@@ -1477,7 +1477,7 @@
     }
 
     // Emit new particles
-    const emitRate = gasMode ? 10 : 5;
+    const emitRate = gasMode ? 15 : 8;
     for (let i = 0; i < emitRate; i++) {
       if (particles.length < MAX_PARTICLES) emitParticle();
     }
@@ -1528,7 +1528,7 @@
       // 0.4 orbits = particle has swung around enough to arrive tangentially.
       let remove = false;
       const nearStreamPath = Math.abs(dz2) < rCirc * 0.4 && dx2 > 0;
-      const hasOrbited = part.orbits >= 0.4;
+      const hasOrbited = part.orbits >= 0.3;
 
       if (hasOrbited && nearStreamPath && r2 < rCirc * 1.5 && r2 > rInner) {
         // Stream-on-stream impact! Deposit mass at this radius.
