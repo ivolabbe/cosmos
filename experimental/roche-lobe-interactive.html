@@ -531,8 +531,8 @@
   let x1Pos = 0, x2Pos = 0; // star positions on x-axis (dimensionless)
 
   // Star temperatures
-  const T1 = 5000;   // donor (cooler, fills lobe)
-  const T2 = 10000;  // accretor (hotter)
+  const T1 = 4500;   // donor — late K/early M star (fills Roche lobe in CV system)
+  const T2 = 20000;  // accretor — white dwarf (hot, compact)
 
   function starColor(T) {
     if (T < 3500) return 0xaa1100;
@@ -854,8 +854,9 @@
 
   // Star visual radii
   // Star 1 = donor (fills its Roche lobe, controlled by fill factor)
-  // Star 2 = accretor (compact, much smaller than its Roche lobe)
-  const STAR2_FIXED_R = 0.06; // accretor is compact (fraction of separation)
+  // Star 2 = white dwarf accretor (~Earth-sized, tiny compared to separation)
+  // R_WD ~ 0.01 R_sun, binary separation ~ 1-2 R_sun → WD is ~1% of separation
+  const STAR2_FIXED_R = 0.015; // white dwarf: very compact
 
   let star1 = makeStarMesh(T1, 1.0, true); // highRes for Roche deformation
   let star2 = makeStarMesh(T2, STAR2_FIXED_R * A_VIS);
@@ -1505,11 +1506,10 @@
       const r2 = Math.sqrt(dx2 * dx2 + dz2 * dz2);
       const angle2 = Math.atan2(dz2, dx2);
 
-      // Track orbital angle around accretor to know when particle has orbited
-      if (r2 < rCirc * 1.5) {
+      // Track orbital angle around accretor
+      if (r2 < rCirc * 2.0) {
         if (part.lastAngle !== null) {
           let dAngle = angle2 - part.lastAngle;
-          // Normalize to [-PI, PI]
           if (dAngle > PI) dAngle -= TWO_PI;
           if (dAngle < -PI) dAngle += TWO_PI;
           part.orbits += Math.abs(dAngle) / TWO_PI;
@@ -1517,17 +1517,27 @@
         part.lastAngle = angle2;
       }
 
-      // Deposit mass into disk only AFTER the particle has completed
-      // at least 0.7 orbits around the accretor (arrives tangentially,
-      // not head-on). This models circularisation.
+      // --- Stream-on-stream collision: disk formation ---
+      // After ~1 orbit, the particle swings back to where the incoming
+      // stream is. When it's near the L1-accretor line (the fresh stream
+      // path) AND has orbited enough, it collides with the incoming gas.
+      // This self-collision dissipates energy and forms the initial ring.
+      //
+      // Detection: particle has done >= 0.85 orbits AND is close to the
+      // x-axis (where the stream from L1 arrives) in the accretor frame.
       let remove = false;
-      if (r2 < rCirc * 1.2 && r2 > rInner && part.orbits > 0.7) {
-        // Deposit at the outer ring (circularisation radius)
-        const outerRingIdx = N_RINGS - 1;
-        ringMass[outerRingIdx] += MASS_PER_PARTICLE;
+      const nearStreamPath = Math.abs(dz2) < rCirc * 0.25 && dx2 > 0; // near L1-side of accretor
+      const hasOrbited = part.orbits >= 0.85;
+
+      if (hasOrbited && nearStreamPath && r2 < rCirc * 1.3 && r2 > rInner) {
+        // Stream-on-stream impact! Deposit mass at this radius.
+        // This is the circularisation radius.
+        const ringIdx = Math.round((r2 - rInner) / ((rCirc - rInner) / (N_RINGS - 1)));
+        const ri = Math.max(0, Math.min(N_RINGS - 1, ringIdx));
+        ringMass[ri] += MASS_PER_PARTICLE;
         diskTotalMass += MASS_PER_PARTICLE;
 
-        // Record hotspot angle from this impact
+        // Hotspot forms at the stream-stream impact point
         hotspotAngle = angle2;
         remove = true;
       }
