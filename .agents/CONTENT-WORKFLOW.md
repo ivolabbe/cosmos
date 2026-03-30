@@ -110,6 +110,15 @@ Injection order (regardless of load timing):
 
 Result: content → explorer → research → CTA → footer
 
+## Keeping the Index Current
+
+**Researcher agent responsibility:** When writing a new spec or promoting an app, update `.planning/apps/README.md`:
+- Add to the Production or In Development table
+- Add spec to the Specs table if applicable
+- Move from dev → production table when promoted to `articles/`
+
+The app index is the single source of truth for what exists and where.
+
 ## Deployment
 
 Push to `main` → GitHub Pages deploys in ~30s → live at the configured URL.
