@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Graph | COSMOS Encyclopedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<style>
+/* ── Graph container ───────────────────────────── */
+#graph-wrap {
+  position: relative; width: 100%; height: 70vh; min-height: 500px;
+  background: #fff; border-radius: 6px; overflow: hidden;
+  border: 1px solid #e0e0e0;
+  margin: 0 auto;
+}
+#graph-wrap canvas { display: block; position: absolute; top: 0; left: 0; }
+
+/* ── Search bar ────────────────────────────────── */
+#search-bar {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; gap: 0;
+}
+#search-input {
+  width: 280px; padding: 8px 14px;
+  background: rgba(255,255,255,0.92); color: #343642;
+  border: 1px solid #ccc; border-radius: 5px 0 0 5px;
+  font-size: 14px; outline: none; font-family: inherit;
+}
+#search-input::placeholder { color: #999; }
+#search-input:focus { border-color: #DC2D27; }
+#search-clear {
+  padding: 8px 12px; background: #f5f5f5;
+  border: 1px solid #ccc; border-left: none;
+  border-radius: 0 5px 5px 0; color: #999;
+  cursor: pointer; font-size: 13px; font-family: inherit;
+}
+#search-clear:hover { background: #e8e8e8; color: #343642; }
+
+/* ── Search results dropdown ───────────────────── */
+#search-results {
+  position: absolute; top: 44px; left: 50%; transform: translateX(-50%);
+  z-index: 10; width: 280px; max-height: 260px; overflow-y: auto;
+  background: rgba(255,255,255,0.97); border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px; display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.result-item {
+  padding: 7px 14px; cursor: pointer; font-size: 13px; color: #343642;
+  border-bottom: 1px solid #eee;
+}
+.result-item:hover { background: #f0f0f0; }
+.result-item .letter-tag {
+  display: inline-block; width: 18px; text-align: center;
+  color: #999; font-size: 11px; margin-right: 5px;
+}
+
+/* ── Letter filter ─────────────────────────────── */
+#letter-filter {
+  position: absolute; top: 12px; right: 12px; z-index: 10;
+  display: flex; flex-wrap: wrap; gap: 2px; max-width: 220px;
+  justify-content: flex-end;
+}
+.letter-btn {
+  width: 24px; height: 24px; border-radius: 3px;
+  background: rgba(255,255,255,0.85); border: 1px solid #ccc;
+  color: #888; font-size: 11px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-family: inherit; transition: all 0.15s;
+}
+.letter-btn:hover { background: #eee; color: #343642; }
+.letter-btn.active {
+  background: #DC2D27; color: #fff;
+  border-color: #DC2D27;
+}
+
+/* ── Info panel (selected node) ────────────────── */
+#info-panel {
+  position: absolute; bottom: 16px; left: 16px; z-index: 10;
+  max-width: 350px; max-height: 55vh; overflow-y: auto;
+  background: rgba(255,255,255,0.95); border: 1px solid #ddd;
+  border-radius: 6px; padding: 16px 20px;
+  display: none; backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+#info-panel h2 {
+  font-size: 18px; font-weight: 700; color: #343642; margin-bottom: 3px;
+}
+#info-panel .degree-badge {
+  font-size: 12px; color: #888; margin-bottom: 10px;
+}
+#info-panel .conn-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+  color: #aaa; margin-bottom: 5px;
+}
+#info-panel .connections { display: flex; flex-wrap: wrap; gap: 3px; }
+#info-panel .conn-tag {
+  padding: 2px 7px; border-radius: 3px;
+  background: #f0f0f0; color: #555;
+  font-size: 11px; cursor: pointer; border: 1px solid #ddd;
+  transition: all 0.12s;
+}
+#info-panel .conn-tag:hover {
+  background: #DC2D27; border-color: #DC2D27;
+  color: #fff;
+}
+#info-panel .article-link {
+  display: inline-block; margin-top: 12px; padding: 5px 12px;
+  background: #DC2D27; border: none;
+  border-radius: 4px; color: #fff; text-decoration: none;
+  font-size: 12px; font-weight: 600; transition: all 0.15s;
+}
+#info-panel .article-link:hover {
+  background: #a82220;
+}
+#info-close {
+  position: absolute; top: 6px; right: 10px;
+  background: none; border: none; color: #bbb;
+  font-size: 16px; cursor: pointer; padding: 4px;
+}
+#info-close:hover { color: #343642; }
+
+/* ── Stats + legend ────────────────────────────── */
+#stats-bar {
+  position: absolute; bottom: 8px; right: 12px; z-index: 10;
+  font-size: 11px; color: #aaa;
+}
+#legend {
+  position: absolute; bottom: 8px; left: 12px; z-index: 5;
+  font-size: 10px; color: #bbb; line-height: 1.6;
+}
+#category-legend {
+  position: absolute; top: 48px; left: 12px; z-index: 10;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.cat-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; color: #666; cursor: default;
+  padding: 1px 0;
+}
+.cat-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── Tooltip ───────────────────────────────────── */
+#tooltip {
+  position: fixed; z-index: 30; pointer-events: none;
+  background: rgba(255,255,255,0.95); border: 1px solid #ddd;
+  border-radius: 4px; padding: 5px 9px;
+  font-size: 12px; color: #343642; white-space: nowrap; display: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#tooltip .tt-degree { font-size: 10px; color: #888; }
+
+/* ── Open-in-window button ─────────────────────── */
+#fullscreen-btn {
+  position: absolute; top: 12px; left: 12px; z-index: 10;
+  width: 32px; height: 32px; border-radius: 4px;
+  background: rgba(255,255,255,0.85); border: 1px solid #ccc;
+  color: #666; font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s; line-height: 1; text-decoration: none;
+}
+#fullscreen-btn:hover { background: #eee; color: #343642; }
+
+/* ── Standalone mode (no site chrome, full viewport) ── */
+body.standalone .top-bar,
+body.standalone .site-header,
+body.standalone .breadcrumb,
+body.standalone .article__header,
+body.standalone .article__body > p:first-child,
+body.standalone .caption { display: none; }
+body.standalone { margin: 0; padding: 0; overflow: hidden; }
+body.standalone main, body.standalone .article,
+body.standalone .container, body.standalone .article__body {
+  padding: 0; margin: 0; max-width: none; width: 100%;
+}
+body.standalone #graph-wrap {
+  width: 100vw; height: 100vh; border-radius: 0; border: none;
+}
+body.standalone #fullscreen-btn { display: none; }
+
+/* ── Scrollbar ─────────────────────────────────── */
+#info-panel::-webkit-scrollbar { width: 5px; }
+#info-panel::-webkit-scrollbar-track { background: transparent; }
+#info-panel::-webkit-scrollbar-thumb { background: rgba(100,140,255,0.25); border-radius: 3px; }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="index.html">COSMOS</a></li>
+        <li><span class="current">Knowledge Graph</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container">
+        <header class="article__header">
+          <h1 class="article__title">Knowledge Graph</h1>
+        </header>
+        <div class="article__body">
+          <p>Explore how astronomy concepts connect across the COSMOS encyclopedia. Each node is an article; edges represent cross-references. Click any node to see its connections, or drag nodes to rearrange the layout. Filter by letter or search by name.</p>
+
+          <div id="graph-wrap" style="max-width:none;">
+            <div id="search-bar">
+              <input id="search-input" type="text" placeholder="Search articles..." autocomplete="off">
+              <button id="search-clear">&times;</button>
+            </div>
+            <div id="search-results"></div>
+            <div id="letter-filter"></div>
+
+            <div id="info-panel">
+              <button id="info-close">&times;</button>
+              <h2 id="info-title"></h2>
+              <div id="info-degree" class="degree-badge"></div>
+              <div class="conn-label">Connected to</div>
+              <div id="info-connections" class="connections"></div>
+              <a id="info-article-link" class="article-link" href="#" target="_blank">Read article &rarr;</a>
+            </div>
+
+            <div id="category-legend"></div>
+            <div id="legend">Scroll to zoom &middot; Drag to pan &middot; Click a node to explore</div>
+            <div id="stats-bar"><span id="stats-text"></span></div>
+            <a id="fullscreen-btn" href="?standalone" target="_blank" title="Open in new window">&#x2197;</a>
+
+            <canvas id="graph-canvas"></canvas>
+          </div>
+          <p style="text-align:center;font-size:0.8rem;color:#808285;">Interactive knowledge graph of the COSMOS encyclopedia. Click a node to explore its connections, drag to rearrange. <a href="explore.html?standalone" target="_blank">Open fullscreen</a>.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <div id="tooltip">
+    <div id="tt-title"></div>
+    <div id="tt-degree" class="tt-degree"></div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-dispatch@3/dist/d3-dispatch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-quadtree@3/dist/d3-quadtree.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-timer@3/dist/d3-timer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-force@3/dist/d3-force.min.js"></script>
+<script>
+// ── Data & state ──────────────────────────────────
+let graphData = null;
+let nodes = [], edges = [];
+let nodeMap = {};           // id → node
+let adjacency = {};         // id → Set of neighbor ids
+let edgeIndex = {};         // "src|tgt" → edge
+
+// View transform
+let tx = 0, ty = 0, scale = 1;
+const MIN_SCALE = 0.1, MAX_SCALE = 8;
+
+// Interaction
+let hoveredNode = null;
+let selectedNode = null;
+let activeLetter = null;
+let dragging = false;
+let dragStart = { x: 0, y: 0 };
+let dragNodeStart = { tx: 0, ty: 0 };
+
+// Simulation (D3 force)
+let simulation = null;
+let topHubThreshold = 20; // min degree to show label in default view
+
+// Canvas
+const canvas = document.getElementById('graph-canvas');
+const ctx = canvas.getContext('2d');
+let W, H;
+let dpr = window.devicePixelRatio || 1;
+
+// ── Category colors (loaded from cosmos-categories.json) ──
+let categoryData = null;  // { categories: {id: {label, color}}, articles: {slug: catId} }
+const FALLBACK_COLOR = '#999';
+
+function nodeColorHex(node) {
+  if (!categoryData) return FALLBACK_COLOR;
+  const catId = categoryData.articles[node.id];
+  if (!catId || !categoryData.categories[catId]) return FALLBACK_COLOR;
+  return categoryData.categories[catId].color;
+}
+
+function nodeCategoryLabel(node) {
+  if (!categoryData) return '';
+  const catId = categoryData.articles[node.id];
+  if (!catId || !categoryData.categories[catId]) return '';
+  return categoryData.categories[catId].label;
+}
+
+function nodeRadius(node) {
+  return Math.min(18, 2 + Math.sqrt(node.degree) * 1.2);
+}
+
+// ── Resize (fit graph container, not viewport) ───
+const graphWrap = document.getElementById('graph-wrap');
+
+function resize() {
+  const rect = graphWrap.getBoundingClientRect();
+  W = rect.width;
+  H = rect.height;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', () => { resize(); draw(); });
+resize();
+
+// ── Load data ─────────────────────────────────────
+Promise.all([
+  fetch('dev/cosmos-graph.json').then(r => r.json()),
+  fetch('dev/cosmos-categories.json').then(r => r.json())
+])
+  .then(([data, cats]) => {
+    graphData = data;
+    categoryData = cats;
+    initGraph(data);
+    initUI();
+    initLegend();
+  })
+  .catch(e => {
+    ctx.fillStyle = '#fff';
+    ctx.font = '16px Open Sans, sans-serif';
+    ctx.fillText('Error loading dev/cosmos-graph.json: ' + e.message, 40, 60);
+  });
+
+function initGraph(data) {
+  nodes = data.nodes.map(n => ({ ...n }));
+
+  nodeMap = {};
+  nodes.forEach(n => { nodeMap[n.id] = n; });
+
+  // Adjacency (built before D3 mutates source/target to object refs)
+  adjacency = {};
+  nodes.forEach(n => { adjacency[n.id] = new Set(); });
+  data.edges.forEach(e => {
+    if (nodeMap[e.source] && nodeMap[e.target]) {
+      adjacency[e.source].add(e.target);
+      adjacency[e.target].add(e.source);
+    }
+  });
+
+  // D3 force links need {source: id, target: id} — D3 resolves them to node refs
+  edges = data.edges.filter(e => nodeMap[e.source] && nodeMap[e.target])
+    .map(e => ({ source: e.source, target: e.target }));
+
+  // Compute hub threshold: show labels for ~20 most connected nodes
+  const degrees = nodes.map(n => n.degree).sort((a, b) => b - a);
+  topHubThreshold = degrees[Math.min(50, degrees.length - 1)] || 1;
+
+  // Center transform
+  tx = W / 2;
+  ty = H / 2;
+  scale = 1;
+  targetTx = tx;
+  targetTy = ty;
+  targetScale = scale;
+
+  // Update stats
+  document.getElementById('stats-text').textContent =
+    `${nodes.length} articles · ${edges.length} connections`;
+
+  // D3 force simulation
+  simulation = d3.forceSimulation(nodes)
+    .force('charge', d3.forceManyBody().strength(-80).distanceMax(500))
+    .force('link', d3.forceLink(edges).id(d => d.id).distance(60).strength(l =>
+      1 / Math.max(adjacency[l.source.id || l.source].size, adjacency[l.target.id || l.target].size)
+    ))
+    .force('center', d3.forceCenter(0, 0))
+    .force('collide', d3.forceCollide(d => nodeRadius(d) + 1))
+    .velocityDecay(0.4)
+    .on('tick', draw);
+}
+
+// ── Selection force (Obsidian-style: gently push neighbors outward) ──
+function applySelectionForce(node) {
+  simulation.force('select', alpha => {
+    if (!node) return;
+    const str = 8 * alpha;
+    adjacency[node.id].forEach(id => {
+      const n = nodeMap[id];
+      if (!n) return;
+      let dx = n.x - node.x;
+      let dy = n.y - node.y;
+      const d = Math.sqrt(dx * dx + dy * dy) || 1;
+      // Push neighbors outward from selected node
+      n.vx += (dx / d) * str;
+      n.vy += (dy / d) * str;
+    });
+  });
+  simulation.alpha(0.15).restart();
+}
+
+function clearSelectionForce() {
+  simulation.force('select', null);
+}
+
+// ── Rendering (white background, clean single circles) ──
+function nodeRGB(node) {
+  const hex = nodeColorHex(node);
+  return [parseInt(hex.slice(1,3),16), parseInt(hex.slice(3,5),16), parseInt(hex.slice(5,7),16)];
+}
+
+function draw() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.save();
+  ctx.translate(tx, ty);
+  ctx.scale(scale, scale);
+
+  const isFiltered = activeLetter !== null;
+  const highlightSet = new Set();
+  const focusNode = selectedNode || hoveredNode;
+  if (focusNode) {
+    highlightSet.add(focusNode.id);
+    adjacency[focusNode.id].forEach(id => highlightSet.add(id));
+  }
+  const hasHighlight = highlightSet.size > 0;
+
+  // ── Edges ──
+  ctx.lineCap = 'round';
+  for (const e of edges) {
+    const sVis = !isFiltered || e.source.letter === activeLetter;
+    const tVis = !isFiltered || e.target.letter === activeLetter;
+    if (!sVis && !tVis) continue;
+
+    const srcHL = highlightSet.has(e.source.id);
+    const tgtHL = highlightSet.has(e.target.id);
+    const direct = (e.source === focusNode || e.target === focusNode) && srcHL && tgtHL;
+
+    let alpha, lw;
+    if (hasHighlight) {
+      if (direct) {
+        alpha = 0.35; lw = 1.5 / scale;
+      } else if (srcHL && tgtHL) {
+        alpha = 0.12; lw = 0.7 / scale;
+      } else {
+        alpha = 0.03; lw = 0.3 / scale;
+      }
+    } else if (isFiltered) {
+      alpha = (sVis && tVis) ? 0.08 : 0.02;
+      lw = 0.4 / scale;
+    } else {
+      alpha = 0.06;
+      lw = 0.4 / scale;
+    }
+
+    if (direct) {
+      const [r1,g1,b1] = nodeRGB(e.source === focusNode ? e.target : e.source);
+      ctx.strokeStyle = `rgba(${r1},${g1},${b1},${alpha})`;
+    } else {
+      ctx.strokeStyle = `rgba(52,54,66,${alpha})`;
+    }
+    ctx.lineWidth = lw;
+    ctx.beginPath();
+    ctx.moveTo(e.source.x, e.source.y);
+    ctx.lineTo(e.target.x, e.target.y);
+    ctx.stroke();
+  }
+
+  // ── Nodes (single clean circles) ──
+  for (const n of nodes) {
+    const vis = !isFiltered || n.letter === activeLetter;
+    const [cr, cg, cb] = nodeRGB(n);
+    const r = nodeRadius(n);
+    const isFocus = n === focusNode;
+    const isNeighbor = !isFocus && highlightSet.has(n.id);
+
+    let alpha;
+    if (hasHighlight) {
+      if (isFocus) alpha = 1;
+      else if (isNeighbor) alpha = 0.9;
+      else alpha = 0.12;
+    } else if (isFiltered) {
+      alpha = vis ? 0.85 : 0.08;
+    } else {
+      alpha = 0.85;
+    }
+
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha})`;
+    ctx.fill();
+  }
+
+  // ── Labels ──
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+
+  if (hasHighlight) {
+    const fontSize = Math.max(6, 11 / scale);
+    ctx.font = `600 ${fontSize}px "Open Sans", sans-serif`;
+    for (const id of highlightSet) {
+      const n = nodeMap[id];
+      if (!n) continue;
+      const r = nodeRadius(n);
+      const isFocus = n === focusNode;
+      ctx.fillStyle = isFocus ? '#343642' : 'rgba(52,54,66,0.8)';
+      ctx.fillText(n.title, n.x, n.y - r - 4 / scale);
+    }
+  } else if (isFiltered) {
+    const fontSize = Math.max(5, 10 / scale);
+    ctx.font = `600 ${fontSize}px "Open Sans", sans-serif`;
+    for (const n of nodes) {
+      if (n.letter !== activeLetter) continue;
+      const r = nodeRadius(n);
+      ctx.fillStyle = 'rgba(52,54,66,0.75)';
+      ctx.fillText(n.title, n.x, n.y - r - 3 / scale);
+    }
+  } else {
+    // Default view: show labels for top hubs + all labels when zoomed
+    const fontSize = Math.max(4, 10 / scale);
+    ctx.font = `600 ${fontSize}px "Open Sans", sans-serif`;
+    const minDegree = scale > 1.8 ? 0 : topHubThreshold;
+    for (const n of nodes) {
+      if (n.degree < minDegree) continue;
+      const r = nodeRadius(n);
+      const a = scale > 1.8 ? 0.5 : 0.6;
+      ctx.fillStyle = `rgba(52,54,66,${a})`;
+      ctx.fillText(n.title, n.x, n.y - r - 2 / scale);
+    }
+  }
+
+  ctx.restore();
+}
+
+// ── Animation loop (D3 simulation calls draw() on tick) ──
+
+// ── Interaction: screen → graph coords ────────────
+function canvasXY(e) {
+  const rect = canvas.getBoundingClientRect();
+  return { cx: e.clientX - rect.left, cy: e.clientY - rect.top };
+}
+
+function screenToGraph(sx, sy) {
+  return { x: (sx - tx) / scale, y: (sy - ty) / scale };
+}
+
+function findNodeAt(sx, sy) {
+  const { x, y } = screenToGraph(sx, sy);
+  const hitRadius = 8 / scale;
+  let best = null, bestDist = Infinity;
+  for (const n of nodes) {
+    const dx = n.x - x, dy = n.y - y;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    const r = nodeRadius(n) + hitRadius;
+    if (d < r && d < bestDist) {
+      best = n;
+      bestDist = d;
+    }
+  }
+  return best;
+}
+
+// ── Smooth zoom ───────────────────────────────────
+let targetScale = scale;
+let targetTx = tx, targetTy = ty;
+let smoothing = false;
+
+function smoothStep() {
+  const ease = 0.15;
+  tx += (targetTx - tx) * ease;
+  ty += (targetTy - ty) * ease;
+  scale += (targetScale - scale) * ease;
+  draw();
+  if (Math.abs(targetScale - scale) > 0.001 ||
+      Math.abs(targetTx - tx) > 0.5 ||
+      Math.abs(targetTy - ty) > 0.5) {
+    requestAnimationFrame(smoothStep);
+  } else {
+    scale = targetScale; tx = targetTx; ty = targetTy;
+    smoothing = false;
+    draw();
+  }
+}
+
+function startSmooth() {
+  if (!smoothing) { smoothing = true; requestAnimationFrame(smoothStep); }
+}
+
+// ── Mouse events (canvas-relative coordinates) ───
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const { cx, cy } = canvasXY(e);
+  const factor = e.deltaY > 0 ? 0.97 : 1.03;
+  const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, targetScale * factor));
+  targetTx = cx - (cx - targetTx) * (newScale / targetScale);
+  targetTy = cy - (cy - targetTy) * (newScale / targetScale);
+  targetScale = newScale;
+  startSmooth();
+}, { passive: false });
+
+// ── Node dragging (reheats D3 simulation) ─────────
+let draggedNode = null;
+
+canvas.addEventListener('mousedown', e => {
+  const { cx, cy } = canvasXY(e);
+  const node = findNodeAt(cx, cy);
+  if (node) {
+    draggedNode = node;
+    dragStart.x = cx; dragStart.y = cy;
+    draggedNode.fx = draggedNode.x;
+    draggedNode.fy = draggedNode.y;
+    simulation.alphaTarget(0.3).restart();
+  } else {
+    dragging = true;
+    dragStart.x = cx; dragStart.y = cy;
+    dragNodeStart.tx = targetTx;
+    dragNodeStart.ty = targetTy;
+  }
+  canvas.style.cursor = 'grabbing';
+});
+
+canvas.addEventListener('mousemove', e => {
+  const { cx, cy } = canvasXY(e);
+  if (draggedNode) {
+    const { x, y } = screenToGraph(cx, cy);
+    draggedNode.fx = x;
+    draggedNode.fy = y;
+    return;
+  }
+  if (dragging) {
+    targetTx = dragNodeStart.tx + (cx - dragStart.x);
+    targetTy = dragNodeStart.ty + (cy - dragStart.y);
+    tx = targetTx; ty = targetTy;
+    draw();
+    return;
+  }
+
+  const node = findNodeAt(cx, cy);
+  if (node !== hoveredNode) {
+    hoveredNode = node;
+    canvas.style.cursor = node ? 'pointer' : 'default';
+    const tt = document.getElementById('tooltip');
+    if (node) {
+      document.getElementById('tt-title').textContent = node.title;
+      document.getElementById('tt-degree').textContent = node.degree + ' connections';
+      tt.style.display = 'block';
+      tt.style.left = (e.clientX + 14) + 'px';
+      tt.style.top = (e.clientY - 10) + 'px';
+    } else {
+      tt.style.display = 'none';
+    }
+    draw();
+  } else if (node) {
+    const tt = document.getElementById('tooltip');
+    tt.style.left = (e.clientX + 14) + 'px';
+    tt.style.top = (e.clientY - 10) + 'px';
+  }
+});
+
+canvas.addEventListener('mouseup', e => {
+  const { cx, cy } = canvasXY(e);
+  if (draggedNode) {
+    draggedNode.fx = null;
+    draggedNode.fy = null;
+    simulation.alphaTarget(0);
+    const wasDrag = Math.abs(cx - dragStart.x) > 3 || Math.abs(cy - dragStart.y) > 3;
+    if (!wasDrag) selectNode(draggedNode);
+    draggedNode = null;
+    canvas.style.cursor = 'default';
+    return;
+  }
+  const wasDrag = Math.abs(cx - dragStart.x) > 3 || Math.abs(cy - dragStart.y) > 3;
+  dragging = false;
+  canvas.style.cursor = 'default';
+
+  if (!wasDrag) {
+    const node = findNodeAt(cx, cy);
+    if (node) {
+      selectNode(node);
+    } else {
+      clearSelection();
+    }
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  if (draggedNode) {
+    draggedNode.fx = null;
+    draggedNode.fy = null;
+    simulation.alphaTarget(0);
+    draggedNode = null;
+  }
+  hoveredNode = null;
+  document.getElementById('tooltip').style.display = 'none';
+  draw();
+});
+
+// ── Touch support ─────────────────────────────────
+let touchStart = null;
+let touchDist = 0;
+
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, tx, ty };
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[1].clientX - e.touches[0].clientX;
+    const dy = e.touches[1].clientY - e.touches[0].clientY;
+    touchDist = Math.sqrt(dx * dx + dy * dy);
+  }
+}, { passive: true });
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (e.touches.length === 1 && touchStart) {
+    tx = touchStart.tx + (e.touches[0].clientX - touchStart.x);
+    ty = touchStart.ty + (e.touches[0].clientY - touchStart.y);
+    draw();
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[1].clientX - e.touches[0].clientX;
+    const dy = e.touches[1].clientY - e.touches[0].clientY;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    const factor = d / touchDist;
+    const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * factor));
+    const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    tx = cx - (cx - tx) * (newScale / scale);
+    ty = cy - (cy - ty) * (newScale / scale);
+    scale = newScale;
+    touchDist = d;
+    draw();
+  }
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+  if (e.touches.length === 0 && touchStart) {
+    const dx = e.changedTouches[0].clientX - touchStart.x;
+    const dy = e.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
+      const node = findNodeAt(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+      if (node) selectNode(node);
+      else clearSelection();
+    }
+    touchStart = null;
+  }
+});
+
+// ── Node selection ────────────────────────────────
+function selectNode(node) {
+  selectedNode = node;
+  applySelectionForce(node);
+  const panel = document.getElementById('info-panel');
+  document.getElementById('info-title').textContent = node.title;
+  const catLabel = nodeCategoryLabel(node);
+  document.getElementById('info-degree').textContent = node.degree + ' connections' + (catLabel ? ' · ' + catLabel : '');
+  document.getElementById('info-article-link').href = 'articles/' + node.id + '.html';
+
+  const connDiv = document.getElementById('info-connections');
+  connDiv.innerHTML = '';
+  const neighbors = [...adjacency[node.id]]
+    .map(id => nodeMap[id])
+    .filter(Boolean)
+    .sort((a, b) => b.degree - a.degree);
+
+  neighbors.forEach(n => {
+    const tag = document.createElement('span');
+    tag.className = 'conn-tag';
+    tag.textContent = n.title;
+    tag.addEventListener('click', () => {
+      selectNode(n);
+      centerOnNode(n);
+    });
+    connDiv.appendChild(tag);
+  });
+
+  panel.style.display = 'block';
+  draw();
+}
+
+function clearSelection() {
+  selectedNode = null;
+  clearSelectionForce();
+  document.getElementById('info-panel').style.display = 'none';
+  draw();
+}
+
+document.getElementById('info-close').addEventListener('click', clearSelection);
+
+function centerOnNode(node) {
+  // Animate pan to center the node
+  const targetTx = W / 2 - node.x * scale;
+  const targetTy = H / 2 - node.y * scale;
+  const startTx = tx, startTy = ty;
+  const start = performance.now();
+  const duration = 400;
+
+  function animate(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const ease = t * (2 - t); // ease-out quad
+    tx = startTx + (targetTx - startTx) * ease;
+    ty = startTy + (targetTy - startTy) * ease;
+    draw();
+    if (t < 1) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// ── UI init ───────────────────────────────────────
+function initUI() {
+  // Letter filter
+  const filterDiv = document.getElementById('letter-filter');
+  const letters = [...new Set(nodes.map(n => n.letter))].sort();
+  letters.forEach(ch => {
+    const btn = document.createElement('button');
+    btn.className = 'letter-btn';
+    btn.textContent = ch;
+    btn.addEventListener('click', () => {
+      if (activeLetter === ch) {
+        activeLetter = null;
+        btn.classList.remove('active');
+      } else {
+        activeLetter = ch;
+        filterDiv.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      draw();
+    });
+    filterDiv.appendChild(btn);
+  });
+
+  // Search
+  const input = document.getElementById('search-input');
+  const resultsDiv = document.getElementById('search-results');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (q.length < 1) { resultsDiv.style.display = 'none'; return; }
+
+    const matches = nodes
+      .filter(n => n.title.toLowerCase().includes(q))
+      .sort((a, b) => {
+        // Exact prefix match first
+        const aStart = a.title.toLowerCase().startsWith(q) ? 0 : 1;
+        const bStart = b.title.toLowerCase().startsWith(q) ? 0 : 1;
+        if (aStart !== bStart) return aStart - bStart;
+        return b.degree - a.degree;
+      })
+      .slice(0, 15);
+
+    if (matches.length === 0) { resultsDiv.style.display = 'none'; return; }
+
+    resultsDiv.innerHTML = '';
+    matches.forEach(n => {
+      const div = document.createElement('div');
+      div.className = 'result-item';
+      div.innerHTML = `<span class="letter-tag">${n.letter}</span>${n.title}`;
+      div.addEventListener('click', () => {
+        selectNode(n);
+        centerOnNode(n);
+        resultsDiv.style.display = 'none';
+        input.value = n.title;
+      });
+      resultsDiv.appendChild(div);
+    });
+    resultsDiv.style.display = 'block';
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      resultsDiv.style.display = 'none';
+    }
+  });
+
+  document.getElementById('search-clear').addEventListener('click', () => {
+    input.value = '';
+    resultsDiv.style.display = 'none';
+    clearSelection();
+  });
+
+  // Close results when clicking elsewhere
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#search-bar') && !e.target.closest('#search-results')) {
+      resultsDiv.style.display = 'none';
+    }
+  });
+}
+
+// ── Category legend ───────────────────────────────
+function initLegend() {
+  if (!categoryData) return;
+  const div = document.getElementById('category-legend');
+  // Count per category for sorting
+  const counts = {};
+  for (const slug in categoryData.articles) {
+    const cat = categoryData.articles[slug];
+    counts[cat] = (counts[cat] || 0) + 1;
+  }
+  const sorted = Object.entries(categoryData.categories)
+    .sort((a, b) => (counts[b[0]] || 0) - (counts[a[0]] || 0));
+
+  sorted.forEach(([id, cat]) => {
+    const item = document.createElement('div');
+    item.className = 'cat-item';
+    item.innerHTML = `<span class="cat-dot" style="background:${cat.color}"></span>${cat.label}`;
+    div.appendChild(item);
+  });
+}
+
+// ── Standalone mode detection ─────────────────────
+if (location.search.includes('standalone')) {
+  document.body.classList.add('standalone');
+  // Re-measure after chrome is hidden
+  requestAnimationFrame(() => { resize(); });
+}
+</script>
+</body>
+</html>

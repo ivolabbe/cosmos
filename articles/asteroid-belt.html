@@ -18,10 +18,21 @@
       <ul class="top-bar__links">
         <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
         <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
-        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
       </ul>
     </div>
   </div>
+
+  <aside class="sao-banner" aria-label="Study astronomy online">
+    <div class="container">
+      <div class="sao-banner__inner">
+        <span class="sao-banner__icon">&#x1F393;</span>
+        <div class="sao-banner__text">
+          <strong>Study Astronomy Online</strong> &mdash; Dive deep into the wonders of modern astronomy. Flexible online courses at the world-class Centre for Astrophysics.
+        </div>
+        <a class="sao-banner__cta" href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/" target="_blank" rel="noopener">Explore courses &rarr;</a>
+      </div>
+    </div>
+  </aside>
 
   <header class="site-header">
     <div class="container">
@@ -48,27 +59,24 @@
 
   <main id="main">
     <article class="article">
-      <div class="container container--narrow">
+      <div class="container">
         <header class="article__header">
           <h1 class="article__title">Asteroid Belt</h1>
         </header>
         <div class="article__body">
-          <p>
-<div class="imageRight" style="width:400px; ">
-<div class="imageWrapper" style="width:400px; ">
-<img src="../images/mainasteroidbelt1.gif" width="400" height="445" alt="mainasteroidbelt1.gif" title="mainasteroidbelt1.gif"/>
-<div class="caption">
-The <a class="lexicon-term" href="main-asteroid-belt.html">main asteroid belt</a> is estimated to contain millions of objects and is located between the orbits of <a class="lexicon-term" href="mars.html">Mars</a> and Jupiter.  The <a class="lexicon-term" href="trojan-asteroids.html">Trojan asteroids</a> are a separate group of asteroids lying outside the main asteroid belt and sharing an <a class="lexicon-term" href="orbit.html">orbit</a> with Jupiter.<br/><a href="http://solarsystem.nasa.gov/multimedia/display.cfm?IM_ID=850" target="_blank">Credit</a>: NASA/Lunar and <a class="lexicon-term" href="planet.html">Planetary</a> Institute
-</div>
-</div><!-- End of imageWrapper div -->
-</div><!-- End of alignment div -->
-</p>
-
 	<p>The majority of asteroids in the <a class="lexicon-term" href="sun.html">Solar</a> System are found in the main asteroid belt.  This is located between the orbits of Mars and Jupiter, with the greatest concentration of asteroids between 2.12 and 3.3 <a class="lexicon-term" href="astronomical-unit.html">AU</a>.  Although it is thought to contain millions of objects (only tens of thousands have actually been observed), if they were all gathered into a single object, it would not exceed 1,500 km in diameter.</p>
 
 	<p>The main asteroid belt is very sparsely populated and the distribution of asteroids within it is not uniform.  In particular, the break-up of larger bodies results in families of asteroids which all share very similar <a class="lexicon-term" href="orbit.html">orbital</a> properties and cluster together.  While at the other extreme, there are zones in which there are almost no asteroids. These are known as the <a class="lexicon-term" href="kirkwood-gaps.html">Kirkwood Gaps</a> and are the result of orbital resonances with Jupiter.</p>
 
 	<p>It is thought that the main asteroid belt is a leftover from the early Solar System when the strong gravitational influence of Jupiter prevented the <a class="lexicon-term" href="planet.htmlesimals">planetesimals</a> in this region from coalescing to form a planetary core.</p>
+
+<!-- Interactive visualisation -->
+<div style="width:100%;max-width:800px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+  <iframe src="../dev/asteroid-interactive.html?embed" style="width:100%;height:100%;border:none;" loading="lazy" allowfullscreen></iframe>
+</div>
+<p style="text-align:center;font-size:0.8rem;color:#808285;margin-top:8px;">Interactive: The asteroid belt between Mars and Jupiter, showing Kirkwood gaps, Trojan asteroids, and the Hilda group. <a href="../dev/asteroid-interactive.html" target="_blank" style="color:#5ba4cf;">Open full screen ↗</a></p>
+<!-- End interactive -->
+
         </div>
       </div>
     </article>
@@ -115,5 +123,8 @@ The <a class="lexicon-term" href="main-asteroid-belt.html">main asteroid belt</a
       </div>
     </div>
   </footer>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
 </body>
 </html>

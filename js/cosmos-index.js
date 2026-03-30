@@ -5,11 +5,6 @@ var COSMOS_INDEX = [
     "letter": "A"
   },
   {
-    "slug": "about",
-    "title": "About Cosmos",
-    "letter": ""
-  },
-  {
     "slug": "absolute-magnitude",
     "title": "Absolute Magnitude",
     "letter": "A"

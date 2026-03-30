@@ -1,0 +1,137 @@
+// Site template — canonical page structure for all COSMOS article pages.
+// This is the single source of truth for page chrome.
+// Article content (title, body HTML) is injected into the template.
+'use strict';
+
+/**
+ * Render a full article page.
+ * @param {Object} opts
+ * @param {string} opts.title   — Article title (plain text)
+ * @param {string} opts.letter  — First letter for breadcrumb
+ * @param {string} opts.body    — Inner HTML of article__body div
+ * @returns {string} Full HTML page
+ */
+function renderArticlePage({ title, letter, body }) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${esc(title)} | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <aside class="sao-banner" aria-label="Study astronomy online">
+    <div class="container">
+      <div class="sao-banner__inner">
+        <span class="sao-banner__icon">&#x1F393;</span>
+        <div class="sao-banner__text">
+          <strong>Study Astronomy Online</strong> &mdash; Dive deep into the wonders of modern astronomy. Flexible online courses at the world-class Centre for Astrophysics.
+        </div>
+        <a class="sao-banner__cta" href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/" target="_blank" rel="noopener">Explore courses &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=${esc(letter)}">${esc(letter)}</a></li>
+        <li><span class="current">${esc(title)}</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container">
+        <header class="article__header">
+          <h1 class="article__title">${esc(title)}</h1>
+        </header>
+        <div class="article__body">
+${body}
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>`;
+}
+
+function esc(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+module.exports = { renderArticlePage };

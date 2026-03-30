@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Gravitational Waves | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #060618; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* --- Info panel (top-left, fullscreen only) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(6,6,24,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; max-width: 380px;
+      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 12px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode: hide description, compact readout --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info {
+      max-width: 180px; padding: 8px 12px; top: 8px; left: 8px;
+    }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+
+    #status-msg {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.6);
+      pointer-events: none; z-index: 10; display: none;
+    }
+
+    /* --- Controls bar (bottom, wide single-row) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 12px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+    #controls input[type="range"] { width: 60px; accent-color: #DC2D27; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .val { min-width: 20px; text-align: right; display: inline-block; font-size: 11px; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    /* --- Spectrogram (top-right) --- */
+    #spectrogram {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 10px 12px 6px; z-index: 10;
+    }
+    body.embedded #spectrogram { top: 8px; right: 8px; }
+    #spectrogram h3 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 4px; text-align: center;
+    }
+    #spec-canvas { display: block; border-radius: 3px; }
+
+    /* Allow wrapping on small viewports */
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="info">
+    <h2>Gravitational Waves</h2>
+    <p class="desc">Binary black hole inspiral &amp; merger. Spacetime ripples propagate outward from the source.</p>
+    <div class="readout">
+      <div>GW freq: <span id="r-fgw">40.0</span> Hz</div>
+      <div>Audio freq: <span id="r-afq">40</span> Hz (2&times;)</div>
+      <div>Separation: <span id="r-sep">7.1</span> R<sub>s</sub></div>
+      <div>Time to merger: <span id="r-ttm">30.0 s</span></div>
+      <div>Chirp mass: <span id="r-mc">26.1</span> M<sub>&#9737;</sub></div>
+    </div>
+    <p class="hint">Drag to rotate &middot; Scroll to zoom &middot; Best with headphones</p>
+  </div>
+
+  <div id="status-msg"></div>
+
+  <div id="spectrogram">
+    <h3>Chirp Signal (frequency &times; time)</h3>
+    <canvas id="spec-canvas" width="300" height="150"></canvas>
+  </div>
+
+  <div id="controls">
+    <label>m<sub>1</sub> <input type="range" id="mass1" min="1" max="50" value="15" step="0.5">
+      <span class="val" id="mass1-val">15</span>M<sub>&#9737;</sub></label>
+    <label>m<sub>2</sub> <input type="range" id="mass2" min="1" max="50" value="30" step="0.5">
+      <span class="val" id="mass2-val">30</span>M<sub>&#9737;</sub></label>
+    <div class="sep"></div>
+    <button id="btn-play" class="active">&#9654; Play</button>
+    <label><input type="checkbox" id="toggle-auto" checked> Auto</label>
+    <label>Speed <input type="range" id="speed-slider" min="-1.7" max="1" value="-0.3" step="0.01" disabled>
+      <span class="val" id="speed-val">auto</span></label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="toggle-sound" checked> Sound</label>
+    <label><input type="checkbox" id="toggle-3d"> 3D</label>
+    <button id="btn-reset">Reset</button>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+    // ===================================================================
+    //  Embedded mode detection + Page Visibility API
+    // ===================================================================
+    const isEmbedded = window.self !== window.top;
+    if (isEmbedded) document.body.classList.add('embedded');
+
+    // Visibility listener added after state vars are declared (see below)
+
+    // ===================================================================
+    //  Constants
+    // ===================================================================
+    const G  = 6.674e-11;          // m^3 kg^-1 s^-2
+    const C  = 2.998e8;            // m/s
+    const MSUN = 1.989e30;         // kg
+    const PI = Math.PI, TWO_PI = 2 * PI;
+
+    const MESH_SIZE = 30;          // world units
+    const MESH_SEG  = 512;         // vertices per side (high-res for smooth waves)
+    const WAVE_SPEED = 140;        // visual propagation speed — wide waves like real sims (~2-3 crests at start)
+    const VIS_DURATION = 16;       // playback seconds at 1x
+    const ORBIT_VIS_R = 6.0;      // initial orbit radius in world units (larger = more spiral-in visible)
+    const EXAGGERATION = 1.8;      // max wave displacement (world units)
+    const TRAIL_LEN = 210;
+    const TRAIL_PTS_PER_FRAME = 5;
+    const AUDIO_SHIFT = 2;         // frequency multiplier: 1 octave up for audibility
+    const WELL_DEPTH = 0.2;        // gravity well depth scale (world units)
+
+    // ===================================================================
+    //  Shaders
+    // ===================================================================
+    const vertexShader = /* glsl */`
+      uniform float u_phase;
+      uniform float u_gwFreq;
+      uniform float u_amplitude;
+      uniform float u_waveSpeed;
+      uniform vec2  u_bh1;       // BH1 position (x, z) in world coords
+      uniform vec2  u_bh2;       // BH2 position (x, z)
+      uniform float u_wd1;       // gravity well depth for BH1
+      uniform float u_wd2;       // gravity well depth for BH2
+      uniform float u_orbitR;    // current orbital separation in world units
+      varying vec2  vUv;
+      varying float v_disp;
+
+      void main() {
+        vUv = uv;
+        vec3 pos = position;
+
+        float r = length(pos.xz);
+        float theta = atan(pos.z, pos.x);
+
+        // Spatial wavenumber
+        float k = 6.2832 * u_gwFreq / u_waveSpeed;
+
+        // 1/sqrt(r) radial falloff, clamped near source
+        float envelope = u_amplitude / max(sqrt(r), 0.55);
+
+        // Suppress wave INSIDE the binary orbit — waves only propagate outward
+        float innerCutoff = smoothstep(0.0, u_orbitR * 0.9, r);
+
+        // Quadrupolar wave as DEPRESSION, only outside the orbit
+        // +phase = outward propagation, +2θ = counter-clockwise spiral
+        float wave = -envelope * innerCutoff * cos(u_phase - k * r + 2.0 * theta + 3.1416);
+
+        // Gravity wells at each BH: 1/r potential (always depresses)
+        float d1 = length(pos.xz - u_bh1);
+        float d2 = length(pos.xz - u_bh2);
+        float wells = -(u_wd1 / max(d1, 0.12) + u_wd2 / max(d2, 0.12));
+
+        float d = wave + wells;
+        pos.y += d;
+        v_disp = d;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }
+    `;
+
+    const fragmentShader = /* glsl */`
+      uniform float u_maxDisp;
+      uniform int u_gridOnly;
+      varying vec2 vUv;
+      varying float v_disp;
+
+      void main() {
+        float s = clamp(v_disp / u_maxDisp, -1.0, 1.0);
+
+        // Grid lines (spacetime fabric)
+        float gx = abs(fract(vUv.x * 30.0) - 0.5);
+        float gz = abs(fract(vUv.y * 30.0) - 0.5);
+        float grid = max(1.0 - smoothstep(0.0, 0.06, gx),
+                         1.0 - smoothstep(0.0, 0.06, gz));
+
+        // Edge fade
+        float edge = max(abs(vUv.x - 0.5), abs(vUv.y - 0.5)) * 2.0;
+        float fade = 1.0 - smoothstep(0.82, 1.0, edge);
+
+        if (u_gridOnly == 1) {
+          // 3D mode: translucent grid lines only, no solid surface
+          float alpha = grid * 0.15 * fade;
+          gl_FragColor = vec4(vec3(0.45, 0.5, 0.65) * grid, alpha);
+          return;
+        }
+
+        // 2D mode: full colored surface + grid
+        vec3 cZero = vec3(0.06, 0.06, 0.18);
+        vec3 cPos  = vec3(1.2, 0.22, 0.0);
+        vec3 cNeg  = vec3(0.0, 0.25, 1.2);
+        vec3 hotP  = vec3(2.4, 1.6, 1.1);
+        vec3 hotN  = vec3(1.1, 1.6, 2.4);
+
+        vec3 col;
+        if (s > 0.0) {
+          col = mix(cZero, cPos, smoothstep(0.0, 0.25, s));
+          col = mix(col, hotP, smoothstep(0.3, 0.8, s));
+        } else {
+          col = mix(cZero, cNeg, smoothstep(0.0, 0.25, -s));
+          col = mix(col, hotN, smoothstep(0.3, 0.8, -s));
+        }
+
+        col += vec3(0.25, 0.25, 0.4) * grid * (0.15 + 0.12 * abs(s));
+        col = mix(vec3(0.039, 0.039, 0.18), col, fade);
+
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    // ===================================================================
+    //  Physics: post-Newtonian inspiral pre-computation
+    // ===================================================================
+    function computeInspiral(m1_Msun, m2_Msun) {
+      const m1 = m1_Msun * MSUN, m2 = m2_Msun * MSUN;
+      const M = m1 + m2;
+      const eta = (m1 * m2) / (M * M);
+      const Mc = M * Math.pow(eta, 0.6);          // chirp mass
+      const Rs = 2 * G * M / (C * C);              // Schwarzschild radius
+      const GMc_c3 = G * Mc / (C * C * C);
+
+      // ISCO GW frequency (Schwarzschild)
+      const f_ISCO = C * C * C / (Math.pow(6, 1.5) * PI * G * M);
+
+      // Leading-order frequency evolution prefactor
+      const prefactor = (96 / 5) * Math.pow(PI, 8 / 3) * Math.pow(GMc_c3, 5 / 3);
+
+      // Estimate time to coalescence from f0
+      const f0 = 20;
+      const tau = (5 / 256) * Math.pow(PI, -8 / 3)
+                * Math.pow(GMc_c3, -5 / 3) * Math.pow(f0, -8 / 3);
+
+      // Adaptive sample rate: higher for short inspirals
+      const MAX_SAMPLES = 120000;
+      const sampleRate = Math.min(4000, Math.max(200, Math.floor(MAX_SAMPLES / tau)));
+      const dt = 1 / sampleRate;
+
+      const maxN = Math.ceil(tau * sampleRate) + Math.ceil(sampleRate * 0.5);
+
+      // Allocate arrays
+      const t = new Float64Array(maxN);
+      const freq = new Float64Array(maxN);
+      const phase = new Float64Array(maxN);
+      const amp = new Float64Array(maxN);
+      const sep = new Float64Array(maxN);     // orbital separation (m)
+      const bx1 = new Float64Array(maxN), by1 = new Float64Array(maxN);
+      const bx2 = new Float64Array(maxN), by2 = new Float64Array(maxN);
+
+      let f = f0, phi = 0, n = 0;
+
+      // --- Inspiral (RK4 on df/dt) ---
+      const dfdt = ff => prefactor * Math.pow(ff, 11 / 3);
+
+      const f_end = f_ISCO * 2;  // extend past ISCO for smoother ending
+      while (f < f_end && n < maxN - Math.ceil(sampleRate * 0.5)) {
+        t[n] = n * dt;
+        freq[n] = f;
+        phase[n] = phi;
+        amp[n] = Math.pow(f / f0, 2 / 3);
+
+        const f_orb = f / 2;
+        const a = Math.pow(G * M / Math.pow(TWO_PI * f_orb, 2), 1 / 3);
+        sep[n] = a;
+
+        const phi_orb = phi / 2;
+        const r1 = a * m2 / M, r2 = a * m1 / M;
+        bx1[n] =  r1 * Math.cos(phi_orb); by1[n] =  r1 * Math.sin(phi_orb);
+        bx2[n] = -r2 * Math.cos(phi_orb); by2[n] = -r2 * Math.sin(phi_orb);
+
+        // RK4 step
+        const k1 = dfdt(f);
+        const k2 = dfdt(f + 0.5 * dt * k1);
+        const k3 = dfdt(f + 0.5 * dt * k2);
+        const k4 = dfdt(f + dt * k3);
+        f += dt * (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+        phi += TWO_PI * freq[n] * dt;
+        n++;
+      }
+
+      const nInspiral = n;
+      const ampMax = amp[n - 1] || 1;
+
+      // --- Ringdown (damped sinusoid at QNM frequency) ---
+      const Mf = 0.95 * M;
+      const fQNM = 0.59 * C * C * C / (TWO_PI * G * Mf);
+      const tauQNM = 0.7 * G * Mf / (C * C * C);
+      const ringSteps = Math.min(Math.ceil(12 * tauQNM * sampleRate), Math.ceil(sampleRate * 0.5));
+      const t0 = t[nInspiral - 1] || 0;
+      const phi0 = phase[nInspiral - 1] || 0;
+
+      for (let i = 0; i < ringSteps && n < maxN; i++) {
+        const dtr = i * dt;
+        t[n] = t0 + dtr;
+        freq[n] = fQNM;
+        phase[n] = phi0 + TWO_PI * fQNM * dtr;
+        amp[n] = ampMax * Math.exp(-dtr / tauQNM);
+        sep[n] = 0;
+        bx1[n] = 0; by1[n] = 0; bx2[n] = 0; by2[n] = 0;
+        n++;
+      }
+
+      return {
+        t, freq, phase, amp, sep, bx1, by1, bx2, by2,
+        nSteps: n, nInspiral, dt, sampleRate,
+        chirpMass: Mc / MSUN,
+        totalMass: M / MSUN,
+        Rs, f_ISCO, fQNM, tauQNM, ampMax,
+        physDuration: t[n - 1] || 0,
+      };
+    }
+
+    // ===================================================================
+    //  Scene
+    // ===================================================================
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 200);
+    camera.position.set(0, 12, 18);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setClearColor(0x060618);
+    document.body.appendChild(renderer.domElement);
+
+    const orbit = new OrbitControls(camera, renderer.domElement);
+    orbit.enableDamping = true;
+    orbit.dampingFactor = 0.06;
+    orbit.minDistance = 4;
+    orbit.maxDistance = 40;
+    orbit.maxPolarAngle = PI * 0.48;
+
+    // Post-processing
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(innerWidth, innerHeight), 1.0, 0.4, 0.82
+    );
+    composer.addPass(bloomPass);
+    composer.addPass(new OutputPass());
+
+    // ===================================================================
+    //  Spacetime mesh
+    // ===================================================================
+    const meshGeo = new THREE.PlaneGeometry(MESH_SIZE, MESH_SIZE, MESH_SEG, MESH_SEG);
+    meshGeo.rotateX(-PI / 2);
+
+    const meshMat = new THREE.ShaderMaterial({
+      uniforms: {
+        u_phase:     { value: 0 },
+        u_gwFreq:    { value: 20 },
+        u_amplitude: { value: 0 },
+        u_waveSpeed: { value: WAVE_SPEED },
+        u_maxDisp:   { value: EXAGGERATION * 2.5 },
+        u_gridOnly:  { value: 0 },
+        u_bh1:       { value: new THREE.Vector2(0, 0) },
+        u_bh2:       { value: new THREE.Vector2(0, 0) },
+        u_wd1:       { value: 0 },
+        u_wd2:       { value: 0 },
+        u_orbitR:    { value: ORBIT_VIS_R },
+      },
+      vertexShader,
+      fragmentShader,
+      side: THREE.DoubleSide,
+    });
+    const spacetimeMesh = new THREE.Mesh(meshGeo, meshMat);
+    spacetimeMesh.position.y = -0.6;  // offset mesh below BHs (at y=0)
+    scene.add(spacetimeMesh);
+
+    // ===================================================================
+    //  3D GW strain — volumetric ray-marched sphere (gwpv-style)
+    //  Evaluates h+(r,θ,φ) at multiple radii along each view ray through
+    //  a bounding sphere, producing a true volumetric rendering of the
+    //  quadrupolar (l=2,m=2) GW pattern propagating outward in 3D.
+    // ===================================================================
+    const SPHERE_RADIUS = 12.0;
+
+    const sphereVertShader = /* glsl */`
+      varying vec3 vWorldPos;
+      void main() {
+        vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    const sphereFragShader = /* glsl */`
+      uniform float u_phase;
+      uniform float u_amplitude;
+      uniform float u_gwFreq;
+      uniform float u_waveSpeed;
+      uniform float u_timeToMerger;
+      uniform vec3  u_cameraPos;
+
+      varying vec3 vWorldPos;
+
+      #define NUM_STEPS 48
+      #define R_MAX 12.0
+
+      vec2 sphereHit(vec3 ro, vec3 rd, float r) {
+        float b = dot(ro, rd);
+        float c = dot(ro, ro) - r * r;
+        float disc = b * b - c;
+        if (disc < 0.0) return vec2(-1.0);
+        float sq = sqrt(disc);
+        return vec2(-b - sq, -b + sq);
+      }
+
+      void main() {
+        vec3 ro = u_cameraPos;
+        vec3 rd = normalize(vWorldPos - ro);
+
+        vec2 hit = sphereHit(ro, rd, R_MAX);
+        if (hit.x < 0.0) discard;
+
+        float tStart = max(hit.x, 0.0);
+        float tEnd   = hit.y;
+        float stepSize = (tEnd - tStart) / float(NUM_STEPS);
+        if (stepSize <= 0.0) discard;
+
+        // Same wavenumber as 2D mode — same physics, just rendered volumetrically
+        float k = 6.2832 * u_gwFreq / u_waveSpeed;
+
+        vec3 totalCol = vec3(0.0);
+        float totalAlpha = 0.0;
+
+        for (int i = 0; i < NUM_STEPS; i++) {
+          float t = tStart + (float(i) + 0.5) * stepSize;
+          vec3 pos = ro + rd * t;
+          float r = length(pos);
+          if (r > R_MAX) continue;
+
+          vec3 n = pos / max(r, 0.01);
+          float cosT = n.y;
+          float phi  = atan(n.z, n.x);
+
+          // Same phase as 2D mode: outward-propagating quadrupolar wave
+          float phaseTerm = u_phase - k * r + 2.0 * phi;
+
+          // h+ and h× from (2,±2) modes
+          float hPlus  = 0.5 * (1.0 + cosT * cosT) * cos(phaseTerm);
+          float hCross = cosT * sin(phaseTerm);
+
+          // Smooth inner/outer fade
+          float innerFade = smoothstep(1.5, 5.0, r);
+          float outerFade = 1.0 - smoothstep(R_MAX * 0.75, R_MAX, r);
+
+          // Pure oscillation field [-1, 1] — same range at ALL radii
+          float field = hPlus + hCross;
+          float af = abs(field);
+
+          // Skip near-zero → dark gaps between wavefronts
+          if (af < 0.45) continue;
+
+          // Discrete color bands with uniform color (hard edges, not gradual)
+          // Matching gwpv playground approach for crisp wavefront definition
+          vec3 col;
+          float bandOpacity;
+          if (field > 0.7)       { col = vec3(0.9, 0.2, 0.05);  bandOpacity = 2.0; }  // red-orange
+          else if (field > 0.5)  { col = vec3(0.7, 0.75, 0.05); bandOpacity = 0.45; } // yellow-green
+          else if (field > 0.3)  { col = vec3(0.1, 0.55, 0.15); bandOpacity = 0.15; } // green
+          else if (field < -0.7) { col = vec3(0.1, 0.7, 0.5);   bandOpacity = 2.0; }  // teal
+          else if (field < -0.5) { col = vec3(0.05, 0.4, 0.7);  bandOpacity = 0.45; } // blue
+          else                   { col = vec3(0.02, 0.15, 0.35); bandOpacity = 0.15; } // dark blue
+
+          // Radial screening (matching playground: activation/deactivation)
+          float screening = innerFade * outerFade;
+
+          // Very low optical density — only concentrated peaks accumulate
+          // (matching playground: opticalDensity * rayStride * color.a)
+          float alpha = screening * bandOpacity * bandOpacity * bandOpacity * 0.007 * stepSize;
+
+          // Simple additive accumulation (matching playground exactly)
+          totalCol += alpha * col;
+          totalAlpha += alpha;
+        }
+
+        if (totalAlpha < 0.001) discard;
+        totalAlpha = min(totalAlpha, 1.0);
+        gl_FragColor = vec4(totalCol, totalAlpha);
+      }
+    `;
+
+    const sphereGroup = new THREE.Group();
+    const sphereMat = new THREE.ShaderMaterial({
+      uniforms: {
+        u_phase:         { value: 0 },
+        u_amplitude:     { value: 0 },
+        u_gwFreq:        { value: 20 },
+        u_waveSpeed:     { value: WAVE_SPEED },
+        u_timeToMerger:  { value: 10 },
+        u_cameraPos:     { value: new THREE.Vector3() },
+      },
+      vertexShader: sphereVertShader,
+      fragmentShader: sphereFragShader,
+      transparent: true,
+      depthWrite: false,
+      // Premultiplied alpha compositing: gaps are truly transparent (black)
+      blending: THREE.CustomBlending,
+      blendSrc: THREE.OneFactor,
+      blendDst: THREE.OneMinusSrcAlphaFactor,
+      side: THREE.BackSide,   // render inside faces so camera inside sphere works
+    });
+    const sphereMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(SPHERE_RADIUS, 64, 32),
+      sphereMat
+    );
+    sphereGroup.add(sphereMesh);
+    sphereGroup.visible = false;
+    scene.add(sphereGroup);
+
+    let mode3D = false;
+
+    // Update sphere uniforms each frame
+    function updateSphereUniforms(phase, fGw, amplitude, timeToMerger) {
+      sphereMat.uniforms.u_phase.value        = phase;
+      sphereMat.uniforms.u_gwFreq.value       = fGw;
+      sphereMat.uniforms.u_amplitude.value    = amplitude;
+      sphereMat.uniforms.u_timeToMerger.value = timeToMerger;
+      sphereMat.uniforms.u_cameraPos.value.copy(camera.position);
+    }
+
+    // ===================================================================
+    //  Binary objects — dark spheres with luminous rim (like a black hole)
+    // ===================================================================
+    function makeBH() {
+      const group = new THREE.Group();
+
+      // Dark core
+      const coreGeo = new THREE.SphereGeometry(1, 32, 32);
+      const coreMat = new THREE.MeshBasicMaterial({ color: 0x050510 });
+      group.add(new THREE.Mesh(coreGeo, coreMat));
+
+      // Bright rim / photon ring (slightly larger, additive, transparent)
+      const rimGeo = new THREE.SphereGeometry(1.08, 32, 32);
+      const rimMat = new THREE.MeshBasicMaterial({
+        color: 0x6688ff, transparent: true, opacity: 0.35,
+        side: THREE.BackSide,   // only the inside edge glows (rim effect)
+      });
+      group.add(new THREE.Mesh(rimGeo, rimMat));
+
+      // Outer glow halo (triggers bloom)
+      const haloGeo = new THREE.SphereGeometry(1.3, 24, 24);
+      const haloMat = new THREE.MeshBasicMaterial({
+        color: 0x4466cc, transparent: true, opacity: 0.12,
+        side: THREE.BackSide,
+      });
+      group.add(new THREE.Mesh(haloGeo, haloMat));
+
+      group.position.y = 0.0;
+      scene.add(group);
+      return group;
+    }
+    const bh1 = makeBH();
+    const bh2 = makeBH();
+
+    // Remnant (hidden until merger)
+    const remnant = makeBH();
+    remnant.scale.setScalar(1.4);
+    remnant.visible = false;
+
+    // ===================================================================
+    //  Orbital trails
+    // ===================================================================
+    function createTrail(baseR, baseG, baseB) {
+      const positions = new Float32Array(TRAIL_LEN * 3);
+      const colors    = new Float32Array(TRAIL_LEN * 4); // RGBA
+      // Pre-compute gradient: constant color, fading alpha
+      for (let i = 0; i < TRAIL_LEN; i++) {
+        const alpha = Math.pow(1 - i / TRAIL_LEN, 2);
+        colors[i * 4]     = baseR;
+        colors[i * 4 + 1] = baseG;
+        colors[i * 4 + 2] = baseB;
+        colors[i * 4 + 3] = alpha;
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geo.setAttribute('color',    new THREE.BufferAttribute(colors, 4));
+      geo.setDrawRange(0, 0);
+      const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true });
+      const line = new THREE.Line(geo, mat);
+      line.frustumCulled = false;
+      scene.add(line);
+      return { line, positions, count: 0 };
+    }
+    const trail1 = createTrail(1.0, 0.65, 0.25);   // warm orange
+    const trail2 = createTrail(0.25, 0.65, 1.0);    // cool cyan
+
+    function addTrailPoint(trail, x, y, z) {
+      const p = trail.positions;
+      // Shift everything forward by 1 slot
+      p.copyWithin(3, 0, (TRAIL_LEN - 1) * 3);
+      p[0] = x; p[1] = y; p[2] = z;
+      trail.count = Math.min(trail.count + 1, TRAIL_LEN);
+      trail.line.geometry.attributes.position.needsUpdate = true;
+      trail.line.geometry.setDrawRange(0, trail.count);
+    }
+
+    function clearTrail(trail) {
+      trail.positions.fill(0);
+      trail.count = 0;
+      trail.line.geometry.attributes.position.needsUpdate = true;
+      trail.line.geometry.setDrawRange(0, 0);
+    }
+
+    // ===================================================================
+    //  Audio engine (WebAudio)
+    // ===================================================================
+    let audioCtx = null, osc = null, gainNode = null, audioEnabled = true;
+
+    function initAudio() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = 20;
+      gainNode = audioCtx.createGain();
+      gainNode.gain.value = 0;
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      osc.start();
+    }
+
+    function updateAudio(gwFreq, amplitude, active) {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      if (active && playing) {
+        // Shift up 2 octaves (4×) so the chirp is clearly audible
+        osc.frequency.setTargetAtTime(gwFreq * AUDIO_SHIFT, now, 0.015);
+        // Louder base: 0.12 at start, grows to 0.5 at peak
+        const vol = Math.min(0.12 + amplitude * 0.38, 0.5);
+        gainNode.gain.setTargetAtTime(vol, now, 0.015);
+      } else {
+        gainNode.gain.setTargetAtTime(0, now, 0.05);
+      }
+    }
+
+    // ===================================================================
+    //  State
+    // ===================================================================
+    let m1Msun = 15, m2Msun = 30;
+    let inspiral = computeInspiral(m1Msun, m2Msun);
+    let orbitScale = ORBIT_VIS_R / (inspiral.sep[0] || 1);
+
+    // Fixed BH visual sizes from Schwarzschild radii (constant during inspiral)
+    // Rs_i = 2*G*m_i/c^2, visual = Rs_i * orbitScale
+    function computeBHSizes() {
+      const rs1 = 2 * G * m1Msun * MSUN / (C * C);
+      const rs2 = 2 * G * m2Msun * MSUN / (C * C);
+      // scale by orbitScale so the ratio Rs/a is correct at all times
+      bh1.scale.setScalar(Math.max(0.08, rs1 * orbitScale));
+      bh2.scale.setScalar(Math.max(0.08, rs2 * orbitScale));
+    }
+
+    let simTime = 0;
+    let visualPhase = 0;
+    let prevOrbPhase = 0;
+    let playing = false;
+    let speedMul = 0.5;
+    let autoSpeed = true;
+    let merged = false;
+    let finished = false;
+
+    // Auto-speed profile: ramp up → cruise → smooth sigmoid decel → slow final moments
+    // Progress-based sigmoid — smooth by construction (no frame-skip issues)
+    function getAutoSpeedMul(progress, fISCO) {
+      const CRUISE = 2.0;
+      const END_SPEED = 2.0 / (1.5 * fISCO);  // ~1 orbit/s at 1.5×f_ISCO
+      const MERGER_BOOST = 0.1;
+
+      // Ramp up (0→25%): slow start so user sees a few demo orbits
+      if (progress < 0.25) {
+        const t = progress / 0.25;
+        return 0.04 + (CRUISE - 0.04) * t * t;
+      }
+
+      // Cruise + smooth sigmoid decel centered at 89% progress
+      let speed = END_SPEED + (CRUISE - END_SPEED)
+                / (1 + Math.exp(60 * (progress - 0.89)));
+
+      // Post-merger speedup (very late, p ≈ 0.998)
+      speed += MERGER_BOOST / (1 + Math.exp(-300 * (progress - 0.998)));
+
+      return speed;
+    }
+
+    // DOM refs
+    const elFgw  = document.getElementById('r-fgw');
+    const elAfq  = document.getElementById('r-afq');
+    const elSep  = document.getElementById('r-sep');
+    const elTtm  = document.getElementById('r-ttm');
+    const elMc   = document.getElementById('r-mc');
+    const elMsg  = document.getElementById('status-msg');
+
+    // ===================================================================
+    //  Spectrogram (frequency vs time chirp diagram)
+    // ===================================================================
+    const specCanvas = document.getElementById('spec-canvas');
+    const specCtx = specCanvas.getContext('2d');
+    const SPEC_W = specCanvas.width, SPEC_H = specCanvas.height;
+    const SPEC_PAD = { l: 38, r: 8, t: 4, b: 20 };
+    const specPlotW = SPEC_W - SPEC_PAD.l - SPEC_PAD.r;
+    const specPlotH = SPEC_H - SPEC_PAD.t - SPEC_PAD.b;
+    // Store chirp trace: progress (0→1), freq, phase, amplitude
+    let specTrace = [];
+
+    // Layout: top 55% = frequency plot, bottom 45% = waveform
+    const freqH = Math.floor(specPlotH * 0.52);
+    const waveTop = SPEC_PAD.t + freqH + 12;   // gap between plots
+    const waveH = SPEC_H - waveTop - SPEC_PAD.b;
+
+    function freqToY(f, fMin, fMax) {
+      const logMin = Math.log10(fMin), logMax = Math.log10(fMax);
+      const frac = (Math.log10(f) - logMin) / (logMax - logMin);
+      return SPEC_PAD.t + freqH * (1 - frac);
+    }
+
+    function drawSpectrogram(progress, fGw, amplitude, phase) {
+      if (playing && !finished) {
+        specTrace.push({ p: progress, f: fGw, a: amplitude, ph: phase });
+        // Cap trace length for performance (keep last 3000 points)
+        if (specTrace.length > 3000) specTrace = specTrace.slice(-2500);
+      }
+
+      const fMin = 15;
+      const fMax = Math.max(inspiral.f_ISCO * 1.5, inspiral.fQNM * 1.2, 100);
+
+      // Clear
+      specCtx.fillStyle = 'rgba(6,6,30,1)';
+      specCtx.fillRect(0, 0, SPEC_W, SPEC_H);
+
+      // ---- TOP: Frequency vs time ----
+      specCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+      specCtx.lineWidth = 0.5;
+      for (const fTick of [20, 50, 100, 200, 500, 1000]) {
+        if (fTick < fMin || fTick > fMax) continue;
+        const y = freqToY(fTick, fMin, fMax);
+        specCtx.beginPath();
+        specCtx.moveTo(SPEC_PAD.l, y);
+        specCtx.lineTo(SPEC_W - SPEC_PAD.r, y);
+        specCtx.stroke();
+        specCtx.fillStyle = 'rgba(255,255,255,0.35)';
+        specCtx.font = '9px "Open Sans", sans-serif';
+        specCtx.textAlign = 'right';
+        specCtx.fillText(fTick + '', SPEC_PAD.l - 4, y + 3);
+      }
+
+      // Freq label
+      specCtx.save();
+      specCtx.fillStyle = 'rgba(255,255,255,0.4)';
+      specCtx.font = '9px "Open Sans", sans-serif';
+      specCtx.translate(10, SPEC_PAD.t + freqH / 2);
+      specCtx.rotate(-PI / 2);
+      specCtx.textAlign = 'center';
+      specCtx.fillText('Hz', 0, 0);
+      specCtx.restore();
+
+      // Draw frequency curve
+      specCtx.save();
+      specCtx.beginPath();
+      specCtx.rect(SPEC_PAD.l, SPEC_PAD.t, specPlotW, freqH);
+      specCtx.clip();
+
+      if (specTrace.length > 1) {
+        specCtx.strokeStyle = 'rgba(220,100,40,0.3)';
+        specCtx.lineWidth = 5;
+        specCtx.beginPath();
+        for (let i = 0; i < specTrace.length; i++) {
+          const x = SPEC_PAD.l + specTrace[i].p * specPlotW;
+          const y = freqToY(specTrace[i].f, fMin, fMax);
+          i === 0 ? specCtx.moveTo(x, y) : specCtx.lineTo(x, y);
+        }
+        specCtx.stroke();
+        specCtx.strokeStyle = '#ff8844';
+        specCtx.lineWidth = 1.5;
+        specCtx.beginPath();
+        for (let i = 0; i < specTrace.length; i++) {
+          const x = SPEC_PAD.l + specTrace[i].p * specPlotW;
+          const y = freqToY(specTrace[i].f, fMin, fMax);
+          i === 0 ? specCtx.moveTo(x, y) : specCtx.lineTo(x, y);
+        }
+        specCtx.stroke();
+        const last = specTrace[specTrace.length - 1];
+        specCtx.fillStyle = '#fff';
+        specCtx.beginPath();
+        specCtx.arc(SPEC_PAD.l + last.p * specPlotW, freqToY(last.f, fMin, fMax), 3, 0, TWO_PI);
+        specCtx.fill();
+      }
+      specCtx.restore();
+      specCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+      specCtx.lineWidth = 0.5;
+      specCtx.strokeRect(SPEC_PAD.l, SPEC_PAD.t, specPlotW, freqH);
+
+      // ---- BOTTOM: Waveform h(t) = A(t) · sin(Φ(t)) ----
+      const waveMid = waveTop + waveH / 2;
+      // Zero line
+      specCtx.strokeStyle = 'rgba(255,255,255,0.06)';
+      specCtx.beginPath();
+      specCtx.moveTo(SPEC_PAD.l, waveMid);
+      specCtx.lineTo(SPEC_W - SPEC_PAD.r, waveMid);
+      specCtx.stroke();
+
+      // h(t) label
+      specCtx.fillStyle = 'rgba(255,255,255,0.4)';
+      specCtx.font = '9px "Open Sans", sans-serif';
+      specCtx.textAlign = 'right';
+      specCtx.fillText('h(t)', SPEC_PAD.l - 4, waveMid + 3);
+
+      specCtx.save();
+      specCtx.beginPath();
+      specCtx.rect(SPEC_PAD.l, waveTop, specPlotW, waveH);
+      specCtx.clip();
+
+      if (specTrace.length > 1) {
+        // Glow
+        specCtx.strokeStyle = 'rgba(80,200,180,0.25)';
+        specCtx.lineWidth = 3;
+        specCtx.beginPath();
+        for (let i = 0; i < specTrace.length; i++) {
+          const s = specTrace[i];
+          const x = SPEC_PAD.l + s.p * specPlotW;
+          const h = s.a * Math.sin(s.ph);
+          const y = waveMid - h * waveH * 0.45;
+          i === 0 ? specCtx.moveTo(x, y) : specCtx.lineTo(x, y);
+        }
+        specCtx.stroke();
+        // Sharp
+        specCtx.strokeStyle = '#55ddcc';
+        specCtx.lineWidth = 1;
+        specCtx.beginPath();
+        for (let i = 0; i < specTrace.length; i++) {
+          const s = specTrace[i];
+          const x = SPEC_PAD.l + s.p * specPlotW;
+          const h = s.a * Math.sin(s.ph);
+          const y = waveMid - h * waveH * 0.45;
+          i === 0 ? specCtx.moveTo(x, y) : specCtx.lineTo(x, y);
+        }
+        specCtx.stroke();
+      }
+      specCtx.restore();
+      specCtx.strokeRect(SPEC_PAD.l, waveTop, specPlotW, waveH);
+
+      // Time label
+      specCtx.fillStyle = 'rgba(255,255,255,0.4)';
+      specCtx.font = '9px "Open Sans", sans-serif';
+      specCtx.textAlign = 'center';
+      specCtx.fillText('Time to merger', SPEC_PAD.l + specPlotW / 2, SPEC_H - 2);
+    }
+
+    // ===================================================================
+    //  Readout + status helpers
+    // ===================================================================
+    function updateReadout(idx) {
+      const fgw = inspiral.freq[idx];
+      const a   = inspiral.sep[idx];
+      const remaining = Math.max(0, inspiral.physDuration - simTime);
+      const remainVis = remaining / inspiral.physDuration * VIS_DURATION / speedMul;
+
+      elFgw.textContent = fgw.toFixed(1);
+      elAfq.textContent = (fgw * AUDIO_SHIFT).toFixed(0);
+      elSep.textContent = a > 0 ? (a / inspiral.Rs).toFixed(1) : '—';
+      elTtm.textContent = remainVis > 0.05 ? remainVis.toFixed(1) + ' s' : 'Merged';
+      elMc.textContent  = inspiral.chirpMass.toFixed(1);
+    }
+
+    function showMsg(text) {
+      elMsg.textContent = text;
+      elMsg.style.display = text ? 'block' : 'none';
+    }
+
+    // ===================================================================
+    //  Scene initialisation + reset
+    // ===================================================================
+    function resetSim() {
+      simTime = 0;
+      visualPhase = 0;
+      prevOrbPhase = 0;
+      merged = false;
+      finished = false;
+      playing = false;
+      bloomPass.strength = 1.0;
+
+      // True reset: restore default masses
+      m1Msun = 15; m2Msun = 30;
+      document.getElementById('mass1').value = m1Msun;
+      document.getElementById('mass2').value = m2Msun;
+      document.getElementById('mass1-val').textContent = m1Msun;
+      document.getElementById('mass2-val').textContent = m2Msun;
+      inspiral = computeInspiral(m1Msun, m2Msun);
+      orbitScale = ORBIT_VIS_R / (inspiral.sep[0] || 1);
+
+      // Restore auto speed
+      autoSpeed = true;
+      document.getElementById('toggle-auto').checked = true;
+      document.getElementById('speed-slider').disabled = true;
+      document.getElementById('speed-val').textContent = 'auto';
+
+      bh1.visible = true; bh2.visible = true;
+      remnant.visible = false;
+      sphereGroup.visible = mode3D;
+      trail1.line.visible = true;
+      trail2.line.visible = true;
+      // Apply same rendering settings as the 3D toggle handler
+      meshMat.uniforms.u_gridOnly.value = mode3D ? 1 : 0;
+      meshMat.transparent = mode3D;
+      meshMat.depthWrite = !mode3D;
+      spacetimeMesh.visible = true;
+      clearTrail(trail1);
+      clearTrail(trail2);
+      specTrace = [];
+      showMsg('');
+
+      // Set initial positions + uniforms (animate() handles rendering)
+      const totalM = m1Msun + m2Msun;
+      const sepVis = inspiral.sep[0] * orbitScale;
+      const r1 = sepVis * m2Msun / totalM;
+      const r2 = sepVis * m1Msun / totalM;
+      bh1.position.set(r1, 0, 0);
+      bh2.position.set(-r2, 0, 0);
+      computeBHSizes();
+      meshMat.uniforms.u_bh1.value.set(r1, 0);
+      meshMat.uniforms.u_bh2.value.set(-r2, 0);
+      meshMat.uniforms.u_wd1.value = WELL_DEPTH * m1Msun / totalM;
+      meshMat.uniforms.u_wd2.value = WELL_DEPTH * m2Msun / totalM;
+      const initAmp = inspiral.amp[0] / inspiral.ampMax;
+      meshMat.uniforms.u_amplitude.value = (0.15 + 0.85 * initAmp) * EXAGGERATION;
+      meshMat.uniforms.u_orbitR.value = sepVis;
+      meshMat.uniforms.u_gwFreq.value = inspiral.freq[0];
+      meshMat.uniforms.u_phase.value = 0;
+      if (mode3D) updateSphereUniforms(0, inspiral.freq[0], 0.15, inspiral.physDuration);
+
+      updateReadout(0);
+      drawSpectrogram(0, 20, 0, 0);
+
+      document.getElementById('btn-play').classList.remove('active');
+      document.getElementById('btn-play').innerHTML = '&#9654; Play';
+    }
+
+    function recompute() {
+      inspiral = computeInspiral(m1Msun, m2Msun);
+      orbitScale = ORBIT_VIS_R / (inspiral.sep[0] || 1);
+      computeBHSizes();
+      resetSim();
+    }
+
+    // ===================================================================
+    //  UI event handlers
+    // ===================================================================
+    // While dragging mass sliders: recompute + update visuals, keep sim running (slowed)
+    let massDragging = false;
+
+    function onMassDrag() {
+      massDragging = true;
+      // Preserve current progress fraction
+      const progressFrac = inspiral.physDuration > 0
+        ? simTime / inspiral.physDuration : 0;
+      // Recompute with new masses
+      inspiral = computeInspiral(m1Msun, m2Msun);
+      orbitScale = ORBIT_VIS_R / (inspiral.sep[0] || 1);
+      computeBHSizes();
+      // Map simTime to same progress fraction in new inspiral
+      simTime = progressFrac * inspiral.physDuration;
+    }
+
+    function onMassRelease() {
+      massDragging = false;
+    }
+
+    document.getElementById('mass1').addEventListener('input', e => {
+      m1Msun = parseFloat(e.target.value);
+      document.getElementById('mass1-val').textContent = m1Msun;
+      onMassDrag();
+    });
+    document.getElementById('mass1').addEventListener('change', onMassRelease);
+    document.getElementById('mass2').addEventListener('input', e => {
+      m2Msun = parseFloat(e.target.value);
+      document.getElementById('mass2-val').textContent = m2Msun;
+      onMassDrag();
+    });
+    document.getElementById('mass2').addEventListener('change', onMassRelease);
+    document.getElementById('btn-play').addEventListener('click', () => {
+      if (finished) { resetSim(); return; }
+      playing = !playing;
+      if (playing) {
+        if (audioEnabled) initAudio();
+        lastTime = performance.now();
+      }
+      const btn = document.getElementById('btn-play');
+      btn.classList.toggle('active', playing);
+      btn.innerHTML = playing ? '&#9646;&#9646; Pause' : '&#9654; Play';
+    });
+    document.getElementById('toggle-auto').addEventListener('change', e => {
+      autoSpeed = e.target.checked;
+      document.getElementById('speed-slider').disabled = autoSpeed;
+      if (autoSpeed) {
+        document.getElementById('speed-val').textContent = 'auto';
+      }
+    });
+    document.getElementById('speed-slider').addEventListener('input', e => {
+      speedMul = Math.pow(10, parseFloat(e.target.value));
+      document.getElementById('speed-val').textContent = speedMul < 0.1
+        ? speedMul.toFixed(2) : speedMul < 1 ? speedMul.toFixed(1) : speedMul.toFixed(1);
+    });
+    document.getElementById('toggle-sound').addEventListener('change', e => {
+      audioEnabled = e.target.checked;
+      if (audioEnabled) initAudio();
+    });
+    document.getElementById('toggle-3d').addEventListener('change', e => {
+      mode3D = e.target.checked;
+      sphereGroup.visible = mode3D;
+      // In 3D: mesh shows translucent grid only; in 2D: full solid surface
+      meshMat.uniforms.u_gridOnly.value = mode3D ? 1 : 0;
+      meshMat.transparent = mode3D;
+      meshMat.depthWrite = !mode3D;
+      trail1.line.visible = true;
+      trail2.line.visible = true;
+      orbit.maxPolarAngle = PI * 0.48;
+    });
+    document.getElementById('btn-reset').addEventListener('click', resetSim);
+
+    // Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+      composer.setSize(innerWidth, innerHeight);
+    });
+
+    // ===================================================================
+    //  Page Visibility API — pause when tab/iframe is hidden
+    // ===================================================================
+    let wasPlayingBeforeHide = false;
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        wasPlayingBeforeHide = playing;
+        playing = false;
+      } else if (wasPlayingBeforeHide) {
+        playing = true;
+        lastTime = performance.now();
+      }
+    });
+
+    // ===================================================================
+    //  Animation loop
+    // ===================================================================
+    let lastTime = performance.now();
+
+    // Initialize paused with fully rendered scene
+    resetSim();
+
+    // Warm-up: let the animate loop render a few frames paused, then auto-play
+    // This ensures the full GPU pipeline (shaders + bloom render targets) is primed
+
+    function animate(now) {
+      requestAnimationFrame(animate);
+      const dt = Math.max(0, Math.min((now - lastTime) / 1000, 0.1));
+      lastTime = now;
+
+      if (playing && !finished) {
+        // Auto speed: smooth progress-based sigmoid
+        const progress = simTime / (inspiral.physDuration || 1);
+        if (autoSpeed) {
+          speedMul = getAutoSpeedMul(progress, inspiral.f_ISCO);
+          const sv = document.getElementById('speed-val');
+          sv.textContent = speedMul < 0.01 ? speedMul.toFixed(3)
+            : speedMul < 0.1 ? speedMul.toFixed(2)
+            : speedMul < 1 ? speedMul.toFixed(1) : speedMul.toFixed(1);
+        }
+
+        // Advance simulation time (slow down 10× while dragging mass sliders)
+        const dragSlow = massDragging ? 0.1 : 1.0;
+        const dtSim = dt * speedMul * dragSlow * inspiral.physDuration / VIS_DURATION;
+        simTime = Math.max(0, Math.min(simTime + dtSim, inspiral.physDuration));
+
+        // Look up pre-computed state
+        const idx = Math.max(0, Math.min(Math.floor(simTime / inspiral.dt), inspiral.nSteps - 1));
+        const fGw = inspiral.freq[idx];
+        const amplitude = inspiral.amp[idx] / inspiral.ampMax; // normalised 0→1
+        const sepM = inspiral.sep[idx];
+
+        // Advance visual phase (at physical GW frequency, in wall-clock time)
+        visualPhase += TWO_PI * fGw * dt * speedMul;
+
+        // --- Update shader ---
+        const visAmp = (0.15 + 0.85 * amplitude) * EXAGGERATION;
+        meshMat.uniforms.u_phase.value     = visualPhase;   // positive = outward propagation
+        meshMat.uniforms.u_gwFreq.value    = fGw;
+        meshMat.uniforms.u_amplitude.value = visAmp;
+
+        // --- Update binary positions (anti-clockwise) ---
+        const BH_Y = 0.0;  // BHs always at y=0; mesh is offset down
+        const totalM = m1Msun + m2Msun;
+
+        if (idx < inspiral.nInspiral) {
+          const sepVis = sepM * orbitScale;
+          const phi = -visualPhase / 2;   // negative → counter-clockwise on screen
+          const r1 = sepVis * m2Msun / totalM;
+          const r2 = sepVis * m1Msun / totalM;
+          const c1 = Math.cos(phi), s1 = Math.sin(phi);
+
+          const x1 =  r1 * c1, z1 =  r1 * s1;
+          const x2 = -r2 * c1, z2 = -r2 * s1;
+
+          bh1.position.set(x1, BH_Y, z1);
+          bh2.position.set(x2, BH_Y, z2);
+
+          // BH sizes are fixed (Schwarzschild radius doesn't change)
+
+          // Pass BH positions to shader for gravity wells
+          meshMat.uniforms.u_bh1.value.set(x1, z1);
+          meshMat.uniforms.u_bh2.value.set(x2, z2);
+          meshMat.uniforms.u_wd1.value = WELL_DEPTH * m1Msun / totalM;
+          meshMat.uniforms.u_wd2.value = WELL_DEPTH * m2Msun / totalM;
+          meshMat.uniforms.u_orbitR.value = sepVis;
+
+          // Add interpolated trail points
+          const dPhi = phi - prevOrbPhase;
+          for (let i = 1; i <= TRAIL_PTS_PER_FRAME; i++) {
+            const t = i / TRAIL_PTS_PER_FRAME;
+            const p = prevOrbPhase + dPhi * t;
+            const cp = Math.cos(p), sp = Math.sin(p);
+            addTrailPoint(trail1,  r1 * cp, BH_Y,  r1 * sp);
+            addTrailPoint(trail2, -r2 * cp, BH_Y, -r2 * sp);
+          }
+          prevOrbPhase = phi;
+
+          bh1.visible = true; bh2.visible = true;
+          remnant.visible = false;
+        } else if (!merged) {
+          // Merger moment
+          merged = true;
+          bh1.visible = false; bh2.visible = false;
+          remnant.visible = true;
+          remnant.position.set(0, 0, 0);
+          // Remnant size = Schwarzschild radius of combined mass (minus ~5% radiated)
+          const mRemnant = (m1Msun + m2Msun) * 0.95;
+          const rsRemnant = 2 * G * mRemnant * MSUN / (C * C) * orbitScale;
+          remnant.scale.setScalar(Math.max(0.15, rsRemnant));
+          // Single central well for the remnant
+          meshMat.uniforms.u_bh1.value.set(0, 0);
+          meshMat.uniforms.u_bh2.value.set(0, 0);
+          meshMat.uniforms.u_wd1.value = WELL_DEPTH * 0.5;
+          meshMat.uniforms.u_wd2.value = WELL_DEPTH * 0.5;
+          meshMat.uniforms.u_orbitR.value = 0;  // no inner cutoff during ringdown
+          bloomPass.strength = 2.5;
+        }
+
+        // Sync sphere shells if 3D mode is on
+        if (mode3D) {
+          const remaining = Math.max(inspiral.physDuration - simTime, 0.001);
+          updateSphereUniforms(visualPhase, fGw, amplitude, remaining);
+        }
+
+        // Ringdown bloom decay
+        if (merged) {
+          bloomPass.strength = Math.max(1.0, bloomPass.strength * 0.97);
+        }
+
+        // End of simulation
+        if (simTime >= inspiral.physDuration - inspiral.dt) {
+          finished = true;
+          playing = false;
+          showMsg('Click Play or Reset to replay');
+          const btn = document.getElementById('btn-play');
+          btn.classList.remove('active');
+          btn.innerHTML = '&#9654; Play';
+        }
+
+        // Readout
+        updateReadout(idx);
+
+        // Spectrogram (use physical phase for clean waveform)
+        const physPhase = inspiral.phase[idx];
+        drawSpectrogram(progress, fGw, amplitude, physPhase);
+
+        // Audio
+        updateAudio(fGw, amplitude, audioEnabled);
+      }
+
+      orbit.update();
+      composer.render();
+    }
+
+    requestAnimationFrame(animate);
+  </script>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>
