@@ -23,7 +23,11 @@ The project knowledge is organized into layers. Read what you need, in this orde
 ├── sao-researcher.md        ← SAO team: produces build specs
 ├── sao-coder.md             ← SAO team: builds interactives from specs
 ├── sao-verify.md            ← SAO team: quality gate (physics + visual)
-└── sao-writer.md            ← SAO team: article content specialist
+├── sao-writer.md            ← SAO team: article content specialist
+└── sao-analyst.md           ← SAO team: competition, SEO, upgrade path strategy
+
+articles_orig/                ← FROZEN snapshot of original 645 articles (never modify)
+articles/                     ← LIVE articles — may now be edited (originals preserved above)
 
 .planning/
 ├── INTERACTIVE-DEMOS.md     ← Top 10 ranked candidate list
@@ -112,7 +116,7 @@ These files are **living documents** — update them as you learn.
 - **Physics correctness is non-negotiable** — correct first, pretty second.
 - **Log everything** — learnings after every phase, notes for CEO from every agent.
 - **Verify in browser** — never assume code works. Screenshot, console, compare to references.
-- **Minimal article modifications** — existing articles get iframe embed only (<10% text changes max).
+- **Minimal article modifications** — existing articles get iframe embed only (~15% added text max, enforced by `verify.js --article`).
 
 ---
 
@@ -149,14 +153,18 @@ cd /Users/ivo/Documents/Astro/SWIN/SAO/cosmos && python3 -m http.server 8765
 
 ### Automated verification
 ```bash
+# Interactive mode (bloom, particles, spacebar, controls, screenshots):
 node .agents/verify.js <url> --screenshots /tmp [--checks '{"toggle":"#cb-toggle"}']
+
+# Article mode (iframe, text preservation, lexicon, grammar):
+node .agents/verify.js <url> --article --original articles/[topic].html --screenshots /tmp
 ```
 Requires Puppeteer in `/tmp/node_modules/` (`cd /tmp && npm install puppeteer`).
 Must run **headed** (`headless: false`) — WebGL requires GPU.
 
 ### Branches
-- `main` — production
-- `dev` — work in progress (currently: 3 physics sim apps pending review)
+- `main` — production (15 apps)
+- `dev` — active development (remaining 6 physics sim apps)
 
 ---
 
@@ -169,14 +177,13 @@ Must run **headed** (`headless: false`) — WebGL requires GPU.
 
 **Pipeline per app:**
 ```
-Phase 1: Dispatch researcher → .planning/apps/[topic]-spec.md
-Phase 2: Dispatch visual sub agent → .planning/apps/[topic]-spec.md researches visual implementation and references
-Phase 3: Dispatch writer (reads spec) → add iframe to article
-Phase 4: Dispatch coder (reads spec) → dispatch verifier → loop until pass
-Phase 5: Log learnings, update agent docs, commit
+Phase 1: Dispatch researcher → .planning/apps/[topic]-spec.md (science + visual competition survey + build plan)
+Phase 2: Dispatch writer (reads spec) → add iframe to article → verifier checks
+Phase 3: Dispatch coder (reads spec) → dispatch verifier → loop until pass
+Phase 4: Log learnings, update agent docs, commit
 ```
 
-**Current state:** 3/10 built (pulsar, binary star, rotation curve) on `dev` branch, pending physics + visual review. 7 remaining (see PROJECT-STATUS.md).
+**Current state:** 15 apps on `main` (8 planets + GW + sun + satellites + asteroids + pulsar + binary star + rotation curve). 6 remaining from Top 10: Black Hole, Density Wave, Roche Lobe, HR Diagram, CMB, Large-Scale Structure (all Hard/Hardest tier). See PROJECT-STATUS.md.
 
 ### *(Future: Content Team)*
 *Goal: Substantive article text updates, new articles, fact-checking.*

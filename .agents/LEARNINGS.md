@@ -18,8 +18,8 @@ Never assume code works. After writing any interactive: start server, open in Ch
 ### Physics verification is generic, not app-specific
 Every physics element must be checked for: (1) direction sanity — beams diverge, orbits are prograde, flows go the right way; (2) geometry — shapes match physics (dipole loops, elliptical orbits); (3) scale relationships — parameter changes produce correct relative effects; (4) interaction consistency — if camera angle and a control both affect the same physical quantity, they must agree.
 
-### Never modify articles/ directly
-The `articles/` directory is the **production reference** — it must stay untouched on `dev` so we can compare before/after. All new/updated article pages go in `experimental/` only. When ready to go live, the migration is a deliberate copy from `experimental/` to `articles/`, not an in-place edit.
+### Articles may now be edited (originals preserved)
+As of 2026-03-30, original articles are frozen in `articles_orig/` (645 files, never modify). The live `articles/` directory may now be edited directly. Always compare against `articles_orig/` to track what changed.
 
 ### Minimal article modifications
 When adding an interactive to an existing article: ONLY add the iframe embed block and its caption. Do not rewrite, expand, restructure, or "enhance" article content. Slight modifications (<15%) are acceptable — correcting obvious mistakes or updating to present day. A different team handles substantial text changes. For new articles, match the COSMOS voice per `cosmos-style-analysis.md`.
