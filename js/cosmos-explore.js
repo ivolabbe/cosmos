@@ -4,15 +4,16 @@
 (function() {
   'use strict';
 
-  // Derive base path from this script's src (works from /articles/, /dev/, or root)
+  // Derive relative prefix from this script's src attribute (e.g. "../js/X" → "../")
   var scripts = document.getElementsByTagName('script');
-  var scriptSrc = '';
+  var prefix = '';
   for (var i = 0; i < scripts.length; i++) {
-    if (scripts[i].src && scripts[i].src.indexOf('cosmos-explore.js') !== -1) {
-      scriptSrc = scripts[i].src; break;
+    var raw = scripts[i].getAttribute('src') || '';
+    if (raw.indexOf('cosmos-explore.js') !== -1) {
+      prefix = raw.replace(/js\/cosmos-explore\.js.*$/, '');
+      break;
     }
   }
-  var prefix = scriptSrc.replace(/js\/cosmos-explore\.js.*$/, '');
 
   // Load cosmos-index.js dynamically
   var s = document.createElement('script');

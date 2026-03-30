@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Embeds Demo | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .viz-container {
+      width: 100%;
+      height: 500px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 24px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .viz-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .viz-caption {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #808285;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <span class="site-header__title"><span>COSMOS</span> Interactive Demos</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <div class="container container--narrow">
+        <header class="article__header">
+          <h1 class="article__title">Interactive Visualisations</h1>
+        </header>
+        <div class="article__body">
+          <p>These interactive diagrams can be embedded in any COSMOS article page using a simple iframe. They replace static images with explorable 3D visualisations.</p>
+
+          <h3>Asteroid Belt &amp; Inner Solar System</h3>
+          <p>Shows all five inner planets, the main asteroid belt with Kirkwood gaps, and Jupiter's Trojan asteroids at the L4 and L5 Lagrange points. Drag to rotate, scroll to zoom, hover for details.</p>
+          <div class="viz-container">
+            <iframe src="asteroid-interactive.html" loading="lazy"></iframe>
+          </div>
+          <p class="viz-caption">Interactive: drag to rotate, scroll to zoom, hover labels for details.</p>
+
+          <h3>Zenith &amp; Celestial Sphere</h3>
+          <p>Shows the celestial sphere from the observer's perspective, with zenith, nadir, celestial meridian, equator, and both celestial poles. Latitude is adjustable.</p>
+          <div class="viz-container">
+            <iframe src="zenith-interactive.html" loading="lazy"></iframe>
+          </div>
+          <p class="viz-caption">Interactive: drag to rotate, scroll to zoom. Adjust latitude with the slider.</p>
+
+          <h3>Embedding in Articles</h3>
+          <p>To add an interactive visualisation to any COSMOS article, use:</p>
+          <pre style="background:#f6f6f6;padding:16px;border-radius:4px;font-size:0.85rem;overflow-x:auto;"><code>&lt;div style="width:100%;max-width:800px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);"&gt;
+  &lt;iframe src="../dev/asteroid-interactive.html"
+    style="width:100%;height:100%;border:none;" loading="lazy"&gt;
+  &lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
