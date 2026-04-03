@@ -1,150 +1,185 @@
 # COSMOS — Orchestrator Startup
 
-*Generic bootstrap for any orchestrator session. Read this first to understand the information landscape, then load the team-specific plan.*
+*Bootstrap for any orchestrator session. Read this first, then load the pipeline definition for your team.*
 
 ---
 
-## 1. Information Landscape
+## 1. Three-Layer Architecture
 
-The project knowledge is organized into layers. Read what you need, in this order.
-
-### Layer 0: Where things are (read always)
+Agents are assembled from three independent layers:
 
 ```
-.agents/
-├── STARTUP.md              ← YOU ARE HERE — generic orchestrator bootstrap
-├── PROJECT-STATUS.md        ← Current app inventory, branch state, pending items
-├── LEARNINGS.md             ← Accumulated rules, technical patterns, references
-├── AGENTS.md                ← Architecture diagram (transfer pipeline + SAO agents)
-├── INTERACTIVE-STYLE-GUIDE.md ← Three.js visual/architecture rules
-├── cosmos-style-analysis.md ← 643-article corpus voice characterization
-├── verify.js                ← Automated Puppeteer verification script
-├── sao-orchestrator.md      ← SAO team: phase tracker + recovery
-├── sao-researcher.md        ← SAO team: produces build specs
-├── sao-coder.md             ← SAO team: builds interactives from specs
-├── sao-verify.md            ← SAO team: quality gate (physics + visual)
-├── sao-writer.md            ← SAO team: article content specialist
-└── sao-analyst.md           ← SAO team: competition, SEO, upgrade path strategy
+┌─────────────────────────────────────────────────┐
+│  Layer 3: TASK CONTEXT (per-invocation)          │
+│  Spec path, verifier feedback, checkpoint state  │
+├─────────────────────────────────────────────────┤
+│  Layer 2: DOMAIN KNOWLEDGE (per-project)         │
+│  Three.js patterns, COSMOS voice, verification   │
+├─────────────────────────────────────────────────┤
+│  Layer 1: ROLE DEFINITION (portable)             │
+│  "You are a coder. Read spec, build artifact."   │
+└─────────────────────────────────────────────────┘
 
-articles_orig/                ← FROZEN snapshot of original 645 articles (never modify)
-articles/                     ← LIVE articles — may now be edited (originals preserved above)
-
-.planning/
-├── INTERACTIVE-DEMOS.md     ← Top 10 ranked candidate list
-└── apps/
-    ├── planets.md           ← Planet apps dev log
-    ├── pulsar.md            ← Pulsar dev log
-    ├── pulsar-spec.md       ← Pulsar build spec
-    ├── binary-star.md       ← Binary star dev log
-    ├── binary-star-spec.md  ← Binary star build spec
-    ├── rotation-curve.md    ← Rotation curve dev log
-    ├── rotation-curve-spec.md ← Rotation curve build spec
-    └── ...                  ← More dev logs and specs per app
-
-experimental/                ← All interactive HTML files + article pages
-articles/                    ← Production COSMOS encyclopedia (643 articles)
+Orchestrator assembles:  Role + Domain(s) + Task → Agent prompt
 ```
 
-### Layer 1: Project state (read at startup)
+### Layer 1: Roles (portable across projects)
+```
+roles/
+├── orchestrator.md    — phase tracking, dispatch, recovery
+├── researcher.md      — research + spec production
+├── coder.md           — build from spec, handle feedback
+├── verifier.md        — quality gate, structured PASS/FAIL
+├── visual-qa.md       — screenshot comparison, visual quality
+├── writer.md          — content writing, voice matching
+└── analyst.md         — competition survey, strategic analysis
+```
 
+### Layer 2: Domains (project-specific knowledge)
+```
+domains/
+├── threejs-interactive.md   — Three.js patterns, bloom, particles, architecture
+├── astro-research.md        — source hierarchy, fact sheets, spec template
+├── cosmos-articles.md       — COSMOS voice, lexicon links, modification rules
+├── cosmos-verification.md   — verify.js, evidence ladder, infrastructure
+└── cosmos-infrastructure.md — file layout, branches, naming conventions
+```
+
+### Layer 3: Task context (per-invocation)
+- The spec: `.planning/apps/[topic]-spec.md`
+- Verifier feedback (if iterating)
+- Checkpoint state (if continuing)
+- Handoff document (from previous agent)
+
+### How the orchestrator assembles a prompt
+
+```
+Dispatch coder for black-hole:
+  prompt = read("roles/coder.md")
+        + read("domains/threejs-interactive.md")
+        + read("domains/cosmos-infrastructure.md")
+        + "## Your task\n" + read(".planning/apps/black-hole-spec.md")
+        + [verifier feedback if iterating]
+        + [checkpoint state if continuing]
+        + [handoff document from researcher]
+```
+
+To reuse this pipeline for a different project, swap the domain layer:
+```
+SVU Unity project:
+  prompt = read("roles/coder.md")              ← same role
+        + read("domains/unity-patterns.md")     ← different domain
+        + read("domains/svu-infrastructure.md") ← different domain
+        + "## Your task\n" + read("svu-spec.md")
+```
+
+---
+
+## 2. Information Landscape
+
+### Always read at startup
 | File | What it tells you |
 |------|-------------------|
-| `PROJECT-STATUS.md` | What's built, what's on which branch, what's pending review |
-| `LEARNINGS.md` | Rules, patterns, pitfalls, external references |
+| `.planning/PROJECT-STATUS.md` | What's built, what's pending, full history |
+| `.planning/phase-tracker.json` | Current pipeline state per app (compaction-resistant) |
+| `LEARNINGS.md` | Project-wide rules, patterns, pitfalls |
 
-### Layer 2: Architecture & style (read before building)
-
+### Read before building
 | File | What it tells you |
 |------|-------------------|
-| `AGENTS.md` | Agent pipeline architecture, complexity tiers |
-| `INTERACTIVE-STYLE-GUIDE.md` | How to build interactives (Three.js patterns, controls, colours, physics) |
-| `cosmos-style-analysis.md` | How to write articles (voice, level, length, cross-linking density) |
-| `INTERACTIVE-DEMOS.md` | The ranked candidate list with descriptions |
+| `pipelines/interactive-app.md` | Phase sequence, agent assembly, model tiers, verification gates |
+| `INTERACTIVE-STYLE-GUIDE.md` | Visual/architecture rules (complements domain files) |
+| `COSMOS-STYLE-GUIDE.md` | 643-article corpus voice (complements domain files) |
 
-### Layer 3: Team-specific (read for your team)
-
-| Team | Orchestrator | Agents | Plan |
-|------|-------------|--------|------|
-| **SAO Interactive Apps** | `sao-orchestrator.md` | researcher, coder, verifier, writer | Build Top 10 physics sims |
-| *(future teams)* | *their orchestrator* | *their agents* | *their plan* |
-
-### Layer 4: Per-app context (read when working on a specific app)
-
+### Read per app
 | File | What it tells you |
 |------|-------------------|
-| `.planning/apps/[topic].md` | Dev log: what was built, bugs found, lessons learned |
-| `.planning/apps/[topic]-spec.md` | Build spec: facts, physics, staged plan, verification criteria |
-| `experimental/[topic]-interactive.html` | The actual interactive (read for template patterns) |
+| `.planning/apps/[topic]-spec.md` | Build spec (science, visual refs, staged plan) |
+| `.planning/apps/[topic].md` | Dev log (what was built, bugs, learnings) |
+| `dev/[topic]-interactive.html` | The actual interactive |
 
 ---
 
-## 2. Generic Startup Checklist
+## 3. Startup Checklist
 
 ```
-1. Read PROJECT-STATUS.md     → know what exists, what's pending
-2. Read LEARNINGS.md          → know the rules and patterns
-3. Identify your team         → load the team-specific orchestrator
-4. Read the team plan         → know what to build next
-5. Check git branch           → make sure you're on the right branch
-6. Start local server         → python3 -m http.server 8765
-7. Check Puppeteer            → ls /tmp/node_modules/puppeteer
-8. Begin work                 → dispatch agents per team plan
+1. Read .planning/PROJECT-STATUS.md      → know what exists
+2. Read .planning/phase-tracker.json     → know pipeline state
+3. Read LEARNINGS.md                     → know the rules
+4. Read your pipeline definition         → know phases + agents
+5. Check git branch                      → right branch?
+6. Start local server                    → python3 -m http.server 8765
+7. Check Puppeteer                       → ls /tmp/node_modules/puppeteer
+8. Begin work                            → dispatch agents per pipeline
 ```
 
 ---
 
-## 3. Updating Project Knowledge
+## 4. Pipeline Definitions
 
-These files are **living documents** — update them as you learn.
+### Interactive Apps (SAO Team)
+**Pipeline:** `pipelines/interactive-app.md`
+**Goal:** Build interactive 3D visualizations + embed in encyclopedia articles.
+**Phases:** Research → Spec Review → Write Article → Build + Verify → Done
+**Current:** 15 apps on `main`. 6 remaining (all Hard/Hardest tier).
 
-| File | When to update | Who updates |
-|------|---------------|-------------|
-| `LEARNINGS.md` | After each app pipeline — new rules, patterns, pitfalls | Orchestrator |
-| `PROJECT-STATUS.md` | After each app completes or status changes | Orchestrator |
-| `INTERACTIVE-STYLE-GUIDE.md` | When a new visual technique is proven or rejected | Orchestrator / Coder |
-| `sao-*.md` Learnings sections | After each phase — agent-specific findings | Each agent |
-| `.planning/apps/[topic].md` | After each build — dev log per app | Coder / Orchestrator |
+### Article Transfer
+**Pipeline:** `pipelines/article-transfer.md`
+**Goal:** Transfer 643 articles from old Drupal site.
+**Phases:** Inventory → Fetch (parallel) → Reindex → Verify
+**Status:** Complete (643/643 transferred).
 
-**The orchestrator's knowledge management job** is to collect agent notes (via "Notes for CEO" in completion reports), distil learnings, and propagate them to the correct files. If a pattern emerges across multiple apps, add it to `LEARNINGS.md`. If it's agent-specific, add it to that agent's Learnings section.
+### *(Future pipelines)*
+Use the Pipeline Maker Manual (`PIPELINE-MANUAL.md`) to define new pipelines from portable roles.
 
 ---
 
-## 4. Rules (all teams)
+## 5. Rules (all pipelines)
 
 - **Fresh agent per phase** — don't continue across phases. Clear context.
-- **Pass state via files** — spec, dev log, HTML file, verify.js JSON. Not agent context.
-- **Physics correctness is non-negotiable** — correct first, pretty second.
-- **Log everything** — learnings after every phase, notes for CEO from every agent.
-- **Verify in browser** — never assume code works. Screenshot, console, compare to references.
-- **Minimal article modifications** — existing articles get iframe embed only (~15% added text max, enforced by `verify.js --article`).
+- **Pass state via files** — spec, dev log, HTML, verify.js JSON, phase-tracker.json. Not agent context.
+- **Correctness is non-negotiable** — correct first, pretty second.
+- **Log everything** — learnings after every phase, handoff docs from every agent.
+- **Verify with evidence** — never assume code works. Screenshots, test output, measurements.
+- **Update phase-tracker.json** — after every state change. Survives context compaction.
 
 ---
 
-## 5. Reference Implementations
+## 6. Updating Project Knowledge
 
-All existing COSMOS interactives in `experimental/` can be used as templates:
+| What | When | Where | Who updates |
+|------|------|-------|-------------|
+| Phase tracker | Every dispatch/completion | `.planning/phase-tracker.json` | Orchestrator |
+| Domain patterns | New technique proven/rejected | `domains/*.md` | Orchestrator |
+| Pipeline rules | Process improvement | `pipelines/*.md` | Orchestrator |
+| Project-wide rules | Cross-cutting pattern | `LEARNINGS.md` | Orchestrator |
+| Per-app history | After each build | `.planning/apps/[topic].md` | Coder / Orchestrator |
+| Style guides | Visual/voice technique validated | `INTERACTIVE-STYLE-GUIDE.md` / `COSMOS-STYLE-GUIDE.md` | Orchestrator |
 
-### Simple tier (textured sphere + atmosphere + controls)
-- `mercury-interactive.html` — bare rocky planet, simplest template
-- `earth-interactive.html` — custom day/night shader, cloud layer, city lights
-- `saturn-interactive.html` — ring system (RingGeometry + alpha)
+Learnings from agents arrive in completion reports ("Notes for CEO" for complex work). The orchestrator's job is to route them to the correct file in the correct layer.
 
-### Complex tier (physics simulations)
-- `gravitational-waves-interactive.html` — GLSL mesh, WebAudio, spectrogram (canonical physics sim template)
-- `pulsar-interactive.html` — dipole field lines, beam cones, pulse profile, audio
+---
+
+## 7. Reference Implementations
+
+All existing interactives in `dev/` serve as templates:
+
+### Simple tier
+- `mercury-interactive.html` — bare rocky planet
+- `earth-interactive.html` — day/night shader, clouds, city lights
+- `saturn-interactive.html` — ring system
+
+### Complex tier
+- `gravitational-waves-interactive.html` — canonical physics sim template
+- `pulsar-interactive.html` — dipole fields, beam cones, pulse profile
 - `binary-star-interactive.html` — Kepler orbits, RV curves, eclipse light curve
-- `rotation-curve-interactive.html` — galaxy particles, DM slider, component decomposition
-- `satellites-interactive.html` — real catalog data, 14K+ orbits, glTF model
+- `rotation-curve-interactive.html` — galaxy particles, DM slider, decomposition
+- `satellites-interactive.html` — real catalog, 14K+ orbits, glTF model
 - `asteroid-interactive.html` — Kepler solver, Kirkwood gaps, Trojans
 
-### External references
-- Black hole lensing: `github.com/nilsvu/black-holes-playground`
-- GW volume rendering: `github.com/nilsvu/gwpv`
-- NASA Eyes: `eyes.nasa.gov`
-
 ---
 
-## 6. Infrastructure
+## 8. Infrastructure
 
 ### Local server
 ```bash
@@ -153,40 +188,10 @@ cd /Users/ivo/Documents/Astro/SWIN/SAO/cosmos && python3 -m http.server 8765
 
 ### Automated verification
 ```bash
-# Interactive mode (bloom, particles, spacebar, controls, screenshots):
-node .agents/verify.js <url> --screenshots /tmp [--checks '{"toggle":"#cb-toggle"}']
+# Interactive:
+node .agents/code/verify.js <url> --screenshots /tmp [--checks '{"toggle":"#cb-toggle"}']
 
-# Article mode (iframe, text preservation, lexicon, grammar):
-node .agents/verify.js <url> --article --original articles/[topic].html --screenshots /tmp
+# Article:
+node .agents/code/verify.js <url> --article --original articles/[topic].html --screenshots /tmp
 ```
-Requires Puppeteer in `/tmp/node_modules/` (`cd /tmp && npm install puppeteer`).
-Must run **headed** (`headless: false`) — WebGL requires GPU.
-
-### Branches
-- `main` — production (15 apps)
-- `dev` — active development (remaining 6 physics sim apps)
-
----
-
-## 7. Team-Specific Plans
-
-### SAO Interactive Apps Team
-**Goal:** Build the Top 10 interactive visualizations from `.planning/INTERACTIVE-DEMOS.md`.
-
-**Read:** `sao-orchestrator.md` for full phase-tracking protocol.
-
-**Pipeline per app:**
-```
-Phase 1: Dispatch researcher → .planning/apps/[topic]-spec.md (science + visual competition survey + build plan)
-Phase 2: Dispatch writer (reads spec) → add iframe to article → verifier checks
-Phase 3: Dispatch coder (reads spec) → dispatch verifier → loop until pass
-Phase 4: Log learnings, update agent docs, commit
-```
-
-**Current state:** 15 apps on `main` (8 planets + GW + sun + satellites + asteroids + pulsar + binary star + rotation curve). 6 remaining from Top 10: Black Hole, Density Wave, Roche Lobe, HR Diagram, CMB, Large-Scale Structure (all Hard/Hardest tier). See PROJECT-STATUS.md.
-
-### *(Future: Content Team)*
-*Goal: Substantive article text updates, new articles, fact-checking.*
-
-### *(Future: Visual Design Team)*
-*Goal: Cross-app visual consistency, landing pages, embed-demo coordination.*
+Requires Puppeteer in `/tmp/node_modules/`. Must run **headed** (`headless: false`).

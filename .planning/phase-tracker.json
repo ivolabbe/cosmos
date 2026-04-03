@@ -1,0 +1,60 @@
+{
+  "pipeline": "interactive-app",
+  "updated": "2026-04-03T00:00:00Z",
+  "items": {
+    "black-hole": {
+      "phase": 0,
+      "status": "pending",
+      "iteration": 0,
+      "checkpoint": null,
+      "model": "opus",
+      "tier": "hard",
+      "notes": "Schwarzschild lensing, GLSL fragment shader"
+    },
+    "density-wave": {
+      "phase": 0,
+      "status": "pending",
+      "iteration": 0,
+      "checkpoint": null,
+      "model": "sonnet",
+      "tier": "hard",
+      "notes": "Pattern speed + differential rotation"
+    },
+    "roche-lobe": {
+      "phase": 0,
+      "status": "pending",
+      "iteration": 0,
+      "checkpoint": null,
+      "model": "sonnet",
+      "tier": "hard",
+      "notes": "Marching cubes, Roche potential"
+    },
+    "hr-diagram": {
+      "phase": 0,
+      "status": "pending",
+      "iteration": 0,
+      "checkpoint": null,
+      "model": "opus",
+      "tier": "hardest",
+      "notes": "Pure Canvas 2D, evolutionary tracks"
+    },
+    "cmb": {
+      "phase": 0,
+      "status": "pending",
+      "iteration": 0,
+      "checkpoint": null,
+      "model": "opus",
+      "tier": "hardest",
+      "notes": "Pre-computed CAMB grid, sphere texture"
+    },
+    "large-scale-structure": {
+      "phase": 0,
+      "status": "pending",
+      "iteration": 0,
+      "checkpoint": null,
+      "model": "opus",
+      "tier": "hardest",
+      "notes": "Zel'dovich approximation, 50K particles"
+    }
+  }
+}
