@@ -104,27 +104,56 @@ If report is incomplete → reject the REPORT (not the artifact) and re-dispatch
 
 **Key principle:** the orchestrator never solves the problem itself. It reframes and re-dispatches.
 
-## Knowledge Management
+## Knowledge Management (mandatory — not optional cleanup)
 
-After each work item completes (pass OR fail):
+The orchestrator's most important job after dispatching is **feeding learnings back into the system**. Without this, agents repeat the same mistakes across cycles. The pipeline's "Done" phase defines the detailed procedure; this section defines the principles.
 
-### 1. Collect agent notes
-Every agent's completion report contains findings. Read them.
+### Why this matters
 
-### 2. Distill & route learnings
+Every bugfix, every verifier rejection, every "Notes for CEO" entry represents a mistake that cost context and time. If that learning stays in a completion report that no future agent reads, the cost was wasted. The orchestrator's job is to ensure **no agent hits the same problem twice**.
 
-| Learning type | Route to |
-|---------------|----------|
-| Domain pattern (works/doesn't) | Relevant domain file |
-| Role behavior improvement | Role definition |
-| Pipeline process improvement | Pipeline definition |
-| Project-wide rule | LEARNINGS.md |
-| Per-item history | Item's dev log |
+### The feedback loop
 
-### 3. Ensure coherence
-- Do new outputs follow the same conventions as existing ones?
-- Are agent instructions still accurate after this round?
-- Does the style guide still reflect what we're building?
+```
+Agent hits problem → fixes it → reports in completion → orchestrator reads it
+    ↓
+Orchestrator diffs against domain/role files
+    ↓
+Already captured? → skip
+New pattern? → append to correct file
+Contradicts existing? → update existing entry
+Role behavior issue? → tighten the role (only if pattern repeats across 2+ items)
+    ↓
+Commit knowledge updates separately from artifact commits
+```
+
+### Routing table
+
+| Learning type | Route to | Example |
+|---------------|----------|---------|
+| Technical pattern (works/fails) | Domain file | "Line2 transparency = artifacts" → threejs domain |
+| Source/reference quality | Research domain | "NAAP is best educational reference" |
+| Spec template gap | Research domain | "Must include test values" |
+| Verification gap | Verification domain | "verify.js misses X" |
+| Infrastructure change | Infrastructure domain | "New asset path" |
+| Pipeline process improvement | Pipeline definition | "Spec review gate saved a cycle" |
+| Role behavior issue (repeated) | Role definition | "Coder keeps self-verifying" |
+| Project-wide rule | LEARNINGS.md | "Physics correctness first" |
+| Per-item history | Item dev log | "Black hole: ray marching too slow" |
+
+### When to update roles vs domains
+
+- **Domain files** change frequently — after most pipeline runs. They capture what works and what doesn't in this specific project.
+- **Role files** change rarely — only when a behavioral pattern repeats across 2+ items. A single incident goes to the dev log; a pattern goes to the role.
+- **Pipeline files** change occasionally — when a process improvement is validated (e.g., "the spec review gate caught the issue that would have burned a full coder cycle").
+
+### Quality check for updates
+
+Before writing a learning into any file:
+- Is it specific enough to act on? (values, not vibes)
+- Does it include the *why*? (cause, not just rule)
+- Is it placed in the right section?
+- Does it duplicate or contradict an existing entry?
 
 ## Parallel Execution
 

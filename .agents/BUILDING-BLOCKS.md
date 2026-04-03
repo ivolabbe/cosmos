@@ -252,19 +252,38 @@ Not all agents need the most expensive model:
 
 The pipeline's agent assembly table specifies the model per phase.
 
-### 9. Learnings Accumulation
+### 9. Learnings Feedback Loop
 
-Every agent's completion report feeds back into the system:
+The system improves across cycles because the orchestrator **must** update domain/role/pipeline files after every completed item. This is not optional cleanup — it's an explicit pipeline phase (Phase 4 in interactive-app).
 
-| Learning type | Routes to |
-|---------------|-----------|
-| Domain pattern (works/doesn't) | `domains/*.md` |
-| Role behavior improvement | `roles/*.md` |
-| Pipeline process change | `pipelines/*.md` |
-| Project-wide rule | `LEARNINGS.md` |
-| Per-item history | Item's dev log |
+**The loop:**
+```
+Agent hits problem → fixes it → reports in completion
+    ↓
+Orchestrator reads all completion reports
+    ↓
+Diffs each learning against the relevant file
+    ↓
+Already captured? → skip
+New? → append (with the *why*, not just the rule)
+Contradicts existing? → update existing entry
+    ↓
+Commit knowledge updates separately
+```
 
-The orchestrator's knowledge management job: collect notes, distill, route to the correct file in the correct layer.
+**Routing:**
+
+| Learning type | Routes to | Update frequency |
+|---------------|-----------|-----------------|
+| Technical pattern (works/fails) | `domains/*.md` | After most runs |
+| Spec template gap | Research domain | After most runs |
+| Verification gap | Verification domain | After most runs |
+| Pipeline process change | `pipelines/*.md` | Occasionally |
+| Role behavior issue (2+ occurrences) | `roles/*.md` | Rarely |
+| Project-wide rule | `LEARNINGS.md` | Occasionally |
+| Per-item history | Item's dev log | Every run |
+
+**Key principle:** domain files change often, role files change rarely, pipeline files change occasionally. A single incident goes to the dev log; a repeated pattern goes to the domain; a repeated behavioral issue across multiple items goes to the role.
 
 ### 10. Ad Hoc Dispatch
 

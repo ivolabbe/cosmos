@@ -147,16 +147,93 @@ Verifier dispatches visual-qa sub-agent for visual quality assessment.
 - FAIL → feedback to coder, re-dispatch (max 3 iterations)
 - Still failing after 3 → flag PROBLEM, continue to next app
 
-### Phase 4: Done
+### Phase 4: Done — Knowledge Integration
 
-1. Orchestrator reads all agent completion reports / "Notes for CEO"
-2. Route learnings to correct files:
-   - Domain patterns → relevant `domains/*.md`
-   - Pipeline improvements → this file
-   - Per-app history → `.planning/apps/[topic].md`
-   - Project-wide rules → `LEARNINGS.md`
-3. Update `phase-tracker.json` → status: "done"
-4. Git commit
+Phase 4 is NOT a formality. It is the mechanism by which the system improves. The orchestrator must complete all steps before moving to the next app.
+
+#### Step 4.1: Collect all completion reports
+
+Read every agent's output from this pipeline run:
+- Researcher completion report + handoff document
+- Writer completion report (if Phase 2 ran)
+- Coder completion report + checkpoint notes (if any)
+- Verifier report(s) — including failed iterations
+- Visual QA report(s)
+- "Notes for CEO" sections (Hard/Hardest tier)
+
+**Also collect from the iteration history:**
+- What did the verifier catch that the coder got wrong?
+- Did the coder hit the same bug as a previous app?
+- Did the spec miss something the coder had to figure out?
+- Did the researcher's references turn out to be useful or wrong?
+
+#### Step 4.2: Diff learnings against domain files
+
+For each learning, check whether the relevant domain file already covers it:
+
+```
+For each learning from completion reports:
+  1. Identify which file it belongs to (see routing table below)
+  2. Read that file
+  3. Is this learning already captured? → skip
+  4. Does it contradict something in the file? → update the existing entry
+  5. Is it new? → append to the appropriate section
+```
+
+**Routing table:**
+
+| Learning type | Example | Route to |
+|---------------|---------|----------|
+| Rendering pattern that works/fails | "Line2 with transparency causes artifacts" | `domains/threejs-interactive.md` → Technical Gotchas |
+| Physics implementation pattern | "Bessel functions from Abramowitz & Stegun" | `domains/threejs-interactive.md` → Architecture Patterns, or `domains/astro-research.md` → Common Pitfalls |
+| Source/reference quality | "NAAP tools are best for educational comparison" | `domains/astro-research.md` → Visual Competition Survey |
+| Spec template improvement | "Must include test values for every equation" | `domains/astro-research.md` → Spec Template |
+| Verification gap | "verify.js doesn't catch X, must check manually" | `domains/cosmos-verification.md` → Evidence Ladder |
+| Article/voice pattern | "Bold inline labels, not H2 headings" | `domains/cosmos-articles.md` |
+| Infrastructure change | "New asset path convention" | `domains/cosmos-infrastructure.md` |
+| Pipeline process improvement | "Spec review caught 80% of issues" | `pipelines/interactive-app.md` |
+| Role behavior issue | "Coder kept verifying its own work" | `roles/coder.md` → What You Do NOT Do |
+| Cross-cutting rule | "Physics correctness first, always" | `LEARNINGS.md` |
+| App-specific history | "Black hole: tried ray marching, too slow" | `.planning/apps/[topic].md` |
+
+#### Step 4.3: Propose and apply updates
+
+For each learning that needs to be added or updated:
+
+1. **State the learning** clearly and concisely
+2. **State where it goes** (file path + section)
+3. **Apply the edit** — append to the relevant section, or update the existing entry if it's a correction
+4. **If a domain file change affects agent behavior** (e.g., new mandatory check, new anti-pattern), verify the change is specific enough that an agent reading the file cold would follow it
+
+**Update quality checklist:**
+- [ ] Specific enough to act on? ("bloom 0.35" not "use bloom tastefully")
+- [ ] Includes the *why*? ("because X causes Y" not just "don't do X")
+- [ ] Placed in the right section of the right file?
+- [ ] Doesn't duplicate an existing entry?
+- [ ] Doesn't contradict an existing entry without replacing it?
+
+#### Step 4.4: Check if roles need tightening
+
+Review the iteration history for this app:
+
+| Signal | Possible role update |
+|--------|---------------------|
+| Coder kept self-verifying instead of stopping | Strengthen "What You Do NOT Do" in `roles/coder.md` |
+| Verifier reports were vague / missing evidence | Add specific requirements to `roles/verifier.md` |
+| Researcher's spec missed critical implementation detail | Add to spec self-review checklist in `roles/researcher.md` |
+| Handoff was missing, next agent repeated work | Strengthen handoff requirement in the producing role |
+| Checkpoint was too vague for continuation | Improve checkpoint format in `roles/coder.md` |
+
+Only update roles when a pattern repeats across 2+ apps. A single incident goes to the app's dev log; a pattern goes to the role.
+
+#### Step 4.5: Update state and commit
+
+1. Update `phase-tracker.json` → status: "done"
+2. Git commit with message: `Complete [topic]: [brief outcome]`
+3. If domain/role/pipeline files were updated, commit those separately:
+   `Update domain knowledge from [topic] pipeline run`
+
+This separation keeps artifact commits clean and knowledge commits reviewable.
 
 ## Iteration Mode (refine existing apps)
 
