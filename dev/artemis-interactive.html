@@ -10,90 +10,85 @@
     body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
     canvas { display: block; }
 
-    /* Info panel */
+    /* Telemetry panel — compact, no caption */
     #info {
-      position: absolute; top: 16px; left: 16px;
-      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 18px 24px; max-width: 380px;
-      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(10,10,46,0.85); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; padding: 10px 14px; max-width: 240px;
+      z-index: 10; pointer-events: none;
     }
-    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
-    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
-    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
-    #readouts { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.8; }
-    #readouts .row { display: flex; justify-content: space-between; gap: 12px; }
-    #readouts .label { color: rgba(255,255,255,0.45); }
-    #readouts .value { font-weight: 600; color: #fff; }
+    #readouts { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+    #readouts .row { display: flex; justify-content: space-between; gap: 8px; }
+    #readouts .label { color: rgba(255,255,255,0.4); font-size: 10px; }
+    #readouts .value { font-weight: 600; color: #fff; font-size: 12px; font-variant-numeric: tabular-nums; }
     #phase-badge {
-      display: inline-block; margin-top: 6px; padding: 2px 8px;
-      border-radius: 4px; font-size: 11px; font-weight: 600;
-      background: rgba(68,170,238,0.2); border: 1px solid rgba(68,170,238,0.4);
+      display: inline-block; margin-top: 4px; padding: 2px 7px;
+      border-radius: 3px; font-size: 10px; font-weight: 600;
+      background: rgba(68,170,238,0.15); border: 1px solid rgba(68,170,238,0.3);
       color: #44aaee;
     }
-    body.embedded #info h2,
-    body.embedded #info .desc,
-    body.embedded #info .hint { display: none; }
-    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; }
+    body.embedded #info { max-width: 180px; padding: 6px 10px; top: 6px; left: 6px; font-size: 10px; }
     body.embedded #credit { display: none; }
 
-    /* Controls bar */
+    /* Controls bar — compact row */
     #controls {
-      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-      display: flex; align-items: center; gap: 14px; flex-wrap: nowrap;
-      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px; padding: 10px 20px; z-index: 10;
+      position: absolute; bottom: 10px; left: 10px; right: 10px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+      background: rgba(10,10,46,0.85); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; padding: 7px 12px; z-index: 10;
     }
-    #controls label { font-size: 11px; display: flex; align-items: center; gap: 5px; white-space: nowrap; cursor: pointer; }
+    #controls label { font-size: 10px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
     #controls select {
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-      color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; padding: 3px 6px; border-radius: 3px; font-size: 10px; cursor: pointer;
     }
-    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; width: 13px; height: 13px; }
     #controls input[type="range"] {
-      width: 120px; accent-color: #DC2D27; cursor: pointer;
+      flex: 1; min-width: 80px; max-width: 200px; accent-color: #DC2D27; cursor: pointer;
     }
-    #btn-play {
-      background: rgba(220,45,39,0.15); border: 1px solid rgba(220,45,39,0.4);
-      color: #fff; padding: 5px 12px; border-radius: 4px; font-size: 11px;
+    #btn-play, #btn-now {
+      border: 1px solid rgba(220,45,39,0.4); color: #fff;
+      padding: 4px 10px; border-radius: 3px; font-size: 10px;
       cursor: pointer; font-family: "Open Sans", sans-serif;
     }
+    #btn-play { background: rgba(220,45,39,0.15); }
     #btn-play:hover { background: rgba(220,45,39,0.3); }
-    #met-display { font-size: 11px; color: rgba(255,255,255,0.7); white-space: nowrap; min-width: 100px; }
-    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+    #btn-now { background: rgba(68,170,238,0.15); border-color: rgba(68,170,238,0.4); }
+    #btn-now:hover { background: rgba(68,170,238,0.3); }
+    #met-display { font-size: 10px; color: rgba(255,255,255,0.6); white-space: nowrap; }
+    .sep { width: 1px; height: 14px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
 
-    /* Camera strip */
+    /* Camera strip — horizontal at top-right on mobile */
     #cam-strip {
-      position: absolute; bottom: 16px; right: 16px;
-      display: flex; flex-direction: column; gap: 4px;
-      z-index: 10;
+      position: absolute; top: 10px; right: 10px;
+      display: flex; flex-direction: row; gap: 3px; flex-wrap: wrap; justify-content: flex-end;
+      z-index: 10; max-width: 260px;
     }
     .cam-badge {
-      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 4px; padding: 5px 8px; font-size: 10px; font-weight: 600;
-      color: rgba(255,255,255,0.6); cursor: pointer; text-align: center;
-      min-width: 44px; transition: all 0.15s; position: relative;
-      user-select: none;
+      background: rgba(10,10,46,0.85); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px; padding: 4px 6px; font-size: 9px; font-weight: 600;
+      color: rgba(255,255,255,0.5); cursor: pointer; text-align: center;
+      min-width: 32px; transition: all 0.15s; position: relative; user-select: none;
     }
-    .cam-badge:hover { background: rgba(10,10,46,0.98); color: #fff; border-color: rgba(255,255,255,0.3); }
-    .cam-badge.active { border-color: #DC2D27; color: #fff; background: rgba(30,5,5,0.92); }
+    .cam-badge:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .cam-badge.active { border-color: #DC2D27; color: #fff; background: rgba(30,5,5,0.85); }
     .cam-tooltip {
-      display: none; position: absolute; right: calc(100% + 8px); top: 50%;
-      transform: translateY(-50%); background: rgba(10,10,46,0.98);
-      border: 1px solid rgba(220,45,39,0.4); border-radius: 4px;
-      padding: 4px 8px; font-size: 10px; white-space: nowrap; color: #fff;
-      pointer-events: none;
+      display: none; position: absolute; right: 0; top: calc(100% + 4px);
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.3);
+      border-radius: 3px; padding: 3px 6px; font-size: 9px;
+      white-space: nowrap; color: #fff; pointer-events: none;
     }
     .cam-badge:hover .cam-tooltip { display: block; }
 
-    /* Loading screen */
+    /* Loading */
     #loading {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4);
+      font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.4);
       z-index: 20; pointer-events: none; text-align: center;
     }
     #loading-bar {
-      width: 200px; height: 2px; background: rgba(255,255,255,0.1);
-      border-radius: 1px; margin: 10px auto 0; overflow: hidden;
+      width: 160px; height: 2px; background: rgba(255,255,255,0.1);
+      border-radius: 1px; margin: 8px auto 0; overflow: hidden;
     }
     #loading-bar-fill {
       height: 100%; width: 0%; background: #DC2D27;
@@ -106,29 +101,31 @@
       color: rgba(255,255,255,0.85); text-shadow: 0 0 6px #000, 0 0 2px #000;
       pointer-events: none; white-space: nowrap;
     }
-    .label-orion {
-      font-size: 10px; color: #44aaee;
-      text-shadow: 0 0 6px #000, 0 0 2px #000;
-    }
+    .label-orion { font-size: 10px; color: #44aaee; text-shadow: 0 0 6px #000, 0 0 2px #000; }
 
-    /* Credit */
+    /* Credit — minimal */
     #credit {
-      position: absolute; bottom: 58px; left: 50%; transform: translateX(-50%);
-      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10;
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 9px; color: rgba(255,255,255,0.15); z-index: 10;
       pointer-events: none; white-space: nowrap;
     }
-    #credit a { color: rgba(255,255,255,0.35); }
+    #credit a { color: rgba(255,255,255,0.25); }
 
-    /* Now button */
-    #btn-now {
-      background: rgba(68,170,238,0.15); border: 1px solid rgba(68,170,238,0.4);
-      color: #fff; padding: 5px 12px; border-radius: 4px; font-size: 11px;
-      cursor: pointer; font-family: "Open Sans", sans-serif;
-    }
-    #btn-now:hover { background: rgba(68,170,238,0.3); }
-
+    /* Mobile: stack controls, shrink everything */
     @media (max-width: 700px) {
-      #controls { flex-wrap: wrap; justify-content: center; }
+      #info { max-width: 180px; padding: 8px 10px; top: 6px; left: 6px; }
+      #readouts { font-size: 11px; line-height: 1.5; }
+      #readouts .label { font-size: 9px; }
+      #readouts .value { font-size: 11px; }
+      #phase-badge { font-size: 9px; }
+      #controls { gap: 6px; padding: 6px 8px; bottom: 6px; left: 6px; right: 6px; }
+      #controls label { font-size: 9px; }
+      #controls select { font-size: 9px; padding: 2px 4px; }
+      #btn-play, #btn-now { padding: 3px 8px; font-size: 9px; }
+      #met-display { font-size: 9px; }
+      #cam-strip { top: 6px; right: 6px; gap: 2px; max-width: 200px; }
+      .cam-badge { padding: 3px 5px; font-size: 8px; min-width: 28px; }
+      #credit { font-size: 8px; bottom: 46px; }
     }
   </style>
 </head>
@@ -139,17 +136,13 @@
   </div>
 
   <div id="info">
-    <h2>Artemis II</h2>
-    <p class="desc">The first crewed lunar flyby since Apollo 17 &mdash; four astronauts aboard Orion on a free-return trajectory around the Moon.</p>
     <div id="readouts">
       <div class="row"><span class="label">MET</span><span class="value" id="r-met">T+0d 0h 0m</span></div>
-      <div class="row"><span class="label">Earth dist</span><span class="value" id="r-earth">— km</span></div>
-      <div class="row"><span class="label">Moon dist</span><span class="value" id="r-moon">— km</span></div>
-      <div class="row"><span class="label">Velocity</span><span class="value" id="r-vel">— km/s</span></div>
-      <div class="row"><span class="label">Camera</span><span class="value" id="r-cam">Mission Overview</span></div>
+      <div class="row"><span class="label">Earth</span><span class="value" id="r-earth">— km</span></div>
+      <div class="row"><span class="label">Moon</span><span class="value" id="r-moon">— km</span></div>
+      <div class="row"><span class="label">Vel</span><span class="value" id="r-vel">— km/s</span></div>
       <div><span id="phase-badge">Earth Orbit</span></div>
     </div>
-    <p class="hint">Keys 1–8: camera presets &middot; &#x2190;/&#x2192;: cycle &middot; N: now &middot; Space: play/pause</p>
   </div>
 
   <div id="controls">
@@ -799,6 +792,16 @@
     }
   }
 
+  // ---- Phase → camera preset mapping (needed by goToNow) ----
+  const PHASE_PRESET = {
+    'Earth Orbit':    1,
+    'TLI Burn':       1,
+    'Outbound Coast': 2,
+    'Lunar Flyby':    4,
+    'Return Coast':   6,
+    'Reentry':        0,
+  };
+
   // ---- Load trajectory data ----
   async function loadTrajectoryData() {
     try {
@@ -950,7 +953,8 @@
     document.querySelectorAll('.cam-badge').forEach((el, i) => {
       el.classList.toggle('active', i === idx);
     });
-    document.getElementById('r-cam').textContent = CAMERA_PRESETS[idx].name;
+    const camEl = document.getElementById('r-cam');
+    if (camEl) camEl.textContent = CAMERA_PRESETS[idx].name;
 
     const preset = CAMERA_PRESETS[idx];
     const toPos = getPresetCamPos(preset);
@@ -1085,16 +1089,6 @@
   const timeSlider = document.getElementById('time-slider');
   const cbLabels   = document.getElementById('cb-labels');
   const cbOrbits   = document.getElementById('cb-orbits');
-
-  // Phase → best camera preset index
-  const PHASE_PRESET = {
-    'Earth Orbit':    1, // Earth Departure
-    'TLI Burn':       1,
-    'Outbound Coast': 2, // Deep Space Coast
-    'Lunar Flyby':    4, // Lunar Flyby
-    'Return Coast':   6, // Return Journey
-    'Reentry':        0, // Mission Overview
-  };
 
   function goToNow() {
     const nowMs = Date.now();
