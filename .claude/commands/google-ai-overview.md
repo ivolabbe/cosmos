@@ -41,7 +41,12 @@ playwright-cli close
 
 ## Avoiding CAPTCHAs
 
-- **Always use `--persistent`** — saves cookies so Google recognises the browser across sessions
+- **Try `attach --extension` first** — if the user has Chrome open with the Playwright extension, attach to their existing browser session instead of opening a new one. This uses their real cookies/login and avoids CAPTCHAs entirely:
+  ```bash
+  playwright-cli attach --extension
+  playwright-cli goto "https://www.google.com/search?q={topic}+astronomy"
+  ```
+- **Always use `--persistent`** (if not attaching) — saves cookies so Google recognises the browser across sessions
 - **Keep the browser open** between queries — use `goto` instead of `close` + `open` for sequential searches
 - **Don't rapid-fire searches** — if doing multiple queries, a brief pause between them helps
 - **Stay logged in to Google** — a logged-in persistent profile gets far fewer CAPTCHAs
