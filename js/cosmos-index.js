@@ -20,6 +20,11 @@ var COSMOS_INDEX = [
     "letter": "A"
   },
   {
+    "slug": "accelerating-universe",
+    "title": "Accelerating Universe",
+    "letter": "A"
+  },
+  {
     "slug": "active-galactic-nuclei",
     "title": "Active Galactic Nuclei",
     "letter": "A"
@@ -117,6 +122,11 @@ var COSMOS_INDEX = [
   {
     "slug": "antarctic-circle",
     "title": "Antarctic Circle",
+    "letter": "A"
+  },
+  {
+    "slug": "ap-and-bp-stars",
+    "title": "Ap and Bp Stars",
     "letter": "A"
   },
   {
@@ -275,6 +285,11 @@ var COSMOS_INDEX = [
     "letter": "A"
   },
   {
+    "slug": "b-type-star",
+    "title": "B-type Star",
+    "letter": "B"
+  },
+  {
     "slug": "baade%27s-window",
     "title": "Baade's Window",
     "letter": "B"
@@ -287,6 +302,11 @@ var COSMOS_INDEX = [
   {
     "slug": "bandpass",
     "title": "Bandpass",
+    "letter": "B"
+  },
+  {
+    "slug": "barium-stars",
+    "title": "Barium Stars",
     "letter": "B"
   },
   {
@@ -355,6 +375,11 @@ var COSMOS_INDEX = [
     "letter": "B"
   },
   {
+    "slug": "blackbody",
+    "title": "Blackbody",
+    "letter": "B"
+  },
+  {
     "slug": "blackbody-radiation",
     "title": "Blackbody Radiation",
     "letter": "B"
@@ -377,6 +402,11 @@ var COSMOS_INDEX = [
   {
     "slug": "bolometric-magnitude",
     "title": "Bolometric Magnitude",
+    "letter": "B"
+  },
+  {
+    "slug": "boson",
+    "title": "Boson",
     "letter": "B"
   },
   {
@@ -415,8 +445,23 @@ var COSMOS_INDEX = [
     "letter": "C"
   },
   {
+    "slug": "canals-of-mars",
+    "title": "Canals of Mars",
+    "letter": "C"
+  },
+  {
     "slug": "canis-major-dwarf",
     "title": "Canis Major Dwarf",
+    "letter": "C"
+  },
+  {
+    "slug": "capture",
+    "title": "Capture",
+    "letter": "C"
+  },
+  {
+    "slug": "carbon-stars",
+    "title": "Carbon Stars",
     "letter": "C"
   },
   {
@@ -475,6 +520,11 @@ var COSMOS_INDEX = [
     "letter": "C"
   },
   {
+    "slug": "cephei-stars",
+    "title": "Cephei Stars",
+    "letter": "C"
+  },
+  {
     "slug": "cepheid-variable-stars",
     "title": "Cepheid Variable Stars",
     "letter": "C"
@@ -512,6 +562,11 @@ var COSMOS_INDEX = [
   {
     "slug": "chromosphere",
     "title": "Chromosphere",
+    "letter": "C"
+  },
+  {
+    "slug": "cislunar",
+    "title": "Cislunar",
     "letter": "C"
   },
   {
@@ -580,6 +635,11 @@ var COSMOS_INDEX = [
     "letter": "C"
   },
   {
+    "slug": "communications-satellite",
+    "title": "Communications Satellite",
+    "letter": "C"
+  },
+  {
     "slug": "comoving-distance",
     "title": "Comoving distance",
     "letter": "C"
@@ -612,6 +672,11 @@ var COSMOS_INDEX = [
   {
     "slug": "constructive-interference",
     "title": "Constructive Interference",
+    "letter": "C"
+  },
+  {
+    "slug": "coordinate-singularity",
+    "title": "Coordinate Singularity",
     "letter": "C"
   },
   {
@@ -862,6 +927,31 @@ var COSMOS_INDEX = [
   {
     "slug": "early-type-galaxies",
     "title": "Early-type Galaxies",
+    "letter": "E"
+  },
+  {
+    "slug": "earth-impact-hazard",
+    "title": "Earth Impact Hazard",
+    "letter": "E"
+  },
+  {
+    "slug": "earth-satellite",
+    "title": "Earth Satellite",
+    "letter": "E"
+  },
+  {
+    "slug": "earth-crossing-asteroid",
+    "title": "Earth-Crossing Asteroid",
+    "letter": "E"
+  },
+  {
+    "slug": "earthshine",
+    "title": "Earthshine",
+    "letter": "E"
+  },
+  {
+    "slug": "eclipsing-variable-star",
+    "title": "Eclipsing Variable Star",
     "letter": "E"
   },
   {
@@ -1535,6 +1625,11 @@ var COSMOS_INDEX = [
     "letter": "I"
   },
   {
+    "slug": "isobars",
+    "title": "Isobars",
+    "letter": "I"
+  },
+  {
     "slug": "isolated-galaxies",
     "title": "Isolated Galaxies",
     "letter": "I"
@@ -1555,6 +1650,11 @@ var COSMOS_INDEX = [
     "letter": "J"
   },
   {
+    "slug": "jitter",
+    "title": "Jitter",
+    "letter": "J"
+  },
+  {
     "slug": "jovian-planet",
     "title": "Jovian Planet",
     "letter": "J"
@@ -1565,9 +1665,24 @@ var COSMOS_INDEX = [
     "letter": "J"
   },
   {
+    "slug": "juno",
+    "title": "Juno (spacecraft)",
+    "letter": "J"
+  },
+  {
     "slug": "jupiter-family-comets",
     "title": "Jupiter-family Comets",
     "letter": "J"
+  },
+  {
+    "slug": "k-capture",
+    "title": "K Capture",
+    "letter": "K"
+  },
+  {
+    "slug": "k-type-star",
+    "title": "K-type Star",
+    "letter": "K"
   },
   {
     "slug": "kelvin",
@@ -1577,6 +1692,11 @@ var COSMOS_INDEX = [
   {
     "slug": "keplerian-disk",
     "title": "Keplerian Disk",
+    "letter": "K"
+  },
+  {
+    "slug": "kerr-black-hole",
+    "title": "Kerr black hole",
     "letter": "K"
   },
   {
@@ -1642,6 +1762,11 @@ var COSMOS_INDEX = [
   {
     "slug": "lepton",
     "title": "Lepton",
+    "letter": "L"
+  },
+  {
+    "slug": "lepus",
+    "title": "Lepus",
     "letter": "L"
   },
   {
@@ -1735,6 +1860,21 @@ var COSMOS_INDEX = [
     "letter": "L"
   },
   {
+    "slug": "lunar-calendar",
+    "title": "Lunar Calendar",
+    "letter": "L"
+  },
+  {
+    "slug": "lunar-eclipse",
+    "title": "Lunar Eclipse",
+    "letter": "L"
+  },
+  {
+    "slug": "m-type-star",
+    "title": "M-type Star",
+    "letter": "M"
+  },
+  {
     "slug": "mach%27s-principle",
     "title": "Mach's Principle",
     "letter": "M"
@@ -1770,8 +1910,28 @@ var COSMOS_INDEX = [
     "letter": "M"
   },
   {
+    "slug": "main-sequence-of-stars",
+    "title": "Main Sequence of Stars",
+    "letter": "M"
+  },
+  {
+    "slug": "major-axis",
+    "title": "Major Axis",
+    "letter": "M"
+  },
+  {
+    "slug": "mare",
+    "title": "Mare",
+    "letter": "M"
+  },
+  {
     "slug": "mars",
     "title": "Mars",
+    "letter": "M"
+  },
+  {
+    "slug": "mascon",
+    "title": "Mascon",
     "letter": "M"
   },
   {
@@ -1782,6 +1942,11 @@ var COSMOS_INDEX = [
   {
     "slug": "mass",
     "title": "Mass",
+    "letter": "M"
+  },
+  {
+    "slug": "me-stars",
+    "title": "Me Stars",
     "letter": "M"
   },
   {
@@ -1807,6 +1972,16 @@ var COSMOS_INDEX = [
   {
     "slug": "merlin",
     "title": "MERLIN",
+    "letter": "M"
+  },
+  {
+    "slug": "metal-poor-stars",
+    "title": "Metal Poor Stars",
+    "letter": "M"
+  },
+  {
+    "slug": "metal-rich-stars",
+    "title": "Metal Rich Stars",
     "letter": "M"
   },
   {
@@ -1845,6 +2020,11 @@ var COSMOS_INDEX = [
     "letter": "M"
   },
   {
+    "slug": "midnight-sun",
+    "title": "midnight Sun",
+    "letter": "M"
+  },
+  {
     "slug": "milky-way",
     "title": "Milky Way",
     "letter": "M"
@@ -1857,6 +2037,11 @@ var COSMOS_INDEX = [
   {
     "slug": "mirror",
     "title": "Mirror",
+    "letter": "M"
+  },
+  {
+    "slug": "mizar",
+    "title": "Mizar",
     "letter": "M"
   },
   {
@@ -1915,8 +2100,23 @@ var COSMOS_INDEX = [
     "letter": "M"
   },
   {
+    "slug": "multimessenger-astronomy",
+    "title": "multimessenger astronomy",
+    "letter": "M"
+  },
+  {
+    "slug": "n-star",
+    "title": "N Star",
+    "letter": "N"
+  },
+  {
     "slug": "nadir",
     "title": "Nadir",
+    "letter": "N"
+  },
+  {
+    "slug": "names-of-stars",
+    "title": "Names of Stars",
     "letter": "N"
   },
   {
@@ -2572,6 +2772,11 @@ var COSMOS_INDEX = [
   {
     "slug": "solar-mass",
     "title": "Solar Mass",
+    "letter": "S"
+  },
+  {
+    "slug": "solar-system",
+    "title": "Solar System",
     "letter": "S"
   },
   {

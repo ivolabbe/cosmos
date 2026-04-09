@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jitter | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Top bar (SAO banner injected after this by sao-cta.js) -->
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=J">J</a></li>
+        <li><span class="current">Jitter</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container">
+        <header class="article__header">
+          <h1 class="article__title">Jitter</h1>
+        </header>
+        <div class="article__body">
+
+<p>Jitter is the rapid, irregular variation in a <a class="lexicon-term" href="telescope.html">telescope's</a> pointing direction &mdash; a stochastic angular wobble of the line of sight around its intended target on timescales of milliseconds to seconds. In ground-based astronomy, jitter arises primarily from atmospheric turbulence and mechanical vibrations; in space <a class="lexicon-term" href="telescope.html">telescopes</a>, from reaction wheels, cryo-cooler mechanisms, and other onboard sources. Jitter broadens the point spread function (PSF), degrading angular <a class="lexicon-term" href="resolution.html">resolution</a> and photometric precision, and is measured in arcseconds on the ground or milliarcseconds in space. In <a class="lexicon-term" href="spectroscopy.html">stellar spectroscopy</a>, 'radial velocity jitter' refers to a distinct but related concept: astrophysical noise from stellar surface activity that contaminates planet-detection signals.</p>
+
+<div class="imageRight" style="width:350px;">
+  <img src="../images/jitter-adaptive-optics.gif" width="350" alt="Animated comparison showing a star image blurred by atmospheric jitter (left) and sharpened by adaptive optics correction (right)" />
+  <div class="caption">
+    Animated comparison of a star imaged without adaptive optics (left, blurred by atmospheric jitter) and with adaptive optics correction (right, sharp). A fast steering mirror in the adaptive optics system nulls the dominant low-order pointing jitter, recovering close to the diffraction-limited <a class="lexicon-term" href="airy-disk.html">PSF</a>.<br/>
+    <a href="https://commons.wikimedia.org/wiki/File:Adaptive_optics.gif">Jacopo Bertolotti / Wikimedia Commons (CC0 1.0)</a>
+  </div>
+</div>
+
+<h2>Causes</h2>
+
+<p>At ground-based observatories, the dominant cause of jitter is Earth's turbulent atmosphere. Temperature variations in atmospheric layers create refractive-index fluctuations that deflect and distort incoming wavefronts, producing rapid image motion with a characteristic timescale set by the atmospheric coherence time &tau;<sub>0</sub>, typically 10&ndash;30&nbsp;ms under good seeing conditions. On large <a class="lexicon-term" href="telescope.html">telescopes</a>, this image motion exceeds the diffraction limit by orders of magnitude without correction. Mechanical vibrations from building fans, wind loading, drive motors, mirror support actuators, and instrument cooling systems all inject additional vibrational energy into the telescope structure. On space <a class="lexicon-term" href="telescope.html">telescopes</a>, reaction wheel imbalances, cryo-cooler mechanisms, and shutter actuators are the dominant jitter sources, typically producing line-of-sight jitter in the range 0.1&ndash;10&nbsp;milliarcseconds for well-engineered systems. Telescope drives introduce periodic and random tracking errors as a further ground-based source; residual uncorrected fast motion on sub-guiding timescales constitutes another component of the overall jitter budget.</p>
+
+<h2>Impact on Image Quality</h2>
+
+<p>Jitter directly broadens the PSF. When the jitter amplitude exceeds the diffraction limit (&lambda;/<em>D</em> for aperture <em>D</em>), angular <a class="lexicon-term" href="resolution.html">resolution</a> is jitter-limited rather than diffraction-limited. For photometry, PSF broadening reduces peak signal-to-noise on point sources and increases background contribution within any aperture. For astrometry, jitter randomises centroid estimates. For <a class="lexicon-term" href="spectroscopy.html">spectroscopy</a>, if the PSF wanders across a narrow slit, effective <a class="lexicon-term" href="resolution.html">resolution</a> and throughput fluctuate. Jitter is characterised as a root-mean-square (RMS) angular displacement; a standard metric for space <a class="lexicon-term" href="telescope.html">telescopes</a> is the Relative Pointing Error (RPE), the instantaneous deviation relative to the mean over a short reference window.</p>
+
+<h2>Mitigation</h2>
+
+<p>At ground-based observatories, image-motion correction is the first stage of every adaptive optics system. A fast steering mirror tilts at hundreds to thousands of hertz to null the measured image motion, removing the dominant low-order jitter component in a closed feedback loop using a guide star. Vibration sources are further isolated mechanically &mdash; reaction wheels mounted on vibration isolators, cryo-coolers with passive damping stages &mdash; and active control systems use accelerometers to cancel residual structural vibrations. Space <a class="lexicon-term" href="telescope.html">telescopes</a> use Fine Guidance Sensors (FGS) that lock onto guide stars and send corrections to the attitude control system. JWST's FGS operates at approximately 64&nbsp;Hz, achieving a line-of-sight jitter of approximately 1&nbsp;milliarcsecond (1&sigma; per axis), well within its requirement of less than 3.7&nbsp;milliarcseconds. The <a class="lexicon-term" href="hubble-space-telescope.html">Hubble Space Telescope</a> achieves 2&ndash;5&nbsp;milliarcsecond RMS tracking accuracy per orbit.</p>
+
+<h2>Radial Velocity Jitter</h2>
+
+<p>In a distinct usage, astronomers describe 'radial velocity jitter' as astrophysical noise in Doppler planet-search data. Stellar surface phenomena &mdash; rotating starspots, solar-like oscillations, granulation, and supergranulation &mdash; cause apparent Doppler shifts not caused by planetary companions. The principal mechanisms are the flux contrast of dark starspots crossing the visible hemisphere, which distorts spectral line profiles, and the suppression of convective blueshift in active regions. Typical RV jitter amplitudes range from approximately 0.5&ndash;1&nbsp;m/s for a quiet solar-type star averaged over one hour, to 5&ndash;10&nbsp;m/s near an active-region maximum. Mitigation strategies include simultaneous photometric monitoring, activity indicator filtering, wavelength-differential analysis (since spot-induced jitter is wavelength-dependent while planetary Doppler shifts are not), and Gaussian Process regression to model the correlated jitter noise alongside the orbital signal.</p>
+
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- JS-injected sections appear here in this order:
+       1. cosmos-explore.js  → A-Z explorer with cross-linked articles
+       2. latest-research.js → ADS research papers (if data exists)
+       3. sao-cta.js         → "Interested in astronomy?" CTA
+       (footer follows) -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>

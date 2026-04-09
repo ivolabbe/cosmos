@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordinate Singularity | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Top bar (SAO banner injected after this by sao-cta.js) -->
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=C">C</a></li>
+        <li><span class="current">Coordinate Singularity</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container">
+        <header class="article__header">
+          <h1 class="article__title">Coordinate Singularity</h1>
+        </header>
+        <div class="article__body">
+
+<p>A coordinate singularity is an apparent infinity or discontinuity that arises in one coordinate system but disappears entirely when a different coordinate system is chosen, revealing it as a mathematical artifact of the chosen description rather than a physical feature of spacetime. Unlike a true physical singularity, a coordinate singularity carries no physical meaning and can always be removed by an appropriate change of coordinates.</p>
+
+<p>The clearest everyday example is the North Pole in a latitude&ndash;longitude coordinate system. As an object moves due north along the Greenwich meridian, it reaches the North Pole at latitude 90&deg;&nbsp;N. At exactly that point, longitude becomes undefined &mdash; the coordinate &phi; can take any value from 0&deg; to 360&deg; simultaneously. This discontinuity is purely an artifact of the coordinate system; the surface of the Earth is perfectly smooth at the pole. The same behaviour appears in spherical polar coordinates (&rho;,&nbsp;&theta;,&nbsp;&phi;) at both poles, where &theta;&nbsp;=&nbsp;0 and &theta;&nbsp;=&nbsp;&pi;.</p>
+
+<div class="imageRight" style="width:350px;">
+  <img src="../images/coordinate-singularity-kruskal-diagram.svg" width="350" alt="Kruskal–Szekeres diagram of the maximally extended Schwarzschild spacetime with light cones and an infalling worldline" />
+  <div class="caption">
+    Kruskal&ndash;Szekeres diagram of the maximally extended Schwarzschild spacetime, showing the Schwarzschild coordinate chart overlaid with light cones and the worldline of an infalling particle. The event horizon (r&nbsp;=&nbsp;r<sub>s</sub>) appears as a regular boundary in these coordinates, demonstrating that the apparent singularity in Schwarzschild coordinates is a coordinate artifact. The true physical singularity at r&nbsp;=&nbsp;0 appears as the hyperbolic boundary at the top.<br/>
+    <a href="https://upload.wikimedia.org/wikipedia/commons/1/1c/Kruskal_diagram_of_Schwarzschild_chart.svg">Dr Greg / CC BY-SA 3.0</a>
+  </div>
+</div>
+
+<h2>The Kretschmann Scalar Test</h2>
+
+<p>The critical test for whether a singularity is a coordinate artifact or a genuine physical singularity is to compute diffeomorphism-invariant quantities &mdash; quantities that have the same value in every coordinate system. The most commonly used such scalar in <a class="lexicon-term" href="general-relativity.html">general relativity</a> is the <strong>Kretschmann scalar</strong>, K&nbsp;=&nbsp;R<sup>&alpha;&beta;&gamma;&delta;</sup> R<sub>&alpha;&beta;&gamma;&delta;</sub>, where R<sup>&alpha;&beta;&gamma;&delta;</sup> is the Riemann curvature tensor. If the Kretschmann scalar remains finite at a problematic point, the singularity is a coordinate artifact. If it diverges, a true physical singularity exists at that location.</p>
+
+<h2>The Schwarzschild Metric: Two Singularities of Different Kinds</h2>
+
+<p>The most famous coordinate singularity in physics appears in the Schwarzschild metric, the exact solution to Einstein's field equations for a non-rotating spherically symmetric mass, found by Karl Schwarzschild in 1916. In Schwarzschild coordinates, the metric has apparent infinities at two locations: at r&nbsp;=&nbsp;r<sub>s</sub>&nbsp;=&nbsp;2GM/c<sup>2</sup> (the <a class="lexicon-term" href="schwarzschild-radius.html">Schwarzschild radius</a>) and at r&nbsp;=&nbsp;0.</p>
+
+<p>These two locations are radically different in nature. At r&nbsp;=&nbsp;r<sub>s</sub>, the Kretschmann scalar evaluates to K&nbsp;=&nbsp;12/r<sub>s</sub><sup>4</sup> &mdash; a perfectly finite number. The apparent infinity in the metric is purely a coordinate artifact; observers can cross the <a class="lexicon-term" href="event-horizon.html">event horizon</a> freely in finite proper time. At r&nbsp;=&nbsp;0, by contrast, the Kretschmann scalar diverges to infinity: no coordinate transformation can remove this divergence. This is a genuine physical singularity where <a class="lexicon-term" href="spacetime.html">spacetime</a> curvature becomes infinite and <a class="lexicon-term" href="general-relativity.html">general relativity</a> breaks down.</p>
+
+<p>The confusion between these two singularities persisted for decades. Arthur Eddington found a coordinate transformation regular at r&nbsp;=&nbsp;r<sub>s</sub> as early as 1924, but did not recognise its physical significance. In 1932, Georges Lema&icirc;tre was the first to recognise explicitly that the singularity at r&nbsp;=&nbsp;r<sub>s</sub> was a coordinate artifact. David Finkelstein articulated the full physical meaning in 1958, demonstrating that the <a class="lexicon-term" href="event-horizon.html">event horizon</a> is a one-way null surface that infalling matter crosses in finite proper time &mdash; these are now known as Eddington&ndash;Finkelstein coordinates.</p>
+
+<h2>Kruskal&ndash;Szekeres Coordinates</h2>
+
+<p>The most complete resolution of the Schwarzschild coordinate singularity was provided by Kruskal&ndash;Szekeres coordinates, developed independently by Martin Kruskal and George Szekeres in 1960. These coordinates cover the entire maximally extended Schwarzschild <a class="lexicon-term" href="spacetime.html">spacetime</a> with no coordinate singularity anywhere outside the true physical singularity at r&nbsp;=&nbsp;0. In Kruskal&ndash;Szekeres coordinates the <a class="lexicon-term" href="event-horizon.html">event horizon</a> appears as the simple boundary T<sup>2</sup>&nbsp;&minus;&nbsp;X<sup>2</sup>&nbsp;=&nbsp;0, and the maximal extension reveals four distinct spacetime regions: two exterior regions, one <a class="lexicon-term" href="black-hole.html">black hole</a> interior, and one white hole interior. Roger Penrose introduced conformal diagrams in 1965 to visualise this causal structure compactly.</p>
+
+<p>Recognition that the Schwarzschild radius is a coordinate singularity &mdash; not a physical barrier &mdash; was among the most consequential conceptual advances in 20th-century theoretical physics. It confirmed that <a class="lexicon-term" href="black-hole.html">black holes</a> are physically real, established the <a class="lexicon-term" href="event-horizon.html">event horizon</a> as a one-way null surface, and laid the geometric foundation from which Hawking radiation and the laws of <a class="lexicon-term" href="black-hole.html">black hole</a> thermodynamics were subsequently derived. Analogous coordinate singularities appear in the Kerr metric for rotating <a class="lexicon-term" href="kerr-black-hole.html">Kerr black holes</a> and require similarly adapted coordinate choices.</p>
+
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- JS-injected sections appear here in this order:
+       1. cosmos-explore.js  → A-Z explorer with cross-linked articles
+       2. latest-research.js → ADS research papers (if data exists)
+       3. sao-cta.js         → "Interested in astronomy?" CTA
+       (footer follows) -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>
