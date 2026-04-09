@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev-agent"]
   workflow_dispatch:
 
 permissions:
@@ -21,14 +21,48 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout dev-agent (site base)
         uses: actions/checkout@v4
+        with:
+          ref: dev-agent
+          path: site
+
+      - name: Checkout main (approved articles)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-branch
+
+      - name: Build combined artifact
+        run: |
+          # dev-agent is the site root
+          # Copy main branch articles into /stable/articles/ for the blessed snapshot
+          mkdir -p site/stable/articles
+          if [ -d main-branch/articles ]; then
+            cp main-branch/articles/*.html site/stable/articles/ 2>/dev/null || true
+          fi
+          # Copy main branch images into /stable/images/ so articles can find their images
+          mkdir -p site/stable/images
+          if [ -d main-branch/images ]; then
+            cp -r main-branch/images/* site/stable/images/ 2>/dev/null || true
+          fi
+          # Copy main branch CSS/JS so stable articles render correctly
+          mkdir -p site/stable/css site/stable/js
+          if [ -d main-branch/css ]; then
+            cp -r main-branch/css/* site/stable/css/ 2>/dev/null || true
+          fi
+          if [ -d main-branch/js ]; then
+            cp -r main-branch/js/* site/stable/js/ 2>/dev/null || true
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: site
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

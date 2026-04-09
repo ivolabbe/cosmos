@@ -196,7 +196,40 @@ This overlaps Phase 1 and Phase 2 across articles, reducing total wall-clock tim
 
 ---
 
-## 8. Key files
+## 8. Phase 3: Expert Review
+
+After writing is complete, stage articles for human review:
+
+```bash
+# 1. Commit + push on dev-agent (GitHub Actions deploys to Pages)
+git add articles/{slug}.html images/...
+git commit -m "Add articles: slug1, slug2"
+git push origin dev-agent
+
+# 2. Stage for review (updates tracking → queued, creates Google Sheet assignments, sends email)
+node dev/stage-for-review.js --reviewer="Ivo <ivolabbe@gmail.com>" slug1 slug2 slug3
+```
+
+The reviewer opens the emailed link, reviews articles one by one (Approve / Correction / Skip), and can stop at any time. Revisiting the URL later resumes from the first unreviewed article.
+
+```bash
+# 3. Sync results back from Google Sheet to pipeline-status.md
+node dev/sync-review-status.js
+
+# 4. For approved articles — merge to main
+git checkout main
+git checkout dev-agent -- articles/{slug}.html images/...
+git commit -m "Publish approved articles: slug1, slug2"
+git push origin main
+git checkout dev-agent
+
+# Reset for re-testing
+node dev/reset-review.js slug1 slug2
+```
+
+---
+
+## 9. Key files
 
 | File | Purpose |
 |------|---------|
@@ -207,6 +240,9 @@ This overlaps Phase 1 and Phase 2 across articles, reducing total wall-clock tim
 | `.planning/content/pipeline-status.md` | Master tracking table |
 | `.planning/content/cosmos-all-merged-scored-final.md` | All 2,063 articles with scores + seed URLs |
 | `dev/categories-list.txt` | 13 topic categories (compact) |
+| `review/index.html` + `review/app.js` | Reviewer UI (deployed on GitHub Pages) |
+| `dev/review/apps-script.js` | Apps Script source (deploy to Google Sheets) |
+| `dev/review/config.json` | Apps Script deployment URL |
 
 ### Scripts (all zero tokens)
 
@@ -219,3 +255,6 @@ This overlaps Phase 1 and Phase 2 across articles, reducing total wall-clock tim
 | `dev/check-spec.js {slug}` | Post-research | Verify spec structure + images |
 | `dev/check-article.js articles/{slug}.html` | Post-write | Check contractions, "data is", word count, image |
 | `dev/update-pipeline-status.js {slug} {phase} {status}` | After each phase | Update tracking table |
+| `dev/stage-for-review.js --reviewer="Name <email>" slug...` | Post-write | Stage articles for expert review |
+| `dev/sync-review-status.js` | After review | Sync Google Sheet verdicts to pipeline-status.md |
+| `dev/reset-review.js slug...` | Testing | Reset review status in pipeline + Google Sheet |

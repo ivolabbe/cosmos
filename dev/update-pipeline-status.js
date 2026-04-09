@@ -29,7 +29,7 @@ if (!(phase in phaseIdx)) {
   process.exit(1);
 }
 
-const validStatuses = ['-', 'in-progress', 'done', 'revision', 'approved'];
+const validStatuses = ['-', 'in-progress', 'done', 'queued', 'revision', 'approved', 'skipped'];
 if (!validStatuses.includes(status)) {
   console.error(`Invalid status: ${status}. Use: ${validStatuses.join(', ')}`);
   process.exit(1);
