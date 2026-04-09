@@ -23,7 +23,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | accelerating-universe | Accelerating universe | 1 | done | done | - |  |
 | b-type-star | B-type Star | 1 | done | done | - |  |
 | barium-stars | Barium Stars | 1 | done | done(*) | - |  |
-| black-hole | Black hole | 1 | - | - | - | existing: black-hole |
+| black-hole | Black hole | 1 | done | done | - | existing: black-hole |
 | blackbody | Blackbody | 1 | done | done | - |  |
 | boson | Boson | 1 | done | done | - |  |
 | ap-and-bp-stars | Ap and Bp stars | 1 | done | done(*) | - |  |
@@ -49,18 +49,17 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | k-capture | K capture | 1 | done | done(*) | - |  |
 | k-type-star | K-type star | 1 | done | done(*) | - |  |
 | kerr-black-hole | Kerr black hole | 1 | done | done | - |  |
-| lepus | Lepus | 1 | done | done(*) | - |  |
+| lepus | Lepus | 3 | done | done(*) | - |  |
 | lunar-calendar | Lunar Calendar | 1 | done | done(*) | - |  |
 | lunar-eclipse | Lunar eclipse | 1 | done | done(*) | - |  |
 | m-type-star | M-type Star | 1 | done | done(*) | - |  |
 | magnetar | Magnetar | 1 | - | - | - | existing: magnetar |
 | main-sequence-of-stars | main sequence of stars | 1 | done | done(*) | - |  |
-| major-axis | Major Axis | 1 | done | done(*) | - |  |
 | mare | Mare | 1 | done | done | - |  |
-| mars | Mars | 1 | - | - | - | existing: mars |
+| mars | Mars | 1 | done | done | - | existing: mars |
 | mascon | mascon | 1 | done | done | - |  |
 | me-stars | Me Stars | 1 | done | done | queued |  |
-| mercury | Mercury (planet) | 1 | - | - | - | existing: mercury |
+| mercury | Mercury (planet) | 1 | done | done | - | existing: mercury |
 | metal-rich-stars | Metal Rich Stars | 1 | done | done | queued |  |
 | metal-poor-stars | Metal Poor Stars | 1 | done | done | - |  |
 | midnight-sun | midnight Sun | 1 | done | done | queued |  |
@@ -73,7 +72,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | nearby-stars | Nearby Stars | 1 | - | - | - |  |
 | nebular-variable-stars | Nebular Variable Stars | 1 | - | - | - |  |
 | new-moon | New Moon | 1 | - | - | - | existing: new-moon |
-| norma | Norma | 3 | - | - | - |  |
+| norma | Norma | 1 | - | - | - |  |
 | north-star | North Star | 1 | - | - | - |  |
 | nova | Nova | 1 | - | - | - |  |
 | o-type-star | O-type Star | 1 | - | - | - |  |
@@ -84,7 +83,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | pluto | Pluto | 1 | - | - | - |  |
 | rr-lyrae-stars | RR Lyrae Stars | 1 | - | - | - | existing: rr-lyrae |
 | saros | Saros | 1 | - | - | - |  |
-| saturn | Saturn | 1 | - | - | - |  |
+| saturn | Saturn | 1 | done | done | - |  |
 | sputnik | Sputnik | 1 | - | - | - |  |
 | star | Star | 1 | - | - | - | existing: star |
 | star-catalog | star catalog | 1 | - | - | - |  |
@@ -98,7 +97,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | subdwarf-star | Subdwarf Star | 1 | - | - | - |  |
 | subgiant-ch-stars | Subgiant CH Stars | 1 | - | - | - |  |
 | submillimeter-astronomy | Submillimeter Astronomy | 1 | - | - | - |  |
-| sun | Sun | 1 | - | - | - | existing: sun |
+| sun | Sun | 1 | done | done | - | existing: sun |
 | sundial | Sundial | 1 | - | - | - |  |
 | sunspot-cycle | Sunspot Cycle | 1 | - | - | - | existing: sunspot-cycle |
 | sunyaev-zeldovich-process | Sunyaev Zel'dovich Process | 1 | - | - | - |  |
@@ -108,18 +107,18 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | triple-star | Triple Star | 1 | - | - | - |  |
 | tychos-nova | Tycho's Nova | 1 | - | - | - |  |
 | u-geminorum-star | U Geminorum Star | 1 | - | - | - | existing: u-geminorum-stars |
-| venus | Venus | 1 | - | - | - |  |
+| venus | Venus | 1 | done | done | - |  |
 | white-dwarf | White dwarf | 1 | - | - | - | existing: white-dwarf |
 | absolute-space | Absolute Space | 1 | - | - | - |  |
 | algol | Algol | 1 | - | - | - |  |
-| andromeda | Andromeda (constellation) | 3 | - | - | - |  |
+| andromeda | Andromeda (constellation) | 1 | - | - | - |  |
 | andromeda-galaxy | Andromeda Galaxy | 1 | - | - | - | existing: andromeda-galaxy |
 | angstrom | Angstrom | 1 | - | - | - |  |
 | annular-eclipse | Annular Eclipse | 1 | - | - | - |  |
 | apastron | Apastron | 1 | - | - | - | existing: apastron |
 | ariel | Ariel (moon) | 1 | - | - | - |  |
 | asterism | Asterism (astronomy) | 1 | - | - | - | existing: asterism |
-| asteroid | Asteroid | 1 | - | - | - | existing: asteroid |
+| asteroid | Asteroid | 1 | done | done | - | existing: asteroid |
 | asteroid-belt | Asteroid belt | 1 | - | - | - | existing: asteroid-belt |
 | astronomy | Astronomy | 1 | - | - | - | existing: astronomy |
 | auriga | Auriga | 1 | - | - | - |  |
@@ -138,12 +137,12 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | galaxy | Galaxy | 1 | - | - | - | existing: galaxy |
 | galaxy-formation-bias | Galaxy Formation Bias | 1 | - | - | - |  |
 | janus | Janus | 1 | - | - | - |  |
-| lupus | Lupus | 3 | - | - | - |  |
+| lupus | Lupus | 1 | - | - | - |  |
 | momentum | momentum | 1 | - | - | - | existing: momentum |
 | nebula | Nebula | 1 | - | - | - | existing: nebula |
 | nebular-lines | Nebular Lines | 1 | - | - | - |  |
 | nebulium | nebulium | 1 | - | - | - |  |
-| neptune | Neptune | 1 | - | - | - |  |
+| neptune | Neptune | 1 | done | done | - |  |
 | north-america-nebula | North America Nebula | 1 | - | - | - |  |
 | omega-nebula | Omega Nebula | 1 | - | - | - |  |
 | outer-planets | Outer Planets | 1 | - | - | - |  |
@@ -162,7 +161,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | tarantula-nebula | Tarantula Nebula | 1 | - | - | - |  |
 | trifid-nebula | Trifid Nebula | 1 | - | - | - |  |
 | trojan-asteroid | Trojan asteroid | 1 | - | - | - | existing: trojan-asteroids |
-| uranus | Uranus | 1 | - | - | - |  |
+| uranus | Uranus | 1 | done | done | - |  |
 | active-galactic-nucleus | Active galactic nucleus | 2 | - | - | - | existing: active-galactic-nuclei |
 | alpha-centauri | Alpha Centauri | 2 | - | - | - |  |
 | aphelion | Aphelion | 2 | - | - | - | existing: aphelion |
@@ -212,16 +211,15 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | planck-units | Planck Units | 2 | - | - | - | existing: planck-units |
 | planet-nine | Planet Nine | 2 | - | - | - |  |
 | pleiades | Pleiades | 2 | - | - | - |  |
-| pulsar | Pulsar | 2 | - | - | - | existing: pulsar |
+| pulsar | Pulsar | 2 | done | done | - | existing: pulsar |
 | quasar | Quasar | 2 | - | - | - | existing: quasar |
 | universe | Universe | 2 | - | - | - | existing: universe |
 | vega | Vega | 2 | - | - | - |  |
 | white-dwarf-star | white dwarf star | 2 | - | - | - | existing: white-dwarf |
-| canis-major | Canis Major | 3 | - | - | - |  |
+| canis-major | Canis Major | 2 | - | - | - |  |
 | cygnus-x-1 | Cygnus X 1 | 2 | - | - | - |  |
 | hubble-constant | Hubble Constant | 2 | - | - | - |  |
-| larmor-frequency | Larmor Frequency | 2 | - | - | - |  |
-| leo-minor | Leo Minor | 3 | - | - | - |  |
+| leo-minor | Leo Minor | 2 | - | - | - |  |
 | luminosity | Luminosity | 2 | - | - | - | existing: luminosity |
 | main-asteroid-belt | Main Asteroid Belt | 2 | - | - | - | existing: main-asteroid-belt |
 | perigee | Perigee | 2 | - | - | - | existing: perigee |
@@ -229,7 +227,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | pixel | Pixel | 2 | - | - | - |  |
 | rigel | Rigel | 2 | - | - | - |  |
 | solstice | Solstice | 2 | - | - | - | existing: solstice |
-| ursa-minor | Ursa Minor | 3 | - | - | - |  |
+| ursa-minor | Ursa Minor | 2 | - | - | - |  |
 | zero-age-main-sequence | Zero-Age Main Sequence | 2 | - | - | - | existing: zero-age-main-sequence |
 | beta-decay | Beta Decay | 3 | - | - | - |  |
 | brown-dwarf | Brown dwarf | 3 | - | - | - | existing: brown-dwarf |
@@ -291,7 +289,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | lte | LTE | 1 | - | - | - |  |
 | optical-window | Optical Window | 1 | - | - | - |  |
 | photodiode | Photodiode | 1 | - | - | - |  |
-| sculptor | Sculptor | 3 | - | - | - |  |
+| sculptor | Sculptor | 1 | - | - | - |  |
 | sfr | SFR | 1 | - | - | - |  |
 | tide | Tide | 1 | - | - | - |  |
 | latitude | Latitude | 1 | - | - | - |  |
@@ -302,7 +300,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | absorption-trough | Absorption Trough | 2 | - | - | - |  |
 | achernar | Achernar | 2 | - | - | - |  |
 | age-of-the-universe | Age of the universe | 2 | - | - | - |  |
-| apus | Apus | 3 | - | - | - |  |
+| apus | Apus | 2 | - | - | - |  |
 | arcturus | Arcturus | 2 | - | - | - |  |
 | artificial-satellite | Artificial Satellite | 2 | - | - | - |  |
 | astrobiology | Astrobiology | 2 | - | - | - |  |
@@ -314,13 +312,13 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | atomic-orbital | Atomic Orbital | 2 | - | - | - |  |
 | attenuation | Attenuation | 2 | - | - | - |  |
 | b-band | B-Band | 2 | - | - | - |  |
-| caelum | Caelum | 3 | - | - | - |  |
+| caelum | Caelum | 2 | - | - | - |  |
 | cold-dark-matter | Cold Dark Matter (CDM) | 2 | - | - | - |  |
 | cosmic-microwave-background | Cosmic microwave background | 2 | - | - | - | existing: cosmic-microwave-background |
 | electromagnetic-spectrum | electromagnetic spectrum | 2 | - | - | - | existing: electromagnetic-spectrum |
 | faint-blue-galaxy | Faint Blue Galaxy | 2 | - | - | - |  |
 | field-galaxy | Field Galaxy | 2 | - | - | - |  |
-| galaxy-classification | Galaxy Classification | 2 | - | - | - |  |
+| galaxy-classification | Galaxy Classification | 2 | done | done | - |  |
 | galaxy-correlation-function | Galaxy Correlation Function | 2 | - | - | - |  |
 | galaxy-counts | Galaxy Counts | 2 | - | - | - |  |
 | galaxy-formation-problem | galaxy formation problem | 2 | - | - | - |  |
@@ -354,7 +352,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | crab-nebula | Crab Nebula | 2 | - | - | - |  |
 | crab-pulsar | Crab Pulsar | 2 | - | - | - |  |
 | crux | Crux | 2 | - | - | - |  |
-| drake-equation | Drake equation | 2 | - | - | - |  |
+| drake-equation | Drake equation | 2 | done | done | - |  |
 | eclipsing-binary | Eclipsing Binary | 2 | - | - | - |  |
 | exoplanet | Exoplanet | 2 | - | - | - |  |
 | extraterrestrial-life | Extraterrestrial Life | 2 | - | - | - |  |
@@ -398,20 +396,20 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | apparent-magnitude | Apparent magnitude | 2 | - | - | - | existing: apparent-magnitude |
 | big-crunch | Big Crunch | 2 | - | - | - | existing: big-crunch |
 | bolometric-magnitude | Bolometric Magnitude | 2 | - | - | - | existing: bolometric-magnitude |
-| bootes | bootes | 3 | - | - | - |  |
+| bootes | bootes | 2 | - | - | - |  |
 | canopus | Canopus | 2 | - | - | - |  |
 | cassegrain-focus | Cassegrain Focus | 2 | - | - | - |  |
-| cetus | Cetus (constellation) | 3 | - | - | - |  |
+| cetus | Cetus (constellation) | 2 | - | - | - |  |
 | cold-emission | Cold Emission | 2 | - | - | - |  |
 | composite-spectrum-stars | Composite Spectrum Stars | 2 | - | - | - |  |
 | corona | corona | 2 | - | - | - | existing: corona |
 | cosmic-ray | Cosmic ray | 2 | - | - | - | existing: cosmic-rays |
 | cross-spectrum | Cross Spectrum | 2 | - | - | - |  |
 | cygnus-a | Cygnus A | 2 | - | - | - |  |
-| draco | Draco (constellation) | 3 | - | - | - |  |
+| draco | Draco (constellation) | 2 | - | - | - |  |
 | entropy | entropy | 2 | - | - | - |  |
 | epoch | Epoch (astronomy) | 2 | - | - | - | existing: epoch |
-| eridanus | Eridanus (constellation) | 3 | - | - | - |  |
+| eridanus | Eridanus (constellation) | 2 | - | - | - |  |
 | gas-giant-planet | Gas Giant Planet | 2 | - | - | - | existing: gas-giant-planet |
 | hubble-classification | Hubble Classification | 2 | - | - | - | existing: hubble-classification |
 | hulse-taylor-pulsar | Hulse Taylor Pulsar | 2 | - | - | - |  |
@@ -426,7 +424,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | mass-luminosity-radius-relation | Mass-Luminosity-Radius Relation | 2 | - | - | - |  |
 | mass-radius-relation | Mass-Radius Relation | 2 | - | - | - |  |
 | minor-planet | Minor planet | 2 | - | - | - |  |
-| ophiuchus | Ophiuchus | 3 | - | - | - |  |
+| ophiuchus | Ophiuchus | 2 | - | - | - |  |
 | period-luminosity-relation | Period-Luminosity Relation | 2 | - | - | - |  |
 | plancks-blackbody-formula | Plancks Blackbody Formula | 2 | - | - | - |  |
 | positron | Positron | 2 | - | - | - | existing: positron |
@@ -434,7 +432,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | protostar | Protostar | 2 | - | - | - | existing: protostar |
 | ring-nebula | Ring Nebula | 2 | - | - | - |  |
 | spectrograph | spectrograph | 2 | - | - | - |  |
-| spectroscopy | Spectroscopy | 2 | - | - | - | existing: spectroscopy |
+| spectroscopy | Spectroscopy | 2 | done | done | - | existing: spectroscopy |
 | spiral-galaxy | Spiral galaxy | 2 | - | - | - | existing: spiral-galaxy |
 | stellar-evolution | Stellar evolution | 2 | - | - | - | existing: stellar-evolution |
 | triangulum-galaxy | Triangulum Galaxy | 2 | - | - | - |  |
@@ -444,7 +442,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | beehive-cluster | Beehive Cluster | 3 | - | - | - |  |
 | beta-centauri | Beta Centauri | 3 | - | - | - |  |
 | binary-galaxies | Binary Galaxies | 3 | - | - | - |  |
-| binary-star | Binary Star | 3 | - | - | - | existing: binary-star |
+| binary-star | Binary Star | 3 | done | done | - | existing: binary-star |
 | black-dwarf | Black Dwarf | 3 | - | - | - |  |
 | blue-horizontal-branch-stars | Blue Horizontal Branch Stars | 3 | - | - | - |  |
 | blue-supergiant | Blue Supergiant | 3 | - | - | - |  |
@@ -555,7 +553,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | planetary-system | Planetary system | 3 | - | - | - |  |
 | star-system | Star System | 3 | - | - | - |  |
 | advanced-camera-for-surveys | Advanced Camera for Surveys | 1 | - | - | - |  |
-| ara | Ara | 3 | - | - | - |  |
+| ara | Ara | 1 | - | - | - |  |
 | full-moon | Full Moon | 1 | - | - | - | existing: full-moon |
 | hubble-space-telescope | Hubble Space Telescope | 1 | - | - | - | existing: hubble-space-telescope |
 | space | Space | 1 | - | - | - |  |
@@ -567,8 +565,8 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | am-stars | Am Stars | 2 | - | - | - |  |
 | apex | Apex | 2 | - | - | - | existing: apex |
 | apollo-asteroid | Apollo Asteroid | 2 | - | - | - | existing: apollo-asteroids |
-| aquila | Aquila (constellation) | 3 | - | - | - |  |
-| aries | Aries | 3 | - | - | - |  |
+| aquila | Aquila (constellation) | 2 | - | - | - |  |
+| aries | Aries | 2 | - | - | - |  |
 | avalanche | Avalanche | 2 | - | - | - |  |
 | b-star | B Star | 2 | - | - | - |  |
 | back-focal-length | Back Focal Length | 2 | - | - | - |  |
@@ -627,7 +625,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | sunspot | Sunspot | 2 | - | - | - |  |
 | yellow-dwarf | Yellow Dwarf | 2 | - | - | - |  |
 | yellow-giant | Yellow Giant | 2 | - | - | - |  |
-| zenith | Zenith | 2 | - | - | - | existing: zenith |
+| zenith | Zenith | 2 | done | done | - | existing: zenith |
 | accretion-disk | Accretion disk | 3 | - | - | - |  |
 | bandpass | Bandpass | 3 | - | - | - | existing: bandpass |
 | circinus | Circinus | 3 | - | - | - |  |
@@ -655,7 +653,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | international-gamma-ray-astrophysics-laboratory | International Gamma-Ray Astrophysics Laboratory | 3 | - | - | - |  |
 | international-ultraviolet-explorer | International Ultraviolet Explorer | 3 | - | - | - |  |
 | io | Io (moon) | 3 | - | - | - |  |
-| large-scale-structure | Large-Scale Structure | 3 | - | - | - | existing: large-scale-structure |
+| large-scale-structure | Large-Scale Structure | 3 | done | done | - | existing: large-scale-structure |
 | light-curve | Light Curve | 3 | - | - | - |  |
 | rs-cvn-stars | RS CVn Stars | 3 | - | - | - |  |
 | semi-convection | Semi Convection | 3 | - | - | - |  |
@@ -783,7 +781,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | arcminute | Arcminute | 2 | - | - | - | existing: arcminute |
 | arcsecond | Arcsecond | 2 | - | - | - | existing: arcsecond |
 | arecibo | Arecibo | 2 | - | - | - |  |
-| artemis | Artemis (program) | 2 | - | - | - |  |
+| artemis | Artemis (program) | 2 | done | done | - |  |
 | astrometric-binaries | Astrometric Binaries | 2 | - | - | - |  |
 | baades-window | Baade's Window | 2 | - | - | - |  |
 | chandra | Chandra | 2 | - | - | - |  |
@@ -967,7 +965,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | proxima-centauri | Proxima Centauri | 3 | - | - | - |  |
 | red-dwarf | Red dwarf | 3 | - | - | - | existing: red-dwarf |
 | regulus | Regulus | 3 | - | - | - |  |
-| roche-lobe | Roche Lobe | 3 | - | - | - | existing: roche-lobe |
+| roche-lobe | Roche Lobe | 3 | done | done | - | existing: roche-lobe |
 | rosetta | Rosetta | 3 | - | - | - |  |
 | schmidt-camera | Schmidt Camera | 3 | - | - | - |  |
 | sco-cen-association | Sco Cen Association | 3 | - | - | - |  |
@@ -1040,7 +1038,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | gravitational-constant | Gravitational Constant | 3 | - | - | - | existing: gravitational-constant |
 | gravitational-field-lines | Gravitational Field Lines | 3 | - | - | - |  |
 | gravitational-mass | Gravitational Mass | 3 | - | - | - |  |
-| gravitational-waves | Gravitational Waves | 3 | - | - | - | existing: gravitational-waves |
+| gravitational-waves | Gravitational Waves | 3 | done | done | - | existing: gravitational-waves |
 | grazing-incidence-telescope | Grazing Incidence Telescope | 3 | - | - | - |  |
 | h-ii-region | H II region | 3 | - | - | - |  |
 | haro-galaxies | Haro Galaxies | 3 | - | - | - |  |
@@ -1347,7 +1345,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | relativistic-cosmology | Relativistic Cosmology | 3 | - | - | - | existing: relativistic-cosmology |
 | robertson-walker-metric | Robertson-Walker Metric | 3 | - | - | - |  |
 | roche-lobe-overflow | Roche Lobe Overflow | 3 | - | - | - | existing: roche-lobe-overflow |
-| rotation-curve | Rotation Curve | 3 | - | - | - | existing: rotation-curve |
+| rotation-curve | Rotation Curve | 3 | done | done | - | existing: rotation-curve |
 | rr-lyrae-star | RR Lyrae Star | 3 | - | - | - | existing: rr-lyrae |
 | rv-tau-variables | RV Tau Variables | 3 | - | - | - |  |
 | rv-tauri-stars | RV Tauri Stars | 3 | - | - | - |  |
@@ -1462,7 +1460,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | emission-line | Emission Line | 3 | - | - | - | existing: emission-line |
 | emission-nebula | Emission nebula | 3 | - | - | - | existing: emission-nebula |
 | emission-spectrum | Emission Spectrum | 3 | - | - | - |  |
-| interacting-galaxies | Interacting Galaxies | 3 | - | - | - | existing: interacting-galaxies |
+| interacting-galaxies | Interacting Galaxies | 3 | done | done | - | existing: interacting-galaxies |
 | aurora-borealis | Aurora Borealis (Northern Lights) | 2 | - | - | - | existing: aurora-borealis-%28northern-lights%29 |
 | bose-einstein-nuclei | Bose-Einstein Nuclei | 2 | - | - | - |  |
 | bose-einstein-statistics | Bose-Einstein Statistics | 2 | - | - | - |  |
