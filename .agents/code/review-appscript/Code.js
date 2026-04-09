@@ -40,6 +40,9 @@ function doGet(e) {
   if (action === 'export') {
     return handleExport();
   }
+  if (action === 'setup') {
+    return handleSetup();
+  }
 
   return jsonResponse({ error: 'Unknown action' }, 400);
 }
@@ -230,6 +233,30 @@ function handleExport() {
   }
 
   return jsonResponse(assignments);
+}
+
+function handleSetup() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // Rename Sheet1 to assignments if it exists
+  const sheet1 = ss.getSheetByName('Sheet1');
+  if (sheet1) sheet1.setName('assignments');
+
+  // Create or get assignments tab
+  let assignments = ss.getSheetByName('assignments');
+  if (!assignments) assignments = ss.insertSheet('assignments');
+  assignments.getRange('A1:E1').setValues([['reviewer_email', 'reviewer_name', 'slug', 'assigned_date', 'status']]);
+  assignments.getRange('A1:E1').setFontWeight('bold');
+  assignments.setFrozenRows(1);
+
+  // Create or get responses tab
+  let responses = ss.getSheetByName('responses');
+  if (!responses) responses = ss.insertSheet('responses');
+  responses.getRange('A1:E1').setValues([['reviewer_email', 'slug', 'verdict', 'comments', 'timestamp']]);
+  responses.getRange('A1:E1').setFontWeight('bold');
+  responses.setFrozenRows(1);
+
+  return jsonResponse({ ok: true, message: 'Setup complete: assignments + responses tabs created' });
 }
 
 // --- Utility ---

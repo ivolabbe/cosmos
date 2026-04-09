@@ -4,36 +4,51 @@
  *
  * Usage:
  *   node dev/stage-for-review.js --reviewer="Name <email>" slug1 slug2 slug3
+ *   node dev/stage-for-review.js --reviewer="Name <email>" --notify slug1 slug2 slug3
  *
- * What it does:
+ * Without --notify:
  *   1. Updates pipeline-status.md: phase-3-review → queued
- *   2. POSTs to Apps Script to create assignment rows in Google Sheet
- *   3. POSTs to Apps Script to send notification email to reviewer
- *   4. Prints the review URL
+ *   2. Creates assignment rows in Google Sheet
+ *   3. Prints review URL (no email sent)
+ *   → Check the Google Sheet to verify assignments look correct
  *
- * Requires: API_URL environment variable or dev/review/config.json
+ * With --notify:
+ *   Same as above, plus sends notification email to the reviewer.
+ *
+ * Requires: dev/review/config.json with api_url, or COSMOS_REVIEW_API env var
  */
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // ── Parse args ─────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
 let reviewerArg = '';
+let sendNotify = false;
 const slugs = [];
 
 for (const arg of args) {
   if (arg.startsWith('--reviewer=')) {
     reviewerArg = arg.replace('--reviewer=', '');
+  } else if (arg === '--notify') {
+    sendNotify = true;
   } else if (!arg.startsWith('-')) {
     slugs.push(arg);
   }
 }
 
 if (!reviewerArg || !slugs.length) {
-  console.error('Usage: node dev/stage-for-review.js --reviewer="Name <email>" slug1 slug2 ...');
-  console.error('Example: node dev/stage-for-review.js --reviewer="Ivo <ivolabbe@gmail.com>" me-stars metal-rich-stars');
+  console.error('Usage: node dev/stage-for-review.js --reviewer="Name <email>" [--notify] slug1 slug2 ...');
+  console.error('');
+  console.error('  Without --notify: creates assignments in sheet (inspect first)');
+  console.error('  With --notify:    also sends the review email');
+  console.error('');
+  console.error('Example:');
+  console.error('  node dev/stage-for-review.js --reviewer="Ivo <ivolabbe@gmail.com>" me-stars metal-rich-stars');
+  console.error('  # check Google Sheet, then:');
+  console.error('  node dev/stage-for-review.js --reviewer="Ivo <ivolabbe@gmail.com>" --notify me-stars metal-rich-stars');
   process.exit(1);
 }
 
@@ -60,8 +75,6 @@ const API_URL = getApiUrl();
 
 // ── Step 1: Update pipeline-status.md ──────────────────────────
 
-const { execSync } = require('child_process');
-
 console.log('\n=== Updating pipeline-status.md ===\n');
 
 for (const slug of slugs) {
@@ -72,11 +85,11 @@ for (const slug of slugs) {
   }
 }
 
-// ── Step 2 & 3: Create assignments + send email via Apps Script ─
+// ── Step 2: Create assignments in Google Sheet ─────────────────
 
 async function callApi() {
   if (!API_URL) {
-    console.log('\n=== API_URL not configured — skipping Google Sheet + email ===');
+    console.log('\n=== API_URL not configured — skipping Google Sheet ===');
     console.log('Set COSMOS_REVIEW_API env var or create dev/review/config.json:');
     console.log('  { "api_url": "https://script.google.com/macros/s/.../exec" }\n');
   } else {
@@ -99,36 +112,39 @@ async function callApi() {
       console.error('Failed to create assignments:', err.message);
     }
 
-    console.log('\n=== Sending notification email ===\n');
+    // ── Step 3: Optionally send email ─────────────────────────────
 
-    try {
-      const notifyRes = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'notify',
-          reviewer_email: reviewerEmail,
-          reviewer_name: reviewerName,
-          slugs: slugs
-        })
-      });
-      const notifyData = await notifyRes.json();
-      console.log(`Email sent to: ${notifyData.emailed} (${notifyData.articles} articles)`);
-    } catch (err) {
-      console.error('Failed to send email:', err.message);
+    if (sendNotify) {
+      console.log('\n=== Sending notification email ===\n');
+
+      try {
+        const notifyRes = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'notify',
+            reviewer_email: reviewerEmail,
+            reviewer_name: reviewerName,
+            slugs: slugs
+          })
+        });
+        const notifyData = await notifyRes.json();
+        console.log(`Email sent to: ${notifyData.emailed}`);
+      } catch (err) {
+        console.error('Failed to send email:', err.message);
+      }
+    } else {
+      console.log('\n=== Email NOT sent (use --notify to send) ===');
+      console.log('Check the Google Sheet first, then re-run with --notify.\n');
     }
   }
 
-  // ── Step 4: Print review URL ───────────────────────────────────
+  // ── Print review URL ───────────────────────────────────────────
 
   const reviewUrl = 'https://ivolabbe.github.io/cosmos/review/?reviewer=' + encodeURIComponent(reviewerEmail);
 
   console.log('\n=== Review URL ===\n');
   console.log(reviewUrl);
-  console.log('\nArticles staged for review:');
-  for (const slug of slugs) {
-    console.log('  • ' + slug);
-  }
   console.log('');
 }
 
