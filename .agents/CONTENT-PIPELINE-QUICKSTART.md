@@ -196,7 +196,29 @@ This overlaps Phase 1 and Phase 2 across articles, reducing total wall-clock tim
 
 ---
 
-## 8. Phase 3: Expert Review
+## 8. Batch retrospective (after research + write completes)
+
+After each batch of articles completes research and writing, the orchestrator reviews what went well and what went wrong before moving to the review phase. This is how the pipeline improves over time.
+
+**What to review:**
+- **Agent failures:** Did any researchers or writers stall, crash, or produce incomplete output? Why?
+- **Spec quality:** Did `check-spec.js` catch issues? Were there patterns (e.g. missing images from a specific source, captions not created)?
+- **Article quality:** Did `check-article.js` flag recurring problems (contractions, word count, missing images)?
+- **Pipeline friction:** Were there steps that required manual intervention? Could scripts or domain instructions prevent that next time?
+- **Tool availability:** Did agents attempt tools that weren't available in their context (e.g. playwright-cli in background agents)?
+
+**What to update if needed:**
+- `.agents/domains/cosmos-article-research.md` — researcher instructions (e.g. skip unavailable tools, clarify image sourcing)
+- `.agents/domains/cosmos-articles.md` — writer instructions (e.g. voice corrections, length guidance)
+- `.agents/COSMOS-STYLE-GUIDE.md` — voice rules (e.g. new DO/DON'T patterns observed in output)
+- `.agents/CONTENT-PIPELINE-QUICKSTART.md` — orchestrator scaffolding (e.g. new pre-flight checks, changed dispatch patterns)
+- `dev/check-spec.js` or `dev/check-article.js` — add new mechanical checks for recurring issues
+
+**Keep it lightweight:** Only update instructions when a pattern repeats across multiple articles or agents. A single anomaly is not worth a rule change. The goal is continuous improvement, not bureaucracy.
+
+---
+
+## 9. Phase 3: Expert Review
 
 After writing is complete, stage articles for human review:
 
@@ -229,7 +251,7 @@ node dev/reset-review.js slug1 slug2
 
 ---
 
-## 9. Key files
+## 10. Key files
 
 | File | Purpose |
 |------|---------|
