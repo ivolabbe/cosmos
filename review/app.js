@@ -7,7 +7,7 @@
 
 // ── Configuration ──────────────────────────────────────────────
 // Replace with your deployed Apps Script web app URL
-const API_URL = '';  // e.g. 'https://script.google.com/macros/s/XXXXX/exec'
+const API_URL = 'https://script.google.com/macros/s/AKfycbyehyBr6Dm3323QV2eFu2BWB6t7rKl2iZbitZpWViHY2UzReFSAijh-aYIJyRg13KE/exec';
 
 // Base path to article HTML files (relative to review page)
 const ARTICLE_BASE = '../articles/';
@@ -142,7 +142,8 @@ async function submitReview() {
   try {
     var res = await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      redirect: 'follow',
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         action: 'review',
         reviewer: reviewerEmail,
@@ -152,7 +153,8 @@ async function submitReview() {
       })
     });
 
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var result = await res.json();
+    if (result.error) throw new Error(result.error);
 
     // Update local state
     assignments[currentIndex].status = selectedVerdict === 'approved' ? 'approved'
