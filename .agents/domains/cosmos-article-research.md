@@ -45,11 +45,12 @@ Write the spec file immediately with the slug, title, category, and an IN-PROGRE
 ```
 
 ### Milestone 1 — Definition + orientation
-1. Fetch the Wikipedia article and the Britannica page for the topic
-2. Read their reference lists — note any key papers, reviews, or external sources worth following
-3. If a seed URL was provided in the task context (from the master article list), fetch that too
-4. Extract: 1–2 sentence definition that distinguishes the topic from related concepts
-5. Update spec → write `## Definition` + update STATUS to `milestone: 1`
+1. Use `playwright-cli` to Google the topic and extract the AI Overview summary + its cited references — use this as orientation, not a source (the summary may contain errors, but the cited references are useful starting points to follow). Example: navigate to `https://www.google.com/search?q={topic}+astronomy`, then extract the AI Overview text and reference links from the page
+2. Fetch the Wikipedia article and the Britannica page for the topic
+3. Read their reference lists — note any key papers, reviews, or external sources worth following
+4. If a seed URL was provided in the task context (from the master article list), fetch that too
+5. Extract: 1–2 sentence definition that distinguishes the topic from related concepts
+6. Update spec → write `## Definition` + update STATUS to `milestone: 1`
 
 ### Milestone 2 — Key numbers + physical properties
 1. Fetch quantitative data from NASA Science, HyperPhysics, NASA Fact Sheets, or specialist sources as appropriate
