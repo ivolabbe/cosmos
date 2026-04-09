@@ -1,6 +1,6 @@
 # COSMOS Review — Apps Script Setup Reference
 
-How the Google Sheets + Apps Script review backend was set up, and how to redeploy or recreate it.
+How the Google Sheets + Apps Script review backend was set up, and how to recreate it on a different Google account.
 
 ---
 
@@ -47,18 +47,22 @@ cd .agents/code/review-appscript
 clasp push --force
 ```
 
-### 4. Deploy as web app (must be done from the editor)
+### 4. Deploy as web app
 
-`clasp deploy` creates versioned deployments but cannot set access to "Anyone" — this is a known limitation. The initial deployment must be done from the Apps Script editor:
+The initial deployment must set access to "Anyone" which requires the Apps Script editor UI:
 
-1. Open the [script editor](https://script.google.com/d/1fTgEuLAUiI55KqHRxMLsm42Kgs7YnOiIdJM4B7ebl64VnVOfuBsITOL8/edit)
+1. Open the Apps Script editor (clasp outputs the URL, or find it at https://script.google.com)
 2. Click **Deploy** > **New deployment**
 3. Click the gear icon next to "Select type" > choose **Web app**
-4. Set "Execute as" > **Me**
-5. Set "Who has access" > **Anyone**
+4. Set "Execute as" > **Me** (the script runs as the sheet owner, so it can read/write the sheet and send email from this account)
+5. Set "Who has access" > **Anyone** (so reviewers can submit without a Google login)
 6. Click **Deploy**
-7. Authorize when prompted (Sheets + Gmail permissions)
-8. Copy the Web app URL
+7. **Authorize** when prompted — the script needs access to:
+   - Google Sheets (read/write assignments and responses)
+   - Gmail (send review notification emails from this account)
+8. Copy the **Web app URL** — this is the API endpoint used by the review UI and local scripts
+
+**Important:** The web app URL is permanent for this deployment. Subsequent code updates use `clasp push` + deployment version update (see "How to update" below) — the URL does not change.
 
 ### 5. Set up sheet tabs
 
@@ -114,19 +118,51 @@ The web app URL does not change when you update the deployment version.
 
 ---
 
-## How to recreate from scratch
+## How to recreate on a new Google account
 
-If the Google Sheet or Apps Script project is lost:
+Complete walkthrough for setting up the review backend from scratch on any Google account:
 
 ```bash
+# 1. Install clasp if not already present
+npm install -g @google/clasp
+
+# 2. Enable the Apps Script API
+#    Go to https://script.google.com/home/usersettings and toggle ON
+
+# 3. Login with the new Google account
+clasp login    # opens browser for OAuth
+
+# 4. Create the project (creates both the Google Sheet and bound Apps Script)
 cd .agents/code/review-appscript
-rm .clasp.json                  # remove old project reference
+rm -f .clasp.json               # remove old project reference
 clasp create --type sheets --title "COSMOS Review Assignments"
+
+# 5. Push the code
 clasp push --force
-# Then deploy from the editor (step 4 above)
-# Then call ?action=setup to create sheet tabs (step 5)
-# Then update dev/review/config.json and review/app.js with the new URL
+
+# 6. Deploy from the Apps Script editor (see step 4 in "How it was created")
+#    Execute as: Me, Who has access: Anyone
+#    Authorize Sheets + Gmail permissions when prompted
+#    Copy the Web app URL
+
+# 7. Set up the sheet tabs
+curl -sL "https://script.google.com/macros/s/{DEPLOY_ID}/exec?action=setup"
+#    Should return: {"ok":true,"message":"Setup complete: ..."}
+
+# 8. Configure the URL in the repo
+#    Edit dev/review/config.json: set api_url to the Web app URL
+#    Edit review/app.js: set API_URL to the Web app URL
+
+# 9. If the GitHub repo changed, allow the dev branch to deploy to GitHub Pages
+gh api repos/{owner}/{repo}/environments/github-pages/deployment-branch-policies \
+  --method POST -f name="dev-agent"
+
+# 10. Verify
+curl -sL "https://script.google.com/macros/s/{DEPLOY_ID}/exec?action=export"
+#    Should return: []
 ```
+
+**Permissions the script needs:** Google Sheets (read/write the bound spreadsheet) and Gmail (send notification emails from the account). These are requested during the authorization step (#6).
 
 ---
 
