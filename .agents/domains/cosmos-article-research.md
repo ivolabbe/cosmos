@@ -45,21 +45,7 @@ Write the spec file immediately with the slug, title, category, and an IN-PROGRE
 ```
 
 ### Milestone 1 — Definition + orientation
-1. **Google AI Overview** — use `playwright-cli` to fetch the Google AI Overview for the topic. This provides an AI-generated summary and, more importantly, its cited references as starting points:
-   ```bash
-   # Open browser and navigate to Google search
-   playwright-cli open --browser=chrome --persistent "https://www.google.com/search?q={topic}+astronomy"
-   
-   # If CAPTCHA appears (URL contains /sorry/), run: playwright-cli show
-   # and wait for the user to solve it, then retry navigation
-   
-   # Extract the AI Overview text + cited references
-   playwright-cli eval "(function() { var all = document.querySelectorAll('div'); for (var i=0; i<all.length; i++) { var t = all[i].innerText; if (t && t.indexOf('AI Overview') === 0 && t.length > 200) { return t.substring(0, 4000); } } return 'No AI Overview for this query'; })()"
-   
-   # Close browser when done
-   playwright-cli close
-   ```
-   Treat the AI Overview as **orientation only** — do not cite it. The cited references within it are the valuable part. If no AI Overview appears, try adding qualifying terms ("physics", "definition") or proceed without it.
+1. **Google AI Overview (optional, skip if unavailable)** — if `playwright-cli` is available and you are running interactively (not as a background agent), use it to fetch the Google AI Overview for orientation. See the `/google-ai-overview` skill for full instructions. If playwright is unavailable, a CAPTCHA blocks access, or you are running as a background agent, **skip this step** and proceed directly to Wikipedia/Britannica — the AI Overview is helpful but not required.
 2. Fetch the Wikipedia article and the Britannica page for the topic
 3. Read their reference lists — note any key papers, reviews, or external sources worth following
 4. If a seed URL was provided in the task context (from the master article list), fetch that too
