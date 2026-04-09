@@ -4,3 +4,5 @@
 node_modules/
 .agents/.omc/
 .claude/*.backup.*
+scratch/
+articles_orig/index\ 2.json

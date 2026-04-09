@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electromagnetic Spectrum Explorer | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+    #main-canvas { position: absolute; top: 0; left: 0; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+
+    /* --- Controls bar (bottom center) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls select option { background: #1a1a3e; color: #fff; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    /* --- Detail panel (right side) --- */
+    #detail {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; width: 340px;
+      font-size: 13px; line-height: 1.6; z-index: 10;
+      max-height: calc(100vh - 80px); overflow-y: auto;
+      display: none;
+    }
+    #detail h3 { font-size: 16px; font-weight: 300; color: #fff; margin-bottom: 8px; }
+    #detail .detail-section { margin-bottom: 10px; }
+    #detail .detail-section h4 {
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+    }
+    #detail .detail-val { font-family: "Courier New", monospace; color: #fff; font-weight: 600; font-size: 13px; }
+    #detail .detail-list { list-style: none; padding: 0; }
+    #detail .detail-list li { padding: 2px 0; font-size: 12px; color: rgba(255,255,255,0.8); }
+    #detail .detail-list li::before { content: "· "; color: rgba(255,255,255,0.35); }
+    #detail .atmos-tag {
+      display: inline-block; padding: 2px 8px; border-radius: 3px;
+      font-size: 11px; font-weight: 600;
+    }
+    #detail .atmos-transparent { background: rgba(76,175,80,0.3); color: #81c784; }
+    #detail .atmos-opaque { background: rgba(244,67,54,0.3); color: #e57373; }
+    #detail .atmos-partial { background: rgba(255,152,0,0.3); color: #ffb74d; }
+
+    body.embedded #detail { display: none !important; }
+
+    /* --- Visible zoom panel --- */
+    #visible-zoom {
+      position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 10px 14px; z-index: 10;
+      display: none;
+    }
+    #visible-zoom h4 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 6px; text-align: center;
+    }
+    body.embedded #visible-zoom { bottom: 50px; padding: 6px 8px; }
+    body.embedded #visible-zoom h4 { font-size: 9px; }
+
+    /* --- Loading / Credit --- */
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 5; pointer-events: none; white-space: nowrap;
+    }
+
+    /* Scrollbar for detail panel */
+    #detail::-webkit-scrollbar { width: 4px; }
+    #detail::-webkit-scrollbar-track { background: transparent; }
+    #detail::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
+      #detail { width: 260px; padding: 12px 14px; right: 8px; top: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Loading...</div>
+
+  <div id="info">
+    <h2>Electromagnetic Spectrum</h2>
+    <p class="desc">Explore the full range of light, from radio waves to gamma rays. Click anywhere on the spectrum to discover what astronomical objects emit at each wavelength.</p>
+    <div class="readout">
+      <div>Band: <span id="r-band">-</span></div>
+      <div>&lambda;: <span id="r-wave">-</span></div>
+      <div>&nu;: <span id="r-freq">-</span></div>
+      <div>E: <span id="r-energy">-</span></div>
+    </div>
+    <p class="hint">Click/drag the spectrum strip. Toggle atmosphere overlay. Spacebar: reset view.</p>
+  </div>
+
+  <div id="detail">
+    <h3 id="detail-band">-</h3>
+    <div class="detail-section">
+      <h4>Wavelength</h4>
+      <div class="detail-val" id="d-wave">-</div>
+    </div>
+    <div class="detail-section">
+      <h4>Frequency</h4>
+      <div class="detail-val" id="d-freq">-</div>
+    </div>
+    <div class="detail-section">
+      <h4>Photon Energy</h4>
+      <div class="detail-val" id="d-energy">-</div>
+    </div>
+    <div class="detail-section">
+      <h4>Atmosphere</h4>
+      <div id="d-atmos">-</div>
+    </div>
+    <div class="detail-section">
+      <h4>Astronomical Sources</h4>
+      <ul class="detail-list" id="d-sources"></ul>
+    </div>
+    <div class="detail-section">
+      <h4>Telescopes</h4>
+      <ul class="detail-list" id="d-telescopes"></ul>
+    </div>
+    <div class="detail-section" id="d-features-section" style="display:none;">
+      <h4>Notable Features</h4>
+      <ul class="detail-list" id="d-features"></ul>
+    </div>
+  </div>
+
+  <div id="visible-zoom">
+    <h4>Visible Light (380 &ndash; 700 nm)</h4>
+    <canvas id="vis-canvas"></canvas>
+  </div>
+
+  <canvas id="main-canvas"></canvas>
+
+  <div id="credit">COSMOS &middot; Swinburne Astronomy Online</div>
+
+  <div id="controls">
+    <label><input type="checkbox" id="cb-atmos" checked> Atmosphere</label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-visible"> Visible Zoom</label>
+    <div class="sep"></div>
+    <label>Scale:
+      <select id="sel-scale">
+        <option value="wavelength" selected>Wavelength</option>
+        <option value="frequency">Frequency</option>
+        <option value="energy">Energy</option>
+      </select>
+    </label>
+  </div>
+
+<script>
+// ---- Embedded mode ----
+if (window.self !== window.top || new URLSearchParams(window.location.search).get('embed') === '1') {
+  document.body.classList.add('embedded');
+}
+const isEmbedded = document.body.classList.contains('embedded');
+
+// ---- Constants ----
+const c = 2.99792458e8;        // m/s
+const h = 6.62607015e-34;      // J·s
+const eV = 1.602176634e-19;    // J per eV
+
+// Spectrum range in metres (wavelength)
+const LAMBDA_MIN = 1e-14;  // 0.01 pm (gamma)
+const LAMBDA_MAX = 1e3;    // 1 km (radio)
+
+// ---- Band definitions ----
+const BANDS = [
+  { name: 'Gamma Ray',   sub: null,     lMin: 1e-14, lMax: 1e-11,  color: '#3a0066' },
+  { name: 'X-Ray',       sub: 'Hard',   lMin: 1e-11, lMax: 1e-10,  color: '#0044aa' },
+  { name: 'X-Ray',       sub: 'Soft',   lMin: 1e-10, lMax: 1e-8,   color: '#2277cc' },
+  { name: 'Ultraviolet', sub: 'Extreme', lMin: 1e-8,  lMax: 1.22e-7, color: '#6633cc' },
+  { name: 'Ultraviolet', sub: 'Far',    lMin: 1.22e-7, lMax: 2e-7,  color: '#8844cc' },
+  { name: 'Ultraviolet', sub: 'Near',   lMin: 2e-7,  lMax: 3.8e-7, color: '#9955dd' },
+  { name: 'Visible',     sub: null,     lMin: 3.8e-7, lMax: 7e-7,  color: 'rainbow' },
+  { name: 'Infrared',    sub: 'Near',   lMin: 7e-7,  lMax: 5e-6,   color: '#aa2200' },
+  { name: 'Infrared',    sub: 'Mid',    lMin: 5e-6,  lMax: 2.5e-5, color: '#881100' },
+  { name: 'Infrared',    sub: 'Far',    lMin: 2.5e-5, lMax: 1e-3,  color: '#550800' },
+  { name: 'Microwave',   sub: null,     lMin: 1e-3,  lMax: 1e-1,   color: '#1a3a5c' },
+  { name: 'Radio',       sub: null,     lMin: 1e-1,  lMax: 1e3,    color: '#2a2a3a' },
+];
+
+// ---- Spectral features / annotations ----
+const FEATURES = [
+  { name: '21 cm hydrogen line',      lambda: 0.21,       band: 'Radio' },
+  { name: 'CO J=1-0 (2.6 mm)',        lambda: 2.6e-3,     band: 'Microwave' },
+  { name: 'CO J=2-1 (1.3 mm)',        lambda: 1.3e-3,     band: 'Microwave' },
+  { name: 'CMB peak (1.9 mm)',         lambda: 1.9e-3,     band: 'Microwave' },
+  { name: 'K band (2.2 \u03BCm)',     lambda: 2.2e-6,     band: 'Near IR' },
+  { name: 'H band (1.65 \u03BCm)',    lambda: 1.65e-6,    band: 'Near IR' },
+  { name: 'J band (1.25 \u03BCm)',    lambda: 1.25e-6,    band: 'Near IR' },
+  { name: 'H\u03B1 (656.3 nm)',       lambda: 656.3e-9,   band: 'Visible' },
+  { name: 'Na D (589 nm)',             lambda: 589e-9,     band: 'Visible' },
+  { name: 'H\u03B2 (486.1 nm)',       lambda: 486.1e-9,   band: 'Visible' },
+  { name: 'Ca K (393 nm)',             lambda: 393e-9,     band: 'Visible' },
+  { name: 'Lyman \u03B1 (121.6 nm)',  lambda: 121.6e-9,   band: 'UV' },
+  { name: 'Soft X-ray (1 keV)',        lambda: h * c / (1e3 * eV), band: 'X-ray' },
+  { name: 'Hard X-ray (10 keV)',       lambda: h * c / (1e4 * eV), band: 'X-ray' },
+  { name: 'Gamma (100 keV)',           lambda: h * c / (1e5 * eV), band: 'Gamma' },
+  { name: 'Gamma (1 MeV)',             lambda: h * c / (1e6 * eV), band: 'Gamma' },
+];
+
+// ---- Fraunhofer lines for visible zoom ----
+const FRAUNHOFER = [
+  { name: 'A',  lambda: 759.4e-9, element: 'O\u2082' },
+  { name: 'B',  lambda: 686.7e-9, element: 'O\u2082' },
+  { name: 'C',  lambda: 656.3e-9, element: 'H\u03B1' },
+  { name: 'D\u2081', lambda: 589.6e-9, element: 'Na' },
+  { name: 'D\u2082', lambda: 589.0e-9, element: 'Na' },
+  { name: 'E',  lambda: 527.0e-9, element: 'Fe' },
+  { name: 'F',  lambda: 486.1e-9, element: 'H\u03B2' },
+  { name: 'G',  lambda: 430.8e-9, element: 'Fe/Ca' },
+  { name: 'H',  lambda: 396.8e-9, element: 'Ca II' },
+  { name: 'K',  lambda: 393.4e-9, element: 'Ca II' },
+];
+
+// ---- Telescope data per band ----
+const TELESCOPES = {
+  'Radio':       ['VLA', 'ALMA', 'SKA', 'Parkes (Murriyang)', 'MeerKAT', 'LOFAR'],
+  'Microwave':   ['Planck', 'WMAP', 'ALMA', 'BICEP/Keck'],
+  'Infrared':    ['JWST', 'Spitzer', 'WISE', 'Herschel', 'SOFIA'],
+  'Visible':     ['Hubble (WFC3/UVIS)', 'Keck', 'VLT', 'ELT', 'Gemini', 'Rubin/LSST'],
+  'Ultraviolet': ['Hubble (COS/STIS)', 'GALEX', 'FUSE', 'Swift UVOT'],
+  'X-Ray':       ['Chandra', 'XMM-Newton', 'NuSTAR', 'eROSITA', 'Swift XRT'],
+  'Gamma Ray':   ['Fermi LAT', 'H.E.S.S.', 'CTA', 'MAGIC', 'VERITAS'],
+};
+
+// ---- Astronomical sources per band ----
+const SOURCES = {
+  'Radio':       ['Pulsars', 'Quasars & AGN jets', 'Supernova remnants', 'H II regions (21 cm)', 'Cosmic background (CMB tail)'],
+  'Microwave':   ['Cosmic Microwave Background (CMB)', 'Molecular clouds (CO)', 'Sunyaev-Zel\'dovich galaxy clusters', 'Spinning dust emission'],
+  'Infrared':    ['Star-forming regions', 'Proto-planetary discs', 'Red giants & cool stars', 'Dusty galaxies (high-z)', 'Galactic centre'],
+  'Visible':     ['Stellar photospheres', 'Nebulae (emission & reflection)', 'Galaxies', 'Planetary surfaces & atmospheres', 'Supernovae'],
+  'Ultraviolet': ['Hot O/B stars', 'White dwarfs', 'Active galactic nuclei', 'Star-forming galaxies', 'Planetary aurorae'],
+  'X-Ray':       ['Accretion discs (black holes, neutron stars)', 'Galaxy cluster hot gas', 'Supernova remnants', 'Stellar coronae', 'X-ray binaries'],
+  'Gamma Ray':   ['Gamma-ray bursts (GRBs)', 'Blazars & AGN jets', 'Pulsars (magnetospheric)', 'Nuclear decay lines', 'Cosmic ray interactions'],
+};
+
+// ---- Atmospheric opacity model ----
+// Returns transmission 0..1 for a given wavelength in metres.
+// Simplified but physically motivated model.
+function atmosphericTransmission(lambda) {
+  const l = lambda;
+  // Gamma and X-ray: completely opaque
+  if (l < 1e-8) return 0;
+  // EUV: opaque
+  if (l < 2e-7) return 0;
+  // Near UV 200-320nm: mostly opaque (ozone)
+  if (l < 3.2e-7) return 0.02;
+  // Near UV 320-380nm: partial
+  if (l < 3.8e-7) return 0.5 + 0.5 * (l - 3.2e-7) / (3.8e-7 - 3.2e-7);
+  // Visible: transparent
+  if (l < 7e-7) return 0.95;
+  // Near-IR windows
+  if (l < 1.5e-6) {
+    // Water absorption bands with windows
+    const w = l * 1e6; // microns
+    if (w > 0.93 && w < 0.97) return 0.1; // water band
+    if (w > 1.12 && w < 1.16) return 0.15;
+    if (w > 1.35 && w < 1.42) return 0.05;
+    return 0.85;
+  }
+  // J/H/K windows
+  if (l < 2.5e-6) {
+    const w = l * 1e6;
+    if (w > 1.8 && w < 2.0) return 0.05; // water
+    return 0.75;
+  }
+  // Mid-IR: some windows (N, Q bands)
+  if (l < 3e-5) {
+    const w = l * 1e6;
+    if (w > 3.0 && w < 4.0) return 0.6;  // L band
+    if (w > 4.5 && w < 5.2) return 0.5;  // M band
+    if (w > 7.5 && w < 14.5) return 0.5; // N band
+    if (w > 16 && w < 24) return 0.3;    // Q band
+    return 0.05;
+  }
+  // Far-IR: opaque (water vapour)
+  if (l < 1e-3) return 0.02;
+  // Sub-mm: some windows
+  if (l < 3e-3) {
+    const w = l * 1e3; // mm
+    if (w > 0.3 && w < 0.4) return 0.3;
+    if (w > 0.6 && w < 0.9) return 0.4;
+    return 0.1;
+  }
+  // Microwave: mostly transparent
+  if (l < 0.01) return 0.7;
+  // Radio windows
+  if (l < 0.1) return 0.9;
+  if (l < 10) return 0.95;
+  // Very long radio: ionosphere reflects
+  if (l < 30) return 0.5;
+  return 0.05; // very long wavelengths reflected by ionosphere
+}
+
+function atmosphereLabel(trans) {
+  if (trans > 0.7) return { text: 'Transparent', cls: 'atmos-transparent' };
+  if (trans > 0.3) return { text: 'Partially transparent', cls: 'atmos-partial' };
+  return { text: 'Opaque', cls: 'atmos-opaque' };
+}
+
+// ---- Unit formatting ----
+function formatWavelength(lambda) {
+  if (lambda >= 1) return (lambda >= 1000 ? (lambda/1000).toPrecision(3) + ' km' : lambda.toPrecision(3) + ' m');
+  if (lambda >= 1e-2) return (lambda * 100).toPrecision(3) + ' cm';
+  if (lambda >= 1e-3) return (lambda * 1e3).toPrecision(3) + ' mm';
+  if (lambda >= 1e-6) return (lambda * 1e6).toPrecision(3) + ' \u03BCm';
+  if (lambda >= 1e-9) return (lambda * 1e9).toPrecision(3) + ' nm';
+  if (lambda >= 1e-10) return (lambda * 1e10).toPrecision(3) + ' \u212B';
+  if (lambda >= 1e-12) return (lambda * 1e12).toPrecision(3) + ' pm';
+  return (lambda * 1e15).toPrecision(3) + ' fm';
+}
+
+function formatWavelengthFull(lambda) {
+  const parts = [];
+  // Primary
+  parts.push(formatWavelength(lambda));
+  // Secondary conversions
+  if (lambda >= 1e-6 && lambda < 1e-3) {
+    parts.push('= ' + (lambda * 1e9).toPrecision(4) + ' nm');
+  } else if (lambda >= 1e-9 && lambda < 1e-6) {
+    parts.push('= ' + (lambda * 1e10).toPrecision(4) + ' \u212B');
+  }
+  return parts.join(' ');
+}
+
+function formatFrequency(freq) {
+  if (freq >= 1e18) return (freq / 1e18).toPrecision(3) + ' EHz';
+  if (freq >= 1e15) return (freq / 1e15).toPrecision(3) + ' PHz';
+  if (freq >= 1e12) return (freq / 1e12).toPrecision(3) + ' THz';
+  if (freq >= 1e9) return (freq / 1e9).toPrecision(3) + ' GHz';
+  if (freq >= 1e6) return (freq / 1e6).toPrecision(3) + ' MHz';
+  if (freq >= 1e3) return (freq / 1e3).toPrecision(3) + ' kHz';
+  return freq.toPrecision(3) + ' Hz';
+}
+
+function formatEnergy(energy_eV) {
+  if (energy_eV >= 1e9) return (energy_eV / 1e9).toPrecision(3) + ' GeV';
+  if (energy_eV >= 1e6) return (energy_eV / 1e6).toPrecision(3) + ' MeV';
+  if (energy_eV >= 1e3) return (energy_eV / 1e3).toPrecision(3) + ' keV';
+  if (energy_eV >= 1) return energy_eV.toPrecision(3) + ' eV';
+  if (energy_eV >= 1e-3) return (energy_eV * 1e3).toPrecision(3) + ' meV';
+  return (energy_eV * 1e6).toPrecision(3) + ' \u03BCeV';
+}
+
+// ---- Canvas setup ----
+const canvas = document.getElementById('main-canvas');
+const ctx = canvas.getContext('2d');
+const dpr = Math.min(window.devicePixelRatio, 2);
+
+let W, H;
+function resize() {
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  draw();
+}
+
+// ---- Layout ----
+const MARGIN = { top: 60, bottom: 120, left: 60, right: 60 };
+function plotLeft() { return MARGIN.left; }
+function plotRight() { return W - MARGIN.right; }
+function plotWidth() { return plotRight() - plotLeft(); }
+
+// The spectrum strip
+const STRIP_TOP_FRAC = 0.28;
+const STRIP_HEIGHT = 80;
+function stripTop() { return H * STRIP_TOP_FRAC; }
+function stripBot() { return stripTop() + STRIP_HEIGHT; }
+
+// Atmosphere overlay position
+const ATMOS_TOP_FRAC = 0.55;
+const ATMOS_HEIGHT = 60;
+function atmosTop() { return H * ATMOS_TOP_FRAC; }
+
+// ---- Scale mapping ----
+let scaleMode = 'wavelength'; // 'wavelength' | 'frequency' | 'energy'
+
+// Map wavelength (m) to x position on canvas.
+// In wavelength mode: log scale from LAMBDA_MIN to LAMBDA_MAX (left=short, right=long)
+// In frequency mode: log scale from high to low freq (left=high freq = short wavelength)
+// In energy mode: same as frequency (high energy left)
+function lambdaToX(lambda) {
+  // All modes map left = high energy/freq/short wavelength
+  const logL = Math.log10(lambda);
+  const logMin = Math.log10(LAMBDA_MIN);
+  const logMax = Math.log10(LAMBDA_MAX);
+  let t;
+  if (scaleMode === 'wavelength') {
+    t = (logL - logMin) / (logMax - logMin);
+  } else {
+    // frequency and energy: reverse direction
+    t = 1 - (logL - logMin) / (logMax - logMin);
+  }
+  return plotLeft() + t * plotWidth();
+}
+
+function xToLambda(x) {
+  let t = (x - plotLeft()) / plotWidth();
+  t = Math.max(0, Math.min(1, t));
+  const logMin = Math.log10(LAMBDA_MIN);
+  const logMax = Math.log10(LAMBDA_MAX);
+  if (scaleMode === 'wavelength') {
+    return Math.pow(10, logMin + t * (logMax - logMin));
+  } else {
+    return Math.pow(10, logMin + (1 - t) * (logMax - logMin));
+  }
+}
+
+// ---- Visible light colour for wavelength ----
+function wavelengthToRGB(lambda_nm) {
+  // Attempt a physically-motivated approximation
+  let R = 0, G = 0, B = 0;
+  const w = lambda_nm;
+  if (w >= 380 && w < 440) {
+    R = -(w - 440) / (440 - 380);
+    G = 0;
+    B = 1;
+  } else if (w >= 440 && w < 490) {
+    R = 0;
+    G = (w - 440) / (490 - 440);
+    B = 1;
+  } else if (w >= 490 && w < 510) {
+    R = 0;
+    G = 1;
+    B = -(w - 510) / (510 - 490);
+  } else if (w >= 510 && w < 580) {
+    R = (w - 510) / (580 - 510);
+    G = 1;
+    B = 0;
+  } else if (w >= 580 && w < 645) {
+    R = 1;
+    G = -(w - 645) / (645 - 580);
+    B = 0;
+  } else if (w >= 645 && w <= 700) {
+    R = 1;
+    G = 0;
+    B = 0;
+  }
+  // Intensity correction at edges
+  let factor;
+  if (w >= 380 && w < 420) factor = 0.3 + 0.7 * (w - 380) / (420 - 380);
+  else if (w > 645 && w <= 700) factor = 0.3 + 0.7 * (700 - w) / (700 - 645);
+  else if (w >= 420 && w <= 645) factor = 1.0;
+  else factor = 0;
+  R = Math.round(255 * Math.pow(R * factor, 0.8));
+  G = Math.round(255 * Math.pow(G * factor, 0.8));
+  B = Math.round(255 * Math.pow(B * factor, 0.8));
+  return `rgb(${R},${G},${B})`;
+}
+
+// ---- Get band for a wavelength ----
+function getBand(lambda) {
+  for (const b of BANDS) {
+    if (lambda >= b.lMin && lambda < b.lMax) return b;
+  }
+  return BANDS[BANDS.length - 1];
+}
+
+function getBandName(lambda) {
+  const b = getBand(lambda);
+  return b.sub ? b.sub + ' ' + b.name : b.name;
+}
+
+function getMainBandName(lambda) {
+  const b = getBand(lambda);
+  return b.name;
+}
+
+// ---- Get nearby features ----
+function getNearbyFeatures(lambda) {
+  // Return features within a factor of 3 of the selected wavelength
+  return FEATURES.filter(f => {
+    const ratio = f.lambda / lambda;
+    return ratio > 0.33 && ratio < 3;
+  });
+}
+
+// ---- State ----
+let selectedLambda = null;
+let hoveredLambda = null;
+let dragging = false;
+let showAtmosphere = true;
+let showVisibleZoom = false;
+
+// ---- Drawing ----
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  const sTop = stripTop();
+  const sBot = stripBot();
+  const pL = plotLeft();
+  const pR = plotRight();
+  const pW = plotWidth();
+
+  // ---- Spectrum strip ----
+  for (let px = 0; px < pW; px++) {
+    const x = pL + px;
+    const lam = xToLambda(x);
+    const band = getBand(lam);
+    let col;
+    if (band.color === 'rainbow') {
+      col = wavelengthToRGB(lam * 1e9);
+    } else {
+      col = band.color;
+    }
+    ctx.fillStyle = col;
+    ctx.fillRect(x, sTop, 1, STRIP_HEIGHT);
+  }
+
+  // Strip border
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(pL, sTop, pW, STRIP_HEIGHT);
+
+  // ---- Band labels ----
+  ctx.font = '11px "Open Sans"';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  for (const b of BANDS) {
+    const x1 = lambdaToX(b.lMin);
+    const x2 = lambdaToX(b.lMax);
+    const xMid = (x1 + x2) / 2;
+    const bw = Math.abs(x2 - x1);
+    if (bw < 25) continue; // too narrow
+    const label = b.sub ? b.sub + ' ' + b.name : b.name;
+    // Truncate for narrow bands
+    const txt = bw < 50 ? (b.sub || b.name.substring(0, 3)) : label;
+    ctx.fillText(txt, xMid, sTop - 6);
+  }
+
+  // Band separator lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 0.5;
+  for (const b of BANDS) {
+    const x = lambdaToX(b.lMin);
+    ctx.beginPath();
+    ctx.moveTo(x, sTop);
+    ctx.lineTo(x, sBot);
+    ctx.stroke();
+  }
+
+  // ---- Axis scale ----
+  drawAxis(sBot + 10);
+
+  // ---- Atmosphere overlay ----
+  if (showAtmosphere) {
+    drawAtmosphere();
+  }
+
+  // ---- Feature markers ----
+  drawFeatures();
+
+  // ---- Selection marker ----
+  const activeLambda = selectedLambda || hoveredLambda;
+  if (activeLambda) {
+    const x = lambdaToX(activeLambda);
+    if (x >= pL && x <= pR) {
+      // Vertical line
+      ctx.strokeStyle = 'rgba(220,45,39,0.8)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x, sTop - 20);
+      ctx.lineTo(x, showAtmosphere ? atmosTop() + ATMOS_HEIGHT + 10 : sBot + 50);
+      ctx.stroke();
+
+      // Triangle marker
+      ctx.fillStyle = '#DC2D27';
+      ctx.beginPath();
+      ctx.moveTo(x - 6, sTop - 20);
+      ctx.lineTo(x + 6, sTop - 20);
+      ctx.lineTo(x, sTop - 10);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  // ---- Title (bottom area, only fullscreen) ----
+  if (!isEmbedded) {
+    drawScaleLabel();
+  }
+}
+
+function drawAxis(y) {
+  const pL = plotLeft();
+  const pR = plotRight();
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pL, y);
+  ctx.lineTo(pR, y);
+  ctx.stroke();
+
+  // Tick marks at powers of 10
+  ctx.font = '10px "Open Sans"';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+
+  if (scaleMode === 'wavelength') {
+    // Wavelength ticks
+    for (let exp = -14; exp <= 3; exp++) {
+      const lam = Math.pow(10, exp);
+      const x = lambdaToX(lam);
+      if (x < pL || x > pR) continue;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x, y + 6);
+      ctx.stroke();
+      ctx.fillText(formatWavelength(lam), x, y + 18);
+    }
+  } else if (scaleMode === 'frequency') {
+    // Frequency ticks
+    for (let exp = 5; exp <= 28; exp++) {
+      const freq = Math.pow(10, exp);
+      const lam = c / freq;
+      const x = lambdaToX(lam);
+      if (x < pL || x > pR) continue;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x, y + 6);
+      ctx.stroke();
+      ctx.fillText(formatFrequency(freq), x, y + 18);
+    }
+  } else {
+    // Energy ticks
+    for (let exp = -11; exp <= 12; exp++) {
+      const energy_eV = Math.pow(10, exp);
+      const lam = h * c / (energy_eV * eV);
+      const x = lambdaToX(lam);
+      if (x < pL || x > pR) continue;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x, y + 6);
+      ctx.stroke();
+      ctx.fillText(formatEnergy(energy_eV), x, y + 18);
+    }
+  }
+}
+
+function drawScaleLabel() {
+  ctx.font = '12px "Open Sans"';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(255,255,255,0.35)';
+  const labels = {
+    wavelength: 'Wavelength (increasing \u2192)',
+    frequency: 'Frequency (increasing \u2192)',
+    energy: 'Photon Energy (increasing \u2192)',
+  };
+  ctx.fillText(labels[scaleMode], (plotLeft() + plotRight()) / 2, stripBot() + 40);
+}
+
+function drawAtmosphere() {
+  const aTop = atmosTop();
+  const pL = plotLeft();
+  const pW = plotWidth();
+
+  // Label
+  ctx.font = '11px "Open Sans"';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = 'rgba(255,255,255,0.5)';
+  ctx.fillText('Atmospheric Opacity', pL, aTop - 6);
+
+  // Background
+  ctx.fillStyle = 'rgba(10,10,46,0.4)';
+  ctx.fillRect(pL, aTop, pW, ATMOS_HEIGHT);
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 0.5;
+  ctx.strokeRect(pL, aTop, pW, ATMOS_HEIGHT);
+
+  // 50% line
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(pL, aTop + ATMOS_HEIGHT / 2);
+  ctx.lineTo(pL + pW, aTop + ATMOS_HEIGHT / 2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels — standard convention: top=100% opaque, bottom=0% (transparent)
+  // Windows (transparent bands) appear as dips; blocked bands fill the top
+  ctx.font = '9px "Open Sans"';
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.textAlign = 'right';
+  ctx.fillText('100%', pL - 4, aTop + 10);
+  ctx.fillText('0%', pL - 4, aTop + ATMOS_HEIGHT - 2);
+
+  // Opacity curve — fill from top down to curve (filled area = blocked radiation)
+  ctx.beginPath();
+  ctx.moveTo(pL, aTop);
+  for (let px = 0; px <= pW; px++) {
+    const x = pL + px;
+    const lam = xToLambda(x);
+    const trans = atmosphericTransmission(lam);
+    const opacity = 1 - trans;
+    // opacity=1 → y at top (aTop), opacity=0 → y at bottom (aTop+H)
+    const yy = aTop + ATMOS_HEIGHT * (1 - opacity);
+    ctx.lineTo(x, yy);
+  }
+  ctx.lineTo(pL + pW, aTop);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(244,67,54,0.15)';
+  ctx.fill();
+
+  // Opacity curve — line (glow then sharp)
+  // Glow
+  ctx.beginPath();
+  for (let px = 0; px <= pW; px++) {
+    const x = pL + px;
+    const lam = xToLambda(x);
+    const trans = atmosphericTransmission(lam);
+    const opacity = 1 - trans;
+    const yy = aTop + ATMOS_HEIGHT * (1 - opacity);
+    if (px === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+  }
+  ctx.strokeStyle = 'rgba(255,100,80,0.25)';
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  // Sharp
+  ctx.beginPath();
+  for (let px = 0; px <= pW; px++) {
+    const x = pL + px;
+    const lam = xToLambda(x);
+    const trans = atmosphericTransmission(lam);
+    const opacity = 1 - trans;
+    const yy = aTop + ATMOS_HEIGHT * (1 - opacity);
+    if (px === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+  }
+  ctx.strokeStyle = 'rgba(255,120,100,0.8)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+function drawFeatures() {
+  ctx.font = '9px "Open Sans"';
+  ctx.textAlign = 'center';
+  const sBot = stripBot();
+  const sTop = stripTop();
+
+  for (let i = 0; i < FEATURES.length; i++) {
+    const f = FEATURES[i];
+    const x = lambdaToX(f.lambda);
+    if (x < plotLeft() || x > plotRight()) continue;
+
+    // Small tick below strip
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(x, sTop);
+    ctx.lineTo(x, sTop + 4);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, sBot - 4);
+    ctx.lineTo(x, sBot);
+    ctx.stroke();
+  }
+}
+
+// ---- Visible zoom ----
+const visCanvas = document.getElementById('vis-canvas');
+const visCtx = visCanvas.getContext('2d');
+const VIS_W = 400, VIS_H = 60;
+
+function initVisCanvas() {
+  visCanvas.width = VIS_W * dpr;
+  visCanvas.height = VIS_H * dpr;
+  visCanvas.style.width = (isEmbedded ? 280 : VIS_W) + 'px';
+  visCanvas.style.height = (isEmbedded ? 40 : VIS_H) + 'px';
+  visCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function drawVisibleZoom() {
+  if (!showVisibleZoom) return;
+  const w = VIS_W, h = VIS_H;
+  visCtx.clearRect(0, 0, w, h);
+
+  // Rainbow gradient
+  for (let px = 0; px < w; px++) {
+    const nm = 380 + (px / w) * (700 - 380);
+    visCtx.fillStyle = wavelengthToRGB(nm);
+    visCtx.fillRect(px, 0, 1, h * 0.6);
+  }
+
+  // Fraunhofer lines
+  visCtx.font = '8px "Open Sans"';
+  visCtx.textAlign = 'center';
+  for (const f of FRAUNHOFER) {
+    const nm = f.lambda * 1e9;
+    const px = ((nm - 380) / (700 - 380)) * w;
+    // Dark absorption line
+    visCtx.fillStyle = 'rgba(0,0,0,0.7)';
+    visCtx.fillRect(px - 0.5, 0, 1.5, h * 0.6);
+    // Label
+    visCtx.fillStyle = 'rgba(255,255,255,0.6)';
+    visCtx.fillText(f.name, px, h * 0.6 + 12);
+    visCtx.font = '7px "Open Sans"';
+    visCtx.fillStyle = 'rgba(255,255,255,0.35)';
+    visCtx.fillText(f.element, px, h * 0.6 + 22);
+    visCtx.font = '8px "Open Sans"';
+  }
+
+  // Wavelength ticks
+  visCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+  visCtx.lineWidth = 0.5;
+  visCtx.font = '8px "Open Sans"';
+  visCtx.fillStyle = 'rgba(255,255,255,0.4)';
+  for (let nm = 400; nm <= 700; nm += 50) {
+    const px = ((nm - 380) / (700 - 380)) * w;
+    visCtx.beginPath();
+    visCtx.moveTo(px, h * 0.6);
+    visCtx.lineTo(px, h * 0.6 + 3);
+    visCtx.stroke();
+    if (nm % 100 === 0) {
+      visCtx.fillText(nm + ' nm', px, h - 2);
+    }
+  }
+
+  // Selection marker on visible zoom
+  if (selectedLambda) {
+    const nm = selectedLambda * 1e9;
+    if (nm >= 380 && nm <= 700) {
+      const px = ((nm - 380) / (700 - 380)) * w;
+      visCtx.strokeStyle = 'rgba(220,45,39,0.8)';
+      visCtx.lineWidth = 2;
+      visCtx.beginPath();
+      visCtx.moveTo(px, 0);
+      visCtx.lineTo(px, h);
+      visCtx.stroke();
+    }
+  }
+
+  // Border
+  visCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+  visCtx.lineWidth = 1;
+  visCtx.strokeRect(0, 0, w, h * 0.6);
+}
+
+// ---- Update detail panel ----
+function updateDetail(lambda) {
+  if (!lambda || isEmbedded) {
+    document.getElementById('detail').style.display = 'none';
+    return;
+  }
+  const panel = document.getElementById('detail');
+  panel.style.display = 'block';
+
+  const freq = c / lambda;
+  const energy_J = h * freq;
+  const energy_eV_val = energy_J / eV;
+
+  document.getElementById('detail-band').textContent = getBandName(lambda);
+  document.getElementById('d-wave').textContent = formatWavelengthFull(lambda);
+  document.getElementById('d-freq').textContent = formatFrequency(freq);
+  document.getElementById('d-energy').textContent = formatEnergy(energy_eV_val);
+
+  // Atmosphere
+  const trans = atmosphericTransmission(lambda);
+  const aLabel = atmosphereLabel(trans);
+  document.getElementById('d-atmos').innerHTML =
+    `<span class="atmos-tag ${aLabel.cls}">${aLabel.text}</span>` +
+    `<span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:8px;">(${Math.round(trans * 100)}% transmission)</span>`;
+
+  // Sources
+  const mainBand = getMainBandName(lambda);
+  const srcList = document.getElementById('d-sources');
+  const sources = SOURCES[mainBand] || ['(no specific sources catalogued for this sub-band)'];
+  srcList.innerHTML = sources.map(s => `<li>${s}</li>`).join('');
+
+  // Telescopes
+  const telList = document.getElementById('d-telescopes');
+  const tels = TELESCOPES[mainBand] || ['(no major observatory covers this exact band)'];
+  telList.innerHTML = tels.map(t => `<li>${t}</li>`).join('');
+
+  // Nearby features
+  const features = getNearbyFeatures(lambda);
+  const fSection = document.getElementById('d-features-section');
+  const fList = document.getElementById('d-features');
+  if (features.length > 0) {
+    fSection.style.display = 'block';
+    fList.innerHTML = features.map(f =>
+      `<li>${f.name} (\u03BB = ${formatWavelength(f.lambda)})</li>`
+    ).join('');
+  } else {
+    fSection.style.display = 'none';
+  }
+}
+
+// ---- Update readout ----
+function updateReadout(lambda) {
+  if (!lambda) {
+    document.getElementById('r-band').textContent = '-';
+    document.getElementById('r-wave').textContent = '-';
+    document.getElementById('r-freq').textContent = '-';
+    document.getElementById('r-energy').textContent = '-';
+    return;
+  }
+  const freq = c / lambda;
+  const energy_eV_val = h * freq / eV;
+  document.getElementById('r-band').textContent = getBandName(lambda);
+  document.getElementById('r-wave').textContent = formatWavelength(lambda);
+  document.getElementById('r-freq').textContent = formatFrequency(freq);
+  document.getElementById('r-energy').textContent = formatEnergy(energy_eV_val);
+}
+
+// ---- Event handling ----
+function handlePointer(e, isClick) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const sTop = stripTop();
+  const sBot = stripBot();
+
+  // Check if in or near strip area
+  if (y >= sTop - 30 && y <= sBot + 30 && x >= plotLeft() && x <= plotRight()) {
+    const lambda = xToLambda(x);
+    if (isClick || dragging) {
+      selectedLambda = lambda;
+      updateDetail(lambda);
+    }
+    hoveredLambda = lambda;
+    updateReadout(lambda);
+    canvas.style.cursor = 'crosshair';
+    draw();
+    if (showVisibleZoom) drawVisibleZoom();
+  } else {
+    hoveredLambda = null;
+    canvas.style.cursor = 'default';
+    if (!isClick) {
+      updateReadout(selectedLambda);
+      draw();
+    }
+  }
+}
+
+canvas.addEventListener('mousedown', (e) => {
+  dragging = true;
+  handlePointer(e, true);
+});
+canvas.addEventListener('mousemove', (e) => {
+  handlePointer(e, false);
+});
+canvas.addEventListener('mouseup', () => { dragging = false; });
+canvas.addEventListener('mouseleave', () => {
+  dragging = false;
+  hoveredLambda = null;
+  updateReadout(selectedLambda);
+  draw();
+});
+
+// Touch support
+canvas.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  dragging = true;
+  handlePointer(e.touches[0], true);
+}, { passive: false });
+canvas.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (dragging) handlePointer(e.touches[0], true);
+}, { passive: false });
+canvas.addEventListener('touchend', () => { dragging = false; });
+
+// ---- Keyboard ----
+window.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    // Reset
+    selectedLambda = null;
+    hoveredLambda = null;
+    updateReadout(null);
+    updateDetail(null);
+    draw();
+    if (showVisibleZoom) drawVisibleZoom();
+  }
+});
+
+// ---- Controls ----
+document.getElementById('cb-atmos').addEventListener('change', (e) => {
+  showAtmosphere = e.target.checked;
+  draw();
+});
+
+document.getElementById('cb-visible').addEventListener('change', (e) => {
+  showVisibleZoom = e.target.checked;
+  document.getElementById('visible-zoom').style.display = showVisibleZoom ? 'block' : 'none';
+  if (showVisibleZoom) drawVisibleZoom();
+});
+
+document.getElementById('sel-scale').addEventListener('change', (e) => {
+  scaleMode = e.target.value;
+  draw();
+  if (showVisibleZoom) drawVisibleZoom();
+});
+
+// ---- Init ----
+window.addEventListener('resize', resize);
+initVisCanvas();
+resize();
+document.getElementById('loading').style.display = 'none';
+</script>
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Asteroid Belt | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; max-width: 340px;
+      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; display: none; }
+    .panel-box {
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 6px 10px 4px;
+    }
+    .panel-box h3 { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5); margin-bottom: 4px; text-align: center; }
+    .panel-box canvas { display: block; border-radius: 3px; }
+    body.embedded #panels { top: 8px; right: 8px; }
+    body.embedded #hist-canvas { width: 200px; height: 110px; }
+    body.embedded #credit { display: none; }
+
+    #tooltip {
+      position: absolute; display: none;
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+      border-radius: 6px; padding: 10px 14px; font-size: 12px; max-width: 280px;
+      line-height: 1.5; pointer-events: none; z-index: 20; color: #e0e0e0;
+    }
+
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4);
+      z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Loading&hellip;</div>
+
+  <div id="info">
+    <h2>Asteroid Belt</h2>
+    <p class="desc">The main belt between Mars and Jupiter, with Kirkwood gaps from orbital resonances and Trojan asteroids at Jupiter's Lagrange points.</p>
+    <p class="hint">Drag to rotate &middot; Scroll to zoom &middot; Hover labels for details</p>
+  </div>
+
+  <div id="tooltip"></div>
+
+  <div id="panels" style="position:absolute;top:16px;right:16px;z-index:10;">
+    <div class="panel-box">
+      <h3>Main Belt Distribution</h3>
+      <canvas id="hist-canvas" width="300" height="190"></canvas>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="btn-play">&#9654; Play</button>
+    <div class="sep"></div>
+    <label>Speed
+      <select id="speed-select">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="3">3x</option>
+        <option value="10">10x</option>
+        <option value="30">30x</option>
+      </select>
+    </label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="toggle-orbits" checked> Orbits</label>
+    <label><input type="checkbox" id="toggle-labels" checked> Labels</label>
+  </div>
+
+  <div id="credit">COSMOS &middot; Swinburne Astronomy Online</div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+    import { Line2 } from 'three/addons/lines/Line2.js';
+    import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
+    import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+    // ---- Embedded mode ----
+    const isEmbedded = window.self !== window.top;
+    if (isEmbedded) document.body.classList.add('embedded');
+
+    // ---- Scene ----
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 500);
+    camera.position.set(0, 16, 0.01);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    document.body.prepend(renderer.domElement);
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild(labelRenderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 2;
+    controls.maxDistance = 50;
+
+    // ---- Bloom post-processing ----
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      0.45, 0.7, 0.4));
+    composer.addPass(new OutputPass());
+
+    // ---- Circular particle material (mandatory: PointsMaterial renders squares) ----
+    function makeCircleMat(color, size, opacity) {
+      return new THREE.ShaderMaterial({
+        uniforms: {
+          uColor: { value: new THREE.Color(color) },
+          uSize: { value: size },
+          uOpacity: { value: opacity },
+          uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+        },
+        vertexShader: `
+          uniform float uSize;
+          uniform float uPixelRatio;
+          void main() {
+            vec4 mv = modelViewMatrix * vec4(position, 1.0);
+            gl_PointSize = max(uSize * uPixelRatio * (200.0 / -mv.z), 1.2);
+            gl_Position = projectionMatrix * mv;
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 uColor;
+          uniform float uOpacity;
+          void main() {
+            float d = length(gl_PointCoord - 0.5) * 2.0;
+            if (d > 1.0) discard;
+            float alpha = exp(-d * d * 3.0) * uOpacity;
+            gl_FragColor = vec4(uColor, alpha);
+          }
+        `,
+        transparent: true,
+        depthWrite: false,
+      });
+    }
+
+    // ---- Planet data (correct semi-major axes in AU) ----
+    const planets = [
+      { name: 'Mercury', a: 0.387, e: 0.206, period: 0.241, r: 0.05, color: 0xcccccc,
+        desc: 'The smallest planet, just 0.055 Earth masses. Orbital period: 88 days.' },
+      { name: 'Venus', a: 0.723, e: 0.007, period: 0.615, r: 0.07, color: 0xeecc66,
+        desc: 'Similar in size to Earth but with a thick CO\u2082 atmosphere. Period: 225 days.' },
+      { name: 'Earth', a: 1.0, e: 0.017, period: 1.0, r: 0.075, color: 0x44aaee,
+        desc: 'Our home planet. Orbital period: 365.25 days (1 year).' },
+      { name: 'Mars', a: 1.524, e: 0.093, period: 1.881, r: 0.06, color: 0xee5533,
+        desc: 'The Red Planet. The asteroid belt inner edge lies just beyond. Period: 687 days.' },
+      { name: 'Jupiter', a: 5.203, e: 0.049, period: 11.86, r: 0.25, color: 0xeebb88,
+        desc: 'The largest planet (318 Earth masses). Its gravity sculpts the asteroid belt and captures Trojans. Period: 11.86 years.' },
+    ];
+
+    // ---- Kepler solver ----
+    function solveKepler(M, e) {
+      let E = M;
+      for (let i = 0; i < 10; i++) E = E - (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+      return E;
+    }
+
+    function orbitXZ(a, e, period, time) {
+      const M = ((2 * Math.PI) / period) * time;
+      const E = solveKepler(M, e);
+      return [a * (Math.cos(E) - e), -a * Math.sqrt(1 - e * e) * Math.sin(E)];
+    }
+
+    function orbitXYZ(a, e, period, time, incl, omega) {
+      const M = ((2 * Math.PI) / period) * time;
+      const E = solveKepler(M, e);
+      const xO = a * (Math.cos(E) - e), yO = a * Math.sqrt(1 - e * e) * Math.sin(E);
+      const co = Math.cos(omega), so = Math.sin(omega), ci = Math.cos(incl), si = Math.sin(incl);
+      return [co * xO - so * yO, (so * xO + co * yO) * si, -(so * xO + co * yO) * ci];
+    }
+
+    function createOrbitRing(a, e, color, opacity) {
+      // Plain THREE.Line — 1px, no Line2 artifacts. Additive blending gives soft glow.
+      const period = Math.pow(a, 1.5);
+      const pts = [];
+      for (let i = 0; i <= 256; i++) {
+        const [x, z] = orbitXZ(a, e, period, (i / 256) * period);
+        pts.push(new THREE.Vector3(x, 0, z));
+      }
+      return new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({
+          color, transparent: true, opacity: 0.35,
+          blending: THREE.AdditiveBlending, depthWrite: false,
+        })
+      );
+    }
+
+    // ---- Groups ----
+    const orbitGroup = new THREE.Group(); scene.add(orbitGroup);
+    const labelGroup = new THREE.Group(); scene.add(labelGroup);
+
+    // ---- Tooltip ----
+    const tipEl = document.getElementById('tooltip');
+    function makeLabel(text, pos, color, desc) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      div.style.cssText = `color:${color};font-size:11px;font-weight:600;font-family:"Open Sans",sans-serif;text-shadow:0 0 8px rgba(0,0,0,1),0 0 3px rgba(0,0,0,1);pointer-events:auto;cursor:default;padding:2px 4px;`;
+      if (desc) {
+        div.addEventListener('mouseenter', ev => { tipEl.innerHTML = `<strong>${text}</strong><br>${desc}`; tipEl.style.display = 'block'; tipEl.style.left = (ev.clientX+14)+'px'; tipEl.style.top = (ev.clientY-10)+'px'; });
+        div.addEventListener('mousemove', ev => { tipEl.style.left = (ev.clientX+14)+'px'; tipEl.style.top = (ev.clientY-10)+'px'; });
+        div.addEventListener('mouseleave', () => tipEl.style.display = 'none');
+      }
+      const label = new CSS2DObject(div);
+      label.position.set(pos.x||0, pos.y||0, pos.z||0);
+      labelGroup.add(label);
+      return label;
+    }
+
+    // ---- Sun (radial-gradient sprite — smooth glow, no hard edges) ----
+    {
+      const c = document.createElement('canvas');
+      c.width = 128; c.height = 128;
+      const g = c.getContext('2d');
+      const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+      // Compact bright disc — bloom handles the glow, no painted halo
+      grad.addColorStop(0,    'rgba(255,255,255,1)');
+      grad.addColorStop(0.1,  'rgba(255,250,200,1)');
+      grad.addColorStop(0.25, 'rgba(255,230,80,0.9)');
+      grad.addColorStop(0.45, 'rgba(255,180,30,0.2)');
+      grad.addColorStop(0.65, 'rgba(255,120,0,0.02)');
+      grad.addColorStop(1,    'rgba(255,80,0,0)');
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 128, 128);
+      const sunTex = new THREE.CanvasTexture(c);
+      const sunSprite = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: sunTex, blending: THREE.AdditiveBlending, depthWrite: false,
+      }));
+      sunSprite.scale.set(0.9, 0.9, 1);
+      scene.add(sunSprite);
+    }
+    makeLabel('Sun', { y: 0.1, z: -0.25 }, '#ffee55', 'Our star. All planets and asteroids orbit it.');
+
+    // ---- Planets ----
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const planetObjs = planets.map(p => {
+      orbitGroup.add(createOrbitRing(p.a, p.e, p.color, 0.5));
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.r, 24, 24), new THREE.MeshBasicMaterial({ color: p.color }));
+      mesh.userData = { name: p.name, desc: `${p.desc}<br><em style="font-size:11px;opacity:0.5;">Semi-major axis: ${p.a} AU · e=${p.e} · P=${p.period} yr</em>` };
+      scene.add(mesh);
+      const label = makeLabel(p.name, {}, `#${p.color.toString(16).padStart(6,'0')}`);
+      return { mesh, label, data: p, phase: Math.random() * p.period };
+    });
+
+    // Tooltip on planet mesh hover (raycaster), not on label
+    const allPlanetMeshes = planetObjs.map(o => o.mesh);
+    renderer.domElement.addEventListener('pointermove', ev => {
+      pointer.x = (ev.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(ev.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(allPlanetMeshes);
+      if (hits.length > 0) {
+        const d = hits[0].object.userData;
+        tipEl.innerHTML = `<strong>${d.name}</strong><br>${d.desc}`;
+        tipEl.style.display = 'block';
+        tipEl.style.left = (ev.clientX + 14) + 'px';
+        tipEl.style.top = (ev.clientY - 10) + 'px';
+      } else {
+        tipEl.style.display = 'none';
+      }
+    });
+
+    // ---- Kirkwood gaps (orbital resonances with Jupiter) ----
+    // Wider exclusion zones for visual clarity — real gaps are narrower but
+    // the density dip must be obvious at 5000 particles
+    const gaps = [
+      { c: 2.502, w: 0.18 }, // 3:1 resonance — wide and obvious
+      { c: 2.825, w: 0.14 }, // 5:2 resonance
+      { c: 2.958, w: 0.12 }, // 7:3 resonance
+      { c: 3.278, w: 0.20 }, // 2:1 resonance (strongest — widest gap)
+    ];
+    function inGap(a) { return gaps.some(g => Math.abs(a - g.c) < g.w); }
+
+    // ---- Realistic belt distribution — traced from observed histogram ----
+    // Piecewise linear density at 0.05 AU intervals, read from the reference plot.
+    // Values are relative density (0–10 scale). Rejection sampling.
+    const beltPDF = [
+      // a,   density   (blue inner belt)
+      [2.06,  0.0], [2.10, 0.5], [2.15, 1.5], [2.20, 3.5], [2.25, 6.0],
+      [2.30, 8.5], [2.35, 10.0], [2.38, 9.5], [2.40, 8.0], [2.42, 6.0],
+      [2.44, 4.0], [2.46, 2.0], [2.48, 0.5], [2.50, 0.0],
+      // (3:1 Kirkwood gap)
+      // a,   density   (orange middle belt)
+      [2.52, 0.0], [2.55, 3.0], [2.58, 5.0], [2.60, 6.5], [2.63, 7.5],
+      [2.65, 7.5], [2.68, 7.0], [2.70, 6.5], [2.73, 5.5], [2.75, 5.0],
+      [2.78, 3.5], [2.80, 1.5], [2.82, 0.0],
+      // (5:2 Kirkwood gap)
+      // a,   density   (between 5:2 and 7:3 — small population)
+      [2.84, 0.0], [2.87, 1.5], [2.90, 2.5], [2.93, 2.0], [2.96, 0.0],
+      // (7:3 Kirkwood gap)
+      // a,   density   (green outer belt)
+      [2.98, 0.0], [3.00, 2.0], [3.03, 4.0], [3.05, 5.5], [3.08, 6.0],
+      [3.10, 6.5], [3.12, 6.5], [3.15, 6.0], [3.18, 5.5], [3.20, 5.0],
+      [3.22, 4.0], [3.25, 2.0], [3.27, 0.5], [3.28, 0.0],
+      // (2:1 Kirkwood gap — essentially empty beyond)
+    ];
+    // Build CDF for inverse-transform sampling
+    const beltCDF = [];
+    let cumul = 0;
+    for (let i = 1; i < beltPDF.length; i++) {
+      const [a0, d0] = beltPDF[i-1], [a1, d1] = beltPDF[i];
+      const area = (a1 - a0) * (d0 + d1) * 0.5; // trapezoid
+      cumul += area;
+      beltCDF.push({ a0, a1, d0, d1, cumStart: cumul - area, cumEnd: cumul });
+    }
+    const beltTotal = cumul;
+    function sampleBeltA() {
+      const u = Math.random() * beltTotal;
+      for (const seg of beltCDF) {
+        if (u <= seg.cumEnd) {
+          // Linear interpolation within this segment
+          const frac = (u - seg.cumStart) / (seg.cumEnd - seg.cumStart || 1e-9);
+          return seg.a0 + frac * (seg.a1 - seg.a0);
+        }
+      }
+      return beltPDF[beltPDF.length-1][0]; // fallback
+    }
+
+    // ---- Asteroids, Trojans & Hildas ----
+    let asteroidPoints, asteroidData = [], nAst = 2000;
+    let trojanL4Points, trojanL5Points, trojanL4Data = [], trojanL5Data = [];
+    let hildaPoints, hildaData = [];
+
+    function buildAll(count) {
+      nAst = count;
+      const nTroj = Math.max(120, Math.floor(count * 0.05));
+      const nHilda = Math.max(200, Math.floor(count * 0.06));  // need enough for triangle to be visible
+
+      // Main belt
+      asteroidData = [];
+      for (let i = 0; i < nAst; i++) {
+        const a = sampleBeltA();
+        asteroidData.push({ a, e: 0.01+Math.random()*0.2, incl: (Math.random()-0.5)*0.3,
+          omega: Math.random()*Math.PI*2, raan: Math.random()*Math.PI*2,
+          period: Math.pow(a,1.5), phase: Math.random()*Math.pow(a,1.5) });
+      }
+      if (asteroidPoints) scene.remove(asteroidPoints);
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(nAst * 3), 3));
+      asteroidPoints = new THREE.Points(geo, makeCircleMat(0xeeeedd, isEmbedded ? 0.16 : 0.24, isEmbedded ? 0.35 : 0.75));
+      scene.add(asteroidPoints);
+
+      // Trojans (L4 Greeks, L5 Trojans) — wider scatter, z-oscillation
+      function makeTrojanData(angleDeg, n) {
+        const data = [], aRad = angleDeg * Math.PI / 180;
+        for (let i = 0; i < n; i++) {
+          const angSpread = ((Math.random()+Math.random()+Math.random())/3 - 0.5) * 0.87;
+          // Tapered: tangential scatter wide at centre, narrow at edges
+          const tFrac = Math.abs(angSpread) / 0.435; // 0=centre, 1=edge
+          data.push({
+            angOff: angSpread, nom: aRad,
+            dTangent: (Math.random()-0.5) * 0.5 * (1 - tFrac * 0.7), // tapers toward tips
+            dRadial: (Math.random()-0.5) * 0.3,  // narrow in radius
+            // Gaussian-weighted inclination: mean ~10°, rare above 25°
+            yAmp: (Math.random()+Math.random()+Math.random()-1.5)/1.5 * 1.2,
+            yPeriod: 3 + Math.random() * 8,
+            yPhase: Math.random() * Math.PI * 2,
+          });
+        }
+        return data;
+      }
+      trojanL4Data = makeTrojanData(60, nTroj);
+      trojanL5Data = makeTrojanData(-60, nTroj);
+
+      [trojanL4Points, trojanL5Points].forEach(p => { if (p) scene.remove(p); });
+      function mkTrojPts(data, color) {
+        const g = new THREE.BufferGeometry();
+        g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(data.length * 3), 3));
+        const p = new THREE.Points(g, makeCircleMat(color, isEmbedded ? 0.20 : 0.26, isEmbedded ? 0.55 : 0.85));
+        scene.add(p); return p;
+      }
+      trojanL4Points = mkTrojPts(trojanL4Data, 0x99ffbb);
+      trojanL5Points = mkTrojPts(trojanL5Data, 0x99ffbb);
+
+      // Hildas — 3:2 resonance with Jupiter at ~3.97 AU
+      // Uniformly distributed in orbital phase (time). The triangle emerges
+      // because eccentric orbits spend more time at aphelion (slow) than
+      // perihelion (fast). With 3 aphelion directions (omega 120° apart),
+      // the density peaks form a triangle.
+      // omega is set relative to Jupiter's initial angle so the triangle
+      // starts at the correct orientation.
+      hildaData = [];
+      const hildaA0 = 3.90;
+      // Resonant period: exactly 2/3 of Jupiter's period (3:2 resonance lock)
+      const jupPeriodExact = planets[4].period; // 11.86 yr
+      const hildaPeriod = jupPeriodExact * 2 / 3; // ~7.907 yr
+      // Compute Jupiter's angle at t=0 to align the triangle
+      const jupData = planets[4], jupPhase0 = planetObjs[4].phase;
+      const [jx0, jz0] = orbitXZ(jupData.a, jupData.e, jupData.period, jupPhase0);
+      const jupAngle0 = Math.atan2(-jz0, jx0);
+      // hildaTime at t=0 (must match animation loop: hildaTime = jupTime)
+      const hildaTime0 = jupPhase0;
+      for (let i = 0; i < nHilda; i++) {
+        const a = hildaA0 + (Math.random() - 0.5) * 0.4;
+        const e = 0.12 + Math.random() * 0.10;
+        const cluster = Math.floor(Math.random() * 3);
+        // Phase biased toward aphelion (M=π) — mimics resonance libration
+        let M0;
+        if (Math.random() < 0.6) {
+          M0 = Math.PI + (Math.random() + Math.random() - 1) * 0.8;
+        } else {
+          M0 = Math.random() * Math.PI * 2;
+        }
+        const phase = (M0 / (2 * Math.PI)) * hildaPeriod - hildaTime0;
+        // Aphelion direction: 3 vertices at L4 (60°), anti-Jupiter (180°), L5 (300°)
+        const targetAngle = jupAngle0 + [Math.PI/3, Math.PI, 5*Math.PI/3][cluster]
+          + (Math.random() - 0.5) * 0.15;
+        // Resonance libration: Jupiter nudges Hildas, causing them to
+        // oscillate around the resonance centre. Period ~150–350 Hilda orbits,
+        // amplitude ~15–35° in longitude.
+        const libAmp = (0.25 + Math.random() * 0.35) * hildaPeriod / (2 * Math.PI);
+        const libPeriod = hildaPeriod * (150 + Math.random() * 200);
+        const libPhase = Math.random() * 2 * Math.PI;
+        hildaData.push({ a, e, period: hildaPeriod, phase,
+          incl: (Math.random() - 0.5) * 0.2,
+          omega: targetAngle - Math.PI,
+          raan: 0,
+          libAmp, libPeriod, libPhase,
+        });
+      }
+      if (hildaPoints) scene.remove(hildaPoints);
+      const hgeo = new THREE.BufferGeometry();
+      hgeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(nHilda * 3), 3));
+      hildaPoints = new THREE.Points(hgeo, makeCircleMat(0xff8877, isEmbedded ? 0.22 : 0.26, isEmbedded ? 0.7 : 0.95));
+      scene.add(hildaPoints);
+    }
+    buildAll(10000);
+    document.getElementById('loading').style.display = 'none';
+
+    // ---- Histogram panel ----
+    const histCanvas = document.getElementById('hist-canvas');
+    const hctx = histCanvas.getContext('2d');
+    function drawHistogram() {
+      const W = histCanvas.width, H = histCanvas.height;
+      const pad = { l: 32, r: 8, t: 8, b: 32 };
+      const pW = W - pad.l - pad.r, pH = H - pad.t - pad.b;
+      const aMin = 2.0, aMax = 5.6, nBins = 120;
+      const binW = (aMax - aMin) / nBins;
+      // Separate bins per population
+      const beltBins = new Array(nBins).fill(0);
+      const hildaBins = new Array(nBins).fill(0);
+      const trojanBins = new Array(nBins).fill(0);
+
+      asteroidData.forEach(d => {
+        const bi = Math.floor((d.a - aMin) / binW);
+        if (bi >= 0 && bi < nBins) beltBins[bi]++;
+      });
+      // Hildas: spread around 3.97 AU in histogram (real distribution width ~0.15 AU)
+      hildaData.forEach(() => {
+        const a = 3.90 + (Math.random() + Math.random() - 1) * 0.2;
+        const bi = Math.floor((a - aMin) / binW);
+        if (bi >= 0 && bi < nBins) hildaBins[bi]++;
+      });
+      // Trojans: distributed around Jupiter's 5.203 AU (spread ±0.3 AU)
+      [...trojanL4Data, ...trojanL5Data].forEach(() => {
+        const a = 5.203 + (Math.random() + Math.random() - 1) * 0.3;
+        const bi = Math.floor((a - aMin) / binW);
+        if (bi >= 0 && bi < nBins) trojanBins[bi]++;
+      });
+
+      // Log density — y-axis starts at 10, shows Hildas and Trojans alongside belt
+      const allBins = beltBins.map((b, i) => b + hildaBins[i] + trojanBins[i]);
+      const logMin = Math.log10(10), logMax = Math.log10(Math.max(...allBins, 10) + 1);
+
+      // Background
+      hctx.fillStyle = 'rgba(6,6,30,1)';
+      hctx.fillRect(0, 0, W, H);
+
+      // Draw bars — log scale, layered: belt (white) then hildas (red) then trojans (green)
+      function drawBins(bins, color) {
+        hctx.fillStyle = color;
+        for (let i = 0; i < nBins; i++) {
+          if (bins[i] === 0) continue;
+          const logVal = Math.log10(bins[i] + 1);
+          if (logVal < logMin) continue;
+          const bh = ((logVal - logMin) / (logMax - logMin)) * pH;
+          const x = pad.l + (i / nBins) * pW;
+          const w = Math.max(1, pW / nBins - 0.5);
+          hctx.fillRect(x, pad.t + pH - bh, w, bh);
+        }
+      }
+      drawBins(beltBins, 'rgba(255,255,255,0.6)');
+      drawBins(hildaBins, 'rgba(255,80,80,0.8)');
+      drawBins(trojanBins, 'rgba(100,255,180,0.8)');
+
+      // Kirkwood gap markers
+      hctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      hctx.lineWidth = 1;
+      hctx.setLineDash([4, 3]);
+      hctx.font = '11px "Open Sans", sans-serif';
+      hctx.fillStyle = 'rgba(255,255,255,0.6)';
+      hctx.textAlign = 'center';
+      gaps.forEach(g => {
+        const x = pad.l + ((g.c - aMin) / (aMax - aMin)) * pW;
+        hctx.beginPath(); hctx.moveTo(x, pad.t); hctx.lineTo(x, pad.t + pH); hctx.stroke();
+      });
+      // Resonance labels
+      [[2.502,'3:1'],[2.825,'5:2'],[2.958,'7:3'],[3.278,'2:1']].forEach(([a,lbl]) => {
+        const x = pad.l + ((a - aMin) / (aMax - aMin)) * pW;
+        hctx.fillText(lbl, x, pad.t + 10);
+      });
+      hctx.setLineDash([]);
+
+      // Axes
+      hctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      hctx.lineWidth = 0.5;
+      hctx.strokeRect(pad.l, pad.t, pW, pH);
+
+      // Y-axis log labels
+      hctx.fillStyle = 'rgba(255,255,255,0.5)';
+      hctx.font = '11px "Open Sans", sans-serif';
+      hctx.textAlign = 'right';
+      [10, 100, 1000].forEach(v => {
+        const logV = Math.log10(v);
+        if (logV < logMin || logV > logMax) return;
+        const y = pad.t + pH - ((logV - logMin) / (logMax - logMin)) * pH;
+        hctx.fillText(v, pad.l - 4, y + 4);
+        hctx.strokeStyle = 'rgba(255,255,255,0.06)';
+        hctx.beginPath(); hctx.moveTo(pad.l, y); hctx.lineTo(pad.l + pW, y); hctx.stroke();
+      });
+
+      // X-axis labels + title
+      hctx.fillStyle = 'rgba(255,255,255,0.6)';
+      hctx.font = '11px "Open Sans", sans-serif';
+      hctx.textAlign = 'center';
+      for (let a = 2.0; a <= 5.5; a += 0.5) {
+        const x = pad.l + ((a - aMin) / (aMax - aMin)) * pW;
+        hctx.fillText(a.toFixed(1), x, H - 14);
+      }
+      hctx.fillStyle = 'rgba(255,255,255,0.5)';
+      hctx.font = '12px "Open Sans", sans-serif';
+      hctx.fillText('Semi-major Axis (AU)', pad.l + pW * 0.5, H - 1);
+    }
+    drawHistogram();
+
+    // Belt boundaries
+    makeLabel('MAIN BELT', { x: -2.7, y: 0.1, z: 0 }, '#bbbbaa',
+      'Located 2.1\u20133.3 AU from the Sun, between Mars and Jupiter. Kirkwood gaps caused by orbital resonances with Jupiter.');
+
+    // ---- Named asteroids (Ceres, Vesta) ----
+    const namedAsteroids = [
+      { name: 'Ceres', a: 2.769, e: 0.076, period: Math.pow(2.769, 1.5), r: 0.05,
+        color: 0xffeedd, desc: 'Dwarf planet. Largest object in the belt (940 km diameter). Discovered 1801.' },
+      { name: 'Vesta', a: 2.362, e: 0.089, period: Math.pow(2.362, 1.5), r: 0.04,
+        color: 0xffeecc, desc: 'Second-largest asteroid (525 km). Brightest asteroid visible from Earth.' },
+    ];
+    const namedObjs = namedAsteroids.map(na => {
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(na.r, 16, 16),
+        new THREE.MeshBasicMaterial({ color: na.color }));
+      scene.add(mesh);
+      mesh.userData = { name: na.name, desc: `${na.desc}<br><em style="font-size:11px;opacity:0.5;">a=${na.a} AU · e=${na.e}</em>` };
+      allPlanetMeshes.push(mesh); // add to raycaster hover targets
+      const label = makeLabel(na.name, {}, `#${na.color.toString(16).padStart(6,'0')}`);
+      return { mesh, label, data: na, phase: Math.random() * na.period };
+    });
+
+    // ---- Distance scale (HTML overlay — fixed screen X, projected Y) ----
+    const scaleEl = document.createElement('div');
+    scaleEl.style.cssText = 'position:absolute;left:16px;top:0;bottom:0;width:80px;z-index:5;pointer-events:none;';
+    document.body.appendChild(scaleEl);
+    // Canvas for the vertical line + tick marks
+    const scaleCanvas = document.createElement('canvas');
+    scaleCanvas.style.cssText = 'position:absolute;left:55px;top:0;width:20px;height:100%;';
+    scaleCanvas.width = 20; scaleCanvas.height = window.innerHeight;
+    scaleEl.appendChild(scaleCanvas);
+    const sctx = scaleCanvas.getContext('2d');
+    window.addEventListener('resize', () => { scaleCanvas.height = window.innerHeight; });
+    // Create tick label elements for each AU
+    const scaleTicks = [];
+    for (let au = 1; au <= 5; au++) {
+      const tick = document.createElement('div');
+      tick.style.cssText = `position:absolute;left:0;white-space:nowrap;font-family:"Open Sans",sans-serif;text-shadow:0 0 6px rgba(0,0,0,1);`;
+      tick.innerHTML = `<span style="color:rgba(255,255,255,0.7);font-size:${isEmbedded?11:14}px;font-weight:600;">${au} AU</span><br><span style="color:rgba(255,200,100,0.55);font-size:${isEmbedded?9:12}px;">${(au*8.317).toFixed(1)} lm</span>`;
+      scaleEl.appendChild(tick);
+      scaleTicks.push({ au, el: tick });
+    }
+    // Distance scale: tracks zoom (camera distance) so 1 AU on scale = 1 AU in scene.
+    // Does NOT track rotation or tilt — fixed screen position, correct at any zoom.
+    function updateScale() {
+      const camR = camera.position.length();
+      const fov = camera.fov * Math.PI / 180;
+      const pxPerAU = window.innerHeight / (2 * Math.tan(fov / 2) * camR);
+      const centreY = window.innerHeight / 2;
+      const H = scaleCanvas.height;
+
+      // Draw vertical line + tick marks
+      sctx.clearRect(0, 0, 20, H);
+      sctx.strokeStyle = 'rgba(255,255,255,0.4)';
+      sctx.lineWidth = 1.5;
+      const y0 = centreY, y5 = centreY - 5 * pxPerAU;
+      sctx.beginPath(); sctx.moveTo(10, y0); sctx.lineTo(10, y5); sctx.stroke();
+      for (let au = 0; au <= 5; au++) {
+        const y = centreY - au * pxPerAU;
+        if (y > 0 && y < H) {
+          sctx.beginPath(); sctx.moveTo(4, y); sctx.lineTo(16, y); sctx.stroke();
+        }
+      }
+
+      // Position labels
+      scaleTicks.forEach(({ au, el }) => {
+        const sy = centreY - au * pxPerAU - 10;
+        el.style.top = sy + 'px';
+        el.style.display = (sy > 0 && sy < H - 40) ? 'block' : 'none';
+      });
+    }
+    window.addEventListener('resize', () => { scaleCanvas.height = window.innerHeight; });
+
+    // AU rings
+    for (let au = 1; au <= 6; au++) {
+      const pts = [];
+      for (let i = 0; i <= 128; i++) { const a = (i/128)*Math.PI*2; pts.push(new THREE.Vector3(au*Math.cos(a), -0.01, au*Math.sin(a))); }
+      const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineDashedMaterial({ color: 0x6666aa, transparent: true, opacity: 0.15, dashSize: 0.15, gapSize: 0.1 }));
+      l.computeLineDistances(); scene.add(l);
+    }
+
+    // ---- Stars (two-layer: dim + bright for bloom glow) ----
+    {
+      const N = 800, pos = new Float32Array(N * 3);
+      for (let i = 0; i < N; i++) {
+        const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1), r = 50+Math.random()*70;
+        pos[i*3] = r*Math.sin(ph)*Math.cos(th);
+        pos[i*3+1] = r*Math.sin(ph)*Math.sin(th);
+        pos[i*3+2] = r*Math.cos(ph);
+      }
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      scene.add(new THREE.Points(geo, makeCircleMat(0xffffff, 0.25 * 1, 0.3)));
+
+      const NB = 80, bpos = new Float32Array(NB * 3);
+      for (let i = 0; i < NB; i++) {
+        const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1), r = 40+Math.random()*60;
+        bpos[i*3] = r*Math.sin(ph)*Math.cos(th);
+        bpos[i*3+1] = r*Math.sin(ph)*Math.sin(th);
+        bpos[i*3+2] = r*Math.cos(ph);
+      }
+      const bgeo = new THREE.BufferGeometry();
+      bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+      scene.add(new THREE.Points(bgeo, makeCircleMat(0xffffff, 0.5 * 1, 0.9)));
+    }
+
+    // Trojan + Hilda labels
+    const trL4Label = makeLabel('GREEKS', {}, '#88ddaa',
+      'The Greeks: leading Jupiter by 60\u00b0 at the L4 Lagrange point. Named after heroes of the Trojan War who fought for Greece.');
+    const trL5Label = makeLabel('TROJANS', {}, '#88ddaa',
+      'The Trojans: trailing Jupiter by 60\u00b0 at the L5 Lagrange point. Named after defenders of Troy.');
+    const hildaLabel = makeLabel('HILDAS', {}, '#ff6666',
+      'The Hildas: in 3:2 orbital resonance with Jupiter at ~4.0 AU. They form a triangular pattern, clustering at three points 120\u00b0 apart.');
+
+    // ---- Animation ----
+    let time = 0, playing = false, speedMul = 1.0;
+    const jupObj = planetObjs.find(p => p.data.name === 'Jupiter');
+
+    function update(t) {
+      // Planets
+      planetObjs.forEach(({ mesh, label, data, phase }) => {
+        const [x, z] = orbitXZ(data.a, data.e, data.period, t + phase);
+        mesh.position.set(x, 0, z);
+        label.position.set(x, 0.1, z - data.r - 0.06);
+      });
+
+      // Named asteroids (Ceres, Vesta)
+      namedObjs.forEach(({ mesh, label, data, phase }) => {
+        const [x, z] = orbitXZ(data.a, data.e, data.period, t + phase);
+        mesh.position.set(x, 0, z);
+        label.position.set(x, 0.1, z - data.r - 0.05);
+      });
+
+      // Main belt
+      if (asteroidPoints) {
+        const arr = asteroidPoints.geometry.attributes.position.array;
+        for (let i = 0; i < nAst; i++) {
+          const ad = asteroidData[i];
+          const [x0, y, z0] = orbitXYZ(ad.a, ad.e, ad.period, t + ad.phase, ad.incl, ad.omega);
+          // Rotate by RAAN to decorrelate z-oscillation across similar-radius asteroids
+          const cr = Math.cos(ad.raan), sr = Math.sin(ad.raan);
+          arr[i*3] = x0*cr - z0*sr; arr[i*3+1] = y; arr[i*3+2] = x0*sr + z0*cr;
+        }
+        asteroidPoints.geometry.attributes.position.needsUpdate = true;
+      }
+
+      // Trojans — positioned at Jupiter's angle ±60°
+      const jupA = Math.atan2(-jupObj.mesh.position.z, jupObj.mesh.position.x);
+      const jupR = Math.sqrt(jupObj.mesh.position.x**2 + jupObj.mesh.position.z**2);
+      function updTroj(pts, data) {
+        if (!pts) return;
+        const arr = pts.geometry.attributes.position.array;
+        for (let i = 0; i < data.length; i++) {
+          const d = data[i];
+          // Compute the L-point position on Jupiter's orbit at ±60° offset
+          const lAngle = jupA + d.nom + d.angOff;
+          // Get the orbital radius at this angle using Jupiter's orbit parameters
+          // For Jupiter: a=5.203, e=0.049. Use the orbit equation r = a(1-e²)/(1+e·cos(trueAnomaly))
+          // Approximate: compute position on orbit at the offset time
+          const jupP = 11.86, jupE = 0.049, jupAA = 5.203;
+          const lTime = lAngle / (2 * Math.PI / jupP); // approximate time for this angle
+          const [lx, lz] = orbitXZ(jupAA, jupE, jupP, lTime);
+          // Apply local scatter (tangential and radial relative to orbit direction)
+          const radDir = Math.atan2(-lz, lx); // radial direction from Sun
+          const tanDir = radDir + Math.PI/2; // tangential direction
+          const x = lx + d.dRadial * Math.cos(radDir) + d.dTangent * Math.cos(tanDir);
+          const z = lz - d.dRadial * Math.sin(radDir) - d.dTangent * Math.sin(tanDir);
+          arr[i*3] = x;
+          arr[i*3+1] = d.yAmp * Math.sin(t / d.yPeriod * 2 * Math.PI + d.yPhase);
+          arr[i*3+2] = z;
+        }
+        pts.geometry.attributes.position.needsUpdate = true;
+      }
+      updTroj(trojanL4Points, trojanL4Data);
+      updTroj(trojanL5Points, trojanL5Data);
+
+      // Label positions: compute L4/L5 on Jupiter's orbit
+      const jupP = 11.86, jupE = 0.049, jupAA = 5.203;
+      const l4Time = (jupA + Math.PI/3) / (2*Math.PI/jupP);
+      const l5Time = (jupA - Math.PI/3) / (2*Math.PI/jupP);
+      const [l4x, l4z] = orbitXZ(jupAA, jupE, jupP, l4Time);
+      const [l5x, l5z] = orbitXZ(jupAA, jupE, jupP, l5Time);
+      trL4Label.position.set(l4x, 0.3, l4z);
+      trL5Label.position.set(l5x, 0.3, l5z);
+
+      // Hildas — resonance-locked to Jupiter via 3:2 mean-motion resonance.
+      // Not Keplerian: Jupiter nudges them at each conjunction, causing
+      // libration around the resonance centre. Without this, they'd drift
+      // out of resonance. The libration term models the restoring force.
+      if (hildaPoints) {
+        const jupTime = t + jupObj.phase;
+        // hildaPeriod = (2/3)*jupPeriod, so M advances 1.5x faster than Jupiter
+        // No extra scaling needed — the resonant period handles it.
+        const hildaTime = jupTime;
+        const arr = hildaPoints.geometry.attributes.position.array;
+        for (let i = 0; i < hildaData.length; i++) {
+          const hd = hildaData[i];
+          // Libration: oscillation around resonance centre from Jupiter's perturbation
+          const lib = hd.libAmp * Math.sin(2 * Math.PI * hildaTime / hd.libPeriod + hd.libPhase);
+          const [x0, y, z0] = orbitXYZ(hd.a, hd.e, hd.period, hildaTime + hd.phase + lib, hd.incl, hd.omega);
+          const cr = Math.cos(hd.raan), sr = Math.sin(hd.raan);
+          arr[i*3] = x0*cr - z0*sr; arr[i*3+1] = y; arr[i*3+2] = x0*sr + z0*cr;
+        }
+        hildaPoints.geometry.attributes.position.needsUpdate = true;
+        // Label opposite Jupiter
+        const hAng = jupA + Math.PI;
+        hildaLabel.position.set(3.9 * Math.cos(hAng), 0.3, -3.9 * Math.sin(hAng));
+      }
+
+    }
+
+    let lastT = performance.now();
+    function animate(now) {
+      requestAnimationFrame(animate);
+      if (playing) time += ((now - lastT) / 1000) * speedMul * 0.5;
+      lastT = now;
+      update(time);
+      updateScale();
+      controls.update();
+      composer.render();
+      labelRenderer.render(scene, camera);
+    }
+    update(0);
+    animate(performance.now());
+
+    // ---- Controls ----
+    document.getElementById('btn-play').addEventListener('click', function() {
+      playing = !playing;
+      this.textContent = playing ? '\u23F8 Pause' : '\u25B6 Play';
+      this.classList.toggle('active', playing);
+    });
+    document.getElementById('speed-select').addEventListener('change', function() { speedMul = parseFloat(this.value); });
+    // Spacebar toggles play/pause
+    window.addEventListener('keydown', e => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        document.getElementById('btn-play').click();
+      }
+    });
+    document.getElementById('toggle-orbits').addEventListener('change', function() { orbitGroup.visible = this.checked; });
+    document.getElementById('toggle-labels').addEventListener('change', function() { labelGroup.visible = this.checked; });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(window.innerWidth, window.innerHeight);
+      labelRenderer.setSize(window.innerWidth, window.innerHeight);
+      // Update LineMaterial resolutions
+      scene.traverse(obj => { if (obj.material && obj.material.isLineMaterial) obj.material.resolution.set(window.innerWidth, window.innerHeight); });
+    });
+  </script>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>

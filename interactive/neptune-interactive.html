@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Neptune | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+    #info { position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; max-width: 340px;
+      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none; }
+    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    body.embedded #info h2, body.embedded #info .desc, body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; }
+    body.embedded #credit { display: none; }
+    #controls { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw; }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls select { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+    #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none; }
+    #credit { position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap; }
+    #credit a { color: rgba(255,255,255,0.35); }
+    @media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading&hellip;</div>
+  <div id="info">
+    <h2>Neptune</h2>
+    <p class="desc">The most distant planet &mdash; an ice giant 30&nbsp;AU from the Sun, with supersonic winds up to 2,100&nbsp;km/h and a vivid blue colour from methane absorption.</p>
+    <p class="hint">Drag to orbit &middot; Scroll to zoom</p>
+  </div>
+  <div id="controls">
+    <label><input type="checkbox" id="cb-rotate" checked> Rotate</label>
+    <div class="sep"></div>
+    <label>Speed
+      <select id="speed-select">
+        <option value="0.2">0.2&times;</option>
+        <option value="0.5" selected>0.5&times;</option>
+        <option value="1">1&times;</option>
+        <option value="3">3&times;</option>
+        <option value="10">10&times;</option>
+      </select>
+    </label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-day"> Day</label>
+  </div>
+  <div id="credit">Texture: <a href="https://www.solarsystemscope.com/textures" target="_blank">Solar System Scope</a> (CC&nbsp;BY&nbsp;4.0).</div>
+
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+  if (window.self !== window.top) document.body.classList.add('embedded');
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  document.body.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500);
+  camera.position.set(0, 0.5, 3);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.minDistance = 1.5;
+  controls.maxDistance = 10;
+
+  /* ---- Lights ---- */
+  const ambientLight = new THREE.AmbientLight(0x222233, 0.2);
+  scene.add(ambientLight);
+  const sunLight = new THREE.DirectionalLight(0xeeeeff, 1.8);
+  sunLight.position.set(5, 2, 3);
+  scene.add(sunLight);
+
+  /* ---- Planet rotation state ---- */
+  let rotating = true;
+  let speedMul = 0.5;
+  const BASE_ROT = 0.002;
+  let dayMode = false;
+
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  composer.addPass(new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.35, 0.6, 0.4));
+
+  const texLoader = new THREE.TextureLoader();
+  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+
+  const surfaceTex = texLoader.load('../assets/textures/planets/web/2k_neptune.jpg', () => {
+    document.getElementById('loading').style.display = 'none';
+  });
+  surfaceTex.colorSpace = THREE.SRGBColorSpace;
+  surfaceTex.anisotropy = maxAniso;
+
+  /* Planet group: tilt the group, rotate the inner mesh */
+  const planetGroup = new THREE.Group();
+  planetGroup.rotation.z = THREE.MathUtils.degToRad(28.32); /* Neptune axial tilt */
+  scene.add(planetGroup);
+
+  const planet = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 128, 64),
+    new THREE.MeshStandardMaterial({ map: surfaceTex, roughness: 0.75, metalness: 0.0 })
+  );
+  planetGroup.add(planet);
+
+  /* Blue methane atmosphere */
+  const ATMOS_R = 1.10;
+  planetGroup.add(new THREE.Mesh(
+    new THREE.SphereGeometry(ATMOS_R, 64, 64),
+    new THREE.ShaderMaterial({
+      transparent: true, blending: THREE.AdditiveBlending,
+      depthWrite: false, side: THREE.FrontSide,
+      uniforms: {
+        atmosColor:  { value: new THREE.Color(0x3366dd) },
+        earthRadius: { value: 1.005 },
+        atmosRadius: { value: ATMOS_R },
+        scaleHeight: { value: 0.035 },
+        intensity:   { value: 2.0 },
+      },
+      vertexShader: `
+        varying vec3 vWorldPos;
+        void main() {
+          vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }`,
+      fragmentShader: `
+        uniform vec3  atmosColor;
+        uniform float earthRadius, atmosRadius, scaleHeight, intensity;
+        varying vec3  vWorldPos;
+        void main() {
+          vec3 rd = normalize(vWorldPos - cameraPosition);
+          vec3 ro = vWorldPos;
+          float hb = dot(ro, rd);
+          float disc = hb*hb - dot(ro,ro) + earthRadius*earthRadius;
+          float pathLen = disc > 0.0 ? max(-hb - sqrt(disc), 0.0) : max(-2.0 * hb, 0.0);
+          float sum = 0.0, dt = pathLen / 8.0;
+          for (int i = 0; i < 8; i++) {
+            vec3 p = ro + rd * ((float(i) + 0.5) * dt);
+            sum += exp(-(length(p) - earthRadius) / scaleHeight) * dt;
+          }
+          float alpha = clamp(sum * intensity, 0.0, 1.0);
+          gl_FragColor = vec4(atmosColor * alpha, alpha);
+        }`,
+    })
+  ));
+
+  /* Stars */
+  {
+    const N = 800, pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const theta = Math.random() * Math.PI * 2, phi = Math.acos(2 * Math.random() - 1), r = 50 + Math.random() * 70;
+      pos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i*3+2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.12, sizeAttenuation: true, transparent: true, opacity: 0.3 })));
+    const NB = 80, bpos = new Float32Array(NB * 3);
+    for (let i = 0; i < NB; i++) {
+      const theta = Math.random() * Math.PI * 2, phi = Math.acos(2 * Math.random() - 1), r = 40 + Math.random() * 60;
+      bpos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+      bpos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      bpos[i*3+2] = r * Math.cos(phi);
+    }
+    const bgeo = new THREE.BufferGeometry();
+    bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+    scene.add(new THREE.Points(bgeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.25, sizeAttenuation: true, transparent: true, opacity: 0.9 })));
+  }
+
+  /* ---- Controls wiring ---- */
+  document.getElementById('cb-rotate').onchange = function() { rotating = this.checked; };
+  document.getElementById('speed-select').onchange = function() { speedMul = parseFloat(this.value); };
+  document.getElementById('cb-day').onchange = function() {
+    dayMode = this.checked;
+    if (dayMode) {
+      ambientLight.color.set(0xffffff);
+      ambientLight.intensity = 4.0;
+      sunLight.visible = false;
+    } else {
+      ambientLight.color.set(0x222233);
+      ambientLight.intensity = 0.2;
+      sunLight.visible = true;
+    }
+  };
+
+  /* ---- Animation: rotate the planet, not the camera ---- */
+  function animate() {
+    requestAnimationFrame(animate);
+    if (rotating) planet.rotation.y += BASE_ROT * speedMul;
+    controls.update();
+    composer.render();
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
+  });
+  </script>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>

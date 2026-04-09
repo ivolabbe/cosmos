@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hertzsprung-Russell Diagram | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* --- Info panel (top-left) --- */
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 18px 24px; max-width: 380px;
+      font-size: 15px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 20px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    .readout { margin-top: 10px; font-size: 13px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.8); }
+    .readout div { margin-bottom: 2px; }
+    .readout span { color: #fff; font-weight: 600; }
+
+    /* --- Embedded mode --- */
+    body.embedded #info h2,
+    body.embedded #info .desc,
+    body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; font-size: 13px; }
+    body.embedded #info .readout { margin-top: 0; font-size: 11px; }
+    body.embedded #credit { display: none; }
+    body.embedded #cross-section { width: 200px; min-width: 200px; }
+    body.embedded #cross-section h3 { font-size: 10px; }
+    body.embedded #cross-section .cs-phase { font-size: 10px; }
+
+    /* --- Tooltip --- */
+    #tooltip {
+      position: absolute; display: none;
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+      border-radius: 6px; padding: 10px 14px; font-size: 12px; max-width: 280px;
+      line-height: 1.5; pointer-events: none; z-index: 20; color: #e0e0e0;
+    }
+
+    /* --- Controls bar (bottom center) --- */
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.9); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    #controls select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 3px 6px; border-radius: 4px; font-family: inherit; font-size: 11px;
+    }
+    #controls select option { background: #1a1a3e; color: #fff; }
+    #controls button {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 10px; border-radius: 4px; font-family: inherit; font-size: 11px; cursor: pointer;
+    }
+    #controls button:hover { background: rgba(255,255,255,0.18); }
+    #controls button.active { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .mass-btn { cursor: pointer; }
+    .mass-btn.selected { background: rgba(220,45,39,0.5); border-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+    /* --- Main layout --- */
+    #main-container {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+    }
+    #hr-canvas-wrap {
+      flex: 1; position: relative; min-width: 0;
+    }
+    #hr-canvas {
+      width: 100%; height: 100%; display: block;
+    }
+
+    /* --- Cross-section sidebar --- */
+    #cross-section {
+      width: 280px; min-width: 280px;
+      background: rgba(10,10,46,0.92); border-left: 1px solid rgba(255,255,255,0.12);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding: 16px 12px; z-index: 5;
+    }
+    #cross-section h3 {
+      font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5);
+      margin-bottom: 4px; text-align: center;
+    }
+    #cross-section .cs-phase {
+      font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 8px; text-align: center;
+      min-height: 20px;
+    }
+    #cs-canvas { display: block; border-radius: 3px; }
+
+    /* --- Region description panel --- */
+    #region-desc {
+      position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+      background: rgba(10,10,46,0.95); border: 1px solid rgba(220,45,39,0.5);
+      border-radius: 8px; padding: 12px 18px; max-width: 500px;
+      font-size: 13px; line-height: 1.5; z-index: 15; display: none; text-align: center;
+    }
+    #region-desc b { color: #fff; font-size: 14px; }
+
+    /* --- Loading / Credit --- */
+    #loading {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none;
+    }
+    #credit {
+      position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap;
+    }
+
+    @media (max-width: 700px) {
+      #controls { flex-wrap: wrap; justify-content: center; }
+      #cross-section { width: 180px; min-width: 180px; padding: 8px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading">Loading...</div>
+
+  <div id="info">
+    <h2>Hertzsprung-Russell Diagram</h2>
+    <p class="desc">Watch a star evolve across the most important diagram in stellar astrophysics.</p>
+    <div class="readout">
+      <div>Mass: <span id="r-mass">-</span></div>
+      <div>Phase: <span id="r-phase">-</span></div>
+      <div>log T<sub>eff</sub>: <span id="r-logT">-</span></div>
+      <div>log L/L<sub>&#9737;</sub>: <span id="r-logL">-</span></div>
+      <div>Radius: <span id="r-radius">-</span></div>
+      <div>Age: <span id="r-age">-</span></div>
+    </div>
+    <p class="hint">Select a mass. Click diagram regions to explore. Spacebar: play/pause.</p>
+  </div>
+
+  <div id="main-container">
+    <div id="hr-canvas-wrap">
+      <canvas id="hr-canvas"></canvas>
+    </div>
+    <div id="cross-section">
+      <h3>Stellar Interior</h3>
+      <div class="cs-phase" id="cs-phase-label">Select a star</div>
+      <canvas id="cs-canvas" width="240" height="240"></canvas>
+    </div>
+  </div>
+
+  <div id="region-desc"></div>
+  <div id="tooltip"></div>
+
+  <div id="controls">
+    <button class="mass-btn" data-mass="0.5">0.5 M&#9737;</button>
+    <button class="mass-btn" data-mass="1">1 M&#9737;</button>
+    <button class="mass-btn" data-mass="2">2 M&#9737;</button>
+    <button class="mass-btn" data-mass="5">5 M&#9737;</button>
+    <button class="mass-btn" data-mass="10">10 M&#9737;</button>
+    <button class="mass-btn" data-mass="25">25 M&#9737;</button>
+    <div class="sep"></div>
+    <button id="btn-play">&#9654; Play</button>
+    <label>Speed
+      <select id="speed-select">
+        <option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option>
+        <option value="2">2x</option>
+        <option value="5">5x</option>
+      </select>
+    </label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="toggle-isoradius"> Iso-R</label>
+    <label><input type="checkbox" id="toggle-spectral"> Sp. Type</label>
+    <label><input type="checkbox" id="toggle-instability"> Instab.</label>
+  </div>
+
+  <div id="credit">Evolutionary tracks based on MESA/MIST models (Choi+ 2016). Stellar properties from Hurley+ (2000). COSMOS / Swinburne Astronomy Online.</div>
+
+  <script>
+    // Embedded mode
+    if (window.self !== window.top || new URLSearchParams(location.search).has('embed')) document.body.classList.add('embedded');
+    const isEmbedded = document.body.classList.contains('embedded');
+
+    // ===== EVOLUTIONARY TRACK DATA =====
+    const tracks = {
+      0.5: [
+        { logT: 3.584, logL: -1.00, phase: "ZAMS",    dur: 0.00 },
+        { logT: 3.575, logL: -0.85, phase: "Mid-MS",  dur: 0.50 },
+        { logT: 3.560, logL: -0.70, phase: "Late MS", dur: 0.45 },
+        { logT: 3.545, logL: -0.50, phase: "End MS (>age of Universe)", dur: 0.05 },
+      ],
+      1: [
+        { logT: 3.762, logL:  0.00, phase: "ZAMS",        dur: 0.00 },
+        { logT: 3.749, logL:  0.30, phase: "Mid-MS",      dur: 0.40 },
+        { logT: 3.724, logL:  0.60, phase: "TAMS",        dur: 0.20 },
+        { logT: 3.700, logL:  0.80, phase: "Subgiant",    dur: 0.08 },
+        { logT: 3.680, logL:  1.20, phase: "Base RGB",    dur: 0.05 },
+        { logT: 3.600, logL:  2.00, phase: "Mid RGB",     dur: 0.04 },
+        { logT: 3.550, logL:  3.40, phase: "RGB Tip",     dur: 0.03 },
+        { logT: 3.550, logL:  3.35, phase: "He Flash",    dur: 0.005 },
+        { logT: 3.700, logL:  1.70, phase: "HB",          dur: 0.06 },
+        { logT: 3.580, logL:  2.50, phase: "Early AGB",   dur: 0.03 },
+        { logT: 3.520, logL:  3.50, phase: "AGB Tip",     dur: 0.02 },
+        { logT: 3.550, logL:  3.40, phase: "PN ejection", dur: 0.005 },
+        { logT: 4.700, logL:  2.00, phase: "PN nucleus",  dur: 0.005 },
+        { logT: 4.600, logL:  0.00, phase: "Hot WD",      dur: 0.02 },
+        { logT: 4.200, logL: -1.50, phase: "Cooling WD",  dur: 0.03 },
+        { logT: 3.800, logL: -3.50, phase: "Cool WD",     dur: 0.04 },
+      ],
+      2: [
+        { logT: 3.950, logL:  1.26, phase: "ZAMS",        dur: 0.00 },
+        { logT: 3.920, logL:  1.50, phase: "Mid-MS",      dur: 0.35 },
+        { logT: 3.870, logL:  1.80, phase: "TAMS",        dur: 0.15 },
+        { logT: 3.750, logL:  2.00, phase: "Subgiant",    dur: 0.06 },
+        { logT: 3.660, logL:  2.40, phase: "Base RGB",    dur: 0.05 },
+        { logT: 3.600, logL:  2.80, phase: "RGB",         dur: 0.04 },
+        { logT: 3.580, logL:  3.10, phase: "He ignition", dur: 0.03 },
+        { logT: 3.750, logL:  1.90, phase: "HB",          dur: 0.06 },
+        { logT: 3.620, logL:  2.60, phase: "Early AGB",   dur: 0.04 },
+        { logT: 3.550, logL:  3.40, phase: "AGB Tip",     dur: 0.03 },
+        { logT: 4.600, logL:  1.80, phase: "PN nucleus",  dur: 0.005 },
+        { logT: 4.400, logL:  0.20, phase: "Hot WD",      dur: 0.02 },
+        { logT: 4.000, logL: -1.20, phase: "Cooling WD",  dur: 0.04 },
+      ],
+      5: [
+        { logT: 4.241, logL: 2.77,  phase: "ZAMS",             dur: 0.00 },
+        { logT: 4.200, logL: 3.00,  phase: "Mid-MS",           dur: 0.35 },
+        { logT: 4.100, logL: 3.20,  phase: "TAMS",             dur: 0.15 },
+        { logT: 3.800, logL: 3.30,  phase: "Hertzsprung gap",  dur: 0.03 },
+        { logT: 3.600, logL: 3.40,  phase: "Base RGB",         dur: 0.03 },
+        { logT: 3.560, logL: 3.50,  phase: "He ignition",      dur: 0.02 },
+        { logT: 4.050, logL: 3.20,  phase: "Blue loop (hot)",  dur: 0.08 },
+        { logT: 3.700, logL: 3.35,  phase: "Blue loop return", dur: 0.06 },
+        { logT: 3.560, logL: 3.80,  phase: "AGB",              dur: 0.05 },
+        { logT: 3.520, logL: 4.00,  phase: "AGB Tip",          dur: 0.02 },
+        { logT: 4.800, logL: 2.50,  phase: "PN nucleus",       dur: 0.005 },
+        { logT: 4.500, logL: 0.50,  phase: "Hot WD",           dur: 0.02 },
+        { logT: 4.100, logL:-1.00,  phase: "Cooling WD",       dur: 0.03 },
+      ],
+      10: [
+        { logT: 4.398, logL: 3.77,  phase: "ZAMS",              dur: 0.00 },
+        { logT: 4.350, logL: 4.00,  phase: "Mid-MS",            dur: 0.35 },
+        { logT: 4.250, logL: 4.20,  phase: "TAMS",              dur: 0.15 },
+        { logT: 3.800, logL: 4.25,  phase: "Hertzsprung gap",   dur: 0.02 },
+        { logT: 3.600, logL: 4.30,  phase: "RSG",               dur: 0.05 },
+        { logT: 4.100, logL: 4.10,  phase: "Blue loop",         dur: 0.08 },
+        { logT: 3.580, logL: 4.50,  phase: "RSG (He shell)",    dur: 0.05 },
+        { logT: 3.560, logL: 4.60,  phase: "Pre-SN",            dur: 0.02 },
+        { logT: 3.560, logL: 4.60,  phase: "Core Collapse SN",  dur: 0.01 },
+      ],
+      25: [
+        { logT: 4.568, logL: 4.80,  phase: "ZAMS",              dur: 0.00 },
+        { logT: 4.530, logL: 5.00,  phase: "Mid-MS",            dur: 0.35 },
+        { logT: 4.450, logL: 5.20,  phase: "TAMS",              dur: 0.15 },
+        { logT: 4.000, logL: 5.10,  phase: "Yellow SG",         dur: 0.05 },
+        { logT: 3.600, logL: 5.30,  phase: "RSG",               dur: 0.08 },
+        { logT: 4.200, logL: 5.20,  phase: "Blue loop / WR",    dur: 0.06 },
+        { logT: 3.580, logL: 5.40,  phase: "RSG return",        dur: 0.04 },
+        { logT: 3.580, logL: 5.40,  phase: "Core Collapse SN",  dur: 0.01 },
+      ],
+    };
+
+    // MS lifetimes for age readout (yr)
+    const msLifetimes = { 0.5: 56e9, 1: 10e9, 2: 1.1e9, 5: 94e6, 10: 20e6, 25: 6.4e6 };
+
+    // ===== COLOUR FROM TEMPERATURE =====
+    // Fine-grained lookup with linear interpolation
+    const colorAnchors = [
+      { T: 2000,  r: 255, g: 80,  b: 30  },
+      { T: 3000,  r: 255, g: 96,  b: 48  },
+      { T: 3500,  r: 255, g: 120, b: 60  },
+      { T: 4000,  r: 255, g: 143, b: 64  },
+      { T: 4500,  r: 255, g: 165, b: 80  },
+      { T: 5000,  r: 255, g: 192, b: 112 },
+      { T: 5500,  r: 255, g: 210, b: 140 },
+      { T: 6000,  r: 255, g: 235, b: 190 },
+      { T: 6500,  r: 255, g: 244, b: 224 },
+      { T: 7500,  r: 248, g: 240, b: 255 },
+      { T: 8500,  r: 220, g: 225, b: 255 },
+      { T: 10000, r: 200, g: 208, b: 255 },
+      { T: 15000, r: 175, g: 195, b: 255 },
+      { T: 20000, r: 160, g: 180, b: 255 },
+      { T: 30000, r: 155, g: 176, b: 255 },
+      { T: 50000, r: 150, g: 170, b: 255 },
+    ];
+
+    function tempToRGB(T) {
+      if (T <= colorAnchors[0].T) return [colorAnchors[0].r, colorAnchors[0].g, colorAnchors[0].b];
+      if (T >= colorAnchors[colorAnchors.length-1].T) {
+        const c = colorAnchors[colorAnchors.length-1];
+        return [c.r, c.g, c.b];
+      }
+      for (let i = 0; i < colorAnchors.length - 1; i++) {
+        if (T >= colorAnchors[i].T && T < colorAnchors[i+1].T) {
+          const t = (T - colorAnchors[i].T) / (colorAnchors[i+1].T - colorAnchors[i].T);
+          return [
+            Math.round(colorAnchors[i].r + t * (colorAnchors[i+1].r - colorAnchors[i].r)),
+            Math.round(colorAnchors[i].g + t * (colorAnchors[i+1].g - colorAnchors[i].g)),
+            Math.round(colorAnchors[i].b + t * (colorAnchors[i+1].b - colorAnchors[i].b)),
+          ];
+        }
+      }
+      return [200, 208, 255];
+    }
+
+    function tempToCSS(logT) {
+      const T = Math.pow(10, logT);
+      const [r, g, b] = tempToRGB(T);
+      return `rgb(${r},${g},${b})`;
+    }
+
+    // ===== HR DIAGRAM AXES =====
+    // X: logT from 4.7 (left, hot) to 3.4 (right, cool) — REVERSED
+    // Y: logL from -4.5 (bottom) to 6.0 (top)
+    const LOGT_MIN = 3.4, LOGT_MAX = 4.7;
+    const LOGL_MIN = -4.5, LOGL_MAX = 6.0;
+    const MARGIN = { top: 30, right: 20, bottom: 50, left: 60 };
+
+    // ===== BACKGROUND POPULATION =====
+    function generatePopulation() {
+      const pop = [];
+      // Main sequence (~1200 stars) — Salpeter IMF weighted
+      for (let i = 0; i < 1200; i++) {
+        // Inverse-transform sampling from Salpeter: M^-2.35
+        const u = Math.random();
+        const mmin = 0.2, mmax = 80;
+        const alpha = 2.35;
+        const M = Math.pow(u * (Math.pow(mmax, 1-alpha) - Math.pow(mmin, 1-alpha)) + Math.pow(mmin, 1-alpha), 1/(1-alpha));
+        // Mass-luminosity relation
+        let logL;
+        if (M < 0.43) logL = Math.log10(0.23 * Math.pow(M, 2.3));
+        else if (M < 2) logL = Math.log10(Math.pow(M, 4.0));
+        else if (M < 20) logL = Math.log10(1.4 * Math.pow(M, 3.5));
+        else logL = Math.log10(32000 * M);
+        logL += (Math.random() - 0.5) * 0.3; // scatter
+        // Temperature from L (piecewise MS locus fit to ZAMS table)
+        let logTbase;
+        if (logL < 0) logTbase = 3.762 + 0.178 * logL; // cool dwarfs
+        else if (logL < 1.5) logTbase = 3.762 + 0.150 * logL; // solar-like
+        else logTbase = 3.762 + 0.150 * 1.5 + 0.185 * (logL - 1.5); // hot stars
+        const logT = logTbase + (Math.random() - 0.5) * 0.04;
+        if (logT >= LOGT_MIN && logT <= LOGT_MAX && logL >= LOGL_MIN && logL <= LOGL_MAX) {
+          pop.push({ logT, logL, type: 'ms' });
+        }
+      }
+      // Red Giant Branch (~300 stars)
+      for (let i = 0; i < 300; i++) {
+        const logT = 3.55 + (Math.random() - 0.5) * 0.10;
+        const logL = 0.5 + Math.random() * 3.0;
+        pop.push({ logT, logL, type: 'rgb' });
+      }
+      // Red Clump / HB (~200 stars)
+      for (let i = 0; i < 200; i++) {
+        const logT = 3.68 + (Math.random() - 0.5) * 0.08;
+        const logL = 1.65 + (Math.random() - 0.5) * 0.3;
+        pop.push({ logT, logL, type: 'hb' });
+      }
+      // White Dwarf sequence (~200 stars)
+      for (let i = 0; i < 200; i++) {
+        const logT = 3.8 + Math.random() * 0.7;
+        const logL = -1 - Math.random() * 3.0;
+        pop.push({ logT, logL, type: 'wd' });
+      }
+      // Supergiants (~50 stars)
+      for (let i = 0; i < 50; i++) {
+        const logT = 3.5 + Math.random() * 1.0;
+        const logL = 4.0 + Math.random() * 1.8;
+        pop.push({ logT, logL, type: 'sg' });
+      }
+      // Subgiants (~50 stars)
+      for (let i = 0; i < 50; i++) {
+        const logT = 3.65 + Math.random() * 0.15;
+        const logL = 0.5 + Math.random() * 1.0;
+        pop.push({ logT, logL, type: 'sub' });
+      }
+      return pop;
+    }
+
+    // ===== CLICKABLE REGIONS =====
+    const regions = [
+      { name: "Main Sequence", logT: [3.45, 4.70], logL: [-1.5, 5.5],
+        desc: "Stars fusing hydrogen in their cores. About 90% of all stars lie on this band. Hotter stars are more luminous." },
+      { name: "Red Giant Branch", logT: [3.50, 3.68], logL: [0.5, 3.5],
+        desc: "Stars with inert helium cores and hydrogen-burning shells. They are expanding and cooling, becoming huge and red." },
+      { name: "Horizontal Branch", logT: [3.55, 3.90], logL: [1.4, 2.0],
+        desc: "Core helium-burning stars. This corresponds to the 'red clump' seen in observational HR diagrams." },
+      { name: "AGB", logT: [3.45, 3.65], logL: [3.0, 4.5],
+        desc: "Asymptotic giant branch: double-shell burning (He and H shells) around a C/O core. Thermal pulses drive mass loss." },
+      { name: "White Dwarfs", logT: [3.70, 4.60], logL: [-4.0, -0.5],
+        desc: "Stellar remnants supported by electron degeneracy pressure. No fusion \u2014 they cool via stored thermal energy." },
+      { name: "Supergiants", logT: [3.50, 4.50], logL: [4.0, 6.0],
+        desc: "Massive stars in advanced evolutionary stages. Short-lived progenitors of core-collapse supernovae." },
+      { name: "Instability Strip", logT: [3.80, 3.90], logL: [1.5, 4.5],
+        desc: "Stars pulsating due to the \u03BA-mechanism: Cepheid variables, RR Lyrae, and Delta Scuti stars." },
+    ];
+
+    // ===== CATMULL-ROM INTERPOLATION =====
+    function catmullRom(p0, p1, p2, p3, t) {
+      const t2 = t * t, t3 = t2 * t;
+      return 0.5 * (
+        (2 * p1) +
+        (-p0 + p2) * t +
+        (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 +
+        (-p0 + 3 * p1 - 3 * p2 + p3) * t3
+      );
+    }
+
+    function interpolateTrack(track, frac) {
+      // Build cumulative durations
+      let totalDur = 0;
+      for (let i = 1; i < track.length; i++) totalDur += track[i].dur;
+      if (totalDur === 0) return { logT: track[0].logT, logL: track[0].logL, phase: track[0].phase, segFrac: 0 };
+
+      let cumDur = 0;
+      for (let i = 1; i < track.length; i++) {
+        const prevCum = cumDur;
+        cumDur += track[i].dur / totalDur;
+        if (frac <= cumDur || i === track.length - 1) {
+          const segFrac = track[i].dur > 0 ? (frac - prevCum) / (track[i].dur / totalDur) : 0;
+          const t = Math.max(0, Math.min(1, segFrac));
+
+          // Catmull-Rom needs 4 points: p0, p1, p2, p3
+          const i1 = i - 1; // start of segment
+          const i2 = i;     // end of segment
+          const i0 = Math.max(0, i1 - 1);
+          const i3 = Math.min(track.length - 1, i2 + 1);
+
+          const logT = catmullRom(track[i0].logT, track[i1].logT, track[i2].logT, track[i3].logT, t);
+          const logL = catmullRom(track[i0].logL, track[i1].logL, track[i2].logL, track[i3].logL, t);
+
+          // Phase is the current waypoint's phase
+          const phase = t < 0.5 ? track[i1].phase : track[i2].phase;
+          return { logT, logL, phase, segFrac: frac };
+        }
+      }
+      const last = track[track.length - 1];
+      return { logT: last.logT, logL: last.logL, phase: last.phase, segFrac: 1 };
+    }
+
+    // ===== STELLAR CROSS-SECTION DATA =====
+    function getShellStructure(phase, mass) {
+      // Return array of shells from center outward: { label, color, relRadius }
+      // relRadius is fractional radius of this shell boundary (0 to 1)
+      const p = phase.toLowerCase();
+      const isHighMass = mass >= 8;
+
+      if (p.includes('zams') || p.includes('mid-ms') || p.includes('late ms') || p.includes('tams') || p.includes('end ms')) {
+        // Main sequence
+        if (mass >= 10) {
+          return [
+            { label: "H \u2192 He (CNO)", color: "#ffcc33", r: 0.25 },
+            { label: "H envelope", color: "#3366aa", r: 1.0 },
+          ];
+        }
+        return [
+          { label: "H \u2192 He (pp chain)", color: "#ffcc33", r: 0.20 },
+          { label: "H envelope", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('subgiant')) {
+        return [
+          { label: "Inert He", color: "#888888", r: 0.12 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.25 },
+          { label: "H envelope", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('rgb') || p.includes('red giant') || p.includes('base rgb') || p.includes('mid rgb')) {
+        return [
+          { label: mass < 2.3 ? "Inert He (degen.)" : "Inert He", color: "#888888", r: 0.08 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.15 },
+          { label: "H envelope (convective)", color: "#2255aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('rgb tip') || p.includes('he flash')) {
+        return [
+          { label: mass < 2.3 ? "He flash!" : "He igniting", color: "#ff4400", r: 0.10 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.20 },
+          { label: "H envelope (convective)", color: "#2255aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('he ignition')) {
+        return [
+          { label: "He \u2192 C,O", color: "#ee6600", r: 0.12 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.22 },
+          { label: "H envelope", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('hb') || p.includes('horizontal') || p.includes('blue loop')) {
+        return [
+          { label: "He \u2192 C,O", color: "#ee6600", r: 0.12 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.25 },
+          { label: "H envelope", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('hertzsprung gap')) {
+        return [
+          { label: "Inert He", color: "#888888", r: 0.10 },
+          { label: "H \u2192 He (thick shell)", color: "#ffcc33", r: 0.25 },
+          { label: "H envelope", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('agb') || p.includes('early agb') || p.includes('agb tip')) {
+        return [
+          { label: "Inert C,O", color: "#666666", r: 0.06 },
+          { label: "He \u2192 C,O", color: "#ee6600", r: 0.14 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.22 },
+          { label: "H envelope (convective)", color: "#2255aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('rsg') || p.includes('yellow sg') || p.includes('red supergiant')) {
+        if (mass >= 25) {
+          return [
+            { label: "He \u2192 C,O", color: "#ee6600", r: 0.08 },
+            { label: "H \u2192 He", color: "#ffcc33", r: 0.18 },
+            { label: "H envelope (convective)", color: "#2255aa", r: 1.0 },
+          ];
+        }
+        return [
+          { label: "He \u2192 C,O", color: "#ee6600", r: 0.10 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.22 },
+          { label: "H envelope", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('wr') || p.includes('wolf-rayet')) {
+        return [
+          { label: "He \u2192 C,O", color: "#ee6600", r: 0.15 },
+          { label: "He envelope (stripped)", color: "#886644", r: 1.0 },
+        ];
+      }
+      if (p.includes('pre-sn') || p.includes('core collapse')) {
+        // Onion shell structure
+        return [
+          { label: "Fe core", color: "#444444", r: 0.06 },
+          { label: "Si \u2192 Fe", color: "#aa4444", r: 0.10 },
+          { label: "O \u2192 Si", color: "#cc6622", r: 0.15 },
+          { label: "Ne \u2192 O", color: "#cc8833", r: 0.20 },
+          { label: "C \u2192 Ne", color: "#dd9944", r: 0.26 },
+          { label: "He \u2192 C", color: "#ee6600", r: 0.34 },
+          { label: "H \u2192 He", color: "#ffcc33", r: 0.45 },
+          { label: mass < 25 ? "H envelope" : "H (if not stripped)", color: "#3366aa", r: 1.0 },
+        ];
+      }
+      if (p.includes('pn')) {
+        return [
+          { label: "C,O core (hot)", color: "#aabbff", r: 0.15 },
+          { label: "Thin H layer", color: "#3366aa", r: 0.20 },
+          { label: "Ejected nebula", color: "rgba(100,200,150,0.3)", r: 1.0 },
+        ];
+      }
+      if (p.includes('wd') || p.includes('white dwarf')) {
+        return [
+          { label: "C,O (degenerate)", color: "#aabbcc", r: 0.85 },
+          { label: "Thin H/He layer", color: "#667799", r: 1.0 },
+        ];
+      }
+      // Default: simple structure
+      return [
+        { label: "Core", color: "#ffcc33", r: 0.20 },
+        { label: "Envelope", color: "#3366aa", r: 1.0 },
+      ];
+    }
+
+    // ===== STATE =====
+    const population = generatePopulation();
+    let currentMass = null;
+    let currentTrack = null;
+    let animFrac = 0;       // 0 to 1 along track
+    let playing = false;
+    let speedMul = 1;
+    let highlightRegion = null;
+    let showIsoRadius = false;
+    let showSpectralType = false;
+    let showInstability = false;
+    let snFlashAlpha = 0;
+
+    // ===== CANVAS SETUP =====
+    const hrCanvas = document.getElementById('hr-canvas');
+    const hrCtx = hrCanvas.getContext('2d');
+    const csCanvas = document.getElementById('cs-canvas');
+    const csCtx = csCanvas.getContext('2d');
+
+    function resizeCanvases() {
+      const wrap = document.getElementById('hr-canvas-wrap');
+      const dpr = Math.min(window.devicePixelRatio, 2);
+      hrCanvas.width = wrap.clientWidth * dpr;
+      hrCanvas.height = wrap.clientHeight * dpr;
+      hrCanvas.style.width = wrap.clientWidth + 'px';
+      hrCanvas.style.height = wrap.clientHeight + 'px';
+      hrCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const csSize = isEmbedded ? 180 : 240;
+      csCanvas.width = csSize * dpr;
+      csCanvas.height = csSize * dpr;
+      csCanvas.style.width = csSize + 'px';
+      csCanvas.style.height = csSize + 'px';
+      csCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    // Coordinate transforms: logT,logL -> canvas pixel (CSS coords)
+    function plotX(logT) {
+      const w = hrCanvas.clientWidth - MARGIN.left - MARGIN.right;
+      // REVERSED: high T on left, low T on right
+      return MARGIN.left + (1 - (logT - LOGT_MIN) / (LOGT_MAX - LOGT_MIN)) * w;
+    }
+    function plotY(logL) {
+      const h = hrCanvas.clientHeight - MARGIN.top - MARGIN.bottom;
+      return MARGIN.top + (1 - (logL - LOGL_MIN) / (LOGL_MAX - LOGL_MIN)) * h;
+    }
+    function canvasToLogT(cx) {
+      const w = hrCanvas.clientWidth - MARGIN.left - MARGIN.right;
+      return LOGT_MIN + (1 - (cx - MARGIN.left) / w) * (LOGT_MAX - LOGT_MIN);
+    }
+    function canvasToLogL(cy) {
+      const h = hrCanvas.clientHeight - MARGIN.top - MARGIN.bottom;
+      return LOGL_MIN + (1 - (cy - MARGIN.top) / h) * (LOGL_MAX - LOGL_MIN);
+    }
+
+    // ===== DRAW HR DIAGRAM =====
+    function drawHR() {
+      const W = hrCanvas.clientWidth;
+      const H = hrCanvas.clientHeight;
+      hrCtx.clearRect(0, 0, W, H);
+
+      // Background
+      hrCtx.fillStyle = '#000';
+      hrCtx.fillRect(0, 0, W, H);
+
+      const plotW = W - MARGIN.left - MARGIN.right;
+      const plotH = H - MARGIN.top - MARGIN.bottom;
+
+      // --- Instability strip overlay ---
+      if (showInstability) {
+        const x1 = plotX(3.90);
+        const x2 = plotX(3.80);
+        hrCtx.fillStyle = 'rgba(180,120,255,0.08)';
+        hrCtx.fillRect(x1, MARGIN.top, x2 - x1, plotH);
+        // Dashed border
+        hrCtx.setLineDash([6, 4]);
+        hrCtx.strokeStyle = 'rgba(180,120,255,0.3)';
+        hrCtx.lineWidth = 1;
+        hrCtx.strokeRect(x1, MARGIN.top, x2 - x1, plotH);
+        hrCtx.setLineDash([]);
+        // Label
+        hrCtx.save();
+        hrCtx.translate((x1 + x2) / 2, MARGIN.top + 20);
+        hrCtx.fillStyle = 'rgba(180,120,255,0.6)';
+        hrCtx.font = '10px "Open Sans"';
+        hrCtx.textAlign = 'center';
+        hrCtx.fillText('Instability', 0, 0);
+        hrCtx.fillText('Strip', 0, 12);
+        hrCtx.restore();
+      }
+
+      // --- Iso-radius lines ---
+      if (showIsoRadius) {
+        const radii = [0.01, 0.1, 1, 10, 100, 1000];
+        const labels = ['0.01 R\u2609', '0.1 R\u2609', '1 R\u2609', '10 R\u2609', '100 R\u2609', '1000 R\u2609'];
+        hrCtx.setLineDash([4, 4]);
+        for (let ri = 0; ri < radii.length; ri++) {
+          const R = radii[ri];
+          const logR = Math.log10(R);
+          // log(L) = 4*log(T_eff) + 2*log(R/R_sun) - 4*log(5780)
+          // => at each logT, logL = 4*logT + 2*logR - 4*Math.log10(5780)
+          const c = 2 * logR - 4 * Math.log10(5780);
+          const pts = [];
+          for (let logT = LOGT_MIN; logT <= LOGT_MAX; logT += 0.01) {
+            const logL = 4 * logT + c;
+            if (logL >= LOGL_MIN && logL <= LOGL_MAX) {
+              pts.push({ x: plotX(logT), y: plotY(logL) });
+            }
+          }
+          if (pts.length > 1) {
+            hrCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+            hrCtx.lineWidth = 1;
+            hrCtx.beginPath();
+            hrCtx.moveTo(pts[0].x, pts[0].y);
+            for (let k = 1; k < pts.length; k++) hrCtx.lineTo(pts[k].x, pts[k].y);
+            hrCtx.stroke();
+            // Label at top
+            hrCtx.fillStyle = 'rgba(255,255,255,0.35)';
+            hrCtx.font = '9px "Open Sans"';
+            hrCtx.textAlign = 'center';
+            const labelPt = pts[pts.length - 1];
+            hrCtx.fillText(labels[ri], labelPt.x, labelPt.y - 4);
+          }
+        }
+        hrCtx.setLineDash([]);
+      }
+
+      // --- Spectral type axis ---
+      if (showSpectralType) {
+        const types = [
+          { label: 'O', logT: 4.55 },
+          { label: 'B', logT: 4.20 },
+          { label: 'A', logT: 3.94 },
+          { label: 'F', logT: 3.83 },
+          { label: 'G', logT: 3.75 },
+          { label: 'K', logT: 3.64 },
+          { label: 'M', logT: 3.48 },
+        ];
+        // Boundary edges: [O-hot, O/B, B/A, A/F, F/G, G/K, K/M, M-cool]
+        const boundaries = [4.70, 4.48, 4.00, 3.88, 3.78, 3.72, 3.57, 3.38];
+        const bandColors = [
+          'rgba(140,160,255,0.06)', // O
+          'rgba(160,180,255,0.05)', // B
+          'rgba(230,240,255,0.04)', // A
+          'rgba(255,245,220,0.04)', // F
+          'rgba(255,220,140,0.04)', // G
+          'rgba(255,170,80,0.04)',  // K
+          'rgba(255,100,50,0.04)',  // M
+        ];
+        for (let i = 0; i < boundaries.length - 1; i++) {
+          const x1 = plotX(boundaries[i]);
+          const x2 = plotX(boundaries[i + 1]);
+          hrCtx.fillStyle = bandColors[i];
+          hrCtx.fillRect(Math.min(x1, x2), MARGIN.top, Math.abs(x2 - x1), plotH);
+        }
+        // Labels at top
+        hrCtx.font = '600 12px "Open Sans"';
+        hrCtx.textAlign = 'center';
+        for (const st of types) {
+          const x = plotX(st.logT);
+          if (x > MARGIN.left && x < W - MARGIN.right) {
+            hrCtx.fillStyle = tempToCSS(st.logT);
+            hrCtx.globalAlpha = 0.7;
+            hrCtx.fillText(st.label, x, MARGIN.top - 8);
+            hrCtx.globalAlpha = 1;
+          }
+        }
+      }
+
+      // --- Grid lines ---
+      hrCtx.strokeStyle = 'rgba(255,255,255,0.06)';
+      hrCtx.lineWidth = 1;
+      // Vertical (logT)
+      for (let logT = 3.5; logT <= 4.6; logT += 0.1) {
+        const x = plotX(logT);
+        hrCtx.beginPath();
+        hrCtx.moveTo(x, MARGIN.top);
+        hrCtx.lineTo(x, H - MARGIN.bottom);
+        hrCtx.stroke();
+      }
+      // Horizontal (logL)
+      for (let logL = -4; logL <= 6; logL += 1) {
+        const y = plotY(logL);
+        hrCtx.beginPath();
+        hrCtx.moveTo(MARGIN.left, y);
+        hrCtx.lineTo(W - MARGIN.right, y);
+        hrCtx.stroke();
+      }
+
+      // --- Axis ticks and labels ---
+      hrCtx.fillStyle = 'rgba(255,255,255,0.5)';
+      hrCtx.font = '11px "Open Sans"';
+      // X-axis: logT labels
+      hrCtx.textAlign = 'center';
+      for (let logT = 3.5; logT <= 4.6; logT += 0.2) {
+        const x = plotX(logT);
+        const y = H - MARGIN.bottom;
+        hrCtx.beginPath();
+        hrCtx.moveTo(x, y);
+        hrCtx.lineTo(x, y + 5);
+        hrCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+        hrCtx.stroke();
+        hrCtx.fillText(logT.toFixed(1), x, y + 18);
+      }
+      // X-axis label
+      hrCtx.font = '13px "Open Sans"';
+      hrCtx.fillStyle = 'rgba(255,255,255,0.6)';
+      hrCtx.fillText('log(Teff / K)  \u2190 hotter', MARGIN.left + plotW / 2, H - 6);
+
+      // Y-axis: logL labels
+      hrCtx.textAlign = 'right';
+      hrCtx.font = '11px "Open Sans"';
+      hrCtx.fillStyle = 'rgba(255,255,255,0.5)';
+      for (let logL = -4; logL <= 6; logL += 1) {
+        const y = plotY(logL);
+        const x = MARGIN.left;
+        hrCtx.beginPath();
+        hrCtx.moveTo(x, y);
+        hrCtx.lineTo(x - 5, y);
+        hrCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+        hrCtx.stroke();
+        hrCtx.fillText(logL.toString(), x - 8, y + 4);
+      }
+      // Y-axis label (rotated)
+      hrCtx.save();
+      hrCtx.translate(14, MARGIN.top + plotH / 2);
+      hrCtx.rotate(-Math.PI / 2);
+      hrCtx.font = '13px "Open Sans"';
+      hrCtx.fillStyle = 'rgba(255,255,255,0.6)';
+      hrCtx.textAlign = 'center';
+      hrCtx.fillText('log(L / L\u2609)', 0, 0);
+      hrCtx.restore();
+
+      // --- Axis box ---
+      hrCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+      hrCtx.lineWidth = 1;
+      hrCtx.strokeRect(MARGIN.left, MARGIN.top, plotW, plotH);
+
+      // --- Population scatter ---
+      for (let i = 0; i < population.length; i++) {
+        const s = population[i];
+        const x = plotX(s.logT);
+        const y = plotY(s.logL);
+        if (x < MARGIN.left || x > W - MARGIN.right || y < MARGIN.top || y > H - MARGIN.bottom) continue;
+
+        let alpha = 0.45;
+        let size = 1.8;
+
+        // Region highlight
+        if (highlightRegion) {
+          const inRegion = isInRegion(s.logT, s.logL, highlightRegion);
+          if (inRegion) {
+            alpha = 0.9;
+            size = 2.8;
+          } else {
+            alpha = 0.08;
+            size = 1.2;
+          }
+        }
+
+        const col = tempToCSS(s.logT);
+        hrCtx.beginPath();
+        hrCtx.arc(x, y, size, 0, Math.PI * 2);
+        hrCtx.fillStyle = col;
+        hrCtx.globalAlpha = alpha;
+        hrCtx.fill();
+      }
+      hrCtx.globalAlpha = 1;
+
+      // --- Evolutionary track ---
+      if (currentTrack) {
+        // Full track line (faint)
+        hrCtx.strokeStyle = 'rgba(255,255,255,0.12)';
+        hrCtx.lineWidth = 1.5;
+        hrCtx.beginPath();
+        const trackPts = getTrackPoints(currentTrack, 200);
+        for (let i = 0; i < trackPts.length; i++) {
+          const x = plotX(trackPts[i].logT);
+          const y = plotY(trackPts[i].logL);
+          if (i === 0) hrCtx.moveTo(x, y);
+          else hrCtx.lineTo(x, y);
+        }
+        hrCtx.stroke();
+
+        // ZAMS marker (ring at start of track)
+        const zx = plotX(currentTrack[0].logT);
+        const zy = plotY(currentTrack[0].logL);
+        hrCtx.strokeStyle = 'rgba(255,255,255,0.4)';
+        hrCtx.lineWidth = 1.5;
+        hrCtx.beginPath();
+        hrCtx.arc(zx, zy, 6, 0, Math.PI * 2);
+        hrCtx.stroke();
+        // Mass label near ZAMS
+        hrCtx.font = '600 10px "Open Sans"';
+        hrCtx.fillStyle = 'rgba(255,255,255,0.5)';
+        hrCtx.textAlign = 'left';
+        hrCtx.shadowColor = '#000';
+        hrCtx.shadowBlur = 3;
+        hrCtx.fillText(currentMass + ' M\u2609', zx + 10, zy - 2);
+        hrCtx.shadowBlur = 0;
+
+        // Traversed portion (bright)
+        const traversedPts = getTrackPoints(currentTrack, 200, animFrac);
+        if (traversedPts.length > 1) {
+          // Glow layer
+          hrCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+          hrCtx.lineWidth = 4;
+          hrCtx.beginPath();
+          for (let i = 0; i < traversedPts.length; i++) {
+            const x = plotX(traversedPts[i].logT);
+            const y = plotY(traversedPts[i].logL);
+            if (i === 0) hrCtx.moveTo(x, y);
+            else hrCtx.lineTo(x, y);
+          }
+          hrCtx.stroke();
+          // Sharp layer
+          hrCtx.strokeStyle = 'rgba(255,255,255,0.6)';
+          hrCtx.lineWidth = 1.5;
+          hrCtx.beginPath();
+          for (let i = 0; i < traversedPts.length; i++) {
+            const x = plotX(traversedPts[i].logT);
+            const y = plotY(traversedPts[i].logL);
+            if (i === 0) hrCtx.moveTo(x, y);
+            else hrCtx.lineTo(x, y);
+          }
+          hrCtx.stroke();
+        }
+
+        // Animated marker
+        const pos = interpolateTrack(currentTrack, animFrac);
+        const mx = plotX(pos.logT);
+        const my = plotY(pos.logL);
+        const mCol = tempToCSS(pos.logT);
+
+        // Glow
+        const grad = hrCtx.createRadialGradient(mx, my, 0, mx, my, 14);
+        grad.addColorStop(0, mCol.replace('rgb', 'rgba').replace(')', ',0.5)'));
+        grad.addColorStop(1, mCol.replace('rgb', 'rgba').replace(')', ',0)'));
+        hrCtx.fillStyle = grad;
+        hrCtx.beginPath();
+        hrCtx.arc(mx, my, 14, 0, Math.PI * 2);
+        hrCtx.fill();
+
+        // Core
+        hrCtx.fillStyle = mCol;
+        hrCtx.beginPath();
+        hrCtx.arc(mx, my, 5, 0, Math.PI * 2);
+        hrCtx.fill();
+
+        // White center
+        hrCtx.fillStyle = 'rgba(255,255,255,0.6)';
+        hrCtx.beginPath();
+        hrCtx.arc(mx, my, 2, 0, Math.PI * 2);
+        hrCtx.fill();
+
+        // Phase label
+        hrCtx.font = '600 11px "Open Sans"';
+        hrCtx.fillStyle = 'rgba(255,255,255,0.85)';
+        hrCtx.textAlign = 'left';
+        hrCtx.shadowColor = '#000';
+        hrCtx.shadowBlur = 4;
+        hrCtx.fillText(pos.phase, mx + 12, my - 8);
+        hrCtx.shadowBlur = 0;
+
+        // SN flash effect
+        if (snFlashAlpha > 0) {
+          hrCtx.fillStyle = `rgba(255,255,255,${snFlashAlpha})`;
+          hrCtx.beginPath();
+          hrCtx.arc(mx, my, 40 * snFlashAlpha, 0, Math.PI * 2);
+          hrCtx.fill();
+        }
+
+        // Update readouts
+        updateReadouts(pos);
+      }
+
+      // --- Highlighted region outline ---
+      if (highlightRegion) {
+        const r = highlightRegion;
+        const rx1 = plotX(Math.max(r.logT[1], LOGT_MIN));
+        const rx2 = plotX(Math.min(r.logT[0], LOGT_MAX));
+        const ry1 = plotY(Math.min(r.logL[1], LOGL_MAX));
+        const ry2 = plotY(Math.max(r.logL[0], LOGL_MIN));
+        hrCtx.setLineDash([6, 4]);
+        hrCtx.strokeStyle = 'rgba(220,45,39,0.4)';
+        hrCtx.lineWidth = 1.5;
+        hrCtx.strokeRect(rx1, ry1, rx2 - rx1, ry2 - ry1);
+        hrCtx.setLineDash([]);
+      }
+    }
+
+    function isInRegion(logT, logL, region) {
+      return logT >= region.logT[0] && logT <= region.logT[1] &&
+             logL >= region.logL[0] && logL <= region.logL[1];
+    }
+
+    // Get interpolated track points for drawing
+    function getTrackPoints(track, numPts, maxFrac) {
+      maxFrac = maxFrac !== undefined ? maxFrac : 1;
+      const pts = [];
+      for (let i = 0; i <= numPts; i++) {
+        const frac = (i / numPts) * maxFrac;
+        const p = interpolateTrack(track, frac);
+        pts.push(p);
+      }
+      return pts;
+    }
+
+    // ===== DRAW CROSS-SECTION =====
+    // Use a seeded "random" for nebula stippling so it doesn't flicker each frame
+    let nebulaDots = null;
+    function ensureNebulaDots() {
+      if (!nebulaDots) {
+        nebulaDots = [];
+        for (let j = 0; j < 40; j++) {
+          nebulaDots.push({
+            angle: Math.random() * Math.PI * 2,
+            dist: 0.5 + Math.random() * 0.5,
+            size: 2 + Math.random() * 3,
+          });
+        }
+      }
+      return nebulaDots;
+    }
+
+    function drawCrossSection() {
+      const size = isEmbedded ? 180 : 240;
+      csCtx.clearRect(0, 0, size, size);
+      csCtx.fillStyle = '#000';
+      csCtx.fillRect(0, 0, size, size);
+
+      // Reserve space: top area for legend, lower area for diagram
+      const legendH = 12; // per-item height
+      const diagramCy = size * 0.58;
+      const maxR = size * 0.34;
+
+      if (!currentTrack || currentMass === null) {
+        csCtx.fillStyle = 'rgba(255,255,255,0.15)';
+        csCtx.font = '12px "Open Sans"';
+        csCtx.textAlign = 'center';
+        csCtx.fillText('Select a star mass', size / 2, diagramCy);
+        document.getElementById('cs-phase-label').textContent = 'Select a star';
+        return;
+      }
+
+      const pos = interpolateTrack(currentTrack, animFrac);
+      const shells = getShellStructure(pos.phase, currentMass);
+      const cx = size / 2;
+      const cy = diagramCy;
+
+      // Qualitative radius scaling by evolutionary phase
+      let scaleFactor = 1.0;
+      const p = pos.phase.toLowerCase();
+      if (p.includes('wd') || p.includes('white dwarf')) scaleFactor = 0.25;
+      else if (p.includes('pn')) scaleFactor = 0.85;
+      else if (p.includes('ms') || p.includes('zams') || p.includes('tams') || p.includes('end ms') || p.includes('late ms')) scaleFactor = 0.55;
+      else if (p.includes('subgiant') || p.includes('hertzsprung')) scaleFactor = 0.70;
+      // Giants, AGB, RSG, SG all use full scale
+
+      const baseR = maxR * scaleFactor;
+
+      // Draw shells from outside in
+      for (let i = shells.length - 1; i >= 0; i--) {
+        const shell = shells[i];
+        const r = shell.r * baseR;
+
+        if (shell.color.includes('rgba')) {
+          // Nebula effect
+          csCtx.fillStyle = shell.color;
+          csCtx.beginPath();
+          csCtx.arc(cx, cy, r, 0, Math.PI * 2);
+          csCtx.fill();
+          const dots = ensureNebulaDots();
+          csCtx.fillStyle = 'rgba(100,200,150,0.12)';
+          for (const dot of dots) {
+            const sx = cx + Math.cos(dot.angle) * dot.dist * r;
+            const sy = cy + Math.sin(dot.angle) * dot.dist * r;
+            csCtx.beginPath();
+            csCtx.arc(sx, sy, dot.size, 0, Math.PI * 2);
+            csCtx.fill();
+          }
+        } else {
+          csCtx.fillStyle = shell.color;
+          csCtx.beginPath();
+          csCtx.arc(cx, cy, r, 0, Math.PI * 2);
+          csCtx.fill();
+
+          // Depth gradient
+          const grad = csCtx.createRadialGradient(cx - r * 0.2, cy - r * 0.2, 0, cx, cy, r);
+          grad.addColorStop(0, 'rgba(255,255,255,0.08)');
+          grad.addColorStop(1, 'rgba(0,0,0,0.15)');
+          csCtx.fillStyle = grad;
+          csCtx.beginPath();
+          csCtx.arc(cx, cy, r, 0, Math.PI * 2);
+          csCtx.fill();
+
+          // Shell boundary ring (not for outermost)
+          if (i > 0) {
+            csCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+            csCtx.lineWidth = 1;
+            csCtx.beginPath();
+            csCtx.arc(cx, cy, r, 0, Math.PI * 2);
+            csCtx.stroke();
+          }
+        }
+      }
+
+      // Outer boundary
+      csCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+      csCtx.lineWidth = 1.5;
+      csCtx.beginPath();
+      csCtx.arc(cx, cy, shells[shells.length - 1].r * baseR, 0, Math.PI * 2);
+      csCtx.stroke();
+
+      // Legend (top of canvas): colour swatch + label for each shell
+      csCtx.font = '600 9px "Open Sans"';
+      csCtx.shadowColor = '#000';
+      csCtx.shadowBlur = 3;
+      const legendStartY = 10;
+      for (let i = 0; i < shells.length; i++) {
+        const shell = shells[i];
+        const ly = legendStartY + i * legendH;
+        // Colour swatch
+        if (!shell.color.includes('rgba')) {
+          csCtx.fillStyle = shell.color;
+        } else {
+          csCtx.fillStyle = 'rgba(100,200,150,0.5)';
+        }
+        csCtx.fillRect(8, ly, 8, 8);
+        csCtx.strokeStyle = 'rgba(255,255,255,0.2)';
+        csCtx.lineWidth = 0.5;
+        csCtx.strokeRect(8, ly, 8, 8);
+        // Label
+        csCtx.fillStyle = 'rgba(255,255,255,0.85)';
+        csCtx.textAlign = 'left';
+        csCtx.fillText(shell.label, 20, ly + 8);
+      }
+      csCtx.shadowBlur = 0;
+
+      // Phase label
+      document.getElementById('cs-phase-label').textContent = pos.phase;
+    }
+
+    // ===== READOUTS =====
+    function updateReadouts(pos) {
+      if (!pos || currentMass === null) {
+        document.getElementById('r-mass').textContent = '-';
+        document.getElementById('r-phase').textContent = '-';
+        document.getElementById('r-logT').textContent = '-';
+        document.getElementById('r-logL').textContent = '-';
+        document.getElementById('r-radius').textContent = '-';
+        document.getElementById('r-age').textContent = '-';
+        return;
+      }
+
+      document.getElementById('r-mass').textContent = currentMass + ' M\u2609';
+      document.getElementById('r-phase').textContent = pos.phase;
+      document.getElementById('r-logT').textContent = pos.logT.toFixed(3);
+      document.getElementById('r-logL').textContent = pos.logL.toFixed(2);
+
+      // Radius from Stefan-Boltzmann: R/R_sun = sqrt(L/L_sun) / (T_eff/5780)^2
+      const L = Math.pow(10, pos.logL);
+      const T = Math.pow(10, pos.logT);
+      const R = Math.sqrt(L) / Math.pow(T / 5780, 2);
+      if (R >= 100) document.getElementById('r-radius').textContent = R.toFixed(0) + ' R\u2609';
+      else if (R >= 1) document.getElementById('r-radius').textContent = R.toFixed(1) + ' R\u2609';
+      else document.getElementById('r-radius').textContent = R.toFixed(3) + ' R\u2609';
+
+      // Age estimate (rough: scale by fraction through total lifetime)
+      const totalLife = msLifetimes[currentMass] || 10e9;
+      const age = animFrac * totalLife * 1.3; // track extends ~30% beyond MS
+      if (age > 1e9) document.getElementById('r-age').textContent = (age / 1e9).toFixed(2) + ' Gyr';
+      else if (age > 1e6) document.getElementById('r-age').textContent = (age / 1e6).toFixed(1) + ' Myr';
+      else document.getElementById('r-age').textContent = (age / 1e3).toFixed(0) + ' kyr';
+    }
+
+    // ===== CONTROLS =====
+    // Mass buttons
+    document.querySelectorAll('.mass-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mass = parseFloat(btn.dataset.mass);
+        selectMass(mass);
+        document.querySelectorAll('.mass-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    function selectMass(mass) {
+      currentMass = mass;
+      currentTrack = tracks[mass];
+      animFrac = 0;
+      snFlashAlpha = 0;
+      playing = false;
+      updatePlayButton();
+      // Auto-play after selection
+      setTimeout(() => {
+        playing = true;
+        updatePlayButton();
+      }, 300);
+    }
+
+    // Play/Pause
+    const btnPlay = document.getElementById('btn-play');
+    btnPlay.addEventListener('click', () => {
+      if (!currentTrack) return;
+      // If at end of track, restart
+      if (animFrac >= 1 && !playing) {
+        animFrac = 0;
+        snFlashAlpha = 0;
+      }
+      playing = !playing;
+      updatePlayButton();
+    });
+
+    function updatePlayButton() {
+      if (playing) {
+        btnPlay.textContent = '\u23F8 Pause';
+        btnPlay.classList.add('active');
+      } else {
+        btnPlay.textContent = '\u25B6 Play';
+        btnPlay.classList.remove('active');
+      }
+    }
+
+    // Spacebar toggle
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (currentTrack) {
+          if (animFrac >= 1 && !playing) {
+            animFrac = 0;
+            snFlashAlpha = 0;
+          }
+          playing = !playing;
+          updatePlayButton();
+        }
+      }
+    });
+
+    // Speed
+    document.getElementById('speed-select').addEventListener('change', (e) => {
+      speedMul = parseFloat(e.target.value);
+    });
+
+    // Overlays
+    document.getElementById('toggle-isoradius').addEventListener('change', (e) => {
+      showIsoRadius = e.target.checked;
+    });
+    document.getElementById('toggle-spectral').addEventListener('change', (e) => {
+      showSpectralType = e.target.checked;
+    });
+    document.getElementById('toggle-instability').addEventListener('change', (e) => {
+      showInstability = e.target.checked;
+    });
+
+    // ===== CLICK HANDLING — Region detection =====
+    hrCanvas.addEventListener('click', (e) => {
+      const rect = hrCanvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      const logT = canvasToLogT(cx);
+      const logL = canvasToLogL(cy);
+
+      // Check if inside plot area
+      if (cx < MARGIN.left || cx > hrCanvas.clientWidth - MARGIN.right ||
+          cy < MARGIN.top || cy > hrCanvas.clientHeight - MARGIN.bottom) {
+        highlightRegion = null;
+        document.getElementById('region-desc').style.display = 'none';
+        return;
+      }
+
+      // Find matching region (check instability strip first as it's smaller)
+      let found = null;
+      // Prioritize smaller/more specific regions
+      const sortedRegions = [...regions].sort((a, b) => {
+        const areaA = (a.logT[1] - a.logT[0]) * (a.logL[1] - a.logL[0]);
+        const areaB = (b.logT[1] - b.logT[0]) * (b.logL[1] - b.logL[0]);
+        return areaA - areaB;
+      });
+      for (const r of sortedRegions) {
+        if (logT >= r.logT[0] && logT <= r.logT[1] && logL >= r.logL[0] && logL <= r.logL[1]) {
+          found = r;
+          break;
+        }
+      }
+
+      if (found && found === highlightRegion) {
+        // Toggle off
+        highlightRegion = null;
+        document.getElementById('region-desc').style.display = 'none';
+      } else if (found) {
+        highlightRegion = found;
+        const descEl = document.getElementById('region-desc');
+        descEl.innerHTML = `<b>${found.name}</b><br>${found.desc}`;
+        descEl.style.display = 'block';
+      } else {
+        highlightRegion = null;
+        document.getElementById('region-desc').style.display = 'none';
+      }
+    });
+
+    // ===== HOVER TOOLTIP =====
+    hrCanvas.addEventListener('mousemove', (e) => {
+      if (!currentTrack) return;
+      const rect = hrCanvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+
+      // Check proximity to track marker
+      const pos = interpolateTrack(currentTrack, animFrac);
+      const mx = plotX(pos.logT);
+      const my = plotY(pos.logL);
+      const dist = Math.sqrt((cx - mx) ** 2 + (cy - my) ** 2);
+
+      const tooltip = document.getElementById('tooltip');
+      if (dist < 20) {
+        const T = Math.pow(10, pos.logT);
+        const L = Math.pow(10, pos.logL);
+        const R = Math.sqrt(L) / Math.pow(T / 5780, 2);
+        tooltip.innerHTML = `<b>${pos.phase}</b><br>T<sub>eff</sub> = ${T.toFixed(0)} K<br>L = ${L.toFixed(1)} L<sub>\u2609</sub><br>R = ${R.toFixed(2)} R<sub>\u2609</sub>`;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX + 12) + 'px';
+        tooltip.style.top = (e.clientY - 10) + 'px';
+      } else {
+        tooltip.style.display = 'none';
+      }
+    });
+    hrCanvas.addEventListener('mouseleave', () => {
+      document.getElementById('tooltip').style.display = 'none';
+    });
+
+    // ===== ANIMATION LOOP =====
+    let lastTime = 0;
+    const ANIM_DURATION = 45; // seconds for full track at 1x speed
+
+    function animate(timestamp) {
+      requestAnimationFrame(animate);
+
+      const dt = lastTime ? (timestamp - lastTime) / 1000 : 0;
+      lastTime = timestamp;
+
+      if (playing && currentTrack) {
+        const step = (dt * speedMul) / ANIM_DURATION;
+        animFrac = Math.min(1, animFrac + step);
+
+        if (animFrac >= 1) {
+          playing = false;
+          updatePlayButton();
+          animFrac = 1;
+          // Trigger SN flash for massive stars at track end
+          if (currentMass >= 8) snFlashAlpha = 1.0;
+        }
+      }
+
+      // Decay SN flash over time
+      if (snFlashAlpha > 0) {
+        snFlashAlpha = Math.max(0, snFlashAlpha - dt * 1.5);
+      }
+
+      drawHR();
+      drawCrossSection();
+    }
+
+    // ===== INIT =====
+    function init() {
+      resizeCanvases();
+      document.getElementById('loading').style.display = 'none';
+
+      // Default: select 1 M_sun
+      // Don't auto-select — let user choose
+      updateReadouts(null);
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resizeCanvases);
+    init();
+  </script>
+</body>
+</html>

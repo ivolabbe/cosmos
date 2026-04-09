@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Venus | COSMOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Open Sans", sans-serif; background: #000; color: #e0e0e0; overflow: hidden; }
+    canvas { display: block; }
+    #info {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 16px 20px; max-width: 340px;
+      font-size: 14px; line-height: 1.6; z-index: 10; pointer-events: none;
+    }
+    #info h2 { font-size: 18px; font-weight: 300; margin-bottom: 6px; color: #fff; }
+    #info .desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    #info .hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
+    body.embedded #info h2, body.embedded #info .desc, body.embedded #info .hint { display: none; }
+    body.embedded #info { max-width: 200px; padding: 8px 12px; top: 8px; left: 8px; }
+    body.embedded #credit { display: none; }
+    #controls {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; flex-wrap: nowrap;
+      background: rgba(10,10,46,0.92); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 8px 16px; z-index: 10; max-width: 95vw;
+    }
+    #controls label { font-size: 11px; display: flex; align-items: center; gap: 4px; white-space: nowrap; cursor: pointer; }
+    #controls select { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
+    #controls input[type="checkbox"] { accent-color: #DC2D27; }
+    .sep { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+    #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.4); z-index: 20; pointer-events: none; }
+    #credit { position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: rgba(255,255,255,0.25); z-index: 10; pointer-events: none; white-space: nowrap; }
+    #credit a { color: rgba(255,255,255,0.35); }
+    @media (max-width: 700px) { #controls { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading&hellip;</div>
+  <div id="info">
+    <h2>Venus</h2>
+    <p class="desc">Earth&#8217;s &#8220;sister planet&#8221; &mdash; similar in size but shrouded in thick sulphuric acid clouds with a runaway greenhouse surface temperature of 465&nbsp;&#176;C.</p>
+    <p class="hint">Drag to orbit &middot; Scroll to zoom</p>
+  </div>
+  <div id="controls">
+    <label><input type="checkbox" id="cb-rotate" checked> Rotate</label>
+    <div class="sep"></div>
+    <label>Speed
+      <select id="speed-select">
+        <option value="0.2">0.2&times;</option>
+        <option value="0.5" selected>0.5&times;</option>
+        <option value="1">1&times;</option>
+        <option value="3">3&times;</option>
+        <option value="10">10&times;</option>
+      </select>
+    </label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-day"> Day</label>
+    <div class="sep"></div>
+    <label><input type="checkbox" id="cb-clouds" checked> Clouds</label>
+  </div>
+  <div id="credit">Textures: <a href="https://www.solarsystemscope.com/textures" target="_blank">Solar System Scope</a> (CC&nbsp;BY&nbsp;4.0).</div>
+
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }}
+  </script>
+  <script type="module">
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+  if (window.self !== window.top) document.body.classList.add('embedded');
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  document.body.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500);
+  camera.position.set(0, 0.5, 3);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.minDistance = 1.5;
+  controls.maxDistance = 10;
+
+  /* ---- Lights ---- */
+  const ambientLight = new THREE.AmbientLight(0x222233, 0.15);
+  scene.add(ambientLight);
+  const sunLight = new THREE.DirectionalLight(0xfff8ee, 2.2);
+  sunLight.position.set(5, 2, 3);
+  scene.add(sunLight);
+
+  /* ---- Planet rotation state ---- */
+  let rotating = true;
+  let speedMul = 0.5;
+  const BASE_ROT = 0.002;
+  let dayMode = false;
+
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  composer.addPass(new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight), 0.35, 0.6, 0.4));
+
+  const texLoader = new THREE.TextureLoader();
+  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  let loaded = 0;
+  const checkLoad = () => { if (++loaded >= 2) document.getElementById('loading').style.display = 'none'; };
+
+  /* Planet group: tilt the group, rotate the inner meshes */
+  const planetGroup = new THREE.Group();
+  planetGroup.rotation.z = THREE.MathUtils.degToRad(177.4); /* Venus axial tilt (retrograde) */
+  scene.add(planetGroup);
+
+  /* Surface (radar view) */
+  const surfaceTex = texLoader.load('../assets/textures/planets/web/8k_venus_surface.jpg', checkLoad);
+  surfaceTex.colorSpace = THREE.SRGBColorSpace;
+  surfaceTex.anisotropy = maxAniso;
+
+  const planet = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 128, 64),
+    new THREE.MeshStandardMaterial({ map: surfaceTex, roughness: 0.85, metalness: 0.0 })
+  );
+  planetGroup.add(planet);
+
+  /* Cloud layer */
+  const cloudTex = texLoader.load('../assets/textures/planets/web/4k_venus_atmosphere.jpg', checkLoad);
+  cloudTex.colorSpace = THREE.SRGBColorSpace;
+  cloudTex.anisotropy = maxAniso;
+
+  const cloudMesh = new THREE.Mesh(
+    new THREE.SphereGeometry(1.02, 128, 64),
+    new THREE.MeshStandardMaterial({
+      map: cloudTex, transparent: true, opacity: 0.85,
+      roughness: 0.7, metalness: 0.0,
+    })
+  );
+  planetGroup.add(cloudMesh);
+
+  /* Dense Venusian atmosphere */
+  const ATMOS_R = 1.12;
+  const atmosMat = new THREE.ShaderMaterial({
+    transparent: true, blending: THREE.AdditiveBlending,
+    depthWrite: false, side: THREE.FrontSide,
+    uniforms: {
+      atmosColor:  { value: new THREE.Color(0xeebb66) },
+      earthRadius: { value: 1.005 },
+      atmosRadius: { value: ATMOS_R },
+      scaleHeight: { value: 0.035 },
+      intensity:   { value: 2.5 },
+    },
+    vertexShader: `
+      varying vec3 vWorldPos;
+      void main() {
+        vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }`,
+    fragmentShader: `
+      uniform vec3  atmosColor;
+      uniform float earthRadius, atmosRadius, scaleHeight, intensity;
+      varying vec3  vWorldPos;
+      void main() {
+        vec3 rd = normalize(vWorldPos - cameraPosition);
+        vec3 ro = vWorldPos;
+        float hb = dot(ro, rd);
+        float disc = hb*hb - dot(ro,ro) + earthRadius*earthRadius;
+        float pathLen = disc > 0.0 ? max(-hb - sqrt(disc), 0.0) : max(-2.0 * hb, 0.0);
+        float sum = 0.0, dt = pathLen / 8.0;
+        for (int i = 0; i < 8; i++) {
+          vec3 p = ro + rd * ((float(i) + 0.5) * dt);
+          sum += exp(-(length(p) - earthRadius) / scaleHeight) * dt;
+        }
+        float alpha = clamp(sum * intensity, 0.0, 1.0);
+        gl_FragColor = vec4(atmosColor * alpha, alpha);
+      }`,
+  });
+  planetGroup.add(new THREE.Mesh(new THREE.SphereGeometry(ATMOS_R, 64, 64), atmosMat));
+
+  /* Stars */
+  {
+    const N = 800;
+    const pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 50 + Math.random() * 70;
+      pos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i*3+2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({
+      color: 0xffffff, size: 0.12, sizeAttenuation: true, transparent: true, opacity: 0.3,
+    })));
+    const NB = 80, bpos = new Float32Array(NB * 3);
+    for (let i = 0; i < NB; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 40 + Math.random() * 60;
+      bpos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+      bpos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+      bpos[i*3+2] = r * Math.cos(phi);
+    }
+    const bgeo = new THREE.BufferGeometry();
+    bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+    scene.add(new THREE.Points(bgeo, new THREE.PointsMaterial({
+      color: 0xffffff, size: 0.25, sizeAttenuation: true, transparent: true, opacity: 0.9,
+    })));
+  }
+
+  /* ---- Controls wiring ---- */
+  document.getElementById('cb-rotate').onchange = function() { rotating = this.checked; };
+  document.getElementById('speed-select').onchange = function() { speedMul = parseFloat(this.value); };
+  document.getElementById('cb-day').onchange = function() {
+    dayMode = this.checked;
+    if (dayMode) {
+      ambientLight.color.set(0xffffff);
+      ambientLight.intensity = 4.0;
+      sunLight.visible = false;
+    } else {
+      ambientLight.color.set(0x222233);
+      ambientLight.intensity = 0.15;
+      sunLight.visible = true;
+    }
+  };
+  document.getElementById('cb-clouds').onchange = function() { cloudMesh.visible = this.checked; };
+
+  /* ---- Animation: rotate the planet, not the camera ---- */
+  function animate() {
+    requestAnimationFrame(animate);
+    if (rotating) {
+      planet.rotation.y += BASE_ROT * speedMul;
+      cloudMesh.rotation.y += BASE_ROT * speedMul * 1.15; /* super-rotation */
+    }
+    controls.update();
+    composer.render();
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
+  });
+  </script>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>
