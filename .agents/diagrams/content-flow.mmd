@@ -1,0 +1,56 @@
+---
+title: "COSMOS Content — Process Flow"
+---
+graph TD
+    %% Phase 1
+    P1["PHASE 1: Audit & Plan"]
+    A1["Auditor"]
+    P1 -->|dispatch| A1
+    A1 -->|"audit report\nprioritised actions"| P2
+
+    %% Phase 2
+    P2["PHASE 2: Edit / Write"]
+    W2["Writer"]
+    P2 -->|dispatch| W2
+    W2 -->|"modified articles"| P3
+
+    %% Phase 3
+    P3["PHASE 3: Review"]
+    RV["Reviewer"]
+    P3 -->|dispatch| RV
+    RV -->|pass| P4
+    RV -->|"fail (max 3)"| W2
+
+    %% Phase 4 — closed feedback loop
+    P4["PHASE 4: Done"]
+    P4A["Collect reports"]
+    P4B["Update style guide\nSEO targets · agent defs"]
+    P4C["Commit & track metrics"]
+
+    P4 --> P4A
+    P4A --> P4B
+    P4B --> P4C
+
+    %% Feedback
+    P4B -.->|"refined audit criteria"| A1
+    P4B -.->|"updated voice guide"| W2
+    P4B -.->|"adjusted checks"| RV
+
+    %% Coordination with Interactive team
+    W2 -.->|"app recommendations"| INT["Interactive\nOrchestrator"]
+    INT -.->|"delivered apps"| W2
+
+    %% Styling
+    classDef phase fill:#1a3a4a,stroke:#2a5a6a,color:#fff,font-weight:bold
+    classDef agent fill:#2d6a2e,stroke:#3a8a3b,color:#fff
+    classDef reviewer fill:#8b2020,stroke:#a83030,color:#fff
+    classDef done fill:#5a6a2a,stroke:#7a8a3a,color:#fff
+    classDef feedback fill:#3a3a5a,stroke:#5a5a7a,color:#ccc
+    classDef external fill:#4a4a6a,stroke:#6a6aaa,color:#ccc
+
+    class P1,P2,P3 phase
+    class A1,W2 agent
+    class RV reviewer
+    class P4 done
+    class P4A,P4B,P4C feedback
+    class INT external

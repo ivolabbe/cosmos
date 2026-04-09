@@ -1,0 +1,1 @@
+Infrared composite of Jupiter's north pole captured by Juno's Jovian Infrared Auroral Mapper (JIRAM) on 2 February 2017. The image reveals a central cyclone surrounded by eight circumpolar cyclones, each spanning roughly 4,000 kilometres across. Colour represents radiated heat — brighter regions are warmer. Credit: NASA/JPL-Caltech/SwRI/ASI/INAF/JIRAM (PIA22335, public domain).

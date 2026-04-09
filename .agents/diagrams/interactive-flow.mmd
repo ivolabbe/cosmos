@@ -1,0 +1,66 @@
+---
+title: "COSMOS Interactive — Process Flow (per app)"
+---
+graph TD
+    %% Phase 1
+    P1["PHASE 1: Research"]
+    R1["Researcher"]
+    P1 -->|dispatch| R1
+    R1 -->|"spec.md"| P2
+
+    %% Phase 2
+    P2["PHASE 2: Article"]
+    W2["Writer"]
+    V2["Verifier"]
+    P2 -->|dispatch| W2
+    W2 --> V2
+    V2 -->|pass| P3
+    V2 -->|"fail (max 3)"| W2
+
+    %% Phase 3
+    P3["PHASE 3: Build + Verify"]
+    C3["Coder"]
+    V3["Verifier"]
+    VIS["Visual\nsub-agent"]
+    P3 -->|dispatch| C3
+    C3 --> V3
+    V3 -->|dispatches| VIS
+    V3 -->|pass| P4
+    V3 -->|"fail (max 3)"| C3
+    C3 -->|"interactive.html"| OUT3[ ]
+
+    %% Phase 4 — closed feedback loop
+    P4["PHASE 4: Done"]
+    P4A["Collect agent reports"]
+    P4B["Distill patterns"]
+    P4C["Update agent defs\nstyle guide · process"]
+    P4D["Commit"]
+
+    P4 --> P4A
+    P4A --> P4B
+    P4B --> P4C
+    P4C --> P4D
+
+    %% Feedback arrows back to start
+    P4C -.->|"improved instructions"| R1
+    P4C -.->|"updated patterns"| C3
+    P4C -.->|"refined checks"| V3
+
+    %% Styling
+    classDef phase fill:#1a3a4a,stroke:#2a5a6a,color:#fff,font-weight:bold
+    classDef agent fill:#2d6a2e,stroke:#3a8a3b,color:#fff
+    classDef verifier fill:#8b2020,stroke:#a83030,color:#fff
+    classDef visual fill:#6b4a8a,stroke:#8b6aaa,color:#fff
+    classDef done fill:#5a6a2a,stroke:#7a8a3a,color:#fff
+    classDef feedback fill:#3a3a5a,stroke:#5a5a7a,color:#ccc
+    classDef mode fill:#4a4a2a,stroke:#6a6a3a,color:#ccc,font-size:12px
+    classDef invisible fill:none,stroke:none
+
+    class P1,P2,P3 phase
+    class R1,W2,C3 agent
+    class V2,V3 verifier
+    class VIS visual
+    class P4 done
+    class P4A,P4B,P4C,P4D feedback
+    class FM,IM,DM mode
+    class OUT3 invisible

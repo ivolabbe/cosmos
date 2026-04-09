@@ -1,0 +1,641 @@
+MERGE	Carbon-Nitrogen Cycle	CNO Cycle	3	7
+KEEP	Carbonaceous Chondrite		3	7
+DROP	carrier wave		3	7
+KEEP	Cassegrain reflector		3	7
+DROP	Cassini's laws		3	7
+KEEP	Cassiopeia		3	7
+KEEP	Cassiopeia A		3	7
+KEEP	Cataclysmic Variable		3	7
+DROP	Cauchy Dispersion Formula		3	7
+DROP	Causality Puzzle		3	7
+DROP	Causation, Causality		3	7
+DROP	Cavendish experiment		3	7
+MERGE	Celestial	Celestial Sphere	3	7
+MERGE	Celestial Body	Celestial Sphere	3	7
+KEEP	Celestial Equator		3	7
+MERGE	celestial globe	Celestial Sphere	3	7
+MERGE	Celestial Longitude	Celestial Coordinates	3	7
+KEEP	Celestial Pole		3	7
+KEEP	center of mass		3	7
+DROP	Cesium Clock		3	7
+DROP	Chang'e (probes)		3	7
+DROP	Chaos Theory		3	7
+KEEP	Chemical Differentiation		3	7
+KEEP	Chemical Enrichment		3	7
+KEEP	Cherenkov Detector		3	7
+MERGE	Co-Moving Coordinates	Comoving Distance	3	7
+MERGE	Coma Cluster	coma-cluster	3	7
+DROP	Coordinate Covalent Bond		3	7
+MERGE	Coordinated Universal Time (UTC)	Coordinated Universal Time	3	7
+MERGE	Coordinates	Celestial Coordinates	3	7
+KEEP	Copernican Principle		3	7
+KEEP	Cosmic Background Explorer		3	7
+KEEP	Cosmological Principle		3	7
+DROP	Covariance		3	7
+DROP	cylindrical polar coordinates		3	7
+MERGE	Density Fluctuations	Large-Scale Structure	3	7
+MERGE	Density Perturbations	Large-Scale Structure	3	7
+DROP	Detailed Balance		3	7
+KEEP	Detector		3	7
+MERGE	Differentiation	Differentiated Object	3	7
+KEEP	diffraction, sound		3	7
+MERGE	Diffuse Galactic Light	Milky Way	3	7
+DROP	Dissipative Structures		3	7
+KEEP	Dissociation		3	7
+MERGE	distance measurement	Trigonometric Parallax	3	7
+KEEP	Blue Dwarf, Blue Giant		3	7
+KEEP	Dorado		3	7
+MERGE	Double Cluster in Perseus	Star Cluster	3	7
+DROP	Doublet		3	7
+MERGE	Dumbbell Galaxies (db)	Galaxy Morphology	3	7
+KEEP	Dynamical Friction		3	7
+MERGE	Dynamo	Solar Cycle	3	7
+DROP	Dynode		3	7
+DROP	Dysprosium		3	7
+MERGE	Eccentric Anomaly	Orbital Elements	3	7
+MERGE	Eddington Approximation	Arthur Eddington	3	7
+MERGE	Eddington mass limit	Chandrasekhar Limit	3	7
+KEEP	Effective Temperature		3	7
+DROP	Eikonal Approximation		3	7
+KEEP	Einstein Coefficient		3	7
+KEEP	Einstein ring		3	7
+KEEP	Einstein-Bose condensation		3	7
+DROP	Ekman Layer		3	7
+DROP	electric shock		3	7
+MERGE	electron degeneracy	Electron Degeneracy Pressure	3	7
+DROP	Electron energy level diagrams		3	7
+DROP	electron spin		3	7
+KEEP	Electron Temperature		3	7
+MERGE	electron volt	Electron Volt	3	7
+DROP	electrons in solids		3	7
+DROP	Electronuclear Force		3	7
+KEEP	Electroweak Interactions		3	7
+KEEP	Emission		3	7
+KEEP	Emission Coefficient		3	7
+MERGE	emission, quantum	Emission Line	3	7
+MERGE	emission, stimulated	Emission Line	3	7
+MERGE	Ergoregion	Black Hole	3	7
+KEEP	Eros		3	7
+KEEP	European Southern Observatory		3	7
+DROP	Excitation Potential		3	7
+KEEP	Fraunhofer Lines		3	7
+KEEP	Galactic Bulge		3	7
+KEEP	Galactic Halo		3	7
+KEEP	Gamma-Ray Astronomy		3	7
+KEEP	gamma-ray telescope		3	7
+KEEP	Gaussian Gravitational Constant		3	7
+KEEP	Gregorian Telescope		3	7
+DROP	Group Theory		3	7
+KEEP	H I Region		3	7
+MERGE	Halo	Dark Halo	3	7
+DROP	Hamiltonian Operator (H)		3	7
+DROP	Hamiltonian Theory		3	7
+KEEP	Hayashi Track		3	7
+KEEP	HB or Horizontal Branch Stars		3	7
+KEEP	Helium Flash		3	7
+MERGE	Henry Draper system	Harvard Spectral Classification	3	7
+DROP	Hermitian Matrix		3	7
+KEEP	HIPPARCOS		3	7
+KEEP	Horizontal Branch		3	7
+KEEP	Horizontal Branch Star		3	7
+MERGE	Hubble nebula	Nebula	3	7
+MERGE	Hubble Time	Hubble Law	3	7
+DROP	Icarus		3	7
+KEEP	Inclination		3	7
+MERGE	Inflationary Cosmology	Big Bang	3	7
+MERGE	Infrared	Infrared	3	7
+MERGE	Infrared Photometry	Infrared	3	7
+KEEP	Infrared Slavery		3	7
+MERGE	infrared source	Infrared	3	7
+KEEP	Infrared Telescope		3	7
+KEEP	Instability Strip		3	7
+DROP	Inversion Layer		3	7
+DROP	Invisible Astronomy		3	7
+KEEP	Ionization		3	7
+KEEP	ionization energy		3	7
+KEEP	Ionization Potential		3	7
+MERGE	Ionosphere	Atmosphere	3	7
+DROP	IPCS		3	7
+MERGE	Iron Meteorite	Meteorite	3	7
+DROP	Irradiation		3	7
+DROP	Irreversibility		3	7
+DROP	Ising Model		3	7
+KEEP	Isochrones		3	7
+DROP	Isoplanatic Patch		3	7
+MERGE	Isothermal Fluctuations	Large-Scale Structure	3	7
+KEEP	Isotope		3	7
+DROP	Isotopic Spin		3	7
+KEEP	Jeans Instability Criterion		3	7
+KEEP	Jeans Mass		3	7
+DROP	Jodrell Bank		3	7
+DROP	Joule Dissipation		3	7
+MERGE	Julian Proleptic Calendar	Julian Calendar	3	7
+DROP	Jump Conditions		3	7
+MERGE	K corona	Corona	3	7
+DROP	K line		3	7
+DROP	Kaluza-Klein theory		3	7
+KEEP	Keplerian rotation curve		3	7
+MERGE	Keplerian telescope (astronomical telescope)	Telescope	3	7
+DROP	Killing vector		3	7
+DROP	kilogram		3	7
+DROP	kilogram (kg)		3	7
+MERGE	kinetic temperature	Effective Temperature	3	7
+KEEP	Kitt Peak National Observatory		3	7
+DROP	Klein-Alfvén cosmology		3	7
+DROP	Klein-Nishina formula		3	7
+MERGE	Kuiper Airborne Observatory	Kuiper Belt	3	7
+DROP	Lallemand Camera		3	7
+DROP	Landé Factor		3	7
+DROP	Laplacian Determinism		3	7
+MERGE	Latitude, Celestial	Celestial Coordinates	3	7
+DROP	LCROSS		3	7
+DROP	Lennard-Jones Potential		3	7
+MERGE	Light Pressure	Radiation Pressure	3	7
+MERGE	Line Broadening	Spectral Line Broadening	3	7
+MERGE	Line Profile	Spectral Line Profile	3	7
+DROP	Liquid Crystal		3	7
+DROP	list of brightest stars		3	7
+DROP	Logistic Equation		3	7
+DROP	Lommel-Seeliger Surface		3	7
+KEEP	Lorentz-FitzGerald contraction		3	7
+KEEP	Low Surface Brightness Galaxy		3	7
+DROP	Low-Temperature Physics		3	7
+MERGE	Lower Culmination	Meridian Transit	3	7
+KEEP	Luminosity Function		3	7
+KEEP	Luminous Blue Variables		3	7
+DROP	Lyapounov Exponent		3	7
+KEEP	Lyman Alpha		3	7
+MERGE	Lyman Alpha Clouds	Lyman Alpha	3	7
+MERGE	Lyman Alpha Line	Lyman Alpha	3	7
+MERGE	Lyrae	RR Lyrae	3	7
+DROP	M30		3	7
+DROP	M32		3	7
+DROP	M33		3	7
+DROP	M81		3	7
+DROP	Maclaurin Series		3	7
+DROP	Magnetic Moment		3	7
+MERGE	Magnetic Pressure	Radiation Pressure	3	7
+DROP	Magnification		3	7
+DROP	Malmquist Correction		3	7
+DROP	Many-Body Problem		3	7
+MERGE	Mariner	Mars	3	7
+DROP	Markovian process		3	7
+MERGE	Mass-Luminosity Ratio	Luminosity	3	7
+MERGE	Massive Halos	Dark Halo	3	7
+DROP	Materialism		3	7
+MERGE	Matter Era	Big Bang	3	7
+DROP	Matter Waves		3	7
+KEEP	Mauna Kea Observatory		3	7
+KEEP	Maxwell's Theory		3	7
+MERGE	Mean Anomaly	Orbital Elements	3	7
+MERGE	Mean Motion	Orbital Elements	3	7
+DROP	Mean Profile		3	7
+MERGE	Merger	Galaxy Formation	3	7
+DROP	Michelson-Morley experiment		3	7
+DROP	Microphotometer		3	7
+DROP	Microprocessor		3	7
+MERGE	Microwave Background Anisotropy Experiment	Cosmic Microwave Background	3	7
+KEEP	Milne-Eddington Approximation		3	7
+MERGE	Missing Mass	Dark Matter	3	7
+MERGE	Missing Mass Problem	Dark Matter	3	7
+DROP	Modeling of earlier events		3	7
+MERGE	Mount Stromlo and Siding Spring Observatories	Observatories	3	7
+KEEP	Mount Wilson Observatory		3	7
+MERGE	Mt. Wilson	Mount Wilson Observatory	3	7
+DROP	Multi-Dimensional Hole		3	7
+DROP	Multiphoton Process		3	7
+DROP	Multiplex		3	7
+DROP	N Lines		3	7
+MERGE	Naked Singularity	Singularity	3	7
+DROP	Native Oxide		3	7
+DROP	Neutral Current		3	7
+DROP	Neutral Current Reactions		3	7
+MERGE	NGC	NGC	3	7
+DROP	NGC2440		3	7
+MERGE	Night	Day	3	7
+DROP	No Hair Theorem		3	7
+MERGE	Nodes, Line of	Ascending Node	3	7
+DROP	Noise Source		3	7
+KEEP	Non-Destructive Readout		3	7
+DROP	Non-Linear Optics		3	7
+DROP	Normalization		3	7
+MERGE	North Celestial Pole (NCP)	Celestial Poles	3	7
+MERGE	North Galactic Pole	North Galactic Pole	3	7
+DROP	North Polar Sequence		3	7
+DROP	Nuclear		3	7
+KEEP	nuclear binding energy		3	7
+DROP	Nuclear Structure Concepts		3	7
+DROP	Nuclear Time Scale		3	7
+KEEP	OB Association		3	7
+DROP	Oblateness		3	7
+DROP	Obliquity		3	7
+KEEP	Observational Cosmology		3	7
+MERGE	Old Thin Disk	Thin Disk	3	7
+DROP	One-Loop Process		3	7
+DROP	Optical Chaos		3	7
+KEEP	Optical Depth		3	7
+DROP	Optical Fibres		3	7
+DROP	Optical Pair		3	7
+DROP	Optical Path Difference (OPD)		3	7
+DROP	optical storage		3	7
+KEEP	Optical Telescope		3	7
+KEEP	Optics		3	7
+DROP	Overstability		3	7
+DROP	P-Branch		3	7
+KEEP	P-Process		3	7
+DROP	Pancake Model		3	7
+DROP	Panstellar		3	7
+MERGE	parameter z	Redshift	3	7
+DROP	Particle Accelerator		3	7
+MERGE	Penrose Process	Black Hole	3	7
+MERGE	Perfect Cosmological Principle	Cosmological Principle	3	7
+MERGE	Periastron	Periastron	3	7
+DROP	periodic motion		3	7
+KEEP	Perturbation		3	7
+MERGE	Perturbation Expansion	Perturbation	3	7
+MERGE	Perturbation Method	Perturbation	3	7
+MERGE	Pfund Series	Balmer Series	3	7
+MERGE	Phase Angle	Phases	3	7
+DROP	Photocathode		3	7
+DROP	Photoelectrons		3	7
+KEEP	Photoionization		3	7
+KEEP	Photomultiplier		3	7
+KEEP	Photomultiplier Tube		3	7
+KEEP	Photon Detectors		3	7
+KEEP	Photon Quantum Energy		3	7
+MERGE	photon sphere	Black Hole	3	7
+KEEP	Photonics		3	7
+DROP	Planar Spin Model		3	7
+MERGE	Planck	Cosmic Microwave Background	3	7
+MERGE	Planck Distribution	Blackbody Radiation	3	7
+MERGE	Planck Epoch/Planck Time	Planck Time	3	7
+KEEP	Planck Era		3	7
+MERGE	Planck Mass	Planck Units	3	7
+KEEP	Planck Scale		3	7
+KEEP	Planck Tension		3	7
+KEEP	Planetary Science		3	7
+KEEP	Planetesimal		3	7
+MERGE	Planetocentric Coordinates	Planet	3	7
+MERGE	Planetographic Coordinates	Planet	3	7
+MERGE	Polar Axis	Celestial Poles	3	7
+MERGE	Polar Circle	Arctic Circle	3	7
+MERGE	Polar Day	Day	3	7
+MERGE	Polar Motion	Precession	3	7
+MERGE	Polar Night	Seasons	3	7
+DROP	Polaroid (Trade name)		3	7
+MERGE	Precession of the Equinoxes	Precession	3	7
+MERGE	Precession, Constant of	Precession	3	7
+KEEP	Proper Motion		3	7
+KEEP	Quantum Cosmology		3	7
+KEEP	r-Process		3	7
+KEEP	Radial Pulsation		3	7
+KEEP	Radial Velocity		3	7
+KEEP	Radiation Pressure		3	7
+KEEP	Radiative Zone		3	7
+KEEP	Radio Astronomy		3	7
+MERGE	Red Supergiant	red-supergiant	3	7
+MERGE	Reduced Proper Motion	Proper Motion	3	7
+KEEP	Reflecting Telescope		3	7
+KEEP	Reflection Nebula		3	7
+KEEP	Robertson-Walker Metric		3	7
+MERGE	Roche Lobe	Roche Lobe	3	7
+DROP	Roentgen (unit)		3	7
+KEEP	Rotation Curve		3	7
+DROP	Royal Society		3	7
+KEEP	RR Lyrae Star		3	7
+KEEP	RV Tau Variables		3	7
+KEEP	RV Tauri Stars		3	7
+KEEP	S-Process		3	7
+KEEP	Satellite Galaxy		3	7
+DROP	Satellite Lines		3	7
+MERGE	Saturn's Rings	Rings of Saturn	3	7
+KEEP	Schmidt Plates		3	7
+MERGE	Schwarzschild Singularity	Schwarzschild Radius	3	7
+DROP	Scientific Model		3	7
+KEEP	Scorpius X-1		3	7
+KEEP	Sculptor Dwarf		3	7
+MERGE	Sculptor Group	Local Group	3	7
+DROP	Second Quantization		3	7
+MERGE	Secondary Cosmic Rays	Cosmic Rays	3	7
+MERGE	Secular Acceleration	Precession	3	7
+DROP	Secular Change		3	7
+MERGE	Secular Parallax	Trigonometric Parallax	3	7
+DROP	Selection Rule		3	7
+DROP	Self-Organisation		3	7
+KEEP	Semi-Regular Variable		3	7
+MERGE	Singularity	Singularity	3	7
+MERGE	SMC X-1	X-Ray Binary	3	7
+MERGE	Solar Neutrinos	Sun	3	7
+KEEP	Solar Mass		3	7
+MERGE	solar neutrino problem	Sun	3	7
+MERGE	Solar Parallax	Trigonometric Parallax	3	7
+MERGE	Solar Phase Angle	Phases	3	7
+DROP	sound pressure		3	7
+MERGE	South Galactic Pole	South Galactic Pole	3	7
+MERGE	Spectroheliograph	Spectroscopy	3	7
+KEEP	Spherical Aberration		3	7
+MERGE	Spin-Flip Collisions	Spin Flip Transition	3	7
+KEEP	Spitzer Space Telescope		3	7
+DROP	state variables		3	7
+KEEP	Steady State Theory		3	7
+KEEP	Stellar Activity		3	7
+KEEP	Stellar Core		3	7
+KEEP	Stellar Flare		3	7
+KEEP	Stellar Halo		3	7
+KEEP	Stellar Parallax		3	7
+KEEP	Stellar Remnants		3	7
+KEEP	Stellar Structure		3	7
+KEEP	Stellar Wind		3	7
+DROP	Stellarator		3	7
+KEEP	Stimulated Emission		3	7
+DROP	Stress		3	7
+DROP	string theory		3	7
+DROP	Superforce		3	7
+MERGE	Supergalactic Plane	Supergalactic Coordinate System	3	7
+DROP	Superposition Principle		3	7
+DROP	Superstring Theory		3	7
+DROP	Supersymmetric Quantum Field Theory		3	7
+DROP	Supersymmetric Standard Model		3	7
+DROP	Supersynthesis		3	7
+DROP	Superunified Theory		3	7
+DROP	Symmetry Principle		3	7
+KEEP	T Tauri star		3	7
+KEEP	Telluric Lines		3	7
+DROP	temperature scales		3	7
+DROP	Tera		3	7
+DROP	Thin-Screen Model		3	7
+KEEP	Thomas-Fermi Theory		3	7
+DROP	Thought Experiment		3	7
+KEEP	Three-Body Problem		3	7
+KEEP	Tidal Theory		3	7
+DROP	Toy Theory		3	7
+MERGE	Transient X-Ray Sources	X-Ray Binary	3	7
+MERGE	Triple-alpha process	Triple Alpha Process	3	7
+MERGE	Triple- process	Triple Alpha Process	3	7
+MERGE	Tropical Year	Tropical Year	3	7
+KEEP	Tully-Fisher Relation		3	7
+DROP	Tunneling		3	7
+DROP	Twin-Exhaust Model		3	7
+DROP	Twistor Theory		3	7
+DROP	Two-Component Model		3	7
+DROP	Type I String Theory		3	7
+KEEP	Ultraviolet Astronomy		3	7
+MERGE	Ultraviolet Catastrophe	Blackbody Radiation	3	7
+KEEP	Ultraviolet Ga Stars		3	7
+KEEP	Ultraviolet Stars		3	7
+MERGE	URCA process	Neutron Star	3	7
+KEEP	Vela Supernova Remnant		3	7
+KEEP	Virtual Interaction		3	7
+KEEP	Weak Interaction		3	7
+KEEP	White Supergiant		3	7
+KEEP	Wide-field Infrared Survey Explorer		3	7
+MERGE	WZ Cassiopeiae	Cassiopeia	3	7
+MERGE	X Process	P-Process	3	7
+KEEP	Yellow Supergiant		3	7
+KEEP	bicycle wheel precession		2	7
+DROP	Dennis Tito		2	7
+DROP	Differential Forms		2	7
+DROP	E Line		2	7
+DROP	Echelon		2	7
+DROP	Emersion		2	7
+MERGE	ESO	European Southern Observatory	2	7
+DROP	Euler Number (Eu)		2	7
+KEEP	Lorentz Invariant		2	7
+MERGE	Lunisolar Precession	Precession	2	7
+DROP	Median		2	7
+DROP	momentum expression		2	7
+DROP	pep Reaction		2	7
+DROP	Photoemission		2	7
+DROP	Pion		2	7
+DROP	Polytropic Index (n)		2	7
+KEEP	Red Giant		2	7
+DROP	Scalar-Tensor Theory		2	7
+DROP	Second Parameter		2	7
+DROP	Shane-Wirtanen Catalogue		2	7
+DROP	shock, electric		2	7
+KEEP	Signal-To-Noise Ratio		2	7
+KEEP	Sun as red giant		2	7
+MERGE	top precession	Precession	2	7
+DROP	Density Gradient		1	7
+MERGE	Density Parameter	Density Parameter	1	7
+MERGE	Density Wave	Density Wave Model	1	7
+DROP	DESI		1	7
+MERGE	Diameter Distance	Distance	1	7
+KEEP	Diffraction Limited		1	7
+KEEP	Diffraction Pattern		1	7
+KEEP	Dilute Aperture		1	7
+DROP	Dilution Factor		1	7
+MERGE	Dipole Anisotropy	Cosmic Microwave Background Dipole	1	7
+DROP	Dipole Antenna		1	7
+DROP	Direct Motion		1	7
+DROP	Direction Cosine		1	7
+DROP	Dirty Ice		1	7
+KEEP	Dispersion Measure		1	7
+KEEP	Diverging Lens		1	7
+DROP	Double Bond		1	7
+MERGE	Double Galaxies	Interacting Galaxies	1	7
+KEEP	Double Radio Source		1	7
+KEEP	Double Star		1	7
+DROP	Down-Loading		1	7
+KEEP	Dumbbell Nebula		1	7
+DROP	Dynamic Range		1	7
+DROP	Dynamical Method		1	7
+DROP	Dynamical Time		1	7
+MERGE	e-Process	P-Process	1	7
+KEEP	Eddington Limit		1	7
+DROP	Eddy Currents		1	7
+MERGE	Effective Radius	Effective Radius	1	7
+DROP	Elastic Collision		1	7
+DROP	Electron Affinity		1	7
+DROP	Electron Collider		1	7
+DROP	Electron Gas		1	7
+DROP	Electron Shells		1	7
+MERGE	Electron Volt (eV)	Electron Volt	1	7
+MERGE	Electroweak Force	Big Bang	1	7
+KEEP	Emission Line		1	7
+KEEP	Emission Nebula		1	7
+KEEP	Emission Spectrum		1	7
+DROP	Encke's Division		1	7
+DROP	Endoergic Process		1	7
+DROP	Endothermic Process		1	7
+DROP	Energy Curve		1	7
+DROP	Energy Distribution		1	7
+DROP	Ergodic Motion		1	7
+DROP	Euclidean Geometry		1	7
+DROP	Exoergic Process		1	7
+DROP	Eoetvoes Experiment		1	7
+DROP	Reaction Rate		1	7
+KEEP	Bose-Einstein Nuclei		9	6
+KEEP	Bose-Einstein Statistics		9	6
+KEEP	Einsteinium		9	6
+KEEP	ADC		8	6
+DROP	almucantar		8	6
+DROP	am		8	6
+DROP	ataxite		8	6
+MERGE	Ceti	Tau Ceti	8	6
+MERGE	o Ceti	Mira Variable	8	6
+KEEP	Tau Ceti		8	6
+DROP	Translucent		8	6
+DROP	ab Variables		7	6
+KEEP	Asymptotic Branch (AGB) Stars		7	6
+MERGE	Fermi	Fermi Paradox	7	6
+KEEP	Nadir		7	6
+KEEP	2024 Solar Eclipse FAQ		6	6
+DROP	Akatsuki		6	6
+DROP	Amplifier		6	6
+MERGE	Anomalistic Month	Anomalistic Year	6	6
+DROP	Anti-Ferromagnet		6	6
+DROP	Apollo Space Program		6	6
+DROP	Appleton Layer		6	6
+DROP	Azimuthal Quantum Number (k)		6	6
+MERGE	carbon fusion	CNO Cycle	6	6
+DROP	Hyperbolic Space		6	6
+KEEP	K2-18b		6	6
+DROP	Leap Second		6	6
+DROP	Nuclear Chronology		6	6
+DROP	Nuclear Disk		6	6
+MERGE	Nuclear Fission	Nuclear Fusion	6	6
+DROP	Nuclear fission concepts		6	6
+DROP	Nuclear Forces		6	6
+DROP	nuclear particles		6	6
+DROP	Nuclear units.		6	6
+DROP	Nucleon		6	6
+DROP	Strong Nuclear Force		6	6
+DROP	Topology		6	6
+DROP	United States Naval Observatory		6	6
+MERGE	Voyager	Voyager Program	6	6
+KEEP	Voyager 1		6	6
+MERGE	WMAP mission	Cosmic Microwave Background	6	6
+KEEP	A Shell Stars		5	6
+MERGE	Absolute Brightness	Absolute Magnitude	5	6
+DROP	Absolute Unit		5	6
+KEEP	Abundance Ratio		5	6
+KEEP	Ae or A Emission Stars		5	6
+KEEP	Aperture Efficiency		5	6
+KEEP	Aperture Function		5	6
+KEEP	Aperture Ratio		5	6
+KEEP	Aperture Synthesis		5	6
+KEEP	Asinh Magnitude		5	6
+DROP	Aspect Ratio		5	6
+DROP	Avogadro Constant		5	6
+DROP	Avogadro's Number		5	6
+KEEP	Azimuth		5	6
+MERGE	Bandpass Filter	Bandpass	5	6
+DROP	Barn		5	6
+MERGE	Barnard's Loop	Orion Nebula	5	6
+DROP	Barnard's Satellite		5	6
+DROP	Bootstrapping		5	6
+KEEP	diffuse ionized gas		5	6
+DROP	Diffusion		5	6
+KEEP	Expansion of Universe		5	6
+DROP	Figure of Merit		5	6
+MERGE	Galactic Anticenter	Galactic Anti-Centre	5	6
+MERGE	Galactic Cluster	Star Cluster	5	6
+MERGE	Galactic Wind	Galactic Winds	5	6
+MERGE	Geocentric Cosmology	Cosmology	5	6
+MERGE	Geomagnetic Storm	Geomagnetic Storms	5	6
+DROP	Gravitino		5	6
+DROP	Graviton		5	6
+MERGE	Great Rift	Zone of Avoidance	5	6
+DROP	Hall Effect		5	6
+DROP	Ham		5	6
+DROP	HEAO		5	6
+DROP	Helium Problem		5	6
+DROP	Hestia		5	6
+MERGE	Intergalactic Matter	Intergalactic Medium	5	6
+DROP	K meson or kaon		5	6
+KEEP	Kepler's Laws		5	6
+MERGE	Keplerian orbit	Orbit	5	6
+KEEP	Krzeminski's star		5	6
+KEEP	Landau Damping		5	6
+DROP	list of constellations		5	6
+DROP	Omicron2 Eridani		5	6
+DROP	Particle conservation laws		5	6
+KEEP	Penumbra		5	6
+DROP	Period Doubling		5	6
+KEEP	Radiation		5	6
+MERGE	Red Spot	Jupiter	5	6
+MERGE	Relativistic Cosmology	Relativistic Cosmology	5	6
+KEEP	Rhea		5	6
+DROP	Schottky Barrier		5	6
+KEEP	Silicon Burning		5	6
+DROP	small body		5	6
+KEEP	Solar Cycle		5	6
+MERGE	Solar Flare	Solar Flare	5	6
+KEEP	Solar Prominence		5	6
+KEEP	Spectral Type		5	6
+DROP	SPOT		5	6
+DROP	SSPM		5	6
+DROP	Thermal Diffusion		5	6
+DROP	Traps		5	6
+KEEP	Van Allen (Radiation) Belts		5	6
+MERGE	Wavelength	Wavelength	5	6
+KEEP	Aberration, Stellar		4	6
+DROP	Array		4	6
+KEEP	Astrology		4	6
+KEEP	Aurora		4	6
+MERGE	Aurora Australis	Aurora	4	6
+DROP	Becklin-Neugebauer Object		4	6
+DROP	Becquerel (Bq)		4	6
+DROP	Bequerel (unit)		4	6
+DROP	Carrier Boson		4	6
+DROP	CMOS		4	6
+DROP	deuterium-tritium fusion		4	6
+KEEP	Diffraction reveals the geometry of the diffracting object.		4	6
+DROP	Disjoint		4	6
+DROP	doping of semiconductors		4	6
+DROP	Dual, Duality, Duality Symmetries		4	6
+DROP	Dubnium		4	6
+DROP	Echo		4	6
+KEEP	Eddington's Standard Model		4	6
+DROP	Eigenstate, Eigenvalue		4	6
+KEEP	Einstein A and B coefficients		4	6
+DROP	electron-positron pair production		4	6
+DROP	Energia (launch vehicle)		4	6
+MERGE	expansion models	Universe	4	6
+KEEP	Explosive Variables		4	6
+MERGE	Exponential Expansion	Universe	4	6
+DROP	Extended Dimension		4	6
+DROP	Extended Source		4	6
+MERGE	Extragalactic Distance Scale	Cosmic Distance Ladder	4	6
+KEEP	Extreme Ultraviolet Explorer		4	6
+DROP	F Layers		4	6
+DROP	f-Electron		4	6
+MERGE	F-Spot	Sunspot Cycle	4	6
+DROP	f-Sum Rule		4	6
+KEEP	F-Type		4	6
+KEEP	F-type Star		4	6
+KEEP	Faber-Jackson Relation		4	6
+KEEP	Fabry-Perot		4	6
+DROP	facula		4	6
+DROP	Falcon		4	6
+DROP	False Color		4	6
+DROP	False Vacuum		4	6
+DROP	False Vacuum Bubble		4	6
+DROP	Families		4	6
+DROP	Fano-Noise		4	6
+MERGE	Faraday Rotation	Radio Astronomy	4	6
+MERGE	FAST	Telescope	4	6
+DROP	Feautrier's Method		4	6
+DROP	Feed Horn		4	6
+DROP	Femto		4	6
+DROP	Ferromagnet		4	6
+DROP	FET		4	6
+DROP	Feynman Diagram		4	6
+DROP	FFT		4	6
+DROP	FG Sagittae		4	6
+DROP	Fibrilles		4	6
+MERGE	Field Equations	Friedmann-Lemaitre Universe	4	6
+DROP	FIFO		4	6
+DROP	Fine-Tuning		4	6
+DROP	Fines, Lunar		4	6
+DROP	Finesse		4	6
+DROP	FIRAS		4	6
+MERGE	Fireball	Fireball	4	6
+DROP	First Order Transition		4	6
+MERGE	First Point of Aries	Vernal Equinox	4	6
+MERGE	Fission	Nuclear Fusion	4	6
+DROP	Fission fragments		4	6
+KEEP	FITS	fits	4	6
+MERGE	Five-Minute Oscillations	solar-oscillations	4	6
+MERGE	Fixed Point	lagrange-point	4	6

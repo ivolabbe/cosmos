@@ -1,0 +1,3 @@
+**R Leporis (Hind's Crimson Star) imaged by ALMA** — millimetre-wavelength observation of R Leporis, a C-N type Mira variable in Lepus, one of the most visually striking carbon stars. The ALMA data reveal the circumstellar envelope of gas and dust ejected through the star's stellar wind. R Leporis has a bolometric luminosity of ~13,200 L☉ and pulsates with a period of 427 days, varying from magnitude +5.5 to +11.7. The thick carbon-dust shell is responsible for its deep crimson optical appearance.
+
+Credit: ALMA (ESO/NAOJ/NRAO) / Y. Asaki et al. / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:R_Leporis_as_imaged_by_ALMA_(ann23019a).jpg) — CC BY 4.0

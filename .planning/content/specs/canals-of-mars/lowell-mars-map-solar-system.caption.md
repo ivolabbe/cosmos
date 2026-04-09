@@ -1,0 +1,1 @@
+Lowell's detailed Mars globe map from _The Solar System_ (fig. 8), showing the intricate canal network he charted over years of observation from Flagstaff, Arizona. Lowell founded his observatory in 1894 at over 2,100 m elevation specifically for clear atmospheric seeing. Source: Wikimedia Commons, public domain.

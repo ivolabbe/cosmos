@@ -1,0 +1,1 @@
+Percival Lowell's depiction of the Martian canal network, reproduced in Yakov Perelman's _Distant Worlds_ (1914). Lowell believed the canals were irrigation works constructed by an advanced Martian civilisation to carry meltwater from the polar ice caps. Source: Wikimedia Commons, public domain.

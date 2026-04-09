@@ -6,8 +6,8 @@
 ## Status: Complete (2026-03-28)
 
 ### Files
-- Interactive: `experimental/binary-star-interactive.html` (946 lines)
-- Article: `experimental/binary-star.html` (246 lines)
+- Interactive: `dev/binary-star-interactive.html` (946 lines)
+- Article: `dev/binary-star.html` (246 lines)
 - Spec: `.planning/apps/binary-star-spec.md` (666 lines)
 
 ### Features
@@ -33,7 +33,7 @@
 - K1/K2 = M2/M1 = 1/q
 
 ### Template used
-`experimental/gravitational-waves-interactive.html` — structure (orbiting objects + 2D panels + sliders)
+`dev/gravitational-waves-interactive.html` — structure (orbiting objects + 2D panels + sliders)
 
 ### Bugs found & fixed
 - **orbitControls hoisting (critical)**: `const orbitControls` declared after `updateCameraFromInclination()` call that referenced it. `const` doesn't hoist — caused ReferenceError that blocked entire animation loop. Fixed by moving OrbitControls init before the function call.

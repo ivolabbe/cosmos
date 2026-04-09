@@ -6,7 +6,7 @@
 
 **Date**: 2026-03-29
 **Screenshots**: `/tmp/roche-lobe-interactive-initial.png`, `/tmp/roche-lobe-interactive-rotated.png`, plus in-browser screenshots at multiple states
-**Agent instructions checked**: `.agents/sao-coder.md`, `.agents/INTERACTIVE-STYLE-GUIDE.md`
+**Agent instructions checked**: `.agents/agents/cosmos-coder.md`, `.agents/INTERACTIVE-STYLE-GUIDE.md`
 **Spec**: `.planning/apps/roche-lobe-spec.md`
 
 ### Checklist

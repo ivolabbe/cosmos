@@ -1,0 +1,641 @@
+DROP	nakshatra	none	6	7
+MERGE	Neutrino Bremsstrahlung	bremsstrahlung-radiation	6	7
+KEEP	neutrino interaction	none	6	7
+MERGE	Neutrino Process	stellar-evolution	6	7
+KEEP	Newton's Universal Theory of Gravity		6	7
+MERGE	Newtonian Cosmology	cosmology	6	7
+KEEP	Nordtvedt Effect	none	6	7
+KEEP	North Polar Spur	none	6	7
+KEEP	Nuclear Fusion	none	6	7
+KEEP	Opacity	none	6	7
+KEEP	Packing Fraction	none	6	7
+KEEP	Pair Annihilation	none	6	7
+DROP	Pan	none	6	7
+KEEP	Paschen-Back Effect	none	6	7
+KEEP	Perfect Gas	none	6	7
+MERGE	Perigalacticon	periapsis	6	7
+MERGE	Photoneutrinos	stellar-evolution	6	7
+MERGE	Physical keys to cosmology	cosmology	6	7
+DROP	piezoelectric effect	none	6	7
+MERGE	Planck radiation formula	blackbody-radiation	6	7
+KEEP	Planck Time	none	6	7
+MERGE	Planck's Radiation Law	blackbody-radiation	6	7
+KEEP	Ptolemy	none	6	7
+DROP	Saturn (launch vehicle)	none	6	7
+KEEP	SETI	none	6	7
+DROP	Shavit	none	6	7
+DROP	space elevator	none	6	7
+KEEP	space exploration	none	6	7
+DROP	space shuttle	none	6	7
+DROP	space tourism	none	6	7
+DROP	space-based solar power	none	6	7
+KEEP	Space-Time	none	6	7
+MERGE	Space-Time Continuum	Space-Time	6	7
+MERGE	Space-Time Foam	Space-Time	6	7
+DROP	Spacecraft	none	6	7
+DROP	SpaceShipOne	none	6	7
+MERGE	Standard Model of Cosmology	concordance-model	6	7
+KEEP	Supergravity	none	6	7
+KEEP	Surface Gravity		6	7
+KEEP	Tropic of Capricorn	none	6	7
+MERGE	Tycho	Ptolemy	6	7
+KEEP	Aberration, Annual	none	5	7
+KEEP	Aberration, Planetary	none	5	7
+KEEP	Ablation	none	5	7
+KEEP	Absolute Luminosity		5	7
+KEEP	Absolute Magnitude	none	5	7
+KEEP	Absolute Temperature		5	7
+KEEP	Absorption of Radiation		5	7
+KEEP	Accelerating Universe	none	5	7
+MERGE	Acceleration	velocity	5	7
+KEEP	Accretion	none	5	7
+KEEP	Accumulation Theory	none	5	7
+KEEP	Actinic Radiation	none	5	7
+DROP	Action	none	5	7
+DROP	Action-at-a-Distance	none	5	7
+KEEP	Active Optics	none	5	7
+KEEP	Adaptive Optics	none	5	7
+DROP	Adhesion	none	5	7
+KEEP	Advance of the Perihelion	none	5	7
+KEEP	Advection	none	5	7
+MERGE	Airy Diffraction Disk	airy-disk	5	7
+KEEP	Albedo	none	5	7
+KEEP	Aldebaran	none	5	7
+KEEP	Allende meteorite	none	5	7
+KEEP	Almagest	none	5	7
+DROP	Amagat	none	5	7
+DROP	Ampere	none	5	7
+KEEP	Anamorphic Magnification		5	7
+KEEP	Angular Acceleration	none	5	7
+KEEP	Angular Diameter	none	5	7
+MERGE	Angular Dispersion	angular-diameter	5	7
+MERGE	Angular Displacement	angular-diameter	5	7
+KEEP	Angular Frequency	none	5	7
+KEEP	Angular Momentum	none	5	7
+KEEP	Angular Resolution	none	5	7
+MERGE	Angular Size	angular-diameter	5	7
+KEEP	Annihilation	none	5	7
+KEEP	Annual Variation	none	5	7
+KEEP	Antapex	none	5	7
+KEEP	Antares	none	5	7
+KEEP	Antenna Temperature	none	5	7
+MERGE	Anti-Neutrino	neutron	5	7
+KEEP	Anti-Reflection Coating	none	5	7
+MERGE	Anticenter	galactic-anti-centre	5	7
+KEEP	AO Cassiopeiae		5	7
+KEEP	Apodization	none	5	7
+KEEP	Apparent Magnitude	none	5	7
+KEEP	Apparition	none	5	7
+KEEP	Aristarchus of Samos	none	5	7
+MERGE	Arm Population	population-i	5	7
+MERGE	Association	stellar-association	5	7
+DROP	Association of Universities for Research in Astronomy	none	5	7
+KEEP	Astration	none	5	7
+KEEP	Astrochemistry	none	5	7
+KEEP	Astronomer	none	5	7
+KEEP	Astronomical Survey	none	5	7
+KEEP	Astronomical Twilight	none	5	7
+DROP	Atlas	none	5	7
+KEEP	Atmosphere	none	5	7
+KEEP	Atmospheric Dispersion Corrector	none	5	7
+KEEP	Atmospheric Extinction	none	5	7
+KEEP	Atomic Mass Number	none	5	7
+KEEP	Atomic Mass Unit	none	5	7
+KEEP	Atomic Number	none	5	7
+MERGE	Atomic Second	second	5	7
+KEEP	Atomic spectra	none	5	7
+MERGE	Atomic Structure	atom	5	7
+MERGE	Atomic structure concepts	atom	5	7
+DROP	Atomic Theory	none	5	7
+MERGE	Atomic Time	coordinated-universal-time	5	7
+MERGE	Atomic Weight	atomic-mass-number	5	7
+DROP	Augmentation	none	5	7
+MERGE	Auto-Ionization	ionisation	5	7
+KEEP	Axion	none	5	7
+MERGE	B Cassiopeiae	constellation	5	7
+DROP	b-Lines	none	5	7
+KEEP	Background Count	none	5	7
+KEEP	Background Radiation	none	5	7
+KEEP	Baily's Beads	none	5	7
+DROP	Bar	none	5	7
+KEEP	Barnard's Star	none	5	7
+DROP	BCD	none	5	7
+DROP	Bendis	none	5	7
+DROP	Billion	none	5	7
+KEEP	Bohr magneton		5	7
+KEEP	Bolide	none	5	7
+KEEP	Boltzmann Constant	none	5	7
+MERGE	Bond Albedo	albedo	5	7
+DROP	Brane	none	5	7
+MERGE	brehmsstrahlung radiation	bremsstrahlung-radiation	5	7
+KEEP	Bremsstrahlung	none	5	7
+DROP	Brilliancy	none	5	7
+DROP	Bromine	none	5	7
+DROP	Canonical	none	5	7
+DROP	CDM	none	5	7
+DROP	Chang'e (deity)	none	5	7
+KEEP	Chaotic Inflation	none	5	7
+DROP	Charge	none	5	7
+DROP	charge, electric	none	5	7
+DROP	Chemical Clock	none	5	7
+MERGE	Chemical Elements	element	5	7
+KEEP	Chromatic Aberration	none	5	7
+KEEP	Collimate	none	5	7
+MERGE	Compound lens	telescope	5	7
+MERGE	conjugate points, lens	telescope	5	7
+MERGE	Converging lens	telescope	5	7
+MERGE	Converging mirror	mirror	5	7
+KEEP	coronal mass ejection	none	5	7
+MERGE	Coronal Mass Ejection (CME)	coronal mass ejection	5	7
+KEEP	cosmological constant	none	5	7
+MERGE	Cosmological Constant Problem	cosmological constant	5	7
+KEEP	Coudé Focus		5	7
+MERGE	Deformable Mirror	adaptive-optics	5	7
+DROP	Determinism	none	5	7
+KEEP	Dielectronic Recombination	none	5	7
+MERGE	Disk	disk-galaxies	5	7
+DROP	Disorder	none	5	7
+MERGE	Eagle	nebula	5	7
+KEEP	Einstein velocity addition		5	7
+DROP	Electron-Hole Pairs	none	5	7
+KEEP	Element	none	5	7
+MERGE	Energy Spectrum	electromagnetic-spectrum	5	7
+KEEP	Equuleus	none	5	7
+KEEP	Event	none	5	7
+KEEP	Flash Spectrum	none	5	7
+KEEP	Fraction of power in a wavelength range.		5	7
+KEEP	Frequency	none	5	7
+MERGE	Frequency Distribution	frequency	5	7
+MERGE	Frequency Standard	frequency	5	7
+MERGE	Fundamental Frequency	frequency	5	7
+KEEP	Fusion		5	7
+KEEP	Gacrux	none	5	7
+MERGE	Gem	gemini	5	7
+KEEP	Gemini	none	5	7
+KEEP	Grating diffraction of helium-neon laser		5	7
+KEEP	Gravitation	none	5	7
+MERGE	Gravity and the photon	gravitational-redshift	5	7
+MERGE	Gravity concepts	gravitation	5	7
+KEEP	Gravity Darkening	none	5	7
+MERGE	gravity field	gravitation	5	7
+KEEP	Gravity Probe A	none	5	7
+KEEP	Great Looped Nebula	none	5	7
+KEEP	Great Year	none	5	7
+DROP	Hades	none	5	7
+KEEP	Halo Stars	none	5	7
+DROP	harmonic oscillator, quantum	none	5	7
+KEEP	Harvard Classification		5	7
+KEEP	harvest moon	none	5	7
+DROP	Hassium	none	5	7
+KEEP	HEASARC	none	5	7
+KEEP	Helium Abundance	none	5	7
+KEEP	Helium Burning	none	5	7
+KEEP	Herschel Infrared Observatory	none	5	7
+MERGE	Hess Diagram	hertzsprung-russell-diagram	5	7
+DROP	Higgs Physics	none	5	7
+KEEP	Horologium	none	5	7
+KEEP	Hourglass Nebula	none	5	7
+MERGE	Hydrocarbon	molecule	5	7
+KEEP	Hydromagnetics	none	5	7
+KEEP	Iapetus	none	5	7
+KEEP	impact event	none	5	7
+KEEP	Inflation	none	5	7
+MERGE	Inner Lagrangian Point (L1)	roche-lobe	5	7
+MERGE	Intelligence	seti	5	7
+MERGE	Inverse Bremsstrahlung	bremsstrahlung-radiation	5	7
+MERGE	Ionized	ionisation	5	7
+KEEP	ISO	none	5	7
+MERGE	J magnitude	apparent-magnitude	5	7
+DROP	Joule	none	5	7
+KEEP	Julian Calendar	none	5	7
+MERGE	Julian Date	julian-calendar	5	7
+MERGE	Julian Date, Modified	julian-calendar	5	7
+MERGE	Julian Year	julian-calendar	5	7
+MERGE	K magnitude	apparent-magnitude	5	7
+KEEP	Kapteyn Universe	none	5	7
+KEEP	Keyhole Nebula	none	5	7
+DROP	kilometer per second	none	5	7
+MERGE	Lambda ()	cosmological-constant	5	7
+MERGE	Lambda Doublet	spectral-line	5	7
+MERGE	Lambda Term	cosmological-constant	5	7
+KEEP	Las Campanas Observatory	none	5	7
+KEEP	LBG		5	7
+DROP	LED	none	5	7
+DROP	LEDA	none	5	7
+KEEP	Lens	none	5	7
+MERGE	lenses	Lens	5	7
+MERGE	Lensing	gravitational-redshift	5	7
+KEEP	Leo	none	5	7
+MERGE	Leo I	Leo	5	7
+MERGE	Leo II	Leo	5	7
+DROP	Levi	none	5	7
+DROP	LIDAR	none	5	7
+KEEP	Light Cylinder	none	5	7
+MERGE	Light Year	light-year	5	7
+MERGE	Light-Time	light-year	5	7
+KEEP	LIGO	none	5	7
+DROP	Littrow	none	5	7
+KEEP	Longitude	none	5	7
+MERGE	LSBG	low-surface-brightness-galaxy	5	7
+MERGE	M magnitude	apparent-magnitude	5	7
+DROP	Magic Number	none	5	7
+KEEP	Magnetic Bremsstrahlung		5	7
+KEEP	Magneton		5	7
+DROP	Main Beam	none	5	7
+DROP	Mantissa	none	5	7
+KEEP	Mass Defect	none	5	7
+MERGE	Mass Models	density	5	7
+DROP	Meissner Effect	none	5	7
+DROP	Men	none	5	7
+DROP	mesons	none	5	7
+MERGE	Mesosphere	atmosphere	5	7
+MERGE	Messier catalog	Messier Object	5	7
+KEEP	Messier Object	none	5	7
+MERGE	Milne Cosmological Model	cosmology	5	7
+MERGE	Minute of Arc	arcminute	5	7
+DROP	MOS	none	5	7
+MERGE	N-Magnitude	apparent-magnitude	5	7
+DROP	Nanosecond	none	5	7
+DROP	Nautical Mile	none	5	7
+MERGE	New Inflation	Inflation	5	7
+KEEP	Node	none	5	7
+MERGE	Non-Gray Atmosphere	atmosphere	5	7
+KEEP	Nuclear Density	none	5	7
+KEEP	Nuclide	none	5	7
+KEEP	Objective Prism	none	5	7
+MERGE	Old Inflation	Inflation	5	7
+DROP	Omid	none	5	7
+KEEP	Oort's Constants	none	5	7
+DROP	Optical Matching	none	5	7
+DROP	Order	none	5	7
+KEEP	Order of Magnitude	none	5	7
+KEEP	Peculiar Velocity	none	5	7
+MERGE	Photographic Magnitude	apparent-magnitude	5	7
+MERGE	Photovisual Magnitude	apparent-magnitude	5	7
+KEEP	Planck Constant	none	5	7
+MERGE	Plane-Parallel Atmosphere	atmosphere	5	7
+KEEP	Proxima Centauri	none	5	7
+KEEP	Red Dwarf	none	5	7
+KEEP	Regulus	none	5	7
+KEEP	Rosetta	none	5	7
+KEEP	Schmidt Camera	none	5	7
+KEEP	Sco-Cen Association	none	5	7
+MERGE	Second	si-units	5	7
+KEEP	Sextans Dwarf		5	7
+DROP	Side Lobe	none	5	7
+KEEP	sizes of the planets	none	5	7
+KEEP	Skylab	none	5	7
+KEEP	slingshot orbit	none	5	7
+KEEP	SOFIA	none	5	7
+KEEP	Solar Day	none	5	7
+MERGE	Solar Velocity	peculiar-velocity	5	7
+DROP	Space Charge Wave	none	5	7
+KEEP	Space Curvature	none	5	7
+KEEP	Space Debris	none	5	7
+MERGE	Space Motion	proper-motion	5	7
+KEEP	Space Station	none	5	7
+KEEP	Space Telescope	none	5	7
+MERGE	Space Velocity	velocity	5	7
+KEEP	Space Weather	none	5	7
+MERGE	Space-Like Path	Space-Time	5	7
+DROP	spaceflight	none	5	7
+MERGE	spin-orbit effect	zeeman-effect	5	7
+MERGE	spin-orbit interaction	zeeman-effect	5	7
+KEEP	Stefan-Boltzmann Constant	none	5	7
+MERGE	Stratosphere	atmosphere	5	7
+DROP	String Coupling Constant	none	5	7
+MERGE	Supra-Thermal Proton Bremsstrahlung	bremsstrahlung-radiation	5	7
+KEEP	synthesis of the heavy elements	none	5	7
+MERGE	Tangential Velocity	transverse-velocity	5	7
+MERGE	Terminal Velocity	velocity	5	7
+MERGE	Thermal Bremsstrahlung	bremsstrahlung-radiation	5	7
+MERGE	Thick Disk	thick-disk	5	7
+MERGE	Thin Disk	thin-disk	5	7
+KEEP	Tidal Locking	none	5	7
+KEEP	Topocentric	none	5	7
+DROP	Topologically Distinct	none	5	7
+MERGE	Transverse Velocity	transverse-velocity	5	7
+MERGE	U Velocity	velocity	5	7
+KEEP	ULIRG	none	5	7
+KEEP	Veil Nebula	none	5	7
+KEEP	Whirlpool Galaxy	none	5	7
+KEEP	Apsidal Motion	none	4	7
+DROP	Baldet-Johnson Bands	none	4	7
+KEEP	Balmer Series	none	4	7
+DROP	Band Width	none	4	7
+KEEP	Barred Spiral Galaxy	none	4	7
+KEEP	Baryogenesis	none	4	7
+KEEP	Baryon-to-Photon Ratio	none	4	7
+MERGE	Baryonic	baryonic-matter	4	7
+DROP	BF3 Counter	none	4	7
+DROP	Biconcave	none	4	7
+DROP	Bifurcation	none	4	7
+KEEP	Big Bang Nucleosynthesis	none	4	7
+KEEP	Big Blue Bump	none	4	7
+DROP	Biprism, Fresnel's	none	4	7
+KEEP	BL Lac Object	none	4	7
+DROP	Bond, Ionic	none	4	7
+DROP	Born Approximation	none	4	7
+DROP	Bottom	none	4	7
+KEEP	Bound-Free Transitions	none	4	7
+DROP	Boundary Condition	none	4	7
+KEEP	Brans-Dicke Theory	none	4	7
+DROP	Bright Points	none	4	7
+KEEP	Brightness	none	4	7
+DROP	Brightness Distribution	none	4	7
+MERGE	Carina OB 2	stellar-association	4	7
+DROP	Cavitation	none	4	7
+KEEP	centrifugal force	none	4	7
+KEEP	centripetal force	none	4	7
+KEEP	Chandra X-ray Observatory	none	4	7
+MERGE	Chandrasekhar-Schönberg Limit	chandrasekhar-limit	4	7
+DROP	Chapman-Jouguet Detonation	none	4	7
+KEEP	Charge Bleeding	none	4	7
+DROP	Charge Multiplet	none	4	7
+DROP	Charge Number	none	4	7
+KEEP	Christoffel Symbols	none	4	7
+MERGE	cosmic background radiation	cosmic-microwave-background	4	7
+KEEP	Differential Rotation	none	4	7
+KEEP	Diffraction	none	4	7
+MERGE	Diffraction concepts	Diffraction	4	7
+DROP	Dimension	none	4	7
+DROP	Dimensional Analysis	none	4	7
+DROP	Discriminator	none	4	7
+DROP	Disintegration	none	4	7
+KEEP	Dispersion Relations	none	4	7
+DROP	Dissipation	none	4	7
+KEEP	Dissociative Recombination	none	4	7
+DROP	Domain	none	4	7
+KEEP	Doppler Broadening	none	4	7
+MERGE	Doppler Shift	doppler-shift	4	7
+DROP	Dyne	none	4	7
+MERGE	Eccentric	orbital-eccentricity	4	7
+MERGE	Eccentricity	orbital-eccentricity	4	7
+DROP	Edge Effects	none	4	7
+KEEP	Elevation	none	4	7
+KEEP	elongation	none	4	7
+MERGE	Elongation, Greatest	elongation	4	7
+DROP	Entanglement	none	4	7
+MERGE	Equilibrium	hydrostatic-equilibrium	4	7
+KEEP	Evection	none	4	7
+KEEP	Evershed Effect	none	4	7
+DROP	exchange force	none	4	7
+KEEP	Extinction	none	4	7
+MERGE	Fall	meteorite	4	7
+MERGE	Field Rotation	telescope	4	7
+DROP	Field Theory	none	4	7
+MERGE	FIR	infrared	4	7
+MERGE	FIRST	radio-astronomy	4	7
+KEEP	Fokker-Planck Equation		4	7
+KEEP	Force	none	4	7
+KEEP	Free-Free Radiation	none	4	7
+KEEP	Fringes	none	4	7
+KEEP	fundamental forces	none	4	7
+MERGE	Galactic	galaxy	4	7
+KEEP	Galaxy Cluster	none	4	7
+MERGE	Gas	molecule	4	7
+MERGE	Gas Cloud	molecular-cloud	4	7
+DROP	gas constant	none	4	7
+KEEP	Gemini Observatory	none	4	7
+MERGE	Geology	earth	4	7
+KEEP	Giant		4	7
+KEEP	Giant Molecular Cloud		4	7
+KEEP	Gould Belt	none	4	7
+KEEP	Grand Unified Theory	none	4	7
+KEEP	Gravitational Constant	none	4	7
+KEEP	Gravitational Field Lines	none	4	7
+KEEP	Gravitational Mass	none	4	7
+MERGE	Gravitational Radius	schwarzschild-radius	4	7
+KEEP	Gravitational Waves		4	7
+KEEP	Grazing-Incidence Telescope	none	4	7
+KEEP	H II		4	7
+MERGE	H II Condensation	hii-region	4	7
+MERGE	Harman-Seaton Sequence	planetary-nebulae	4	7
+KEEP	Haro Galaxies	none	4	7
+MERGE	Head-Tail Galaxies	galactic-jets	4	7
+DROP	Heat of Formation	none	4	7
+KEEP	Helicity	none	4	7
+KEEP	Helmholtz Contraction	none	4	7
+DROP	Hera	none	4	7
+KEEP	Hercules X-1	none	4	7
+DROP	Heterodyne	none	4	7
+KEEP	Hidalgo	none	4	7
+DROP	Hidden Variables Theory	none	4	7
+DROP	Hugoniot Relations	none	4	7
+KEEP	Hydrostatic Equilibrium	none	4	7
+KEEP	ideal gas law		4	7
+KEEP	Impact Craters	none	4	7
+KEEP	Infrared (IR)	none	4	7
+KEEP	Infrared Astronomical Satellite	none	4	7
+KEEP	Inner Planet	none	4	7
+KEEP	Insolation	none	4	7
+KEEP	Integrating Detector		4	7
+KEEP	Intensity	none	4	7
+MERGE	Intensity Interferometry	radio-interferometer	4	7
+KEEP	Interaction of radiation with matter		4	7
+MERGE	Intercloud Medium	intercloud-gas	4	7
+KEEP	International Astronomical Union	none	4	7
+KEEP	interplanetary medium	none	4	7
+MERGE	Interstellar Cloud	interstellar-gas-cloud	4	7
+MERGE	IR	infrared	4	7
+DROP	Iradiance curve of the Sun	none	4	7
+KEEP	IRAF	none	4	7
+KEEP	IRAM	none	4	7
+KEEP	IRAS	none	4	7
+KEEP	Karman line	none	4	7
+DROP	Kennedy Space Center	none	4	7
+KEEP	Keplerian telescope	none	4	7
+KEEP	Kleinmann-Low nebula	none	4	7
+MERGE	L-magnitude	apparent-magnitude	4	7
+MERGE	Large-Scale Structure	large-scale-structure	4	7
+KEEP	Libra	none	4	7
+KEEP	Libration	none	4	7
+DROP	Light and Vision	none	4	7
+KEEP	Light Clock	none	4	7
+KEEP	Light Cone	none	4	7
+KEEP	Light Pollution	none	4	7
+MERGE	Light, Deflection of	gravitational-redshift	4	7
+MERGE	light, speed of	speed-of-light	4	7
+KEEP	Limb Brightening	none	4	7
+KEEP	Lindblad Resonance	none	4	7
+DROP	list of astronauts	none	4	7
+DROP	list of astronomers	none	4	7
+KEEP	list of galaxies and galaxy clusters		4	7
+KEEP	Local Thermodynamic Equilibrium	none	4	7
+DROP	Localisation	none	4	7
+KEEP	Lorentz force law		4	7
+KEEP	Lunation	none	4	7
+DROP	magnetic force	none	4	7
+KEEP	Magnetic Monopole	none	4	7
+MERGE	Magnetic Monopole Problem	Magnetic Monopole	4	7
+KEEP	Magnetic Poles	none	4	7
+KEEP	Magnetopause	none	4	7
+KEEP	Magnetosphere	none	4	7
+KEEP	Mass-to-Light Ratio	none	4	7
+MERGE	Mean Elements	orbital-elements	4	7
+DROP	Mean Life	none	4	7
+DROP	Meness	none	4	7
+KEEP	Meridian	none	4	7
+DROP	micro-	none	4	7
+MERGE	Microwave Background Radiation	cosmic-microwave-background	4	7
+DROP	MIR	none	4	7
+KEEP	Mira	none	4	7
+KEEP	Mira Ceti		4	7
+KEEP	Mira Variables		4	7
+KEEP	Miranda	none	4	7
+KEEP	Mirror	none	4	7
+DROP	Mixer	none	4	7
+MERGE	modeling of nucleosynthesis	Big Bang Nucleosynthesis	4	7
+DROP	NEC	none	4	7
+DROP	NEF	none	4	7
+KEEP	Nereid	none	4	7
+MERGE	Newton's second law for rotation	newton%27s-second-law-of-motion	4	7
+DROP	Non-Relativistic Zone	none	4	7
+DROP	Normal Modes	none	4	7
+KEEP	Nuclear Statistical Equilibrium	none	4	7
+KEEP	Nutation	none	4	7
+MERGE	O Magnitude	apparent-magnitude	4	7
+DROP	Oersted	none	4	7
+DROP	Optical Soliton	none	4	7
+KEEP	Orbital Elements	none	4	7
+MERGE	Osculating Elements	Orbital Elements	4	7
+KEEP	Out-Gassing	none	4	7
+DROP	P-Wave	none	4	7
+KEEP	Pair production	none	4	7
+KEEP	Particle	none	4	7
+DROP	Particle Distribution Function	none	4	7
+KEEP	Particle Horizon	none	4	7
+KEEP	Particle Physics	none	4	7
+DROP	Particle references	none	4	7
+KEEP	Particle-to-Antiparticle Ratio	none	4	7
+DROP	Percolation	none	4	7
+MERGE	Persei	Perseus (constellation)	4	7
+KEEP	Perseus A	none	4	7
+KEEP	Perseus Arm	none	4	7
+MERGE	Perseus OB1	stellar-association	4	7
+MERGE	Perseus OB2	stellar-association	4	7
+MERGE	Perseus X-1	x-ray-binary	4	7
+DROP	Photoelectric Devices	none	4	7
+MERGE	Photoelectric Magnitude	apparent-magnitude	4	7
+KEEP	Photon-to-Baryon Ratio	none	4	7
+KEEP	Pickering Series	none	4	7
+DROP	Pico-	none	4	7
+KEEP	Pinwheel Galaxy	none	4	7
+KEEP	Prime Meridian	none	4	7
+KEEP	Protoplanetary Disk	none	4	7
+KEEP	Refracting Telescope	none	4	7
+KEEP	ROSAT	none	4	7
+KEEP	Rosette Nebula	none	4	7
+KEEP	Rossby Waves	none	4	7
+KEEP	Rossiter Effect	none	4	7
+MERGE	rotational motion	rotation-curve	4	7
+KEEP	Rotational Transition	none	4	7
+KEEP	RW Aurigae		4	7
+KEEP	Saturn Nebula	none	4	7
+KEEP	Scale Height	none	4	7
+KEEP	Schmidt Telescope	none	4	7
+KEEP	Schwarzschild Black Hole	none	4	7
+KEEP	Scientific Revolution	none	4	7
+MERGE	Scorpius OB1	stellar-association	4	7
+DROP	Second Superstring Revolution	none	4	7
+KEEP	Self-Absorption	none	4	7
+DROP	Sigma	none	4	7
+KEEP	Spectra	none	4	7
+KEEP	Spectral Series	none	4	7
+KEEP	Spica	none	4	7
+KEEP	Spin	none	4	7
+KEEP	Spring Equinox	none	4	7
+MERGE	Static Limit	event-horizon	4	7
+MERGE	Stationary Limit	event-horizon	4	7
+DROP	stationary nonequilibrium state	none	4	7
+MERGE	Statistical Equilibrium	hydrostatic-equilibrium	4	7
+KEEP	Stellar Population	none	4	7
+DROP	Strange	none	4	7
+DROP	Strangeness	none	4	7
+DROP	Strong Force Symmetry	none	4	7
+MERGE	Structure	large-scale-structure	4	7
+DROP	Sub-Atomic Particle	none	4	7
+KEEP	Sublimation	none	4	7
+KEEP	Synchronous Rotation	none	4	7
+MERGE	Thermal Background	cosmic-microwave-background	4	7
+MERGE	Thermal Equilibrium	hydrostatic-equilibrium	4	7
+KEEP	Thermal Radiation	none	4	7
+MERGE	Thermodynamic Equilibrium	hydrostatic-equilibrium	4	7
+KEEP	Tidal Force	none	4	7
+DROP	Top	none	4	7
+KEEP	Transition Radiation	none	4	7
+KEEP	Transuranic Elements	none	4	7
+MERGE	U line	spectral-line	4	7
+KEEP	ultraviolet telescope	none	4	7
+MERGE	Unified Field Theory	Grand Unified Theory	4	7
+DROP	Upsilon Particle	none	4	7
+DROP	van der Waals Equation	none	4	7
+DROP	van der Waals Forces	none	4	7
+DROP	Vector Boson	none	4	7
+MERGE	Velocity Field	velocity	4	7
+DROP	Virtual Particle	none	4	7
+DROP	Virtual Particle Theory	none	4	7
+KEEP	Vis Viva Equation	none	4	7
+DROP	Vlaslov Equation	none	4	7
+KEEP	Vlasov-Maxwell Equations		4	7
+KEEP	Vogt-Russell Theorem	none	4	7
+KEEP	von Zeipel's Theorem	none	4	7
+MERGE	W and Z Particles	boson	4	7
+MERGE	W Boson	boson	4	7
+MERGE	W particle	boson	4	7
+KEEP	Wave-Particle Duality	none	4	7
+KEEP	Weak (Nuclear) Force	none	4	7
+MERGE	Weak Gauge Boson	boson	4	7
+KEEP	Wien displacement law	none	4	7
+MERGE	Wien's Law	Wien displacement law	4	7
+DROP	work-energy principle	none	4	7
+DROP	X Particle	none	4	7
+KEEP	X-Ray Pulsars		4	7
+KEEP	X-ray Telescope	none	4	7
+DROP	Z particle	none	4	7
+DROP	Zerilli's Equation	none	4	7
+KEEP	Zeroth Law of Thermodynamics	none	4	7
+KEEP	47 Tucanae	none	3	7
+KEEP	51 Pegasi b	none	3	7
+DROP	Bahcall-Soneira Model	none	3	7
+MERGE	Bailey Types	rr-lyrae	3	7
+DROP	Balloon Metaphor	none	3	7
+KEEP	Balmer Jump	none	3	7
+DROP	Baud	none	3	7
+KEEP	beat frequency		3	7
+DROP	Bell's Inequality	none	3	7
+KEEP	Bellatrix	none	3	7
+MERGE	Bellatrix ( Orionis)	Bellatrix	3	7
+KEEP	Binning	none	3	7
+DROP	Biosatellite	none	3	7
+DROP	Birefringent	none	3	7
+DROP	Birefringent Crystal	none	3	7
+DROP	Birkhoff's Theorem	none	3	7
+MERGE	BL Lacertae	BL Lac Object	3	7
+KEEP	Blaze Angle	none	3	7
+KEEP	Blazed Grating	none	3	7
+DROP	Blue Edge	none	3	7
+KEEP	Blue Giant	none	3	7
+DROP	Blue Haze	none	3	7
+MERGE	Blue Shift	redshift	3	7
+MERGE	blue straggler star	blue-stragglers	3	7
+MERGE	Blue Stragglers	blue-stragglers	3	7
+DROP	boat in current	none	3	7
+DROP	Bohr model	none	3	7
+DROP	Bohr Radius	none	3	7
+KEEP	Bok Globule	none	3	7
+KEEP	Boltzmann distribution		3	7
+KEEP	Boltzmann-Saha Theory		3	7
+DROP	Born-Oppenheimer Approximation	none	3	7
+DROP	Bosonic String Theory	none	3	7
+KEEP	Brackett Series	none	3	7
+DROP	Brewster Angle	none	3	7
+KEEP	Bright Blue Variables		3	7
+MERGE	Brightness Temperature	effective-temperature	3	7
+DROP	Brillouin Zone	none	3	7
+MERGE	Bulge	bulges	3	7
+DROP	Bus	none	3	7
+DROP	Canonical Change	none	3	7
+DROP	Cape Photographic Durchmusterung		3	7
+KEEP	Carbon Burning		3	7
+DROP	Carbon Dioxide		3	7

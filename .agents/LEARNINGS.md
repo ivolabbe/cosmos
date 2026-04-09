@@ -22,13 +22,13 @@ Every physics element must be checked for: (1) direction sanity — beams diverg
 As of 2026-03-30, original articles are frozen in `articles_orig/` (645 files, never modify). The live `articles/` directory may now be edited directly. Always compare against `articles_orig/` to track what changed.
 
 ### Minimal article modifications
-When adding an interactive to an existing article: ONLY add the iframe embed block and its caption. Do not rewrite, expand, restructure, or "enhance" article content. Slight modifications (<15%) are acceptable — correcting obvious mistakes or updating to present day. A different team handles substantial text changes. For new articles, match the COSMOS voice per `cosmos-style-analysis.md`.
+When adding an interactive to an existing article: ONLY add the iframe embed block and its caption. Do not rewrite, expand, restructure, or "enhance" article content. Slight modifications (<15%) are acceptable — correcting obvious mistakes or updating to present day. A different team handles substantial text changes. For new articles, match the COSMOS voice per `COSMOS-STYLE-GUIDE.md`.
 
 ### Rapid visual iteration
 The user iterates rapidly by testing visually in Chrome and queuing corrections. Physical accuracy is as important as visual appeal. Don't over-engineer before testing — make the minimal change, let the user evaluate, iterate. The user references real physics papers/tools as visual quality targets — take these seriously.
 
 ### Visual quality via sub-agent
-Visual verification is context-heavy (web searches, image comparisons). The verifier dispatches `sao-visual` as a sub-agent. Visual rules: favour additive blending for glow, use bloom tastefully (0.2–0.4), use plain THREE.Line + additive for orbit lines (no stacking, no Line2 with transparency), find appropriate textures for spherical bodies. **Never change physics to match visuals** — only adjust visual parameters (zoom, brightness, opacity, line thickness, colour, bloom).
+Visual verification is context-heavy (web searches, image comparisons). The verifier dispatches `cosmos-visual` as a sub-agent. Visual rules: favour additive blending for glow, use bloom tastefully (0.2–0.4), use plain THREE.Line + additive for orbit lines (no stacking, no Line2 with transparency), find appropriate textures for spherical bodies. **Never change physics to match visuals** — only adjust visual parameters (zoom, brightness, opacity, line thickness, colour, bloom).
 
 ### Continuous learning
 After every successful result, write learnings to the project. Update agent files, dev logs, and style guides with new knowledge. Pattern: build → test → verify → log → improve skill → next iteration.
@@ -113,7 +113,7 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 ### Verification process lessons (2026-03-29)
 - **Code-reading verification is useless for visual quality.** Must use actual browser (Puppeteer headed or Chrome). A code review cannot catch visual artifacts, alignment issues, or bloom interactions.
 - **Visual verification must check IMPLEMENTATION patterns**, not just visual outcomes. A wrong implementation (e.g. double-FrontSide spheres) that happens to look passable under one set of bloom settings will break under different conditions.
-- **Always dispatch both sao-verify + sao-visual agents.** Never substitute manual code review for visual inspection.
+- **Always dispatch both cosmos-verify + cosmos-visual agents.** Never substitute manual code review for visual inspection.
 - **A "PASS" report without screenshots is invalid.** The verifier must produce actual screenshots. A text-only report proves nothing was actually rendered.
 
 ### Process mistakes to avoid (2026-03-29)
@@ -156,16 +156,16 @@ Ray-marched column density on a single FrontSide sphere is the ONLY approach tha
 
 | Location | Contents |
 |---|---|
-| `.agents/sao-*.md` | Agent definitions with per-agent Learnings sections |
+| `.agents/agents/cosmos-*.md` | Agent definitions with per-agent Learnings sections |
 | `.agents/INTERACTIVE-STYLE-GUIDE.md` | Three.js visual/architecture rules |
-| `.agents/cosmos-style-analysis.md` | 643-article corpus voice/level/style analysis |
-| `.agents/verify.js` | Automated Puppeteer verification script |
+| `.agents/COSMOS-STYLE-GUIDE.md` | 643-article corpus voice/level/style analysis |
+| `.agents/code/verify.js` | Automated Puppeteer verification script |
 | `.planning/INTERACTIVE-DEMOS.md` | Top 10 ranked candidate list |
 | `.planning/apps/*.md` | Per-app dev logs |
 | `.planning/apps/*-spec.md` | Build specs for physics sim apps |
-| `experimental/*-interactive.html` | Interactive visualizations |
-| `experimental/*.html` (non-interactive) | Article pages with embedded interactives |
-| `experimental/assets/` | Textures, models, credits |
+| `dev/*-interactive.html` | Interactive visualizations |
+| `dev/*.html` (non-interactive) | Article pages with embedded interactives |
+| `dev/assets/` | Textures, models, credits |
 
 ---
 

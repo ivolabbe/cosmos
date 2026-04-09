@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"tail -3 /tmp/cosmos-unmatched.txt | cat -A\",\"description\":\"Check if input file ends with newline\"}",
+  "error": "Exit code 1\ncat: illegal option -- A\nusage: cat [-belnstuv] [file ...]",
+  "timestamp": "2026-04-06T07:45:52.667Z",
+  "retry_count": 1
+}

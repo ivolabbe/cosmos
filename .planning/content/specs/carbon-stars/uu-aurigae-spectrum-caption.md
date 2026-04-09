@@ -1,0 +1,3 @@
+**Echelle spectrum of the carbon star UU Aurigae** — uncalibrated echelle spectrum showing the complex absorption bands characteristic of a carbon star atmosphere. The dark absorption features are produced by molecules C₂ (Swan bands), CN (cyanogen), and CH in the cool, carbon-rich envelope of this C-N type AGB star. UU Aurigae is a semiregular variable (period ~234 days) in Auriga, one of the brightest carbon stars in the sky. Obtained with a Meade 16″ RCX-400 telescope and Shelyak Instruments Echelle Spectrograph at the Allegheny Observatory, University of Pittsburgh, 2015.
+
+Credit: Naboc1 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Echelle_Spectra_of_the_Carbon_Star_UU_Aurigae.jpg) — CC BY-SA 3.0

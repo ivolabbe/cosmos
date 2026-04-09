@@ -85,7 +85,7 @@ The density wave model, proposed by C.C. Lin and Frank Shu in 1964, explains why
 - **Our advantage**: Lightweight single HTML file. Educational focus with physics readouts. Interactive pattern speed / arm controls. Star formation demonstration.
 
 ### Reference 6: Existing COSMOS rotation-curve-interactive.html
-- **URL**: `experimental/rotation-curve-interactive.html`
+- **URL**: `dev/rotation-curve-interactive.html`
 - **Source**: This project
 - **What it does well**: 8000-particle face-on spiral galaxy with physically correct differential rotation from a three-component mass model (bulge + disk + dark matter halo). Linked rotation curve panel. Dark matter slider. Bloom, circular particles, colour gradient. Already demonstrates that inner stars orbit faster than outer stars. Proven architecture.
 - **What it does poorly**: Spiral arms are baked into initial particle positions via logarithmic winding — they wind up over time because there is no density wave pattern holding them. No separate pattern speed. No star formation. No traffic jam overlay. The spiral dissolves as the simulation runs (the winding problem in action).
@@ -459,7 +459,7 @@ The spiral pattern should only be rendered between ILR and OLR. Inside ILR or ou
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/rotation-curve-interactive.html`** — because:
+**`dev/rotation-curve-interactive.html`** — because:
 1. Same galaxy particle system architecture (8000 particles, BufferGeometry, per-vertex colours, custom ShaderMaterial with size attribute).
 2. Same three-component mass model (Hernquist bulge + Freeman disk + isothermal halo + Bessel functions) — copy directly.
 3. Same differential rotation (Omega(R) = v_total(R) / R) — already implemented.
@@ -498,7 +498,7 @@ The coder should start by copying rotation-curve-interactive.html and modifying:
 - **Dobbs & Baba 2014, PASA 31, e035** (Dawes Review 4: Spiral Structures in Disc Galaxies): Comprehensive review. Section 3.3 covers star formation in spiral arms. Available at: http://ned.ipac.caltech.edu/level5/March15/Dobbs/Dobbs2.html
 
 ### Existing COSMOS mass model code
-- **`experimental/rotation-curve-interactive.html`**: Lines 194-301. Complete implementation of Bessel functions (I0, I1, K0, K1), vBulge, vDisk, vHalo, vTotal, rho0 tuning. Copy directly.
+- **`dev/rotation-curve-interactive.html`**: Lines 194-301. Complete implementation of Bessel functions (I0, I1, K0, K1), vBulge, vDisk, vHalo, vTotal, rho0 tuning. Copy directly.
 
 ### Pseudocode: core density wave computation (per frame)
 

@@ -423,14 +423,14 @@ Optional enhancement: A soft circular gradient sprite for each particle (a small
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/binary-star-interactive.html`** — because:
+**`dev/binary-star-interactive.html`** — because:
 1. Same architecture: 3D scene (center/left) + 2D canvas panel (right) + sliders in controls bar
 2. Physics-driven particle/object positions updated each frame from analytic model
 3. Sliders that change physics parameters and immediately update both 3D scene and 2D plot
 4. Already uses the multi-panel layout pattern proven in GW and pulsar apps
 5. Stacked 2D panels on the right (RV + light curve) — we use one panel for the rotation curve
 
-Alternative template: `experimental/gravitational-waves-interactive.html` — for the spectrogram panel positioning and the slider-driven physics architecture. Either works; binary-star is slightly closer because it has the same "orbiting objects + diagnostic panel" pattern.
+Alternative template: `dev/gravitational-waves-interactive.html` — for the spectrogram panel positioning and the slider-driven physics architecture. Either works; binary-star is slightly closer because it has the same "orbiting objects + diagnostic panel" pattern.
 
 ---
 

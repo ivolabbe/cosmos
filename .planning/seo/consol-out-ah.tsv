@@ -1,0 +1,634 @@
+KEEP	Uhuru		3	5
+KEEP	Ultra-High Frequency		3	5
+DROP	Ultramicroscopic		3	5
+KEEP	Umbra		3	5
+DROP	unit vectors		3	5
+DROP	Unitarity		3	5
+MERGE	units	si-units	3	5
+MERGE	Universal Time (UT)	coordinated-universal-time	3	5
+DROP	Weight		3	5
+MERGE	BCG	brightest-cluster-galaxies	2	5
+DROP	Comparison unit:1 U.S. year		2	5
+DROP	Complex Number		2	5
+DROP	Complex Number Astrophysics		2	5
+DROP	Conic Constant		2	5
+KEEP	Conjunction		2	5
+KEEP	Constant of Precession		2	5
+DROP	Constants		2	5
+DROP	Cosecant Law		2	5
+DROP	Cosine Law		2	5
+KEEP	Coulomb's Law		2	5
+DROP	Coupling Constant		2	5
+DROP	Curie (unit)		2	5
+DROP	current law		2	5
+KEEP	Curvature Constant		2	5
+DROP	Day Numbers		2	5
+DROP	Debye Unit		2	5
+DROP	Dipole Moment		2	5
+DROP	Dirac Function		2	5
+DROP	DMA		2	5
+DROP	e-Folding Time		2	5
+KEEP	Edmond Halley		2	5
+DROP	Electron Conduction		2	5
+DROP	Enthalphy (H)		2	5
+DROP	Entrance Pupil		2	5
+MERGE	Ephemeris Longitude	epoch	2	5
+MERGE	Ephemeris Second	epoch	2	5
+MERGE	Ephemeris Time	epoch	2	5
+MERGE	Ephemeris Transit	epoch	2	5
+KEEP	Equatorial Mount		2	5
+KEEP	Equivalent Width		2	5
+DROP	Even-Odd Nuclei		2	5
+KEEP	G-Type Star		2	5
+KEEP	Hertz		2	5
+DROP	Hydrodynamics		2	5
+DROP	j-j Coupling		2	5
+KEEP	Jansky		2	5
+KEEP	K-type Star		2	5
+KEEP	Late Type Stars		2	5
+DROP	Low-Velocity Star		2	5
+KEEP	M-Type		2	5
+KEEP	M-type Star		2	5
+DROP	Night-Sky Light		2	5
+KEEP	O-type Star		2	5
+DROP	Poincaré's Theorem		2	5
+DROP	Poisson Distribution		2	5
+DROP	Poisson's Equation		2	5
+KEEP	Post-Newtonian Effects		2	5
+DROP	Potts Model		2	5
+KEEP	Poynting-Robertson Effect		2	5
+DROP	Primary Theory		2	5
+MERGE	Principle of Equivalence	general-relativity	2	5
+MERGE	Ptolemaic Model of the Universe	alternative-cosmologies	2	5
+DROP	radiation effects		2	5
+KEEP	Radiocarbon Dating		2	5
+DROP	Raman Effect		2	5
+DROP	Ramsauer Effect		2	5
+KEEP	Rayleigh-Jeans Law		2	5
+DROP	Razin Effect		2	5
+KEEP	Refraction, Law of		2	5
+DROP	Regge-Wheeler Equations		2	5
+DROP	Restoration		2	5
+KEEP	Rosseland Mean Absorption Coefficient		2	5
+KEEP	Sky		2	5
+KEEP	40 Eridani		1	5
+KEEP	Early-Type Spiral		1	5
+KEEP	Elastic Scattering		1	5
+KEEP	Pleione		1	5
+DROP	Preamplifier		1	5
+DROP	Pumping (optical)		1	5
+MERGE	Intrinsic Brightness	luminosity	9	4
+DROP	North Point		9	4
+KEEP	Northern Cross		9	4
+DROP	Larmor Radius		8	4
+MERGE	Venus Express	venus	7	4
+MERGE	Aeon (or Eon)	year	6	4
+MERGE	charm quark	quark	6	4
+MERGE	down quark	quark	6	4
+KEEP	Gamma Ray		6	4
+KEEP	Quark		6	4
+DROP	Squark		6	4
+MERGE	strange quark	quark	6	4
+MERGE	top quark	quark	6	4
+KEEP	Ultrashort-Period Cepheids		6	4
+MERGE	up quark	quark	6	4
+MERGE	Viking Space Probes	mars	6	4
+KEEP	Wilkinson Microwave Anisotropy Probe (WMAP)		6	4
+KEEP	Young Disk Cepheids		6	4
+DROP	Faraday's law		5	4
+MERGE	Gamma Decay	gamma-ray-burst	5	4
+MERGE	gamma-rays	gamma-ray-burst	5	4
+MERGE	Primordial Quarks	quark	5	4
+MERGE	quark confinement	quark	5	4
+MERGE	Quark Jet	quark	5	4
+MERGE	Quark-Hadron Phase Transition	quark	5	4
+MERGE	quarks	quark	5	4
+MERGE	refraction, light	light	5	4
+KEEP	Ultraviolet Excess		5	4
+MERGE	Ultraviolet Excess Screening	ultraviolet	5	4
+MERGE	Ultraviolet Light	ultraviolet	5	4
+KEEP	Amalthea		4	4
+DROP	BAD Nuclei		4	4
+KEEP	f Number		4	4
+DROP	POSS		4	4
+KEEP	Prime Focus		4	4
+DROP	Projectile		4	4
+KEEP	RADAR		4	4
+KEEP	Radian		4	4
+DROP	V Velocity		4	4
+DROP	Valence Electron		4	4
+KEEP	Velocity		4	4
+KEEP	Velocity Dispersion		4	4
+DROP	Velocity Profiles		4	4
+DROP	Velocity Space		4	4
+DROP	velocity, relative		4	4
+DROP	velocity, terminal		4	4
+MERGE	Velocity-Distance Relation	hubble-law	4	4
+DROP	Velocity-of-Light Radius		4	4
+KEEP	Virial Mass		4	4
+DROP	W Velocity		4	4
+DROP	F component		3	4
+KEEP	Henry Draper Catalogue		3	4
+MERGE	Hirayama Families	asteroid	3	4
+DROP	IC-5148		3	4
+DROP	Platonic Solids		3	4
+DROP	Predictability		3	4
+KEEP	Prograde Motion		3	4
+KEEP	PSF		3	4
+MERGE	Psyche	asteroid	3	4
+KEEP	Puppis		3	4
+KEEP	Pyxis		3	4
+MERGE	Quadrant	astrolabe	3	4
+DROP	Quadrupole		3	4
+DROP	Rare Gases		3	4
+KEEP	Ras Algethi		3	4
+KEEP	Rayleigh-Taylor Instability		3	4
+MERGE	Reconnection	solar-flare	3	4
+KEEP	References: Harvard Tower		3	4
+DROP	RF Power		3	4
+DROP	Richardson-Lucy Method		3	4
+KEEP	Ulysses		3	4
+KEEP	Umklapp Scattering		3	4
+DROP	unidentified flying object		3	4
+DROP	Unidentified Flying Objects: What We Know		3	4
+DROP	Unification		3	4
+DROP	Unified Theories		3	4
+DROP	Uniform Vibration		3	4
+DROP	Uniformitarianism		3	4
+DROP	Universal Attraction		3	4
+DROP	Universality		3	4
+DROP	Universality Class		3	4
+DROP	Unstable Equilibrium		3	4
+MERGE	Upper Culmination	meridian-transit	3	4
+DROP	Urania		3	4
+KEEP	Uraniborg		3	4
+DROP	uranium-235 fission		3	4
+DROP	Uranium-Lead Dating		3	4
+MERGE	UT1	coordinated-universal-time	3	4
+MERGE	UTC	coordinated-universal-time	3	4
+MERGE	UV	ultraviolet	3	4
+DROP	uvby System		3	4
+DROP	V1016 Cygni		3	4
+DROP	V1057 Cygni		3	4
+DROP	V444 Cygni		3	4
+DROP	Vacancy		3	4
+KEEP	Vacuum		3	4
+DROP	Vacuum Expectation Value		3	4
+DROP	Vacuum Fluctuation		3	4
+DROP	Vacuum Genesis		3	4
+DROP	Vacuum Higgs Value		3	4
+DROP	Valence		3	4
+DROP	Valence Band		3	4
+KEEP	van Allen Belts		3	4
+MERGE	Vanguard	satellite	3	4
+DROP	Vapor Pressure		3	4
+DROP	VBLR		3	4
+DROP	Vector		3	4
+DROP	Vector Meson		3	4
+DROP	Vector Space		3	4
+DROP	Vector Translation		3	4
+KEEP	Vela X		3	4
+MERGE	Venera	venus	3	4
+DROP	Veneziano Theory		3	4
+KEEP	Vernal Equinox		3	4
+DROP	Vertex		3	4
+DROP	Vertical		3	4
+KEEP	Very Long Baseline Interferometry		3	4
+DROP	Vibration Number		3	4
+DROP	Vibrational Energy		3	4
+DROP	Vibrational Pattern		3	4
+DROP	Vibrational Transition		3	4
+DROP	Vidicon		3	4
+KEEP	Vignetting		3	4
+MERGE	Viking	mars	3	4
+MERGE	Virginis	virgo-cluster	3	4
+KEEP	Virgo		3	4
+MERGE	Virgo A	virgo-cluster	3	4
+MERGE	Virgo Infall	virgo-cluster	3	4
+MERGE	Virgo X-1	virgo-cluster	3	4
+DROP	Virtual Pairs		3	4
+DROP	Virtual Phase		3	4
+DROP	Viscosity		3	4
+DROP	Visibility Function		3	4
+MERGE	visible light	light	3	4
+MERGE	visual binaries	Visual Binary	3	4
+KEEP	VLA		3	4
+KEEP	VLBI		3	4
+KEEP	VLT		3	4
+MERGE	VLTI	vlbi	3	4
+KEEP	Voids		3	4
+KEEP	Voigt Profile		3	4
+KEEP	Volans		3	4
+DROP	Vortex		3	4
+DROP	Vortex Theory		3	4
+DROP	Voskhod		3	4
+DROP	Vostok		3	4
+DROP	Vulcan		3	4
+KEEP	Vulpecula		3	4
+DROP	W3		3	4
+DROP	W44		3	4
+DROP	W49		3	4
+DROP	W51		3	4
+KEEP	Waning Crescent		3	4
+KEEP	Waning Gibbous		3	4
+KEEP	Warp		3	4
+DROP	Was the Big Bang Actually an Explosion?		3	4
+DROP	Watt		3	4
+MERGE	Wave	wavelength	3	4
+DROP	Wave Function		3	4
+DROP	Wave Mechanics		3	4
+DROP	Wave Noise		3	4
+DROP	Wave Number		3	4
+DROP	Wave Zone		3	4
+DROP	Wavefront		3	4
+DROP	Wavefront Error		3	4
+MERGE	Waves	wavelength	3	4
+DROP	waves on ocean		3	4
+DROP	Weak Gauge Symmetry		3	4
+DROP	Weakly Coupled		3	4
+DROP	Weber (Wb)		3	4
+DROP	Weber Bar		3	4
+DROP	Week		3	4
+DROP	weightlessness		3	4
+DROP	Weinberg		3	4
+DROP	Weinberg-Salam Model		3	4
+MERGE	Werner Lines	spectral-line	3	4
+DROP	Wesselink Analysis		3	4
+DROP	What's the Difference Between a Solstice and an Equinox?		3	4
+DROP	Wheatstone Bridge		3	4
+DROP	Whistlers		3	4
+DROP	Who Won the Space Race?		3	4
+KEEP	Widmanstatten pattern		3	4
+MERGE	Wien peak	blackbody-radiation	3	4
+DROP	Will Light-Speed Space Travel Ever Be Possible?		3	4
+DROP	wind energy		3	4
+DROP	Winding Mode		3	4
+DROP	Winding Number		3	4
+DROP	Window		3	4
+DROP	windows of creation		3	4
+DROP	WINO		3	4
+MERGE	Winter	seasons	3	4
+DROP	WKB method		3	4
+DROP	WLRG		3	4
+KEEP	WMAP		3	4
+MERGE	Wolf Diagram	wolf-number	3	4
+MERGE	Wolf Number (R)	wolf-number	3	4
+KEEP	Wolf-Lundmark-Melotte System		3	4
+KEEP	Wollaston Prism		3	4
+DROP	Work Function		3	4
+DROP	World Line		3	4
+DROP	World Model		3	4
+DROP	World Point		3	4
+DROP	World Surface/World Sheet		3	4
+MERGE	WZ Sagittae	cataclysmic-variable	3	4
+DROP	X-Band		3	4
+DROP	X-ogen		3	4
+KEEP	X-ray		3	4
+MERGE	X-ray source	x-ray-binary	3	4
+MERGE	X-Rays	x-rays	3	4
+DROP	XBL		3	4
+DROP	XBONG		3	4
+KEEP	XMM		3	4
+KEEP	XMM-Newton		3	4
+DROP	XRT		3	4
+DROP	Yang-Mills Theories		3	4
+DROP	Yarikh		3	4
+KEEP	Year		3	4
+MERGE	Year (Besselian)	year	3	4
+MERGE	Year (Tropical)	tropical-year	3	4
+DROP	Yellow Spot (Macula Lutea)		3	4
+KEEP	Yerkes System		3	4
+KEEP	Yerkes, Charles Tyson		3	4
+DROP	Ylem		3	4
+KEEP	Yohkoh		3	4
+MERGE	Young Thin Disk	thin-disk	3	4
+DROP	YY Gem		3	4
+DROP	YY Orionis		3	4
+MERGE	z parameter	redshift	3	4
+DROP	z pinch		3	4
+DROP	Z-number		3	4
+DROP	Zanstra's theory		3	4
+DROP	Zener Diode		3	4
+MERGE	Zenith Distance	zenith	3	4
+DROP	Zeolite		3	4
+DROP	Zepto-		3	4
+DROP	Zero-Point Energy		3	4
+MERGE	Zero-Point Pressure	degenerate-electron-pressure	3	4
+DROP	Zeropoint		3	4
+DROP	Zetta-		3	4
+DROP	Zino		3	4
+MERGE	Zond	moon	3	4
+MERGE	Aurora Borealis	aurora-borealis-(northern-lights)	2	4
+MERGE	Chromospheric Network	chromosphere	2	4
+DROP	Chronology of Notable Astronauts		2	4
+MERGE	Chronometer	coordinated-universal-time	2	4
+DROP	CID		2	4
+DROP	Circle		2	4
+DROP	circular motion		2	4
+MERGE	Circumpolar Stars	celestial-sphere	2	4
+DROP	Classical Physics		2	4
+MERGE	Clementine	moon	2	4
+DROP	Closed Space		2	4
+DROP	Closed String		2	4
+DROP	Closed System (isolated system)		2	4
+DROP	Cloud Chamber		2	4
+MERGE	CMD	hertzsprung-russell-diagram	2	4
+DROP	CN-Strong Stars		2	4
+DROP	CN-Weak Stars		2	4
+DROP	CNES		2	4
+MERGE	CNO Stars	cno-cycle	2	4
+DROP	CO		2	4
+DROP	Co-Moving Sphere		2	4
+DROP	CO2		2	4
+KEEP	Coalsack		2	4
+DROP	Coarse-Graining		2	4
+DROP	Coaxial Cable		2	4
+MERGE	COBE	cosmic-microwave-background	2	4
+DROP	Coded Mask		2	4
+DROP	coelostat		2	4
+MERGE	cohenite	meteorite	2	4
+DROP	Coherence		2	4
+DROP	Cohomology		2	4
+KEEP	Collapsed Star		2	4
+DROP	Collider		2	4
+KEEP	Collimator		2	4
+DROP	Collinear (Collinearity)		2	4
+KEEP	Collisionless Damping		2	4
+DROP	Colloid		2	4
+MERGE	Color	filters	2	4
+DROP	Color Charge		2	4
+MERGE	Color Excess	extinction	2	4
+DROP	Color Field		2	4
+DROP	Color Force		2	4
+MERGE	Color Index	filters	2	4
+MERGE	Color-Color Plot	filters	2	4
+KEEP	Color-Magnitude Diagram		2	4
+MERGE	Column Density (N)	column-density	2	4
+DROP	Common-User		2	4
+DROP	Commutation Relations		2	4
+KEEP	Compact HII Region		2	4
+KEEP	Compact Infrared Sources		2	4
+KEEP	Compact Radio Source		2	4
+DROP	Compactification		2	4
+KEEP	Companion Star		2	4
+DROP	Compare to uncertainty principle		2	4
+DROP	Comparison Band		2	4
+DROP	Complex Analytic		2	4
+DROP	Complexity		2	4
+DROP	Composite Object		2	4
+DROP	Composite Particle Theory		2	4
+MERGE	Compton Gamma Ray Observatory	gamma-ray-burst	2	4
+DROP	Concave		2	4
+DROP	Concavo-Convex		2	4
+DROP	Condensed Matter Physics		2	4
+DROP	condition for maximum intensity		2	4
+DROP	conductor, electric		2	4
+DROP	Configuration		2	4
+DROP	Configuration Mixing		2	4
+DROP	Confinement		2	4
+DROP	Conformal Geometry		2	4
+DROP	Conifold Transition		2	4
+DROP	Conjugate Points		2	4
+DROP	Conservative Field		2	4
+DROP	conservative force		2	4
+DROP	Conservative System		2	4
+DROP	Conserved Quantity		2	4
+DROP	Consistent		2	4
+DROP	Constellation program		2	4
+DROP	Constituents		2	4
+DROP	Continuum		2	4
+KEEP	Convective Zone		2	4
+DROP	Convergent		2	4
+KEEP	Convolution		2	4
+DROP	Cooper pair		2	4
+MERGE	Copernican system	alternative-cosmologies	2	4
+MERGE	Copernicus	alternative-cosmologies	2	4
+DROP	Coplanar		2	4
+KEEP	Cor Caroli		2	4
+DROP	Cordoba Durchmusterung		2	4
+MERGE	Core-Halo Galaxies	cd-galaxies	2	4
+MERGE	Coriolis Effect	earth	2	4
+MERGE	coriolis force	earth	2	4
+MERGE	Coriolis Force (Coriolis Effect)	earth	2	4
+DROP	Coronene		2	4
+MERGE	CoRoT	telescope	2	4
+MERGE	CoRoT-7b	exoplanet	2	4
+DROP	Corpuscular Radiation		2	4
+DROP	Corpuscular Theory		2	4
+DROP	Corrector Plates		2	4
+DROP	Correlation Length		2	4
+KEEP	Correlator		2	4
+KEEP	Cosmological Distances		2	4
+DROP	Cosmological Hypothesis		2	4
+MERGE	Cosmological Model	concordance-model	2	4
+MERGE	Cosmos	cosmology	2	4
+DROP	Coster-Kronig Transition		2	4
+DROP	Coulomb		2	4
+MERGE	Coulomb Barrier	triple-alpha-process	2	4
+DROP	Coulomb Collision		2	4
+DROP	Coulomb-Born Approximation		2	4
+DROP	Counting Rate		2	4
+DROP	Coupling		2	4
+DROP	Covariant		2	4
+DROP	Cowen		2	4
+DROP	CP symmetry		2	4
+DROP	CP Violation		2	4
+DROP	CPT Invariance		2	4
+DROP	CPT Invariant		2	4
+DROP	CPU		2	4
+KEEP	Crater		2	4
+DROP	Crimean Astrophysical Observatory		2	4
+KEEP	Critical Density		2	4
+DROP	Critical Equatorial Velocity		2	4
+DROP	Critical Exponent		2	4
+MERGE	Critical Mass Density	critical-density	2	4
+DROP	Critical Path		2	4
+DROP	Critical Phenomena		2	4
+DROP	Critical Point		2	4
+DROP	Critical Speed		2	4
+KEEP	Cross Section		2	4
+DROP	Crossover Effect		2	4
+DROP	CryoSat		2	4
+DROP	Crêpe Ring		2	4
+DROP	CS or SC Stars		2	4
+DROP	CSO		2	4
+DROP	CTE		2	4
+DROP	CTI		2	4
+DROP	Cu		2	4
+MERGE	Culmination	meridian-transit	2	4
+DROP	Curie		2	4
+MERGE	Curiosity	mars	2	4
+DROP	Curled-Up Dimension		2	4
+DROP	Current Density		2	4
+DROP	current position		2	4
+DROP	Current Sheath Model		2	4
+DROP	current, electric		2	4
+KEEP	Curvature		2	4
+KEEP	Curve of Growth		2	4
+DROP	Cusp		2	4
+DROP	CV Serpentis		2	4
+DROP	CVD		2	4
+DROP	Cyanogen (CN) Bands		2	4
+DROP	Cygni		2	4
+DROP	Cynthion		2	4
+DROP	D Layer		2	4
+DROP	D Lines		2	4
+MERGE	D Ring	saturn	2	4
+DROP	D Stars		2	4
+DROP	d-Electron		2	4
+DROP	Dalton minimum		2	4
+DROP	Damped Oscillation		2	4
+KEEP	Damping		2	4
+KEEP	Dark Current		2	4
+MERGE	Dark Halo	dark-halo	2	4
+DROP	Darwin Ellipsoids		2	4
+DROP	Darwinism		2	4
+DROP	DAT		2	4
+DROP	Data		2	4
+DROP	Data Model		2	4
+DROP	Data Rate		2	4
+DROP	Daughter Nuclide		2	4
+MERGE	Dawn	asteroid	2	4
+DROP	DC		2	4
+MERGE	de Sitter Model	friedmann-lemaitre-universe	2	4
+DROP	Dead Reckoning		2	4
+DROP	Debye		2	4
+DROP	Debye Length		2	4
+DROP	Debye-Hückel Model		2	4
+DROP	Decibel		2	4
+KEEP	Decoupling		2	4
+DROP	Deduction		2	4
+MERGE	deep field	hubble-space-telescope	2	4
+MERGE	Deep Impact	comet	2	4
+MERGE	Deep Space 1	asteroid	2	4
+DROP	Defect of Illumination		2	4
+DROP	Deferred Charge		2	4
+KEEP	Deflection of Light		2	4
+DROP	Deflection of the Vertical		2	4
+DROP	Degaussing		2	4
+MERGE	Degree	degree-(angular)	2	4
+DROP	Degrees of Freedom		2	4
+KEEP	Deimos		2	4
+DROP	Delocalization, Delocalized		2	4
+DROP	Delta		2	4
+KEEP	Delta Cephei		2	4
+DROP	Delta Del Stars		2	4
+DROP	Delta T (AT)		2	4
+DROP	Demagnetization		2	4
+DROP	Demeter		2	4
+KEEP	Demon Star		2	4
+DROP	Dendrite		2	4
+DROP	DENIS		2	4
+DROP	Filar Micrometer		2	4
+KEEP	Plasma Clouds		2	4
+DROP	Plurality of Worlds		2	4
+DROP	Point Source		2	4
+DROP	Polytrope		2	4
+DROP	Pulse Counting		2	4
+DROP	Pycnonuclear		2	4
+DROP	quarter-wave plate		2	4
+KEEP	Rayleigh Number		2	4
+MERGE	Reddening	interstellar-reddening	2	4
+KEEP	Relaxation Time		2	4
+KEEP	Resonance Particles		2	4
+DROP	Reticle		2	4
+KEEP	Reticulum		2	4
+DROP	Reynolds Number		2	4
+DROP	A-coefficient		1	4
+DROP	Alfvén Number		1	4
+DROP	p-type semiconductor		1	4
+DROP	q0		1	4
+MERGE	radio map of the sky	radio-astronomy	1	4
+KEEP	Rayleigh Scattering		1	4
+KEEP	Neutron		6	3
+DROP	ADF		5	3
+DROP	AM Canum Venaticorum (HZ 29)		5	3
+MERGE	avoidance, zone of	zone-of-avoidance	5	3
+KEEP	Faraday Effect		5	3
+DROP	First Day of Fall		5	3
+DROP	Induction		5	3
+MERGE	Galactic Latitude	galactic-coordinate-system	4	3
+KEEP	21-cm Radiation		3	3
+DROP	3 Process		3	3
+KEEP	30 Doradus (NGC 2070)		3	3
+MERGE	3K background radiation	cosmic-microwave-background	3	3
+DROP	4N Nuclei		3	3
+KEEP	A-type		3	3
+DROP	Aether		3	3
+DROP	AIPS		3	3
+DROP	Alfvén Speed		3	3
+DROP	Alfvén Waves		3	3
+DROP	Aliasing		3	3
+DROP	Analyzer		3	3
+DROP	Anharmonic Oscillator		3	3
+DROP	Ansae		3	3
+KEEP	Anthropic Principle		3	3
+DROP	Anthropocentrism		3	3
+MERGE	Apparent Solar Time	solar-day	3	3
+DROP	Arrival Time		3	3
+DROP	Arrow of Time		3	3
+DROP	Atto-		3	3
+DROP	Automated Transfer Vehicle		3	3
+DROP	Average Life		3	3
+MERGE	Avoidance	zone-of-avoidance	3	3
+KEEP	Axis		3	3
+DROP	Axisymmetric Collapse		3	3
+DROP	Backscattering		3	3
+MERGE	NGC catalog	ngc	2	3
+MERGE	Anomalous Zeeman Effect	zeeman-effect	1	3
+DROP	Phase Difference		8	2
+DROP	CDA		7	2
+KEEP	Day		7	2
+DROP	Duality		7	2
+DROP	Dyad		7	2
+DROP	Is Earth Going to Change the Direction in Which It Rotates?		7	2
+MERGE	Mean Solar Day	solar-day	7	2
+DROP	PDA		7	2
+MERGE	Sun Path (Day Arc)	sun	7	2
+DROP	Deuteron		6	2
+DROP	EPROM		6	2
+DROP	Etalon		6	2
+DROP	Inversion		6	2
+DROP	K electron		6	2
+DROP	Near Zone		6	2
+DROP	Negatron		6	2
+KEEP	neutron degeneracy		6	2
+KEEP	Neutron Drip		6	2
+MERGE	Neutron Excess ()	neutron-star	6	2
+KEEP	Neutron Lifetime		6	2
+KEEP	Neutron Matter		6	2
+DROP	NRAO		6	2
+DROP	p-Electron		6	2
+DROP	Tevatron		6	2
+DROP	Knudsen number		4	2
+DROP	Love Number		4	2
+DROP	B-Coefficient		3	2
+KEEP	Compton Effect		3	2
+DROP	E component		3	2
+KEEP	Inverse Compton Effect		3	2
+DROP	Josephson Effect		3	2
+DROP	K component		3	2
+DROP	L Component		3	2
+KEEP	Mass Absorption Coefficient		3	2
+DROP	Photovoltaic Effect		3	2
+DROP	Scott Effect		3	2
+DROP	Thirring Effect		3	2
+DROP	Transit-Time Effect		3	2
+DROP	Tsytovitch Effect		3	2
+DROP	Tunnel Effect		3	2
+KEEP	2024 YR4		2	2
+KEEP	AM radio		2	2
+MERGE	Anti-Quark	quark	2	2
+KEEP	Aquarius		2	2
+DROP	Auto-Catalysis		2	2
+DROP	Hannah Arendt on the conquest of space		2	2
+DROP	Helios (Greek god)		2	2
+DROP	Hyades (mythology)		2	2
+DROP	1 Orionis		1	2
+DROP	2 Orionis		1	2
+MERGE	21-centimetre radiation	spin-flip-transition	1	2
+DROP	3-Kpc Arm		1	2
+DROP	4-kpc Arm		1	2
+DROP	Anti-Neutron		1	2
+KEEP	Einstein Effect		1	2
+MERGE	Altitude-Azimuth	horizontal-coordinate-system	1	1

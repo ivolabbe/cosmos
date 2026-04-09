@@ -508,14 +508,14 @@ Optional: a subtle noise texture for the cross-section envelope to suggest conve
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/binary-star-interactive.html`** — because:
+**`dev/binary-star-interactive.html`** — because:
 1. Multi-panel layout: 3D scene (or main canvas) + diagnostic panel on the right
 2. Physics-driven animation with discrete parameter selection
 3. Controls bar with buttons and sliders
 4. Linked panels that update together (3D orbit + RV plot + light curve ~ HR diagram + cross-section)
 5. Phase-dependent behaviour (binary orbit phase ~ evolutionary phase)
 
-Alternative: **`experimental/gravitational-waves-interactive.html`** — for the spectrogram panel positioning and the animated physics with time progression.
+Alternative: **`dev/gravitational-waves-interactive.html`** — for the spectrogram panel positioning and the animated physics with time progression.
 
 The HR diagram is unique in that its main canvas is more 2D diagram than 3D scene, so the coder should use an orthographic camera or a pure 2D canvas for the scatter plot. The cross-section sidebar is also 2D. This app is more "data visualization" than "3D simulation," which is a different flavour from the other COSMOS physics sims.
 

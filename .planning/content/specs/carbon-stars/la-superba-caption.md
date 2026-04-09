@@ -1,0 +1,3 @@
+**Y Canum Venaticorum (La Superba)** — an RGB optical composite showing the intensely red colour of this carbon star in the constellation Canes Venatici. La Superba is a C-J type semiregular variable with an effective temperature of ~2760 K, a radius of ~352 R☉, and luminosity ~4400 L☉. Its extraordinary redness arises from carbon molecules (C₂, CN, CH) and carbon-dust in its AGB atmosphere absorbing blue and green light. Image taken from Edmonton, Canada, March 2019.
+
+Credit: David Ritter / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Y_Canum_Venaticorum_RGB.jpg) — CC BY-SA 4.0

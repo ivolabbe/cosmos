@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="260px" height="350px" version="1.0" xmlns="http://www.w3.org/2000/svg"><!--
+  Na-39
+--><circle cx="65" cy="12" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  Mg-39 No data
+  Al-39
+--><circle cx="95" cy="145" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  Si-39
+--><circle cx="110" cy="194" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  P-39
+--><circle cx="125" cy="234" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  S-39
+--><circle cx="140" cy="262" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  Cl-39
+--><circle cx="155" cy="280" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  Ar-39
+--><circle cx="170" cy="289" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  K-39
+--><circle cx="185" cy="291" r="3" strok="blue" stroke-width="1" fill="blue" /><!--
+  Ca-39
+--><circle cx="200" cy="273" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  Sc-39
+--><circle cx="215" cy="238" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  Ti-39
+--><circle cx="230" cy="196" r="3" strok="red" stroke-width="1" fill="red" /><!--
+  M=38.95
+--><line x1="48" y1="325" x2="240" y2="325" stroke="black" /><!--
+  M=39.00
+--><line x1="48" y1="200" x2="240" y2="200" stroke="black" /><!--
+  M=39.05
+--><line x1="48" y1="75" x2="240" y2="75" stroke="black" /><!--
+  N=10
+--><line x1="50" y1="0" x2="50" y2="325" stroke="black" /><!--
+
+--><text x="7" y="20" font-family="serif" font-size="15" fill="black" stroke="black" >M (u)</text><!--
+
+--><text x="7" y="325" font-family="serif" font-size="15" fill="black" stroke="black" >38.95</text><!--
+--><text x="7" y="200" font-family="serif" font-size="15" fill="black" stroke="black" >39.00</text><!--
+--><text x="7" y="75" font-family="serif" font-size="15" fill="black" stroke="black" >39.05</text><!--
+  N-11
+--><line x1="65" y1="320" x2="65" y2="330" stroke="black" /><!--
+  N-12
+--><line x1="80" y1="320" x2="80" y2="330" stroke="black" /><!--
+--><text x="70" y="345" font-family="serif" font-size="15" fill="black" stroke="black" >12</text><!--
+  N-13
+--><line x1="95" y1="320" x2="95" y2="330" stroke="black" /><!--
+  N-14
+--><line x1="110" y1="320" x2="110" y2="330" stroke="black" /><!--
+  N-15
+--><line x1="125" y1="320" x2="125" y2="330" stroke="black" /><!--
+--><text x="115" y="345" font-family="serif" font-size="15" fill="black" stroke="black" >15</text><!--
+  N-16
+--><line x1="140" y1="320" x2="140" y2="330" stroke="black" /><!--
+  N-17
+--><line x1="155" y1="320" x2="155" y2="330" stroke="black" /><!--
+  N-18
+--><line x1="170" y1="320" x2="170" y2="330" stroke="black" /><!--
+--><text x="160" y="345" font-family="serif" font-size="15" fill="black" stroke="black" >18</text><!--
+  N-19
+--><line x1="185" y1="300" x2="185" y2="330" stroke="black" /><!--
+  N-20
+--><line x1="200" y1="320" x2="200" y2="330" stroke="black" /><!--
+  N-21
+--><line x1="215" y1="320" x2="215" y2="330" stroke="black" /><!--
+--><text x="205" y="345" font-family="serif" font-size="15" fill="black" stroke="black" >21</text><!--
+  N-22
+--><line x1="230" y1="320" x2="230" y2="330" stroke="black" /><!--
+--><text x="240" y="345" font-family="serif" font-size="15" fill="black" stroke="black" >N</text><!--
+
+--></svg>
+
+
+
+
+
+

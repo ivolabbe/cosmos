@@ -15,7 +15,7 @@
 - `/tmp/lss-zoomed.png` — zoomed in, particle shape visible
 - `/tmp/lss-nogrid.png` — grid toggled off
 
-**Agent instructions checked**: `.agents/sao-coder.md`
+**Agent instructions checked**: `.agents/agents/cosmos-coder.md`
 
 ### Checklist
 

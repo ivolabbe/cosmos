@@ -83,7 +83,7 @@ A 3D interactive visualization of the Roche potential in a close binary star sys
 
 ### Visual Reference 5: COSMOS Binary Star Interactive (our own)
 - **Source**: Existing COSMOS app
-- **URL**: `experimental/binary-star-interactive.html`
+- **URL**: `dev/binary-star-interactive.html`
 - **What it does well**: Two orbiting stars with adjustable mass ratio. RV + light curve panels. Established COSMOS visual style. Bloom, star shaders, orbit trails.
 - **What it does poorly**: No Roche lobes, no equipotentials, no mass transfer.
 - **Key technique**: Two-body Kepler orbit, luminance-tint star shader, 2D canvas panels.
@@ -490,7 +490,7 @@ acceleration = -gradient(Phi_eff) + 2*(v cross Omega)
 where Phi_eff = -Phi_grav - Phi_centrifugal. Since our Phi already includes the centrifugal term with a negative sign, the effective force is -dPhi/dx (negate the gradient). Test this carefully: a particle released at L1 with a small nudge toward star 2 should curve in the prograde direction (positive Coriolis deflection).
 
 ### 6. COSMOS Binary Star Interactive (template)
-- **URL**: `experimental/binary-star-interactive.html`
+- **URL**: `dev/binary-star-interactive.html`
 - **What to adopt**: Entire HTML/CSS structure. Star shader. Orbit computation. 2D canvas panel pattern. Controls bar. Bloom setup. Embedded mode detection. Resize handler. Play/pause with spacebar.
 
 ---
@@ -555,7 +555,7 @@ This is significantly more complex than the binary star app (~500 lines) due to 
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/binary-star-interactive.html`** -- because:
+**`dev/binary-star-interactive.html`** -- because:
 1. Same physical setting (two orbiting stars in a binary system)
 2. Same HTML/CSS architecture (info panel + 2D canvas panel + controls bar + 3D scene)
 3. Same star rendering (luminance-tint shader on sun texture)
@@ -675,9 +675,9 @@ Donor overflows Roche lobe
 
 ## Verification Log (2026-03-29, Interactive Mode)
 
-**Verified by**: sao-verify agent
-**Agent instructions checked**: `.agents/sao-verify.md`, `.agents/sao-coder.md`
-**Artifact**: `experimental/roche-lobe-interactive.html`
+**Verified by**: cosmos-verify agent
+**Agent instructions checked**: `.agents/agents/cosmos-verify.md`, `.agents/agents/cosmos-coder.md`
+**Artifact**: `dev/roche-lobe-interactive.html`
 **Screenshots**: `/tmp/roche-t0.png`, `/tmp/roche-t8.png`, `/tmp/roche-t18.png`, `/tmp/roche-gas.png`, `/tmp/roche-zoomed.png`, `/tmp/roche-donor.png`, `/tmp/roche4-potential.png`, `/tmp/roche4-gas.png`, `/tmp/roche4-algol-gas.png`, `/tmp/roche4-algol-disk-clip.png`, `/tmp/roche4-algol-potential.png`, `/tmp/roche4-disk-clip.png`, `/tmp/roche3-overhead-gas.png`, `/tmp/roche3-gas-full-disk.png`
 
 ### Checklist

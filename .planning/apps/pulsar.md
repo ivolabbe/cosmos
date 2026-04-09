@@ -6,8 +6,8 @@
 ## Status: Complete (2026-03-28)
 
 ### Files
-- Interactive: `experimental/pulsar-interactive.html` (895 lines)
-- Article: `experimental/pulsar.html` (206 lines)
+- Interactive: `dev/pulsar-interactive.html` (895 lines)
+- Article: `dev/pulsar.html` (206 lines)
 - Spec: `.planning/apps/pulsar-spec.md` (581 lines)
 
 ### Features
@@ -36,7 +36,7 @@
 - Spin-down luminosity: Ė = 4π²IṖ/P³
 
 ### Template used
-`experimental/gravitational-waves-interactive.html` — structure (2D panel, sliders, audio, readouts)
+`dev/gravitational-waves-interactive.html` — structure (2D panel, sliders, audio, readouts)
 
 ### Verified
 - Puppeteer headed: canvas renders, no JS errors, loading hides

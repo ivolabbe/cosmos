@@ -1,6 +1,6 @@
 # Asteroid Belt Interactive — Dev Log
 
-**Files:** `experimental/asteroid-interactive.html`, `experimental/asteroid.html`
+**Files:** `dev/asteroid-interactive.html`, `dev/asteroid.html`
 **Status:** Production-ready (major upgrade 2026-03-29)
 **Started:** 2026-03-23
 

@@ -1,0 +1,642 @@
+KEEP	red-supergiant	supergiant	7	9
+DROP	sco		7	9
+DROP	soyuz		7	9
+DROP	tauri		7	9
+DROP	theory-of-everything		7	9
+DROP	barotropic-bas		6	9
+DROP	bessel-equation		6	9
+DROP	biasing		6	9
+DROP	bib		6	9
+MERGE:big-bang	big-bang	big-bang	6	9
+MERGE:big-bang	big-bang-expansion	big-bang	6	9
+MERGE:big-bang	big-bang-theory	big-bang	6	9
+MERGE:big-bang	big-bang-model	big-bang	6	9
+KEEP	binding-energy		6	9
+MERGE:binding-energy	binding-energy-curve	binding-energy	6	9
+MERGE:binding-energy	binding-energy-nuclear	binding-energy	6	9
+MERGE:blackbody-radiation	blackbody-radiation	blackbody-radiation	6	9
+KEEP	bodes-law		6	9
+DROP	breit-wigner-equation		6	9
+KEEP	butterfly-diagram		6	9
+DROP	carbon-black		6	9
+DROP	carboxyl-group		6	9
+MERGE:equinox	catalog-equinox	equinox	6	9
+DROP	catastrophism		6	9
+DROP	cation		6	9
+DROP	cbr		6	9
+KEEP	center-of-curvature		6	9
+DROP	characteristic-value		6	9
+MERGE:galaxy-groups-and-clusters	cluster	galaxy-groups-and-clusters	6	9
+MERGE:galaxy-groups-and-clusters	clustering	galaxy-groups-and-clusters	6	9
+KEEP	coma-cluster		6	9
+MERGE:cosmic-microwave-background	cosmic-microwave-background	cosmic-microwave-background	6	9
+MERGE:cosmic-microwave-background	cosmic-microwave-background-cmb	cosmic-microwave-background	6	9
+KEEP	crab-nebula		6	9
+KEEP	crab-pulsar		6	9
+KEEP	crux		6	9
+DROP	dq-herculis		6	9
+DROP	dra		6	9
+KEEP	drake-equation		6	9
+DROP	drell-yan-annihilation		6	9
+MERGE	eclipse	Eclipse	6	9
+MERGE:eclipse	eclipse-year	eclipse	6	9
+MERGE:eclipse	eclipse-annular	eclipse	6	9
+MERGE:eclipse	eclipse-lunar	eclipse	6	9
+MERGE:eclipse	eclipse-solar	eclipse	6	9
+KEEP	eclipsing-binary		6	9
+DROP	els		6	9
+MERGE:equinox	equinoxes-precession-of-the	equinox	6	9
+DROP	europa-clipper		6	9
+KEEP	exoplanet		6	9
+KEEP	extraterrestrial-life		6	9
+KEEP	gravity		6	9
+DROP	gravity-recovery-and-climate-experiment		6	9
+DROP	gravity-recovery-and-interior-laboratory		6	9
+KEEP	great-attractor		6	9
+MERGE:galaxy-groups-and-clusters	group	galaxy-groups-and-clusters	6	9
+KEEP	h-and-k-emission-line-stars		6	9
+MERGE:hadron	hadron	hadron	6	9
+DROP	heavy-metal-stars		6	9
+DROP	helium-weak-stars		6	9
+DROP	helmholtz-free-energy		6	9
+KEEP	herbig-ae-be-stars		6	9
+KEEP	hertzsprung-russell-diagram		6	9
+KEEP	hertzsprung-gap		6	9
+MERGE:hierarchical-clustering	hierarchical-clustering	hierarchical-clustering	6	9
+MERGE:hierarchical-clustering	hierarchical-clustering-model	hierarchical-clustering	6	9
+DROP	high-energy-transient-explorer-2		6	9
+DROP	high-energy-particles		6	9
+DROP	higher-dimensional-supergravity		6	9
+KEEP	hot-dark-matter		6	9
+MERGE:hubble-law	hubble-constant-and-red-shifts	hubble-law	6	9
+DROP	hydrogen-deficient-c-type-stars		6	9
+DROP	hydrogen-deficient-early-type-stars		6	9
+DROP	impulse-of-force		6	9
+KEEP	inflationary-model		6	9
+DROP	inhomogeneous-early-universe		6	9
+DROP	internal-energy		6	9
+MERGE:cosmological-principle	isotropic	cosmological-principle	6	9
+KEEP	isotropy		6	9
+DROP	kelvin-contraction		6	9
+KEEP	keplers-laws		6	9
+MERGE:keplers-laws	keplers-second-law	keplers-laws	6	9
+MERGE:kinetic-energy	kinetic-energy	kinetic-energy	6	9
+DROP	klein-gordon-equation		6	9
+DROP	kruskal-diagram		6	9
+DROP	kurtosis		6	9
+KEEP	lagrange-point		6	9
+MERGE:lagrange-point	lagrangian	lagrange-point	6	9
+MERGE:lagrange-point	lagrangian-points	lagrange-point	6	9
+DROP	lane-emden-equation		6	9
+DROP	latitude-terrestrial		6	9
+MERGE:newtons-law-of-universal-gravitation	law-of-universal-attraction	newtons-law-of-universal-gravitation	6	9
+MERGE:friedmann-lemaitre-universe	lemaitre-universe	friedmann-lemaitre-universe	6	9
+KEEP	lens-equation		6	9
+KEEP	lisa		6	9
+DROP	list-of-stars		6	9
+DROP	little-bangs		6	9
+MERGE:milky-way	local-arm	milky-way	6	9
+KEEP	local-group		6	9
+MERGE:orbital-elements	longitude-of-the-perihelion	orbital-elements	6	9
+DROP	longitude-terrestrial		6	9
+KEEP	lorentz-force-equation		6	9
+DROP	lsr		6	9
+KEEP	m104		6	9
+KEEP	m13		6	9
+MERGE:andromeda-galaxy	m31	andromeda-galaxy	6	9
+KEEP	m42		6	9
+MERGE:pleiades	m45	pleiades	6	9
+KEEP	m51		6	9
+KEEP	m81-group		6	9
+KEEP	m87		6	9
+DROP	mass-energy		6	9
+DROP	master-equation		6	9
+KEEP	maxwells-equations		6	9
+MERGE:equinox	mean-equator-and-mean-equinox	equinox	6	9
+MERGE:electromagnetic-spectrum	microwave	electromagnetic-spectrum	6	9
+MERGE:cosmic-microwave-background	microwave-background	cosmic-microwave-background	6	9
+MERGE:quasar	mini-quasar	quasar	6	9
+DROP	multiringed-basin		6	9
+DROP	mural-arc		6	9
+DROP	nasa		6	9
+DROP	nernst-theorem		6	9
+DROP	neutral-region-solar		6	9
+MERGE:gravitational-constant	newtons-constant-g	gravitational-constant	6	9
+MERGE:newtons-first-law-of-motion	newtons-first-law	newtons-first-law-of-motion	6	9
+MERGE:newtons-law-of-universal-gravitation	newtons-law-of-gravitation	newtons-law-of-universal-gravitation	6	9
+MERGE:newtons-law-of-universal-gravitation	newtons-universal-gravitational-constant	newtons-law-of-universal-gravitation	6	9
+DROP	nuclear-energy		6	9
+DROP	number-count-test		6	9
+DROP	palomar		6	9
+DROP	parametric-amplifier		6	9
+DROP	parametric-representation		6	9
+DROP	pencil-beam		6	9
+KEEP	photon-energy		6	9
+DROP	physics		6	9
+MERGE:planck-energy	planck-energy	planck-energy	6	9
+KEEP	planetary-ring		6	9
+MERGE:asteroid	planetoids	asteroid	6	9
+MERGE:nebula	proto-solar-nebula	nebula	6	9
+KEEP	protogalaxy		6	9
+KEEP	protoplanet		6	9
+DROP	r-galaxy		6	9
+KEEP	ring-galaxy		6	9
+KEEP	rogue-planet		6	9
+KEEP	sedna		6	9
+KEEP	sextant		6	9
+DROP	shapley-ames-catalogue		6	9
+DROP	shenzhou		6	9
+KEEP	special-relativity		6	9
+DROP	stationary-point		6	9
+KEEP	stellar-classification		6	9
+DROP	strange-attractor		6	9
+KEEP	supermassive-black-hole		6	9
+MERGE:stellar-association	t-associations	stellar-association	6	9
+DROP	thermal-energy		6	9
+DROP	thermal-equilibrium-law-of		6	9
+DROP	threshold-energy		6	9
+DROP	transparency-point		6	9
+DROP	triple-point		6	9
+KEEP	triton		6	9
+DROP	tropic		6	9
+MERGE:hertzsprung-russell-diagram	turn-off-point	hertzsprung-russell-diagram	6	9
+MERGE:keplers-laws	understanding-keplers-laws	keplers-laws	6	9
+KEEP	ursa-major		6	9
+MERGE:astronomical-unit	astronomical-unit	astronomical-unit	5	9
+DROP	ballik-ramsay-bands		5	9
+DROP	bev		5	9
+MERGE:big-crunch	big-crunch	big-crunch	5	9
+DROP	biology		5	9
+DROP	bipm		5	9
+DROP	boeing-company		5	9
+MERGE:bolometric-magnitude	bolometric-correction	bolometric-magnitude	5	9
+DROP	boost-factor		5	9
+KEEP	bootes		5	9
+MERGE:bootes	bootis	bootes	5	9
+DROP	bright-ring		5	9
+MERGE:cosmic-rays	burst-cosmic-ray	cosmic-rays	5	9
+DROP	byte		5	9
+KEEP	canopus		5	9
+MERGE:canopus	canopus-car	canopus	5	9
+DROP	carroll-and-ostlie		5	9
+KEEP	cassegrain-focus		5	9
+KEEP	cetus		5	9
+DROP	channel-stops		5	9
+DROP	chaos		5	9
+DROP	chiral-chirality		5	9
+DROP	circinus-x-1		5	9
+KEEP	cold-emission		5	9
+DROP	coma-x-1		5	9
+KEEP	composite-spectrum-stars		5	9
+MERGE:spectral-continuum	continuous-spectrum	spectral-continuum	5	9
+KEEP	corona		5	9
+KEEP	cosmic-ray		5	9
+KEEP	cross-spectrum		5	9
+KEEP	cygnus-a		5	9
+KEEP	draco		5	9
+DROP	emissivity		5	9
+DROP	energia-company		5	9
+KEEP	entropy		5	9
+MERGE:epoch	epoch	epoch	5	9
+MERGE:eridanus	eri	eridanus	5	9
+KEEP	eridanus		5	9
+MERGE:general-relativity	general-relativity-ideas	general-relativity	5	9
+MERGE:gravitational-waves	gravity-waves	gravitational-waves	5	9
+DROP	gravity-assist-orbit		5	9
+DROP	gravity-from-apples-to-the-universe		5	9
+DROP	helium-strong-stars		5	9
+MERGE:hercules	hercules-cluster	hercules	5	9
+MERGE:william-herschel	herschel	william-herschel	5	9
+MERGE:hertzsprung-russell-diagram	hertzsprung-russell-hr-diagram	hertzsprung-russell-diagram	5	9
+DROP	hinds-nebula		5	9
+MERGE:big-bang	hot-big-bang	big-bang	5	9
+KEEP	hubble-classification		5	9
+KEEP	hulse-taylor-pulsar		5	9
+KEEP	interstellar-square-law		5	9
+MERGE:luminosity	intrinsic-luminosity	luminosity	5	9
+DROP	invariant		5	9
+DROP	iras-galaxy		5	9
+KEEP	irregular-galaxy		5	9
+DROP	isophotes		5	9
+DROP	isospin		5	9
+DROP	isostasy		5	9
+DROP	isotones		5	9
+KEEP	kerr-solution		5	9
+MERGE:large-magellanic-cloud	large-magellanic-cloud	large-magellanic-cloud	5	9
+MERGE:large-magellanic-cloud	large-magellanic-cloud-lmc	large-magellanic-cloud	5	9
+DROP	lattice		5	9
+KEEP	libration-orbits		5	9
+DROP	line-blanketing		5	9
+DROP	list-of-planets		5	9
+DROP	lobes		5	9
+DROP	longitudinal-wave		5	9
+DROP	lossy		5	9
+DROP	luminance		5	9
+MERGE:morgan-keenan-luminosity-class	luminosity-class	morgan-keenan-luminosity-class	5	9
+KEEP	luminosity-distance		5	9
+DROP	luminous		5	9
+KEEP	luminous-flux		5	9
+DROP	luminous-intensity		5	9
+DROP	luminous-mass		5	9
+DROP	macroscopic		5	9
+MERGE:magellanic-clouds	magellan	magellanic-clouds	5	9
+MERGE:magellanic-clouds	magellanic-cloud	magellanic-clouds	5	9
+KEEP	mass-luminosity-radius-relation		5	9
+KEEP	mass-radius-relation-chandrasekhar		5	9
+DROP	mean-place		5	9
+DROP	meridional-flow		5	9
+DROP	minkowski-metric		5	9
+MERGE:semi-minor-axis	minor-axis	semi-minor-axis	5	9
+KEEP	minor-planet		5	9
+DROP	monopole		5	9
+DROP	multiplet		5	9
+DROP	nano		5	9
+DROP	noethers-theorem		5	9
+MERGE:stellar-nucleosynthesis	nucleosynthetic-era	stellar-nucleosynthesis	5	9
+MERGE:active-galactic-nuclei	nucleus	active-galactic-nuclei	5	9
+DROP	number-density		5	9
+KEEP	objective-grating		5	9
+DROP	octans		5	9
+MERGE:ophiuchus	ophiuchi	ophiuchus	5	9
+MERGE:ophiuchus	ophiuchus	ophiuchus	5	9
+DROP	osumi		5	9
+DROP	parton		5	9
+DROP	pericynthion		5	9
+KEEP	period-luminosity-relation		5	9
+KEEP	plancks-blackbody-formula		5	9
+DROP	plume		5	9
+MERGE:positron	positron	positron	5	9
+DROP	positronium		5	9
+MERGE:procyon	procyon	procyon	5	9
+KEEP	protostar		5	9
+DROP	pulsating-universe		5	9
+DROP	radius		5	9
+DROP	raster		5	9
+DROP	re		5	9
+DROP	reproducing-universes		5	9
+KEEP	ring-nebula		5	9
+DROP	scholastics		5	9
+DROP	solid-state		5	9
+DROP	source		5	9
+KEEP	spectrograph		5	9
+MERGE:spectroscopy	spectroscopic-notation	spectroscopy	5	9
+MERGE:spectroscopy	spectroscopy	spectroscopy	5	9
+MERGE:electromagnetic-spectrum	spectrum	electromagnetic-spectrum	5	9
+KEEP	spiral-galaxy		5	9
+DROP	standing-wave		5	9
+DROP	stationary-wave		5	9
+KEEP	stellar-evolution		5	9
+DROP	torsional-wave		5	9
+DROP	torus		5	9
+DROP	transverse-wave		5	9
+KEEP	triangulum-galaxy		5	9
+KEEP	virgo-supercluster		5	9
+MERGE	wolf-rayet-wr-star	Wolf-Rayet Star	5	9
+MERGE	wolf-rayet-star	Wolf-Rayet Star	5	9
+MERGE	wr-or-wolf-rayet-stars	Wolf-Rayet Star	5	9
+DROP	b-factory		4	9
+MERGE:balmer-series	balmer-formula	balmer-series	4	9
+DROP	band-molecular		4	9
+DROP	barometric-law		4	9
+KEEP	beehive-cluster		4	9
+KEEP	beta-centauri		4	9
+DROP	beta-transformation		4	9
+DROP	bih		4	9
+KEEP	binary-galaxies		4	9
+KEEP	binary-star		4	9
+DROP	bit		4	9
+DROP	blaauw-mechanism		4	9
+KEEP	black-dwarf		4	9
+DROP	blanford		4	9
+DROP	blr		4	9
+DROP	blrg		4	9
+KEEP	blue-horizontal-branch-stars		4	9
+KEEP	blue-supergiant		4	9
+DROP	bonner-durchmusterung		4	9
+KEEP	bose-einstein-condensation		4	9
+DROP	bottom-up-scenario		4	9
+DROP	boundary-layer		4	9
+DROP	bowen-fluorescence-mechanism		4	9
+DROP	bragg-angle		4	9
+KEEP	bragg-spectrometer		4	9
+DROP	broken-symmetry		4	9
+KEEP	calendar		4	9
+DROP	caloris		4	9
+DROP	camelopardalis		4	9
+KEEP	canis-major-dwarf-galaxy		4	9
+KEEP	castor		4	9
+MERGE:equatorial-coordinate-system	celestial-coordinates	equatorial-coordinate-system	4	9
+KEEP	celestial-mechanics		4	9
+MERGE:celestial-meridian	celestial-meridian	celestial-meridian	4	9
+MERGE:centaurus-a	cen-a	centaurus-a	4	9
+DROP	centauri-rigil-kent		4	9
+KEEP	centaurus		4	9
+MERGE:centaurus	centaurus-cluster	centaurus	4	9
+DROP	centaurus-x-3		4	9
+MERGE	cepheid	Cepheid Variable	4	9
+MERGE	cepheid-variable	Cepheid Variable	4	9
+KEEP	cepheus		4	9
+DROP	cern		4	9
+DROP	cerro-tololo-inter-american-observatory		4	9
+DROP	cetus-arc		4	9
+DROP	cfht		4	9
+DROP	charf		4	9
+DROP	charm		4	9
+DROP	china-1		4	9
+DROP	chopping		4	9
+KEEP	cluster-variable		4	9
+KEEP	combination-variable		4	9
+KEEP	cosmic-distance-ladder		4	9
+MERGE:dark-nebula	dark-nebula	dark-nebula	4	9
+KEEP	declination		4	9
+DROP	desorption		4	9
+DROP	dirac-equation		4	9
+KEEP	dispersion		4	9
+DROP	dispersive-power		4	9
+KEEP	dwarf-cepheids		4	9
+KEEP	dwarf-planet		4	9
+MERGE:equinox	dynamical-equinox	equinox	4	9
+KEEP	einstein-relationship		4	9
+KEEP	electromagnetic-field		4	9
+MERGE:elongation	elongation-satellite	elongation	4	9
+DROP	encounter		4	9
+DROP	energy-band		4	9
+DROP	energy-gap		4	9
+DROP	energy-level		4	9
+MERGE:hour-angle	ephemeris-hour-angle	hour-angle	4	9
+DROP	epitaxial		4	9
+MERGE:equinox	equation-equinoxes	equinox	4	9
+DROP	equilibrium-position		4	9
+DROP	erg		4	9
+DROP	eventuality		4	9
+KEEP	fomalhaut		4	9
+KEEP	giant-planet		4	9
+KEEP	gravitational-lens		4	9
+MERGE:apparent-magnitude	h-magnitude	apparent-magnitude	4	9
+KEEP	helium-variable-stars		4	9
+KEEP	hercules		4	9
+MERGE:physical-cosmology	hierarchical-cosmology	physical-cosmology	4	9
+KEEP	hipparchus		4	9
+MERGE:hubble-law	hubble-diagram	hubble-law	4	9
+MERGE:hubble-law	hubble-radius	hubble-law	4	9
+MERGE:hubble-law	hubble-lemaitre-law	hubble-law	4	9
+MERGE:hyades	hyades	hyades	4	9
+MERGE:hydra	hydra	hydra	4	9
+DROP	hypergalaxy		4	9
+KEEP	inflationary-hypothesis		4	9
+KEEP	interstellar-dust		4	9
+KEEP	interstellar-extinction		4	9
+MERGE:interstellar-medium	interstellar-gas	interstellar-medium	4	9
+MERGE:interstellar-medium	interstellar-hydrogen	interstellar-medium	4	9
+MERGE:interstellar-medium	interstellar-lines	interstellar-medium	4	9
+MERGE:interstellar-medium	interstellar-matter	interstellar-medium	4	9
+MERGE:interstellar-medium	interstellar-molecules	interstellar-medium	4	9
+KEEP	interstellar-object		4	9
+MERGE:interstellar-reddening	interstellar-reddening	interstellar-reddening	4	9
+MERGE:interstellar-medium	interstellar-space	interstellar-medium	4	9
+DROP	invariable-plane		4	9
+DROP	invariant-plane		4	9
+MERGE:ion	ion	ion	4	9
+DROP	irion		4	9
+DROP	isochoric		4	9
+DROP	isomer		4	9
+KEEP	k-correction		4	9
+DROP	kaons-to-electrons		4	9
+KEEP	keck-observatory		4	9
+KEEP	kiloparsec		4	9
+MERGE:stellar-kinematics	kinematics	stellar-kinematics	4	9
+DROP	kinetic-energy-rotational		4	9
+DROP	lacerta		4	9
+DROP	laminar-flow		4	9
+DROP	laplacian-plane		4	9
+MERGE:ligo	laser-interferometer-gravitational-wave-observatory	ligo	4	9
+KEEP	lenticular-galaxy		4	9
+DROP	li-rich-stars		4	9
+KEEP	lick-observatory		4	9
+DROP	list-of-astronomical-observatories		4	9
+DROP	list-of-satellites		4	9
+MERGE:supercluster	local-supercluster	supercluster	4	9
+MERGE:cosmic-distance-ladder	long-distance-scale	cosmic-distance-ladder	4	9
+KEEP	long-period-variable-star		4	9
+MERGE:long-period-comets	long-period-variables	long-period-comets	4	9
+DROP	longitude-celestial		4	9
+KEEP	lorentz-transformation		4	9
+DROP	lunar-reconnaissance-orbiter		4	9
+DROP	mach-number		4	9
+MERGE:stellar-magnetic-field	magnetic-field	stellar-magnetic-field	4	9
+MERGE:apparent-magnitude	magnitudes	apparent-magnitude	4	9
+KEEP	main-sequence-turn-off		4	9
+KEEP	mass-spectrometer		4	9
+KEEP	maxwell-distribution		4	9
+DROP	mcdonald-observatory		4	9
+DROP	mean-molecular-weight		4	9
+MERGE:celestial-mechanics	mechanics	celestial-mechanics	4	9
+KEEP	megaparsec		4	9
+MERGE:metallicity	metal	metallicity	4	9
+MERGE:metallicity	metal-rich	metallicity	4	9
+MERGE:metallicity	metallicity	metallicity	4	9
+KEEP	metallicity-gradient		4	9
+DROP	metastable-state		4	9
+MERGE:meteoroid	meteor-and-meteoroid	meteoroid	4	9
+MERGE:meteoroid	meteoroid	meteoroid	4	9
+MERGE:micrometeorite	micrometeoroid	micrometeorite	4	9
+DROP	micrometry		4	9
+DROP	microscopium		4	9
+DROP	mmt-observatory		4	9
+DROP	mole		4	9
+MERGE:molecular-cloud	molecular-cloud	molecular-cloud	4	9
+MERGE:molecular-cloud	molecular-cloud-complex	molecular-cloud	4	9
+MERGE:molecule	molecule	molecule	4	9
+MERGE:supergiant	most-luminous-supergiants	supergiant	4	9
+DROP	moving-cluster		4	9
+DROP	natural-line-broadening		4	9
+DROP	natural-philosophy		4	9
+DROP	natural-selection		4	9
+DROP	natural-units		4	9
+DROP	oblique-rotator		4	9
+DROP	observation		4	9
+KEEP	observatory		4	9
+DROP	observer		4	9
+MERGE:omega-centauri	omega	omega-centauri	4	9
+MERGE:omega-centauri	omega-centauri	omega-centauri	4	9
+DROP	open-string		4	9
+DROP	orbifold		4	9
+MERGE:orbit	orbit	orbit	4	9
+MERGE:orbit	orbit-concepts	orbit	4	9
+MERGE:orbit	orbit-velocity	orbit	4	9
+MERGE:orbit	orbit-circular	orbit	4	9
+MERGE:angular-momentum	orbital-angular-momentum	angular-momentum	4	9
+DROP	orbital-quantum-number		4	9
+DROP	orbiting-astronomical-observatory		4	9
+DROP	orbiting-collision		4	9
+DROP	orbiting-geophysical-observatory		4	9
+KEEP	order-of-magnitude-estimate		4	9
+MERGE:molecular-cloud	orion-molecular-cloud-1	molecular-cloud	4	9
+DROP	orionis		4	9
+KEEP	ortho-spectrum		4	9
+MERGE:orbit	osculating-orbit	orbit	4	9
+KEEP	palomar-observatory		4	9
+KEEP	para-spectrum		4	9
+DROP	parasites		4	9
+DROP	paris-observatory		4	9
+DROP	pasachoff		4	9
+DROP	pascal		4	9
+DROP	patroclus		4	9
+KEEP	pegasus		4	9
+DROP	pegasus-satellite		4	9
+DROP	pericenter		4	9
+MERGE:period	period	period	4	9
+DROP	perlmutter		4	9
+KEEP	perseus-cluster		4	9
+DROP	phases		4	9
+DROP	phoenix-constellation		4	9
+DROP	phonon		4	9
+DROP	photino		4	9
+DROP	photoelectric-emulsions		4	9
+DROP	photometric-binaries		4	9
+DROP	pitch-angle		4	9
+KEEP	planck-satellite		4	9
+KEEP	pre-main-sequence-star		4	9
+DROP	pup		4	9
+DROP	qeh		4	9
+KEEP	sagittarius		4	9
+MERGE:sagittarius-a	sagittarius-b2	sagittarius-a	4	9
+DROP	schrodinger-equation		4	9
+KEEP	scintillation		4	9
+KEEP	scorpius		4	9
+KEEP	seyfert-galaxies		4	9
+MERGE:seyfert-galaxy	seyfert-galaxy	seyfert-galaxy	4	9
+DROP	seyferts-sextet		4	9
+MERGE:small-magellanic-cloud	small-magellanic-cloud	small-magellanic-cloud	4	9
+DROP	soho-satellite		4	9
+KEEP	solar-nebula		4	9
+KEEP	solar-rotation		4	9
+DROP	spallation		4	9
+MERGE:spectroscopy	spectrometer	spectroscopy	4	9
+DROP	spherical-polar-coordinates		4	9
+DROP	spring		4	9
+DROP	spy-satellite		4	9
+DROP	stability		4	9
+KEEP	star-formation		4	9
+DROP	statistical-mechanics		4	9
+KEEP	stellar		4	9
+KEEP	stellar-association		4	9
+KEEP	strong-interaction		4	9
+KEEP	subgiant		4	9
+MERGE:supercluster	supercluster	supercluster	4	9
+DROP	superconductor		4	9
+DROP	supercooling		4	9
+DROP	superfluid		4	9
+DROP	superfluidity		4	9
+KEEP	supergiant		4	9
+DROP	supermultiplet		4	9
+DROP	supersymmetry		4	9
+KEEP	taurus		4	9
+MERGE:crab-nebula	taurus-a	crab-nebula	4	9
+MERGE:terrestrial-planet	terrestrial-planet	terrestrial-planet	4	9
+KEEP	thermal-convection		4	9
+DROP	thermion		4	9
+KEEP	tidal-friction		4	9
+DROP	toro		4	9
+MERGE:vela	vela	vela	4	9
+MERGE:virgo-cluster	virgo-cluster	virgo-cluster	4	9
+MERGE	visual-binary-star	Visual Binary	4	9
+DROP	weather-satellite		4	9
+KEEP	yerkes-observatory		4	9
+MERGE:bodes-law	bodes-law	bodes-law	3	9
+DROP	boyles-law		3	9
+DROP	braggs-law		3	9
+MERGE:telescope	cassegrain-focus-telescope	telescope	3	9
+KEEP	cassegrain-reflecting-telescope		3	9
+DROP	charless-law		3	9
+KEEP	comparison-of-jwst-and-hubble		3	9
+MERGE:telescope	coude-telescope	telescope	3	9
+DROP	depolarizer		3	9
+DROP	electrodes		3	9
+KEEP	giant-star		3	9
+KEEP	hubble-flow		3	9
+MERGE:hubble-law	hubble-law	hubble-law	3	9
+DROP	ishtar-terra		3	9
+KEEP	kirchhoffs-laws		3	9
+DROP	lamberts-law		3	9
+DROP	lenzs-law		3	9
+MERGE:lepton	lepton	lepton	3	9
+MERGE:lepton	lepton-era	lepton	3	9
+MERGE:lepton	leptonic-era	lepton	3	9
+DROP	lithium-stars		3	9
+MERGE:telescope	maksutov-telescope	telescope	3	9
+DROP	parity		3	9
+DROP	prandtl-number		3	9
+KEEP	prominence		3	9
+DROP	qe-pinned		3	9
+KEEP	rabi-frequency		3	9
+MERGE:redshift	red-shift	redshift	3	9
+MERGE:redshift	redshift-survey	redshift	3	9
+MERGE:redshift	redshift-distance-relation	redshift	3	9
+MERGE:redshift	redshift-magnitude-test	redshift	3	9
+DROP	rille		3	9
+MERGE:seasons	seasons	seasons	3	9
+DROP	sextans		3	9
+DROP	sfh		3	9
+DROP	siemens		3	9
+DROP	snells-law		3	9
+DROP	sol		3	9
+MERGE:standard-candle	standard-ruler	standard-candle	3	9
+DROP	stefans-law		3	9
+KEEP	stefan-boltzmann-law		3	9
+KEEP	subaru-telescope		3	9
+KEEP	subgiant-star		3	9
+KEEP	supergiant-star		3	9
+DROP	tau-lepton		3	9
+KEEP	telescopium		3	9
+KEEP	thermodynamics-first-law		3	9
+KEEP	thermodynamics-second-law		3	9
+KEEP	thermodynamics-zeroth-law		3	9
+KEEP	transit-telescope		3	9
+KEEP	binary-system		2	9
+MERGE:cosmic-distance-ladder	distance-ladder	cosmic-distance-ladder	2	9
+MERGE:distance-modulus	distance-modulus	distance-modulus	2	9
+KEEP	dwarf-galaxy		2	9
+DROP	dye-laser		2	9
+DROP	electric-field		2	9
+MERGE:orbital-elements	elements-orbital	orbital-elements	2	9
+KEEP	elliptical-galaxy		2	9
+KEEP	eruptive-variable		2	9
+MERGE:stellar-classification	mkk-system	stellar-classification	2	9
+KEEP	planetary-system		2	9
+DROP	predict		2	9
+DROP	pulse-window		2	9
+DROP	r-monocerotis		2	9
+DROP	rainbow		2	9
+MERGE:standard-candle	standard-candle	standard-candle	2	9
+KEEP	star-system		2	9
+DROP	system-flow		2	9
+DROP	system-noise		2	9
+DROP	tychonic-system		2	9
+MERGE:photometry	ubv-photometric-system	photometry	2	9
+MERGE:photometry	ubv-system	photometry	2	9
+DROP	dissipative-system		1	9
+DROP	draco-system		1	9
+DROP	ensemble-average		1	9
+DROP	abt		10	8
+KEEP	acs		10	8
+DROP	adu		10	8
+KEEP	ara		10	8
+DROP	atb		10	8
+DROP	calabi-yau-space		9	8
+DROP	calibi-yau-space		9	8
+DROP	canadian-space-agency		9	8
+DROP	chance		9	8
+DROP	china-national-space-administration		9	8
+DROP	european-space-agency		9	8
+MERGE:full-moon	full-moon	full-moon	9	8
+KEEP	hubble-space-telescope		9	8
+DROP	mariner-spacecraft		9	8
+DROP	mariner-spaceprobes		9	8
+DROP	mercury-space-project		9	8
+DROP	minkowski-space		9	8
+DROP	minkowski-space-time		9	8
+DROP	national-aeronautics-and-space-administration		9	8
+DROP	national-air-and-space-museum		9	8
+DROP	null-line		9	8
+DROP	open-space		9	8

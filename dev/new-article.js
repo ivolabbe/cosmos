@@ -78,10 +78,14 @@ if (insertIdx === -1) {
 fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
 console.log(`  Added to ${indexPath} (${index.length} total)`);
 
-// ── 3. Rebuild cosmos-index.js ──
+// ── 3. Rebuild cosmos-index.js + slugs.txt ──
 const jsIndex = 'var COSMOS_INDEX = ' + JSON.stringify(index, null, 2) + ';';
 fs.writeFileSync('js/cosmos-index.js', jsIndex);
 console.log(`  Rebuilt js/cosmos-index.js`);
+
+const slugs = index.map(a => a.slug).sort().join('\n') + '\n';
+fs.writeFileSync('articles/slugs.txt', slugs);
+console.log(`  Rebuilt articles/slugs.txt`);
 
 // ── 4. Scrape ADS (optional) ──
 if (doScrape) {

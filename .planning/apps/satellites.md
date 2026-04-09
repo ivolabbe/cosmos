@@ -3,14 +3,14 @@
 ## Status: Complete (2026-03-28)
 
 ## Files
-- `experimental/satellites-interactive.html` — Three.js interactive
-- `experimental/satellite.html` — COSMOS article with embed
-- `experimental/models/satellites/` — glTF model (Earth globe, airline routes)
-- `experimental/models/satellites/catalog/` — CelesTrak/SATCAT orbit data
+- `dev/satellites-interactive.html` — Three.js interactive
+- `dev/satellite.html` — COSMOS article with embed
+- `dev/models/satellites/` — glTF model (Earth globe, airline routes)
+- `dev/models/satellites/catalog/` — CelesTrak/SATCAT orbit data
   - `cat_leo.bin` (2000 subsampled from 14,071), `cat_meo.bin` (168), `cat_geo.bin` (595), `cat_heo.bin` (41)
   - `debris_positions.bin` (14,587 objects × 8 points)
   - `all_positions.bin` (14,875 satellite epoch positions — not currently used)
-- `experimental/assets/CREDITS.md` — All attributions
+- `dev/assets/CREDITS.md` — All attributions
 
 ## Architecture
 - **Engine:** Three.js with importmap CDN

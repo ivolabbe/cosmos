@@ -1,0 +1,3 @@
+**CW Leonis (IRC +10216) — Hubble Space Telescope** — the nearest carbon star to the Sun, located ~400 light-years away in Leo and embedded in a thick circumstellar dust shell. The orange-red cobweb structures are sooty carbon-dust clouds expelled by the star's powerful stellar wind at rates of up to 10⁻⁵ M☉ yr⁻¹. The bright beams radiating outward changed measurably in brightness between Hubble observations in 2001, 2011, and 2016 — an extraordinary change on astronomical timescales. CW Leonis is the brightest near-infrared carbon star in the sky and a benchmark object for studying AGB mass loss and circumstellar chemistry.
+
+Credit: ESA/Hubble & NASA, T. Ueta, H. Kim / [ESA/Hubble heic2112a](https://esahubble.org/images/heic2112a/) — CC BY 4.0

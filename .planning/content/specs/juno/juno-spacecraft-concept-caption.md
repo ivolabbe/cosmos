@@ -1,0 +1,1 @@
+Artist's concept of NASA's Juno spacecraft approaching Jupiter. The spacecraft's three solar panel wings — each approximately 9 metres long — are clearly visible, representing Juno's status as the first solar-powered spacecraft to operate at Jupiter's distance from the Sun. Credit: NASA/JPL-Caltech (PIA13746, public domain).

@@ -1,0 +1,46 @@
+---
+title: "COSMOS — Agent Organisation"
+---
+graph LR
+    subgraph interactive["Interactive Team"]
+        direction TB
+        IO["**Interactive Orchestrator**\nDispatches phases, tracks progress,\ncollects learnings, updates agents"]
+        RES["**Researcher**\nScience facts, visual references,\nimplementation plan → spec.md"]
+        COD["**Coder**\nBuilds interactive HTML\nfrom spec"]
+        VER_I["**Verifier**\nPuppeteer browser testing,\nphysics + visual QA"]
+        VIS["**Visual** _(sub-agent)_\nScreenshot comparison,\nstyle guide compliance"]
+    end
+
+    subgraph content["Content Team"]
+        direction TB
+        CO["**Content Orchestrator**\nAudit planning, SEO strategy,\ncollects learnings, updates agents"]
+        AUD["**Auditor**\nScores articles, identifies gaps,\nprioritises work"]
+        REV["**Reviewer**\nGrammar, voice, SEO,\nfactual accuracy"]
+    end
+
+    subgraph shared["Shared"]
+        direction TB
+        WR["**Writer**\nArticle content, embeds,\ncaptions. Used by both teams"]
+    end
+
+    IO --- RES
+    IO --- COD
+    IO --- VER_I
+    VER_I --- VIS
+    CO --- AUD
+    CO --- REV
+    IO --- WR
+    CO --- WR
+
+    classDef orchestrator fill:#1a4a3a,stroke:#2a6a4a,color:#fff,font-weight:bold
+    classDef agent fill:#2d5a6e,stroke:#3a7a8b,color:#fff
+    classDef verifier fill:#8b2020,stroke:#a83030,color:#fff
+    classDef visual fill:#6b4a8a,stroke:#8b6aaa,color:#fff
+    classDef writer fill:#8a7a20,stroke:#aaa030,color:#fff
+
+    class IO,CO orchestrator
+    class RES,COD,AUD agent
+    class VER_I verifier
+    class VIS visual
+    class WR writer
+    class REV verifier

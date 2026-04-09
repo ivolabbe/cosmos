@@ -5,7 +5,7 @@
 ### PASS: density-wave interactive (2026-03-29)
 
 **Screenshots**: `/tmp/dw-initial.png`, `/tmp/dw-after6s.png`, `/tmp/dw-traffic.png`, `/tmp/dw-zones.png`, `/tmp/dw-4arms.png`, `/tmp/dw-1arm.png`, `/tmp/dw-pitch5.png`, `/tmp/dw-pitch30.png`, `/tmp/dw-omegap40.png`, `/tmp/dw-dm0.png`, `/tmp/dw-embedded.png`, `/tmp/dw-panel-closeup.png`, `/tmp/dw-info-closeup.png`, `/tmp/dw-controls-closeup.png`
-**Agent instructions checked**: `.agents/sao-coder.md`, `.agents/sao-verify.md`
+**Agent instructions checked**: `.agents/agents/cosmos-coder.md`, `.agents/agents/cosmos-verify.md`
 
 #### Checklist
 

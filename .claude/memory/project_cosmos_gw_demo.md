@@ -4,7 +4,7 @@ description: Gravitational wave Three.js demo implementation details, known issu
 type: project
 ---
 
-Interactive gravitational wave visualization at `cosmos/experimental/gravitational-waves-interactive.html`.
+Interactive gravitational wave visualization at `cosmos/dev/gravitational-waves-interactive.html`.
 
 **Architecture:** Single self-contained HTML file. Three.js 0.170 via CDN importmap. Custom GLSL vertex/fragment shaders for spacetime mesh. EffectComposer + UnrealBloomPass. WebAudio chirp. 2D canvas spectrogram panel.
 
@@ -18,8 +18,8 @@ Interactive gravitational wave visualization at `cosmos/experimental/gravitation
 **Auto-speed profile:** Sigmoid-based: cruise at 1.5× for bulk of sim, steep decel in last ~5% to 0.028× (≈1 orbit/sec at f_orb=35 Hz for 30+30 M☉).
 
 **Files:**
-- `experimental/gravitational-waves-interactive.html` — standalone demo
-- `experimental/gravitational-waves-article.html` — article page with 800px iframe embed
+- `dev/gravitational-waves-interactive.html` — standalone demo
+- `dev/gravitational-waves.html` — article page with 800px iframe embed
 - `css/style.css` — added `.viz-embed` reusable classes
 
 **How to apply:** When resuming work on this demo or building new COSMOS interactives, follow the same single-file pattern (inline CSS + importmap + module JS). Test with local HTTP server (`python3 -m http.server`) + Chrome console.

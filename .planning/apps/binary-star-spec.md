@@ -79,7 +79,7 @@ A 3D interactive visualization of a binary star system orbiting its common cente
 - **Applicable to our build?**: Visual reference for 3D orbit rendering. We use analytic Kepler orbits (exact, no drift) instead of numerical integration.
 
 ### Reference 5: COSMOS GW Interactive (our own)
-- **URL**: `experimental/gravitational-waves-interactive.html`
+- **URL**: `dev/gravitational-waves-interactive.html`
 - **What it does well**: Two orbiting objects + 2D spectrogram panel + slider controls. Physics precomputed with post-Newtonian formulas. Established COSMOS visual style. Audio. Bloom.
 - **What it does poorly**: Specialized for inspiral (decaying orbit, not periodic).
 - **Key technique**: Two-body center-of-mass orbit, 2D panel (canvas) synced to 3D scene, slider controls.
@@ -616,7 +616,7 @@ function starColor(T) {
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/gravitational-waves-interactive.html`** — because:
+**`dev/gravitational-waves-interactive.html`** — because:
 1. Same architecture: two objects orbiting center of mass + linked 2D panel + slider controls.
 2. Same physics pattern: compute orbital positions from analytic formulas (not numerical integration).
 3. Same layout: 3D view center, 2D panel top-right, info panel top-left, controls bar bottom.
@@ -631,7 +631,7 @@ function starColor(T) {
 - Replace black holes with colored stellar spheres.
 - Remove gravitational wave mesh and audio chirp.
 
-Also reference **`experimental/pulsar-interactive.html`** for the dual-panel layout pattern (3D + 2D pulse profile).
+Also reference **`dev/pulsar-interactive.html`** for the dual-panel layout pattern (3D + 2D pulse profile).
 
 ---
 

@@ -1,0 +1,641 @@
+DROP	Bond, Covalent	—	5	5
+DROP	Bose Statistics	—	5	5
+DROP	BPS States	—	5	5
+DROP	Buried Channel	—	5	5
+MERGE	Carbon Cycle	cno-cycle	5	5
+DROP	Chandler Period	—	5	5
+KEEP	Cosmogony	—	5	5
+DROP	East Point	—	5	5
+DROP	fluorescent light	—	5	5
+KEEP	Gas Giant		5	5
+MERGE	Gravitational Singularity	singularity	5	5
+DROP	heat of fusion	—	5	5
+DROP	Heliograph	—	5	5
+KEEP	Heliometer		5	5
+DROP	heliostat	—	5	5
+KEEP	Helix Nebula	—	5	5
+DROP	Hesperus	—	5	5
+KEEP	index of refraction		5	5
+KEEP	Induced Emission		5	5
+KEEP	Infrared Space Observatory	—	5	5
+MERGE	Irradiance	flux	5	5
+DROP	ISAS	—	5	5
+DROP	Jacobi Ellipsoid	—	5	5
+KEEP	Jodrell Bank Observatory	—	5	5
+KEEP	Kapteyn's Star		5	5
+MERGE	Kepler's 3rd law	orbit	5	5
+MERGE	Kepler's Nova	supernova	5	5
+MERGE	Kepler's Supernova	supernova	5	5
+KEEP	Kepler-452b	—	5	5
+DROP	Lambda Boo Stars	—	5	5
+KEEP	Large Binocular Telescope Observatory	—	5	5
+DROP	Law	—	5	5
+DROP	Limit Cycle	—	5	5
+MERGE	Local Sidereal Time	sidereal-day	5	5
+DROP	Long March	—	5	5
+KEEP	Lorentz Invariance		5	5
+DROP	LS Coupling	—	5	5
+DROP	Lucy	—	5	5
+DROP	Lumen	—	5	5
+DROP	Lumogen	—	5	5
+MERGE	Lunar Cycle	moon	5	5
+DROP	Lynx	—	5	5
+KEEP	Lyra	—	5	5
+DROP	Magnetic Susceptibility	—	5	5
+DROP	Manifold	—	5	5
+DROP	Many-Worlds	—	5	5
+DROP	Metastable	—	5	5
+DROP	MHD	—	5	5
+DROP	MIDAS	—	5	5
+KEEP	Mimas	—	5	5
+DROP	MIPS	—	5	5
+DROP	Mixing-Length Theory	—	5	5
+DROP	Model even earlier times	—	5	5
+DROP	Monte Carlo Method	—	5	5
+KEEP	Month	—	5	5
+KEEP	Moons of Uranus		5	5
+DROP	MOST	—	5	5
+DROP	Mulliken Bands	—	5	5
+DROP	Multi-Doughnut	—	5	5
+DROP	NICMOS	—	5	5
+DROP	Nightglow	—	5	5
+DROP	NLR	—	5	5
+MERGE	Nodical Month	month	5	5
+KEEP	Orbital Period		5	5
+DROP	Oosterhoff Groups	—	5	5
+DROP	Orthonormal Tetrad	—	5	5
+DROP	Root Mean Square (rms)	—	5	5
+DROP	rotational inertia	—	5	5
+DROP	Rotational Invariance	—	5	5
+KEEP	Royal Greenwich Observatory	—	5	5
+MERGE	RR Lyr	rr-lyrae	5	5
+DROP	s-Electron	—	5	5
+KEEP	satellite observatory		5	5
+DROP	Scale Invariance	—	5	5
+DROP	Secular Instability	—	5	5
+DROP	Shinsei	—	5	5
+DROP	Short Scale	—	5	5
+MERGE	Sidereal	sidereal-day	5	5
+MERGE	Sidereal Day	sidereal-day	5	5
+MERGE	Sidereal Hour Angle	sidereal-day	5	5
+KEEP	Sidereal Period		5	5
+KEEP	Sidereal Time		5	5
+DROP	Siderite	—	5	5
+DROP	Siderolite	—	5	5
+DROP	Skylight	—	5	5
+KEEP	Solar and Heliospheric Observatory	—	5	5
+MERGE	Solar Calendar	year	5	5
+KEEP	Solar Dynamics Observatory	—	5	5
+MERGE	solar radiation	solar-flare	5	5
+MERGE	Solar Year	tropical-year	5	5
+MERGE	Spectral Line	spectral-line	5	5
+DROP	spin, electron	—	5	5
+DROP	spring potential energy	—	5	5
+DROP	SSB	—	5	5
+DROP	Sum-Over-Paths	—	5	5
+MERGE	Summer	summer-solstice	5	5
+KEEP	Summer Solstice		5	5
+KEEP	Sunlight	—	5	5
+DROP	Super Radiance	—	5	5
+KEEP	Super-Earth	—	5	5
+DROP	Super-Metal-Rich	—	5	5
+DROP	Superpartners	—	5	5
+DROP	Supersonic	—	5	5
+MERGE	Synodic Month	month	5	5
+KEEP	Synodic Period		5	5
+DROP	Synodic Time	—	5	5
+DROP	Taylor Instability	—	5	5
+DROP	Time Delay	—	5	5
+KEEP	Time Dilation	—	5	5
+MERGE	Trans-Neptunian Object	trans-neptunian-objects	5	5
+KEEP	Ultraviolet		5	5
+KEEP	Winter Solstice		5	5
+MERGE	Barycenter	centre-of-mass	4	5
+KEEP	Barycentric Dynamical Time (TDB)		4	5
+MERGE	Baryon	baryons	4	5
+KEEP	Baryon Number Conservation		4	5
+KEEP	Beat Cepheids		4	5
+DROP	Bell's Paradox	—	4	5
+DROP	Biconvex	—	4	5
+DROP	BN Object	—	4	5
+DROP	Bohr Atom	—	4	5
+DROP	Boussinesq Equations	—	4	5
+DROP	Bubble	—	4	5
+KEEP	Calculation of expansion time		4	5
+DROP	Cambridge Catalogues	—	4	5
+KEEP	Cancer	—	4	5
+KEEP	Canes Venatici	—	4	5
+MERGE	Capricorn	constellation	4	5
+KEEP	Capricornus	—	4	5
+MERGE	Carbon Cycle (carbon-nitrogen cycle)	cno-cycle	4	5
+KEEP	Caroline Herschel	—	4	5
+DROP	Carte du ciel	—	4	5
+DROP	Cas A (3C 461)	—	4	5
+KEEP	Catadioptric Lens		4	5
+KEEP	CCD		4	5
+KEEP	Celestial Ephemeris Pole		4	5
+DROP	Cerenkov Radiation	—	4	5
+DROP	Chamaeleon	—	4	5
+DROP	Chaotic Dynamics	—	4	5
+DROP	Chapman's Equation	—	4	5
+DROP	Charge Conjugation	—	4	5
+MERGE	Chiron	centaurs	4	5
+MERGE	chondrule	chondrule	4	5
+KEEP	Clyde Tombaugh	—	4	5
+KEEP	Degenerate Matter	—	4	5
+DROP	Digitized	—	4	5
+KEEP	Dione	—	4	5
+DROP	Distance units	—	4	5
+DROP	Doping	—	4	5
+MERGE	Dust	dust-grain	4	5
+DROP	Eigenfunctions	—	4	5
+KEEP	Einstein equation		4	5
+DROP	electric guitar	—	4	5
+DROP	Electrodynamics	—	4	5
+DROP	Empiricism	—	4	5
+KEEP	Ephemeris	—	4	5
+MERGE	Equator	equator	4	5
+DROP	Equipartition of Energy	—	4	5
+DROP	Example of required energy to confine particles	—	4	5
+DROP	Exchange Correlation	—	4	5
+KEEP	Exchange Interaction		4	5
+MERGE	Extraterrestrial Intelligence	seti	4	5
+MERGE	Filament	galactic-filaments	4	5
+DROP	Flash Gate	—	4	5
+KEEP	FM radio		4	5
+KEEP	Focal Plane Scale		4	5
+DROP	Fornax System	—	4	5
+MERGE	Friedmann Models	friedmann-lemaitre-universe	4	5
+DROP	FU Orionis	—	4	5
+KEEP	Gaia	—	4	5
+KEEP	Gain		4	5
+MERGE	Galactic Equator	galactic-equator	4	5
+KEEP	gamma radioactivity		4	5
+DROP	Gaussian	—	4	5
+MERGE	Glitch	glitch	4	5
+KEEP	Granulation	—	4	5
+MERGE	Gravitational Collapse	core-collapse	4	5
+MERGE	Gravitational Equilibrium	hydrostatic-equilibrium	4	5
+KEEP	Gravitational Instability		4	5
+DROP	Gray (unit)	—	4	5
+DROP	Gray Body	—	4	5
+MERGE	Great Wall	large-scale-structure	4	5
+DROP	Green's Theorem	—	4	5
+KEEP	Greenhouse Effect	—	4	5
+DROP	Greenwich	—	4	5
+MERGE	Greenwich Mean Time Zone (GMT)	greenwich-mean-time	4	5
+MERGE	Greenwich Sidereal Date	sidereal-day	4	5
+DROP	Greenwich Sidereal Day Number	—	4	5
+MERGE	Gregorian Calendar	gregorian-calendar	4	5
+DROP	GRG	—	4	5
+DROP	Grolier Codex	—	4	5
+DROP	Groombridge 1830	—	4	5
+DROP	Grotrian Diagram	—	4	5
+DROP	Ground Loop	—	4	5
+DROP	Ground State	—	4	5
+DROP	GSD	—	4	5
+DROP	GSFC	—	4	5
+DROP	GUI	—	4	5
+DROP	Guillotine Factor	—	4	5
+DROP	GUT	—	4	5
+DROP	Guth	—	4	5
+DROP	Gyrofrequency	—	4	5
+DROP	Gyrosynchrotron Radiation	—	4	5
+DROP	H and K lines	—	4	5
+DROP	H-II Transfer Vehicle	—	4	5
+DROP	h-line	—	4	5
+MERGE	H-R Diagram	hertzsprung-russell-diagram	4	5
+KEEP	Habitable Zone	—	4	5
+DROP	HAC	—	4	5
+DROP	Hadley Rille	—	4	5
+KEEP	Hagedorn Equation of State		4	5
+DROP	Half-Life	—	4	5
+DROP	Half-Power Beamwidth	—	4	5
+DROP	Hanning Method	—	4	5
+DROP	Hardness Ratio	—	4	5
+DROP	Harkins's Rule	—	4	5
+DROP	Harmonic Law	—	4	5
+DROP	Harmonic Overtone	—	4	5
+KEEP	Harvard-Smithsonian Center for Astrophysics		4	5
+DROP	Harwit	—	4	5
+DROP	Hayabusa	—	4	5
+DROP	HBL	—	4	5
+DROP	heat of vaporization	—	4	5
+DROP	heat transfer	—	4	5
+DROP	Heat transfer concepts	—	4	5
+DROP	Heaviside Layer	—	4	5
+DROP	Height	—	4	5
+DROP	Heisenberg Model	—	4	5
+MERGE	Heliocentric	heliocentrism	4	5
+MERGE	Heliocentric Model	heliocentrism	4	5
+KEEP	Heliocentrism	—	4	5
+DROP	Hermes	—	4	5
+DROP	Hermetic	—	4	5
+DROP	Heterotic E-String Theory	—	4	5
+DROP	Heterotic String	—	4	5
+DROP	Hidden Mass	—	4	5
+DROP	Hierarchy Problem	—	4	5
+DROP	Higgs Field	—	4	5
+DROP	Higgs Mechanism	—	4	5
+DROP	Higgs Particle	—	4	5
+DROP	Higgsino	—	4	5
+KEEP	High-Luminosity Early Type Objects		4	5
+KEEP	Hohmann Orbit	—	4	5
+DROP	Hold-Time	—	4	5
+DROP	Holmberg Radius	—	4	5
+DROP	Hologram	—	4	5
+DROP	Holomorphic	—	4	5
+DROP	Holtsmark Approximation	—	4	5
+DROP	Homogeneity	—	4	5
+DROP	Homogeneity Problem	—	4	5
+DROP	Homogeneous	—	4	5
+KEEP	Homogeneous Expansion		4	5
+KEEP	Honeycomb Mirrors		4	5
+KEEP	Horsehead Nebula	—	4	5
+DROP	Host Computer	—	4	5
+DROP	Hoyle-Narlikar Theory	—	4	5
+DROP	HPBW	—	4	5
+DROP	HPQ	—	4	5
+DROP	HRS	—	4	5
+MERGE	HST	hubble-space-telescope	4	5
+DROP	HTML	—	4	5
+DROP	HTTP	—	4	5
+KEEP	Hubble Ultra Deep Field	—	4	5
+DROP	Huitzilopochtli	—	4	5
+DROP	Hund's Rule	—	4	5
+DROP	Hyad	—	4	5
+MERGE	Hyades (astronomy)	asterism	4	5
+DROP	Hybrid Array	—	4	5
+DROP	Hydrogen fine structure (3->2 transition)	—	4	5
+DROP	hydrogen radial probability	—	4	5
+DROP	Hydrus	—	4	5
+DROP	Hypercharge	—	4	5
+DROP	Hyperdimensional	—	4	5
+KEEP	Hyperion	—	4	5
+DROP	Hysteresis	—	4	5
+DROP	Hysteresis Cycle	—	4	5
+DROP	Hz	—	4	5
+DROP	IAU	—	4	5
+DROP	IBC	—	4	5
+KEEP	Ice Giant	—	4	5
+KEEP	Ideal Gas		4	5
+DROP	IDL	—	4	5
+DROP	IF	—	4	5
+DROP	ILR	—	4	5
+DROP	Image Dissector Scanner	—	4	5
+KEEP	Image Intensifier		4	5
+DROP	Image Tube	—	4	5
+DROP	Implicate Order	—	4	5
+DROP	Impurity and Conduction	—	4	5
+DROP	Indefiniteness	—	4	5
+DROP	Indian Space Research Organisation	—	4	5
+DROP	Inertial Frame of Reference	—	4	5
+DROP	Inertial Mass	—	4	5
+DROP	Infinities	—	4	5
+DROP	Infographic: Spacecraft of the Apollo Program	—	4	5
+DROP	ingress	—	4	5
+DROP	InSb	—	4	5
+DROP	insulator, electric	—	4	5
+DROP	Integrated Circuit	—	4	5
+DROP	Integration Time	—	4	5
+DROP	intensity, sound	—	4	5
+DROP	Intercombination Lines	—	4	5
+KEEP	interference, sound		4	5
+DROP	Interpulse	—	4	5
+DROP	Inti	—	4	5
+DROP	Inverse Maser	—	4	5
+KEEP	Jeans Length		4	5
+DROP	K shell	—	4	5
+DROP	kamacite	—	4	5
+KEEP	Kepler-186f	—	4	5
+KEEP	Lagoon Nebula	—	4	5
+DROP	Lattice Gas	—	4	5
+DROP	Least Action	—	4	5
+DROP	Least Squares, Principle of	—	4	5
+MERGE	Life Zone	habitable-zone	4	5
+DROP	Limb Correction	—	4	5
+KEEP	Limb Darkening	—	4	5
+DROP	Line Width	—	4	5
+KEEP	Local Bubble	—	4	5
+MERGE	Look-Back Time	lookback-time	4	5
+MERGE	Loop Nebula	nebula	4	5
+KEEP	Lorentz Contraction		4	5
+DROP	Loschmidt Number (constant)	—	4	5
+MERGE	Mach's Principle	mach%27s-principle	4	5
+MERGE	Magellanic Stream	magellanic-stream	4	5
+KEEP	Magnetohydrodynamics		4	5
+DROP	Marching Subpulse	—	4	5
+KEEP	Mass Function		4	5
+DROP	Matter-to-Antimatter Ratio	—	4	5
+KEEP	Maunder Minimum	—	4	5
+DROP	Mean Free Time	—	4	5
+KEEP	Mean Solar Time		4	5
+DROP	Messenger Particle	—	4	5
+MERGE	Metric	concordance-model	4	5
+KEEP	Microwave Radiation		4	5
+DROP	Mintaka	—	4	5
+DROP	Moiré Fringes	—	4	5
+KEEP	Monochromatic Radiation		4	5
+DROP	Multiples and Numbers	—	4	5
+DROP	N1	—	4	5
+MERGE	Navigation	celestial	4	5
+DROP	Neon Burning	—	4	5
+DROP	Neumann Lines	—	4	5
+KEEP	Newtonian		4	5
+KEEP	Non-Thermal Radiation		4	5
+DROP	NSF	—	4	5
+DROP	Objective	—	4	5
+KEEP	Olbers' Paradox	—	4	5
+DROP	Open System	—	4	5
+MERGE	Orion A	nebula	4	5
+KEEP	Orion Arm	—	4	5
+MERGE	Orion B	nebula	4	5
+MERGE	Orion Spur	orion-arm	4	5
+DROP	Orthorhombic Crystal	—	4	5
+KEEP	OSIRIS-REx	—	4	5
+DROP	Oxygen Burning	—	4	5
+DROP	Oxygen-Rich Giants	—	4	5
+DROP	Ozone Layer	—	4	5
+KEEP	Pallas	—	4	5
+DROP	Partition Function	—	4	5
+KEEP	Paschen Series		4	5
+DROP	Pauli Exclusion Principle	—	4	5
+KEEP	Peak of intensity vs frequency plot		4	5
+DROP	Phase Conjugation	—	4	5
+DROP	Phase Switching	—	4	5
+KEEP	Phoebe	—	4	5
+KEEP	Pisces	—	4	5
+DROP	Pixons	—	4	5
+KEEP	Pole Star	—	4	5
+DROP	PSI	—	4	5
+KEEP	Regolith	—	4	5
+DROP	rms current	—	4	5
+DROP	Rotation of molecule	—	4	5
+MERGE	Schwarzschild	schwarzschild-radius	4	5
+MERGE	Schwarzschild Solution	schwarzschild-radius	4	5
+DROP	Scuti Stars	—	4	5
+KEEP	Scutum	—	4	5
+DROP	Selenocentric	—	4	5
+KEEP	Shell Star		4	5
+KEEP	Shooting Star		4	5
+DROP	Simulations	—	4	5
+DROP	SIS Junction	—	4	5
+MERGE	Small Solar System Body	asteroid	4	5
+MERGE	Solar Apex	apex	4	5
+KEEP	Sombrero Galaxy	—	4	5
+KEEP	Southern African Large Telescope	—	4	5
+DROP	Spectral Index	—	4	5
+MERGE	Speed of Light	speed-of-light	4	5
+DROP	Speed-of-Light Circle	—	4	5
+KEEP	stellar lifetimes		4	5
+DROP	Storage Ring	—	4	5
+DROP	Strong Equivalence Principle	—	4	5
+DROP	t-Time	—	4	5
+DROP	taenite	—	4	5
+KEEP	Tektite	—	4	5
+DROP	Terrestrial	—	4	5
+DROP	Terrestrial Dynamical Time	—	4	5
+KEEP	Tethys	—	4	5
+DROP	THEMIS	—	4	5
+DROP	Theodolite	—	4	5
+DROP	Thermalization	—	4	5
+KEEP	Time		4	5
+DROP	Time Zone	—	4	5
+DROP	Transit Circle	—	4	5
+MERGE	Tropic of Cancer	tropic-of-cancer	4	5
+MERGE	True Equator and Equinox	equator	4	5
+MERGE	Ultraviolet Radiation	ultraviolet	4	5
+KEEP	Very Large Telescope	—	4	5
+KEEP	VY Canis Majoris	—	4	5
+DROP	Weak-Equivalence Principle	—	4	5
+KEEP	White Giant		4	5
+MERGE	Zone of Avoidance	zone-of-avoidance	4	5
+KEEP	A-type Star		3	5
+KEEP	Ap Stars		3	5
+MERGE	Apoapsis	apoapsis	3	5
+KEEP	Apophis	—	3	5
+KEEP	Arecibo Observatory	—	3	5
+MERGE	Armillary Sphere	astrolabe	3	5
+DROP	AS Eridani	—	3	5
+DROP	Ashen Light	—	3	5
+MERGE	Asteroid Family	asteroid-belt	3	5
+MERGE	Astrolabe	astrolabe	3	5
+KEEP	Astronaut	—	3	5
+KEEP	Bolometer		3	5
+KEEP	Brillouin Scattering		3	5
+DROP	Carbon Dating	—	3	5
+KEEP	Compton Scattering	—	3	5
+MERGE	Draconic Month	month	3	5
+DROP	Duty Cycle	—	3	5
+DROP	DVR	—	3	5
+KEEP	Electron-Phonon Scattering		3	5
+MERGE	Ensisheim meteorite	meteorite	3	5
+DROP	Galactocentric Distance	—	3	5
+DROP	Getter	—	3	5
+KEEP	Grating concepts		3	5
+DROP	Hektor	—	3	5
+KEEP	Imperfect Scattering		3	5
+DROP	Inverse P Cygni Profile	—	3	5
+KEEP	Inverse Plasmon Scattering		3	5
+DROP	It's Winter! It's Summer!	—	3	5
+DROP	J H K L M N Q	—	3	5
+DROP	J-file	—	3	5
+DROP	J-value	—	3	5
+KEEP	JD		3	5
+DROP	K edge	—	3	5
+DROP	Kennelly-Heaviside layer	—	3	5
+DROP	KeV	—	3	5
+DROP	Khonsu	—	3	5
+DROP	kilo-	—	3	5
+MERGE	Kirkwood gaps	kirkwood-gaps	3	5
+DROP	Kolmogorov-Smirnov test	—	3	5
+DROP	Krüger 60 AB	—	3	5
+DROP	Kushukh	—	3	5
+DROP	Kwangmyongsong	—	3	5
+KEEP	Lambda cold dark matter concordance data		3	5
+DROP	LBV	—	3	5
+DROP	Leonardo da Vinci's parachute	—	3	5
+DROP	Light-Emitting Diode	—	3	5
+DROP	Lowell's Band	—	3	5
+DROP	LPV	—	3	5
+DROP	LSB	—	3	5
+DROP	Lunar Atmosphere and Dust Environment Explorer	—	3	5
+DROP	M-Theory	—	3	5
+DROP	Maffei 1 and 2	—	3	5
+DROP	Malmquist Bias	—	3	5
+DROP	Mass Discrepancy	—	3	5
+DROP	Mass-Shell	—	3	5
+KEEP	Maximum Entropy Method		3	5
+DROP	MCMC	—	3	5
+DROP	Meitnerium	—	3	5
+DROP	Mer-Cad-Tel	—	3	5
+DROP	Metal-Poor	—	3	5
+MERGE	Meteor	meteor	3	5
+MERGE	Meteoritical Society	meteorite	3	5
+MERGE	meteoritics	meteorite	3	5
+DROP	Meter	—	3	5
+DROP	Methane	—	3	5
+DROP	Methanol	—	3	5
+DROP	Metric Tensor	—	3	5
+KEEP	Mie Scattering		3	5
+DROP	Mie Theory	—	3	5
+DROP	milli-	—	3	5
+DROP	Minimum Resolvable Angle	—	3	5
+DROP	More extensive table of spectral lines	—	3	5
+DROP	Multi-Pinned-Phase	—	3	5
+MERGE	Murchison Meteorite	meteorite	3	5
+MERGE	Murray Meteorite	meteorite	3	5
+DROP	Nanometer	—	3	5
+KEEP	Newton and Infinite Series		3	5
+DROP	NLRG	—	3	5
+DROP	NLS1	—	3	5
+DROP	NML Tau	—	3	5
+DROP	No-Boundary Proposal	—	3	5
+KEEP	Non-Coherent Scattering		3	5
+KEEP	Non-Conservative Scattering		3	5
+DROP	Non-Perturbative	—	3	5
+DROP	Nozomi	—	3	5
+DROP	NTT	—	3	5
+DROP	O((f))	—	3	5
+DROP	Octave	—	3	5
+DROP	Oef	—	3	5
+DROP	One-Standard-Deviation Uncertainty	—	3	5
+KEEP	Oppenheimer-Volkoff Limit	—	3	5
+MERGE	Orgueil Meteorite	meteorite	3	5
+KEEP	Orrery	—	3	5
+DROP	Overshoot	—	3	5
+DROP	Passband	—	3	5
+DROP	Pavo	—	3	5
+DROP	Phasor	—	3	5
+DROP	Phillips Bands	—	3	5
+DROP	Photoconductivity	—	3	5
+KEEP	Photoelectric Filtering		3	5
+KEEP	Photon Counting		3	5
+KEEP	Photon Decoupling		3	5
+DROP	Pinch Machine	—	3	5
+KEEP	Radiation Damping		3	5
+KEEP	Ritchey-Chrétien		3	5
+KEEP	Rocard Scattering		3	5
+KEEP	Rutherford scattering		3	5
+DROP	S-Wave	—	3	5
+DROP	schreibersite	—	3	5
+KEEP	Schwarzschild Filling Factor		3	5
+KEEP	Segmented Mirrors		3	5
+DROP	Self-Consistent Field Approach	—	3	5
+DROP	Semi-Conductor	—	3	5
+KEEP	Semi-Major Axis		3	5
+DROP	Sonde	—	3	5
+DROP	Spectral Energy Distribution	—	3	5
+KEEP	Spitzer-Schwarzschild Scattering Mechanism		3	5
+DROP	Standard Deviation ()	—	3	5
+DROP	Standard Model of Particle Physics	—	3	5
+DROP	Standstill	—	3	5
+DROP	Stat-Coulomb	—	3	5
+DROP	Statistical Distribution	—	3	5
+DROP	Statistical Error	—	3	5
+DROP	Statistical Weight	—	3	5
+KEEP	Stephan's Quintet	—	3	5
+DROP	Sticking Coefficient	—	3	5
+DROP	Stilb (sb)	—	3	5
+DROP	Stochastic Cooling	—	3	5
+DROP	Stokes	—	3	5
+DROP	Stokes Parameters	—	3	5
+MERGE	stony iron meteorite	meteorite	3	5
+MERGE	stony meteorite	meteorite	3	5
+DROP	STP	—	3	5
+DROP	Strange Particles	—	3	5
+DROP	Strategic Defense Initiative	—	3	5
+DROP	Streamline	—	3	5
+DROP	String Mode	—	3	5
+DROP	Strong-Weak Duality	—	3	5
+DROP	Strongly Coupled	—	3	5
+DROP	SU(3)	—	3	5
+DROP	SU(5)	—	3	5
+DROP	Sub-Atomic	—	3	5
+DROP	Sub-Pulse	—	3	5
+DROP	Subcritical	—	3	5
+KEEP	Subdwarf (sd)		3	5
+DROP	Sublattice Magnetization	—	3	5
+DROP	Subsonic	—	3	5
+DROP	Sum-Over-Histories	—	3	5
+KEEP	Super-High Frequency		3	5
+DROP	Superconducting Super Collider	—	3	5
+DROP	Superconductivity	—	3	5
+DROP	Supergranulation Cells	—	3	5
+DROP	Superunified	—	3	5
+DROP	Supra-Thermal	—	3	5
+MERGE	Surface Brightness	surface-brightness-profiles	3	5
+DROP	Surface Channel	—	3	5
+DROP	Surface Tension	—	3	5
+DROP	Surveyor	—	3	5
+DROP	Surya	—	3	5
+DROP	Susceptibility	—	3	5
+DROP	SUSY	—	3	5
+DROP	Suzaku	—	3	5
+DROP	Svarozhich	—	3	5
+DROP	SX Phoenicis	—	3	5
+DROP	Symmetry Breaking	—	3	5
+KEEP	Synchrotron		3	5
+DROP	Synthesis Aerial	—	3	5
+DROP	System I, II & III Longitude	—	3	5
+DROP	Tachyon	—	3	5
+DROP	Tail	—	3	5
+DROP	Taurus-Littrow Valley	—	3	5
+DROP	Taylor Column	—	3	5
+DROP	TCP	—	3	5
+DROP	TDB	—	3	5
+DROP	TDG	—	3	5
+DROP	TDI	—	3	5
+DROP	TDRSS	—	3	5
+DROP	TDT	—	3	5
+DROP	Tempon	—	3	5
+DROP	Terminator	—	3	5
+KEEP	Tertiary (mirror)		3	5
+DROP	Tesla	—	3	5
+DROP	Tesla (Unit)	—	3	5
+DROP	TeV	—	3	5
+DROP	Thermal Noise	—	3	5
+KEEP	Thermodynamic Potential		3	5
+KEEP	Thermodynamics		3	5
+KEEP	Thermohaline Convection		3	5
+DROP	Theta Pinch	—	3	5
+KEEP	Thomson Scattering		3	5
+DROP	Thor rocket	—	3	5
+DROP	Thoth	—	3	5
+KEEP	Three-Phase CCD		3	5
+DROP	Throughput	—	3	5
+DROP	THz	—	3	5
+DROP	Tiangong	—	3	5
+DROP	Time-Like Path	—	3	5
+DROP	Timing Waveform	—	3	5
+DROP	Tincle	—	3	5
+DROP	TIROS	—	3	5
+DROP	TOE	—	3	5
+DROP	Tokamak	—	3	5
+DROP	Top-Down Scenario	—	3	5
+DROP	Topology-Changing Transition	—	3	5
+DROP	Torr	—	3	5
+DROP	Transition Metal	—	3	5
+DROP	Transition Probability	—	3	5
+DROP	Transition Region and Coronal Explorer	—	3	5
+DROP	Transmittance	—	3	5
+DROP	transparency	—	3	5
+DROP	Transparent	—	3	5
+DROP	Transputer	—	3	5
+DROP	Trapezium	—	3	5
+DROP	Trapped Surface	—	3	5
+DROP	Trefil	—	3	5
+DROP	Trillion	—	3	5
+DROP	Tritium	—	3	5
+MERGE	Tropical Year (Solar Year)	tropical-year	3	5
+DROP	Tropopause	—	3	5
+DROP	True Anomaly	—	3	5
+DROP	True Vacuum	—	3	5
+DROP	Tunnel Diode	—	3	5
+DROP	Turbidity	—	3	5
+DROP	Turbulence	—	3	5
+DROP	Turbulent Flow	—	3	5
+DROP	Twistor	—	3	5
+DROP	U(1)		3	5
+DROP	UCD		3	5
+DROP	UHF		3	5

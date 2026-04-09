@@ -1,0 +1,641 @@
+red supergiant star	7	9	HyperPhysics	1	Star	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/redsup.html
+Sco	7	9	NED	1	comet	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Soyuz	7	9	Britannica	1	sun	0.50	https://www.britannica.com/technology/Soyuz
+Tauri	7	9	NED	1	alpha centauri	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Theory of Everything	7	9	NED	1	theory of relativity	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Barotropic Bas	6	9	NED	1	Astrophysics	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bessel Equation	6	9	NED	1	Drake equation	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Biasing	6	9	NED	1	Big Bang	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+BIB	6	9	NED	1	Big Bang	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Big Bang	6	9	HyperPhysics,NED	2	Big Bang	1.00	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/bbang.html
+big bang expansion	6	9	HyperPhysics	1	Big Bang	0.62	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/bbcloc.html
+Big Bang Theory	6	9	Astro4Edu	1	Big Bang	0.70	https://astro4edu.org/resources/glossary/term/38/
+Big-Bang Model	6	9	Britannica,NED	2	Big Bang	0.64	https://www.britannica.com/science/big-bang-model
+Binding Energy	6	9	HyperPhysics,NED	2	Dark energy	0.64	https://hyperphysics.phy-astr.gsu.edu/hbase/nucene/nucbin.html
+binding energy curve	6	9	HyperPhysics	1	Dark energy	0.52	https://hyperphysics.phy-astr.gsu.edu/hbase/nucene/nucbin.html
+binding energy, nuclear	6	9	HyperPhysics	1	Dark energy	0.47	https://hyperphysics.phy-astr.gsu.edu/hbase/nucene/nucbin.html
+Blackbody Radiation	6	9	Astro4Edu,Britannica,HyperPhysics,NED	4	Black-body radiation	0.97	https://www.britannica.com/science/blackbody-radiation
+Bode's Relationship	6	9	NED	1	Drake equation	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Breit-Wigner Equation	6	9	NED	1	Drake equation	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Butterfly Diagram	6	9	NED	1	Hertzsprung–Russell diagram	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Carbon Black	6	9	NED	1	Crab Nebula	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Carboxyl Group	6	9	NED	1	Local Group	0.72	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Catalog Equinox	6	9	NED	1	Equinox	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Catastrophism	6	9	NED	1	Astrophysics	0.72	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cation	6	9	NED	1	Stellar classification	0.43	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+CBR	6	9	NED	1	Crux	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Center of Curvature	6	9	NED	1	Rings of Saturn	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Characteristic Value	6	9	NED	1	Extraterrestrial life	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cluster	6	9	Astro4Edu,NED	2	Cluster of Galaxies	0.80	https://astro4edu.org/resources/glossary/term/57/
+Clustering	6	9	NED	1	Cluster of Galaxies	0.80	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Coma Cluster (Abell 1656)	6	9	NED	1	Cluster of Galaxies	0.80	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+cosmic microwave background	6	9	Britannica	1	Cosmic microwave background	1.00	https://www.britannica.com/science/cosmic-microwave-background
+Cosmic Microwave Background (CMB)	6	9	Astro4Edu,NED	2	Cosmic microwave background	0.90	https://astro4edu.org/resources/glossary/term/69/
+Crab Nebula	6	9	Britannica,HyperPhysics	2	Crab Nebula	1.00	https://www.britannica.com/place/Crab-Nebula
+Crab Pulsar (NP 0532)	6	9	NED	1	Pulsar	0.95	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Crux	6	9	Britannica	1	Crux	1.00	https://www.britannica.com/place/Crux
+DQ Herculis	6	9	NED	1	Eclipse	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Dra	6	9	NED	1	Drake equation	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Drake equation	6	9	Britannica	1	Drake equation	1.00	https://www.britannica.com/science/Drake-equation
+Drell-Yan Annihilation	6	9	NED	1	Stellar classification	0.59	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Eclipse Year	6	9	NED	1	Eclipse	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Eclipse, Annular	6	9	NED	1	Eclipse	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Eclipse, Lunar	6	9	HyperPhysics,NED	2	Eclipse	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/lunecl.html
+Eclipse, Solar	6	9	HyperPhysics,NED	2	Eclipse	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/solecl.html
+Eclipsing Binary	6	9	Astro4Edu,NED	2	Eclipse	0.52	https://astro4edu.org/resources/glossary/term/508/
+ELS	6	9	NED	1	Eclipse	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+equinoxes, precession of the	6	9	Britannica	1	Equinox	0.85	https://www.britannica.com/science/precession-of-the-equinoxes
+Europa Clipper	6	9	Britannica	1	Eclipse	0.57	https://www.britannica.com/technology/Europa-Clipper
+Exoplanet	6	9	Astro4Edu	1	Exoplanet	1.00	https://astro4edu.org/resources/glossary/term/106/
+Extraterrestrial Life	6	9	Astro4Edu,Britannica	2	Extraterrestrial life	1.00	https://www.britannica.com/science/extraterrestrial-life
+Gravity	6	9	Astro4Edu,Britannica,HyperPhysics,NED	4	Gravity	1.00	https://www.britannica.com/science/gravity-physics
+Gravity Recovery and Climate Experiment	6	9	Britannica	1		—	https://www.britannica.com/event/Gravity-Recovery-and-Climate-Experiment
+Gravity Recovery and Interior Laboratory	6	9	Britannica	1		—	https://www.britannica.com/event/Gravity-Recovery-and-Interior-Laboratory
+Great Attractor	6	9	Britannica,NED	2	Great Attractor	1.00	https://www.britannica.com/topic/Great-Attractor
+Group	6	9	NED	1	Local Group	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_G.html
+H and K Emission Line Stars	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hadron	6	9	NED	1	Hydrogen	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Heavy-Metal Stars	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Helium-Weak Stars	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Helmholtz free energy	6	9	HyperPhysics	1		—	https://hyperphysics.phy-astr.gsu.edu/hbase/thermo/helmholtz.html
+Herbig Ae, Be Stars	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hertrzprung-Russell Diagram	6	9	HyperPhysics	1	Hertzsprung–Russell diagram	0.93	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/herrus.html
+Hertzsprung Gap	6	9	NED	1	Hertzsprung–Russell diagram	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hierarchical Clustering	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hierarchical Clustering Model	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+High Energy Transient Explorer-2	6	9	Britannica	1		—	https://www.britannica.com/topic/High-Energy-Transient-Explorer-2
+High-Energy Particles	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Higher-Dimensional Supergravity	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hot Dark Matter	6	9	NED	1	Dark matter	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hubble constant and red shifts	6	9	HyperPhysics	1		—	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/hubble.html
+Hydrogen-Deficient C-type Stars	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hydrogen-Deficient Early-Type Stars	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+impulse of force	6	9	HyperPhysics	1		—	https://hyperphysics.phy-astr.gsu.edu/hbase/impulse.html
+inflationary model	6	9	HyperPhysics	1	Lambda-CDM model	0.33	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/planck.html
+Inhomogeneous Early Universe	6	9	NED	1	Universe	0.33	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+internal energy	6	9	HyperPhysics	1	Dark energy	0.62	https://hyperphysics.phy-astr.gsu.edu/hbase/thermo/inteng.html
+Isotropic	6	9	NED	1	Astrophysics	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Isotropy	6	9	NED	1	Astrophysics	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Kelvin contraction	6	9	NED	1	Gemini (constellation)	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K21
+Kepler's laws of planetary motion	6	9	Britannica	1	Kepler's laws of planetary motion	1.00	https://www.britannica.com/science/Keplers-laws-of-planetary-motion
+Kepler's second law of planetary motion	6	9	Britannica	1	Kepler's laws of planetary motion	0.89	https://www.britannica.com/science/Keplers-second-law-of-planetary-motion
+kinetic energy	6	9	HyperPhysics,NED	2	Dark energy	0.64	https://hyperphysics.phy-astr.gsu.edu/hbase/ke.html
+Klein-Gordon equation	6	9	NED	1	Drake equation	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html
+Kruskal diagram	6	9	NED	1	Hertzsprung–Russell diagram	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K56
+kurtosis	6	9	NED	1	Astrophysics	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K60
+Lagrange point	6	9	Britannica	1	Lagrange point	1.00	https://www.britannica.com/science/Lagrangian-point
+Lagrangian	6	9	NED	1	Lagrange point	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lagrangian Points	6	9	NED	1	Lagrange point	0.84	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lane-Emden Equation	6	9	NED	1	Drake equation	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Latitude, Terrestrial	6	9	NED	1	Extraterrestrial life	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Law of Universal Attraction	6	9	NED	1	Newton's law of universal gravitation	0.72	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lemaître Universe	6	9	NED	1	Age of the universe	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+lens equation	6	9	HyperPhysics	1	Drake equation	0.74	https://hyperphysics.phy-astr.gsu.edu/hbase/geoopt/lenseq.html
+LISA	6	9	NED	1	Pulsar	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+list of stars	6	9	Britannica	1	Rings of Saturn	0.64	https://www.britannica.com/topic/list-of-stars-2036726
+Little Bangs	6	9	NED	1	Big Bang	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Local Arm	6	9	NED	1	Local Group	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Local Group	6	9	Britannica	1	Local Group	1.00	https://www.britannica.com/place/Local-Group
+Longitude of the Perihelion	6	9	NED	1	Age of the universe	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Longitude, Terrestrial	6	9	NED	1	Extraterrestrial life	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lorentz Force Equation	6	9	NED	1	Drake equation	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+LSR	6	9	NED	1	Pulsar	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+M104	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+M13	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+M31	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+M42	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+M45	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+M51	6	9	NED	1		—	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+M81 group	6	9	Britannica	1	Local Group	0.60	https://www.britannica.com/place/M81-group
+M87	6	9	Britannica,NED	2		—	https://www.britannica.com/place/Virgo-A
+mass energy	6	9	HyperPhysics	1	Dark energy	0.73	https://hyperphysics.phy-astr.gsu.edu/hbase/relativ/releng.html
+Master Equation	6	9	NED	1	Drake equation	0.76	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Maxwell's Equations	6	9	NED	1	Drake equation	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Mean Equator and Mean Equinox	6	9	NED	1	Equinox	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Microwave	6	9	HyperPhysics,NED	2	Cosmic microwave background	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/ems2.html
+Microwave Background	6	9	NED	1	Cosmic microwave background	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Mini-Quasar	6	9	NED	1	Quasar	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+multiringed basin	6	9	Britannica	1	Lagrange point	0.52	https://www.britannica.com/science/multiringed-basin
+Mural Arc	6	9	NED	1	Ursa Major	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+NASA	6	9	HyperPhysics,NED	2	Quasar	0.60	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/nasa.html
+Nernst Theorem	6	9	NED	1	Neutron star	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Neutral Region (solar)	6	9	NED	1	Neutron star	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Newton's Constant G	6	9	NED	1	Neutron star	0.58	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Newton's first law	6	9	HyperPhysics	1	Neutron star	0.60	https://hyperphysics.phy-astr.gsu.edu/hbase/newt.html
+Newton's law of gravitation	6	9	Britannica	1	Newton's law of universal gravitation	0.84	https://www.britannica.com/science/Newtons-law-of-gravitation
+Newton's Universal Gravitational Constant	6	9	NED	1	Newton's law of universal gravitation	0.77	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+nuclear energy	6	9	HyperPhysics	1	Dark energy	0.72	https://hyperphysics.phy-astr.gsu.edu/hbase/nucene/nengcn.html
+Number-Count Test	6	9	NED	1	Neutron star	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Palomar	6	9	HyperPhysics,NED	2	Pulsar	0.62	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/palomar.html
+Parametric Amplifier	6	9	NED	1	Extraterrestrial life	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Parametric Representation	6	9	NED	1	Drake equation	0.51	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Pencil Beam	6	9	NED	1	Special relativity	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+photon energy	6	9	HyperPhysics	1	Dark energy	0.58	https://hyperphysics.phy-astr.gsu.edu/hbase/mod2.html
+Physics	6	9	NED	1	Astrophysics	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Planck Energy	6	9	NED	1	Dark energy	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+planetary ring	6	9	Britannica	1	Planet	0.85	https://www.britannica.com/science/ring-system
+Planetoids	6	9	NED	1	Planet	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Proto-Solar Nebula	6	9	NED	1	Nebula	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+protogalaxy	6	9	Britannica	1	Galaxy	0.85	https://www.britannica.com/science/protogalaxy
+Protoplanet	6	9	Astro4Edu,Britannica	2	Planet	0.85	https://www.britannica.com/science/protoplanet
+R Galaxy	6	9	NED	1	Galaxy	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+Ring Galaxy	6	9	NED	1	Galaxy	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+rogue planet	6	9	Britannica	1	dwarf planet	0.67	https://www.britannica.com/science/rogue-planet
+Sedna	6	9	Britannica	1	supernova	0.57	https://www.britannica.com/place/Sedna
+Sextant	6	9	NED	1	exoplanet	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Shapley-Ames Catalogue	6	9	NED	1	halley's comet	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Shenzhou	6	9	Britannica	1	supernova	0.47	https://www.britannica.com/technology/Shenzhou
+Special Relativity	6	9	NED	1	special relativity	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Stationary Point	6	9	NED	1	lagrange point	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+stellar classification	6	9	Britannica	1	stellar classification	1.00	https://www.britannica.com/science/stellar-classification
+Strange Attractor	6	9	NED	1	great attractor	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Supermassive Black Hole	6	9	Astro4Edu,Britannica	2	supermassive black hole	1.00	https://www.britannica.com/science/supermassive-black-hole
+T Associations	6	9	NED	1	stellar classification	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T1
+Thermal Energy	6	9	HyperPhysics,NED	2	dark energy	0.63	https://hyperphysics.phy-astr.gsu.edu/hbase/kinetic/eqpar.html
+Thermal Equilibrium, Law of	6	9	NED	1	newton's law of universal gravitation	0.59	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T35
+Threshold Energy	6	9	NED	1	dark energy	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T56
+transparency point	6	9	HyperPhysics	1	lagrange point	0.63	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/bbcloc.html
+Triple Point	6	9	NED	1	lagrange point	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Triton	6	9	Astro4Edu,Britannica,NED	3	triton (moon)	0.85	https://www.britannica.com/place/Triton-astronomy
+Tropic	6	9	Astro4Edu	1	astrophysics	0.67	https://astro4edu.org/resources/glossary/term/483/
+Turn-Off Point	6	9	NED	1	lagrange point	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T107
+Understanding Kepler's Laws of Planetary Motion	6	9	Britannica	1	Kepler's laws of planetary motion	0.82	https://www.britannica.com/story/understanding-keplers-laws-of-planetary-motion
+Ursa Major	6	9	Britannica	1	Ursa Major	1.00	https://www.britannica.com/place/Ursa-Major
+Astronomical Unit	5	9	Astro4Edu,Britannica,HyperPhysics,NED	4	astronomical unit	1.00	https://www.britannica.com/science/astronomical-unit
+Ballik-Ramsay Bands	5	9	NED	1	Subrahmanyan Chandrasekhar	0.49	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+BeV	5	9	NED	1	Boötes	0.44	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Big Crunch	5	9	NED	1	Big Crunch	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Biology	5	9	NED	1	Astrobiology	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+BIPM	5	9	NED	1	Big Rip	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Boeing Company	5	9	Britannica	1	Big Crunch	0.50	https://www.britannica.com/money/Boeing-Company
+Bolometric Correction (B.C.)	5	9	NED	1	Eridanus (constellation)	0.46	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Boost Factor	5	9	NED	1	Protostar	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bootes	5	9	Britannica	1	Boötes	0.83	https://www.britannica.com/place/Bootes
+Bootis	5	9	NED	1	Boötes	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bright Ring	5	9	NED	1	Big Rip	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Burst (Cosmic-Ray)	5	9	NED	1	Cosmic ray	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Byte	5	9	NED	1	Boötes	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Canopus	5	9	Britannica	1	Canopus	1.00	https://www.britannica.com/topic/Canopus-star
+Canopus ( Car)	5	9	NED	1	Canopus	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Carroll & Ostlie	5	9	HyperPhysics	1	Solstice	0.50	https://hyperphysics.phy-astr.gsu.edu/hbase/relativ/relref.html
+Cassegrain Focus	5	9	NED	1	Canopus	0.52	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cetus	5	9	Britannica	1	Cetus (constellation)	0.38	https://www.britannica.com/place/Cetus
+Channel Stops	5	9	NED	1	Canopus	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Chaos	5	9	NED	1	Canopus	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Chiral, Chirality	5	9	NED	1	Spiral galaxy	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Circinus X-1 (3U 1516-56)	5	9	NED	1	Radio source	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cold Emission	5	9	NED	1	Spectroscopy	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Coma X-1 (3U 1257+28)	5	9	NED	1	Radio source	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Composite Spectrum Stars	5	9	NED	1	Spectroscopy	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Continuous Spectrum	5	9	NED	1	Spectroscopy	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Corona	5	9	Astro4Edu,Britannica,NED	3	Constellation	0.80	https://www.britannica.com/science/corona-Sun
+Cosmic Ray	5	9	Astro4Edu,Britannica	2	Cosmic ray	1.00	https://www.britannica.com/science/cosmic-ray
+Cross-Spectrum	5	9	NED	1	Spectroscopy	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cygnus A (3C 405)	5	9	NED	1	Radio source	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Draco	5	9	Britannica,NED	2	Draco (constellation)	0.85	https://www.britannica.com/place/Draco-constellation
+Emissivity	5	9	NED	1	Luminosity	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Energia (company)	5	9	Britannica	1	Eridanus (constellation)	0.54	https://www.britannica.com/money/Energia-Russian-company
+Entropy	5	9	HyperPhysics,NED	2	Spectroscopy	0.63	https://hyperphysics.phy-astr.gsu.edu/hbase/therm/entrop.html
+Epoch	5	9	NED	1	Epoch (astronomy)	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Eri	5	9	NED	1	Eridanus (constellation)	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Eridanus	5	9	Britannica	1	Eridanus (constellation)	0.85	https://www.britannica.com/place/Eridanus
+General relativity ideas	5	9	HyperPhysics	1	General relativity	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/relativ/conrel.html
+Gravity Waves	5	9	NED	1	Gravitational wave	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_G.html
+gravity-assist orbit	5	9	HyperPhysics	1	Orbit	0.50	https://hyperphysics.phy-astr.gsu.edu/hbase/doubal.html
+Gravity: From Apples to the Universe	5	9	Britannica	1	Universe	0.85	https://www.britannica.com/story/gravity-from-apples-to-the-universe
+Helium-Strong Stars	5	9	NED	1	Neutron star	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hercules Cluster	5	9	NED	1	Hercules (constellation)	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Herschel	5	9	Britannica	1	William Herschel	1.00	https://www.britannica.com/topic/Herschel-space-telescope
+Hertzsprung-Russell (HR) Diagram	5	9	Astro4Edu	1	Hertzsprung–Russell diagram	0.88	https://astro4edu.org/resources/glossary/term/143/
+Hind's Nebula	5	9	NED	1	Orion Nebula	0.72	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hot Big Bang	5	9	NED	1	Big Bang	0.80	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hubble Classification	5	9	NED	1	Stellar classification	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hulse-Taylor Pulsar	5	9	NED	1	Pulsar	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Interstellar Square Law	5	9	NED	1	Interstellar medium	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Intrinsic Luminosity	5	9	NED	1	Luminosity	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Invariant	5	9	NED	1	Minor planet	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+IRAS Galaxy	5	9	NED	1	Spiral galaxy	0.83	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Irregular Galaxy	5	9	Astro4Edu,NED	2	Irregular galaxy	1.00	https://astro4edu.org/resources/glossary/term/164/
+Isophotes	5	9	NED	1	Boötes	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Isospin	5	9	HyperPhysics,NED	2	Solstice	0.53	https://hyperphysics.phy-astr.gsu.edu/hbase/particles/parint.html
+Isostasy	5	9	NED	1	Luminosity	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Isotones	5	9	NED	1	Boötes	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Kerr solution	5	9	NED	1	Stellar evolution	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K31
+Large Magellanic Cloud	5	9	NED	1	Large Magellanic Cloud	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Large Magellanic Cloud (LMC)	5	9	Astro4Edu	1	Large Magellanic Cloud	0.88	https://astro4edu.org/resources/glossary/term/499/
+Lattice	5	9	NED	1	Solstice	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Libration Orbits	5	9	NED	1	Earth's orbit	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Line Blanketing	5	9	NED	1	Minor planet	0.59	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+list of planets	5	9	Britannica	1	Minor planet	0.67	https://www.britannica.com/topic/list-of-planets-2058004
+Lobes	5	9	NED	1	Boötes	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Longitudinal Wave	5	9	NED	1	Gravitational wave	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lossy	5	9	NED	1	Luminosity	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Luminance	5	9	NED	1	Minor planet	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Luminosity Class	5	9	Astro4Edu,NED	2	Luminosity	0.77	https://astro4edu.org/resources/glossary/term/503/
+Luminosity Distance	5	9	NED	1	Luminosity	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Luminous	5	9	NED	1	Luminosity	0.78	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Luminous Flux	5	9	NED	1	Luminosity	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Luminous Intensity	5	9	NED	1	Luminosity	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Luminous Mass	5	9	NED	1	Luminosity	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Macroscopic	5	9	NED	1	Spectroscopy	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Magellan	5	9	Britannica	1	Large Magellanic Cloud	0.85	https://www.britannica.com/topic/Magellan
+Magellanic Cloud	5	9	Britannica	1	Large Magellanic Cloud	0.85	https://www.britannica.com/topic/Magellanic-Cloud
+Mass-Luminosity-Radius Relation	5	9	NED	1	Luminosity	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Mass-Radius Relation (Chandrasekhar)	5	9	NED	1	Subrahmanyan Chandrasekhar	0.58	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Mean Place	5	9	NED	1	Minor planet	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Meridional Flow	5	9	NED	1	Gravitational wave	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Minkowski Metric	5	9	NED	1	Luminosity	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Minor Axis	5	9	Astro4Edu	1	Minor planet	0.64	https://astro4edu.org/resources/glossary/term/394/
+Minor Planet	5	9	Astro4Edu,NED	2	Minor planet	1.00	https://astro4edu.org/resources/glossary/term/200/
+Monopole	5	9	NED	1	Minor planet	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Multiplet	5	9	NED	1	Minor planet	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+nano-	5	9	NED	1	Canopus	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Noether's Theorem	5	9	NED	1	Earth's orbit	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Nucleosynthetic Era	5	9	NED	1	Stellar nucleosynthesis	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Nucleus	5	9	Astro4Edu,NED	2	Active galactic nucleus	0.75	https://astro4edu.org/resources/glossary/term/224/
+Number Density	5	9	NED	1	Luminosity	0.58	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Objective Grating	5	9	NED	1	Active galactic nucleus	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O11
+Octans	5	9	Britannica	1	Canopus	0.62	https://www.britannica.com/place/Octans
+Ophiuchi	5	9	NED	1	Ophiuchus	0.82	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html
+Ophiuchus	5	9	Britannica	1	Ophiuchus	1.00	https://www.britannica.com/topic/Ophiuchus
+Osumi	5	9	Britannica	1	Cosmic ray	0.53	https://www.britannica.com/topic/Osumi
+Parton	5	9	NED	1	Procyon	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Pericynthion	5	9	NED	1	Procyon	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Period-Luminosity Relation	5	9	NED	1	Luminosity	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Planck's Blackbody Formula	5	9	NED	1	(estimated)	0.15	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Plume	5	9	NED	1	Pluto	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Positron	5	9	HyperPhysics,NED	2	Astronomy	0.59	https://hyperphysics.phy-astr.gsu.edu/hbase/particles/lepton.html
+Positronium	5	9	NED	1	Astronomy	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Procyon	5	9	Britannica,NED	2	Procyon	1.00	https://www.britannica.com/place/Procyon
+Protostar	5	9	Astro4Edu	1	Protostar	1.00	https://astro4edu.org/resources/glossary/term/264/
+Pulsating  Universe	5	9	NED	1	Universe	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Radius	5	9	NED	1	Uranus	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+Raster	5	9	NED	1	Asteroid	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+Re	5	9	Britannica	1	Ceres (dwarf planet)	0.85	https://www.britannica.com/topic/Re
+Reproducing Universes	5	9	NED	1	Universe	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+Ring Nebula	5	9	Britannica,NED	2	Orion Nebula	0.87	https://www.britannica.com/place/Ring-Nebula
+Scholastics	5	9	NED	1	solstice	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Solid-State	5	9	NED	1	solstice	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Source	5	9	NED	1	outer space	0.59	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Spectrograph	5	9	Astro4Edu,NED	2	spectroscopy	0.67	https://astro4edu.org/resources/glossary/term/326/
+spectroscopic notation	5	9	HyperPhysics	1	spectroscopy	0.65	https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/hydcol.html
+Spectroscopy	5	9	Astro4Edu,NED	2	spectroscopy	1.00	https://astro4edu.org/resources/glossary/term/327/
+Spectrum	5	9	Astro4Edu,NED	2	spectroscopy	0.60	https://astro4edu.org/resources/glossary/term/328/
+Spiral Galaxy	5	9	Astro4Edu,NED	2	spiral galaxy	1.00	https://astro4edu.org/resources/glossary/term/330/
+Standing Wave	5	9	NED	1	gravitational wave	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Stationary Wave	5	9	NED	1	gravitational wave	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Stellar Evolution	5	9	Astro4Edu,NED	2	stellar evolution	1.00	https://astro4edu.org/resources/glossary/term/334/
+Torsional Wave	5	9	NED	1	gravitational wave	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Torus	5	9	NED	1	arcturus	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T73
+Transverse Wave	5	9	NED	1	gravitational wave	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Triangulum Galaxy	5	9	NED	1	triangulum galaxy	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T85
+Virgo Supercluster	5	9	NED	1	Virgo Supercluster	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_V.html#V46
+Wolf-Rayet (WR) Star	5	9	NED	1	Wolf–Rayet star	0.90	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_W.html
+Wolf-Rayet star	5	9	Britannica	1	Wolf–Rayet star	1.00	https://www.britannica.com/science/Wolf-Rayet-star
+WR or Wolf-Rayet stars	5	9	NED	1	Wolf–Rayet star	0.80	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_W.html
+b-Factory	4	9	NED	1	Observatory	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Balmer Formula	4	9	NED	1	Star formation	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Band (molecular)	4	9	NED	1	Molecular cloud	0.58	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Barometric Law	4	9	NED	1	Astrometry	0.58	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Beehive Cluster	4	9	NED	1	Open cluster	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Beta Centauri	4	9	Britannica	1	Omega Centauri	0.81	https://www.britannica.com/place/Beta-Centauri
+Beta Transformation	4	9	NED	1	Star formation	0.73	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+BIH	4	9	NED	1	Orbit	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Binary Galaxies	4	9	NED	1	Binary star	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Binary Star	4	9	Astro4Edu,Britannica	2	Binary star	1.00	https://www.britannica.com/science/binary-star
+Bit	4	9	NED	1	Orbit	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Blaauw Mechanism	4	9	NED	1	Celestial mechanics	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Black Dwarf	4	9	NED	1	Brown dwarf	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Blanford	4	9	HyperPhysics	1	Blazar	0.57	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/astref.html
+BLR	4	9	NED	1	Blazar	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+BLRG	4	9	NED	1	Blazar	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Blue Horizontal-Branch Stars	4	9	NED	1	Horizon	0.40	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Blue Supergiant	4	9	NED	1	Supergiant	0.80	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bonner Durchmusterung	4	9	Britannica	1	Open cluster	0.55	https://www.britannica.com/topic/Bonner-Durchmusterung
+Bose-Einstein Condensation	4	9	HyperPhysics,NED	2	Constellation	0.51	https://hyperphysics.phy-astr.gsu.edu/hbase/particles/spinc.html
+Bottom-Up Scenario	4	9	NED	1	Omega Centauri	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Boundary Layer	4	9	NED	1	Binary star	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bowen Fluorescence Mechanism	4	9	NED	1	Celestial mechanics	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bragg Angle	4	9	NED	1	Hour angle	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bragg spectrometer	4	9	HyperPhysics	1	Astrometry	0.64	https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/bragg.html
+Broken Symmetry	4	9	NED	1	Astrometry	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Calendar	4	9	Astro4Edu,NED	2	Achernar	0.62	https://astro4edu.org/resources/glossary/term/47/
+Caloris	4	9	Britannica	1	Scorpius	0.67	https://www.britannica.com/place/Caloris
+Camelopardalis	4	9	Britannica	1	Circumstellar disc	0.56	https://www.britannica.com/place/Camelopardalis
+Canis Major Dwarf Galaxy	4	9	Britannica	1	Dwarf galaxy	0.67	https://www.britannica.com/place/Canis-Major-Dwarf-Galaxy
+Castor	4	9	Britannica	1	Astrometry	0.62	https://www.britannica.com/place/Castor-star
+Celestial Coordinates	4	9	Astro4Edu,Britannica	2	Equatorial coordinate system	0.69	https://www.britannica.com/science/celestial-coordinates
+Celestial Mechanics	4	9	Britannica,NED	2	Celestial mechanics	1.00	https://www.britannica.com/science/celestial-mechanics-physics
+Celestial Meridian	4	9	NED	1	Celestial mechanics	0.76	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cen A	4	9	NED	1	Centaurus A	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Centauri (Rigil Kent)	4	9	NED	1	Centaurus A	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Centaurus	4	9	Britannica	1	Centaurus	1.00	https://www.britannica.com/place/Centaurus
+Centaurus Cluster	4	9	NED	1	Centaurus	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Centaurus X-3	4	9	NED	1	Centaurus	0.82	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cepheid	4	9	NED	1	Cepheid variable	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cepheid Variable	4	9	Astro4Edu,Britannica	2	Cepheid variable	1.00	https://www.britannica.com/science/Cepheid-variable
+Cepheus	4	9	Britannica	1	Cepheus (constellation)	0.47	https://www.britannica.com/topic/Cepheus-constellation
+CERN	4	9	NED	1	Achernar	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cerro Tololo Inter-American Observatory	4	9	Britannica	1	Observatory	0.44	https://www.britannica.com/topic/Cerro-Tololo-Inter-American-Observatory
+Cetus Arc	4	9	NED	1	Centaurus A	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+CFHT	4	9	NED	1	Fomalhaut	0.46	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Charf	4	9	NED	1	Achernar	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Charm	4	9	NED	1	Achernar	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+China 1	4	9	Britannica	1	Achernar	0.53	https://www.britannica.com/topic/China-1
+Chopping	4	9	NED	1	Horizon	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cluster Variable	4	9	NED	1	Variable star	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Combination Variable	4	9	NED	1	Variable star	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cosmic Distance Ladder	4	9	NED	1	Cosmic distance ladder	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Dark Nebula	4	9	Astro4Edu,NED	2	Dark nebula	1.00	https://astro4edu.org/resources/glossary/term/77/
+Declination	4	9	Astro4Edu,Britannica,HyperPhysics,NED	4	Declination	1.00	https://www.britannica.com/science/declination
+Desorption	4	9	NED	1	Horizon	0.59	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Dirac Equation	4	9	NED	1	Drake equation	0.86	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Dispersion	4	9	NED	1	Supergiant	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Dispersive Power	4	9	NED	1	Supermassive black hole	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Dwarf Cepheids	4	9	NED	1	Dwarf planet	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Dwarf Planet	4	9	Astro4Edu,Britannica	2	Dwarf planet	1.00	https://www.britannica.com/science/dwarf-planet
+Dynamical Equinox	4	9	NED	1	Equinox	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Einstein relationship	4	9	HyperPhysics	1	Constellation	0.59	https://hyperphysics.phy-astr.gsu.edu/hbase/relativ/releng.html
+Electromagnetic Field	4	9	NED	1	Stellar magnetic field	0.79	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Elongation, Satellite	4	9	NED	1	Natural satellite	0.68	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Encounter	4	9	NED	1	Open cluster	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Energy Band	4	9	NED	1	Dark energy	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Energy Gap	4	9	NED	1	Dark energy	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Energy Level	4	9	Astro4Edu,NED	2	Dark energy	0.52	https://astro4edu.org/resources/glossary/term/101/
+Ephemeris Hour Angle	4	9	NED	1	Hour angle	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Epitaxial	4	9	NED	1	Cepheid variable	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Equation Equinoxes	4	9	NED	1	Equinox	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Equilibrium Position	4	9	NED	1	Aquarius (constellation)	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+ERG	4	9	NED	1	Dark energy	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Eventuality	4	9	NED	1	Metallicity	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Fomalhaut	4	9	Britannica,NED	2	Fomalhaut	1.00	https://www.britannica.com/place/Fomalhaut
+Giant Planet	4	9	Astro4Edu	1	Giant planet	1.00	https://astro4edu.org/resources/glossary/term/129/
+Gravitational Lens	4	9	Astro4Edu,Britannica,HyperPhysics,NED	4	Gravitational lens	1.00	https://www.britannica.com/science/gravitational-lens
+H-magnitude	4	9	NED	1	Magnitude (astronomy)	0.90	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Helium Variable Stars	4	9	NED	1	Variable star	0.76	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hercules	4	9	Britannica	1	Hercules (constellation)	1.00	https://www.britannica.com/place/Hercules-constellation
+Hierarchical Cosmology	4	9	NED	1	Physical cosmology	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hipparchus	4	9	Britannica	1	Hipparchus	1.00	https://www.britannica.com/biography/Hipparchus-Greek-astronomer
+Hubble Diagram	4	9	Astro4Edu,NED	2	Hubble's law	0.62	https://astro4edu.org/resources/glossary/term/148/
+Hubble Radius	4	9	NED	1	Hubble's law	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hubble-Lemaitre Law	4	9	Astro4Edu	1	Hubble's law	0.65	https://astro4edu.org/resources/glossary/term/414/
+Hyades	4	9	NED	1	Hyades (star cluster)	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hydra	4	9	Britannica	1	Hydra (constellation)	1.00	https://www.britannica.com/place/Hydra-constellation
+Hypergalaxy	4	9	NED	1	Seyfert galaxy	0.72	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+inflationary hypothesis	4	9	HyperPhysics	1	Nebular hypothesis	0.73	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/planck.html
+Interstellar Dust	4	9	NED	1	Interstellar medium	0.83	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Interstellar Extinction	4	9	Astro4Edu,NED	2	Interstellar medium	0.71	https://astro4edu.org/resources/glossary/term/472/
+Interstellar Gas	4	9	NED	1	Interstellar medium	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Interstellar Hydrogen	4	9	NED	1	Interstellar medium	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Interstellar Lines	4	9	NED	1	Interstellar medium	0.76	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Interstellar Matter	4	9	NED	1	Interstellar medium	0.79	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Interstellar Molecules	4	9	NED	1	Interstellar medium	0.78	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+interstellar object	4	9	Britannica	1	Interstellar medium	0.74	https://www.britannica.com/science/interstellar-object
+Interstellar Reddening	4	9	NED	1	Interstellar medium	0.78	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Interstellar Space	4	9	NED	1	Interstellar medium	0.76	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Invariable Plane	4	9	NED	1	Variable star	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Invariant Plane	4	9	NED	1	Giant planet	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Ion	4	9	Astro4Edu,NED	2	Horizon	0.60	https://astro4edu.org/resources/glossary/term/419/
+Irion	4	9	HyperPhysics	1	Horizon	0.67	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/astref.html
+Isochoric	4	9	NED	1	Scorpius	0.59	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+Isomer	4	9	NED	1	Astrometry	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_I.html
+K correction	4	9	NED	1	Constellation	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K7
+kaons to electrons	4	9	HyperPhysics	1	Constellation	0.58	https://hyperphysics.phy-astr.gsu.edu/hbase/particles/cronin.html
+Keck Observatory	4	9	Britannica	1	Observatory	0.81	https://www.britannica.com/topic/Keck-Observatory
+kiloparsec	4	9	NED	1	Parsec	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K37
+kinematics	4	9	NED	1	Stellar kinematics	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K
+kinetic energy, rotational	4	9	HyperPhysics	1	Stellar rotation	0.52	https://hyperphysics.phy-astr.gsu.edu/hbase/rke.html
+Lacerta	4	9	Britannica	1	Achernar	0.67	https://www.britannica.com/topic/Lacerta-astronomy
+Laminar Flow	4	9	NED	1	Planetary geology	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Laplacian Plane	4	9	NED	1	Giant planet	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Laser Interferometer Gravitational-Wave Observatory	4	9	Britannica	1	First observation of gravitational waves	0.53	https://www.britannica.com/topic/Laser-Interferometer-Gravitational-wave-Observatory
+Lenticular Galaxy	4	9	Astro4Edu	1	Lenticular galaxy	1.00	https://astro4edu.org/resources/glossary/term/452/
+Li-rich stars	4	9	NED	1	Binary star	0.58	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lick Observatory	4	9	Britannica	1	Observatory	0.81	https://www.britannica.com/topic/Lick-Observatory
+list of astronomical observatories and telescopes	4	9	Britannica	1	Astronomical coordinate systems	0.55	https://www.britannica.com/topic/list-of-astronomical-observatories-and-telescopes-2048633
+list of satellites	4	9	Britannica	1	Natural satellite	0.63	https://www.britannica.com/topic/list-of-satellites-2024625
+Local Supercluster	4	9	NED	1	Supercluster	0.80	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Long Distance Scale	4	9	NED	1	Cosmic distance ladder	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+long-period variable star	4	9	Britannica	1	Long-period variable star	1.00	https://www.britannica.com/science/long-period-variable-star
+Long-Period Variables	4	9	NED	1	Long-period variable star	0.91	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Longitude, Celestial	4	9	NED	1	Long-period variable star	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lorentz Transformation	4	9	HyperPhysics,NED	2	Star formation	0.61	https://hyperphysics.phy-astr.gsu.edu/hbase/relativ/ltrans.html
+Lunar Reconnaissance Orbiter	4	9	Britannica	1	Orbit	0.85	https://www.britannica.com/topic/Lunar-Reconnaissance-Orbiter
+Mach Number	4	9	NED	1	Achernar	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Magnetic Field	4	9	Astro4Edu,HyperPhysics	2	Stellar magnetic field	0.85	https://astro4edu.org/resources/glossary/term/455/
+magnitudes	4	9	HyperPhysics	1	Magnitude (astronomy)	0.65	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/para.html
+Main-Sequence Turn-Off	4	9	NED	1	Pre-main-sequence star	0.73	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+mass spectrometer	4	9	HyperPhysics	1	Astrometry	0.67	https://hyperphysics.phy-astr.gsu.edu/hbase/magnetic/maspec.html
+Maxwell Distribution	4	9	HyperPhysics,NED	2	Stellar rotation	0.50	https://hyperphysics.phy-astr.gsu.edu/hbase/kinetic/kintem.html
+McDonald Observatory	4	9	Britannica	1	Observatory	0.85	https://www.britannica.com/topic/McDonald-Observatory
+Mean Molecular Weight	4	9	NED	1	Molecular cloud	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Mechanics	4	9	NED	1	Celestial mechanics	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Megaparsec	4	9	NED	1	Parsec	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Metal	4	9	Astro4Edu,NED	2	Metallicity	0.85	https://astro4edu.org/resources/glossary/term/457/
+Metal-Rich	4	9	NED	1	Metallicity	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Metallicity	4	9	NED	1	Metallicity	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Metallicity Gradient	4	9	NED	1	Metallicity	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Metastable State	4	9	NED	1	Variable star	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+meteor and meteoroid	4	9	Britannica	1	Meteoroid	0.85	https://www.britannica.com/science/meteor
+Meteoroid	4	9	Astro4Edu,NED	2	Meteoroid	1.00	https://astro4edu.org/resources/glossary/term/197/
+micrometeoroid	4	9	Britannica	1	Meteoroid	0.85	https://www.britannica.com/science/micrometeoroid
+Micrometry	4	9	NED	1	Astrometry	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Microscopium	4	9	Britannica	1	Scorpius	0.60	https://www.britannica.com/place/Microscopium
+MMT Observatory	4	9	Britannica	1	Observatory	0.85	https://www.britannica.com/science/MMT-Observatory
+Mole	4	9	NED	1	Molecular cloud	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Molecular Cloud	4	9	Astro4Edu,Britannica	2	Molecular cloud	1.00	https://www.britannica.com/science/molecular-cloud
+Molecular Cloud Complex	4	9	NED	1	Molecular cloud	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Molecule	4	9	Astro4Edu	1	Molecular cloud	0.61	https://astro4edu.org/resources/glossary/term/201/
+Most luminous supergiants	4	9	HyperPhysics	1	Supergiant	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/dist2.html
+Moving Cluster	4	9	NED	1	Virgo Cluster	0.81	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Natural Line Broadening	4	9	NED	1	Natural satellite	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Natural Philosophy	4	9	NED	1	Natural satellite	0.51	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Natural Selection	4	9	NED	1	Natural satellite	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Natural Units	4	9	NED	1	Natural satellite	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Oblique Rotator	4	9	NED	1	Observatory	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O14
+Observation	4	9	Astro4Edu	1	First observation of gravitational waves	0.75	https://astro4edu.org/resources/glossary/term/226/
+Observatory	4	9	Astro4Edu	1	Observatory	1.00	https://astro4edu.org/resources/glossary/term/227/
+Observer	4	9	NED	1	Observatory	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html
+Omega	4	9	NED	1	Omega Centauri	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html
+Omega Centauri	4	9	Britannica,NED	2	Omega Centauri	1.00	https://www.britannica.com/place/Omega-Centauri
+Open String	4	9	NED	1	Open cluster	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html
+Orbifold	4	9	NED	1	Orbit	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O48
+Orbit	4	9	Astro4Edu,NED	2	Orbit	1.00	https://astro4edu.org/resources/glossary/term/232/
+orbit concepts	4	9	HyperPhysics	1	Orbit	0.75	https://hyperphysics.phy-astr.gsu.edu/hbase/orbit.html
+orbit velocity	4	9	HyperPhysics	1	Orbit	0.75	https://hyperphysics.phy-astr.gsu.edu/hbase/orbv3.html
+orbit, circular	4	9	HyperPhysics	1	Orbit	0.75	https://hyperphysics.phy-astr.gsu.edu/hbase/orbv.html
+orbital angular momentum	4	9	HyperPhysics	1	Orbit	0.75	https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/qangm.html
+orbital quantum number	4	9	HyperPhysics	1	Orbit	0.75	https://hyperphysics.phy-astr.gsu.edu/hbase/quantum/hydcol.html
+Orbiting Astronomical Observatory	4	9	Britannica	1	Observatory	0.75	https://www.britannica.com/technology/Orbiting-Astronomical-Observatory
+Orbiting Collision	4	9	NED	1	Orbit	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O52
+Orbiting Geophysical Observatory	4	9	Britannica	1	Observatory	0.75	https://www.britannica.com/topic/Orbiting-Geophysical-Observatory
+Order-of-Magnitude Estimate	4	9	NED	1	Magnitude (astronomy)	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O53
+Orion Molecular Cloud 1	4	9	NED	1	Molecular cloud	0.79	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O58
+Orionis	4	9	NED	1	Horizon	0.71	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html
+Ortho-Spectrum	4	9	NED	1	Absorption spectroscopy	0.54	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O71
+Osculating Orbit	4	9	NED	1	Orbit	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O75
+Palomar Observatory	4	9	Britannica	1	Observatory	0.75	https://www.britannica.com/topic/Palomar-Observatory
+Para-Spectrum	4	9	NED	1	Parsec	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Parasites	4	9	NED	1	Parsec	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Paris Observatory	4	9	Britannica	1	Observatory	0.79	https://www.britannica.com/topic/Paris-Observatory
+Pasachoff	4	9	HyperPhysics	1	Parsec	0.53	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/astref.html
+Pascal	4	9	NED	1	Parsec	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Patroclus	4	9	NED	1	Hipparchus	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Pegasus	4	9	Britannica	1	Pegasus (constellation)	0.75	https://www.britannica.com/place/Pegasus-astronomy
+Pegasus (satellite)	4	9	Britannica	1	Pegasus (constellation)	0.76	https://www.britannica.com/technology/Pegasus-satellites
+Pericenter	4	9	NED	1	Supercluster	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Period	4	9	Astro4Edu,NED	2	Long-period variable star	0.75	https://astro4edu.org/resources/glossary/term/245/
+Perlmutter	4	9	HyperPhysics	1	Supercluster	0.73	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/astref.html
+Perseus Cluster	4	9	NED	1	Open cluster	0.74	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Phases	4	9	NED	1	Parsec	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Phoenix (constellation)	4	9	Britannica	1	Constellation	0.75	https://www.britannica.com/place/Phoenix-constellation
+Phonon	4	9	NED	1	Horizon	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Photino	4	9	NED	1	Horizon	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Photoelectric Emulsions	4	9	NED	1	Photometry (astronomy)	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Photometric Binaries	4	9	NED	1	Photometry (astronomy)	0.52	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Pitch Angle	4	9	NED	1	Hour angle	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Planck satellite	4	9	HyperPhysics	1	Natural satellite	0.67	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/planckcmb.html
+Pre-main-sequence Star	4	9	Astro4Edu	1	Pre-main-sequence star	1.00	https://astro4edu.org/resources/glossary/term/525/
+Pup	4	9	NED	1	Pluto	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+QEH	4	9	NED	1	Earth	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_Q.html
+Sagittarius	4	9	Astro4Edu,Britannica	2	sagittarius a*	0.79	https://www.britannica.com/place/Sagittarius-constellation
+Sagittarius B2	4	9	NED	1	sagittarius a*	0.86	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Schrödinger Equation	4	9	NED	1	drake equation	0.65	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Scintillation	4	9	NED	1	constellation	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Scorpius	4	9	Astro4Edu,Britannica	2	scorpius	1.00	https://www.britannica.com/place/Scorpius
+Seyfert galaxies	4	9	HyperPhysics	1	seyfert galaxy	0.87	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/galax.html
+Seyfert galaxy	4	9	Britannica	1	seyfert galaxy	1.00	https://www.britannica.com/science/Seyfert-galaxy
+Seyfert's Sextet	4	9	NED	1	seyfert galaxy	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Small Magellanic Cloud	4	9	NED	1	small magellanic cloud	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+SOHO satellite	4	9	HyperPhysics	1	natural satellite	0.65	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/soho.html
+solar nebula	4	9	Britannica	1	dark nebula	0.78	https://www.britannica.com/science/solar-nebula
+Solar Rotation	4	9	NED	1	stellar rotation	0.87	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Spallation	4	9	NED	1	constellation	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Spectrometer	4	9	NED	1	astrometry	0.73	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+spherical polar coordinates	4	9	HyperPhysics	1	astronomical coordinate systems	0.62	https://hyperphysics.phy-astr.gsu.edu/hbase/sphc.html
+Spring	4	9	Astro4Edu	1	supergiant	0.62	https://astro4edu.org/resources/glossary/term/400/
+spy satellite	4	9	Britannica	1	natural satellite	0.67	https://www.britannica.com/technology/spy-satellite
+Stability	4	9	NED	1	metallicity	0.60	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Star Formation	4	9	Astro4Edu	1	star formation	1.00	https://astro4edu.org/resources/glossary/term/333/
+Statistical Mechanics	4	9	NED	1	celestial mechanics	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Stellar	4	9	NED	1	circumstellar disc	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+stellar association	4	9	Britannica	1	star formation	0.67	https://www.britannica.com/science/stellar-association
+Strong Interaction	4	9	NED	1	star formation	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Subgiant	4	9	NED	1	supergiant	0.78	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Supercluster	4	9	Britannica,NED	2	supercluster	1.00	https://www.britannica.com/science/supercluster
+Superconductor	4	9	NED	1	supercluster	0.69	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Supercooling	4	9	NED	1	supergiant	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Superfluid	4	9	NED	1	supercluster	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Superfluidity	4	9	NED	1	supercluster	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Supergiant	4	9	NED	1	supergiant	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Supermultiplet	4	9	NED	1	supercluster	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Supersymmetry	4	9	NED	1	supercluster	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Taurus	4	9	Astro4Edu,Britannica	2	centaurus	0.85	https://www.britannica.com/place/Taurus
+Taurus A	4	9	NED	1	centaurus a	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T13
+Terrestrial Planet	4	9	Astro4Edu	1	terrestrial planet	1.00	https://astro4edu.org/resources/glossary/term/354/
+Thermal Convection	4	9	NED	1	hercules (constellation)	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Thermion	4	9	NED	1	horizon	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T39
+tidal friction	4	9	Britannica	1	star formation	0.64	https://www.britannica.com/science/tidal-friction
+Toro	4	9	NED	1	meteoroid	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html#T71
+Vela (constellation)	4	9	Britannica	1	Vela (constellation)	1.00	https://www.britannica.com/topic/Vela-astronomy
+Virgo cluster	4	9	Britannica	1	Virgo Cluster	1.00	https://www.britannica.com/place/Virgo-cluster
+Visual Binary Star	4	9	NED	1	Binary star	0.76	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_V.html#V55
+weather satellite	4	9	Britannica	1	Natural satellite	0.76	https://www.britannica.com/technology/weather-satellite
+Yerkes Observatory	4	9	Britannica	1	Observatory	0.76	https://www.britannica.com/topic/Yerkes-Observatory
+Bode's Law	3	9	Britannica,NED	2	Hubble's law	0.73	https://www.britannica.com/science/Bodes-law
+Boyle's Law	3	9	NED	1	Hubble's law	0.78	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Bragg's Law	3	9	NED	1	Hubble's law	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_B.html
+Cassegrain (focus, telescope)	3	9	NED	1	Telescope	0.47	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Cassegrain (reflecting) Telescope	3	9	NED	1	Telescope	0.43	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Charles's Law	3	9	NED	1	Hubble's law	0.72	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+comparison of the James Webb and Hubble space telescopes	3	9	Britannica	1	Telescope	0.75	https://www.britannica.com/topic/comparison-of-the-James-Webb-and-Hubble-space-telescopes-2229305
+Coudé Telescope	3	9	NED	1	Telescope	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Depolarizer	3	9	NED	1	Polaris	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Electrodes	3	9	NED	1	Telescope	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Giant Star	3	9	Astro4Edu,Britannica	2	Giant star	1.00	https://www.britannica.com/science/giant-star
+Hubble Flow	3	9	NED	1	Hubble's law	0.78	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_H.html
+Hubble Law	3	9	HyperPhysics,NED	2	Hubble's law	0.91	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/hubble.html
+Ishtar Terra	3	9	Britannica	1	Star cluster	0.67	https://www.britannica.com/place/Ishtar-Terra
+Kirchhoff's laws	3	9	NED	1	Hubble's law	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_K.html#K42
+Lambert's Law	3	9	NED	1	Hubble's law	0.64	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lenz's Law	3	9	NED	1	Hubble's law	0.73	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lepton	3	9	HyperPhysics,NED	2	Lepton epoch	0.67	https://hyperphysics.phy-astr.gsu.edu/hbase/particles/lepton.html
+Lepton Era	3	9	NED	1	Lepton epoch	0.73	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Leptonic Era	3	9	NED	1	Lepton epoch	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Lithium Stars	3	9	NED	1	Giant star	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_L.html
+Maksutov Telescope	3	9	NED	1	Telescope	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Parity	3	9	NED	1	Polaris	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Prandtl Number	3	9	NED	1	Planet Nine	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Prominence	3	9	NED	1	Main sequence	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+QE Pinned	3	9	NED	1	Planet Nine	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_Q.html
+Rabi frequency	3	9	NED	1	Main sequence	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+red shift	3	9	HyperPhysics	1	Redshift	0.94	https://hyperphysics.phy-astr.gsu.edu/hbase/astro/redshf.html
+Redshift Survey	3	9	NED	1	Redshift	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+Redshift-Distance Relation	3	9	NED	1	Redshift	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+Redshift-Magnitude Test	3	9	NED	1	Redshift	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_R.html
+rille	3	9	Britannica	1	Rigel	0.60	https://www.britannica.com/science/rille
+Seasons	3	9	Astro4Edu	1	serpens	0.57	https://astro4edu.org/resources/glossary/term/300/
+Sextans	3	9	Britannica	1	serpens	0.57	https://www.britannica.com/place/Sextans
+SFH	3	9	NED	1	redshift	0.36	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Siemens (S)	3	9	NED	1	serpens	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Snell's Law	3	9	NED	1	hubble's law	0.61	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Sol	3	9	Britannica	1	algol	0.50	https://www.britannica.com/topic/Sol-Roman-god
+Standard Ruler	3	9	NED	1	star cluster	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Stefan's Law	3	9	NED	1	hubble's law	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Stefan- Boltzmann law	3	9	HyperPhysics	1	hubble's law	0.55	https://hyperphysics.phy-astr.gsu.edu/hbase/thermo/stefan.html
+Subaru Telescope	3	9	Britannica	1	telescope	0.85	https://www.britannica.com/topic/Subaru-Telescope
+Subgiant Star	3	9	Astro4Edu	1	giant star	0.85	https://astro4edu.org/resources/glossary/term/481/
+Supergiant Star	3	9	Astro4Edu,Britannica	2	giant star	0.85	https://www.britannica.com/science/supergiant-star
+Tau Lepton	3	9	HyperPhysics,NED	2	lepton epoch	0.63	https://hyperphysics.phy-astr.gsu.edu/hbase/particles/lepton.html
+Telescopium	3	9	Britannica	1	telescope	0.80	https://www.britannica.com/topic/Telescopium
+thermodynamics, first law	3	9	HyperPhysics	1	hubble's law	0.55	https://hyperphysics.phy-astr.gsu.edu/hbase/thermo/firlaw.html
+thermodynamics, second law	3	9	HyperPhysics	1	hubble's law	0.55	https://hyperphysics.phy-astr.gsu.edu/hbase/thermo/seclaw.html
+thermodynamics, zeroth law	3	9	HyperPhysics	1	hubble's law	0.55	https://hyperphysics.phy-astr.gsu.edu/hbase/thermo/spht.html
+Transit Telescope	3	9	NED	1	telescope	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_T.html
+Binary System	2	9	Astro4Edu,NED	2	Planetary system	0.76	https://astro4edu.org/resources/glossary/term/41/
+Distance Ladder	2	9	Astro4Edu,NED	2	Cosmic distance ladder	0.85	https://astro4edu.org/resources/glossary/term/437/
+Distance Modulus	2	9	NED	1	Cosmic distance ladder	0.53	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Dwarf Galaxy	2	9	Astro4Edu,NED	2	Dwarf galaxy	1.00	https://astro4edu.org/resources/glossary/term/86/
+Dye Laser	2	9	NED	1	Open cluster	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Electric Field	2	9	Astro4Edu,HyperPhysics	2	Stellar magnetic field	0.67	https://astro4edu.org/resources/glossary/term/93/
+Elements, Orbital	2	9	NED	1	Orbit	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+Elliptical Galaxy	2	9	Astro4Edu	1	Elliptical galaxy	1.00	https://astro4edu.org/resources/glossary/term/99/
+Eruptive Variable	2	9	NED	1	Cepheid variable	0.73	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+MKK System	2	9	NED	1	Star system	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Planetary System	2	9	Astro4Edu	1	Planetary system	1.00	https://astro4edu.org/resources/glossary/term/468/
+Predict	2	9	NED	1	Redshift	0.67	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+Pulse Window	2	9	NED	1	Ursa Minor	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_P.html
+R Monocerotis	2	9	Britannica,NED	2	Ursa Minor	0.52	https://www.britannica.com/place/R-Monocerotis
+Rainbow	2	9	Astro4Edu	1	Ursa Minor	0.59	https://astro4edu.org/resources/glossary/term/275/
+Standard Candle	2	9	Astro4Edu,HyperPhysics,NED	3	star cluster	0.59	https://astro4edu.org/resources/glossary/term/476/
+Star System	2	9	NED	1	star system	1.00	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+System Flow	2	9	NED	1	planetary system	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+System Noise	2	9	NED	1	planetary system	0.63	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_S.html
+Tychonic system	2	9	Britannica	1	planetary system	0.63	https://www.britannica.com/science/Tychonic-system
+UBV Photometric System	2	9	NED	1	planetary system	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_U.html#U3
+UBV system	2	9	Britannica	1	planetary system	0.63	https://www.britannica.com/science/UBV-system
+Dissipative System	1	9	NED	1	Star system	0.62	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Draco System	1	9	NED	1	Star system	0.70	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_D.html
+Ensemble Average	1	9	NED	1	Observable universe	0.57	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_E.html
+ABT	10	8	NED	1	earth	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_A.html
+ACS	10	8	HyperPhysics	1	mars	0.57	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/hubinst.html
+ADU	10	8	NED	1	enceladus	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_A.html
+Ara	10	8	Britannica	1	auriga	0.67	https://www.britannica.com/place/Ara-constellation
+ATB	10	8	NED	1	earth	0.50	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_A.html
+Calabi-Yau Space, Calabi-Yau Shape	9	8	NED	1	Space	0.26	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Calibi-Yau Space	9	8	NED	1	Space	0.48	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+Canadian Space Agency	9	8	Britannica	1	Space	0.38	https://www.britannica.com/topic/Canadian-Space-Agency
+Chance	9	8	NED	1	Space	0.55	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_C.html
+China National Space Administration	9	8	Britannica	1	Space	0.25	https://www.britannica.com/topic/China-National-Space-Administration
+European Space Agency	9	8	Britannica	1	Space	0.85	https://www.britannica.com/topic/European-Space-Agency
+Full Moon	9	8	Astro4Edu,Britannica	2	Full moon	1.00	https://www.britannica.com/science/full-Moon-lunar-phase
+Hubble Space Telescope	9	8	Britannica,HyperPhysics	2	Hubble Space Telescope	1.00	https://www.britannica.com/topic/Hubble-Space-Telescope
+Mariner spacecraft	9	8	HyperPhysics	1	Space	0.85	https://hyperphysics.phy-astr.gsu.edu/hbase/solar/mariner.html
+Mariner Spaceprobes	9	8	NED	1	Space	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Mercury (space project)	9	8	Britannica	1	Space	0.85	https://www.britannica.com/science/Mercury-space-project
+Minkowski Space	9	8	NED	1	Space	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+Minkowski Space-Time	9	8	NED	1	Space	0.85	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_M.html
+National Aeronautics and Space Administration	9	8	Britannica	1	Space	0.85	https://www.britannica.com/topic/NASA
+National Air and Space Museum	9	8	Britannica	1	Space	0.85	https://www.britannica.com/topic/National-Air-and-Space-Museum
+Null Line	9	8	NED	1	Full moon	0.56	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_N.html
+Open Space	9	8	NED	1	Space	0.75	https://ned.ipac.caltech.edu/level5/Glossary/Glossary_O.html#O35

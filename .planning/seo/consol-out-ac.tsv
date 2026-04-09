@@ -1,0 +1,640 @@
+KEEP	PC		9	8
+DROP	Phase Space	N/A	9	8
+DROP	Phoenix (space probe)	N/A	9	8
+DROP	Pioneer Spaceprobes	N/A	9	8
+DROP	Saule	N/A	9	8
+DROP	SLAC	N/A	9	8
+KEEP	Space	N/A	9	8
+DROP	SPAN	N/A	9	8
+DROP	Sparticles	N/A	9	8
+KEEP	Spicule	N/A	9	8
+DROP	State Space	N/A	9	8
+DROP	Subspace	N/A	9	8
+DROP	Superspace	N/A	9	8
+KEEP	A Star		8	8
+MERGE	Aberration	Aberration	8	8
+MERGE	Achilles	trojan-asteroids	8	8
+KEEP	Adiabatic Demagnetization		8	8
+MERGE	Aerolite	meteorite	8	8
+KEEP	Akari	N/A	8	8
+KEEP	Alcor	N/A	8	8
+KEEP	Am Stars		8	8
+DROP	Amaterasu	N/A	8	8
+MERGE	Andromeda I, II, III	andromeda-galaxy	8	8
+MERGE	Annual Parallax	trigonometric-parallax	8	8
+KEEP	Anomalous Expansion		8	8
+MERGE	Anomaly	orbit	8	8
+MERGE	Antenna Gain	radio-telescope	8	8
+KEEP	Apex	N/A	8	8
+MERGE	Apollo	apollo-asteroids	8	8
+DROP	Apollo 11	N/A	8	8
+DROP	Apollo 13	N/A	8	8
+DROP	Apollo 17	N/A	8	8
+KEEP	Apollo Asteroid	N/A	8	8
+KEEP	Aquila	N/A	8	8
+DROP	Ariane	N/A	8	8
+KEEP	Aries	N/A	8	8
+DROP	Atum	N/A	8	8
+MERGE	Autumn	autumnal-equinox	8	8
+KEEP	Avalanche		8	8
+KEEP	B Star		8	8
+KEEP	Back Focal Length		8	8
+DROP	Back Warming	N/A	8	8
+DROP	Titan rocket	N/A	8	8
+DROP	Where Did the Moon Come From?	N/A	8	8
+DROP	Will Artemis II Land on the Moon?	N/A	8	8
+DROP	World Monuments Fund Lists the Moon as "At Risk"	N/A	8	8
+KEEP	AI Velorum Stars		7	8
+KEEP	Antalgol Star		7	8
+KEEP	Anti-Matter	N/A	7	8
+KEEP	Aperture	N/A	7	8
+MERGE	Aperture Photometry	aperture	7	8
+KEEP	Aurigae Stars		7	8
+KEEP	Ba or Barium Stars		7	8
+DROP	DSP	N/A	7	8
+KEEP	Electromagnetic Force	N/A	7	8
+KEEP	Europa	N/A	7	8
+MERGE	Extragalactic Astronomy	astronomy	7	8
+KEEP	Fermi Level		7	8
+KEEP	Fermi Statistics		7	8
+KEEP	Fermi's Question		7	8
+KEEP	Fermi-Dirac Nuclei		7	8
+KEEP	Fermi-Dirac statistics		7	8
+KEEP	Fermi-Dirac-Sommerfeld Law		7	8
+KEEP	Fermilab		7	8
+KEEP	Fermion		7	8
+KEEP	Fermium		7	8
+MERGE	Galactic Astronomy	astronomy	7	8
+KEEP	Galileo (spacecraft)	N/A	7	8
+MERGE	Hubble Parameter	hubble-law	7	8
+DROP	Is Comet 3I/ATLAS an Alien Spacecraft?	N/A	7	8
+DROP	Korea Space Launch Vehicle-1	N/A	7	8
+KEEP	Newton's Laws of Motion	N/A	7	8
+DROP	RTI	N/A	7	8
+DROP	Soliton	N/A	7	8
+DROP	Spacelab	N/A	7	8
+MERGE	Ultraviolet-Bright Stars	ultraviolet	7	8
+KEEP	Ursa Minor Dwarf Galaxy		7	8
+KEEP	UV Ceti Stars		7	8
+MERGE	UV Stars	ultraviolet	7	8
+KEEP	van Biesbroeck's Star	N/A	7	8
+KEEP	van Maanen's Star	N/A	7	8
+KEEP	Vela Pulsar	N/A	7	8
+MERGE	Violent Galaxy	active-galactic-nuclei	7	8
+MERGE	VV Cep Stars	VV Cephei Stars	7	8
+KEEP	VV Cephei Stars		7	8
+KEEP	W Ursae Majoris Stars		7	8
+KEEP	W Virginis Star	N/A	7	8
+MERGE	Weak G-band Stars	spectral-classification	7	8
+MERGE	Weak-Line Stars	spectral-classification	7	8
+KEEP	Wee Worlds: Our 5 (Official) Dwarf Planets		7	8
+DROP	What's the Difference Between Planets and Stars?	N/A	7	8
+KEEP	Wide Field and Planetary Camera		7	8
+KEEP	YY Ori stars		7	8
+MERGE	Z Camelopardalis Stars	cataclysmic-variable	7	8
+KEEP	Altair	N/A	6	8
+KEEP	Bernoulli's Theorem		6	8
+KEEP	Callisto	N/A	6	8
+MERGE	Commensurate Orbits	orbit	6	8
+KEEP	Cosmology	N/A	6	8
+KEEP	Density	N/A	6	8
+DROP	Distribution Function	N/A	6	8
+KEEP	Eratosthenes	N/A	6	8
+KEEP	Eris	N/A	6	8
+DROP	Ethernet	N/A	6	8
+KEEP	Fermi Interaction		6	8
+KEEP	GALEX	N/A	6	8
+KEEP	General Theory of Relativity	N/A	6	8
+MERGE	Granules	sun	6	8
+KEEP	Great Red Spot	N/A	6	8
+KEEP	Haumea	N/A	6	8
+DROP	Kaufmann	N/A	6	8
+KEEP	Keck	N/A	6	8
+DROP	list of moons	N/A	6	8
+KEEP	Makemake	N/A	6	8
+DROP	Malakbel	N/A	6	8
+DROP	MAMA	N/A	6	8
+DROP	MEM	N/A	6	8
+KEEP	Neutrino	N/A	6	8
+MERGE	Newton (N)	si-units	6	8
+DROP	Numbers (Dirac):	N/A	6	8
+MERGE	Overtone	harmonic	6	8
+MERGE	Penrose's Theorem	cosmic-censorship-conjecture	6	8
+KEEP	Photoelectric Effect	N/A	6	8
+DROP	Quantum Space	N/A	6	8
+DROP	Shaula	N/A	6	8
+KEEP	Sunspot	N/A	6	8
+DROP	Variable-Mass Theory	N/A	6	8
+KEEP	Vesta	N/A	6	8
+KEEP	Yellow Dwarf	N/A	6	8
+KEEP	Yellow Giant		6	8
+KEEP	Zenith	N/A	6	8
+KEEP	Accretion Disk	N/A	5	8
+KEEP	Circinus	N/A	5	8
+KEEP	Circular polarization		5	8
+KEEP	Clock Frequency		5	8
+DROP	Coherent	N/A	5	8
+DROP	coherent light	N/A	5	8
+DROP	Coherent Receivers	N/A	5	8
+KEEP	Coherent Scattering		5	8
+KEEP	Columba	N/A	5	8
+KEEP	Coma		5	8
+KEEP	Cometary Coma	N/A	5	8
+KEEP	Compton Wavelength		5	8
+KEEP	Conservative Scattering		5	8
+DROP	Copernicanism	N/A	5	8
+KEEP	Coronagraph	N/A	5	8
+MERGE	Coronal Equilibrium	corona	5	8
+MERGE	Coronal Green Line	corona	5	8
+KEEP	Coronal Hole	N/A	5	8
+KEEP	Corvus	N/A	5	8
+KEEP	Crab Nebula (M1)	N/A	5	8
+KEEP	cross section, scattering		5	8
+KEEP	Cygnus	N/A	5	8
+MERGE	Cygnus A	cygnus-a	5	8
+MERGE	Cygnus Loop	supernova-remnant	5	8
+DROP	Cygnus spacecraft	N/A	5	8
+MERGE	Cygnus X-2	x-ray-binary	5	8
+MERGE	Cygnus X-3	x-ray-binary	5	8
+MERGE	Cygnus X-5	x-ray-binary	5	8
+DROP	DARA	N/A	5	8
+KEEP	de Broglie Wavelength (Bar)		5	8
+KEEP	DeBroglie wavelength		5	8
+KEEP	Deceleration Parameter	N/A	5	8
+KEEP	Delphinus	N/A	5	8
+MERGE	Europa (J II)	europa	5	8
+MERGE	Extended Inflationary Universe	alternative-cosmologies	5	8
+MERGE	Flat Universe	concordance-model	5	8
+MERGE	Friedmann Universe	friedmann-lemaitre-universe	5	8
+KEEP	Ganymede	N/A	5	8
+MERGE	Ganymede (J III)	ganymede	5	8
+KEEP	Gravitational Radiation		5	8
+DROP	Hartle-Hawking Proposal	N/A	5	8
+DROP	Hawking's Theorem	N/A	5	8
+MERGE	Hubble Expansion	hubble-flow	5	8
+KEEP	International Gamma-Ray Astrophysics Laboratory		5	8
+KEEP	International Ultraviolet Explorer		5	8
+KEEP	Io	N/A	5	8
+MERGE	Large-Scale Motions	large-scale-structure	5	8
+KEEP	Light Curve	N/A	5	8
+MERGE	Oe	spectral-classification	5	8
+DROP	positron annihilation	N/A	5	8
+MERGE	Radio Scintillation	radio-astronomy	5	8
+DROP	RAM	N/A	5	8
+MERGE	Ring	saturn	5	8
+DROP	Royal Astronomical Society	N/A	5	8
+KEEP	RS CVn Stars		5	8
+DROP	S Band	N/A	5	8
+DROP	Salyut	N/A	5	8
+KEEP	Semi-Convection		5	8
+DROP	Serial Register	N/A	5	8
+MERGE	Shadow Matter	dark-matter	5	8
+DROP	Signal Band	N/A	5	8
+DROP	Sky Map	N/A	5	8
+DROP	SMART-1	N/A	5	8
+DROP	Smooth Space	N/A	5	8
+MERGE	Solar Burst	solar-flare	5	8
+KEEP	Solar Constant	N/A	5	8
+MERGE	Solar Energy	sun	5	8
+MERGE	Solar Motion	sun	5	8
+DROP	South African National Space Agency	N/A	5	8
+DROP	space law	N/A	5	8
+DROP	Spark Chamber	N/A	5	8
+DROP	Specific Gravity	N/A	5	8
+DROP	Specific Heat	N/A	5	8
+DROP	Specific Intensity	N/A	5	8
+MERGE	Spectral Bandwidth	bandpass	5	8
+KEEP	Spectral Classification		5	8
+DROP	Spectral Ratio	N/A	5	8
+KEEP	Spectroscopic Binaries		5	8
+MERGE	Spectroscopic Parallax	trigonometric-parallax	5	8
+DROP	Spherical Space	N/A	5	8
+DROP	spin g-factor	N/A	5	8
+DROP	Spin Network	N/A	5	8
+MERGE	Spiral Arm	spiral-arm	5	8
+MERGE	Spiral Density Wave	density-wave-model	5	8
+MERGE	Spiral Nebula	spiral-galaxy	5	8
+DROP	TAI	N/A	5	8
+KEEP	Visible Spectrum		5	8
+KEEP	Zel'dovich Spectrum		5	8
+KEEP	Chandrasekhar Limit	N/A	4	8
+DROP	Clapeyron's Equation	N/A	4	8
+DROP	Compare with fission	N/A	4	8
+DROP	Conditions for fusion	N/A	4	8
+DROP	Conduction	N/A	4	8
+DROP	Conduction Band	N/A	4	8
+DROP	conduction heat transfer	N/A	4	8
+DROP	Conservation Laws	N/A	4	8
+MERGE	Conservation of Angular Momentum	angular-momentum	4	8
+KEEP	conservation of baryon number		4	8
+DROP	Conservation of Energy	N/A	4	8
+DROP	Conservation of Mass and Energy	N/A	4	8
+DROP	Conservation of Matter	N/A	4	8
+DROP	Conservation of Momentum	N/A	4	8
+DROP	conservation principle	N/A	4	8
+KEEP	Convection		4	8
+KEEP	Copernican Revolution	N/A	4	8
+KEEP	cross section, nuclear reaction		4	8
+DROP	Decay	N/A	4	8
+DROP	Decay of the False Vacuum	N/A	4	8
+DROP	Decoupling of Matter and Energy	N/A	4	8
+KEEP	Deneb	N/A	4	8
+DROP	Differential Geometry	N/A	4	8
+DROP	DN	N/A	4	8
+DROP	DNA	N/A	4	8
+KEEP	Doppler Effect	N/A	4	8
+DROP	Drift Curves	N/A	4	8
+KEEP	Dual Resonance Theory		4	8
+MERGE	Einstein Equivalence Principle	equivalence-principle	4	8
+KEEP	Equivalence Principle	N/A	4	8
+MERGE	ESA	alma	4	8
+MERGE	Extreme Deep Field	hubble-space-telescope	4	8
+DROP	Far Field	N/A	4	8
+DROP	FDS Law	N/A	4	8
+DROP	Fechner's Law	N/A	4	8
+KEEP	Fermi Gamma-ray Space Telescope	N/A	4	8
+DROP	Field	N/A	4	8
+KEEP	Field Curvature		4	8
+DROP	Field Effect Transistor	N/A	4	8
+KEEP	Field Emission		4	8
+KEEP	Field Lens		4	8
+DROP	Field of View	N/A	4	8
+DROP	fine structure constant	N/A	4	8
+KEEP	first law of thermodynamics		4	8
+KEEP	Flat Field		4	8
+DROP	Force Carriers	N/A	4	8
+DROP	Force Charge	N/A	4	8
+DROP	Force from spherical shell of mass M	N/A	4	8
+DROP	forces, fundamental	N/A	4	8
+DROP	four fundamental forces	N/A	4	8
+DROP	FT	N/A	4	8
+DROP	Fundamental Constants	N/A	4	8
+MERGE	Gamma	gamma-ray-burst	4	8
+KEEP	Gamma Ray Burst		4	8
+DROP	Gauge Field	N/A	4	8
+DROP	Gauss' law	N/A	4	8
+MERGE	gravitational field	gravitational-constant	4	8
+KEEP	Gravitational Force		4	8
+DROP	Hadron Barrier	N/A	4	8
+DROP	Hadronic Era	N/A	4	8
+DROP	Higgs Boson	N/A	4	8
+DROP	High-Energy Physics	N/A	4	8
+DROP	Hilbert Space	N/A	4	8
+MERGE	Hubble Program	hubble-space-telescope	4	8
+KEEP	Image Spectrometers		4	8
+MERGE	Interferometer	radio-interferometer	4	8
+DROP	Intermediate Vector Boson	N/A	4	8
+KEEP	Inverse Square Law	N/A	4	8
+KEEP	Laser Interferometer Space Antenna	N/A	4	8
+DROP	Luminiferous Ether	N/A	4	8
+KEEP	Mirror Symmetry		4	8
+KEEP	Occultation	N/A	4	8
+KEEP	Pollux	N/A	4	8
+MERGE	Pollux ( Gem)	pollux	4	8
+DROP	Polonium	N/A	4	8
+DROP	Potential energy	N/A	4	8
+DROP	Potential energy, gravity	N/A	4	8
+MERGE	Primary Cosmic Rays	cosmic-rays	4	8
+DROP	Primary Quantum Number	N/A	4	8
+MERGE	Principle of Relativity	general-theory-of-relativity	4	8
+MERGE	PSR	pulsar	4	8
+KEEP	PSR 1257+12		4	8
+DROP	Quanta	N/A	4	8
+DROP	quantized energy levels	N/A	4	8
+DROP	Quantum Gravity	N/A	4	8
+DROP	Quantum Physics	N/A	4	8
+KEEP	Radio Telescope	N/A	4	8
+DROP	Reference: Weinberg	N/A	4	8
+KEEP	Refractor		4	8
+MERGE	Relativity	general-theory-of-relativity	4	8
+DROP	rest mass energy	N/A	4	8
+KEEP	Right Ascension	N/A	4	8
+KEEP	Rotation	N/A	4	8
+DROP	rotation equations	N/A	4	8
+KEEP	Runaway Stars	N/A	4	8
+KEEP	Saha Equation	N/A	4	8
+KEEP	Salpeter Function		4	8
+DROP	Sawtooth Wave	N/A	4	8
+DROP	Schrodinger solution	N/A	4	8
+DROP	Schuster Mechanism	N/A	4	8
+DROP	Science	N/A	4	8
+DROP	Scientific Method	N/A	4	8
+KEEP	Second Law of Thermodynamics		4	8
+KEEP	Secondary Mirror		4	8
+DROP	seismic waves	N/A	4	8
+KEEP	Semi-Forbidden Lines		4	8
+KEEP	Semi-Minor Axis	N/A	4	8
+DROP	sinusoidal waves	N/A	4	8
+DROP	Slew	N/A	4	8
+KEEP	Small Magellanic Cloud (SMC)	N/A	4	8
+DROP	Sobieski	N/A	4	8
+KEEP	Solid Angle	N/A	4	8
+KEEP	South Atlantic Anomaly	N/A	4	8
+DROP	Spark Spectra	N/A	4	8
+KEEP	Speckle Interferometry		4	8
+DROP	spectral colors	N/A	4	8
+KEEP	Spectrum Variables		4	8
+MERGE	Spörer's Law of Zones	sunspot-cycle	4	8
+DROP	Swan Bands	N/A	4	8
+KEEP	Synchrotron Radiation	N/A	4	8
+KEEP	Type-1a supernovae		4	8
+KEEP	Ultra Deep Field		4	8
+KEEP	Very Large Array	N/A	4	8
+MERGE	Visual Magnitude	apparent-magnitude	4	8
+KEEP	Zodiacal Light	N/A	4	8
+DROP	Beam Efficiency	N/A	3	8
+KEEP	Beta Crucis	N/A	3	8
+KEEP	Beta Pictoris	N/A	3	8
+KEEP	Boltzmann Factor		3	8
+MERGE	Cen X-2 and Cen X-4	x-ray-binary	3	8
+DROP	Differential Equation	N/A	3	8
+KEEP	Escape Velocity	N/A	3	8
+KEEP	Galilean Telescope		3	8
+KEEP	Hale Telescope		3	8
+KEEP	Herbig-Haro Object	N/A	3	8
+KEEP	Infrared Astronomy	N/A	3	8
+DROP	LN2	N/A	3	8
+MERGE	Luna	moon	3	8
+MERGE	Luna 25	moon	3	8
+MERGE	Lunar	moon	3	8
+MERGE	Luyten 726-8	red-dwarf	3	8
+KEEP	Meteorite	N/A	3	8
+KEEP	Opposition	N/A	3	8
+MERGE	Phase	phases	3	8
+KEEP	Photosphere	N/A	3	8
+KEEP	Pictor	N/A	3	8
+DROP	Principal Quantum Number	N/A	3	8
+DROP	Propagator	N/A	3	8
+DROP	Proton Decay	N/A	3	8
+KEEP	Proton-Proton Chain	N/A	3	8
+KEEP	proton-proton fusion		3	8
+MERGE	Pulkovo Observatory	telescope	3	8
+MERGE	Puppis A	supernova-remnant	3	8
+DROP	Quantum	N/A	3	8
+DROP	Quantum Chromodynamics	N/A	3	8
+DROP	Quantum Defect	N/A	3	8
+DROP	Quantum Determinism	N/A	3	8
+KEEP	Quantum Efficiency		3	8
+KEEP	Quantum Efficiency Hysteresis		3	8
+DROP	Quantum Electrodynamics	N/A	3	8
+DROP	Quantum Electronics	N/A	3	8
+DROP	quantum energy	N/A	3	8
+DROP	Quantum Field	N/A	3	8
+DROP	Quantum Field Theory	N/A	3	8
+MERGE	Quantum Fluctuations	cosmic-microwave-background	3	8
+DROP	Quantum Geometry	N/A	3	8
+DROP	Quantum Hall Effect	N/A	3	8
+DROP	Quantum Leap	N/A	3	8
+DROP	Quantum Liquid	N/A	3	8
+DROP	Quantum Mechanical Amplitude	N/A	3	8
+DROP	Quantum Mechanics	N/A	3	8
+DROP	quantum numbers, atomic	N/A	3	8
+DROP	Quantum references	N/A	3	8
+DROP	Quantum Solid	N/A	3	8
+DROP	quantum statistics	N/A	3	8
+DROP	Quantum Theory	N/A	3	8
+DROP	Quantum Tunneling	N/A	3	8
+DROP	Rad	N/A	3	8
+DROP	radiation energy density	N/A	3	8
+KEEP	Radio		3	8
+KEEP	Radio Waves		3	8
+DROP	Regge Trajectory	N/A	3	8
+DROP	relativistic energy	N/A	3	8
+DROP	relativistic energy expression	N/A	3	8
+DROP	relativistic momentum	N/A	3	8
+DROP	Relativistic Quantum Field Theory	N/A	3	8
+DROP	Ritz Combination Principle	N/A	3	8
+KEEP	Roche Limit	N/A	3	8
+DROP	Rydberg atom	N/A	3	8
+DROP	Rydberg Formula	N/A	3	8
+KEEP	S Doradus	N/A	3	8
+KEEP	Scattering Matrix		3	8
+DROP	Schramm	N/A	3	8
+DROP	Schrodinger equation concepts	N/A	3	8
+DROP	Science and Technology Satellite	N/A	3	8
+DROP	SEC	N/A	3	8
+DROP	Sefer Yetzira	N/A	3	8
+DROP	semicircular canals	N/A	3	8
+DROP	Shock Wave	N/A	3	8
+MERGE	Singularity Theorems	singularity	3	8
+MERGE	Sirius ( CMa)	sirius	3	8
+DROP	Solar System Illustration	N/A	3	8
+DROP	Spin-Up	N/A	3	8
+MERGE	Standard Epoch	epoch	3	8
+KEEP	Supernova Remnant	N/A	3	8
+KEEP	Temperature	N/A	3	8
+DROP	Unitary Transformation	N/A	3	8
+DROP	Vela (satellite)	N/A	3	8
+MERGE	waves, electromagnetic	electromagnetic-spectrum	3	8
+DROP	What's the Difference Between a Meteoroid, a Meteor, and a Meteorite?	N/A	3	8
+KEEP	White Hole	N/A	3	8
+DROP	White Light	N/A	3	8
+DROP	White Noise	N/A	3	8
+KEEP	X-Ray Astronomy	N/A	3	8
+DROP	Depth of Field	N/A	2	8
+KEEP	Diurnal Motion	N/A	2	8
+MERGE	Epicycle Theory	homocentric-sphere-model	2	8
+MERGE	Equation of Center	orbit	2	8
+KEEP	Equation of State	N/A	2	8
+KEEP	Equation of Time	N/A	2	8
+KEEP	Perihelion	N/A	2	8
+DROP	Polysilicon	N/A	2	8
+MERGE	Position Angle	equatorial-coordinate-system	2	8
+DROP	Post-Galilean Transformation	N/A	2	8
+KEEP	Praesepe	N/A	2	8
+KEEP	Precession	N/A	2	8
+DROP	Product	N/A	2	8
+MERGE	Project Ozma	seti	2	8
+MERGE	Protogalactic Gas Cloud	galaxy-formation	2	8
+DROP	Psi/J particle	N/A	2	8
+DROP	QCD	N/A	2	8
+MERGE	QSO	quasar	2	8
+KEEP	Quadrature	N/A	2	8
+KEEP	Quasi-Stellar Radio Source		2	8
+DROP	R Zones	N/A	2	8
+KEEP	radio, AM		2	8
+DROP	Random Walk	N/A	2	8
+DROP	Ranger	N/A	2	8
+DROP	Reciprocal Linear Dispersion	N/A	2	8
+KEEP	Refraction	N/A	2	8
+DROP	Reseau	N/A	2	8
+MERGE	Rich Clusters	hickson-compact-groups	2	8
+DROP	Runge-Kutta Method	N/A	2	8
+DROP	Russell-Vogt Theorem	N/A	2	8
+DROP	Rydberg	N/A	2	8
+DROP	Rydberg Correction	N/A	2	8
+KEEP	Sagitta	N/A	2	8
+DROP	Scintillation Counter	N/A	2	8
+DROP	Solar System Concepts	N/A	2	8
+MERGE	SS Cygni Stars	cataclysmic-variable	2	8
+KEEP	Density Wave Theory	N/A	1	8
+DROP	Effective Theory	N/A	1	8
+DROP	Electroweak Theory	N/A	1	8
+KEEP	Exclusion Principle		1	8
+DROP	Existence Theorems	N/A	1	8
+DROP	Post Hoc Fallacy	N/A	1	8
+DROP	Probable Error (p.e.)	N/A	1	8
+DROP	Reference Kaufmann	N/A	1	8
+DROP	Reference North	N/A	1	8
+DROP	Standard Error (s.e.)	N/A	1	8
+MERGE	altitude and azimuth	horizontal-coordinate-system	9	7
+DROP	Aryabhata (satellite)	N/A	9	7
+DROP	bag model, quarks	N/A	9	7
+MERGE	Baryon Number	baryons	8	7
+DROP	Carter's Theorem	N/A	8	7
+MERGE	Mass Number	atom	8	7
+DROP	MIS	N/A	8	7
+KEEP	Monoceros	N/A	8	7
+DROP	Shapash	N/A	8	7
+KEEP	Strong Force	N/A	8	7
+KEEP	Titan	N/A	8	7
+DROP	A band	N/A	7	7
+KEEP	AB Magnitude System		7	7
+DROP	Abelian Group	N/A	7	7
+MERGE	Aberration, Spherical	telescope	7	7
+DROP	Absorptivity	N/A	7	7
+MERGE	Achromat	telescope	7	7
+KEEP	Achromatic Objective		7	7
+DROP	Acuity, Visual	N/A	7	7
+MERGE	Alcyone	pleiades	7	7
+DROP	Allotropy	N/A	7	7
+KEEP	Alpha Crucis	N/A	7	7
+DROP	Alpha Decay	N/A	7	7
+DROP	alpha particle	N/A	7	7
+KEEP	Altitude	N/A	7	7
+DROP	Amorphous	N/A	7	7
+KEEP	Amplitude	N/A	7	7
+KEEP	Anastigmastic Lens		7	7
+DROP	angular momentum, quantized	N/A	7	7
+KEEP	angular velocity	N/A	7	7
+DROP	Anisotropic Models	N/A	7	7
+DROP	Anisotropy	N/A	7	7
+KEEP	Anomalistic Year	N/A	7	7
+DROP	Anti-Proton	N/A	7	7
+KEEP	Antikythera mechanism	N/A	7	7
+MERGE	Apocenter	apoapsis	7	7
+DROP	Appulse	N/A	7	7
+DROP	Aquarius/SAC-D	N/A	7	7
+KEEP	Arcminute	N/A	7	7
+KEEP	Arcsecond	N/A	7	7
+KEEP	Arecibo	N/A	7	7
+DROP	Aristotelian Physics	N/A	7	7
+KEEP	Artemis (program)	N/A	7	7
+DROP	Aspect	N/A	7	7
+DROP	Astigmatism	N/A	7	7
+KEEP	Astrometric Binaries		7	7
+MERGE	astronomical map	constellation	7	7
+DROP	Astrophysics references	N/A	7	7
+MERGE	Atmosphere (Solar)	chromosphere	7	7
+DROP	atomic clock	N/A	7	7
+DROP	Attitude	N/A	7	7
+DROP	automatic picture transmission station	N/A	7	7
+MERGE	Autumn Equinox	autumnal-equinox	7	7
+DROP	Avogadro's Law	N/A	7	7
+MERGE	B2FH	stellar-evolution	7	7
+KEEP	Baade's Window	N/A	7	7
+MERGE	background radiation, 3K	cosmic-microwave-background	7	7
+MERGE	Band Spectrum	spectral-line	7	7
+KEEP	Chandra	N/A	7	7
+KEEP	Chandrayaan	N/A	7	7
+DROP	Electricity and Magnetism	N/A	7	7
+KEEP	electromagnetic energy		7	7
+DROP	Electromagnetic Gauge Symmetry	N/A	7	7
+KEEP	Electromagnetic Radiation		7	7
+MERGE	Electromagnetic Spectrum	electromagnetic-spectrum	7	7
+DROP	Electromagnetic Unit	N/A	7	7
+KEEP	Electromagnetic Wave		7	7
+KEEP	Electromagnetism		7	7
+DROP	electron capture	N/A	7	7
+DROP	electronegativity	N/A	7	7
+DROP	Electrostatic Unit (esu)	N/A	7	7
+KEEP	Fermi Gas		7	7
+DROP	Flat Space	N/A	7	7
+DROP	FU	N/A	7	7
+DROP	Gemini spacecraft	N/A	7	7
+KEEP	Hobby-Eberly Telescope	N/A	7	7
+KEEP	knock-on spectrum		7	7
+MERGE	Line Spectrum	spectral-line	7	7
+MERGE	MACHO	machos	7	7
+MERGE	Newton's 2nd Law	newton's-laws-of-motion	7	7
+MERGE	Newton's 3rd Law	newton's-laws-of-motion	7	7
+KEEP	Newton's Laws		7	7
+MERGE	Newton's second law	newton's-laws-of-motion	7	7
+MERGE	Newton's third law	newton's-laws-of-motion	7	7
+MERGE	Newtonian model of expansion	hubble-law	7	7
+DROP	Ranger Spaceprobes	N/A	7	7
+KEEP	Thermodynamics Laws		7	7
+DROP	A-number	N/A	6	7
+DROP	aberration, constant of	N/A	6	7
+KEEP	Bernoulli Effect		6	7
+KEEP	Bernoulli Probability		6	7
+MERGE	Bianchi Cosmology	cosmology	6	7
+KEEP	Big Dipper	N/A	6	7
+MERGE	Big Dipper, the	big-dipper	6	7
+MERGE	Blackbody Curve	blackbody-radiation	6	7
+MERGE	Blackbody radiation concepts	blackbody-radiation	6	7
+MERGE	blackbody spectrum	blackbody-radiation	6	7
+DROP	Bound-Bound Transitions	N/A	6	7
+DROP	Branching Ratio	N/A	6	7
+MERGE	Burst (Solar)	solar-flare	6	7
+DROP	Butterfly Effect	N/A	6	7
+MERGE	Cassini's Division	saturn	6	7
+DROP	cavity radiation	N/A	6	7
+MERGE	centre of gravity	centre-of-mass	6	7
+DROP	Chain Reaction	N/A	6	7
+DROP	Chirality	N/A	6	7
+MERGE	Copernican Model of the Universe	copernican-revolution	6	7
+MERGE	Cosmic -Ray Bursts	cosmic-rays	6	7
+MERGE	Cosmic Background Radiation (CBR)	cosmic-microwave-background	6	7
+MERGE	Cosmic Censorship	cosmic-censorship-conjecture	6	7
+DROP	Cosmic Light	N/A	6	7
+MERGE	Cosmic Matter Density	critical-density	6	7
+MERGE	Cosmic Microwave Background Radiation (CMBR)	cosmic-microwave-background	6	7
+KEEP	cosmic neutrino background	N/A	6	7
+MERGE	Cosmic Radiation, Cosmic Rays	cosmic-rays	6	7
+MERGE	Cosmic Ray Astronomy	cosmic-rays	6	7
+KEEP	Cosmic Strings	N/A	6	7
+DROP	Cosmic Substratum	N/A	6	7
+DROP	Cosmic Time	N/A	6	7
+MERGE	cosmic X-ray background	x-rays	6	7
+KEEP	Cosmic Year	N/A	6	7
+MERGE	Cosmological Redshift	cosmological-redshift	6	7
+KEEP	de Sitter Universe		6	7
+KEEP	Deuterium	N/A	6	7
+DROP	Dipole	N/A	6	7
+DROP	dipole, electric	N/A	6	7
+KEEP	Displacement	N/A	6	7
+DROP	distance relationship	N/A	6	7
+MERGE	Doppler effect, relativistic	doppler-shift	6	7
+KEEP	Einstein-de Sitter Cosmology		6	7
+DROP	elastic potential energy	N/A	6	7
+DROP	electric current	N/A	6	7
+DROP	electric potential energy	N/A	6	7
+DROP	Eleven-Dimensional Supergravity	N/A	6	7
+MERGE	expansion	hubble-flow	6	7
+KEEP	Fermi Constant		6	7
+KEEP	Galactic Center	N/A	6	7
+MERGE	Galactic Tide	tide	6	7
+MERGE	Half Moon	phases	6	7
+KEEP	Hawking Radiation	N/A	6	7
+MERGE	head (of comet)	cometary-coma	6	7
+DROP	heat	N/A	6	7
+KEEP	heliopause	N/A	6	7
+DROP	Helios (spacecraft)	N/A	6	7
+DROP	Hinode	N/A	6	7
+DROP	Holmium	N/A	6	7
+DROP	Indus	N/A	6	7
+MERGE	Ionization Radiation	ionisation	6	7
+MERGE	ionizing radiation	ionisation	6	7
+KEEP	James Webb Space Telescope	N/A	6	7
+DROP	Japan Aerospace Exploration Agency	N/A	6	7
+DROP	Jupiter effect	N/A	6	7
+MERGE	law of gravity	gravitational-constant	6	7
+KEEP	Lense-Thirring Effect		6	7
+DROP	Lifetime	N/A	6	7
+DROP	Lightest Superpartner	N/A	6	7
+KEEP	Little Dipper, The	N/A	6	7
+DROP	Magnetic-Dipole Radiation	N/A	6	7
+KEEP	Mean Free Path		6	7
+DROP	Mössbauer Effect	N/A	6	7
+KEEP	N-body Simulations	N/A	6	7

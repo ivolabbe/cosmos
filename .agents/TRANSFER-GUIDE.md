@@ -115,7 +115,7 @@ Links to NASA, Hubble, AAO, NOAO, JPL etc. are legitimate credit links — leave
 
 ## Step 6: Wrap in Article Template
 
-Each article gets a full HTML page using the template in `.agents/article-template.html`.
+Each article gets a full HTML page using the template in `.agents/code/article-template.html`.
 
 Placeholders: `{TITLE}`, `{LETTER}`, `{BODY}`.
 
@@ -141,7 +141,7 @@ with open('js/cosmos-index.js', 'w') as f:
 
 ## Step 8: Verification
 
-Run these checks after every transfer batch. See `.agents/verify.sh` for the full script.
+Run these checks after every transfer batch. See `.agents/code/verify.sh` for the full script.
 
 | Check | Command | Must pass? |
 |---|---|---|

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a1e; font-family: 'Helvetica Neue', Arial, sans-serif; }
+canvas { display: block; margin: 40px auto; }
+</style>
+</head>
+<body>
+<canvas id="org"></canvas>
+<canvas id="interactive"></canvas>
+<canvas id="content"></canvas>
+<script>
+const DPR = 2;
+
+function setupCanvas(id, w, h) {
+  const c = document.getElementById(id);
+  c.width = w * DPR; c.height = h * DPR;
+  c.style.width = w + 'px'; c.style.height = h + 'px';
+  const ctx = c.getContext('2d');
+  ctx.scale(DPR, DPR);
+  return ctx;
+}
+
+function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.stroke(); }
+}
+
+// style: 'solid' (dispatch), 'dashed' (feedback), 'dotted' (document flow)
+function arrow(ctx, x1, y1, x2, y2, color, style) {
+  ctx.strokeStyle = color || '#4a6a4a';
+  ctx.lineWidth = 1.5;
+  if (style === 'dashed') ctx.setLineDash([8, 5]);
+  else if (style === 'dotted') ctx.setLineDash([2, 4]);
+  else ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  const a = Math.atan2(y2 - y1, x2 - x1);
+  const s = 7;
+  ctx.fillStyle = color || '#4a6a4a';
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - s * Math.cos(a - 0.4), y2 - s * Math.sin(a - 0.4));
+  ctx.lineTo(x2 - s * Math.cos(a + 0.4), y2 - s * Math.sin(a + 0.4));
+  ctx.fill();
+  ctx.setLineDash([]);
+}
+
+function text(ctx, str, x, y, size, color, align, bold) {
+  ctx.font = (bold ? 'bold ' : '') + size + 'px "Helvetica Neue", Arial, sans-serif';
+  ctx.fillStyle = color || '#fff';
+  ctx.textAlign = align || 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(str, x, y);
+}
+
+function box(ctx, x, y, w, h, fill, label, sublabel) {
+  roundRect(ctx, x, y, w, h, 6, fill);
+  text(ctx, label, x + w/2, y + (sublabel ? h/2 - 8 : h/2), 13, '#fff', 'center', true);
+  if (sublabel) text(ctx, sublabel, x + w/2, y + h/2 + 10, 10, 'rgba(255,255,255,0.75)');
+}
+
+// ═══════════════════════════════════════════════
+// 1. ORGANISATION DIAGRAM (roles, no flow)
+// ═══════════════════════════════════════════════
+(function() {
+  const W = 900, H = 640;
+  const ctx = setupCanvas('org', W, H);
+
+  // Background
+  ctx.fillStyle = '#0a0a1e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Title
+  text(ctx, 'COSMOS — Agent Organisation', W/2, 30, 20, '#fff', 'center', true);
+
+  // Interactive Team
+  const ix = 60, iy = 80;
+  roundRect(ctx, ix - 15, iy - 15, 380, 340, 10, null, 'rgba(100,150,100,0.3)');
+  text(ctx, 'Interactive Team', ix + 175, iy - 2, 14, 'rgba(130,180,130,0.8)', 'center', true);
+
+  box(ctx, ix + 90, iy + 20, 180, 50, '#1a4a3a', 'Interactive Orchestrator', 'dispatches · tracks · learns');
+  box(ctx, ix, iy + 100, 140, 45, '#2d5a6e', 'Researcher', 'science · spec.md');
+  box(ctx, ix, iy + 170, 140, 45, '#2d6a2e', 'Coder', 'builds HTML');
+  box(ctx, ix + 180, iy + 100, 140, 45, '#8b2020', 'Verifier', 'Puppeteer · QA');
+  box(ctx, ix + 180, iy + 170, 140, 45, '#6b4a8a', 'Visual', 'sub-agent');
+  box(ctx, ix, iy + 240, 140, 45, '#6a6a20', 'Writer', 'shared agent');
+
+  // Content Team
+  const cx = 490, cy = 80;
+  roundRect(ctx, cx - 15, cy - 15, 380, 340, 10, null, 'rgba(100,100,150,0.3)');
+  text(ctx, 'Content Team', cx + 175, cy - 2, 14, 'rgba(130,130,180,0.8)', 'center', true);
+
+  box(ctx, cx + 90, cy + 20, 180, 50, '#1a3a4a', 'Content Orchestrator', 'audit · SEO · learns');
+  box(ctx, cx + 30, cy + 100, 140, 45, '#2d5a6e', 'Auditor', 'accuracy · vetting');
+  box(ctx, cx + 200, cy + 100, 140, 45, '#8b2020', 'Reviewer', 'grammar · voice · facts');
+  box(ctx, cx + 30, cy + 170, 140, 45, '#6a6a20', 'Writer', 'shared agent');
+  box(ctx, cx + 200, cy + 170, 140, 45, '#5a5a2e', 'Analyst', 'SEO · competition');
+
+  // Responsibilities summary
+  const ry = 440;
+  text(ctx, 'Responsibilities', W/2, ry, 13, 'rgba(255,255,255,0.8)', 'center', true);
+
+  const roles = [
+    ['Orchestrator', 'Dispatch agents, track phases, collect learnings, update agent defs'],
+    ['Researcher', 'Science facts, visual references, implementation plan → spec.md'],
+    ['Writer', 'Article content, embeds, captions (shared between teams)'],
+    ['Coder', 'Build interactive HTML from spec, iterate on verifier feedback'],
+    ['Verifier', 'Browser testing via Puppeteer, physics + visual QA'],
+    ['Auditor', 'Scientific accuracy, fact-checking, content vetting'],
+    ['Reviewer', 'Grammar, voice consistency, factual accuracy gate'],
+    ['Analyst', 'Competition analysis, SEO strategy, upgrade path roadmap'],
+    ['Visual', 'Sub-agent of Verifier: screenshot comparison, style guide check'],
+  ];
+  roles.forEach(([role, desc], i) => {
+    const y = ry + 18 + i * 18;
+    text(ctx, role, 200, y, 11, 'rgba(255,255,255,0.85)', 'right', true);
+    text(ctx, desc, 210, y, 10, 'rgba(255,255,255,0.7)', 'left');
+  });
+})();
+
+// ═══════════════════════════════════════════════
+// 2. INTERACTIVE FLOW DIAGRAM
+// ═══════════════════════════════════════════════
+(function() {
+  const W = 900, H = 600;
+  const ctx = setupCanvas('interactive', W, H);
+  ctx.fillStyle = '#0a0a1e'; ctx.fillRect(0, 0, W, H);
+
+  text(ctx, 'COSMOS Interactive — Process Flow (per app)', W/2, 22, 18, '#fff', 'center', true);
+
+  // Phase 1
+  const p1y = 50;
+  box(ctx, 60, p1y, 200, 45, '#1a3a4a', 'PHASE 1: Research');
+  arrow(ctx, 260, p1y + 22, 300, p1y + 22, '#4a8a4a');
+  box(ctx, 300, p1y + 2, 120, 40, '#2d6a2e', 'Researcher');
+  arrow(ctx, 420, p1y + 22, 540, p1y + 22, '#6a8a3a', 'dotted');
+  box(ctx, 540, p1y + 2, 120, 40, '#4a5a2a', 'SPEC', 'central artifact');
+  arrow(ctx, 600, p1y + 42, 600, p1y + 72, 'rgba(140,180,100,0.6)', 'dotted');
+  text(ctx, 'informs writer, coder, verifier', 615, p1y + 60, 9, 'rgba(180,220,140,0.7)');
+
+  // Phase 2
+  const p2y = p1y + 90;
+  box(ctx, 60, p2y, 200, 45, '#1a3a4a', 'PHASE 2: Article');
+  arrow(ctx, 260, p2y + 22, 300, p2y + 22, '#4a8a4a');
+  box(ctx, 300, p2y + 2, 120, 40, '#2d6a2e', 'Writer');
+  arrow(ctx, 420, p2y + 22, 460, p2y + 22, '#8a4a4a');
+  box(ctx, 460, p2y + 2, 120, 40, '#8b2020', 'Verifier');
+  text(ctx, '→ article.html', 610, p2y + 22, 11, 'rgba(255,255,255,0.75)', 'left');
+  arrow(ctx, 460, p2y + 45, 420, p2y + 45, '#8b4040', 'dashed');
+  text(ctx, 'fail (max 3)', 440, p2y + 55, 9, 'rgba(255,200,200,0.7)');
+
+  // Phase 3
+  const p3y = p2y + 88;
+  box(ctx, 60, p3y, 200, 45, '#1a3a4a', 'PHASE 3: Build + Verify');
+  arrow(ctx, 260, p3y + 22, 300, p3y + 22, '#4a8a4a');
+  box(ctx, 300, p3y + 2, 120, 40, '#2d6a2e', 'Coder');
+  arrow(ctx, 420, p3y + 22, 460, p3y + 22, '#8a4a4a');
+  box(ctx, 460, p3y + 2, 120, 40, '#8b2020', 'Verifier');
+  arrow(ctx, 580, p3y + 22, 620, p3y + 22, '#6b4a8a');
+  box(ctx, 620, p3y, 100, 44, '#6b4a8a', 'Visual', 'sub-agent');
+  arrow(ctx, 460, p3y + 45, 420, p3y + 45, '#8b4040', 'dashed');
+  text(ctx, 'fail (max 3)', 440, p3y + 55, 9, 'rgba(255,200,200,0.7)');
+  text(ctx, '→ interactive.html', 610, p3y + 55, 11, 'rgba(255,255,255,0.75)', 'left');
+
+  // Phase 4
+  const p4y = p3y + 88;
+  arrow(ctx, 160, p3y + 45, 160, p4y, '#5a8a3a');
+  box(ctx, 60, p4y, 360, 45, '#5a6a2a', 'PHASE 4: Done', 'learnings · commit · update status');
+
+  // Feedback loop
+  const fy = p4y + 60;
+  roundRect(ctx, 60, fy, 780, 65, 6, 'rgba(50,50,80,0.3)', 'rgba(80,80,120,0.4)');
+  text(ctx, 'Feedback Loop (closed)', 450, fy + 17, 12, 'rgba(200,200,240,0.85)', 'center', true);
+  text(ctx, 'Orchestrator collects reports → Distill patterns → Update agent defs → style guide · process rules', 450, fy + 40, 10, 'rgba(200,200,240,0.8)', 'center');
+
+  // Feedback arrows back up
+  arrow(ctx, 200, fy, 200, p1y + 45, 'rgba(140,140,220,0.5)', 'dashed');
+  arrow(ctx, 550, fy, 550, p3y + 45, 'rgba(140,140,220,0.5)', 'dashed');
+
+  // Alternative modes — side by side
+  const my = fy + 72;
+  text(ctx, 'Alternative Modes', W/2, my, 12, 'rgba(255,255,255,0.85)', 'center', true);
+  box(ctx, 60, my + 12, 170, 30, '#6a6a20', 'ITERATION MODE');
+  text(ctx, 'Updated spec, modify existing', 145, my + 50, 9, 'rgba(255,255,255,0.65)');
+  box(ctx, 270, my + 12, 170, 30, '#4a2020', 'DO-OVER MODE');
+  text(ctx, 'Archive → fresh spec + template', 355, my + 50, 9, 'rgba(255,255,255,0.65)');
+
+  // Hard gates
+  const gy = my + 62;
+  roundRect(ctx, 40, gy, W - 80, 26, 4, 'rgba(120,40,40,0.4)', 'rgba(160,60,60,0.5)');
+  text(ctx, 'HARD GATES:  No coder self-verification  ·  Screenshots required  ·  No skipping phases  ·  Coder ≠ Verifier', W/2, gy + 13, 10, 'rgba(255,200,200,0.85)');
+})();
+
+// ═══════════════════════════════════════════════
+// 3. CONTENT FLOW DIAGRAM
+// ═══════════════════════════════════════════════
+(function() {
+  const W = 900, H = 640;
+  const ctx = setupCanvas('content', W, H);
+  ctx.fillStyle = '#0a0a1e'; ctx.fillRect(0, 0, W, H);
+
+  text(ctx, 'COSMOS Content — Process Flow', W/2, 30, 18, '#fff', 'center', true);
+
+  // Phase 1
+  const p1y = 80;
+  box(ctx, 60, p1y, 220, 55, '#1a3a4a', 'PHASE 1: Audit & Plan');
+  arrow(ctx, 280, p1y + 27, 330, p1y + 27, '#4a8a4a');               // dispatch: solid
+  box(ctx, 330, p1y + 5, 130, 45, '#2d5a6e', 'Auditor');
+  text(ctx, '→ audit report', 490, p1y + 27, 11, 'rgba(255,255,255,0.75)', 'left');
+
+  // Phase 2
+  const p2y = 200;
+  box(ctx, 60, p2y, 220, 55, '#1a3a4a', 'PHASE 2: Edit / Write');
+  arrow(ctx, 280, p2y + 27, 330, p2y + 27, '#4a8a4a');               // dispatch: solid
+  box(ctx, 330, p2y + 5, 130, 45, '#2d6a2e', 'Writer');
+  text(ctx, '→ articles/', 490, p2y + 27, 11, 'rgba(255,255,255,0.75)', 'left');
+
+  // Interactive coordination
+  box(ctx, 600, p2y - 30, 160, 45, '#3a3a5a', 'Interactive Team');
+  arrow(ctx, 600, p2y - 7, 460, p2y + 15, 'rgba(100,100,180,0.5)', 'dotted');  // document flow: dotted
+  text(ctx, 'app recommendations ↔ delivered apps', 620, p2y + 25, 9, 'rgba(180,180,220,0.7)');
+
+  // Phase 3
+  const p3y = 330;
+  box(ctx, 60, p3y, 220, 55, '#1a3a4a', 'PHASE 3: Review');
+  arrow(ctx, 280, p3y + 27, 330, p3y + 27, '#4a8a4a');               // dispatch: solid
+  box(ctx, 330, p3y + 5, 130, 45, '#8b2020', 'Reviewer');
+  // Fail loop
+  arrow(ctx, 395, p3y + 50, 395, p2y + 55, '#8b4040', 'dashed');     // feedback: dashed
+  text(ctx, 'fail → feedback (max 3)', 430, p2y + 80, 9, 'rgba(255,200,200,0.7)', 'left');
+
+  // Phase 4
+  const p4y = 450;
+  arrow(ctx, 170, p3y + 55, 170, p4y, '#5a8a3a');                    // dispatch: solid
+  box(ctx, 60, p4y, 400, 55, '#5a6a2a', 'PHASE 4: Done', 'commit · track metrics');
+
+  // Feedback loop
+  const fy = p4y + 80;
+  roundRect(ctx, 60, fy, 780, 65, 8, 'rgba(50,50,80,0.3)', 'rgba(80,80,120,0.3)');
+  text(ctx, 'Feedback Loop', 450, fy + 17, 12, 'rgba(200,200,240,0.85)', 'center', true);
+  text(ctx, 'Orchestrator collects reports → Update style guide · SEO targets · agent defs → Next audit uses improved criteria', 450, fy + 40, 10, 'rgba(200,200,240,0.8)', 'center');
+
+  arrow(ctx, 200, fy, 200, p1y + 55, 'rgba(140,140,220,0.5)', 'dashed');  // feedback: dashed
+  text(ctx, 'refined criteria', 200, p1y + 70, 9, 'rgba(180,180,240,0.65)');
+
+  // Hard gates
+  const gy = fy + 80;
+  roundRect(ctx, 40, gy, W - 80, 26, 4, 'rgba(120,40,40,0.4)', 'rgba(160,60,60,0.5)');
+  text(ctx, 'HARD GATES:  No publish without reviewer  ·  Preserve originals  ·  SEO validation required  ·  Data are plural', W/2, gy + 13, 10, 'rgba(255,200,200,0.85)');
+})();
+</script>
+</body></html>

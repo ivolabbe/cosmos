@@ -1,6 +1,6 @@
 # Zenith Diagram Interactive — Dev Log
 
-**Files:** `experimental/zenith-interactive.html`
+**Files:** `dev/zenith-interactive.html`
 **Status:** Production-ready (article + interactive, 2026-03-29)
 **Started:** 2026-03-23
 
@@ -25,7 +25,7 @@ Interactive zenith/horizon diagram showing the celestial sphere, observer's loca
 
 - [x] No article test page → file renamed to `zenith.html` (was `zenith-article.html`)
 ### v3 — Article written (2026-03-29)
-- SAO writer produced `experimental/zenith.html` (511 words, 23 lexicon links)
+- SAO writer produced `dev/zenith.html` (511 words, 23 lexicon links)
 - Covers: zenith, nadir, horizon, celestial meridian, poles, equator, latitude dependence, circumpolar stars
 - Interactive iframe embedded, replacing old static GIF
 - SAO verifier: PASS (14/14 checks, screenshots saved)

@@ -392,7 +392,7 @@ This is a very slow process in reality (timescale ~Myr). For the visualization, 
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/gravitational-waves-interactive.html`** — because:
+**`dev/gravitational-waves-interactive.html`** — because:
 
 1. It is a **physics simulation** (not just a textured globe), same category as the pulsar app.
 2. It has a **2D panel** (spectrogram) alongside the 3D scene — directly analogous to our pulse profile panel.

@@ -21,7 +21,7 @@ COSMOS is the **only** substantial astronomy encyclopedia (644 articles) written
 
 Replace outdated static diagrams with interactive Three.js visualizations users can rotate, zoom, and explore. This is the single biggest differentiator — nobody in the astronomy education landscape does this well.
 
-**Prototype built:** `experimental/zenith-interactive.html` — 3D celestial sphere with adjustable latitude, labelled zenith/poles/meridian/equator, hover tooltips.
+**Prototype built:** `dev/zenith-interactive.html` — 3D celestial sphere with adjustable latitude, labelled zenith/poles/meridian/equator, hover tooltips.
 
 **High-value targets:**
 - **Hertzsprung-Russell Diagram** — hover stars to see names, spectral types, luminosity; click to jump to article

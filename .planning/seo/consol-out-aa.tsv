@@ -1,0 +1,641 @@
+KEEP	Andromeda Galaxy (M31)		10	10
+MERGE	Leo Systems	Leo (constellation)	10	10
+KEEP	Solar System		10	10
+KEEP	B-type Star		9	10
+KEEP	B[e] Stars		9	10
+KEEP	Band Head		9	10
+KEEP	Barium Stars		9	10
+KEEP	Be or B Emission Line Stars		9	10
+DROP	Bethlehem, Star of		9	10
+KEEP	Black Hole		9	10
+MERGE	Black hole concepts	Black Hole	9	10
+MERGE	Black-Hole Entropy	Black Hole	9	10
+MERGE	Black-Hole Thermodynamics	Black Hole	9	10
+KEEP	Blackbody		9	10
+DROP	Blocking  Layer		9	10
+MERGE	Blue Halo Stars	Stellar Halo	9	10
+MERGE	Bootis Stars	Spectral Classification	9	10
+KEEP	Boson		9	10
+MERGE	bosons	Boson	9	10
+KEEP	Bp Stars		9	10
+KEEP	Bp, Ap Stars		9	10
+MERGE	Bw Stars	Spectral Classification	9	10
+KEEP	C Stars		9	10
+MERGE	Calcium Star	Spectral Classification	9	10
+KEEP	Canals of Mars		9	10
+KEEP	Capture		9	10
+MERGE	Carbon Stars	C Stars	9	10
+KEEP	Cephei Stars		9	10
+DROP	Christening Pluto's Moons		9	10
+KEEP	Chromosphere		9	10
+KEEP	Cislunar		9	10
+KEEP	communications satellite		9	10
+KEEP	Coordinate Singularity		9	10
+MERGE	Crescent Moon	Phases	9	10
+DROP	D-meson		9	10
+DROP	Down		9	10
+MERGE	Early-Type Emission Stars	Spectral Classification	9	10
+KEEP	Earth		9	10
+KEEP	Earth impact hazard		9	10
+KEEP	Earth satellite		9	10
+KEEP	Earth-crossing asteroid		9	10
+MERGE	Earthlight	Earthshine	9	10
+KEEP	earthshine		9	10
+DROP	Eberhardt		9	10
+KEEP	eclipsing variable star		9	10
+KEEP	Epact		9	10
+KEEP	Isobars		9	10
+DROP	J Meson		9	10
+KEEP	Jet		9	10
+KEEP	Jitter		9	10
+MERGE	Jovian	Jovian Planet	9	10
+DROP	JPL		9	10
+KEEP	Juno		9	10
+KEEP	Jupiter		9	10
+KEEP	K capture		9	10
+KEEP	K star		9	10
+KEEP	Kerr black hole		9	10
+DROP	klystron		9	10
+DROP	launch vehicle		9	10
+DROP	Lawrencium		9	10
+KEEP	Lepus		9	10
+DROP	Linear Electron Collider		9	10
+MERGE	Luna-Resource	Moon exploration	9	10
+KEEP	Lunar Calendar		9	10
+KEEP	Lunar Eclipse		9	10
+MERGE	Lunar Orbiter	Moon exploration	9	10
+DROP	LUT		9	10
+KEEP	Lyrae Stars		9	10
+KEEP	M Star		9	10
+KEEP	Magnetic Stars		9	10
+MERGE	Magnitude of a Lunar Eclipse	Lunar Eclipse	9	10
+MERGE	magnitude of star	Apparent Magnitude	9	10
+KEEP	main sequence of stars		9	10
+KEEP	Major Axis		9	10
+MERGE	Manganese Stars	Spectral Classification	9	10
+KEEP	Mare		9	10
+KEEP	Mars		9	10
+MERGE	Mars Atmosphere and Volatile Evolution	Mars exploration	9	10
+MERGE	Mars Exploration Rover	Mars exploration	9	10
+MERGE	Mars Express	Mars exploration	9	10
+MERGE	Mars Global Surveyor	Mars exploration	9	10
+MERGE	Mars Orbiter Mission	Mars exploration	9	10
+MERGE	Mars Pathfinder	Mars exploration	9	10
+MERGE	Mars Polar Lander	Mars exploration	9	10
+MERGE	Mars Reconnaissance Orbiter	Mars exploration	9	10
+KEEP	mascon		9	10
+MERGE	Massive Black Hole	Supermassive Black Hole	9	10
+DROP	Massless Black Hole		9	10
+DROP	Matrix		9	10
+KEEP	Me Stars		9	10
+MERGE	Mean Sun	Sun	9	10
+DROP	Measuring the Earth, Classical and Arabic		9	10
+DROP	Measuring the Earth, Modernized		9	10
+KEEP	Mensa		9	10
+KEEP	Mercury		9	10
+DROP	mercury barometer		9	10
+DROP	Meson		9	10
+KEEP	Metal-Enhanced Star Formation		9	10
+KEEP	Metal-Rich Stars		9	10
+KEEP	Metal-Weak Stars		9	10
+DROP	Micron		9	10
+KEEP	midnight Sun		9	10
+DROP	Million		9	10
+MERGE	Mini Black Holes	Primordial Black Hole	9	10
+KEEP	Mizar		9	10
+DROP	Monodromy		9	10
+DROP	Monotonic		9	10
+KEEP	Moon		9	10
+MERGE	Moon exploration	Moon	9	10
+DROP	Moon Landing: Just the Facts		9	10
+DROP	moon worship		9	10
+MERGE	Moonrise, Moonset	Moon	9	10
+MERGE	Moons	Moon	9	10
+MERGE	moons of Pluto	Pluto	9	10
+MERGE	MS Stars	Spectral Classification	9	10
+KEEP	multimessenger astronomy		9	10
+DROP	Muon		9	10
+KEEP	N Star		9	10
+KEEP	Names of Stars		9	10
+MERGE	National Radio Astronomy Observatory	Radio Astronomy	9	10
+DROP	NBS		9	10
+MERGE	Near Earth Asteroid Rendezvous Shoemaker	Near-Earth Asteroids	9	10
+KEEP	Near-Earth Objects		9	10
+KEEP	Nearby Stars		9	10
+KEEP	Nebular Variable Stars		9	10
+KEEP	New Moon		9	10
+DROP	NISAR		9	10
+DROP	NOAO		9	10
+KEEP	Norma		9	10
+DROP	Normal		9	10
+KEEP	North Star		9	10
+KEEP	Nova		9	10
+MERGE	Nova Herculis	Nova	9	10
+MERGE	Nova Persei	Nova	9	10
+KEEP	O Star		9	10
+DROP	OAO		9	10
+MERGE	Old Stars	Stellar Evolution	9	10
+KEEP	Optical Astronomy		9	10
+DROP	OVLA		9	10
+KEEP	Ozone		9	10
+MERGE	P Cyg Stars	P Cygni Star	9	10
+KEEP	P Cygni Star		9	10
+MERGE	Partial Lunar Eclipse	Lunar Eclipse	9	10
+KEEP	Peculiar A Star		9	10
+KEEP	Peculiar Stars		9	10
+MERGE	Persei stars	Perseus (constellation)	9	10
+KEEP	PG 1159 Stars		9	10
+MERGE	Photosphere of the Sun	Photosphere	9	10
+DROP	PI		9	10
+MERGE	Pioneer	Solar System	9	10
+KEEP	Pluto		9	10
+KEEP	Saros		9	10
+KEEP	Saturn		9	10
+DROP	Shear		9	10
+DROP	Sheath		9	10
+DROP	Signature		9	10
+DROP	SIN		9	10
+MERGE	SNR	Supernova Remnant	9	10
+DROP	SNU		9	10
+MERGE	Solar	Sun	9	10
+KEEP	Sputnik		9	10
+KEEP	Star		9	10
+KEEP	star catalog		9	10
+MERGE	Star Classification	Spectral Classification	9	10
+KEEP	Star concepts		9	10
+KEEP	Star Counts		9	10
+MERGE	Star processes	Stellar Evolution	9	10
+KEEP	star spectral types		9	10
+KEEP	Star Stream		9	10
+MERGE	Star Streaming	Star Stream	9	10
+KEEP	Star Trail		9	10
+MERGE	Stardust/NExT	Comet	9	10
+KEEP	Stark Effect		9	10
+KEEP	Starlight		9	10
+MERGE	Starliner	Spacecraft	9	10
+KEEP	STARLINK		9	10
+DROP	Stars, Time-Life		9	10
+MERGE	Starship	Spacecraft	9	10
+DROP	Strain		9	10
+MERGE	Stratospheric Observatory for Infrared Astronomy	Infrared	9	10
+DROP	String		9	10
+KEEP	SU(N)		9	10
+MERGE	Sub-Luminous Stars	Stellar Luminosity Class	9	10
+KEEP	Subdwarf Star		9	10
+KEEP	Subgiant CH Stars		9	10
+KEEP	Submillimeter Astronomy		9	10
+KEEP	Sun as white dwarf		9	10
+MERGE	Sun Concepts	Sun	9	10
+KEEP	Sundial		9	10
+MERGE	Sunrise/Sunset	Sun	9	10
+KEEP	Sunspot Cycle		9	10
+MERGE	Sunspot Number	Sunspot Cycle	9	10
+KEEP	Sunspot Radiation		9	10
+KEEP	Sunyaev-Zel'dovich Process		9	10
+KEEP	supermoon		9	10
+KEEP	Supernova 1987A		9	10
+KEEP	Symbiotic Stars		9	10
+DROP	Telstar		9	10
+KEEP	Triple Star		9	10
+MERGE	Trumpler Stars	Star Cluster	9	10
+KEEP	Tycho's Nova		9	10
+MERGE	Tycho's Star	Tycho's Nova	9	10
+KEEP	Type Ia supernovae as evidence for an accelerating universe		9	10
+KEEP	U Geminorum Star		9	10
+KEEP	Venus		9	10
+KEEP	Absolute Space		8	10
+MERGE	AE Aurigae	Auriga	8	10
+KEEP	Algol		8	10
+KEEP	Andromeda		8	10
+KEEP	Andromeda Galaxy		8	10
+KEEP	Angstrom		8	10
+KEEP	Annular Eclipse		8	10
+MERGE	Annular Solar Eclipse	Annular Eclipse	8	10
+KEEP	Apastron		8	10
+DROP	Ares		8	10
+KEEP	Ariel		8	10
+KEEP	Asterism		8	10
+KEEP	Asteroid		8	10
+KEEP	Asteroid Belt		8	10
+KEEP	Astronomy		8	10
+KEEP	Auriga		8	10
+MERGE	B Galaxy	Galaxy Morphology	8	10
+DROP	BDL		8	10
+KEEP	Biased Galaxy Formation		8	10
+KEEP	Biela's Comet		8	10
+DROP	Buran		8	10
+MERGE	C Galaxies	Galaxy Morphology	8	10
+KEEP	California Nebula (IC 1499)		8	10
+KEEP	cD Galaxy		8	10
+DROP	CD-ROM		8	10
+DROP	Cold-Gas Approximation		8	10
+MERGE	Coma (of a comet)	Cometary Coma	8	10
+KEEP	Comet		8	10
+KEEP	Comet 3I/ATLAS		8	10
+MERGE	Comet Arend-Roland	Comet	8	10
+KEEP	Comet Hale-Bopp		8	10
+MERGE	Comet Ikeya-Seki	Comet	8	10
+MERGE	Comet Morehouse	Comet	8	10
+MERGE	Comet Nucleus	Cometary Nucleus	8	10
+MERGE	Comet Schwassmann-Wachmann 1	Comet	8	10
+KEEP	Comet Shoemaker-Levy 9		8	10
+KEEP	Cometary Nebula		8	10
+MERGE	Cometary Tail	Cometary Tails	8	10
+MERGE	Comets, Family of	Comet	8	10
+MERGE	Comets, Group of	Comet	8	10
+MERGE	Comets, Nomenclature	Comet	8	10
+KEEP	Compact Galaxy		8	10
+KEEP	Degenerate Gas		8	10
+KEEP	DLA Systems		8	10
+DROP	Do Hurricanes Happen on Other Planets?		8	10
+DROP	Does It Rain on Other Planets?		8	10
+MERGE	E galaxy	Elliptical Galaxy	8	10
+KEEP	Eclipse		8	10
+MERGE	Elongation, Planetary	Elongation	8	10
+KEEP	Galaxy		8	10
+KEEP	Janus		8	10
+DROP	kayser		8	10
+MERGE	KL nebula	Orion Nebula	8	10
+MERGE	L Galaxy	Galaxy Morphology	8	10
+DROP	LAN		8	10
+DROP	Landsat		8	10
+DROP	Laser		8	10
+KEEP	Lupus		8	10
+DROP	Maclaurin Spheroid		8	10
+MERGE	Mass of the Galaxy	Milky Way	8	10
+KEEP	Metagalaxy		8	10
+DROP	MeV		8	10
+DROP	Micrometer		8	10
+MERGE	Milky Way Galaxy	Milky Way	8	10
+DROP	Mixmaster Model		8	10
+DROP	MMT		8	10
+KEEP	momentum		8	10
+DROP	MTF		8	10
+KEEP	Nebula		8	10
+KEEP	Nebular Lines		8	10
+KEEP	nebulium		8	10
+DROP	NELG		8	10
+DROP	NEP		8	10
+KEEP	Neptune		8	10
+MERGE	Neptunium	Neptune	8	10
+MERGE	Ney-Allen Nebula	Nebula	8	10
+KEEP	North America Nebula		8	10
+MERGE	Nucleus (of a comet)	Cometary Nucleus	8	10
+KEEP	Omega Nebula		8	10
+KEEP	Outer Planets		8	10
+KEEP	Owl Nebula		8	10
+MERGE	Partial Solar Eclipse	Solar Eclipse	8	10
+KEEP	Plage		8	10
+KEEP	Planck Length		8	10
+KEEP	Planet		8	10
+KEEP	Planet Formation		8	10
+KEEP	Planetarium		8	10
+KEEP	planetary defense		8	10
+KEEP	Planetary Precession		8	10
+DROP	Secular		8	10
+KEEP	Solar Eclipse		8	10
+KEEP	Solar Wind		8	10
+MERGE	Superior Planets	Superior Planet	8	10
+KEEP	Swan Nebula		8	10
+KEEP	Tarantula Nebula		8	10
+KEEP	Trifid Nebula		8	10
+KEEP	Trojan asteroid		8	10
+MERGE	Trojans	Trojan Asteroids	8	10
+KEEP	Type Ia supernovae in Pinwheel Galaxy		8	10
+KEEP	Uranus		8	10
+KEEP	Active Galactic Nucleus		7	10
+KEEP	Alpha Centauri		7	10
+KEEP	Aphelion		7	10
+KEEP	Astrophysics		7	10
+KEEP	Betelgeuse		7	10
+MERGE	Betelgeuse ( Ori)	Betelgeuse	7	10
+DROP	BLS1		7	10
+KEEP	Carbon Detonation Supernova Model		7	10
+KEEP	Ceres		7	10
+KEEP	Dark Matter		7	10
+MERGE	Disk Star	Thin Disk	7	10
+MERGE	dKe, dMe Stars	Spectral Classification	7	10
+KEEP	Dwarf		7	10
+KEEP	Dwarf Nova		7	10
+KEEP	Dwarf Star		7	10
+MERGE	Early-Type Stars	Early-Type Galaxies	7	10
+MERGE	Earth's Axis	Earth	7	10
+MERGE	Earth's Rotation	Earth	7	10
+KEEP	Earth-like Planet		7	10
+DROP	EBS		7	10
+DROP	ESRF		7	10
+DROP	ET		7	10
+DROP	EUV		7	10
+KEEP	Halley's Comet		7	10
+KEEP	Hydrogen		7	10
+KEEP	Ionized Hydrogen		7	10
+KEEP	Metallic Hydrogen		7	10
+KEEP	Milky Way		7	10
+KEEP	Molecular Hydrogen		7	10
+MERGE	Negative Hydrogen Ion	Hydrogen	7	10
+KEEP	Neutral Hydrogen		7	10
+MERGE	Ortho-Hydrogen	Hydrogen	7	10
+MERGE	Para-Hydrogen	Hydrogen	7	10
+KEEP	Supernova		7	10
+KEEP	Zodiac		7	10
+DROP	Bel		6	10
+KEEP	beta radioactivity		6	10
+DROP	Binomial Probability		6	10
+DROP	CDS		6	10
+KEEP	Chaotic Inflationary Universe Theory		6	10
+KEEP	Cluster of Galaxies		6	10
+KEEP	Dark Energy		6	10
+MERGE	Diffuse Nebula	Emission Nebula	6	10
+DROP	Discoverer		6	10
+MERGE	Disk Galaxy	Disk Galaxies	6	10
+DROP	DUMAND		6	10
+KEEP	Eddington-Lemaître Universe		6	10
+KEEP	Einstein Static Universe		6	10
+KEEP	Enceladus		6	10
+MERGE	Encke's Comet	Comet	6	10
+KEEP	Energy		6	10
+MERGE	Ensemble (of universes)	Multiverse	6	10
+KEEP	Equinox		6	10
+DROP	Era		6	10
+DROP	ERO		6	10
+MERGE	Eruptive Galaxy	Galaxy Morphology	6	10
+KEEP	expanding universe		6	10
+KEEP	General Relativity		6	10
+DROP	Inverse -decay		6	10
+KEEP	Iron Peak		6	10
+DROP	Johnson Noise		6	10
+DROP	kernel		6	10
+MERGE	kinematic relativity	General Relativity	6	10
+MERGE	Kuiper bands	Kuiper Belt	6	10
+KEEP	Kuiper Belt		6	10
+DROP	LERG		6	10
+DROP	magnetic confinement		6	10
+KEEP	Mass		6	10
+DROP	mega-		6	10
+DROP	Meinel Bands		6	10
+KEEP	Microchannel Plate		6	10
+KEEP	Multiverse		6	10
+KEEP	Neutron Star		6	10
+MERGE	New Inflationary Universe	Cosmic Inflation	6	10
+DROP	Noise		6	10
+DROP	OH		6	10
+KEEP	Oort Cloud		6	10
+MERGE	Open Inflationary Universe Theory	Cosmic Inflation	6	10
+MERGE	Open Universe	Universe	6	10
+DROP	Order Parameter		6	10
+KEEP	Orion		6	10
+KEEP	Orion Nebula		6	10
+MERGE	Oscillating Universe	Universe	6	10
+DROP	Other spectra		6	10
+KEEP	Outer Space		6	10
+KEEP	Outer Space Treaty		6	10
+KEEP	Parallax		6	10
+DROP	Paraxial		6	10
+KEEP	Past Light Cone		6	10
+KEEP	Planck Units		6	10
+KEEP	Planet Nine		6	10
+KEEP	Pleiades		6	10
+KEEP	Pulsar		6	10
+KEEP	Quasar		6	10
+MERGE	S Andromedae	Andromeda Galaxy	6	10
+MERGE	Static Universe	Einstein Static Universe	6	10
+MERGE	Statistical Parallax	Parallax	6	10
+MERGE	Theory of General Relativity	General Relativity	6	10
+DROP	Twisted-Pair		6	10
+DROP	Ultra-Relativistic		6	10
+KEEP	Universe		6	10
+KEEP	Vega		6	10
+KEEP	White Dwarf		6	10
+KEEP	white dwarf star		6	10
+KEEP	Canis Major		5	10
+MERGE	Canis Majoris	Canis Major	5	10
+MERGE	Canis Majoris Star	Canis Major	5	10
+DROP	Cathode-Ray  Tube (CRT)		5	10
+KEEP	Cygnus X-1		5	10
+DROP	DRAGN		5	10
+DROP	DRO		5	10
+DROP	Eightfold Way		5	10
+MERGE	Evolution	Stellar Evolution	5	10
+KEEP	Hubble Constant		5	10
+DROP	Information		5	10
+DROP	Isoelectronic Sequence		5	10
+DROP	Ixchel		5	10
+KEEP	Larmor Frequency		5	10
+KEEP	Leo Minor		5	10
+DROP	Luminescence		5	10
+KEEP	Luminosity		5	10
+DROP	Maia Sequence		5	10
+DROP	Main Lines (of an OH source)		5	10
+DROP	mass, reduced		5	10
+DROP	Mean Distance		5	10
+DROP	Minimal Surface		5	10
+MERGE	NML Cygnus	Cygnus X-1	5	10
+DROP	Occam's Razor		5	10
+KEEP	Perigee		5	10
+KEEP	Photon		5	10
+KEEP	Pixel		5	10
+KEEP	Rigel		5	10
+DROP	Sequencer		5	10
+KEEP	Solstice		5	10
+KEEP	Ursa Minor		5	10
+KEEP	Zero-Age Main Sequence		5	10
+DROP	Bamberga		4	10
+KEEP	Beta Decay		4	10
+KEEP	Brown Dwarf		4	10
+DROP	Candela		4	10
+KEEP	Capella		4	10
+MERGE	Capella ( Aur)	Capella	4	10
+KEEP	Carina		4	10
+KEEP	Celestial Sphere		4	10
+DROP	CHAPEA		4	10
+KEEP	Constellation		4	10
+DROP	dielectric		4	10
+MERGE	Dirac Large Number Hypothesis	Cosmology	4	10
+DROP	Dish		4	10
+KEEP	Dust Cloud		4	10
+KEEP	Dynamical Parallax		4	10
+KEEP	Echelle		4	10
+KEEP	Ecliptic		4	10
+MERGE	ecliptic plane	Ecliptic	4	10
+MERGE	Einstein Universe	Einstein Static Universe	4	10
+KEEP	Ellipticity		4	10
+KEEP	Energy Density		4	10
+KEEP	Horizon		4	10
+KEEP	Hour Angle		4	10
+KEEP	Hypothesis		4	10
+KEEP	Interstellar Medium		4	10
+KEEP	Island Universe Hypothesis		4	10
+DROP	Isomer Shift		4	10
+DROP	Kaguya		4	10
+DROP	KAO		4	10
+DROP	Laika		4	10
+DROP	Lamb Shift		4	10
+MERGE	Local Hypothesis (of quasars)	Quasar	4	10
+DROP	Lyot Division		4	10
+DROP	Matter Fields		4	10
+KEEP	Maxwell		4	10
+DROP	Methylamine		4	10
+MERGE	Most luminous H II regions	HII Region	4	10
+KEEP	Nebular Hypothesis		4	10
+DROP	Null Geodesic		4	10
+KEEP	Open Cluster		4	10
+KEEP	Parsec		4	10
+DROP	Paul Trap		4	10
+KEEP	Perseus		4	10
+MERGE	Perseus-Pisces Region	Large-Scale Structure	4	10
+KEEP	Photometry		4	10
+MERGE	Planck's hypothesis	Planck Units	4	10
+KEEP	Sagittarius A*		4	10
+KEEP	Scattering		4	10
+KEEP	Seeing		4	10
+DROP	Selene		4	10
+DROP	Sense		4	10
+DROP	Serapis		4	10
+KEEP	Serpens		4	10
+MERGE	Serpentis	Serpens	4	10
+DROP	Sphere		4	10
+MERGE	Spitzer-Oort Hypothesis	Nebular Hypothesis	4	10
+DROP	Swift		4	10
+KEEP	Uncertainty Principle		4	10
+KEEP	Variable Star		4	10
+DROP	Dry Ice		3	10
+MERGE	Expanding Arm	Milky Way	3	10
+KEEP	Globular Cluster		3	10
+MERGE	Most luminous globular clusters	Globular Cluster	3	10
+DROP	OB		3	10
+KEEP	Observable Universe		3	10
+KEEP	Polaris		3	10
+KEEP	Proton		3	10
+DROP	Spinor		3	10
+KEEP	Star Cluster		3	10
+KEEP	Telescope		3	10
+KEEP	Cassini-Huygens		2	10
+KEEP	Detached Binaries		2	10
+KEEP	Epsilon Aurigae		2	10
+KEEP	Eta Aquilae		2	10
+KEEP	Eta Carinae		2	10
+KEEP	Event Horizon		2	10
+DROP	Iris		2	10
+DROP	IRS		2	10
+MERGE	Messenger	Mercury	2	10
+KEEP	Planetary Nebula		2	10
+KEEP	Sirius		2	10
+DROP	SIS		2	10
+DROP	Spiritualism		2	10
+DROP	Isothermal Change		10	9
+MERGE	absorption, quantum	Absorption Line	9	9
+KEEP	Argument of the Perihelion ()		9	9
+MERGE	Ariel (satellite)	Ariel	9	9
+KEEP	Absorption Band		8	9
+KEEP	Atom		8	9
+MERGE	Atomic Hydrogen	Neutral Hydrogen	8	9
+MERGE	Atoms	Atom	8	9
+MERGE	Companion of Sirius (Sirius B)	Sirius	8	9
+DROP	dex		8	9
+KEEP	Eclipses in 2024, 2025, and 2026		8	9
+KEEP	Ellipse		8	9
+KEEP	Epicycle		8	9
+KEEP	F Star		8	9
+MERGE	Fictitious Mean Sun	Sun	8	9
+KEEP	Field Horizontal Branch Stars		8	9
+KEEP	Field Star		8	9
+KEEP	Flare Star		8	9
+KEEP	FU Ori Stars or Fuors		8	9
+MERGE	fueling of the stars	Stellar Evolution	8	9
+KEEP	Fundamental Stars		8	9
+KEEP	G star		8	9
+MERGE	Gibbous Moon	Phases	8	9
+DROP	IUE		8	9
+KEEP	Latitude		8	9
+KEEP	LTE		8	9
+MERGE	Mean Solar Second	Solar Day	8	9
+KEEP	Optical Window		8	9
+KEEP	Photodiode		8	9
+DROP	rms		8	9
+DROP	S-Factor		8	9
+DROP	SAA		8	9
+DROP	SAO		8	9
+KEEP	Sculptor		8	9
+KEEP	SFR		8	9
+DROP	Sink		8	9
+DROP	SIT		8	9
+KEEP	Tide		8	9
+MERGE	Tides	Tide	8	9
+MERGE	Total Lunar Eclipse	Lunar Eclipse	8	9
+MERGE	Total Solar Eclipse	Solar Eclipse	8	9
+KEEP	Aberration		7	9
+MERGE	Aberration, E-terms of	Aberration	7	9
+KEEP	Absorption		7	9
+MERGE	Absorption Edges	Absorption	7	9
+KEEP	Absorption Line		7	9
+KEEP	Absorption Spectrum		7	9
+KEEP	Absorption Trough		7	9
+KEEP	Achernar		7	9
+DROP	Adsorption		7	9
+KEEP	Age of the Universe		7	9
+MERGE	Aplanatic System	Telescope	7	9
+KEEP	Apus		7	9
+KEEP	Arcturus		7	9
+KEEP	Artificial Satellite		7	9
+KEEP	Astrobiology		7	9
+KEEP	Astrometry		7	9
+KEEP	Astronomical Color Index		7	9
+MERGE	Astronomical Coordinates	Astronomical Coordinate Systems	7	9
+KEEP	Astronomical Observatory		7	9
+DROP	Asymmetry		7	9
+KEEP	Atomic Orbital		7	9
+KEEP	Attenuation		7	9
+MERGE	Attractor	Great Attractor	7	9
+KEEP	B Band		7	9
+DROP	Berkelium		7	9
+DROP	Bohrium		7	9
+KEEP	Caelum		7	9
+MERGE	Centauri	Alpha Centauri	7	9
+KEEP	Cold Dark Matter (CDM)		7	9
+MERGE	Einstein's General Theory of Relativity	General Relativity	7	9
+MERGE	Exploding Galaxy	Galaxy Morphology	7	9
+KEEP	Explosive Galaxy Formation		7	9
+MERGE	extrasolar planet	Exoplanet	7	9
+KEEP	Faint Blue Galaxy		7	9
+KEEP	Field Galaxy		7	9
+KEEP	Galaxy Classification		7	9
+MERGE	Galaxy concepts	Galaxy	7	9
+KEEP	Galaxy Correlation Function		7	9
+KEEP	Galaxy Counts		7	9
+KEEP	galaxy formation problem		7	9
+MERGE	Galaxy M61	Galaxy	7	9
+MERGE	Gaseous Nebula	Emission Nebula	7	9
+KEEP	Gum Nebula		7	9
+KEEP	High-Velocity Star		7	9
+MERGE	HZ Stars	Spectral Classification	7	9
+KEEP	kelvin		7	9
+KEEP	Limb		7	9
+MERGE	liquid helium	Helium	7	9
+DROP	Mark Shuttleworth		7	9
+KEEP	Matter		7	9
+DROP	Mendelevium		7	9
+MERGE	Missing Matter	Dark Matter	7	9
+KEEP	Nicol Prism		7	9
+KEEP	Nicolaus Copernicus		7	9
+DROP	Nobelium		7	9
+KEEP	Non-Baryonic Matter		7	9
+MERGE	Nuclear Matter	Matter	7	9
+DROP	Odin		7	9
+MERGE	P-Strong Stars	Spectral Classification	7	9
+DROP	PHA		7	9
+KEEP	Plaskett's Star		7	9
+MERGE	Population I & II stars	Population I	7	9
+KEEP	Post-Asymptotic Branch Stars		7	9
+KEEP	Primordial Black Holes		7	9
+KEEP	Program Stars		7	9
+KEEP	Ptolemaic system		7	9
+MERGE	Pulsating Nova	Nova	7	9
+MERGE	Quarter Moon	Phases	7	9
+MERGE	Quiet Sun	Sun	7	9
+KEEP	R Coronae Borealis star		7	9
+MERGE	R CrB Stars	R Coronae Borealis star	7	9
+KEEP	R Star		7	9
+MERGE	radio and radar astronomy	Radio Astronomy	7	9
+KEEP	Radio Stars		7	9
+KEEP	red dwarf star		7	9
+KEEP	red giant star		7	9

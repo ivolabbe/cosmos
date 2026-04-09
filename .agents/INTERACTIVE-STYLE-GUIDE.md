@@ -9,7 +9,7 @@
 ## Architecture
 
 ### Single-file, self-contained HTML
-Each visualization is ONE `.html` file in `experimental/`. It contains all CSS, HTML, and JS inline. No external JS modules — they break in iframes. Use `<script type="importmap">` + `<script type="module">` with CDN imports.
+Each visualization is ONE `.html` file in `dev/`. It contains all CSS, HTML, and JS inline. No external JS modules — they break in iframes. Use `<script type="importmap">` + `<script type="module">` with CDN imports.
 
 ```html
 <script type="importmap">
@@ -29,7 +29,7 @@ Each visualization is ONE `.html` file in `experimental/`. It contains all CSS, 
 ### Embed via iframe in articles
 ```html
 <div style="width:100%;max-width:800px;height:500px;border-radius:6px;overflow:hidden;margin:24px auto;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
-  <iframe src="../experimental/VIZNAME.html" style="width:100%;height:100%;border:none;" loading="lazy"></iframe>
+  <iframe src="../dev/VIZNAME.html" style="width:100%;height:100%;border:none;" loading="lazy"></iframe>
 </div>
 ```
 
@@ -396,11 +396,11 @@ function makeCircleMat(color, size, opacity) {
 ## Workflow: Creating a New Interactive Visualization
 
 ### Step 1: Create the visualization
-- File: `experimental/TOPIC-interactive.html` (single self-contained HTML)
+- File: `dev/TOPIC-interactive.html` (single self-contained HTML)
 - Follow all style, controls, and architecture guidelines above
 
 ### Step 2: Create the article page with embed
-- File: `experimental/TOPIC.html`
+- File: `dev/TOPIC.html`
 - Copy the existing article from `articles/TOPIC.html`
 - Replace the static image with the iframe embed:
 ```html
@@ -414,7 +414,7 @@ function makeCircleMat(color, size, opacity) {
 Start a local server (`python3 -m http.server 8765`) and open the article page. Run through ALL checks below.
 
 ### Step 4: Update embed-demo.html
-Add the new visualization to `experimental/embed-demo.html`.
+Add the new visualization to `dev/embed-demo.html`.
 
 ---
 
@@ -476,10 +476,10 @@ Run these tests for every new interactive visualization before considering it do
 
 ## File Naming Convention
 
-- `experimental/TOPIC-interactive.html` — the embeddable 3D visualization (stays in experimental/ permanently)
-- `experimental/TOPIC.html` — article page with the embed (mirrors `articles/TOPIC.html` for easy migration)
+- `dev/TOPIC-interactive.html` — the embeddable 3D visualization (stays in dev/ permanently)
+- `dev/TOPIC.html` — article page with the embed (mirrors `articles/TOPIC.html` for easy migration)
 
-When ready to go live: copy `experimental/TOPIC.html` → `articles/TOPIC.html` and update iframe `src` to `../experimental/TOPIC-interactive.html`.
+When ready to go live: copy `dev/TOPIC.html` → `articles/TOPIC.html` and update iframe `src` to `../dev/TOPIC-interactive.html`.
 
 ## Babylon.js Apps
 

@@ -92,7 +92,7 @@ The large-scale structure of the Universe — the cosmic web — is one of the m
 - **Our advantage**: Cosmological scale. Time evolution. Cosmic web topology. Educational labelling. The particle rendering technique is directly applicable.
 
 ### Reference 6: Existing COSMOS — Satellites Interactive
-- **URL**: `experimental/satellites-interactive.html`
+- **URL**: `dev/satellites-interactive.html`
 - **Source**: This project
 - **What it does well**: 14,875 satellite orbits + 14,587 debris points rendered as colour-coded point clouds with toggles. ShaderMaterial with round particles, altitude-dependent size and brightness. Smooth performance. Clean toggle UI.
 - **What it does poorly**: Earth-scale, not cosmological. No time evolution. No physics simulation.
@@ -545,7 +545,7 @@ This is more complex than the rotation curve app (which has harder analytic phys
 
 ## Closest Existing COSMOS App to Use as Template
 
-**`experimental/satellites-interactive.html`** — because:
+**`dev/satellites-interactive.html`** — because:
 1. Same core technique: large point cloud (14K+ debris objects) rendered with `ShaderMaterial` + circular particles + additive blending
 2. Same toggle pattern: multiple categories of objects shown/hidden via checkboxes
 3. Same performance tier: tens of thousands of points at 60 fps
@@ -554,7 +554,7 @@ This is more complex than the rotation curve app (which has harder analytic phys
 
 The LSS app extends this pattern by: adding time evolution (position array updates each frame), replacing pre-loaded binary data with procedurally generated positions, adding depth fog, and adding a fly-through camera mode.
 
-Alternative template: `experimental/asteroid-belt-interactive.html` — for the particle shader patterns and the distance scale overlay. The asteroid belt uses ~10K particles with `makeCircleMat`, which is the same approach we need.
+Alternative template: `dev/asteroid-belt-interactive.html` — for the particle shader patterns and the distance scale overlay. The asteroid belt uses ~10K particles with `makeCircleMat`, which is the same approach we need.
 
 ---
 

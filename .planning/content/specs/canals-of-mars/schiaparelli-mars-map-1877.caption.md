@@ -1,0 +1,1 @@
+Schiaparelli's 1877 map of Mars, showing the network of _canali_ he charted during the great opposition. The map introduced a Latin nomenclature for Martian features still partly in use today. Published in Popular Science Monthly, vol. 61 (1902). Source: Wikimedia Commons, public domain.

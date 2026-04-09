@@ -6,7 +6,7 @@
 
 **Screenshots**: Puppeteer: `/tmp/hr-diagram-interactive-initial.png`, `/tmp/hr-diagram-interactive-rotated.png`. Browser screenshots taken in Chrome via MCP at multiple states (initial, 1 M_sun WD endpoint, 10 M_sun SN endpoint, 25 M_sun SN endpoint, overlays enabled, WD region highlight, embedded mode).
 
-**Agent instructions checked**: `.agents/sao-coder.md`
+**Agent instructions checked**: `.agents/agents/cosmos-coder.md`
 
 ### Checklist
 
@@ -47,7 +47,7 @@
 ### Failed checks detail:
 
 1. **Check #1 — Agent compliance**: The spec explicitly states "Use WebGL (Three.js OrthographicCamera + Points with ShaderMaterial for circular particles) for the scatter plot" (Stage 1) and "Bloom: subtle, on the animated marker only (threshold high enough that population points don't bloom). Bloom strength 0.3, radius 0.5, threshold 0.7" (Stage 6). The coder used 2D Canvas instead, which means no bloom pipeline is possible. The 2D canvas approach is clean and functional, but it deviates from the spec architecture.
-   **Rule violated**: Spec Stage 1 "Use WebGL (Three.js OrthographicCamera + Points with ShaderMaterial)" and sao-coder.md "The spec — your blueprint".
+   **Rule violated**: Spec Stage 1 "Use WebGL (Three.js OrthographicCamera + Points with ShaderMaterial)" and cosmos-coder.md "The spec — your blueprint".
    **Suggested fix**: This is a fundamental architecture choice. The 2D Canvas implementation works well visually. **Two options**: (a) Accept the 2D Canvas approach and mark bloom as N/A for this app type. The radial gradient on the marker serves as a bloom substitute. (b) Rewrite using Three.js OrthographicCamera + Points with ShaderMaterial + bloom pipeline. Option (a) is pragmatic; option (b) is spec-faithful.
 
 2. **Check #4 — Bloom pipeline**: See #1 above. No Three.js means no bloom. The radial gradient marker glow is an acceptable visual substitute.

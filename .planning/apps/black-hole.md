@@ -6,7 +6,7 @@
 
 **Date**: 2026-03-29
 **Screenshots**: `/tmp/bh-fullscreen-initial.png`, `/tmp/bh-fullscreen-mass50.png`, `/tmp/bh-fullscreen-disk.png`, `/tmp/bh-fullscreen-disk-edgeon.png`, `/tmp/bh-disk-doppler-above.png`, `/tmp/bh-disk-edgeon2.png`, `/tmp/bh-mass1.png`, `/tmp/bh-mass100.png`, `/tmp/bh-embedded.png`, `/tmp/bh-fullscreen-final.png`
-**Agent instructions checked**: `.agents/sao-coder.md`
+**Agent instructions checked**: `.agents/agents/cosmos-coder.md`
 
 ### Checklist
 
