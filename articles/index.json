@@ -2130,8 +2130,23 @@
     "letter": "N"
   },
   {
+    "slug": "near-earth-objects",
+    "title": "Near Earth Objects",
+    "letter": "N"
+  },
+  {
+    "slug": "nearby-stars",
+    "title": "Nearby Stars",
+    "letter": "N"
+  },
+  {
     "slug": "nebula",
     "title": "Nebula",
+    "letter": "N"
+  },
+  {
+    "slug": "nebular-variable-stars",
+    "title": "Nebular Variable Stars",
     "letter": "N"
   },
   {
@@ -2185,6 +2200,16 @@
     "letter": "N"
   },
   {
+    "slug": "north-star",
+    "title": "North Star",
+    "letter": "N"
+  },
+  {
+    "slug": "nova",
+    "title": "Nova",
+    "letter": "N"
+  },
+  {
     "slug": "novae",
     "title": "Novae",
     "letter": "N"
@@ -2193,6 +2218,11 @@
     "slug": "nyquist-rate",
     "title": "Nyquist Rate",
     "letter": "N"
+  },
+  {
+    "slug": "o-type-star",
+    "title": "O-type Star",
+    "letter": "O"
   },
   {
     "slug": "objective-lens",
@@ -2207,6 +2237,11 @@
   {
     "slug": "opposition",
     "title": "Opposition",
+    "letter": "O"
+  },
+  {
+    "slug": "optical-astronomy",
+    "title": "Optical Astronomy",
     "letter": "O"
   },
   {
@@ -2245,6 +2280,11 @@
     "letter": "O"
   },
   {
+    "slug": "p-cygni-star",
+    "title": "P-Cygni Star",
+    "letter": "P"
+  },
+  {
     "slug": "parabola",
     "title": "Parabola",
     "letter": "P"
@@ -2257,6 +2297,16 @@
   {
     "slug": "parsec",
     "title": "Parsec",
+    "letter": "P"
+  },
+  {
+    "slug": "peculiar-a-star",
+    "title": "Peculiar A Star",
+    "letter": "P"
+  },
+  {
+    "slug": "peculiar-stars",
+    "title": "Peculiar Stars",
     "letter": "P"
   },
   {

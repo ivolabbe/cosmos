@@ -68,18 +68,18 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | multimessenger-astronomy | multimessenger astronomy | 1 | done | done | - |  |
 | n-star | N Star | 1 | done | done | - |  |
 | names-of-stars | Names of Stars | 1 | done | done | - |  |
-| near-earth-objects | Near Earth Objects | 1 | - | - | - |  |
-| nearby-stars | Nearby Stars | 1 | - | - | - |  |
-| nebular-variable-stars | Nebular Variable Stars | 1 | - | - | - |  |
+| near-earth-objects | Near Earth Objects | 1 | done | done | - |  |
+| nearby-stars | Nearby Stars | 1 | done | done | - |  |
+| nebular-variable-stars | Nebular Variable Stars | 1 | done | done | - |  |
 | new-moon | New Moon | 1 | - | - | - | existing: new-moon |
-| norma | Norma | 1 | - | - | - |  |
-| north-star | North Star | 1 | - | - | - |  |
-| nova | Nova | 1 | - | - | - |  |
-| o-type-star | O-type Star | 1 | - | - | - |  |
-| optical-astronomy | Optical Astronomy | 1 | - | - | - |  |
-| p-cygni-star | P-Cygni Star | 1 | - | - | - |  |
-| peculiar-a-star | Peculiar A Star | 1 | - | - | - |  |
-| peculiar-stars | Peculiar Stars | 1 | - | - | - |  |
+| norma | Norma | 3 | - | - | - |  |
+| north-star | North Star | 1 | done | done | - |  |
+| nova | Nova | 1 | done | done | - |  |
+| o-type-star | O-type Star | 1 | done | done | - |  |
+| optical-astronomy | Optical Astronomy | 1 | done | done | - |  |
+| p-cygni-star | P-Cygni Star | 1 | done | done | - |  |
+| peculiar-a-star | Peculiar A Star | 1 | done | done | - |  |
+| peculiar-stars | Peculiar Stars | 1 | done | done | - |  |
 | pluto | Pluto | 1 | - | - | - |  |
 | rr-lyrae-stars | RR Lyrae Stars | 1 | - | - | - | existing: rr-lyrae |
 | saros | Saros | 1 | - | - | - |  |
@@ -95,10 +95,10 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | starlight | Starlight | 1 | - | - | - |  |
 | starlink | STARLINK | 1 | - | - | - |  |
 | subdwarf-star | Subdwarf Star | 1 | - | - | - |  |
-| subgiant-ch-stars | Subgiant CH Stars | 1 | - | - | - |  |
+| subgiant-ch-stars | Subgiant CH Stars | 3 | - | - | - |  |
 | submillimeter-astronomy | Submillimeter Astronomy | 1 | - | - | - |  |
 | sun | Sun | 1 | done | done | - | existing: sun |
-| sundial | Sundial | 1 | - | - | - |  |
+| sundial | Sundial | 2 | - | - | - |  |
 | sunspot-cycle | Sunspot Cycle | 1 | - | - | - | existing: sunspot-cycle |
 | sunyaev-zeldovich-process | Sunyaev Zel'dovich Process | 1 | - | - | - |  |
 | supermoon | supermoon | 1 | - | - | - |  |
@@ -121,7 +121,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | asteroid | Asteroid | 1 | done | done | - | existing: asteroid |
 | asteroid-belt | Asteroid belt | 1 | - | - | - | existing: asteroid-belt |
 | astronomy | Astronomy | 1 | - | - | - | existing: astronomy |
-| auriga | Auriga | 1 | - | - | - |  |
+| auriga | Auriga | 3 | - | - | - |  |
 | bielas-comet | Biela's Comet | 1 | - | - | - |  |
 | california-nebula | California Nebula (IC 1499) | 1 | - | - | - |  |
 | cd-galaxy | cD Galaxy | 1 | - | - | - |  |
@@ -130,27 +130,24 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | comet-hale-bopp | Comet Hale Bopp | 1 | - | - | - |  |
 | comet-shoemaker-levy-9 | Comet Shoemaker Levy 9 | 1 | - | - | - |  |
 | cometary-nebula | Cometary Nebula | 1 | - | - | - |  |
-| compact-galaxy | Compact Galaxy | 1 | - | - | - |  |
+| ucd-galaxy | Ultra-Compact Dwarf Galaxy | 1 | - | - | - |  |
 | degenerate-gas | Degenerate Gas | 1 | - | - | - |  |
 | damped-lyman-alpha-systems | Damped Lyman Alpha Systems | 1 | - | - | - |  |
 | eclipse | Eclipse | 1 | - | - | - |  |
 | galaxy | Galaxy | 1 | - | - | - | existing: galaxy |
 | galaxy-formation-bias | Galaxy Formation Bias | 1 | - | - | - |  |
 | janus | Janus | 1 | - | - | - |  |
-| lupus | Lupus | 1 | - | - | - |  |
+| lupus | Lupus | 3 | - | - | - |  |
 | momentum | momentum | 1 | - | - | - | existing: momentum |
 | nebula | Nebula | 1 | - | - | - | existing: nebula |
 | nebular-lines | Nebular Lines | 1 | - | - | - |  |
-| nebulium | nebulium | 1 | - | - | - |  |
 | neptune | Neptune | 1 | done | done | - |  |
 | north-america-nebula | North America Nebula | 1 | - | - | - |  |
-| omega-nebula | Omega Nebula | 1 | - | - | - |  |
 | outer-planets | Outer Planets | 1 | - | - | - |  |
 | owl-nebula | Owl Nebula | 1 | - | - | - |  |
 | planck-length | Planck Length | 1 | - | - | - | existing: planck-length |
 | planet | Planet | 1 | - | - | - | existing: planet |
 | planet-formation | Planet Formation | 1 | - | - | - |  |
-| planetarium | Planetarium | 1 | - | - | - |  |
 | planetary-defense | planetary defense | 1 | - | - | - |  |
 | planetary-precession | Planetary Precession | 1 | - | - | - |  |
 | sn-2011fe-type-ia-supernovae-in-pinwheel-galaxy | SN 2011fe Type Ia supernovae in Pinwheel Galaxy | 1 | - | - | - |  |
@@ -159,7 +156,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | solar-wind | Solar Wind | 1 | - | - | - | existing: solar-wind |
 | swan-nebula | Swan Nebula | 1 | - | - | - |  |
 | tarantula-nebula | Tarantula Nebula | 1 | - | - | - |  |
-| trifid-nebula | Trifid Nebula | 1 | - | - | - |  |
+| trifid-nebula | Trifid Nebula | 3 | - | - | - |  |
 | trojan-asteroid | Trojan asteroid | 1 | - | - | - | existing: trojan-asteroids |
 | uranus | Uranus | 1 | done | done | - |  |
 | active-galactic-nucleus | Active galactic nucleus | 2 | - | - | - | existing: active-galactic-nuclei |
