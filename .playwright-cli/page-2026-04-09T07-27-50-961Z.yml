@@ -1,0 +1,112 @@
+- generic [active] [ref=e1]:
+  - link "Jump to content" [ref=e2] [cursor=pointer]:
+    - /url: "#bodyContent"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - navigation "Site" [ref=e6]:
+        - generic "Main menu" [ref=e7]:
+          - button "Main menu" [ref=e8] [cursor=pointer]
+          - generic [ref=e11]: Main menu
+      - link "Wikimedia Commons" [ref=e12] [cursor=pointer]:
+        - /url: /wiki/Main_Page
+        - img [ref=e13]
+        - img "Wikimedia Commons" [ref=e15]
+    - generic [ref=e16]:
+      - search [ref=e17]:
+        - generic [ref=e20]:
+          - searchbox "Search Wikimedia Commons" [ref=e23]
+          - button "Search" [ref=e25]
+      - navigation "Personal tools" [ref=e26]:
+        - generic [ref=e27]:
+          - list [ref=e30]:
+            - listitem [ref=e31]:
+              - link "English" [ref=e32] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e34]: English
+          - list [ref=e37]:
+            - listitem [ref=e38]:
+              - link "Donate" [ref=e39] [cursor=pointer]:
+                - /url: https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=commons.wikimedia.org&uselang=en
+                - generic [ref=e41]: Donate
+            - listitem [ref=e42]:
+              - link "Create account" [ref=e43] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:CreateAccount&returnto=File%3ANearby+stars.png
+            - listitem [ref=e44]:
+              - link "Log in" [ref=e45] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:UserLogin&returnto=File%3ANearby+stars.png
+  - generic [ref=e47]:
+    - main [ref=e51]:
+      - heading "File:Nearby stars.png" [level=1] [ref=e53]
+      - generic [ref=e55]:
+        - navigation "Namespaces" [ref=e57]:
+          - generic [ref=e58]:
+            - generic:
+              - list:
+                - listitem [ref=e59]:
+                  - link "File" [ref=e60] [cursor=pointer]:
+                    - /url: /w/index.php?title=File:Nearby_stars.png&action=edit&redlink=1
+                    - generic [ref=e61]: File
+                - listitem [ref=e62]:
+                  - link "Discussion" [ref=e63] [cursor=pointer]:
+                    - /url: /w/index.php?title=File_talk:Nearby_stars.png&action=edit&redlink=1
+                    - generic [ref=e64]: Discussion
+        - generic [ref=e65]:
+          - navigation "Views" [ref=e66]:
+            - generic [ref=e67]:
+              - generic:
+                - list:
+                  - listitem [ref=e68]:
+                    - link "Create" [ref=e69] [cursor=pointer]:
+                      - /url: /w/index.php?title=File:Nearby_stars.png&action=edit
+                      - generic [ref=e70]: Create
+          - navigation "Page tools" [ref=e71]:
+            - generic [ref=e72]:
+              - button "Tools" [ref=e73] [cursor=pointer]
+              - generic [ref=e75] [cursor=pointer]: Tools
+      - navigation "Appearance" [ref=e78]:
+        - generic [ref=e81]:
+          - generic [ref=e82]: Appearance
+          - button "hide" [ref=e83] [cursor=pointer]
+      - generic "File:Nearby stars.png" [ref=e84]:
+        - generic [ref=e85]:
+          - paragraph [ref=e87]: No file by this name exists.
+          - heading "File usage on Commons" [level=2] [ref=e88]
+          - paragraph [ref=e90]: There are no pages that use this file.
+    - contentinfo [ref=e92]:
+      - list
+      - list:
+        - listitem [ref=e93]:
+          - link "Privacy policy" [ref=e94] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy
+        - listitem [ref=e95]:
+          - link "About Wikimedia Commons" [ref=e96] [cursor=pointer]:
+            - /url: /wiki/Commons:Welcome
+        - listitem [ref=e97]:
+          - link "Disclaimers" [ref=e98] [cursor=pointer]:
+            - /url: /wiki/Commons:General_disclaimer
+        - listitem [ref=e99]:
+          - link "Code of Conduct" [ref=e100] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Universal_Code_of_Conduct
+        - listitem [ref=e101]:
+          - link "Developers" [ref=e102] [cursor=pointer]:
+            - /url: https://developer.wikimedia.org
+        - listitem [ref=e103]:
+          - link "Statistics" [ref=e104] [cursor=pointer]:
+            - /url: https://stats.wikimedia.org/#/commons.wikimedia.org
+        - listitem [ref=e105]:
+          - link "Cookie statement" [ref=e106] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Cookie_statement
+        - listitem [ref=e107]:
+          - link "Mobile view" [ref=e108] [cursor=pointer]:
+            - /url: //commons.wikimedia.org/w/index.php?title=File:Nearby_stars.png&mobileaction=toggle_view_mobile
+      - list [ref=e109]:
+        - listitem [ref=e110]:
+          - link "Wikimedia Foundation" [ref=e111] [cursor=pointer]:
+            - /url: https://www.wikimedia.org/
+            - img "Wikimedia Foundation" [ref=e113]
+        - listitem [ref=e114]:
+          - link "Powered by MediaWiki" [ref=e115] [cursor=pointer]:
+            - /url: https://www.mediawiki.org/
+            - img "Powered by MediaWiki" [ref=e117]
+  - generic [ref=e118]:
+    - list

@@ -1,0 +1,5 @@
+[    1044ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://commons.wikimedia.org/wiki/File:Nearest_stars_and_brown_dwarfs.jpg:0
+[    1609ms] [LOG] [Obsidian Clipper] Initializing content script, generation 1 @ chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/content.js:0
+[    2728ms] Could not establish connection. Receiving end does not exist.
+[    2728ms] Could not establish connection. Receiving end does not exist.
+[    2729ms] Could not establish connection. Receiving end does not exist.

@@ -47,7 +47,7 @@ grep -m1 "STATUS:" .planning/content/specs/{slug}/{slug}-spec.md 2>/dev/null || 
 - `STATUS: IN-PROGRESS (milestone: N)` → dispatch researcher with the same prompt — the domain file tells it to read the partial spec and resume from milestone N+1
 - `no spec` → dispatch researcher from scratch
 
-### Dispatch researcher (model: opus)
+### Dispatch researcher (model: sonnet)
 
 Spawn one agent per article with this exact prompt:
 
@@ -101,7 +101,7 @@ node dev/copy-recommended-image.js {slug}
 
 Note the image path printed by `copy-recommended-image.js`. The matching caption file is in `.planning/content/specs/{slug}/` (same base name + `-caption.md`).
 
-### Dispatch writer (model: sonnet)
+### Dispatch writer (model: opus)
 
 Spawn one agent per article with this exact prompt:
 
@@ -205,7 +205,7 @@ After each batch of articles completes research and writing, the orchestrator re
 - **Spec quality:** Did `check-spec.js` catch issues? Were there patterns (e.g. missing images from a specific source, captions not created)?
 - **Article quality:** Did `check-article.js` flag recurring problems (contractions, word count, missing images)?
 - **Pipeline friction:** Were there steps that required manual intervention? Could scripts or domain instructions prevent that next time?
-- **Tool availability:** Did agents attempt tools that weren't available in their context (e.g. playwright-cli in background agents)?
+- **Tool availability:** Did agents attempt tools that weren't available in their context?
 
 **What to update if needed:**
 - `.agents/domains/cosmos-article-research.md` — researcher instructions (e.g. skip unavailable tools, clarify image sourcing)

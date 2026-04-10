@@ -10,8 +10,8 @@
 
 - **Encyclopedic, third-person, present tense** for current facts; past tense for historical events
 - **Open with direct definition** — first sentence = "[Term] is/are [definition]." Variants: historical/etymological, contrast, problem-statement — but always lead with the term
-- **Passive/impersonal voice** ("it is generally accepted", "observations reveal"). Use "we" only for "humanity/observers", never "we the authors"
-- **Undergraduate level** — rigorous but accessible. Not pop-science, not a textbook
+- **Varied voice** — mix active and passive naturally. Active is often clearer ("New Horizons revealed" not "it was revealed by"). Passive is fine when the agent is unimportant. Use "we" only for "humanity/observers", never "we the authors"
+- **Approachable expert — this is the #1 priority.** Write like someone who understands the topic so deeply that their explanation feels simple and easy to follow. A keen high schooler should be able to read the article without stopping. Talk like a person, not a paper. If you would not say a phrase out loud to a friend, do not write it. "Tried" not "pursued". "Hit hardest" not "disproportionately affected". "Dimmer" not "reduced optical brightness". Not pop-science, not a textbook, and absolutely not a journal paper
 - **Australian/British spelling** — colour, ionisation, metres, favouring
 - **No editorial fluff** — no dramatic qualifiers ("profound", "groundbreaking"), no rhetorical questions, no filler. State facts neutrally
 - **Analogies sparingly** — effective when making extreme quantities relatable ("a teaspoon of neutron star material would weigh around a billion tonnes")
@@ -98,7 +98,7 @@ The verifier enforces this: `verify.js --article` flags modifications exceeding 
 
 ### When writing a NEW article
 - Follow the voice rules in this file — match the voice exactly
-- Match level, length, and narrative style of existing entries
+- Match level, length, and narrative style described in this file and the style guide. Do NOT read other articles for reference — the style guide is sufficient.
 
 ## Resumability — Write Incrementally
 
@@ -168,3 +168,19 @@ If the spec lacks enough factual content to write the article at the appropriate
 - [ ] Image placed correctly with caption + credit
 - [ ] No inline citations in article text
 - [ ] No cross-links added manually (the script handles this)
+- [ ] **Language clarity pass** (see below)
+
+## Language Clarity Pass (MANDATORY — do not skip)
+
+**This pass is not optional.** If you skip it, the article will be rejected. After writing the article and before running the post-write scripts, re-read every sentence out loud in your head. Apply these checks:
+
+1. **Talk like a person, not a paper.** Read each sentence and ask: would I say this to a smart friend? "SpaceX has pursued several approaches to reducing the optical brightness" is something nobody would say. "SpaceX has tried several ways to make its satellites dimmer" is what a person would say. Use the second version. This is the single most common failure mode.
+2. **Fancy words are a bug.** If a non-technical word has a plainer synonym, the plain one is correct. "Began" not "inaugurated". "Hit hardest" not "disproportionately affected". "Tried" not "pursued". "Stray signals" not "unintended electromagnetic radiation". See the word-choice table in the style guide (Section 4b) — read it, memorise it, apply it.
+3. **One idea per sentence.** If a sentence has more than two facts, split it. Long compound sentences with embedded clauses are the hallmark of academic writing. Break them up.
+4. **Vary active and passive.** If three sentences in a row are passive, rewrite at least one with an active subject.
+5. **No em-dashes.** They are an AI writing tell. Use a comma, full stop, or colon instead. Zero em-dashes in an article is ideal. More than two is too many.
+6. **Say it shorter.** If you can say the same thing in fewer words without losing meaning, do it. "Newer satellites are worse" beats "Later satellite versions emit significantly more unintended radio radiation than earlier ones."
+7. **Plain headings.** A 16-year-old scanning the page should know what each section covers from the heading alone.
+8. **The high-schooler test.** Read the whole article as if you are 16 and interested in space but have no physics training. If any sentence makes you pause or re-read, simplify it.
+
+Technical terms that have COSMOS entries must stay and be linked. The goal is that everything *around* those terms reads like natural, clear English.

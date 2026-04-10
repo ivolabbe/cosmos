@@ -1,0 +1,338 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en-AU
+      - link "Accessibility feedback" [ref=e4] [cursor=pointer]
+  - generic [ref=e9]:
+    - search [ref=e10]:
+      - generic [ref=e12]:
+        - link "Go to Google Home" [ref=e14] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiomsmknuCTAxWS2BoGHWn4DE8QPAgJ
+          - img [ref=e15]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - combobox "Search" [ref=e26]: nearest stars list distances astronomy site:wikipedia.org OR site:nasa.gov nearest stars list distances astronomy site:wikipedia.org OR site:nasa.gov
+            - generic [ref=e27]:
+              - button "Clear" [ref=e29] [cursor=pointer]:
+                - img [ref=e31]
+              - generic [ref=e34]:
+                - button "Search by voice" [ref=e35] [cursor=pointer]:
+                  - img [ref=e36]
+                - button "Search by image" [ref=e38] [cursor=pointer]:
+                  - img [ref=e39]
+          - button "Search" [ref=e41] [cursor=pointer]:
+            - img [ref=e44]
+    - generic [ref=e46]:
+      - button "Settings" [ref=e48] [cursor=pointer]:
+        - img [ref=e51]
+      - generic [ref=e54]:
+        - button "Google apps" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - link "Sign in" [ref=e61] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dnearest%2Bstars%2Blist%2Bdistances%2Bastronomy%2Bsite:wikipedia.org%2BOR%2Bsite:nasa.gov%26sei%3D8FPXaZW7CYjpwN4PkYDx-Qs&ec=futura_srp_og_si_72236_p
+  - generic [ref=e63]:
+    - navigation [ref=e69]:
+      - generic [ref=e73]:
+        - list [ref=e74]:
+          - listitem [ref=e75]:
+            - link "All" [disabled] [ref=e76]:
+              - generic [ref=e78]: All
+          - listitem [ref=e79]:
+            - link "Images" [ref=e80] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3o6iwGk6Iv1tRbZIBNIVs-4YWYcW4druNLL4RhbEwVNo2apxTkON0plXz3eP6WS2ljqVOYHPuZqrbhjFWVcgzB9c5nQnLGpG6xjpmznwpTCDzf31mCgd2vcItsWnvrhhXHPgHhGEuDk0B87o2PY9YjEde4Var1amANF5BEFFM-6JIdf4jw&q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8QtKgLegQIDhAB
+              - generic [ref=e82]: Images
+          - listitem [ref=e83]:
+            - link "Shopping" [ref=e84] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3o6iwGk6Iv1tRbZIBNIVs-4YWYcW4druNLL4RhbEwVNo2apxTkON0plXz3eP6WS2ljqVOYHPuZqrbhjFWVcgzB9c5nQnLGpG6xjpmznwpTCDzf31mCgd2vcItsWnvrhhXHPgHhGEuDk0B87o2PY9YjEde4Var1amANF5BEFFM-6JIdf4jw&q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&ved=1t:220175&ictx=111
+              - generic [ref=e86]: Shopping
+          - listitem [ref=e87]:
+            - link "Forums" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3o6iwGk6Iv1tRbZIBNIVs-4YWYcW4druNLL4RhbEwVNo2apxTkON0plXz3eP6WS2ljqVOYHPuZqrbhjFWVcgzB9c5nQnLGpG6xjpmznwpTCDzf31mCgd2vcItsWnvrhhXHPgHhGEuDk0B87o2PY9YjEde4Var1amANF5BEFFM-6JIdf4jw&q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Qs6gLegQIERAB
+              - generic [ref=e90]: Forums
+          - listitem [ref=e91]:
+            - link "Videos" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3o6iwGk6Iv1tRbZIBNIVs-4YWYcW4druNLL4RhbEwVNo2apxTkON0plXz3eP6WS2ljqVOYHPuZqrbhjFWVcgzB9c5nQnLGpG6xjpmznwpTCDzf31mCgd2vcItsWnvrhhXHPgHhGEuDk0B87o2PY9YjEde4Var1amANF5BEFFM-6JIdf4jw&q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8QtKgLegQIEhAB
+              - generic [ref=e94]: Videos
+          - listitem [ref=e95]:
+            - link "Short videos" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3o6iwGk6Iv1tRbZIBNIVs-4YWYcW4druNLL4RhbEwVNo2apxTkON0plXz3eP6WS2ljqVOYHPuZqrbhjFWVcgzB9c5nQnLGpG6xjpmznwpTCDzf31mCgd2vcItsWnvrhhXHPgHhGEuDk0B87o2PY9YjEde4Var1amANF5BEFFM-6JIdf4jw&q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Qs6gLegQIFBAB
+              - generic [ref=e98]: Short videos
+          - listitem [ref=e99]:
+            - link "News" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3o6iwGk6Iv1tRbZIBNIVs-4YWYcW4druNLL4RhbEwVNo2apxTkON0plXz3eP6WS2ljqVOYHPuZqrbhjFWVcgzB9c5nQnLGpG6xjpmznwpTCDzf31mCgd2vcItsWnvrhhXHPgHhGEuDk0B87o2PY9YjEde4Var1amANF5BEFFM-6JIdf4jw&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q0pQJegQIFRAB
+              - generic [ref=e102]: News
+          - listitem [ref=e103]:
+            - button "More filters" [ref=e104] [cursor=pointer]:
+              - generic "More filters" [ref=e105]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: More
+                  - img [ref=e109]
+        - button "Tools" [ref=e112] [cursor=pointer]:
+          - generic [ref=e114]:
+            - generic [ref=e115]: Tools
+            - img [ref=e117]
+    - heading "Search Results" [level=1] [ref=e119]
+    - main [ref=e125]:
+      - generic [ref=e129]:
+        - generic [ref=e132]:
+          - heading "Web results" [level=2] [ref=e133]
+          - generic [ref=e134]:
+            - generic [ref=e137]:
+              - link "List of nearest stars Wikipedia https://en.wikipedia.org › wiki › List_of_nearest_stars" [ref=e139] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/List_of_nearest_stars
+                - heading "List of nearest stars" [level=3] [ref=e140]
+                - generic [ref=e145]:
+                  - generic [ref=e147]: Wikipedia
+                  - generic [ref=e149]: https://en.wikipedia.org › wiki › List_of_nearest_stars
+              - button "About this result" [ref=e150] [cursor=pointer]:
+                - img [ref=e153]
+            - generic [ref=e156]:
+              - generic [ref=e157]:
+                - text: This list covers all known stars, white dwarfs, brown dwarfs, and sub-brown dwarfs/rogue planets within
+                - emphasis [ref=e158]: 20 light-years
+                - text: (6.13 parsecs) of the Sun.
+              - link "Read more" [ref=e159] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/List_of_nearest_stars#:~:text=This%20list%20covers%20all%20known,(6.13%20parsecs)%20of%20the%20Sun.
+            - list [ref=e161]:
+              - listitem [ref=e162]:
+                - link "Astrometrics" [ref=e163] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/List_of_nearest_stars#Astrometrics
+                  - generic [ref=e166]: Astrometrics
+              - listitem [ref=e167]:
+                - link "List" [ref=e168] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/List_of_nearest_stars#List
+                  - generic [ref=e171]: List
+        - generic [ref=e175]:
+          - generic [ref=e178]:
+            - link "List of nearest stars Wikipedia https://simple.wikipedia.org › wiki › List_of_nearest_stars" [ref=e180] [cursor=pointer]:
+              - /url: https://simple.wikipedia.org/wiki/List_of_nearest_stars
+              - heading "List of nearest stars" [level=3] [ref=e181]
+              - generic [ref=e186]:
+                - generic [ref=e188]: Wikipedia
+                - generic [ref=e190]: https://simple.wikipedia.org › wiki › List_of_nearest_stars
+            - button "About this result" [ref=e191] [cursor=pointer]:
+              - img [ref=e194]
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - text: This
+              - emphasis [ref=e199]: list
+              - text: of the
+              - emphasis [ref=e200]: nearest stars
+              - text: to Earth is by
+              - emphasis [ref=e201]: distance
+              - text: in light years (ly). These
+              - emphasis [ref=e202]: distances
+              - text: are taken from parallax data determined by the Research Consortium ...
+            - link "Read more" [ref=e203] [cursor=pointer]:
+              - /url: https://simple.wikipedia.org/wiki/List_of_nearest_stars#:~:text=This%20list%20of%20the%20nearest,on%20Nearby%20Stars%20(or%20Recons).
+        - generic [ref=e207]:
+          - generic [ref=e210]:
+            - link "List of nearest stars by spectral type Wikipedia https://en.wikipedia.org › wiki › List_of_nearest_stars_..." [ref=e212] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_stars_by_spectral_type
+              - heading "List of nearest stars by spectral type" [level=3] [ref=e213]
+              - generic [ref=e218]:
+                - generic [ref=e220]: Wikipedia
+                - generic [ref=e222]: https://en.wikipedia.org › wiki › List_of_nearest_stars_...
+            - button "About this result" [ref=e223] [cursor=pointer]:
+              - img [ref=e226]
+          - generic [ref=e229]:
+            - generic [ref=e230]:
+              - text: List of nearest M-type stars ;
+              - emphasis [ref=e231]: Proxima Centauri, 4.24265±0.0003
+              - text: ; Barnard's Star, 5.9629±0.0004 ; Wolf 359, 7.856±0.001 ; Lalande 21185, 8.0344±0.0007 ...
+            - link "Read more" [ref=e232] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_stars_by_spectral_type#:~:text=List%20of%20nearest%20M%2Dtype%20stars&text=Proxima%20Centauri,4.24265%C2%B10.0003%20%5B1%5D&text=Barnard's%20Star,5.9629%C2%B10.0004%20%5B1%5D&text=Wolf%20359,7.856%C2%B10.001%20%5B1%5D&text=Lalande%2021185,8.0344%C2%B10.0007%20%5B1%5D
+        - generic [ref=e236]:
+          - generic [ref=e239]:
+            - link "The Nearest Neighbor Star - Imagine the Universe! - NASA NASA Imagine the Universe (.gov) https://imagine.gsfc.nasa.gov › cosmic › nearest_star_info" [ref=e241] [cursor=pointer]:
+              - /url: https://imagine.gsfc.nasa.gov/features/cosmic/nearest_star_info.html
+              - heading "The Nearest Neighbor Star - Imagine the Universe! - NASA" [level=3] [ref=e242]
+              - generic [ref=e247]:
+                - generic [ref=e249]: NASA Imagine the Universe (.gov)
+                - generic [ref=e251]: https://imagine.gsfc.nasa.gov › cosmic › nearest_star_info
+            - button "About this result" [ref=e252] [cursor=pointer]:
+              - img [ref=e255]
+          - generic [ref=e258]:
+            - generic [ref=e259]: 8 Dec 2020 —
+            - generic [ref=e260]:
+              - emphasis [ref=e261]: Alpha Centauri A & B are roughly 4.35 light years away from us
+              - text: . Proxima Centauri is slightly closer at 4.25 light years. How Do We Calculate ...
+            - link "Read more" [ref=e262] [cursor=pointer]:
+              - /url: https://imagine.gsfc.nasa.gov/features/cosmic/nearest_star_info.html#:~:text=Alpha%20Centauri%20A%20%26%20B,Calculate%20Distances%20of%20This%20Magnitude%3F
+        - generic [ref=e266]:
+          - generic [ref=e269]:
+            - link "List of nearest bright stars Wikipedia https://en.wikipedia.org › wiki › List_of_nearest_bright..." [ref=e271] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_bright_stars
+              - heading "List of nearest bright stars" [level=3] [ref=e272]
+              - generic [ref=e277]:
+                - generic [ref=e279]: Wikipedia
+                - generic [ref=e281]: https://en.wikipedia.org › wiki › List_of_nearest_bright...
+            - button "About this result" [ref=e282] [cursor=pointer]:
+              - img [ref=e285]
+          - generic [ref=e288]:
+            - generic [ref=e289]:
+              - text: The following nearest bright stars are found
+              - emphasis [ref=e290]: within 15.0 parsecs (48.9 ly
+              - text: ) of the closest star, the Sun, and have an absolute magnitude of +8.5 or brighter.
+            - link "Read more" [ref=e291] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_bright_stars#:~:text=The%20following%20nearest%20bright%20stars,luminous%20than%20a%20red%20dwarf.
+        - generic [ref=e295]:
+          - generic [ref=e298]:
+            - link "List of nearest giant stars Wikipedia https://en.wikipedia.org › wiki › List_of_nearest_giant_..." [ref=e300] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_giant_stars
+              - heading "List of nearest giant stars" [level=3] [ref=e301]
+              - generic [ref=e306]:
+                - generic [ref=e308]: Wikipedia
+                - generic [ref=e310]: https://en.wikipedia.org › wiki › List_of_nearest_giant_...
+            - button "About this result" [ref=e311] [cursor=pointer]:
+              - img [ref=e314]
+          - generic [ref=e317]:
+            - generic [ref=e318]:
+              - text: This is a list of the nearest giant stars to Earth,
+              - emphasis [ref=e319]: located at a distance of up to 100 light-years
+              - text: (31 parsecs) from Earth.
+            - link "Read more" [ref=e320] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_giant_stars#:~:text=This%20is%20a%20list%20of,light%2Dyears%20(31%20parsecs)%20from%20Earth.
+        - generic [ref=e324]:
+          - generic [ref=e327]:
+            - link "Proxima Centauri Wikipedia https://en.wikipedia.org › wiki › Proxima_Centauri" [ref=e329] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/Proxima_Centauri
+              - heading "Proxima Centauri" [level=3] [ref=e330]
+              - generic [ref=e335]:
+                - generic [ref=e337]: Wikipedia
+                - generic [ref=e339]: https://en.wikipedia.org › wiki › Proxima_Centauri
+            - button "About this result" [ref=e340] [cursor=pointer]:
+              - img [ref=e343]
+          - generic [ref=e346]:
+            - generic [ref=e347]:
+              - emphasis [ref=e348]: Proxima Centauri is the nearest star to Earth after the Sun
+              - text: ", located 4.25 light-years (1.3 parsecs) away in the southern constellation of Centaurus."
+            - link "Read more" [ref=e349] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/Proxima_Centauri#:~:text=Proxima%20Centauri%20is%20the%20nearest,the%20southern%20constellation%20of%20Centaurus.
+        - generic [ref=e353]:
+          - generic [ref=e356]:
+            - link "List of nearest supergiants Wikipedia https://en.wikipedia.org › wiki › List_of_nearest_super..." [ref=e358] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_supergiants
+              - heading "List of nearest supergiants" [level=3] [ref=e359]
+              - generic [ref=e364]:
+                - generic [ref=e366]: Wikipedia
+                - generic [ref=e368]: https://en.wikipedia.org › wiki › List_of_nearest_super...
+            - button "About this result" [ref=e369] [cursor=pointer]:
+              - img [ref=e372]
+          - generic [ref=e375]:
+            - generic [ref=e376]:
+              - text: This is a list of the nearest supergiant stars to Earth,
+              - emphasis [ref=e377]: located at a distance of up to 1,100 light-years
+              - text: (340 parsecs). Some of the brightest stars in the ...
+            - link "Read more" [ref=e378] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_supergiants#:~:text=This%20is%20a%20list%20of,Antares%2C%20are%20in%20the%20list.
+        - generic [ref=e382]:
+          - generic [ref=e385]:
+            - link "Lists of stars Wikipedia https://en.wikipedia.org › wiki › Lists_of_stars" [ref=e387] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/Lists_of_stars
+              - heading "Lists of stars" [level=3] [ref=e388]
+              - generic [ref=e393]:
+                - generic [ref=e395]: Wikipedia
+                - generic [ref=e397]: https://en.wikipedia.org › wiki › Lists_of_stars
+            - button "About this result" [ref=e398] [cursor=pointer]:
+              - img [ref=e401]
+          - generic [ref=e404]:
+            - generic [ref=e405]:
+              - emphasis [ref=e406]: Lists
+              - text: of stars · 1 By location · 2 By name · 3 By
+              - emphasis [ref=e407]: distance
+              - text: . 3.1
+              - emphasis [ref=e408]: Nearest stars
+              - text: ; 3.2 By luminosity; 3.3 20–100 light years away; 3.4 100–500 light-years away · 4 By ...
+            - link "Read more" [ref=e409] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/Lists_of_stars#:~:text=Lists%20of%20stars&text=1%20By%20location&text=2%20By%20name&text=3%20By%20distance,3.4%20100%E2%80%93500%20light%2Dyears%20away&text=4%20By%20physical%20characteristic
+        - generic [ref=e413]:
+          - generic [ref=e416]:
+            - link "List of nearest exoplanets Wikipedia https://en.wikipedia.org › wiki › List_of_nearest_exopl..." [ref=e418] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_exoplanets
+              - heading "List of nearest exoplanets" [level=3] [ref=e419]
+              - generic [ref=e424]:
+                - generic [ref=e426]: Wikipedia
+                - generic [ref=e428]: https://en.wikipedia.org › wiki › List_of_nearest_exopl...
+            - button "About this result" [ref=e429] [cursor=pointer]:
+              - img [ref=e432]
+          - generic [ref=e435]:
+            - generic [ref=e436]:
+              - text: The closest exoplanets are those found orbiting the star closest to the Solar System, which is
+              - emphasis [ref=e437]: Proxima Centauri 4.25 light-years away
+              - text: .
+            - link "Read more" [ref=e438] [cursor=pointer]:
+              - /url: https://en.wikipedia.org/wiki/List_of_nearest_exoplanets#:~:text=The%20closest%20exoplanets%20are%20those,Proxima%20Centauri%204.25%20light%2Dyears%20away.
+      - generic [ref=e440]:
+        - generic [ref=e445]:
+          - heading "People also search for" [level=2] [ref=e447]
+          - generic [ref=e449]:
+            - link "Nearest stars list distances astronomy in km" [ref=e454] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&q=Nearest+stars+list+distances+astronomy+in+km&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q1QJ6BAg3EAE
+              - generic [ref=e455]:
+                - generic [ref=e460]: Nearest stars list distances astronomy in km
+                - img [ref=e464]
+            - link "Nearest stars list distances astronomy from earth" [ref=e470] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&q=Nearest+stars+list+distances+astronomy+from+earth&sa=X&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q1QJ6BAg4EAE
+              - generic [ref=e471]:
+                - generic [ref=e476]: Nearest stars list distances astronomy from earth
+                - img [ref=e480]
+        - navigation [ref=e482]:
+          - heading "Page navigation" [level=1] [ref=e483]
+          - text: "1"
+          - link "Page 2" [ref=e486] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=10&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAE
+            - text: "2"
+          - link "Page 3" [ref=e488] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=20&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAG
+            - text: "3"
+          - link "Page 4" [ref=e490] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=30&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAI
+            - text: "4"
+          - link "Page 5" [ref=e492] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=40&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAK
+            - text: "5"
+          - link "Page 6" [ref=e494] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=50&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAM
+            - text: "6"
+          - link "Page 7" [ref=e496] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=60&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAO
+            - text: "7"
+          - link "Page 8" [ref=e498] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=70&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAQ
+            - text: "8"
+          - link "Page 9" [ref=e500] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=80&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAS
+            - text: "9"
+          - link "Page 10" [ref=e502] [cursor=pointer]:
+            - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=90&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8tMDegQICRAU
+            - text: "10"
+          - heading "Next" [level=2] [ref=e504]:
+            - link "Next" [ref=e505] [cursor=pointer]:
+              - /url: /search?q=nearest+stars+list+distances+astronomy+site:wikipedia.org+OR+site:nasa.gov&sca_esv=6234f0784a7aac09&ei=8FPXaajiJZKx6-AP6fCz-AQ&start=10&sa=N&sstk=Af77f_eZ3CypP8Xi5uZQvrdHRcdjNakylNwTLEd91WfSEldadpx2p1rjb-6RYnlcTh2sq-98oW0RXfSDCp_IDvMnTCH07otIBMh_NQ&ved=2ahUKEwiomsmknuCTAxWS2BoGHWn4DE8Q8NMDegQICRAW
+              - generic [ref=e507]: Next
+      - navigation
+    - contentinfo [ref=e508]:
+      - heading "Footer links" [level=1] [ref=e509]
+      - generic [ref=e513]:
+        - generic [ref=e515]:
+          - text: Australia
+          - generic [ref=e517]:
+            - button "3101, Melbourne VIC - From your IP address" [ref=e519] [cursor=pointer]:
+              - generic [ref=e520]: 3101, Melbourne VIC
+              - generic [ref=e522]:
+                - text: "-"
+                - generic [ref=e523]: From your IP address
+            - text: "-"
+            - button "Update location" [ref=e525] [cursor=pointer]: Update location
+        - generic [ref=e528]:
+          - link "Help" [ref=e529] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en-AU&fg=1
+          - link "Send feedback" [ref=e530] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e531] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en-AU&fg=1
+          - link "Terms" [ref=e532] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en-AU&fg=1

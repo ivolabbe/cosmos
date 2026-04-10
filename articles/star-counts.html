@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Counts | COSMOS Encyclopedia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Top bar (SAO banner injected after this by sao-cta.js) -->
+  <div class="top-bar">
+    <div class="container">
+      <ul class="top-bar__links">
+        <li><a href="https://www.swinburne.edu.au">Swinburne University of Technology</a></li>
+        <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics &amp; Supercomputing</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-header__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="site-header__logo">
+        <span class="site-header__title"><span>COSMOS</span> Encyclopedia</span>
+      </a>
+      <form class="header-search" action="../search.html" method="get">
+        <input type="text" name="keys" class="header-search__input" placeholder="Search the encyclopedia..." aria-label="Search COSMOS">
+        <button type="submit" class="header-search__btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="../index.html">COSMOS</a></li>
+        <li><a href="../browse.html?letter=S">S</a></li>
+        <li><span class="current">Star Counts</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="main">
+    <article class="article">
+      <div class="container">
+        <header class="article__header">
+          <h1 class="article__title">Star Counts</h1>
+        </header>
+        <div class="article__body">
+
+<p><a class="lexicon-term" href="star.html">Star</a> counts are the systematic tallying of stars in a region of sky as a function of <a class="lexicon-term" href="apparent-magnitude.html">apparent magnitude</a>, used to infer the three-dimensional structure of the <a class="lexicon-term" href="milky-way.html">Milky Way</a> from two-dimensional images. By counting how many stars appear in each magnitude interval across different directions, astronomers can work out how stellar <a class="lexicon-term" href="density.html">density</a> changes with <a class="lexicon-term" href="distance.html">distance</a> and direction, without needing a spectrum for every individual star.</p>
+
+<div class="imageRight" style="width:380px;">
+  <img src="../images/star-counts-gaia-edr3-sky-map.jpg" width="380" alt="All-sky colour map from Gaia Early Data Release 3 showing 1.8 billion stars, with the Milky Way disk and central bulge clearly visible" />
+  <div class="caption">
+    The colour of the sky from Gaia's Early Data Release 3 (December 2020), showing the total brightness and colour of 1.8 billion stars. Brighter regions represent denser concentrations of stars; the sweeping band of the Milky Way's disk is strikingly evident, with the bulge at centre. This is the modern culmination of the star-count tradition begun by Herschel.<br/>
+    <a href="https://www.esa.int/ESA_Multimedia/Images/2020/12/The_colour_of_the_sky_from_Gaia_s_Early_Data_Release_3">ESA/Gaia/DPAC; CC BY-SA 3.0 IGO. Acknowledgement: A. Moitinho</a>
+  </div>
+</div>
+
+<p>The technique depends on three ingredients: the spatial density of stars along a given line of sight, the <a class="lexicon-term" href="luminosity.html">luminosity</a> function (how many stars exist at each intrinsic brightness), and the amount of dust <a class="lexicon-term" href="extinction.html">extinction</a> along the way. Comparing counts toward the <a class="lexicon-term" href="galactic-plane.html">galactic plane</a> with counts toward the poles directly reveals the flattened geometry of the disk.</p>
+
+<h2>Historical Development</h2>
+
+<p>William Herschel pioneered star counts in 1785, tallying stars in roughly 683 sky directions with his 20-foot reflector. He assumed all stars had the same intrinsic brightness and produced the first quantitative map of the Milky Way, a flat, irregular slab with the <a class="lexicon-term" href="sun.html">Sun</a> near its centre. His estimate of about 12,000 <a class="lexicon-term" href="light.html">light</a>-years across was far too small, because unrecognised dust blocked the view beyond a few thousand light-years.</p>
+
+<p>In the early 1900s, Jacobus Kapteyn organised the Selected Areas programme, collecting photographic plates of 206 sky zones from observatories worldwide. Using mathematical inversion methods developed with Karl Schwarzschild, Kapteyn published his "Kapteyn <a class="lexicon-term" href="universe.html">Universe</a>" in 1922: a lens-shaped <a class="lexicon-term" href="galaxy.html">galaxy</a> about 40,000 light-years across, still too small for the same reason. Only in 1930 did Robert Trumpler prove that interstellar dust absorbs starlight significantly, explaining why every earlier star-count map was compressed.</p>
+
+<p>In 1980, John Bahcall and Raymond Soneira built a parametric galactic model that combined an exponential disk with a spheroidal <a class="lexicon-term" href="halo.html">halo</a> to predict star counts in any direction. This model dominated galactic structure work for two decades and helped confirm the existence of the <a class="lexicon-term" href="thick-disk.html">thick disk</a>, which showed up as an excess of stars at intermediate galactic latitudes above what a thin-disk model predicted.</p>
+
+<h2>Biases</h2>
+
+<p>Star counts suffer from several well-known biases. Malmquist bias, first described by Gunnar Malmquist in the 1920s, means that magnitude-limited surveys preferentially detect rare, luminous stars while missing the far more common faint red dwarfs at all but the nearest distances. Interstellar extinction makes stars appear fainter and fewer than they are, and varies strongly with direction. Correcting for these effects requires a model of the dust distribution and an accurate luminosity function.</p>
+
+<h2>Modern Surveys</h2>
+
+<p>Near-<a class="lexicon-term" href="infrared.html">infrared</a> surveys such as 2MASS (1997-2001) opened the dust-choked galactic plane to deep star counts, since infrared light passes through dust far more easily than optical light. ESA's Gaia mission has catalogued over 1.8 billion stars with positions, parallaxes, and photometry, roughly 1-2% of the Milky Way's estimated 100-400 billion stars. Gaia transforms the old statistical approach into direct three-dimensional mapping for an historically unprecedented sample.</p>
+
+<!-- WRITER_STATUS: COMPLETE -->
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- JS-injected sections appear here in this order:
+       1. cosmos-explore.js  → A-Z explorer with cross-linked articles
+       2. latest-research.js → ADS research papers (if data exists)
+       3. sao-cta.js         → "Interested in astronomy?" CTA
+       (footer follows) -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__brand">
+        <img src="https://www.swinburne.edu.au/content/dam/media/brand/logo-long-full-keyline.svg" alt="Swinburne University of Technology" class="footer__logo">
+        <p class="footer__desc">COSMOS is produced by the Centre for Astrophysics &amp; Supercomputing at Swinburne University of Technology.</p>
+      </div>
+      <div>
+        <h4 class="footer__heading">Explore</h4>
+        <ul class="footer__links">
+          <li><a href="../index.html">COSMOS Home</a></li>
+          <li><a href="../browse.html">All Entries</a></li>
+          <li><a href="../search.html">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Swinburne</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au">Swinburne University</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/">Centre for Astrophysics</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Swinburne Astronomy Online</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer__heading">Study</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/swinburne-astronomy-online/">Study Astronomy Online</a></li>
+          <li><a href="https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/our-study-options/">Our Study Options</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__acknowledgement">
+      Swinburne University of Technology acknowledges the Wurundjeri Woi-wurrung people of the Kulin Nation
+      as the Traditional Owners of the land on which its Australian campuses are located, and pays respect
+      to Elders past, present and emerging.
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        &copy; Swinburne University of Technology. All material is &copy; Swinburne University of Technology except where indicated.
+      </div>
+    </div>
+  </footer>
+  <script src="../js/cosmos-explore.js" defer></script>
+  <script src="../js/sao-cta.js" defer></script>
+  <script src="../js/latest-research.js" defer></script>
+</body>
+</html>

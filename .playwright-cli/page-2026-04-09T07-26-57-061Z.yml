@@ -1,0 +1,617 @@
+- generic [active] [ref=e1]:
+  - link "Jump to content" [ref=e2] [cursor=pointer]:
+    - /url: "#bodyContent"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - navigation "Site" [ref=e6]:
+        - generic "Main menu" [ref=e7]:
+          - button "Main menu" [ref=e8] [cursor=pointer]
+          - generic [ref=e11]: Main menu
+          - option "Qafár af"
+          - option "Аҧсшәа"
+          - option "bahasa ambon"
+          - option "Acèh"
+          - option "адыгабзэ"
+          - option "адыгабзэ"
+          - option "تونسي/Tûnsî"
+          - option "تونسي"
+          - option "Tûnsî"
+          - option "Afrikaans"
+          - option "Akan"
+          - option "Gegë"
+          - option "Alemannisch"
+          - option "тÿштÿк алтай тил"
+          - option "አማርኛ"
+          - option "Pangcah"
+          - option "aragonés"
+          - option "Ænglisc"
+          - option "अङ्गिका"
+          - option "العربية"
+          - option "ܐܪܡܝܐ"
+          - option "mapudungun"
+          - option "جازايرية"
+          - option "الدارجة"
+          - option "مصرى"
+          - option "অসমীয়া"
+          - option "American sign language"
+          - option "asturianu"
+          - option "Atikamekw"
+          - option "авар"
+          - option "Kotava"
+          - option "अवधी"
+          - option "Aymar aru"
+          - option "azərbaycanca"
+          - option "تۆرکجه"
+          - option "башҡортса"
+          - option "Bali"
+          - option "Boarisch"
+          - option "žemaitėška"
+          - option "Batak Toba"
+          - option "Batak Toba"
+          - option "جهلسری بلوچی"
+          - option "Bikol Central"
+          - option "беларуская"
+          - option "беларуская (тарашкевіца)‎"
+          - option "беларуская (тарашкевіца)‎"
+          - option "български"
+          - option "روچ کپتین بلوچی"
+          - option "भोजपुरी"
+          - option "भोजपुरी"
+          - option "Bislama"
+          - option "Banjar"
+          - option "bamanankan"
+          - option "বাংলা"
+          - option "བོད་ཡིག"
+          - option "বিষ্ণুপ্রিয়া মণিপুরী"
+          - option "بختیاری"
+          - option "brezhoneg"
+          - option "Bráhuí"
+          - option "bosanski"
+          - option "Batak Mandailing"
+          - option "Iriga Bicolano"
+          - option "ᨅᨔ ᨕᨘᨁᨗ"
+          - option "буряад"
+          - option "català"
+          - option "Chavacano de Zamboanga"
+          - option "Mìng-dĕ̤ng-ngṳ̄"
+          - option "нохчийн"
+          - option "Cebuano"
+          - option "Chamoru"
+          - option "Choctaw"
+          - option "ᏣᎳᎩ"
+          - option "Tsetsêhestâhese"
+          - option "کوردی"
+          - option "corsu"
+          - option "Capiceño"
+          - option "Nēhiyawēwin / ᓀᐦᐃᔭᐍᐏᐣ"
+          - option "qırımtatarca"
+          - option "къырымтатарджа (Кирилл)‎"
+          - option "qırımtatarca (Latin)‎"
+          - option "čeština"
+          - option "kaszëbsczi"
+          - option "словѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ"
+          - option "Чӑвашла"
+          - option "Cymraeg"
+          - option "dansk"
+          - option "Deutsch"
+          - option "Österreichisches Deutsch"
+          - option "Schweizer Hochdeutsch"
+          - option "Deutsch (Sie-Form)‎"
+          - option "Thuɔŋjäŋ"
+          - option "Zazaki"
+          - option "dolnoserbski"
+          - option "Dusun Bundu-liwan"
+          - option "डोटेली"
+          - option "ދިވެހިބަސް"
+          - option "ཇོང་ཁ"
+          - option "eʋegbe"
+          - option "Emiliàn"
+          - option "Ελληνικά"
+          - option "emiliàn e rumagnòl"
+          - option "English" [selected]
+          - option "Canadian English"
+          - option "British English"
+          - option "Esperanto"
+          - option "español"
+          - option "español de América Latina"
+          - option "español (formal)‎"
+          - option "eesti"
+          - option "euskara"
+          - option "estremeñu"
+          - option "فارسی"
+          - option "Fulfulde"
+          - option "suomi"
+          - option "meänkieli"
+          - option "Võro"
+          - option "Na Vosa Vakaviti"
+          - option "kvääni"
+          - option "føroyskt"
+          - option "français"
+          - option "français cadien"
+          - option "arpetan"
+          - option "Nordfriisk"
+          - option "furlan"
+          - option "Frysk"
+          - option "Gaeilge"
+          - option "Gagauz"
+          - option "贛語"
+          - option "赣语（简体）‎"
+          - option "贛語（繁體）‎"
+          - option "kriyòl gwiyannen"
+          - option "Gàidhlig"
+          - option "galego"
+          - option "گیلکی"
+          - option "Avañe'ẽ"
+          - option "गोंयची कोंकणी / Gõychi Konknni"
+          - option "गोंयची कोंकणी"
+          - option "Gõychi Konknni"
+          - option "Bahasa Hulontalo"
+          - option "𐌲𐌿𐍄𐌹𐍃𐌺"
+          - option "Ἀρχαία ἑλληνικὴ"
+          - option "Alemannisch"
+          - option "ગુજરાતી"
+          - option "Gaelg"
+          - option "Hausa"
+          - option "客家語/Hak-kâ-ngî"
+          - option "Hawaiʻi"
+          - option "עברית"
+          - option "हिन्दी"
+          - option "Fiji Hindi"
+          - option "Fiji Hindi"
+          - option "Ilonggo"
+          - option "Hiri Motu"
+          - option "hrvatski"
+          - option "Hunsrik"
+          - option "hornjoserbsce"
+          - option "Kreyòl ayisyen"
+          - option "magyar"
+          - option "magyar (formal)‎"
+          - option "հայերեն"
+          - option "Արեւմտահայերէն"
+          - option "Otsiherero"
+          - option "interlingua"
+          - option "Bahasa Indonesia"
+          - option "Interlingue"
+          - option "Igbo"
+          - option "ꆇꉙ"
+          - option "Iñupiak"
+          - option "ᐃᓄᒃᑎᑐᑦ"
+          - option "inuktitut"
+          - option "Ilokano"
+          - option "ГӀалгӀай"
+          - option "Ido"
+          - option "íslenska"
+          - option "italiano"
+          - option "ᐃᓄᒃᑎᑐᑦ/inuktitut"
+          - option "日本語"
+          - option "Patois"
+          - option "la .lojban."
+          - option "jysk"
+          - option "Jawa"
+          - option "ქართული"
+          - option "Qaraqalpaqsha"
+          - option "Taqbaylit"
+          - option "Адыгэбзэ"
+          - option "Адыгэбзэ"
+          - option "Kabɩyɛ"
+          - option "Kabuverdianu"
+          - option "Kongo"
+          - option "کھوار"
+          - option "Gĩkũyũ"
+          - option "Kırmancki"
+          - option "Kwanyama"
+          - option "ဖၠုံလိက်"
+          - option "қазақша"
+          - option "قازاقشا (تٴوتە)‏"
+          - option "قازاقشا (جۇنگو)‏"
+          - option "қазақша (кирил)‎"
+          - option "қазақша (Қазақстан)‎"
+          - option "qazaqşa (latın)‎"
+          - option "qazaqşa (Türkïya)‎"
+          - option "kalaallisut"
+          - option "ភាសាខ្មែរ"
+          - option "ಕನ್ನಡ"
+          - option "한국어"
+          - option "조선말"
+          - option "Перем Коми"
+          - option "Kanuri"
+          - option "къарачай-малкъар"
+          - option "Krio"
+          - option "Kinaray-a"
+          - option "karjal"
+          - option "कॉशुर / کٲشُر"
+          - option "کٲشُر"
+          - option "कॉशुर"
+          - option "Ripoarisch"
+          - option "kurdî"
+          - option "كوردي (عەرەبی)‏"
+          - option "kurdî (latînî)‎"
+          - option "къумукъ"
+          - option "коми"
+          - option "kernowek"
+          - option "Кыргызча"
+          - option "Latina"
+          - option "Ladino"
+          - option "Lëtzebuergesch"
+          - option "лакку"
+          - option "лезги"
+          - option "Lingua Franca Nova"
+          - option "Luganda"
+          - option "Limburgs"
+          - option "Ligure"
+          - option "Līvõ kēļ"
+          - option "لەکی"
+          - option "Ladin"
+          - option "lumbaart"
+          - option "lingála"
+          - option "ລາວ"
+          - option "Silozi"
+          - option "لۊری شومالی"
+          - option "lietuvių"
+          - option "latgaļu"
+          - option "Mizo ţawng"
+          - option "لئری دوٙمینی"
+          - option "latviešu"
+          - option "文言"
+          - option "Lazuri"
+          - option "मैथिली"
+          - option "Basa Banyumasan"
+          - option "мокшень"
+          - option "Malagasy"
+          - option "Ebon"
+          - option "олык марий"
+          - option "Māori"
+          - option "Minangkabau"
+          - option "македонски"
+          - option "മലയാളം"
+          - option "монгол"
+          - option "ꯃꯤꯇꯩ ꯂꯣꯟ"
+          - option "ဘာသာ မန်"
+          - option "молдовеняскэ"
+          - option "मराठी"
+          - option "кырык мары"
+          - option "Bahasa Melayu"
+          - option "Malti"
+          - option "Mvskoke"
+          - option "Mirandés"
+          - option "မြန်မာဘာသာ"
+          - option "эрзянь"
+          - option "مازِرونی"
+          - option "Dorerin Naoero"
+          - option "Nāhuatl"
+          - option "Bân-lâm-gú"
+          - option "Napulitano"
+          - option "norsk bokmål"
+          - option "Plattdüütsch"
+          - option "Nedersaksies"
+          - option "नेपाली"
+          - option "नेपाल भाषा"
+          - option "Oshiwambo"
+          - option "Niuē"
+          - option "Nederlands"
+          - option "Nederlands (informeel)‎"
+          - option "norsk nynorsk"
+          - option "norsk"
+          - option "ᨣᩴᩤᨾᩮᩥᩬᨦ"
+          - option "Novial"
+          - option "ߒߞߏ"
+          - option "Nouormand"
+          - option "Sesotho sa Leboa"
+          - option "Diné bizaad"
+          - option "Chi-Chewa"
+          - option "Nyunga"
+          - option "occitan"
+          - option "Livvinkarjala"
+          - option "Oromoo"
+          - option "ଓଡ଼ିଆ"
+          - option "Ирон"
+          - option "لسان توركى"
+          - option "ਪੰਜਾਬੀ"
+          - option "Pangasinan"
+          - option "Kapampangan"
+          - option "Papiamentu"
+          - option "Picard"
+          - option "Deitsch"
+          - option "Plautdietsch"
+          - option "Pälzisch"
+          - option "पालि"
+          - option "Norfuk / Pitkern"
+          - option "polski"
+          - option "Piemontèis"
+          - option "پنجابی"
+          - option "Ποντιακά"
+          - option "Prūsiskan"
+          - option "پښتو"
+          - option "português"
+          - option "português do Brasil"
+          - option "Runa Simi"
+          - option "Runa shimi"
+          - option "Rumagnôl"
+          - option "Tarifit"
+          - option "rumantsch"
+          - option "kaalengo tšimb"
+          - option "romani čhib"
+          - option "Kirundi"
+          - option "română"
+          - option "armãneashti"
+          - option "tarandíne"
+          - option "русский"
+          - option "русиньскый"
+          - option "armãneashti"
+          - option "Vlăheşte"
+          - option "Влахесте"
+          - option "Vlăheşte"
+          - option "Kinyarwanda"
+          - option "मारवाड़ी"
+          - option "संस्कृतम्"
+          - option "саха тыла"
+          - option "ᱥᱟᱱᱛᱟᱲᱤ"
+          - option "sardu"
+          - option "sicilianu"
+          - option "Scots"
+          - option "سنڌي"
+          - option "Sassaresu"
+          - option "کوردی خوارگ"
+          - option "davvisámegiella"
+          - option "Cmique Itom"
+          - option "Koyraboro Senni"
+          - option "Sängö"
+          - option "žemaitėška"
+          - option "srpskohrvatski / српскохрватски"
+          - option "Tašlḥiyt/ⵜⴰⵛⵍⵃⵉⵜ"
+          - option "Tašlḥiyt"
+          - option "ⵜⴰⵛⵍⵃⵉⵜ"
+          - option "ၽႃႇသႃႇတႆး"
+          - option "tacawit"
+          - option "සිංහල"
+          - option "Simple English"
+          - option "Кӣллт са̄мь кӣлл"
+          - option "bidumsámegiella"
+          - option "ubmejesámiengiälla"
+          - option "slovenčina"
+          - option "سرائیکی"
+          - option "سرائیکی"
+          - option "slovenščina"
+          - option "Schläsch"
+          - option "Gagana Samoa"
+          - option "åarjelsaemien"
+          - option "julevsámegiella"
+          - option "anarâškielâ"
+          - option "sääʹmǩiõll"
+          - option "chiShona"
+          - option "Soomaaliga"
+          - option "shqip"
+          - option "српски / srpski"
+          - option "српски (ћирилица)‎"
+          - option "srpski (latinica)‎"
+          - option "Sranantongo"
+          - option "mbia cheë"
+          - option "SiSwati"
+          - option "Sesotho"
+          - option "Seeltersk"
+          - option "себертатар"
+          - option "Sunda"
+          - option "svenska"
+          - option "Kiswahili"
+          - option "ślůnski"
+          - option "Sakizaya"
+          - option "தமிழ்"
+          - option "Tayal"
+          - option "ತುಳು"
+          - option "తెలుగు"
+          - option "tetun"
+          - option "тоҷикӣ"
+          - option "тоҷикӣ"
+          - option "tojikī"
+          - option "ไทย"
+          - option "ትግርኛ"
+          - option "Türkmençe"
+          - option "Tagalog"
+          - option "толышә зывон"
+          - option "Setswana"
+          - option "lea faka-Tonga"
+          - option "Tok Pisin"
+          - option "Türkçe"
+          - option "Ṫuroyo"
+          - option "Seediq"
+          - option "Xitsonga"
+          - option "татарча/tatarça"
+          - option "татарча"
+          - option "tatarça"
+          - option "chiTumbuka"
+          - option "Twi"
+          - option "reo tahiti"
+          - option "тыва дыл"
+          - option "ⵜⴰⵎⴰⵣⵉⵖⵜ"
+          - option "удмурт"
+          - option "ئۇيغۇرچە / Uyghurche"
+          - option "ئۇيغۇرچە"
+          - option "Uyghurche"
+          - option "українська"
+          - option "اردو"
+          - option "oʻzbekcha/ўзбекча"
+          - option "ўзбекча"
+          - option "oʻzbekcha"
+          - option "Tshivenda"
+          - option "vèneto"
+          - option "vepsän kel’"
+          - option "Tiếng Việt"
+          - option "West-Vlams"
+          - option "Mainfränkisch"
+          - option "Volapük"
+          - option "Vaďďa"
+          - option "Võro"
+          - option "walon"
+          - option "Winaray"
+          - option "Wolof"
+          - option "吴语"
+          - option "хальмг"
+          - option "isiXhosa"
+          - option "მარგალური"
+          - option "saisiyat"
+          - option "ייִדיש"
+          - option "Yorùbá"
+          - option "粵語"
+          - option "Vahcuengh"
+          - option "Zeêuws"
+          - option "ⵜⴰⵎⴰⵣⵉⵖⵜ ⵜⴰⵏⴰⵡⴰⵢⵜ"
+          - option "中文"
+          - option "文言"
+          - option "中文（中国大陆）‎"
+          - option "中文（简体）‎"
+          - option "中文（繁體）‎"
+          - option "中文（香港）‎"
+          - option "Bân-lâm-gú"
+          - option "中文（澳門）‎"
+          - option "中文（马来西亚）‎"
+          - option "中文（新加坡）‎"
+          - option "中文（台灣）‎"
+          - option "粵語"
+          - option "isiZulu"
+      - link "Wikimedia Commons" [ref=e12] [cursor=pointer]:
+        - /url: /wiki/Main_Page
+        - img [ref=e13]
+        - img "Wikimedia Commons" [ref=e15]
+    - generic [ref=e16]:
+      - search [ref=e17]:
+        - generic [ref=e20]:
+          - searchbox "Search Wikimedia Commons" [ref=e23]
+          - button "Search" [ref=e25]
+      - navigation "Personal tools" [ref=e26]:
+        - generic [ref=e27]:
+          - list [ref=e30]:
+            - listitem [ref=e31]:
+              - link "English" [ref=e32] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e34]: English
+          - list [ref=e37]:
+            - listitem [ref=e38]:
+              - link "Donate" [ref=e39] [cursor=pointer]:
+                - /url: https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=commons.wikimedia.org&uselang=en
+                - generic [ref=e41]: Donate
+            - listitem [ref=e42]:
+              - link "Create account" [ref=e43] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:CreateAccount&returnto=File%3ANearest+stars+and+brown+dwarfs.jpg
+            - listitem [ref=e44]:
+              - link "Log in" [ref=e45] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:UserLogin&returnto=File%3ANearest+stars+and+brown+dwarfs.jpg
+  - generic [ref=e47]:
+    - main [ref=e51]:
+      - heading "File:Nearest stars and brown dwarfs.jpg" [level=1] [ref=e53]
+      - generic [ref=e55]:
+        - navigation "Namespaces" [ref=e57]:
+          - generic [ref=e58]:
+            - generic:
+              - list:
+                - listitem [ref=e59]:
+                  - link "File" [ref=e60] [cursor=pointer]:
+                    - /url: /w/index.php?title=File:Nearest_stars_and_brown_dwarfs.jpg&action=edit&redlink=1
+                    - generic [ref=e61]: File
+                - listitem [ref=e62]:
+                  - link "Discussion" [ref=e63] [cursor=pointer]:
+                    - /url: /w/index.php?title=File_talk:Nearest_stars_and_brown_dwarfs.jpg&action=edit&redlink=1
+                    - generic [ref=e64]: Discussion
+        - generic [ref=e65]:
+          - navigation "Views" [ref=e66]:
+            - generic [ref=e67]:
+              - generic:
+                - list:
+                  - listitem [ref=e68]:
+                    - link "Create" [ref=e69] [cursor=pointer]:
+                      - /url: /w/index.php?title=File:Nearest_stars_and_brown_dwarfs.jpg&action=edit
+                      - generic [ref=e70]: Create
+          - navigation "Page tools" [ref=e71]:
+            - generic [ref=e72]:
+              - button "Tools" [ref=e73] [cursor=pointer]
+              - generic [ref=e75] [cursor=pointer]: Tools
+      - navigation "Appearance" [ref=e78]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: Appearance
+            - button "hide" [ref=e83] [cursor=pointer]
+          - generic [ref=e84]:
+            - generic [ref=e85]: Text
+            - list [ref=e87]:
+              - listitem [ref=e88]:
+                - generic [ref=e89]:
+                  - generic [ref=e90]:
+                    - generic [ref=e91]:
+                      - radio "Small" [disabled] [ref=e92]
+                      - generic [ref=e95]: Small
+                    - generic [ref=e96]:
+                      - radio "Standard" [disabled] [ref=e97]
+                      - generic [ref=e100]: Standard
+                    - generic [ref=e101]:
+                      - radio "Large" [disabled] [ref=e102]
+                      - generic [ref=e105]: Large
+                  - paragraph [ref=e106]: This page always uses small font size
+          - generic [ref=e107]:
+            - generic [ref=e108]: Width
+            - list [ref=e110]:
+              - listitem [ref=e111]:
+                - generic [ref=e113]:
+                  - generic [ref=e114]:
+                    - radio "Standard" [checked] [ref=e115]
+                    - generic [ref=e118]: Standard
+                  - generic [ref=e119]:
+                    - radio "Wide" [ref=e120]
+                    - generic [ref=e123]: Wide
+          - generic [ref=e124]:
+            - generic [ref=e125]:
+              - text: Color
+              - generic [ref=e126]: (beta)
+            - list [ref=e128]:
+              - listitem [ref=e129]:
+                - generic [ref=e131]:
+                  - generic [ref=e132]:
+                    - radio "Automatic" [ref=e133]
+                    - generic [ref=e136]: Automatic
+                  - generic [ref=e137]:
+                    - radio "Light" [checked] [ref=e138]
+                    - generic [ref=e141]: Light
+                  - generic [ref=e142]:
+                    - radio "Dark" [ref=e143]
+                    - generic [ref=e146]: Dark
+      - generic "File:Nearest stars and brown dwarfs.jpg" [ref=e147]:
+        - generic [ref=e148]:
+          - paragraph [ref=e150]: No file by this name exists.
+          - heading "File usage on Commons" [level=2] [ref=e151]
+          - paragraph [ref=e153]: There are no pages that use this file.
+    - contentinfo [ref=e155]:
+      - list
+      - list:
+        - listitem [ref=e156]:
+          - link "Privacy policy" [ref=e157] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy
+        - listitem [ref=e158]:
+          - link "About Wikimedia Commons" [ref=e159] [cursor=pointer]:
+            - /url: /wiki/Commons:Welcome
+        - listitem [ref=e160]:
+          - link "Disclaimers" [ref=e161] [cursor=pointer]:
+            - /url: /wiki/Commons:General_disclaimer
+        - listitem [ref=e162]:
+          - link "Code of Conduct" [ref=e163] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Universal_Code_of_Conduct
+        - listitem [ref=e164]:
+          - link "Developers" [ref=e165] [cursor=pointer]:
+            - /url: https://developer.wikimedia.org
+        - listitem [ref=e166]:
+          - link "Statistics" [ref=e167] [cursor=pointer]:
+            - /url: https://stats.wikimedia.org/#/commons.wikimedia.org
+        - listitem [ref=e168]:
+          - link "Cookie statement" [ref=e169] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Cookie_statement
+        - listitem [ref=e170]:
+          - link "Mobile view" [ref=e171] [cursor=pointer]:
+            - /url: //commons.wikimedia.org/w/index.php?title=File:Nearest_stars_and_brown_dwarfs.jpg&mobileaction=toggle_view_mobile
+      - list [ref=e172]:
+        - listitem [ref=e173]:
+          - link "Wikimedia Foundation" [ref=e174] [cursor=pointer]:
+            - /url: https://www.wikimedia.org/
+            - img "Wikimedia Foundation" [ref=e176]
+        - listitem [ref=e177]:
+          - link "Powered by MediaWiki" [ref=e178] [cursor=pointer]:
+            - /url: https://www.mediawiki.org/
+            - img "Powered by MediaWiki" [ref=e180]
+  - generic [ref=e181]:
+    - list

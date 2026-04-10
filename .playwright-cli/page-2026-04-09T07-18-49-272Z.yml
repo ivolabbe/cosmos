@@ -1,0 +1,706 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en-AU
+      - link "Accessibility feedback" [ref=e4] [cursor=pointer]
+  - generic [ref=e9]:
+    - search [ref=e10]:
+      - generic [ref=e12]:
+        - link "Go to Google Home" [ref=e14] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQPAgJ
+          - img [ref=e15]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - combobox "Search" [ref=e26]: uranus uranus
+            - generic [ref=e27]:
+              - button "Clear" [ref=e29] [cursor=pointer]:
+                - img [ref=e31]
+              - generic [ref=e34]:
+                - button "Search by voice" [ref=e35] [cursor=pointer]:
+                  - img [ref=e36]
+                - button "Search by image" [ref=e38] [cursor=pointer]:
+                  - img [ref=e39]
+          - button "Search" [ref=e41] [cursor=pointer]:
+            - img [ref=e44]
+    - generic [ref=e46]:
+      - button "Settings" [ref=e48] [cursor=pointer]:
+        - img [ref=e51]
+      - generic [ref=e54]:
+        - button "Google apps" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - link "Sign in" [ref=e61] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Duranus&ec=futura_srp_og_si_72236_p
+  - generic [ref=e63]:
+    - navigation [ref=e69]:
+      - generic [ref=e75]:
+        - list [ref=e76]:
+          - listitem [ref=e77]:
+            - link "All" [disabled] [ref=e78]:
+              - generic [ref=e80]: All
+          - listitem [ref=e81]:
+            - link "Images" [ref=e82] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCeKIwp94h-QiJ4lJfObsqU79yRFgWBtc5FGpXu1cRl7St18L8nYrByvJY-8silHpqUEqUXiXZ02nRvNaACwtqNcImKCwsq28flpQyz0AUM3s1pfaxQS1GvKuxSwrBicdI76QtFk82TSXO2_bOPaupsfiziow&q=uranus&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQtKgLegQILxAB
+              - generic [ref=e84]: Images
+          - listitem [ref=e85]:
+            - link "Videos" [ref=e86] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCeKIwp94h-QiJ4lJfObsqU79yRFgWBtc5FGpXu1cRl7St18L8nYrByvJY-8silHpqUEqUXiXZ02nRvNaACwtqNcImKCwsq28flpQyz0AUM3s1pfaxQS1GvKuxSwrBicdI76QtFk82TSXO2_bOPaupsfiziow&q=uranus&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQtKgLegQIKxAB
+              - generic [ref=e88]: Videos
+          - listitem [ref=e89]:
+            - link "Shopping" [ref=e90] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCeKIwp94h-QiJ4lJfObsqU79yRFgWBtc5FGpXu1cRl7St18L8nYrByvJY-8silHpqUEqUXiXZ02nRvNaACwtqNcImKCwsq28flpQyz0AUM3s1pfaxQS1GvKuxSwrBicdI76QtFk82TSXO2_bOPaupsfiziow&q=uranus&ved=1t:220175&ictx=111
+              - generic [ref=e92]: Shopping
+          - listitem [ref=e93]:
+            - link "Short videos" [ref=e94] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCeKIwp94h-QiJ4lJfObsqU79yRFgWBtc5FGpXu1cRl7St18L8nYrByvJY-8silHpqUEqUXiXZ02nRvNaACwtqNcImKCwsq28flpQyz0AUM3s1pfaxQS1GvKuxSwrBicdI76QtFk82TSXO2_bOPaupsfiziow&q=uranus&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQs6gLegQIIRAB
+              - generic [ref=e96]: Short videos
+          - listitem [ref=e97]:
+            - link "News" [ref=e98] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&q=uranus&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCeKIwp94h-QiJ4lJfObsqU79yRFgWBtc5FGpXu1cRl7St18L8nYrByvJY-8silHpqUEqUXiXZ02nRvNaACwtqNcImKCwsq28flpQyz0AUM3s1pfaxQS1GvKuxSwrBicdI76QtFk82TSXO2_bOPaupsfiziow&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ0pQJegQIHhAB
+              - generic [ref=e100]: News
+          - listitem [ref=e101]:
+            - link "Forums" [ref=e102] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCeKIwp94h-QiJ4lJfObsqU79yRFgWBtc5FGpXu1cRl7St18L8nYrByvJY-8silHpqUEqUXiXZ02nRvNaACwtqNcImKCwsq28flpQyz0AUM3s1pfaxQS1GvKuxSwrBicdI76QtFk82TSXO2_bOPaupsfiziow&q=uranus&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQs6gLegQIFxAB
+              - generic [ref=e104]: Forums
+          - listitem [ref=e105]:
+            - button "More filters" [ref=e106] [cursor=pointer]:
+              - generic "More filters" [ref=e107]:
+                - generic [ref=e108]:
+                  - generic [ref=e109]: More
+                  - img [ref=e111]
+        - button "Tools" [ref=e114] [cursor=pointer]:
+          - generic [ref=e116]:
+            - generic [ref=e117]: Tools
+            - img [ref=e119]
+    - heading "Search Results" [level=1] [ref=e121]
+    - generic [ref=e126]:
+      - generic [ref=e143]:
+        - generic [ref=e145]:
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - img [ref=e149]
+              - heading "AI Overview" [level=2] [ref=e151]
+            - button "About this result" [ref=e155]:
+              - img [ref=e157]
+          - generic [ref=e175]:
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - text: Uranus is the
+                - mark [ref=e179]: seventh planet from the Sun and the third-largest in our solar system
+                - text: ", characterized as a cold, windy icy giant. It is unique for rotating on its side, with a 97.77-degree tilt, likely due to an ancient collision. It has 28 known moons, faint rings, and a distinct cyan color caused by methane in its atmosphere."
+                - button "NASA (.gov) (+3) – View related links" [ref=e182] [cursor=pointer]:
+                  - generic [ref=e183]:
+                    - img "NASA (.gov)" [ref=e184]
+                    - generic [ref=e185]:
+                      - generic [ref=e186]: NASA (.gov)
+                      - generic [ref=e187]: "+3"
+              - strong [ref=e189]: Key Facts About Uranus
+              - list [ref=e190]:
+                - listitem [ref=e191]:
+                  - generic [ref=e192]:
+                    - strong [ref=e193]: "Discovery:"
+                    - text: Discovered in 1781 by William Herschel, it was the first planet found using a telescope.
+                - listitem [ref=e194]:
+                  - generic [ref=e195]:
+                    - strong [ref=e196]: "Orbit and Rotation:"
+                    - text: One day takes 17 hours, and it takes 84 Earth years to orbit the Sun. Its extreme, 21-year-long seasons are caused by its extreme tilt.
+                - listitem [ref=e197]:
+                  - generic [ref=e198]:
+                    - strong [ref=e199]: "Atmosphere and Climate:"
+                    - text: It has the coldest atmosphere in the solar system, with temperatures reaching as low as -370°F (-218°C).
+                - generic [ref=e200]:
+                  - listitem [ref=e201]:
+                    - generic [ref=e202]:
+                      - strong [ref=e203]: "Composition:"
+                      - text: Primarily composed of water, ammonia, and methane "ices" above a solid core.
+                  - listitem [ref=e204]:
+                    - generic [ref=e205]:
+                      - strong [ref=e206]: "Moons:"
+                      - text: "Known moons include five major ones: Miranda, Ariel, Umbriel, Titania, and Oberon."
+                  - listitem [ref=e207]:
+                    - generic [ref=e208]:
+                      - strong [ref=e209]: "Exploration:"
+                      - text: Only one spacecraft, NASA's
+                      - generic [ref=e210]: Voyager 2
+                      - text: ", has flown by Uranus (in January 1986)."
+                    - button [ref=e213] [cursor=pointer]:
+                      - generic [ref=e214]:
+                        - img [ref=e215]
+                        - generic [ref=e216]:
+                          - generic [ref=e217]: NASA (.gov)
+                          - generic [ref=e218]: "+4"
+              - generic [ref=e219]:
+                - strong [ref=e221]: Unique Characteristics
+                - list [ref=e222]:
+                  - listitem [ref=e223]:
+                    - generic [ref=e224]:
+                      - strong [ref=e225]: "Sideways Spin:"
+                      - text: Unlike other planets, Uranus rolls along its orbital path.
+                  - listitem [ref=e226]:
+                    - generic [ref=e227]:
+                      - strong [ref=e228]: "Faint Rings:"
+                      - text: Uranus has a system of 13 known faint, dark rings.
+                  - listitem [ref=e229]:
+                    - generic [ref=e230]:
+                      - strong [ref=e231]: "Coldest Planet:"
+                      - text: Despite being closer to the Sun than Neptune, it is the coldest planet.
+                  - listitem [ref=e232]:
+                    - generic [ref=e233]:
+                      - strong [ref=e234]: "Name Origin:"
+                      - text: Named after the Greek sky deity Uranus (Ouranos), it is the only planet named after a Greek figure rather than a Roman one.
+                    - button [ref=e237] [cursor=pointer]:
+                      - generic [ref=e238]:
+                        - img [ref=e239]
+                        - generic [ref=e240]:
+                          - generic [ref=e241]: YouTube
+                          - generic [ref=e242]: "+4"
+                - generic [ref=e243]:
+                  - text: You can view images of the planet from the James Webb Telescope, including its rings and moons, at
+                  - link [ref=e245] [cursor=pointer]:
+                    - /url: /url?sa=i&source=web&rct=j&url=https://science.nasa.gov/uranus/&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQy_kOegYIAQgBEAk&opi=89978449&cd&psig=AOvVaw2J-u0pZ1w82pryZwNnHV1P&ust=1775805528096000
+                    - text: NASA's Science website
+                  - text: .
+                  - button [ref=e248] [cursor=pointer]:
+                    - img [ref=e250]
+            - generic [ref=e257]:
+              - list [ref=e259]:
+                - listitem [ref=e260]:
+                  - generic [ref=e261]:
+                    - link "Uranus 101 | National Geographic. Opens in new tab." [ref=e262] [cursor=pointer]:
+                      - /url: /url?sa=i&source=web&rct=j&url=https://www.youtube.com/watch?v%3Dm4NXbFOiOGk%26t%3D1&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQqYcPegYIAQgAECg&opi=89978449&cd&psig=AOvVaw2J-u0pZ1w82pryZwNnHV1P&ust=1775805528096000
+                    - generic [ref=e263]:
+                      - generic [ref=e264]:
+                        - generic [ref=e265]: Uranus 101 | National Geographic
+                        - generic [ref=e266]: Uranus is the seventh planet from the sun. It is located approximately 20 times the distance between Earth and the Sun. Uranus com...
+                        - generic [ref=e267]:
+                          - img [ref=e271]
+                          - generic [ref=e276]:
+                            - generic [ref=e277]: YouTube
+                            - generic [ref=e278]: ·
+                            - generic [ref=e279]: National Geographic
+                          - button "About this result" [ref=e281] [cursor=pointer]:
+                            - img [ref=e282]
+                      - button "undefined" [ref=e286] [cursor=pointer]:
+                        - generic [ref=e288]:
+                          - img [ref=e289]
+                          - generic [ref=e291]: 4m
+                        - img [ref=e296]
+                - listitem [ref=e299]:
+                  - generic [ref=e300]:
+                    - link "Uranus - NASA Science. Opens in new tab." [ref=e301] [cursor=pointer]:
+                      - /url: /url?sa=i&source=web&rct=j&url=https://science.nasa.gov/uranus/&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQqYcPegYIAQgAEC4&opi=89978449&cd&psig=AOvVaw2J-u0pZ1w82pryZwNnHV1P&ust=1775805528096000
+                    - generic [ref=e303]:
+                      - generic [ref=e304]: Uranus - NASA Science
+                      - generic [ref=e305]: Uranus is the seventh planet from the Sun, and the third largest planet in our solar system. It appears to spin sideways. Facts. E...
+                      - generic [ref=e306]:
+                        - generic [ref=e311]: NASA (.gov)
+                        - button [ref=e313] [cursor=pointer]:
+                          - img [ref=e314]
+                - listitem [ref=e318]:
+                  - generic [ref=e319]:
+                    - link [ref=e320] [cursor=pointer]:
+                      - /url: /url?sa=i&source=web&rct=j&url=https://science.nasa.gov/uranus/facts/&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQqYcPegYIAQgAEDI&opi=89978449&cd&psig=AOvVaw2J-u0pZ1w82pryZwNnHV1P&ust=1775805528096000
+                    - generic [ref=e322]:
+                      - generic [ref=e323]: "Uranus: Facts - NASA Science"
+                      - generic [ref=e324]: From an average distance of 1.8 billion miles (2.9 billion kilometers), Uranus is about 19 astronomical units away from the Sun. O...
+                      - generic [ref=e325]:
+                        - generic [ref=e330]: NASA Science (.gov)
+                        - button [ref=e332] [cursor=pointer]:
+                          - img [ref=e333]
+              - button [ref=e338] [cursor=pointer]:
+                - generic [ref=e339]: Show all
+        - button "Show more AI Overview" [ref=e343]:
+          - generic [ref=e345] [cursor=pointer]:
+            - generic [ref=e346]: Show more
+            - img [ref=e348]
+      - main [ref=e351]:
+        - generic [ref=e355]:
+          - generic [ref=e356]:
+            - generic [ref=e364]:
+              - heading "Uranus" [level=2] [ref=e367]
+              - generic [ref=e368]:
+                - generic [ref=e370]: Planet
+                - button "More options for Uranus" [ref=e376] [cursor=pointer]:
+                  - img "More options for Uranus" [ref=e377]:
+                    - img [ref=e379]
+            - complementary "Featured results" [ref=e385]:
+              - generic [ref=e387]:
+                - list [ref=e392]:
+                  - listitem [ref=e393]:
+                    - button "Image of Uranus - Wikipedia" [ref=e396] [cursor=pointer]:
+                      - img "Image of Uranus - Wikipedia" [ref=e399]
+                  - listitem [ref=e400]:
+                    - 'button "Image of Uranus: A guide to the coldest planet in the solar system ..." [ref=e403] [cursor=pointer]':
+                      - 'img "Image of Uranus: A guide to the coldest planet in the solar system ..." [ref=e406]'
+                  - listitem [ref=e407]:
+                    - button "Image of Uranus" [ref=e410] [cursor=pointer]:
+                      - img "Image of Uranus" [ref=e413]
+                  - listitem [ref=e414]:
+                    - button "Image of Uranus 101 | National Geographic - YouTube" [ref=e417] [cursor=pointer]:
+                      - img "Image of Uranus 101 | National Geographic - YouTube" [ref=e420]
+                  - listitem [ref=e421]:
+                    - link [ref=e425] [cursor=pointer]:
+                      - /url: /search?sca_esv=6234f0784a7aac09&q=uranus&udm=2&source=univ&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQnN8JegQIGhAD
+                      - img [ref=e428]
+                - generic [ref=e435]:
+                  - generic [ref=e436]: Uranus is the seventh planet from the Sun. It is a gaseous cyan-coloured ice giant. Most of the planet is made of water, ammonia, and methane in a supercritical phase of matter, which astronomy calls "ice" or volatiles.
+                  - generic [ref=e437]:
+                    - text: "Source:"
+                    - link "Wikipedia" [ref=e438] [cursor=pointer]:
+                      - /url: https://en.wikipedia.org/wiki/Uranus
+                      - generic [ref=e440]: Wikipedia
+                - generic [ref=e444] [cursor=pointer]:
+                  - button "Moons" [ref=e445]:
+                    - generic [ref=e446]: Moons
+                    - generic:
+                      - generic:
+                        - img
+                  - generic [ref=e450]:
+                    - generic [ref=e452]: Setebos, Umbriel, Miranda, Titania, Ariel, Oberon, Puck, Trinculo, Perdita, Sycorax, Margaret, Rosalind, Ophelia, Caliban, Desdemona, Juliet, Ferdinand, Cupid, S/2023 U 1, Bianca, Prospero, Belinda, Stephano, Portia, Cressida, Francisco, Cordelia, Mab
+                    - generic [ref=e457]:
+                      - button "+27"
+                - link "Orbital period 84 years" [ref=e462] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=uranus+orbital+period&stick=H4sIAAAAAAAAAOPgE-LQz9U3SDYuLtYyzE620k8sLinKz8vPrdTPL0rKLEnMiS9KzUksyczPK87ILLCCCioUpBZl5qcsYhUtLUrMKy1WQBUHAD-vGFpXAAAA&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ18AJegQIKBAB
+                  - generic [ref=e463]:
+                    - generic [ref=e464]: Orbital period
+                    - generic [ref=e469]: 84 years
+            - generic [ref=e471]:
+              - heading "Web results" [level=2] [ref=e472]
+              - generic [ref=e473]:
+                - generic [ref=e476]:
+                  - link "Uranus Wikipedia https://en.wikipedia.org › wiki › Uranus" [ref=e478] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Uranus
+                    - heading "Uranus" [level=3] [ref=e479]
+                    - generic [ref=e484]:
+                      - generic [ref=e486]: Wikipedia
+                      - generic [ref=e488]: https://en.wikipedia.org › wiki › Uranus
+                  - button "About this result" [ref=e489] [cursor=pointer]:
+                    - img [ref=e492]
+                - generic [ref=e495]:
+                  - generic [ref=e496]:
+                    - emphasis [ref=e497]: Uranus is the seventh planet from the Sun
+                    - text: . It is a gaseous cyan-coloured ice giant. Most of the planet is made of water, ammonia, and methane in a ...
+                  - link "Read more" [ref=e498] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Uranus#:~:text=Uranus%20is%20the%20seventh%20planet,astronomy%20calls%20%22ice%22%20or%20volatiles.
+          - generic [ref=e499]:
+            - generic [ref=e511]:
+              - generic [ref=e515]:
+                - generic [ref=e516]: Discoverer
+                - link "William Herschel" [ref=e519] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=William+Herschel&si=AL3DRZHmwLjWhgnaPB3UTu10R6S5qNLXiQiKMeezfKyB1FMsRpdd8nli6Qm0wrJ7oQzjAy6pmx4lPyUidQugg5YwKL3yhC6ITTHI66KnCSsGPTHR7eUW3g9LNOFmLopE8_dNlddsIXb7w3AoaLxbGLDo5GyGzlHrqFfA5LXQAkWX59rRL94EUAuLNJnAOxDZocQoMdjp2lOO&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQmxN6BAgbEAI
+              - generic [ref=e523]:
+                - generic [ref=e524]: Discovered
+                - generic [ref=e526]: 13 March 1781
+              - generic [ref=e530]:
+                - generic [ref=e531]: Length of day
+                - generic [ref=e533]: 0d 17h 14m
+              - generic [ref=e537]:
+                - generic [ref=e538]: Distance from Sun
+                - generic [ref=e540]: 2.871 billion km
+              - generic [ref=e544]:
+                - generic [ref=e545]: Radius
+                - generic [ref=e547]: 25,362 km
+            - generic [ref=e550]:
+              - heading "People also search for" [level=3] [ref=e552]
+              - generic [ref=e557]:
+                - list [ref=e558]:
+                  - listitem [ref=e560]:
+                    - generic [ref=e561]:
+                      - link "Neptune":
+                        - /url: /search?sca_esv=6234f0784a7aac09&si=AL3DRZHmwLjWhgnaPB3UTu10R6S5qNLXiQiKMeezfKyB1FMsRgbdTH0GEeQjW_wwla1U4BC0HH9T3Wte_KMpnmPo8obgf2Iv6c7kvAoMMc4YS312FXpU_pSz5DN-T_L6sTcaHBrXGtO9fa1r6NHcSo-v0-6WmBnHmcSjVCFVGtTqsU_wq6FWFDL4_jgByNrSK1HynCuV-AUw&q=Neptune&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQs9oBKAB6BAgPEAY
+                      - heading [level=3] [ref=e566]:
+                        - generic [ref=e567]: Neptune
+                  - listitem [ref=e569]:
+                    - generic [ref=e570]:
+                      - link "Saturn":
+                        - /url: /search?sca_esv=6234f0784a7aac09&si=AL3DRZHmwLjWhgnaPB3UTu10R6S5qNLXiQiKMeezfKyB1FMsRme8ga07UqkERVGmW0rvRDt3ixkZwa10K8EHTNaZfhkUBap3CQGYbEx-SrqBWSPZ0X8-RlRNaqIMY8A5S6xpGqDohSpUjK6xJToQYc2rcZG75oUcU_ISA0fdZE3XnBNJ8VI6ZMBj53kbG5Ltz_clVDzL1g3N&q=Saturn&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQs9oBKAB6BAgPEAo
+                      - heading [level=3] [ref=e575]:
+                        - generic [ref=e576]: Saturn
+                  - listitem [ref=e578]:
+                    - generic [ref=e579]:
+                      - link "Jupiter":
+                        - /url: /search?sca_esv=6234f0784a7aac09&si=AL3DRZHmwLjWhgnaPB3UTu10R6S5qNLXiQiKMeezfKyB1FMsRpO-N_EYqz02H3gAQrNUhiIUL_WlcvsCq2l0i7tsJbnjcNuvM3_dBu6iddnuwfUUc5eKj5VZT4g1Rg6NTlEltOJoXukwZLUIO8Qv8PxCSuWY1Kj7S_GaOoFsZgilH6RFAvJb7KWvlarE2Co7AiGx0XvteDTB&q=Jupiter&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQs9oBKAB6BAgPEA4
+                      - heading [level=3] [ref=e584]:
+                        - generic [ref=e585]: Jupiter
+                  - listitem [ref=e587]:
+                    - generic [ref=e588]:
+                      - link "Pluto":
+                        - /url: /search?sca_esv=6234f0784a7aac09&si=AL3DRZHmwLjWhgnaPB3UTu10R6S5qNLXiQiKMeezfKyB1FMsRqdDvZ9Czi_QnfY0DJpdZL812JFKACN_o5bR5cX2-nu2sOGsM3F-8t1r91ItFVngF9L0Iw-g2dr3OyJ3v4cHzHBG3A7LGaxALvgpJsLQUyRJGJiDQKGJds51EppUtmRDWPwFLM5_L0NPL0DHofTaabVWpxDT&q=Pluto&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQs9oBKAB6BAgPEBI
+                      - heading [level=3] [ref=e593]:
+                        - generic [ref=e594]: Pluto
+                - link "See more" [ref=e596] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus&stick=H4sIAAAAAAAAAONgFuLQz9U3SDYuLlaCs7QEgzNTUssTK4v9UitKgktSC4p_MYoFpOYX5KQqJOYU5ysUpyYWJWcopOUXLWJlCy1KzCstvsUmybBU-Tb_s9CMhbEVx54oz3r3fFpTn9WKVNM8AOz-vbtnAAAA&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQzO0BKAR6BAgPEBQ
+                  - generic [ref=e597]:
+                    - generic [ref=e598]: See more
+                    - img [ref=e600]
+            - generic [ref=e604]:
+              - heading "People also ask" [level=2] [ref=e606]
+              - generic [ref=e607]:
+                - button "What are 5 facts about Uranus?" [ref=e613] [cursor=pointer]:
+                  - generic [ref=e615]: What are 5 facts about Uranus?
+                  - img [ref=e618]
+                - button "What is the most unloved planet?" [ref=e627] [cursor=pointer]:
+                  - generic [ref=e629]: What is the most unloved planet?
+                  - img [ref=e632]
+                - button "Why is Uranus so famous?" [ref=e641] [cursor=pointer]:
+                  - generic [ref=e643]: Why is Uranus so famous?
+                  - img [ref=e646]
+                - button "What is Uranus also known as?" [ref=e655] [cursor=pointer]:
+                  - generic [ref=e657]: What is Uranus also known as?
+                  - img [ref=e660]
+          - generic [ref=e665]:
+            - heading "Web results" [level=2] [ref=e666]
+            - generic [ref=e667]:
+              - generic [ref=e670]:
+                - link "Uranus NASA (.gov) https://science.nasa.gov › uranus" [ref=e672] [cursor=pointer]:
+                  - /url: https://science.nasa.gov/uranus/
+                  - heading "Uranus" [level=3] [ref=e673]
+                  - generic [ref=e678]:
+                    - generic [ref=e680]: NASA (.gov)
+                    - generic [ref=e682]: https://science.nasa.gov › uranus
+                - button "About this result" [ref=e683] [cursor=pointer]:
+                  - img [ref=e686]
+              - generic [ref=e689]:
+                - generic [ref=e690]:
+                  - emphasis [ref=e691]: Uranus is the seventh planet from the Sun
+                  - text: ", and the third largest planet in our solar system – about four times wider than Earth. Uranus is very cold and ..."
+                - link "Read more" [ref=e692] [cursor=pointer]:
+                  - /url: https://science.nasa.gov/uranus/#:~:text=Uranus%20is%20the%20seventh%20planet,is%20very%20cold%20and%20windy.
+          - generic [ref=e696]:
+            - generic [ref=e699]:
+              - 'link "Uranus: Facts NASA Science (.gov) https://science.nasa.gov › uranus › facts" [ref=e701] [cursor=pointer]':
+                - /url: https://science.nasa.gov/uranus/facts/
+                - 'heading "Uranus: Facts" [level=3] [ref=e702]'
+                - generic [ref=e707]:
+                  - generic [ref=e709]: NASA Science (.gov)
+                  - generic [ref=e711]: https://science.nasa.gov › uranus › facts
+              - button "About this result" [ref=e712] [cursor=pointer]:
+                - img [ref=e715]
+            - generic [ref=e718]:
+              - generic [ref=e719]: 21 Apr 2025 —
+              - generic [ref=e720]:
+                - emphasis [ref=e721]: Uranus is the seventh planet from the Sun
+                - text: ", and it has the third largest diameter of planets in our solar system. Uranus appears to spin sideways ..."
+              - link "Read more" [ref=e722] [cursor=pointer]:
+                - /url: https://science.nasa.gov/uranus/facts/#:~:text=Uranus%20is%20the%20seventh%20planet,Uranus%20appears%20to%20spin%20sideways.
+          - generic [ref=e726]:
+            - generic [ref=e728]:
+              - heading "Videos" [level=2] [ref=e729]
+              - button "About this result" [ref=e730] [cursor=pointer]:
+                - img [ref=e733]
+            - generic [ref=e736]:
+              - generic [ref=e741]:
+                - generic [ref=e742]:
+                  - generic [ref=e743]:
+                    - link "Is Uranus Actually a Rock Giant? YouTube Astrum 1 month ago" [ref=e745] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=wKcMvR2C0oA
+                      - heading "Is Uranus Actually a Rock Giant? YouTube Astrum 1 month ago" [level=3] [ref=e746]:
+                        - generic [ref=e749]: Is Uranus Actually a Rock Giant?
+                        - generic [ref=e751]:
+                          - generic [ref=e752]:
+                            - text: YouTube
+                            - generic [ref=e753]: · Astrum
+                          - generic [ref=e754]: 1 month ago
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Astrum
+                        - button "About this result" [ref=e755] [cursor=pointer]:
+                          - img [ref=e758]
+                  - button "Is Uranus Actually a Rock Giant? by Astrum on YouTube. Play on Google. 24:39" [ref=e760] [cursor=pointer]:
+                    - generic [ref=e761]:
+                      - img [ref=e764]
+                      - generic [ref=e767]:
+                        - generic [ref=e768]: 24:39
+                        - img [ref=e771]
+                - button "Uranus, a mysterious planet with a tilted axis, has a complex interior, dynamic atmosphere, and a ring system." [ref=e774] [cursor=pointer]:
+                  - generic [ref=e778]: Uranus, a mysterious planet with a tilted axis, has a complex interior, dynamic atmosphere, and a ring system.
+              - generic [ref=e784]:
+                - generic [ref=e785]:
+                  - generic [ref=e786]:
+                    - link "Uranus for Kids | Learn all about the 7th planet from the sun YouTube Learn Bright 7 May 2025" [ref=e788] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=Q3O0gPlqBv8
+                      - heading "Uranus for Kids | Learn all about the 7th planet from the sun YouTube Learn Bright 7 May 2025" [level=3] [ref=e789]:
+                        - generic [ref=e792]: Uranus for Kids | Learn all about the 7th planet from the sun
+                        - generic [ref=e794]:
+                          - generic [ref=e795]:
+                            - text: YouTube
+                            - generic [ref=e796]: · Learn Bright
+                          - generic [ref=e797]: 7 May 2025
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Learn Bright
+                        - button "About this result" [ref=e798] [cursor=pointer]:
+                          - img [ref=e801]
+                  - button "Uranus for Kids | Learn all about the 7th planet from the sun by Learn Bright on YouTube. Play on Google. 4:38" [ref=e803] [cursor=pointer]:
+                    - generic [ref=e804]:
+                      - img [ref=e810]
+                      - generic [ref=e813]:
+                        - generic [ref=e814]: 4:38
+                        - img [ref=e817]
+                - button "Uranus is the 7th planet from the sun, an ice giant named after the Greek god of the sky, with 28 moons and a unique 98° tilt." [ref=e820] [cursor=pointer]:
+                  - generic [ref=e824]: Uranus is the 7th planet from the sun, an ice giant named after the Greek god of the sky, with 28 moons and a unique 98° tilt.
+              - generic [ref=e830]:
+                - generic [ref=e831]:
+                  - generic [ref=e832]:
+                    - link "Uranus 101 | National Geographic YouTube National Geographic 2 Feb 2019" [ref=e834] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=m4NXbFOiOGk
+                      - heading "Uranus 101 | National Geographic YouTube National Geographic 2 Feb 2019" [level=3] [ref=e835]:
+                        - generic [ref=e838]: Uranus 101 | National Geographic
+                        - generic [ref=e840]:
+                          - generic [ref=e841]:
+                            - text: YouTube
+                            - generic [ref=e842]: · National Geographic
+                          - generic [ref=e843]: 2 Feb 2019
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · National Geographic
+                        - button "About this result" [ref=e844] [cursor=pointer]:
+                          - img [ref=e847]
+                  - button "Uranus 101 | National Geographic by National Geographic on YouTube. Play on Google. 4:10" [ref=e849] [cursor=pointer]:
+                    - generic [ref=e850]:
+                      - img [ref=e856]
+                      - generic [ref=e859]:
+                        - generic [ref=e860]: 4:10
+                        - img [ref=e863]
+                - button "Uranus is the 7th planet from the sun, orbiting once every 84 Earth years. It's the coldest planet at -370°F." [ref=e866] [cursor=pointer]:
+                  - generic [ref=e870]: Uranus is the 7th planet from the sun, orbiting once every 84 Earth years. It's the coldest planet at -370°F.
+            - link "View all videos" [ref=e873] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&q=uranus&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8ccDKAJ6BAhYEAQ
+              - separator [ref=e874]
+              - generic [ref=e875]:
+                - generic [ref=e876]: View all
+                - img [ref=e878]
+          - generic [ref=e882]:
+            - heading "Web results" [level=2] [ref=e883]
+            - generic [ref=e884]:
+              - generic [ref=e887]:
+                - 'link "Solar System: Uranus Villanova College https://icentre.vnc.qld.edu.au › solarsystem › uranus" [ref=e889] [cursor=pointer]':
+                  - /url: https://icentre.vnc.qld.edu.au/solarsystem/uranus
+                  - 'heading "Solar System: Uranus" [level=3] [ref=e890]'
+                  - generic [ref=e895]:
+                    - generic [ref=e897]: Villanova College
+                    - generic [ref=e899]: https://icentre.vnc.qld.edu.au › solarsystem › uranus
+                - button "About this result" [ref=e900] [cursor=pointer]:
+                  - img [ref=e903]
+              - generic [ref=e906]:
+                - generic [ref=e907]: 27 Jan 2026 —
+                - generic [ref=e908]:
+                  - emphasis [ref=e909]: Uranus
+                  - text: was the first planet to be discovered after the invention of the telescope. It is the seventh planet from the sun.
+                - link "Read more" [ref=e910] [cursor=pointer]:
+                  - /url: https://icentre.vnc.qld.edu.au/solarsystem/uranus#:~:text=%22Uranus%20was%20the%20first%20planet,seventh%20planet%20from%20the%20sun...
+          - generic [ref=e914]:
+            - generic [ref=e917]:
+              - 'link "Uranus: A guide to the coldest planet in the solar system Space https://www.space.com › ... › Solar System › Uranus" [ref=e919] [cursor=pointer]':
+                - /url: https://www.space.com/45-uranus-seventh-planet-in-earths-solar-system-was-first-discovered-planet.html
+                - 'heading "Uranus: A guide to the coldest planet in the solar system" [level=3] [ref=e920]'
+                - generic [ref=e925]:
+                  - generic [ref=e927]: Space
+                  - generic [ref=e929]: https://www.space.com › ... › Solar System › Uranus
+              - button "About this result" [ref=e930] [cursor=pointer]:
+                - img [ref=e933]
+            - generic [ref=e936]:
+              - generic [ref=e937]: 5 June 2023 —
+              - generic [ref=e938]:
+                - emphasis [ref=e939]: Uranus has the coldest atmosphere of any of the planets in the solar system
+                - text: ", even though it is not the most distant from the sun."
+              - link "Read more" [ref=e940] [cursor=pointer]:
+                - /url: https://www.space.com/45-uranus-seventh-planet-in-earths-solar-system-was-first-discovered-planet.html#:~:text=Uranus%20has%20the%20coldest%20atmosphere,the%20heat%20from%20the%20sun.
+          - generic [ref=e944]:
+            - generic [ref=e947]:
+              - link "Uranus, the sideways planet The Planetary Society https://www.planetary.org › worlds › uranus" [ref=e949] [cursor=pointer]:
+                - /url: https://www.planetary.org/worlds/uranus
+                - heading "Uranus, the sideways planet" [level=3] [ref=e950]
+                - generic [ref=e955]:
+                  - generic [ref=e957]: The Planetary Society
+                  - generic [ref=e959]: https://www.planetary.org › worlds › uranus
+              - button "About this result" [ref=e960] [cursor=pointer]:
+                - img [ref=e963]
+            - generic [ref=e966]:
+              - generic [ref=e967]:
+                - emphasis [ref=e968]: Uranus, the seventh planet from the sun
+                - text: ", is a cyan-colored world tipped on its side boasting rings and 27 known moons. Uranus-sized worlds ..."
+              - link "Read more" [ref=e969] [cursor=pointer]:
+                - /url: https://www.planetary.org/worlds/uranus#:~:text=Uranus%2C%20the%20seventh%20planet%20from,or%20not%20ours%20is%20unique.
+          - generic [ref=e973]:
+            - generic [ref=e976]:
+              - link "Uranus National Air and Space Museum https://airandspace.si.edu › explore › stories › uranus" [ref=e978] [cursor=pointer]:
+                - /url: https://airandspace.si.edu/explore/stories/uranus
+                - heading "Uranus" [level=3] [ref=e979]
+                - generic [ref=e984]:
+                  - generic [ref=e986]: National Air and Space Museum
+                  - generic [ref=e988]: https://airandspace.si.edu › explore › stories › uranus
+              - button "About this result" [ref=e989] [cursor=pointer]:
+                - img [ref=e992]
+            - generic [ref=e995]:
+              - generic [ref=e996]:
+                - emphasis [ref=e997]: Uranus
+                - text: ", also known as the Tilted Giant for its unique tilted rotation that makes it appear to spin on its side, is the second outermost planet in our Solar ..."
+              - link "Read more" [ref=e998] [cursor=pointer]:
+                - /url: https://airandspace.si.edu/explore/stories/uranus#:~:text=Uranus%2C%20also%20known%20as%20the,planet%20in%20our%20Solar%20System.
+          - generic [ref=e1002]:
+            - generic [ref=e1005]:
+              - link "Top 10 Facts About Uranus! Fun Kids https://www.funkidslive.com › learn › top-10-facts-abo..." [ref=e1007] [cursor=pointer]:
+                - /url: https://www.funkidslive.com/learn/top-10-facts/top-10-facts-about-uranus/
+                - heading "Top 10 Facts About Uranus!" [level=3] [ref=e1008]
+                - generic [ref=e1013]:
+                  - generic [ref=e1015]: Fun Kids
+                  - generic [ref=e1017]: https://www.funkidslive.com › learn › top-10-facts-abo...
+              - button "About this result" [ref=e1018] [cursor=pointer]:
+                - img [ref=e1021]
+            - generic [ref=e1024]:
+              - generic [ref=e1025]:
+                - emphasis [ref=e1026]: Uranus is the seventh planet from the Sun and the third-largest in the Solar System
+                - text: . It is one of the four giant planets in the Solar System.
+              - link "Read more" [ref=e1027] [cursor=pointer]:
+                - /url: https://www.funkidslive.com/learn/top-10-facts/top-10-facts-about-uranus/#:~:text=Uranus%20is%20the%20seventh%20planet,due%20to%20its%20methane%2Drich%20atmosphere.
+          - generic [ref=e1031]:
+            - generic [ref=e1034]:
+              - link "Uranus (mythology) Wikipedia https://en.wikipedia.org › wiki › Uranus_(mythology)" [ref=e1036] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Uranus_(mythology)
+                - heading "Uranus (mythology)" [level=3] [ref=e1037]
+                - generic [ref=e1042]:
+                  - generic [ref=e1044]: Wikipedia
+                  - generic [ref=e1046]: https://en.wikipedia.org › wiki › Uranus_(mythology)
+              - button "About this result" [ref=e1047] [cursor=pointer]:
+                - img [ref=e1050]
+            - generic [ref=e1053]:
+              - generic [ref=e1054]:
+                - text: According to Hesiod,
+                - emphasis [ref=e1055]: Uranus
+                - text: was the son and husband of Gaia (Earth), with whom he fathered the first generation of Titans.
+              - link "Read more" [ref=e1056] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Uranus_(mythology)#:~:text=According%20to%20Hesiod%2C%20Uranus%20was,the%20first%20generation%20of%20Titans.
+            - list [ref=e1058]:
+              - listitem [ref=e1059]:
+                - link "Etymology" [ref=e1060] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Uranus_(mythology)#Etymology
+                  - generic [ref=e1063]: Etymology
+              - listitem [ref=e1064]:
+                - link "Genealogy" [ref=e1065] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Uranus_(mythology)#Genealogy
+                  - generic [ref=e1068]: Genealogy
+              - listitem [ref=e1069]:
+                - link "Mythology" [ref=e1070] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Uranus_(mythology)#Mythology
+                  - generic [ref=e1073]: Mythology
+              - listitem [ref=e1074]:
+                - link "Comparative mythology" [ref=e1075] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Uranus_(mythology)#Comparative_mythology
+                  - generic [ref=e1078]: Comparative mythology
+        - generic [ref=e1080]:
+          - generic [ref=e1085]:
+            - heading "People also search for" [level=2] [ref=e1087]
+            - generic [ref=e1089]:
+              - generic [ref=e1090]:
+                - link "Uranus pronunciation" [ref=e1094] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+pronunciation&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhgEAE
+                  - generic [ref=e1095]:
+                    - generic [ref=e1100]: Uranus pronunciation
+                    - img [ref=e1104]
+                - link "Uranus god" [ref=e1109] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+god&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhmEAE
+                  - generic [ref=e1110]:
+                    - generic [ref=e1115]: Uranus god
+                    - img [ref=e1119]
+                - link "Uranus moons" [ref=e1124] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+moons&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhnEAE
+                  - generic [ref=e1125]:
+                    - generic [ref=e1130]: Uranus moons
+                    - img [ref=e1134]
+                - link "Uranus rings" [ref=e1139] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+rings&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhhEAE
+                  - generic [ref=e1140]:
+                    - generic [ref=e1145]: Uranus rings
+                    - img [ref=e1149]
+              - generic [ref=e1151]:
+                - link "Uranus name" [ref=e1155] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+name&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhkEAE
+                  - generic [ref=e1156]:
+                    - generic [ref=e1161]: Uranus name
+                    - img [ref=e1165]
+                - link "Uranus weather" [ref=e1170] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+weather&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhiEAE
+                  - generic [ref=e1171]:
+                    - generic [ref=e1176]: Uranus weather
+                    - img [ref=e1180]
+                - link "Uranus colour" [ref=e1185] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+colour&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhlEAE
+                  - generic [ref=e1186]:
+                    - generic [ref=e1191]: Uranus colour
+                    - img [ref=e1195]
+                - link "Uranus Facts" [ref=e1200] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Uranus+Facts&sa=X&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ1QJ6BAhjEAE
+                  - generic [ref=e1201]:
+                    - generic [ref=e1206]: Uranus Facts
+                    - img [ref=e1210]
+          - navigation [ref=e1212]:
+            - heading "Page navigation" [level=1] [ref=e1213]
+            - text: "1"
+            - link "Page 2" [ref=e1216] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=10&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAE
+              - text: "2"
+            - link "Page 3" [ref=e1218] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=20&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAG
+              - text: "3"
+            - link "Page 4" [ref=e1220] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=30&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAI
+              - text: "4"
+            - link "Page 5" [ref=e1222] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=40&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAK
+              - text: "5"
+            - link "Page 6" [ref=e1224] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=50&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAM
+              - text: "6"
+            - link "Page 7" [ref=e1226] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=60&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAO
+              - text: "7"
+            - link "Page 8" [ref=e1228] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=70&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAQ
+              - text: "8"
+            - link "Page 9" [ref=e1230] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=80&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAS
+              - text: "9"
+            - link "Page 10" [ref=e1232] [cursor=pointer]:
+              - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=90&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8tMDegQIChAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e1234]:
+              - link "Next" [ref=e1235] [cursor=pointer]:
+                - /url: /search?q=uranus&sca_esv=6234f0784a7aac09&ei=11LXaZ2mPOeQp84P0IDw2Qc&start=10&sa=N&sstk=Af77f_eoKpK_ZcH5foUXD5zm_Vzx4DpMOMfgQIt-dUQlAodHE99PCJA0ar2ZZ6xk0hGInX4ggnECzTWN4imNJ90TpkP4BZFo__k5Ng&ved=2ahUKEwjd7eCeneCTAxVnyMkDHVAAPHsQ8NMDegQIChAW
+                - generic [ref=e1237]: Next
+        - navigation
+    - contentinfo [ref=e1240]:
+      - heading "Footer links" [level=1] [ref=e1241]
+      - generic [ref=e1245]:
+        - generic [ref=e1247]:
+          - text: Australia
+          - generic [ref=e1249]:
+            - button "3101, Melbourne VIC - From your IP address" [ref=e1251] [cursor=pointer]:
+              - generic [ref=e1252]: 3101, Melbourne VIC
+              - generic [ref=e1254]:
+                - text: "-"
+                - generic [ref=e1255]: From your IP address
+            - text: "-"
+            - button "Update location" [ref=e1257] [cursor=pointer]: Update location
+        - generic [ref=e1260]:
+          - link "Help" [ref=e1261] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en-AU&fg=1
+          - link "Send feedback" [ref=e1262] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e1263] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en-AU&fg=1
+          - link "Terms" [ref=e1264] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en-AU&fg=1

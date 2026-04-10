@@ -1,0 +1,493 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en-AU
+      - link "Accessibility feedback" [ref=e4] [cursor=pointer]
+  - generic [ref=e9]:
+    - search [ref=e10]:
+      - generic [ref=e12]:
+        - link "Go to Google Home" [ref=e14] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQPAgJ
+          - img [ref=e15]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - combobox "Search" [ref=e26]: absolute space astronomy absolute space astronomy
+            - generic [ref=e27]:
+              - button "Clear" [ref=e29] [cursor=pointer]:
+                - img [ref=e31]
+              - generic [ref=e34]:
+                - button "Search by voice" [ref=e35] [cursor=pointer]:
+                  - img [ref=e36]
+                - button "Search by image" [ref=e38] [cursor=pointer]:
+                  - img [ref=e39]
+          - button "Search" [ref=e41] [cursor=pointer]:
+            - img [ref=e44]
+    - generic [ref=e46]:
+      - button "Settings" [ref=e48] [cursor=pointer]:
+        - img [ref=e51]
+      - generic [ref=e54]:
+        - button "Google apps" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - link "Sign in" [ref=e61] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dabsolute%2Bspace%2Bastronomy&ec=futura_srp_og_si_72236_p
+  - generic [ref=e63]:
+    - navigation [ref=e69]:
+      - generic [ref=e73]:
+        - list [ref=e74]:
+          - listitem [ref=e75]:
+            - link "All" [disabled] [ref=e76]:
+              - generic [ref=e78]: All
+          - listitem [ref=e79]:
+            - link "Images" [ref=e80] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyY7HAVQoxKDQULsF9zI4RpxezEb8IU2dXaiS1mM2f27-e0BVFkHHpUaR4xQKPwszdeYr3Y70IEq_VaksCpP9D3jNKa42tvC00Q53rRlfDM-TRbjI2A&q=absolute+space+astronomy&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQtKgLegQIGRAB
+              - generic [ref=e82]: Images
+          - listitem [ref=e83]:
+            - link "Videos" [ref=e84] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyY7HAVQoxKDQULsF9zI4RpxezEb8IU2dXaiS1mM2f27-e0BVFkHHpUaR4xQKPwszdeYr3Y70IEq_VaksCpP9D3jNKa42tvC00Q53rRlfDM-TRbjI2A&q=absolute+space+astronomy&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQtKgLegQIGBAB
+              - generic [ref=e86]: Videos
+          - listitem [ref=e87]:
+            - link "Shopping" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyY7HAVQoxKDQULsF9zI4RpxezEb8IU2dXaiS1mM2f27-e0BVFkHHpUaR4xQKPwszdeYr3Y70IEq_VaksCpP9D3jNKa42tvC00Q53rRlfDM-TRbjI2A&q=absolute+space+astronomy&ved=1t:220175&ictx=111
+              - generic [ref=e90]: Shopping
+          - listitem [ref=e91]:
+            - link "Forums" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyY7HAVQoxKDQULsF9zI4RpxezEb8IU2dXaiS1mM2f27-e0BVFkHHpUaR4xQKPwszdeYr3Y70IEq_VaksCpP9D3jNKa42tvC00Q53rRlfDM-TRbjI2A&q=absolute+space+astronomy&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQs6gLegQIFRAB
+              - generic [ref=e94]: Forums
+          - listitem [ref=e95]:
+            - link "Short videos" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyY7HAVQoxKDQULsF9zI4RpxezEb8IU2dXaiS1mM2f27-e0BVFkHHpUaR4xQKPwszdeYr3Y70IEq_VaksCpP9D3jNKa42tvC00Q53rRlfDM-TRbjI2A&q=absolute+space+astronomy&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQs6gLegQIFxAB
+              - generic [ref=e98]: Short videos
+          - listitem [ref=e99]:
+            - link "News" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&q=absolute+space+astronomy&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyY7HAVQoxKDQULsF9zI4RpxezEb8IU2dXaiS1mM2f27-e0BVFkHHpUaR4xQKPwszdeYr3Y70IEq_VaksCpP9D3jNKa42tvC00Q53rRlfDM-TRbjI2A&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ0pQJegQIFBAB
+              - generic [ref=e102]: News
+          - listitem [ref=e103]:
+            - button "More filters" [ref=e104] [cursor=pointer]:
+              - generic "More filters" [ref=e105]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: More
+                  - img [ref=e109]
+        - button "Tools" [ref=e112] [cursor=pointer]:
+          - generic [ref=e114]:
+            - generic [ref=e115]: Tools
+            - img [ref=e117]
+    - heading "Search Results" [level=1] [ref=e119]
+    - generic [ref=e124]:
+      - generic [ref=e143]:
+        - heading "Thinking Searching Thinking a little longer" [level=2] [ref=e147]:
+          - generic [ref=e148]:
+            - generic [ref=e150]: Thinking
+            - generic [ref=e152]: Searching
+            - generic [ref=e162]: Thinking a little longer
+        - progressbar [ref=e164]
+      - main [ref=e206]:
+        - generic [ref=e210]:
+          - generic [ref=e213]:
+            - heading "Web results" [level=2] [ref=e214]
+            - generic [ref=e215]:
+              - generic [ref=e218]:
+                - link "Absolute space and time Wikipedia https://en.wikipedia.org › wiki › Absolute_space_and_ti..." [ref=e220] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time
+                  - heading "Absolute space and time" [level=3] [ref=e221]
+                  - generic [ref=e226]:
+                    - generic [ref=e228]: Wikipedia
+                    - generic [ref=e230]: https://en.wikipedia.org › wiki › Absolute_space_and_ti...
+                - button "About this result" [ref=e231] [cursor=pointer]:
+                  - img [ref=e234]
+              - generic [ref=e237]:
+                - generic [ref=e238]:
+                  - emphasis [ref=e239]: Absolute space and time
+                  - text: is a concept in physics and philosophy about the properties of the universe.
+                - link "Read more" [ref=e240] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time#:~:text=Absolute%20space%20and%20time%20is,the%20properties%20of%20the%20universe.
+          - generic [ref=e244]:
+            - generic [ref=e247]:
+              - link "What is Absolute Space? Universe Today https://www.universetoday.com › articles › absolute-space" [ref=e249] [cursor=pointer]:
+                - /url: https://www.universetoday.com/articles/absolute-space
+                - heading "What is Absolute Space?" [level=3] [ref=e250]
+                - generic [ref=e255]:
+                  - generic [ref=e257]: Universe Today
+                  - generic [ref=e259]: https://www.universetoday.com › articles › absolute-space
+              - button "About this result" [ref=e260] [cursor=pointer]:
+                - img [ref=e263]
+            - generic [ref=e266]:
+              - generic [ref=e267]: 4 July 2011 —
+              - generic [ref=e268]:
+                - emphasis [ref=e269]: Absolute space
+                - text: is the study of
+                - emphasis [ref=e270]: space
+                - text: as an
+                - emphasis [ref=e271]: absolute
+                - text: ", unmoving reference point for what inertial systems (ie planets and other objects) exist within it."
+              - link "Read more" [ref=e272] [cursor=pointer]:
+                - /url: https://www.universetoday.com/articles/absolute-space#:~:text=In%20other%20words%2C%20Absolute%20Space,other%20objects)%20exist%20within%20it.
+          - generic [ref=e276]:
+            - generic [ref=e278]:
+              - heading "Videos" [level=2] [ref=e279]
+              - button "About this result" [ref=e280] [cursor=pointer]:
+                - img [ref=e283]
+            - generic [ref=e286]:
+              - generic [ref=e292]:
+                - generic [ref=e293]:
+                  - generic [ref=e294]:
+                    - link "Brian Cox Explains The Notion of Absolute Space YouTube Science Time 12 Aug 2023" [ref=e296] [cursor=pointer]:
+                      - /url: https://www.youtube.com/shorts/rFfdsMWy7WI
+                      - heading "Brian Cox Explains The Notion of Absolute Space YouTube Science Time 12 Aug 2023" [level=3] [ref=e297]:
+                        - generic [ref=e300]: Brian Cox Explains The Notion of Absolute Space
+                        - generic [ref=e302]:
+                          - generic [ref=e303]:
+                            - text: YouTube
+                            - generic [ref=e304]: · Science Time
+                          - generic [ref=e305]: 12 Aug 2023
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Science Time
+                        - button "About this result" [ref=e306] [cursor=pointer]:
+                          - img [ref=e309]
+                  - button "Brian Cox Explains The Notion of Absolute Space by Science Time on YouTube. Play on Google. 0:50" [ref=e311] [cursor=pointer]:
+                    - generic [ref=e312]:
+                      - img [ref=e318]
+                      - generic [ref=e321]:
+                        - generic [ref=e322]: 0:50
+                        - img [ref=e325]
+                - button "Einstein's theory that you can't tell if you're moving or not demolishes the notion of absolute space." [ref=e328] [cursor=pointer]:
+                  - generic [ref=e332]: Einstein's theory that you can't tell if you're moving or not demolishes the notion of absolute space.
+              - generic [ref=e337]:
+                - generic [ref=e338]:
+                  - generic [ref=e339]:
+                    - link "Brian Cox Explains Why Absolute Space Doesn't Exist ... Instagram AstroPhilesz 6 Jan 2026" [ref=e341] [cursor=pointer]:
+                      - /url: https://www.instagram.com/reel/DTLDA4yAqpW/
+                      - heading "Brian Cox Explains Why Absolute Space Doesn't Exist ... Instagram AstroPhilesz 6 Jan 2026" [level=3] [ref=e342]:
+                        - generic [ref=e345]: Brian Cox Explains Why Absolute Space Doesn't Exist ...
+                        - generic [ref=e347]:
+                          - generic [ref=e348]:
+                            - text: Instagram
+                            - generic [ref=e349]: · AstroPhilesz
+                          - generic [ref=e350]: 6 Jan 2026
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: Instagram
+                              - generic: · AstroPhilesz
+                        - button "About this result" [ref=e351] [cursor=pointer]:
+                          - img [ref=e354]
+                  - link "Brian Cox Explains Why Absolute Space Doesn't Exist ... by AstroPhilesz on Instagram. Play on Instagram. 0:43" [ref=e356] [cursor=pointer]:
+                    - /url: https://www.instagram.com/reel/DTLDA4yAqpW/
+                    - generic [ref=e357]:
+                      - img [ref=e363]
+                      - generic [ref=e367]: 0:43
+                - link "Absolute space doesn't exist because where an object is depends on your perspective, like watching a ball bounce on Earth as it moves." [ref=e369] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DTLDA4yAqpW/
+                  - generic [ref=e373]: Absolute space doesn't exist because where an object is depends on your perspective, like watching a ball bounce on Earth as it moves.
+              - generic [ref=e379]:
+                - generic [ref=e380]:
+                  - generic [ref=e381]:
+                    - link "Absolute Space And Time / Absolute Spacetime ??? YouTube AH DOCUMENTARY 30 Aug 2024" [ref=e383] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=GuUa28qQUQw
+                      - heading "Absolute Space And Time / Absolute Spacetime ??? YouTube AH DOCUMENTARY 30 Aug 2024" [level=3] [ref=e384]:
+                        - generic [ref=e387]: Absolute Space And Time / Absolute Spacetime ???
+                        - generic [ref=e389]:
+                          - generic [ref=e390]:
+                            - text: YouTube
+                            - generic [ref=e391]: · AH DOCUMENTARY
+                          - generic [ref=e392]: 30 Aug 2024
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · AH DOCUMENTARY
+                        - button "About this result" [ref=e393] [cursor=pointer]:
+                          - img [ref=e396]
+                  - button "Absolute Space And Time / Absolute Spacetime ??? by AH DOCUMENTARY on YouTube. Play on Google. 8:46" [ref=e398] [cursor=pointer]:
+                    - generic [ref=e399]:
+                      - img [ref=e405]
+                      - generic [ref=e408]:
+                        - generic [ref=e409]: 8:46
+                        - img [ref=e412]
+                - button "Absolute space and time were proposed by Newton, but Einstein's theory of relativity shows they're woven into a fabric called SpaceTime." [ref=e415] [cursor=pointer]:
+                  - generic [ref=e419]: Absolute space and time were proposed by Newton, but Einstein's theory of relativity shows they're woven into a fabric called SpaceTime.
+            - link "View all videos" [ref=e422] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&q=absolute+space+astronomy&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8ccDKAJ6BAhKEAQ
+              - separator [ref=e423]
+              - generic [ref=e424]:
+                - generic [ref=e425]: View all
+                - img [ref=e427]
+          - generic [ref=e432]:
+            - heading "People also ask" [level=2] [ref=e434]
+            - generic [ref=e435]:
+              - button "What is the concept of absolute space?" [ref=e441] [cursor=pointer]:
+                - generic [ref=e443]: What is the concept of absolute space?
+                - img [ref=e446]
+              - button "Why did Einstein say time is not absolute?" [ref=e455] [cursor=pointer]:
+                - generic [ref=e457]: Why did Einstein say time is not absolute?
+                - img [ref=e460]
+              - button "What is the difference between relative and absolute space?" [ref=e469] [cursor=pointer]:
+                - generic [ref=e471]: What is the difference between relative and absolute space?
+                - img [ref=e474]
+              - button "What did Einstein say about spacetime?" [ref=e483] [cursor=pointer]:
+                - generic [ref=e485]: What did Einstein say about spacetime?
+                - img [ref=e488]
+          - generic [ref=e493]:
+            - heading "Web results" [level=2] [ref=e494]
+            - generic [ref=e495]:
+              - generic [ref=e498]:
+                - link "Absolute magnitude Wikipedia https://en.wikipedia.org › wiki › Absolute_magnitude" [ref=e500] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_magnitude
+                  - heading "Absolute magnitude" [level=3] [ref=e501]
+                  - generic [ref=e506]:
+                    - generic [ref=e508]: Wikipedia
+                    - generic [ref=e510]: https://en.wikipedia.org › wiki › Absolute_magnitude
+                - button "About this result" [ref=e511] [cursor=pointer]:
+                  - img [ref=e514]
+              - generic [ref=e517]:
+                - generic [ref=e518]:
+                  - text: In astronomy, absolute magnitude (M) is
+                  - emphasis [ref=e519]: a measure of the luminosity of a celestial object
+                  - text: on an inverse logarithmic astronomical magnitude scale.
+                - link "Read more" [ref=e520] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_magnitude#:~:text=In%20astronomy%2C%20absolute%20magnitude%20(M),the%20lower%20its%20magnitude%20number.
+          - generic [ref=e524]:
+            - generic [ref=e527]:
+              - link "Absolute space and Newton's theory of relativity Harvard University http://ui.adsabs.harvard.edu › abs › abstract" [ref=e529] [cursor=pointer]:
+                - /url: http://ui.adsabs.harvard.edu/abs/2020SHPMP..71..232D/abstract
+                - heading "Absolute space and Newton's theory of relativity" [level=3] [ref=e530]
+                - generic [ref=e535]:
+                  - generic [ref=e537]: Harvard University
+                  - generic [ref=e539]: http://ui.adsabs.harvard.edu › abs › abstract
+              - button "About this result" [ref=e540] [cursor=pointer]:
+                - img [ref=e543]
+            - generic [ref=e546]:
+              - generic [ref=e547]: by R DiSalle · 2020 · Cited by 13 —
+              - generic [ref=e548]:
+                - text: In other words, Newton, having acknowledged that
+                - emphasis [ref=e549]: absolute space is unobservable
+                - text: ", and motion with respect to it therefore unknowable, nonetheless could solve the ..."
+              - link "Read more" [ref=e550] [cursor=pointer]:
+                - /url: http://ui.adsabs.harvard.edu/abs/2020SHPMP..71..232D/abstract#:~:text=In%20other%20words%2C%20Newton%2C%20having,%22the%20system%20of%20the%20world.
+          - generic [ref=e554]:
+            - generic [ref=e557]:
+              - link "Absolute space time at the macro level vs relativity Reddit · r/cosmology 7 comments · 1 year ago" [ref=e559] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/cosmology/comments/1fpxega/absolute_space_time_at_the_macro_level_vs/
+                - heading "Absolute space time at the macro level vs relativity" [level=3] [ref=e560]
+                - generic [ref=e565]:
+                  - generic [ref=e567]: Reddit · r/cosmology
+                  - generic [ref=e569]: 7 comments · 1 year ago
+              - button "About this result" [ref=e570] [cursor=pointer]:
+                - img [ref=e573]
+            - generic [ref=e576]:
+              - generic [ref=e577]:
+                - emphasis [ref=e578]: There is no universal reference point for spacetime
+                - text: . There may be, but we haven't way of knowing it. To an individual, time is always relative.
+              - link "Read more" [ref=e579] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/cosmology/comments/1fpxega/absolute_space_time_at_the_macro_level_vs/#:~:text=There%20is%20no%20universal%20reference,individual%2C%20time%20is%20always%20relative.
+            - generic [ref=e582]:
+              - generic [ref=e583]:
+                - link "The role of absolute space and time in Newton's physics?" [ref=e586] [cursor=pointer]:
+                  - /url: https://www.reddit.com/r/askphilosophy/comments/mybukx/the_role_of_absolute_space_and_time_in_newtons/
+                  - generic [ref=e587]:
+                    - text: The role of
+                    - emphasis [ref=e588]: absolute space
+                    - text: and time in Newton's physics?
+                - generic [ref=e590]: 8 posts
+                - generic [ref=e592]: 25 Apr 2021
+              - generic [ref=e593]:
+                - 'link "ELI5: what is the concept of absolute space and relative space" [ref=e596] [cursor=pointer]':
+                  - /url: https://www.reddit.com/r/explainlikeimfive/comments/lahejm/eli5_what_is_the_concept_of_absolute_space_and/
+                  - generic [ref=e597]:
+                    - text: "ELI5: what is the concept of"
+                    - emphasis [ref=e598]: absolute space
+                    - text: and relative
+                    - emphasis [ref=e599]: space
+                - generic [ref=e601]: 2 posts
+                - generic [ref=e603]: 2 Feb 2021
+              - link "More results from www.reddit.com" [ref=e607] [cursor=pointer]:
+                - /url: /search?q=absolute+space+astronomy+site:www.reddit.com&sca_esv=6234f0784a7aac09&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQrQIoAnoECCMQAw
+          - generic [ref=e611]:
+            - generic [ref=e614]:
+              - link "The Existence of Absolute Space The Ohio State University https://kb.osu.edu › bitstreams › download" [ref=e616] [cursor=pointer]:
+                - /url: https://kb.osu.edu/bitstreams/3e228d55-6d97-5b9e-96d3-580e40c79f36/download
+                - heading "The Existence of Absolute Space" [level=3] [ref=e617]
+                - generic [ref=e622]:
+                  - generic [ref=e624]: The Ohio State University
+                  - generic [ref=e626]: https://kb.osu.edu › bitstreams › download
+              - generic [ref=e627]:
+                - generic:
+                  - generic: PDF
+              - button "About this result" [ref=e628] [cursor=pointer]:
+                - img [ref=e631]
+            - generic [ref=e634]:
+              - generic [ref=e635]: by JA Gould · 1962 · Cited by 14 —
+              - generic [ref=e636]:
+                - text: Newton's oftquoted definition of
+                - emphasis [ref=e637]: space
+                - text: is that
+                - emphasis [ref=e638]: absolute space
+                - text: is its own nature, without relation to anything external, remains always similar and immovable; ...
+              - link "Read more" [ref=e639] [cursor=pointer]:
+                - /url: https://kb.osu.edu/bitstreams/3e228d55-6d97-5b9e-96d3-580e40c79f36/download#:~:text=Newton's%20oftquoted%20definition%20of,absolute%20space%20is%20always%20the
+          - generic [ref=e643]:
+            - generic [ref=e646]:
+              - link "Absolute and Relational Theories of Space and Motion Stanford Encyclopedia of Philosophy https://plato.stanford.edu › archives › fall2019 › entries" [ref=e648] [cursor=pointer]:
+                - /url: https://plato.stanford.edu/archives/fall2019/entries/spacetime-theories/
+                - heading "Absolute and Relational Theories of Space and Motion" [level=3] [ref=e649]
+                - generic [ref=e654]:
+                  - generic [ref=e656]: Stanford Encyclopedia of Philosophy
+                  - generic [ref=e658]: https://plato.stanford.edu › archives › fall2019 › entries
+              - button "About this result" [ref=e659] [cursor=pointer]:
+                - img [ref=e662]
+            - generic [ref=e665]:
+              - generic [ref=e666]: 11 Aug 2006 —
+              - generic [ref=e667]:
+                - emphasis [ref=e668]: Newtonian acceleration is understood in absolute space
+                - text: as the rate of change of absolute velocity, and is, according to Newtonian mechanics, in ...
+              - link "Read more" [ref=e669] [cursor=pointer]:
+                - /url: https://plato.stanford.edu/archives/fall2019/entries/spacetime-theories/#:~:text=Newtonian%20acceleration%20is%20understood%20in,the%20sides%20of%20the%20bucket.
+          - generic [ref=e673]:
+            - generic [ref=e676]:
+              - link "The Problem of Space in Astronomy and Problem planksip https://www.planksip.org › the-problem-of-space-in-ast..." [ref=e678] [cursor=pointer]:
+                - /url: https://www.planksip.org/the-problem-of-space-in-astronomy-and-problem-1763627440270/
+                - heading "The Problem of Space in Astronomy and Problem" [level=3] [ref=e679]
+                - generic [ref=e684]:
+                  - generic [ref=e686]: planksip
+                  - generic [ref=e688]: https://www.planksip.org › the-problem-of-space-in-ast...
+              - button "About this result" [ref=e689] [cursor=pointer]:
+                - img [ref=e692]
+            - generic [ref=e695]:
+              - generic [ref=e696]: 20 Nov 2025 —
+              - generic [ref=e697]:
+                - text: This
+                - emphasis [ref=e698]: absolute space
+                - text: was, for Newton, the "sensorium of God," implying a divine presence upholding its structure. This provided a stable ...
+              - link "Read more" [ref=e699] [cursor=pointer]:
+                - /url: https://www.planksip.org/the-problem-of-space-in-astronomy-and-problem-1763627440270/#:~:text=This%20absolute%20space%20was%2C%20for,problem%20of%20cosmic%20reference%20points.
+          - generic [ref=e703]:
+            - generic [ref=e706]:
+              - link "The Role of Absolute Space in Newton's Physics Springer Nature Link https://link.springer.com › Foundations of Science" [ref=e708] [cursor=pointer]:
+                - /url: https://link.springer.com/article/10.1007/s10699-025-10023-2
+                - heading "The Role of Absolute Space in Newton's Physics" [level=3] [ref=e709]
+                - generic [ref=e714]:
+                  - generic [ref=e716]: Springer Nature Link
+                  - generic [ref=e718]: https://link.springer.com › Foundations of Science
+              - button "About this result" [ref=e719] [cursor=pointer]:
+                - img [ref=e722]
+            - generic [ref=e725]:
+              - generic [ref=e726]: by R Pisano · 2026 —
+              - generic [ref=e727]:
+                - text: According to Newton, the motion of a body relative to
+                - emphasis [ref=e728]: absolute space
+                - text: determines its physical shape—especially in the case of celestial bodies.
+              - link "Read more" [ref=e729] [cursor=pointer]:
+                - /url: https://link.springer.com/article/10.1007/s10699-025-10023-2#:~:text=According%20to%20Newton%2C%20the%20motion,the%20case%20of%20celestial%20bodies.
+        - generic [ref=e731]:
+          - generic [ref=e736]:
+            - heading "People also search for" [level=2] [ref=e738]
+            - generic [ref=e740]:
+              - generic [ref=e741]:
+                - link "Absolute space in geography" [ref=e745] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+space+in+geography&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhIEAE
+                  - generic [ref=e746]:
+                    - generic [ref=e751]: Absolute space in geography
+                    - img [ref=e755]
+                - link "Absolute space and time" [ref=e760] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+space+and+time&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhREAE
+                  - generic [ref=e761]:
+                    - generic [ref=e766]: Absolute space and time
+                    - img [ref=e770]
+                - link "Time is absolute or relative" [ref=e775] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Time+is+absolute+or+relative&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhLEAE
+                  - generic [ref=e776]:
+                    - generic [ref=e781]: Time is absolute or relative
+                    - img [ref=e785]
+                - link "Absolute magnitude" [ref=e790] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+magnitude&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhMEAE
+                  - generic [ref=e791]:
+                    - generic [ref=e796]: Absolute magnitude
+                    - img [ref=e800]
+              - generic [ref=e802]:
+                - link "Absolute magnitude of the Sun" [ref=e806] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+magnitude+of+the+Sun&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhQEAE
+                  - generic [ref=e807]:
+                    - generic [ref=e812]: Absolute magnitude of the Sun
+                    - img [ref=e816]
+                - link "Example of absolute space in geography" [ref=e821] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Example+of+absolute+space+in+geography&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhPEAE
+                  - generic [ref=e822]:
+                    - generic [ref=e827]: Example of absolute space in geography
+                    - img [ref=e831]
+                - link "Is space absolute or relative" [ref=e836] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Is+space+absolute+or+relative&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhOEAE
+                  - generic [ref=e837]:
+                    - generic [ref=e842]: Is space absolute or relative
+                    - img [ref=e846]
+                - link "Absolute magnitude formula" [ref=e851] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+magnitude+formula&sa=X&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ1QJ6BAhNEAE
+                  - generic [ref=e852]:
+                    - generic [ref=e857]: Absolute magnitude formula
+                    - img [ref=e861]
+          - navigation [ref=e863]:
+            - heading "Page navigation" [level=1] [ref=e864]
+            - text: "1"
+            - link "Page 2" [ref=e867] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=10&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAE
+              - text: "2"
+            - link "Page 3" [ref=e869] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=20&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAG
+              - text: "3"
+            - link "Page 4" [ref=e871] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=30&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAI
+              - text: "4"
+            - link "Page 5" [ref=e873] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=40&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAK
+              - text: "5"
+            - link "Page 6" [ref=e875] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=50&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAM
+              - text: "6"
+            - link "Page 7" [ref=e877] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=60&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAO
+              - text: "7"
+            - link "Page 8" [ref=e879] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=70&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAQ
+              - text: "8"
+            - link "Page 9" [ref=e881] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=80&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAS
+              - text: "9"
+            - link "Page 10" [ref=e883] [cursor=pointer]:
+              - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=90&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8tMDegQIBRAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e885]:
+              - link "Next" [ref=e886] [cursor=pointer]:
+                - /url: /search?q=absolute+space+astronomy&sca_esv=6234f0784a7aac09&ei=HVDXac72Ft6F6-AP6t7Y2QM&start=10&sa=N&sstk=Af77f_fWRaXsrT4lFOpP0aghqCGNTW49P35V80ZX4RZlnDHhZ4jmWLD7vBQthN24Oz4XKtULnECAHCLHbw1K0bmflfCTdaUSrpYLlg&ved=2ahUKEwiO-dDRmuCTAxXewhoGHWovNjsQ8NMDegQIBRAW
+                - generic [ref=e888]: Next
+        - navigation
+    - contentinfo [ref=e889]:
+      - heading "Footer links" [level=1] [ref=e890]
+      - generic [ref=e894]:
+        - generic [ref=e896]:
+          - text: Australia
+          - generic [ref=e898]:
+            - button "Boroondara, Melbourne VIC - Based on your past activity" [ref=e900] [cursor=pointer]:
+              - generic [ref=e901]: Boroondara, Melbourne VIC
+              - generic [ref=e903]:
+                - text: "-"
+                - generic [ref=e904]: Based on your past activity
+            - text: "-"
+            - button "Update location" [ref=e906] [cursor=pointer]: Update location
+        - generic [ref=e909]:
+          - link "Help" [ref=e910] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en-AU&fg=1
+          - link "Send feedback" [ref=e911] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e912] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en-AU&fg=1
+          - link "Terms" [ref=e913] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en-AU&fg=1

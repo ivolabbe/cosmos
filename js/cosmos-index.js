@@ -10,6 +10,11 @@ var COSMOS_INDEX = [
     "letter": "A"
   },
   {
+    "slug": "absolute-space",
+    "title": "Absolute Space",
+    "letter": "A"
+  },
+  {
     "slug": "absorption-line",
     "title": "Absorption Line",
     "letter": "A"
@@ -37,6 +42,11 @@ var COSMOS_INDEX = [
   {
     "slug": "albedo",
     "title": "Albedo",
+    "letter": "A"
+  },
+  {
+    "slug": "algol",
+    "title": "Algol",
     "letter": "A"
   },
   {
@@ -75,6 +85,11 @@ var COSMOS_INDEX = [
     "letter": "A"
   },
   {
+    "slug": "andromeda",
+    "title": "Andromeda",
+    "letter": "A"
+  },
+  {
     "slug": "andromeda-galaxy",
     "title": "Andromeda galaxy",
     "letter": "A"
@@ -82,6 +97,11 @@ var COSMOS_INDEX = [
   {
     "slug": "angle",
     "title": "Angle",
+    "letter": "A"
+  },
+  {
+    "slug": "angstrom",
+    "title": "Angstrom",
     "letter": "A"
   },
   {
@@ -102,6 +122,11 @@ var COSMOS_INDEX = [
   {
     "slug": "angular-velocity",
     "title": "Angular Velocity",
+    "letter": "A"
+  },
+  {
+    "slug": "annular-eclipse",
+    "title": "Annular Eclipse",
     "letter": "A"
   },
   {
@@ -2425,6 +2450,11 @@ var COSMOS_INDEX = [
     "letter": "P"
   },
   {
+    "slug": "pluto",
+    "title": "Pluto",
+    "letter": "P"
+  },
+  {
     "slug": "population-i",
     "title": "Population I",
     "letter": "P"
@@ -2662,6 +2692,11 @@ var COSMOS_INDEX = [
   {
     "slug": "s0-galaxy",
     "title": "S0 Galaxy",
+    "letter": "S"
+  },
+  {
+    "slug": "saros",
+    "title": "Saros",
     "letter": "S"
   },
   {
@@ -2915,6 +2950,11 @@ var COSMOS_INDEX = [
     "letter": "S"
   },
   {
+    "slug": "sputnik",
+    "title": "Sputnik",
+    "letter": "S"
+  },
+  {
     "slug": "square-kilometre-array",
     "title": "Square Kilometre Array",
     "letter": "S"
@@ -2935,8 +2975,48 @@ var COSMOS_INDEX = [
     "letter": "S"
   },
   {
+    "slug": "star-catalog",
+    "title": "star catalog",
+    "letter": "S"
+  },
+  {
+    "slug": "star-concepts",
+    "title": "Star concepts",
+    "letter": "S"
+  },
+  {
+    "slug": "star-counts",
+    "title": "Star Counts",
+    "letter": "S"
+  },
+  {
+    "slug": "star-spectral-types",
+    "title": "star spectral types",
+    "letter": "S"
+  },
+  {
+    "slug": "star-stream",
+    "title": "Star Stream",
+    "letter": "S"
+  },
+  {
     "slug": "starburst-galaxy",
     "title": "Starburst Galaxy",
+    "letter": "S"
+  },
+  {
+    "slug": "stark-effect",
+    "title": "Stark Effect",
+    "letter": "S"
+  },
+  {
+    "slug": "starlight",
+    "title": "Starlight",
+    "letter": "S"
+  },
+  {
+    "slug": "starlink",
+    "title": "STARLINK",
     "letter": "S"
   },
   {
@@ -2985,8 +3065,18 @@ var COSMOS_INDEX = [
     "letter": "S"
   },
   {
+    "slug": "subdwarf-star",
+    "title": "Subdwarf Star",
+    "letter": "S"
+  },
+  {
     "slug": "sublimation",
     "title": "Sublimation",
+    "letter": "S"
+  },
+  {
+    "slug": "submillimeter-astronomy",
+    "title": "Submillimeter Astronomy",
     "letter": "S"
   },
   {
@@ -3015,6 +3105,11 @@ var COSMOS_INDEX = [
     "letter": "S"
   },
   {
+    "slug": "sunyaev-zeldovich-process",
+    "title": "Sunyaev Zel'dovich Process",
+    "letter": "S"
+  },
+  {
     "slug": "supergalactic-coordinate-system",
     "title": "Supergalactic Coordinate System",
     "letter": "S"
@@ -3032,6 +3127,16 @@ var COSMOS_INDEX = [
   {
     "slug": "supermassive-black-hole",
     "title": "Supermassive Black Hole",
+    "letter": "S"
+  },
+  {
+    "slug": "supermoon",
+    "title": "supermoon",
+    "letter": "S"
+  },
+  {
+    "slug": "supernova-1987a",
+    "title": "Supernova 1987A",
     "letter": "S"
   },
   {
@@ -3072,6 +3177,11 @@ var COSMOS_INDEX = [
   {
     "slug": "surface-brightness-profiles",
     "title": "Surface Brightness Profiles",
+    "letter": "S"
+  },
+  {
+    "slug": "symbiotic-stars",
+    "title": "Symbiotic Stars",
     "letter": "S"
   },
   {
@@ -3155,6 +3265,11 @@ var COSMOS_INDEX = [
     "letter": "T"
   },
   {
+    "slug": "triple-star",
+    "title": "Triple Star",
+    "letter": "T"
+  },
+  {
     "slug": "trojan-asteroids",
     "title": "Trojan Asteroids",
     "letter": "T"
@@ -3172,6 +3287,11 @@ var COSMOS_INDEX = [
   {
     "slug": "tropical-year",
     "title": "Tropical Year",
+    "letter": "T"
+  },
+  {
+    "slug": "tychos-nova",
+    "title": "Tycho's Nova",
     "letter": "T"
   },
   {

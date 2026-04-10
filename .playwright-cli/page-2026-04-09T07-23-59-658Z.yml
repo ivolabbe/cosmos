@@ -1,0 +1,343 @@
+- generic [active] [ref=e1]:
+  - table [ref=e2]:
+    - rowgroup [ref=e3]:
+      - row "Stellar Neighbors of the Sun Click on any star for more details. This illustration is patterned after Chaisson and McMillan, Chapter 17, where they identify the closest stellar neighbors of the Sun. The closest star to the sun is Proxima Centauri, but its brighter neighbor Alpha Centauri, a double star, is so nearly the same distance that data about it are usually given. It is about 4 light years distance, or about 3.8x1016 m. Index Star Concepts Reference Chaisson & McMillan Ch 17" [ref=e4]:
+        - cell "Stellar Neighbors of the Sun Click on any star for more details. This illustration is patterned after Chaisson and McMillan, Chapter 17, where they identify the closest stellar neighbors of the Sun. The closest star to the sun is Proxima Centauri, but its brighter neighbor Alpha Centauri, a double star, is so nearly the same distance that data about it are usually given. It is about 4 light years distance, or about 3.8x1016 m." [ref=e5]:
+          - heading "Stellar Neighbors of the Sun" [level=1] [ref=e6]
+          - img [ref=e8]
+          - generic [ref=e9]: Click on any star for more details.
+          - generic:
+            - link:
+              - /url: procyon.html#c2
+            - link:
+              - /url: procyon.html#c1
+            - link:
+              - /url: procyon.html#c3
+            - link:
+              - /url: ../astro/whdwar.html#c4
+            - link:
+              - /url: grm34.html#c4
+            - link:
+              - /url: grm34.html#c4
+            - link:
+              - /url: lalande.html#c1
+            - link:
+              - /url: grm34.html#c1
+            - link:
+              - /url: ross.html#c3
+            - link:
+              - /url: ross.html#c1
+            - link:
+              - /url: lalande.html#c3
+            - link:
+              - /url: grm34.html#c2
+            - link:
+              - /url: grm34.html#c3
+            - link:
+              - /url: ../solar/sun.html#c1
+            - link:
+              - /url: cygni.html#c2
+            - link:
+              - /url: cygni.html#c1
+            - link:
+              - /url: "#c4"
+            - link:
+              - /url: ross.html#c2
+            - link:
+              - /url: "#c2"
+            - link:
+              - /url: lacaille.html#c3
+            - link:
+              - /url: lacaille.html#c2
+            - link:
+              - /url: lacaille.html#c1
+            - link:
+              - /url: lacaille.html#c4
+          - paragraph [ref=e10]: This illustration is patterned after Chaisson and McMillan, Chapter 17, where they identify the closest stellar neighbors of the Sun.
+          - text: The closest star to the sun is
+          - link "Proxima Centauri" [ref=e11] [cursor=pointer]:
+            - /url: "#c1"
+          - text: ", but its brighter neighbor"
+          - link "Alpha Centauri" [ref=e12] [cursor=pointer]:
+            - /url: "#c2"
+          - text: ", a double star, is so nearly the same distance that data about it are usually given. It is about 4"
+          - link "light years" [ref=e13] [cursor=pointer]:
+            - /url: ../astro/para.html#c2
+          - text: distance, or about 3.8x10
+          - superscript [ref=e14]: "16"
+          - text: m.
+          - paragraph
+        - cell "Index Star Concepts Reference Chaisson & McMillan Ch 17" [ref=e15]:
+          - link "Index" [ref=e16] [cursor=pointer]:
+            - /url: ../hframe.html
+          - link "Star Concepts" [ref=e17] [cursor=pointer]:
+            - /url: starcon.html#c1
+          - text: Reference
+          - link "Chaisson & McMillan" [ref=e18] [cursor=pointer]:
+            - /url: ../astro/astref.html#c1
+          - text: Ch 17
+      - row "HyperPhysics***** Astrophysics R Nave Go Back" [ref=e19]:
+        - cell "HyperPhysics***** Astrophysics R Nave" [ref=e20]:
+          - table [ref=e21]:
+            - rowgroup [ref=e22]:
+              - row "HyperPhysics***** Astrophysics R Nave" [ref=e23]:
+                - cell "HyperPhysics***** Astrophysics" [ref=e24]:
+                  - link "HyperPhysics" [ref=e25] [cursor=pointer]:
+                    - /url: ../hph.html
+                  - text: "*****"
+                  - link "Astrophysics" [ref=e26] [cursor=pointer]:
+                    - /url: ../astro/astcon.html#c1
+                - cell "R Nave" [ref=e27]:
+                  - generic [ref=e28]: R Nave
+        - cell "Go Back" [ref=e29]:
+          - link "Go Back" [ref=e30] [cursor=pointer]:
+            - /url: Javascript:history.go(-1)
+  - table [ref=e31]:
+    - rowgroup [ref=e32]:
+      - row [ref=e33]:
+        - cell [ref=e34]:
+          - heading "The Closest Star" [level=1] [ref=e35]
+          - table [ref=e36]:
+            - rowgroup [ref=e37]:
+              - row "The closest star to the sun is Proxima Centauri, but its brighter neighbor Alpha Centauri, a double star, is so nearly the same distance that data about it are usually given. It is about 4 light years distance, or about 3.8x1016 m." [ref=e38]:
+                - cell "The closest star to the sun is Proxima Centauri, but its brighter neighbor Alpha Centauri, a double star, is so nearly the same distance that data about it are usually given. It is about 4 light years distance, or about 3.8x1016 m." [ref=e39]:
+                  - paragraph [ref=e40]:
+                    - text: The closest star to the sun is Proxima Centauri, but its brighter neighbor
+                    - link "Alpha Centauri" [ref=e41] [cursor=pointer]:
+                      - /url: "#c2"
+                    - text: ", a double star, is so nearly the same distance that data about it are usually given. It is about 4"
+                    - link "light years" [ref=e42] [cursor=pointer]:
+                      - /url: ../astro/para.html#c2
+                    - text: distance, or about 3.8x10
+                    - superscript [ref=e43]: "16"
+                    - text: m.
+                - cell [ref=e44]:
+                  - img [ref=e45]
+              - row
+          - paragraph [ref=e46]:
+            - text: If our sun, which has diameter 1.392 x 10
+            - superscript [ref=e47]: "9"
+            - text: meters were scaled down to the size of a period on a printed page, which is nominally about 0.5 mm, then the distance to Alpha Centauri would be about 13.6 km or about 8 miles away. If the Earth were scaled to 0.5 mm diameter, then the Sun would be a ball of diameter 5.4 cm ( a little smaller than a tennis ball) at a distance of 5.9 m (19 ft). On this scale, Alpha Centauri would be 1.48 x 10
+            - superscript [ref=e48]: "6"
+            - text: meters or about 890 miles away. If the sun were
+            - link "scaled" [ref=e49] [cursor=pointer]:
+              - /url: ../nuclear/nucuni.html#c2
+            - text: to a 1 foot radius, then Alpha Centauri would be about 10,300 miles away. The
+            - link "parallax" [ref=e50] [cursor=pointer]:
+              - /url: ../astro/para.html#c1
+            - text: of Proxima Centauri as the Earth orbits the sun is about equivalent to that of a dime at a distance of 6 kilometers.
+          - paragraph [ref=e51]:
+            - text: There are 40 stars within 16 light years of the Earth.
+            - link "Ward & Brownlee" [ref=e52] [cursor=pointer]:
+              - /url: ../astro/astref.html#c1
+            - text: comment that in the same space in a
+            - link "globular cluster" [ref=e53] [cursor=pointer]:
+              - /url: ../astro/magclo.html#c2
+            - text: ", there might be 1000 or more. \"The M15 globular cluster has some 30,000 stars packed into a space only 28 light-years across.\""
+        - cell "Index Nearby Stars Star Concepts" [ref=e54]:
+          - link "Index" [ref=e55] [cursor=pointer]:
+            - /url: ../hframe.html
+          - link "Nearby Stars" [ref=e56] [cursor=pointer]:
+            - /url: strclos.html#c0
+          - link "Star Concepts" [ref=e57] [cursor=pointer]:
+            - /url: starcon.html#c1
+      - row "HyperPhysics***** Astrophysics R Nave Go Back" [ref=e58]:
+        - cell "HyperPhysics***** Astrophysics R Nave" [ref=e59]:
+          - table [ref=e60]:
+            - rowgroup [ref=e61]:
+              - row "HyperPhysics***** Astrophysics R Nave" [ref=e62]:
+                - cell "HyperPhysics***** Astrophysics" [ref=e63]:
+                  - link "HyperPhysics" [ref=e64] [cursor=pointer]:
+                    - /url: ../hph.html
+                  - text: "*****"
+                  - link "Astrophysics" [ref=e65] [cursor=pointer]:
+                    - /url: ../astro/astcon.html#c1
+                - cell "R Nave" [ref=e66]:
+                  - generic [ref=e67]: R Nave
+        - cell "Go Back" [ref=e68]:
+          - link "Go Back" [ref=e69] [cursor=pointer]:
+            - /url: Javascript:history.go(-1)
+  - table [ref=e70]:
+    - rowgroup [ref=e71]:
+      - row [ref=e72]:
+        - cell [ref=e73]:
+          - heading "Alpha Centauri" [level=1] [ref=e74]
+          - paragraph [ref=e75]:
+            - text: The
+            - link "closest star" [ref=e76] [cursor=pointer]:
+              - /url: "#c1"
+            - text: to the sun is
+            - link "Proxima Centauri" [ref=e77] [cursor=pointer]:
+              - /url: "#c3"
+            - text: ", but its brighter neighbor Alpha Centauri, a double star, is so nearly the same distance that data about it are usually given. It is about 4"
+            - link "light years" [ref=e78] [cursor=pointer]:
+              - /url: ../astro/para.html#c2
+            - text: distance, or about 3.8x10
+            - superscript [ref=e79]: "16"
+            - text: m. If our sun, which has diameter 1.392 x 10
+            - superscript [ref=e80]: "9"
+            - text: meters were scaled down to the size of a period on a printed page, which is nominally about 0.5 mm, then the distance to Alpha Centauri would be about 13.6 km or about 8 miles away. If the Earth were scaled to 0.5 mm diameter, then the Sun would be a ball of diameter 5.4 cm ( a little smaller than a tennis ball) at a distance of 5.9 m (19 ft). On this scale, Alpha Centauri would be 1.48 x 10
+            - superscript [ref=e81]: "6"
+            - text: meters or about 890 miles away. If the sun were
+            - link "scaled" [ref=e82] [cursor=pointer]:
+              - /url: ../nuclear/nucuni.html#c2
+            - text: to a 1 foot radius, then Alpha Centauri would be about 10,300 miles away.
+          - img [ref=e84]
+          - paragraph [ref=e85]:
+            - text: The NASA image above combines an optical photo of Alpha Centauri and the closeup x-ray image from the
+            - link "Chandra X-ray Observatory" [ref=e86] [cursor=pointer]:
+              - /url: ../solar/chandra.html#c1
+            - text: . The x-ray image shows Alpha Centauri-A which is a near twin to our Sun, and the somewhat smaller but similar Alpha Centauri - B.
+          - paragraph [ref=e87]: "Image credit: Optical: Zdenek Bardon; X-ray: NASA/CXC/Univ. of Colorado/T. Ayres et al."
+        - cell "Index Nearby Stars Star Concepts Alpha Centauri, NASA" [ref=e88]:
+          - link "Index" [ref=e89] [cursor=pointer]:
+            - /url: ../hframe.html
+          - link "Nearby Stars" [ref=e90] [cursor=pointer]:
+            - /url: strclos.html#c0
+          - link "Star Concepts" [ref=e91] [cursor=pointer]:
+            - /url: starcon.html#c1
+          - link "Alpha Centauri, NASA" [ref=e92] [cursor=pointer]:
+            - /url: https://www.nasa.gov/mission_pages/chandra/images/alpha-centauri-a-triple-star-system-about-4-light-years-from-earth.html
+      - row "HyperPhysics***** Astrophysics R Nave Go Back" [ref=e93]:
+        - cell "HyperPhysics***** Astrophysics R Nave" [ref=e94]:
+          - table [ref=e95]:
+            - rowgroup [ref=e96]:
+              - row "HyperPhysics***** Astrophysics R Nave" [ref=e97]:
+                - cell "HyperPhysics***** Astrophysics" [ref=e98]:
+                  - link "HyperPhysics" [ref=e99] [cursor=pointer]:
+                    - /url: ../hph.html
+                  - text: "*****"
+                  - link "Astrophysics" [ref=e100] [cursor=pointer]:
+                    - /url: ../astro/astcon.html#c1
+                - cell "R Nave" [ref=e101]:
+                  - generic [ref=e102]: R Nave
+        - cell "Go Back" [ref=e103]:
+          - link "Go Back" [ref=e104] [cursor=pointer]:
+            - /url: Javascript:history.go(-1)
+  - table [ref=e105]:
+    - rowgroup [ref=e106]:
+      - row [ref=e107]:
+        - cell [ref=e108]:
+          - heading "Proxima Centauri" [level=1] [ref=e109]
+          - paragraph [ref=e110]:
+            - text: This star is notable for being the
+            - link "closest star" [ref=e111] [cursor=pointer]:
+              - /url: "#c1"
+            - text: to the sun, but its brighter neighbor
+            - link "Alpha Centauri" [ref=e112] [cursor=pointer]:
+              - /url: "#c2"
+            - text: ", a double star, is so nearly the same distance that data about it are usually given. It is about 4"
+            - link "light years" [ref=e113] [cursor=pointer]:
+              - /url: ../astro/para.html#c2
+            - text: distance, or about 3.8x10
+            - superscript [ref=e114]: "16"
+            - text: m from the sun.
+          - paragraph [ref=e115]:
+            - text: With its unique status as the closest star, Proxima Centauri, is an often quoted example of
+            - link "parallax" [ref=e116] [cursor=pointer]:
+              - /url: ../astro/para.html#c1
+            - text: distance measurement. The apparent ellipse in which Proxima Centauri moves during the year as a result of the Earth's orbit around the sun is about the size of a dime observed at three miles distance. Its parallax is 0.762 arcsec, corresponding to a distance of 1.31 parsecs.
+          - paragraph [ref=e117]:
+            - text: Proxima Centauri is a
+            - link "red dwarf star" [ref=e118] [cursor=pointer]:
+              - /url: reddwa.html#c1
+            - text: and as is common with red dwarfs, it is subject to
+            - link "flaring" [ref=e119] [cursor=pointer]:
+              - /url: reddwa.html#c2
+            - text: . In March of 2016 it emitted a flare so powerful that it was visible to the naked eye (
+            - link "magnitude" [ref=e120] [cursor=pointer]:
+              - /url: ../astro/para.html#c5
+            - text: 6.8). A planet named Proxima b was discovered around Proxima Centauri in 2016. It is our nearest neighbor planet around a different star. It orbits Proxima Centauri at a distance of roughly 7.5 million km (4.7 million miles) with an orbital period of approximately 11.2 Earth days. Its estimated mass is at least 1.3 times that of the Earth. The equilibrium temperature of Proxima b is estimated to be within the range of where water could exist as liquid on its surface, thus placing it within the habitable zone of Proxima Centauri.
+          - table [ref=e121]:
+            - rowgroup [ref=e122]:
+              - row "Proxima Centauri has about an eighth of the mass of the sun. Faint red Proxima Centauri - at only 3,100 degrees K (5,120 F) and 500 times less bright than our sun - is nearly a fifth of a light-year from Alpha Centauri A and B. That raises some question about whether it is gravitationally bound to Alpha Centauri A and B." [ref=e123]:
+                - cell "Proxima Centauri has about an eighth of the mass of the sun. Faint red Proxima Centauri - at only 3,100 degrees K (5,120 F) and 500 times less bright than our sun - is nearly a fifth of a light-year from Alpha Centauri A and B. That raises some question about whether it is gravitationally bound to Alpha Centauri A and B." [ref=e124]:
+                  - paragraph [ref=e125]: Proxima Centauri has about an eighth of the mass of the sun. Faint red Proxima Centauri - at only 3,100 degrees K (5,120 F) and 500 times less bright than our sun - is nearly a fifth of a light-year from Alpha Centauri A and B. That raises some question about whether it is gravitationally bound to Alpha Centauri A and B.
+                - cell [ref=e126]:
+                  - img [ref=e128]
+          - paragraph [ref=e129]:
+            - text: The image of Proxima Centauri above was taken by the
+            - link "Hubble Space Telescope" [ref=e130] [cursor=pointer]:
+              - /url: ../solar/hst.html#c1
+            - text: . Image credit
+            - link "ESA/Hubble & NASA" [ref=e131] [cursor=pointer]:
+              - /url: https://earthsky.org/space/proxima-centauri-our-suns-nearest-neighbor
+            - text: .
+          - paragraph [ref=e132]:
+            - text: "Reference:"
+            - link "http://www.atlasoftheuniverse.com/nearstar.html" [ref=e133] [cursor=pointer]:
+              - /url: http://www.atlasoftheuniverse.com/nearstar.html
+        - cell "Index Nearby stars Alpha Centauri, NASA Proxima Centauri flare" [ref=e134]:
+          - link "Index" [ref=e135] [cursor=pointer]:
+            - /url: ../hframe.html
+          - link "Nearby stars" [ref=e136] [cursor=pointer]:
+            - /url: strclos.html#c0
+          - link "Alpha Centauri, NASA" [ref=e137] [cursor=pointer]:
+            - /url: https://www.nasa.gov/mission_pages/chandra/images/alpha-centauri-a-triple-star-system-about-4-light-years-from-earth.html
+          - link "Proxima Centauri flare" [ref=e138] [cursor=pointer]:
+            - /url: https://phys.org/news/2018-04-proxima-centauri-flare-powerful-visible.html
+      - row "HyperPhysics***** Astrophysics R Nave Go Back" [ref=e139]:
+        - cell "HyperPhysics***** Astrophysics R Nave" [ref=e140]:
+          - table [ref=e141]:
+            - rowgroup [ref=e142]:
+              - row "HyperPhysics***** Astrophysics R Nave" [ref=e143]:
+                - cell "HyperPhysics***** Astrophysics" [ref=e144]:
+                  - link "HyperPhysics" [ref=e145] [cursor=pointer]:
+                    - /url: ../hph.html
+                  - text: "*****"
+                  - link "Astrophysics" [ref=e146] [cursor=pointer]:
+                    - /url: ../astro/astcon.html#c1
+                - cell "R Nave" [ref=e147]:
+                  - generic [ref=e148]: R Nave
+        - cell "Go Back" [ref=e149]:
+          - link "Go Back" [ref=e150] [cursor=pointer]:
+            - /url: Javascript:history.go(-1)
+  - table [ref=e151]:
+    - rowgroup [ref=e152]:
+      - row "Barnard's Star Barnard's star is remarkable as a red dwarf star that is the fourth closest star to the Sun after the three members of the Alpha Centauri system. It has a mass of 0.14 times the solar mass and an effective temperature of 3100K. The detection of a planet Barnard's Star b was reported in 2018, and the data provided was radius 0.4 AU and orbital period 233 days. The proposed mass is 3.2 times the mass of the Earth. It became known as a flare star when a stellar flare was observed in 1998. This star is also remarkable because it exhibits the largest proper motion, moving against the background of more distant stars by 10.3 arcseconds per year. Its distance is 1.8 parsecs = 5.9 light years. Index Nearby Stars Star Concepts Barnard's Star Wiki" [ref=e153]:
+        - cell "Barnard's Star Barnard's star is remarkable as a red dwarf star that is the fourth closest star to the Sun after the three members of the Alpha Centauri system. It has a mass of 0.14 times the solar mass and an effective temperature of 3100K. The detection of a planet Barnard's Star b was reported in 2018, and the data provided was radius 0.4 AU and orbital period 233 days. The proposed mass is 3.2 times the mass of the Earth. It became known as a flare star when a stellar flare was observed in 1998. This star is also remarkable because it exhibits the largest proper motion, moving against the background of more distant stars by 10.3 arcseconds per year. Its distance is 1.8 parsecs = 5.9 light years." [ref=e154]:
+          - heading "Barnard's Star" [level=1] [ref=e155]
+          - paragraph [ref=e156]:
+            - text: Barnard's star is remarkable as a
+            - link "red dwarf star" [ref=e157] [cursor=pointer]:
+              - /url: reddwa.html#c1
+            - text: that is the fourth closest star to the Sun after the three members of the
+            - link "Alpha Centauri" [ref=e158] [cursor=pointer]:
+              - /url: "#c2"
+            - text: system. It has a mass of 0.14 times the solar mass and an effective temperature of 3100K. The detection of a planet Barnard's Star b was reported in 2018, and the data provided was radius 0.4 AU and orbital period 233 days. The proposed mass is 3.2 times the mass of the Earth. It became known as a
+            - link "flare star" [ref=e159] [cursor=pointer]:
+              - /url: reddwa.html#c2
+            - text: when a stellar flare was observed in 1998.
+          - paragraph [ref=e160]:
+            - text: This star is also remarkable because it exhibits the largest
+            - link "proper motion" [ref=e161] [cursor=pointer]:
+              - /url: ../astro/para.html#c3
+            - text: ", moving against the background of more distant stars by 10.3 arcseconds per year. Its distance is 1.8 parsecs = 5.9"
+            - link "light years" [ref=e162] [cursor=pointer]:
+              - /url: ../astro/para.html#c2
+            - text: .
+        - cell "Index Nearby Stars Star Concepts Barnard's Star Wiki" [ref=e163]:
+          - link "Index" [ref=e164] [cursor=pointer]:
+            - /url: ../hframe.html
+          - link "Nearby Stars" [ref=e165] [cursor=pointer]:
+            - /url: strclos.html#c0
+          - link "Star Concepts" [ref=e166] [cursor=pointer]:
+            - /url: starcon.html#c1
+          - link "Barnard's Star Wiki" [ref=e167] [cursor=pointer]:
+            - /url: https://en.wikipedia.org/wiki/Barnard%27s_Star
+      - row "HyperPhysics***** Astrophysics R Nave Go Back" [ref=e168]:
+        - cell "HyperPhysics***** Astrophysics R Nave" [ref=e169]:
+          - table [ref=e170]:
+            - rowgroup [ref=e171]:
+              - row "HyperPhysics***** Astrophysics R Nave" [ref=e172]:
+                - cell "HyperPhysics***** Astrophysics" [ref=e173]:
+                  - link "HyperPhysics" [ref=e174] [cursor=pointer]:
+                    - /url: ../hph.html
+                  - text: "*****"
+                  - link "Astrophysics" [ref=e175] [cursor=pointer]:
+                    - /url: ../astro/astcon.html#c1
+                - cell "R Nave" [ref=e176]:
+                  - generic [ref=e177]: R Nave
+        - cell "Go Back" [ref=e178]:
+          - link "Go Back" [ref=e179] [cursor=pointer]:
+            - /url: Javascript:history.go(-1)

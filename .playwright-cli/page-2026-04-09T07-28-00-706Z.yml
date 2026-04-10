@@ -1,0 +1,351 @@
+- generic [active] [ref=e1]:
+  - link "Jump to content" [ref=e2] [cursor=pointer]:
+    - /url: "#bodyContent"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - navigation "Site" [ref=e6]:
+        - generic "Main menu" [ref=e7]:
+          - button "Main menu" [ref=e8] [cursor=pointer]
+          - generic [ref=e11]: Main menu
+      - link "Wikimedia Commons" [ref=e12] [cursor=pointer]:
+        - /url: /wiki/Main_Page
+        - img [ref=e13]
+        - img "Wikimedia Commons" [ref=e15]
+    - generic [ref=e16]:
+      - search [ref=e17]:
+        - generic [ref=e20]:
+          - searchbox "Search Wikimedia Commons" [ref=e23]
+          - button "Search" [ref=e25]
+      - navigation "Personal tools" [ref=e26]:
+        - generic [ref=e27]:
+          - list [ref=e30]:
+            - listitem [ref=e31]:
+              - link "English" [ref=e32] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e34]: English
+          - list [ref=e37]:
+            - listitem [ref=e38]:
+              - link "Donate" [ref=e39] [cursor=pointer]:
+                - /url: https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=commons.wikimedia.org&uselang=en
+                - generic [ref=e41]: Donate
+            - listitem [ref=e42]:
+              - link "Create account" [ref=e43] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:CreateAccount&returnto=Special%3ASearch&returntoquery=ns6%3D1%26search%3Dnearest%2Bstars%2Bmap
+            - listitem [ref=e44]:
+              - link "Log in" [ref=e45] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:UserLogin&returnto=Special%3ASearch&returntoquery=ns6%3D1%26search%3Dnearest%2Bstars%2Bmap
+  - generic [ref=e47]:
+    - main [ref=e51]:
+      - generic [ref=e52]:
+        - heading "Search results" [level=1] [ref=e53]
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - link "Switch to MediaSearch" [ref=e56] [cursor=pointer]:
+              - /url: /wiki/Special:MediaSearch
+            - text: "|"
+          - link "Help" [ref=e58] [cursor=pointer]:
+            - /url: https://www.mediawiki.org/wiki/Special:MyLanguage/Help:CirrusSearch
+            - text: Help
+      - generic [ref=e61]:
+        - generic [ref=e62]:
+          - navigation "Namespaces"
+        - generic [ref=e63]:
+          - navigation "Views"
+          - navigation "Page tools" [ref=e64]:
+            - generic [ref=e65]:
+              - button "Tools" [ref=e66] [cursor=pointer]
+              - generic [ref=e68] [cursor=pointer]: Tools
+      - navigation "Appearance" [ref=e71]:
+        - generic [ref=e74]:
+          - generic [ref=e75]: Appearance
+          - button "hide" [ref=e76] [cursor=pointer]
+      - generic "Search results" [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e82]:
+            - generic:
+              - generic [ref=e85]:
+                - searchbox [ref=e88]: nearest stars map
+                - button "Search" [ref=e91] [cursor=pointer]
+              - generic [ref=e92]:
+                - text: Results
+                - strong [ref=e93]: 1 – 20
+                - text: of
+                - strong [ref=e94]: 4,760
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - paragraph
+              - generic [ref=e98] [cursor=pointer]:
+                - link "Search categories" [ref=e100]:
+                  - /url: https://commons.wikimedia.org/w/index.php?title=Special:Search&search=File%3ANearest+stars+map&ns14=1&fulltext=Search&advanced=1
+                - text: •
+                - link "Skip PDFs and DjVus" [ref=e102]:
+                  - /url: https://commons.wikimedia.org/w/index.php?title=Special:Search&search=File%3ANearest+stars+map+-filemime%3Apdf+-filemime%3Adjvu&fulltext=Search&advanced=1
+                - text: • View other tools
+              - paragraph [ref=e103]:
+                - generic [ref=e104]:
+                  - text: Create the page "
+                  - link "File:Nearest stars map" [ref=e105] [cursor=pointer]:
+                    - /url: /w/index.php?title=File:Nearest_stars_map&action=edit&redlink=1
+                  - text: "\" on this wiki!"
+              - paragraph
+            - generic [ref=e107]:
+              - combobox [ref=e110]:
+                - option "20 items" [selected]
+                - option "50 items"
+                - option "100 items"
+                - option "250 items"
+                - option "500 items"
+              - generic [ref=e111]:
+                - button "First page" [ref=e112] [cursor=pointer]
+                - button "Previous page" [ref=e114] [cursor=pointer]
+                - button "Next page" [ref=e116] [cursor=pointer]
+            - list [ref=e119]:
+              - listitem [ref=e120]:
+                - generic [ref=e121]:
+                  - link "Thumbnail for File:Map of Nearest stars.png" [ref=e123] [cursor=pointer]:
+                    - /url: /wiki/File:Map_of_Nearest_stars.png
+                    - img "Thumbnail for File:Map of Nearest stars.png" [ref=e124]
+                  - generic [ref=e125]:
+                    - link "File:Map of Nearest stars.png" [ref=e127] [cursor=pointer]:
+                      - /url: /wiki/File:Map_of_Nearest_stars.png
+                    - generic [ref=e128]: "DescriptionMap of Nearest stars.png English: Map of Nearest stars Date 26 February 2022 Source Own work Author D A R C 12345..."
+                    - generic [ref=e129]: (800 × 600 (18 KB)) - 18:24, 18 March 2026
+              - listitem [ref=e130]:
+                - generic [ref=e131]:
+                  - link "Thumbnail for File:The Road map of the stars (IA roadmapofstars00parsrich).pdf" [ref=e133] [cursor=pointer]:
+                    - /url: /wiki/File:The_Road_map_of_the_stars_(IA_roadmapofstars00parsrich).pdf
+                    - img "Thumbnail for File:The Road map of the stars (IA roadmapofstars00parsrich).pdf" [ref=e134]
+                  - generic [ref=e135]:
+                    - link "File:The Road map of the stars (IA roadmapofstars00parsrich).pdf" [ref=e137] [cursor=pointer]:
+                      - /url: /wiki/File:The_Road_map_of_the_stars_(IA_roadmapofstars00parsrich).pdf
+                    - generic [ref=e138]: The Road map of the stars ( ) Author Parsons, A. R. (Albert Ross), 1847-1933 Peck, Annetta Weaver Title The Road map of the stars Publisher London...
+                    - generic [ref=e139]: (741 × 1,075 (13.68 MB)) - 12:06, 11 November 2025
+              - listitem [ref=e140]:
+                - generic [ref=e141]:
+                  - link "Thumbnail for File:The call of the stars; (IA callofstars00kipp).pdf" [ref=e143] [cursor=pointer]:
+                    - /url: /wiki/File:The_call_of_the_stars;_(IA_callofstars00kipp).pdf
+                    - img "Thumbnail for File:The call of the stars; (IA callofstars00kipp).pdf" [ref=e144]
+                  - generic [ref=e145]:
+                    - link "File:The call of the stars; (IA callofstars00kipp).pdf" [ref=e147] [cursor=pointer]:
+                      - /url: /wiki/File:The_call_of_the_stars;_(IA_callofstars00kipp).pdf
+                    - generic [ref=e148]: The call of the stars; ( ) Author Kippax, John Robert, 1849- [from old catalog] Title The call of the stars; Publisher New York and London, G. P. Putnam's...
+                    - generic [ref=e149]: (843 × 1,331 (30.34 MB)) - 02:17, 6 October 2024
+              - listitem [ref=e150]:
+                - generic [ref=e151]:
+                  - link "Thumbnail for File:The children's book of stars (IA childrensbookofs00mittuoft).pdf" [ref=e153] [cursor=pointer]:
+                    - /url: /wiki/File:The_children%27s_book_of_stars_(IA_childrensbookofs00mittuoft).pdf
+                    - img "Thumbnail for File:The children's book of stars (IA childrensbookofs00mittuoft).pdf" [ref=e154]
+                  - generic [ref=e155]:
+                    - link "File:The children's book of stars (IA childrensbookofs00mittuoft).pdf" [ref=e157] [cursor=pointer]:
+                      - /url: /wiki/File:The_children%27s_book_of_stars_(IA_childrensbookofs00mittuoft).pdf
+                    - generic [ref=e158]: The children's book of stars ( ) Author Mitton, G. E. (Geraldine Edith) Title The children's book of stars Publisher London A. and C. Black Description...
+                    - generic [ref=e159]: (829 × 1,204 (9.09 MB)) - 01:25, 1 May 2025
+              - listitem [ref=e160]:
+                - generic [ref=e161]:
+                  - link "Thumbnail for File:The call of the stars; a popular introduction to a knowledge of the starry skies (IA callofstarspopul00kipprich).pdf" [ref=e163] [cursor=pointer]:
+                    - /url: /wiki/File:The_call_of_the_stars;_a_popular_introduction_to_a_knowledge_of_the_starry_skies_(IA_callofstarspopul00kipprich).pdf
+                    - img "Thumbnail for File:The call of the stars; a popular introduction to a knowledge of the starry skies (IA callofstarspopul00kipprich).pdf" [ref=e164]
+                  - generic [ref=e165]:
+                    - link "File:The call of the stars; a popular introduction to a knowledge of the starry skies (IA callofstarspopul00kipprich).pdf" [ref=e167] [cursor=pointer]:
+                      - /url: /wiki/File:The_call_of_the_stars;_a_popular_introduction_to_a_knowledge_of_the_starry_skies_(IA_callofstarspopul00kipprich).pdf
+                    - generic [ref=e168]: stars; a popular introduction to a knowledge of the starry skies ( ) Author Kippax, John R. (John Robert), 1849-1922 Title The call of the stars;...
+                    - generic [ref=e169]: (793 × 1,212 (27.95 MB)) - 07:02, 23 February 2023
+              - listitem [ref=e170]:
+                - generic [ref=e171]:
+                  - link "Thumbnail for File:Dülmen, Rolls-Royce Phantom II -- 2024 -- 5841.jpg" [ref=e173] [cursor=pointer]:
+                    - /url: /wiki/File:D%C3%BClmen,_Rolls-Royce_Phantom_II_--_2024_--_5841.jpg
+                    - img "Thumbnail for File:Dülmen, Rolls-Royce Phantom II -- 2024 -- 5841.jpg" [ref=e174]
+                  - generic [ref=e175]:
+                    - link "File:Dülmen, Rolls-Royce Phantom II -- 2024 -- 5841.jpg" [ref=e177] [cursor=pointer]:
+                      - /url: /wiki/File:D%C3%BClmen,_Rolls-Royce_Phantom_II_--_2024_--_5841.jpg
+                    - generic [ref=e178]: II quickly became a status symbol for royalty, industrialists, and movie stars. It is one of the most sought-after pre-war classic cars and stands for...
+                    - generic [ref=e179]: (6,594 × 4,396 (11.71 MB)) - 14:02, 3 April 2026
+              - listitem [ref=e180]:
+                - generic [ref=e181]:
+                  - link "Thumbnail for File:Dülmen, Rolls-Royce Phantom II -- 2024 -- 5846.jpg" [ref=e183] [cursor=pointer]:
+                    - /url: /wiki/File:D%C3%BClmen,_Rolls-Royce_Phantom_II_--_2024_--_5846.jpg
+                    - img "Thumbnail for File:Dülmen, Rolls-Royce Phantom II -- 2024 -- 5846.jpg" [ref=e184]
+                  - generic [ref=e185]:
+                    - link "File:Dülmen, Rolls-Royce Phantom II -- 2024 -- 5846.jpg" [ref=e187] [cursor=pointer]:
+                      - /url: /wiki/File:D%C3%BClmen,_Rolls-Royce_Phantom_II_--_2024_--_5846.jpg
+                    - generic [ref=e188]: II quickly became a status symbol for royalty, industrialists, and movie stars. It is one of the most sought-after pre-war classic cars and stands for...
+                    - generic [ref=e189]: (6,616 × 4,411 (11.85 MB)) - 15:37, 2 April 2026
+              - listitem [ref=e190]:
+                - generic [ref=e191]:
+                  - link "Thumbnail for File:The stars (IA thestars00cham).pdf" [ref=e193] [cursor=pointer]:
+                    - /url: /wiki/File:The_stars_(IA_thestars00cham).pdf
+                    - img "Thumbnail for File:The stars (IA thestars00cham).pdf" [ref=e194]
+                  - generic [ref=e195]:
+                    - link "File:The stars (IA thestars00cham).pdf" [ref=e197] [cursor=pointer]:
+                      - /url: /wiki/File:The_stars_(IA_thestars00cham).pdf
+                    - generic [ref=e198]: "The stars ( ) Author Chambers, George F. (George Frederick), 1841-1915 Title The stars Publisher New York, N.Y. : Review of Reviews Co. Description..."
+                    - generic [ref=e199]: (547 × 868 (6.32 MB)) - 14:59, 5 January 2026
+              - listitem [ref=e200]:
+                - generic [ref=e201]:
+                  - link "Thumbnail for File:Searching For The Stars (227674789).jpeg" [ref=e203] [cursor=pointer]:
+                    - /url: /wiki/File:Searching_For_The_Stars_(227674789).jpeg
+                    - img "Thumbnail for File:Searching For The Stars (227674789).jpeg" [ref=e204]
+                  - generic [ref=e205]:
+                    - link "File:Searching For The Stars (227674789).jpeg" [ref=e207] [cursor=pointer]:
+                      - /url: /wiki/File:Searching_For_The_Stars_(227674789).jpeg
+                    - generic [ref=e208]: the light pollution of the nearest city! [#trees ,#landscape ,#mountains ,#winter ,#night ,#light ,#outdoor ,#road ,#stars ,#snow ,#mountain ,#star ,#composition...
+                    - generic [ref=e209]: (1,365 × 2,048 (879 KB)) - 20:26, 16 July 2023
+              - listitem [ref=e210]:
+                - generic [ref=e211]:
+                  - link "Thumbnail for File:The cairn of stars (IA cairnofstars00macdrich).pdf" [ref=e213] [cursor=pointer]:
+                    - /url: /wiki/File:The_cairn_of_stars_(IA_cairnofstars00macdrich).pdf
+                    - img "Thumbnail for File:The cairn of stars (IA cairnofstars00macdrich).pdf" [ref=e214]
+                  - generic [ref=e215]:
+                    - link "File:The cairn of stars (IA cairnofstars00macdrich).pdf" [ref=e217] [cursor=pointer]:
+                      - /url: /wiki/File:The_cairn_of_stars_(IA_cairnofstars00macdrich).pdf
+                    - generic [ref=e218]: The cairn of stars ( ) Author MacDonnell, James Francis Carlin Title The cairn of stars Publisher New York, H. Holt and company Description Subjects:...
+                    - generic [ref=e219]: (754 × 1,108 (5.42 MB)) - 13:51, 23 December 2025
+              - listitem [ref=e220]:
+                - generic [ref=e221]:
+                  - link "Thumbnail for File:The stars of God (IA starsofgod00burr).pdf" [ref=e223] [cursor=pointer]:
+                    - /url: /wiki/File:The_stars_of_God_(IA_starsofgod00burr).pdf
+                    - img "Thumbnail for File:The stars of God (IA starsofgod00burr).pdf" [ref=e224]
+                  - generic [ref=e225]:
+                    - link "File:The stars of God (IA starsofgod00burr).pdf" [ref=e227] [cursor=pointer]:
+                      - /url: /wiki/File:The_stars_of_God_(IA_starsofgod00burr).pdf
+                    - generic [ref=e228]: The stars of God ( ) Author Burr, E. F. (Enoch Fitch), 1818-1907 Title The stars of God Publisher Hartford, The Student publishing company Description...
+                    - generic [ref=e229]: (768 × 1,141 (12.44 MB)) - 00:08, 28 January 2026
+              - listitem [ref=e230]:
+                - generic [ref=e231]:
+                  - link "Thumbnail for File:The ship of stars; (IA shipofstars00quil).pdf" [ref=e233] [cursor=pointer]:
+                    - /url: /wiki/File:The_ship_of_stars;_(IA_shipofstars00quil).pdf
+                    - img "Thumbnail for File:The ship of stars; (IA shipofstars00quil).pdf" [ref=e234]
+                  - generic [ref=e235]:
+                    - link "File:The ship of stars; (IA shipofstars00quil).pdf" [ref=e237] [cursor=pointer]:
+                      - /url: /wiki/File:The_ship_of_stars;_(IA_shipofstars00quil).pdf
+                    - generic [ref=e238]: "The ship of stars; ( ) Author Quiller-Couch, Arthur Thomas, Sir, 1863-1944 Title The ship of stars; Publisher New York : Scribner Description Subjects:..."
+                    - generic [ref=e239]: (660 × 1,081 (13.06 MB)) - 17:10, 8 February 2021
+              - listitem [ref=e240]:
+                - generic [ref=e241]:
+                  - link "Thumbnail for File:Secrets of the stars (IA secretsofstars00mcfe).pdf" [ref=e243] [cursor=pointer]:
+                    - /url: /wiki/File:Secrets_of_the_stars_(IA_secretsofstars00mcfe).pdf
+                    - img "Thumbnail for File:Secrets of the stars (IA secretsofstars00mcfe).pdf" [ref=e244]
+                  - generic [ref=e245]:
+                    - link "File:Secrets of the stars (IA secretsofstars00mcfe).pdf" [ref=e247] [cursor=pointer]:
+                      - /url: /wiki/File:Secrets_of_the_stars_(IA_secretsofstars00mcfe).pdf
+                    - generic [ref=e248]: "company Description Part of plates printed on both sides Maps on lining-papers Subjects: Astronomy; Stars Language English Publication date 1922 publication_date..."
+                    - generic [ref=e249]: (783 × 1,164 (16.13 MB)) - 22:20, 1 May 2023
+              - listitem [ref=e250]:
+                - generic [ref=e251]:
+                  - link "Thumbnail for File:The ship of stars (IA theshipofstars00quil).pdf" [ref=e253] [cursor=pointer]:
+                    - /url: /wiki/File:The_ship_of_stars_(IA_theshipofstars00quil).pdf
+                    - img "Thumbnail for File:The ship of stars (IA theshipofstars00quil).pdf" [ref=e254]
+                  - generic [ref=e255]:
+                    - link "File:The ship of stars (IA theshipofstars00quil).pdf" [ref=e257] [cursor=pointer]:
+                      - /url: /wiki/File:The_ship_of_stars_(IA_theshipofstars00quil).pdf
+                    - generic [ref=e258]: "Arthur Quiller-Couch: The Ship of Stars Author Quiller-Couch, Arthur Thomas, Sir, 1863-1944 Title The ship of stars Publisher London : Cassell Object..."
+                    - generic [ref=e259]: (654 × 981 (13.6 MB)) - 10:14, 6 January 2025
+              - listitem [ref=e260]:
+                - generic [ref=e261]:
+                  - link "Thumbnail for File:Catalogue of 9842 stars, or, All stars very conspicuous to the naked eye, for the epoch of 1900 (IA catalogueof9842s00backrich).pdf" [ref=e263] [cursor=pointer]:
+                    - /url: /wiki/File:Catalogue_of_9842_stars,_or,_All_stars_very_conspicuous_to_the_naked_eye,_for_the_epoch_of_1900_(IA_catalogueof9842s00backrich).pdf
+                    - img "Thumbnail for File:Catalogue of 9842 stars, or, All stars very conspicuous to the naked eye, for the epoch of 1900 (IA catalogueof9842s00backrich).pdf" [ref=e264]
+                  - generic [ref=e265]:
+                    - link "File:Catalogue of 9842 stars, or, All stars very conspicuous to the naked eye, for the epoch of 1900 (IA catalogueof9842s00backrich).pdf" [ref=e267] [cursor=pointer]:
+                      - /url: /wiki/File:Catalogue_of_9842_stars,_or,_All_stars_very_conspicuous_to_the_naked_eye,_for_the_epoch_of_1900_(IA_catalogueof9842s00backrich).pdf
+                    - generic [ref=e268]: Catalogue of 9842 stars, or, All stars very conspicuous to the naked eye, for the epoch of 1900 ( ) Author Backhouse, T. W. (Thomas William), 1842-1920...
+                    - generic [ref=e269]: (1,379 × 1,800 (27.07 MB)) - 03:16, 13 February 2024
+              - listitem [ref=e270]:
+                - generic [ref=e271]:
+                  - link "Thumbnail for File:The science of the stars (IA b24884522).pdf" [ref=e273] [cursor=pointer]:
+                    - /url: /wiki/File:The_science_of_the_stars_(IA_b24884522).pdf
+                    - img "Thumbnail for File:The science of the stars (IA b24884522).pdf" [ref=e274]
+                  - generic [ref=e275]:
+                    - link "File:The science of the stars (IA b24884522).pdf" [ref=e277] [cursor=pointer]:
+                      - /url: /wiki/File:The_science_of_the_stars_(IA_b24884522).pdf
+                    - generic [ref=e278]: "The science of the stars ( ) Author Pearce, Alfred J Title The science of the stars Publisher London : Simpkin, Marshall, and Co. Description Followed..."
+                    - generic [ref=e279]: (787 × 1,120 (7.19 MB)) - 02:25, 5 December 2022
+              - listitem [ref=e280]:
+                - generic [ref=e281]:
+                  - link "Thumbnail for File:The science of the stars (IA scienceofstars00maun).pdf" [ref=e283] [cursor=pointer]:
+                    - /url: /wiki/File:The_science_of_the_stars_(IA_scienceofstars00maun).pdf
+                    - img "Thumbnail for File:The science of the stars (IA scienceofstars00maun).pdf" [ref=e284]
+                  - generic [ref=e285]:
+                    - link "File:The science of the stars (IA scienceofstars00maun).pdf" [ref=e287] [cursor=pointer]:
+                      - /url: /wiki/File:The_science_of_the_stars_(IA_scienceofstars00maun).pdf
+                    - generic [ref=e288]: "The science of the stars ( ) Author Maunder, E. Walter (Edward Walter), 1851-1928 Title The science of the stars Publisher London, Edinburgh : T.C.&..."
+                    - generic [ref=e289]: (627 × 964 (3.79 MB)) - 13:58, 25 December 2020
+              - listitem [ref=e290]:
+                - generic [ref=e291]:
+                  - link "Thumbnail for File:All night with the stars (IA allnightwithstar00brow).pdf" [ref=e293] [cursor=pointer]:
+                    - /url: /wiki/File:All_night_with_the_stars_(IA_allnightwithstar00brow).pdf
+                    - img "Thumbnail for File:All night with the stars (IA allnightwithstar00brow).pdf" [ref=e294]
+                  - generic [ref=e295]:
+                    - link "File:All night with the stars (IA allnightwithstar00brow).pdf" [ref=e297] [cursor=pointer]:
+                      - /url: /wiki/File:All_night_with_the_stars_(IA_allnightwithstar00brow).pdf
+                    - generic [ref=e298]: "stars ( ) Author Brown, Louise. [from old catalog] Title All night with the stars Publisher New York, The Womans press Description Subjects: Stars..."
+                    - generic [ref=e299]: (760 × 1,114 (2.04 MB)) - 06:09, 2 August 2023
+              - listitem [ref=e300]:
+                - generic [ref=e301]:
+                  - link "Thumbnail for File:The cairn of stars, poems (IA cairnofstarspoem00macd).pdf" [ref=e303] [cursor=pointer]:
+                    - /url: /wiki/File:The_cairn_of_stars,_poems_(IA_cairnofstarspoem00macd).pdf
+                    - img "Thumbnail for File:The cairn of stars, poems (IA cairnofstarspoem00macd).pdf" [ref=e304]
+                  - generic [ref=e305]:
+                    - link "File:The cairn of stars, poems (IA cairnofstarspoem00macd).pdf" [ref=e307] [cursor=pointer]:
+                      - /url: /wiki/File:The_cairn_of_stars,_poems_(IA_cairnofstarspoem00macd).pdf
+                    - generic [ref=e308]: The cairn of stars, poems ( ) Author [MacDonnell, James Francis Carlin] [from old catalog] Title The cairn of stars, poems Publisher New York, H. Holt...
+                    - generic [ref=e309]: (689 × 1,083 (4.01 MB)) - 04:22, 21 June 2025
+              - listitem [ref=e310]:
+                - generic [ref=e311]:
+                  - link "Thumbnail for File:How to identify the stars (IA cu31924012311472).pdf" [ref=e313] [cursor=pointer]:
+                    - /url: /wiki/File:How_to_identify_the_stars_(IA_cu31924012311472).pdf
+                    - img "Thumbnail for File:How to identify the stars (IA cu31924012311472).pdf" [ref=e314]
+                  - generic [ref=e315]:
+                    - link "File:How to identify the stars (IA cu31924012311472).pdf" [ref=e317] [cursor=pointer]:
+                      - /url: /wiki/File:How_to_identify_the_stars_(IA_cu31924012311472).pdf
+                    - generic [ref=e318]: How to identify the stars ( ) Author Milham, Willis I. (Willis Isbister), b. 1874 Title How to identify the stars Publisher New York, The Macmillan...
+                    - generic [ref=e319]: (629 × 1,047 (1.23 MB)) - 07:00, 24 November 2025
+            - generic [ref=e321]:
+              - combobox [ref=e324]:
+                - option "20 items" [selected]
+                - option "50 items"
+                - option "100 items"
+                - option "250 items"
+                - option "500 items"
+              - generic [ref=e325]:
+                - button "First page" [ref=e326] [cursor=pointer]
+                - button "Previous page" [ref=e328] [cursor=pointer]
+                - button "Next page" [ref=e330] [cursor=pointer]
+    - contentinfo [ref=e333]:
+      - list
+      - list:
+        - listitem [ref=e334]:
+          - link "Privacy policy" [ref=e335] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy
+        - listitem [ref=e336]:
+          - link "About Wikimedia Commons" [ref=e337] [cursor=pointer]:
+            - /url: /wiki/Commons:Welcome
+        - listitem [ref=e338]:
+          - link "Disclaimers" [ref=e339] [cursor=pointer]:
+            - /url: /wiki/Commons:General_disclaimer
+        - listitem [ref=e340]:
+          - link "Code of Conduct" [ref=e341] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Universal_Code_of_Conduct
+        - listitem [ref=e342]:
+          - link "Developers" [ref=e343] [cursor=pointer]:
+            - /url: https://developer.wikimedia.org
+        - listitem [ref=e344]:
+          - link "Statistics" [ref=e345] [cursor=pointer]:
+            - /url: https://stats.wikimedia.org/#/commons.wikimedia.org
+        - listitem [ref=e346]:
+          - link "Cookie statement" [ref=e347] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Cookie_statement
+        - listitem [ref=e348]:
+          - link "Mobile view" [ref=e349] [cursor=pointer]:
+            - /url: //commons.wikimedia.org/w/index.php?title=Special:Search&ns6=1&search=nearest+stars+map&mobileaction=toggle_view_mobile
+      - list [ref=e350]:
+        - listitem [ref=e351]:
+          - link "Wikimedia Foundation" [ref=e352] [cursor=pointer]:
+            - /url: https://www.wikimedia.org/
+            - img "Wikimedia Foundation" [ref=e354]
+        - listitem [ref=e355]:
+          - link "Powered by MediaWiki" [ref=e356] [cursor=pointer]:
+            - /url: https://www.mediawiki.org/
+            - img "Powered by MediaWiki" [ref=e358]
+  - generic [ref=e359]:
+    - list

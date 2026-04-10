@@ -1,0 +1,5 @@
+[    1125ms] [WARNING] Skipped unavailable module ext.wp25EasterEggs @ https://en.wikipedia.org/w/load.php?lang=en&modules=startup&only=scripts&raw=1&skin=vector-2022:6
+[    1410ms] [LOG] [Obsidian Clipper] Initializing content script, generation 1 @ chrome-extension://cnjifjpddelmedmihgijeibhnjfabmlf/content.js:0
+[    2530ms] Could not establish connection. Receiving end does not exist.
+[    2530ms] Could not establish connection. Receiving end does not exist.
+[    4245ms] Could not establish connection. Receiving end does not exist.

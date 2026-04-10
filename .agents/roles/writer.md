@@ -35,12 +35,16 @@ Follow the domain's rules exactly. Key principles:
 - Consistent with existing corpus
 - Cross-linked to related content
 
-### 4. Self-check
+### 4. Language clarity pass (MANDATORY)
+**Do not skip this step.** Re-read every sentence and ask: would I say this out loud to a friend? If a phrase sounds like it belongs in a journal paper or a textbook, rewrite it in plain English. "Tried" not "pursued". "Hit hardest" not "disproportionately affected". "Dimmer" not "reduced optical brightness". Split long compound sentences. Vary active and passive voice. The domain file has the full checklist with specific tests. This is the most common reason articles get rejected.
+
+### 5. Self-check
 - [ ] All facts from spec, not independently researched
 - [ ] Tone matches domain's voice guide
 - [ ] Template structure followed exactly
 - [ ] Modification limits respected (if modifying existing content)
 - [ ] Cross-links included
+- [ ] Language clarity pass done — article reads clearly for a broad audience
 
 ## Modification Rules
 

@@ -44,7 +44,7 @@ The COSMOS Encyclopedia reads like a university-level reference written by worki
    - **Bulleted or numbered lists**: Used for enumerated categories (e.g., Non-thermal Radiation lists three types; Friedmann-Lemaitre lists three universe models; Planet lists IAU criteria).
    - **Table layout**: Rare, used for side-by-side comparison of mechanisms (e.g., Glitch article comparing starquakes vs. vortex unpinning).
 
-   **Articles may use H2 sub-headings** within the body. For shorter articles the visual hierarchy is generally flat -- only the H1 article title exists -- but longer articles may have H2 sub headings.
+   **H2 sub-headings:** Consider using H2s when they help readability, typically for articles over ~300 words with distinct thematic sections. For articles over ~500 words it would be unusual if H2s did not help. There are no hard rules -- use judgment.
 
 4. **Images with captioned credit** -- 1--2 images per article (sometimes 0, sometimes up to 5 for image-rich articles like Galaxy), floated left or right with descriptive captions and source credits. Captions are 1--3 sentences, descriptive and sometimes explanatory ("The hydrogen lines in the SNII spectrum have prominent P Cygni profiles, while..."). Credits always attributed (NASA, STScI, AAO, Swinburne, etc.).
 
@@ -56,11 +56,84 @@ The COSMOS Encyclopedia reads like a university-level reference written by worki
 
 ## 4. Tone and Register
 
-- **Register:** Semi-formal academic. Contractions are avoided in nearly all articles (see Section 4a below for rare exceptions). Sentences use the declarative mood almost exclusively.
-- **Voice:** Predominantly passive and impersonal ("it is generally accepted that...", "they are classified according to...", "observations reveal that...", "it is believed that the afterglow originates..."). The word "we" appears occasionally to mean "humanity/observers" ("we observe", "we can determine", "our Galaxy", "our knowledge"), never to mean "we the authors".
-- **Attitude toward the reader:** Respectful, not condescending. Concepts are explained but the reader is assumed to know what "gravity", "light", "temperature", and "orbit" mean at an everyday level.
-- **Emotional tone:** Neutral and factual. Excitement comes through implicit wonder at the subject matter, not through exclamation marks or superlatives. Occasional restrained colour: "beautiful objects", "the enigmatic Geminga", "incredibly strong magnetic fields".
-- **Historical asides:** Brief and factual, citing discoverers by name and date without hagiography ("The first radio pulsar was discovered in 1967 by Jocelyn Bell", "Karl Schwarzschild (1873-1916)", "Walter Baade in the 1940s", "Levi ben Gerson (1288-1344)").
+**Target register: approachable expert.** Think of that person you know who is so brilliant that when they explain something it seems simple, logical, and easy to understand — even if you could not repeat it yourself. That is the voice. The writer deeply understands the topic and uses that understanding to make it clear, not to show off. The reader should never have to re-read a sentence to parse its structure. A keen high schooler or curious adult should be able to follow the article without a physics degree.
+
+- **Accessible, not dumbed down.** Use straightforward language for the connective tissue of sentences. Reserve jargon for terms that have their own COSMOS entry (and link them). If a technical word does not add precision that a plain word lacks, use the plain word.
+- **Varied voice.** Mix active and passive naturally. Do not default to passive for everything. Active voice is often clearer and more engaging. Passive is fine when the agent is unknown or unimportant.
+- **Sentence structure: one idea per sentence.** Avoid packing three facts and two parenthetical asides into one sentence. Shorter, varied sentences read better than long compound ones. If a sentence runs past ~30 words, consider splitting it.
+- **No contractions** in article text (see Section 4a below for rare legacy exceptions).
+- **"We"** may mean "humanity/observers" ("we observe", "our Galaxy"), never "we the authors".
+- **Attitude toward the reader:** Respectful, not condescending. The reader is assumed to know everyday words like "gravity", "light", "temperature", and "orbit".
+- **Emotional tone:** Neutral and factual. Wonder comes through the subject matter itself, not through superlatives or exclamation marks.
+- **Historical asides:** Brief and factual, citing discoverers by name and date without hagiography.
+
+### 4b. Plain Language — Before and After
+
+**This is the single most important rule in this guide.** If the article reads like a textbook or a journal paper, it has failed. Every sentence must pass this test: would you say it this way to a smart friend who is not a scientist? If not, rewrite it.
+
+These examples show the kind of register shift writers must make. The "before" versions are technically correct but stiff. The "after" versions say the same thing in plain English.
+
+| Before (too formal / too dense) | After (COSMOS voice) |
+|---|---|
+| Pluto's interior is thought to be differentiated, with a rocky silicate core roughly 1,700 km across surrounded by a water-ice mantle. | Pluto's interior appears to be layered, with a rocky core roughly 1,700 km across surrounded by a mantle of water ice. |
+| It is locked in a 3:2 mean-motion resonance with Neptune, completing two orbits for every three of Neptune's, placing it in the dynamical class known as plutinos. | Pluto orbits in a 3:2 resonance with Neptune: it completes two orbits for every three of Neptune's. Objects sharing this rhythm are called plutinos. |
+| Data from the New Horizons spacecraft provide evidence for a liquid water ocean 100–180 km thick at the core–mantle boundary, sustained by radioactive heating. | New Horizons data suggest a liquid water ocean, 100–180 km thick, lies between the core and mantle, kept from freezing by heat from radioactive decay. |
+| The dark equatorial band Cthulhu Regio owes its reddish-brown colour to tholins, complex organic compounds produced by ultraviolet irradiation of methane and nitrogen. | The dark equatorial band called Cthulhu Regio gets its reddish-brown colour from tholins, complex organic molecules that form when ultraviolet light breaks down methane and nitrogen. |
+| Newly deployed satellites travel together in a closely-spaced formation before dispersing to their operational orbits, producing a chain of bright, evenly-spaced points of light moving in unison across the sky. | Fresh batches travel in a tight line, producing a chain of bright, evenly spaced dots that drift together across the sky. |
+| The best viewing conditions occur one to two hours after sunset or before sunrise, when the observer is in darkness but the satellites at altitude are still illuminated by the Sun. | They are easiest to spot one to two hours after sunset or before sunrise, when the ground is dark but the satellites are still lit by the Sun. |
+| Twilight observations are disproportionately affected, because the satellites are brightest and most numerous in the sky during twilight. | Twilight observations are hit hardest, because that is when the satellites are brightest and most numerous. |
+| The Vera C. Rubin Observatory, with its wide field of view and high sensitivity, is projected to be more severely affected than ZTF. | The Vera C. Rubin Observatory, with its wider field of view and higher sensitivity, will be even more affected. |
+| Later satellite versions emit significantly more unintended radio radiation than earlier ones. | Newer satellites are worse. |
+| SpaceX has pursued several approaches to reducing the optical brightness of its satellites. | SpaceX has tried several ways to make its satellites dimmer. |
+
+**Key patterns in the rewrites:**
+- Replace passive pileups with active subjects ("New Horizons data suggest..." not "Data provide evidence for...")
+- Split compound sentences at natural breaks
+- Gloss jargon inline on first use ("tholins, complex organic molecules that...") rather than assuming the reader knows
+- Use the ordinary word for non-technical vocabulary
+- Keep the same facts and precision, only the packaging changes
+- Say it shorter. "Newer satellites are worse" beats "Later satellite versions emit significantly more unintended radio radiation than earlier ones"
+
+### Word choice — use the ordinary word
+
+**This is a hard rule, not a suggestion.** Technical jargon that names a specific concept (redshift, nucleosynthesis, ecliptic) must stay. But non-technical vocabulary must use everyday words. If you would not say it aloud to a friend, do not write it.
+
+| Don't write | Write instead |
+|---|---|
+| inaugurated | marked the start of / began |
+| designated | called / named |
+| was substituted | was used instead / replaced it |
+| the implied ability | what it meant was / this showed |
+| compounding the anxiety | adding to the worry / making it worse |
+| significant scientific return | important scientific result |
+| competitive context | rivalry / competition |
+| from antiquity | since ancient times |
+| commensurability | (describe what it means, or drop it) |
+| empirically | by observation |
+| residing in | in |
+| inaugurated the Space Age | marked the beginning of the Space Age |
+| dispersing to their operational orbits | spreading out to their working orbits |
+| without optical aid | with the unaided eye / without a telescope |
+| disproportionately affected | hit hardest |
+| is projected to be more severely affected | will be even more affected |
+| pursued several approaches to reducing | tried several ways to reduce / cut |
+| unintended electromagnetic radiation | stray radio signals / radio leakage |
+| the original unmitigated v1.0 design | the original v1.0 |
+| viewing conditions occur | easiest to spot when / best seen when |
+| moving in unison | drifting together / moving together |
+
+This is not about dumbing down. "Began" and "inaugurated" carry the same information; "began" is invisible, "inaugurated" makes the reader pause. The test is always: does the fancy word add precision that the plain word lacks? If not, use the plain word.
+
+### Em-dashes — avoid
+
+Em-dashes (—) are an AI writing tell and they complicate sentences. Almost every em-dash can be replaced by a comma, a full stop, parentheses, or a colon. **Default to not using them.** An entire article with zero em-dashes is fine. If one genuinely helps readability, allow it, but more than one or two in an entire article should raise a flag. When in doubt, rewrite the sentence without it.
+
+**Key patterns in the rewrites:**
+- Replace passive pileups with active subjects ("New Horizons data suggest..." not "Data provide evidence for...")
+- Split compound sentences at natural breaks
+- Gloss jargon inline on first use ("tholins — complex organic molecules that...") rather than assuming the reader knows
+- Use the ordinary word for non-technical vocabulary
+- Keep the same facts and precision — nothing is lost, only the packaging changes
 
 ### 4a. Rare Register Breaks
 
@@ -96,7 +169,22 @@ These are not style patterns to emulate. New articles should avoid them.
 
 **Major topic articles** in the sample ranged from 246 words (supernova -- a hub article that links out to sub-types) to 1014 words (black hole). The sweet spot for a significant topic is 500--900 words.
 
-**Suggest split ** if an article is over 700 words, consider splitting off a more detailed sub article.
+**Suggest split** if an article is over 700 words, consider splitting off a more detailed sub article.
+
+### Topic importance calibration — match length to topic prominence
+
+Before writing, ask: *how well-known is this topic?* A topic that appears in every introductory astronomy textbook warrants more depth than one only specialists encounter. Use the scale below:
+
+| Topic type | Typical word count | What to include |
+|---|---|---|
+| Core concept (black hole, galaxy, star) | 500–900 words | Full treatment: definition, physics, types, history, significance |
+| Standard undergraduate topic (pulsar, redshift, spectral type) | 300–500 words | Definition, key physics, observational role |
+| Specialist/secondary topic (Stark effect, Sunyaev-Zel'dovich, barium stars) | 150–300 words | Definition + explanation of the key effect; history only if it is genuinely interesting |
+| Minor or fringe topic (obscure catalog objects, rarely observed phenomena) | 100–200 words | Brief definition and one explanatory paragraph; nothing more |
+
+**Practical test:** Ask whether a working astronomer outside the specific sub-field would recognise the term. If the answer is "probably not", keep the article short. Do not add a history section, a biography, or elaboration beyond what is needed to define and explain the concept. A 150-word article on a fringe topic is not a failure — it is correct calibration.
+
+**Concrete example:** The Zeeman effect (universally taught, diagnostic for stellar magnetic fields) warrants ~250 words. The Stark effect (rarely observed directly in astrophysics; mainly appears as line broadening) warrants ~150 words: definition, the linear vs. quadratic distinction, and its role in Stark broadening — nothing more. If you find yourself adding a history section to a specialist topic, stop and ask whether it adds value a reader would actually want.
 
 ---
 
@@ -181,16 +269,16 @@ Cross-linking is **extremely dense**. Every article links copiously to other COS
 
 ### DO:
 - **Open with a direct definition.** First sentence = "[Term] is/are [definition]." No lead-in.
-- **Use passive/impersonal voice** for describing physics ("it is generally accepted", "observations reveal").
+- **Vary active and passive voice.** Use active where it reads more naturally ("New Horizons revealed" not "it was revealed by New Horizons"). Passive is fine when the agent is unimportant.
 - **Hyperlink technical terms** to their COSMOS entries using `class="lexicon-term"`. Link generously, including common terms like "star", "mass", "orbit". Re-link terms on subsequent use.
 - **Give numbers for scale** -- approximate values, orders of magnitude, ranges. Use HTML `<sup>` and `<sub>` for exponents and subscripts.
-- **Use bold inline labels** (`<strong>`) for sub-type headings rather than HTML heading tags. Use bulleted/numbered lists when enumerating three or more categories.
+- **Use bulleted/numbered lists** when enumerating three or more categories.
 - **Credit discoveries** with brief historical context: name, date, institution.
 - **Use analogies sparingly but effectively** to make extreme quantities relatable ("a teaspoon of neutron star material would weigh around a billion tonnes").
 - **Include images** with descriptive captions (1--3 sentences) and source credit lines.
 - **End with forward links** ("See also: ...") where appropriate, or simply stop when the content is covered.
 - **Spell out acronyms** on first use.
-- **Keep articles concise.** Most entries are 150--500 words. Even major topics stay under 1000 words.
+- **Keep articles concise.** Most entries are 150--500 words. Even major topics stay under 1000 words. Match depth to topic richness: a narrow term or minor object may need only 150--300 words; do not pad a thin topic to hit a word-count floor. A short article with no image is perfectly fine if the topic does not warrant more.
 - **Use single quotes** to flag non-literal or idiomatic use of a term ('dark', 'rainbows').
 - **Use Australian/British spelling** (colour, ionisation, metres, etc.).
 
@@ -207,6 +295,7 @@ Cross-linking is **extremely dense**. Every article links copiously to other COS
   - Editorial commentary: "This reasoning seemed unassailable", "The implications are profound"
   - Filler sentences that add no information: "This is one of the most important discoveries in modern physics"
   - Instead, simply state what happened and what it means: "In 1998, two independent teams discovered..." not "In 1998, two teams shattered expectations with a groundbreaking discovery..."
+- **Don't pad articles to seem substantial.** If a topic can be covered well in 200 words, do not stretch it to 600. The corpus median is ~210 words; 46% of articles are 100--250 words. Adding sections, examples, or historical context just to fill space makes the article worse, not better. An article without an image is also fine.
 - **Don't write conclusions or summaries.** The article simply ends when the content is covered.
 - **Don't use exclamation marks** for emphasis (the original corpus uses them extremely rarely -- perhaps 2--3 across 643 articles -- and only for historical-drama emphasis, never pop-science excitement).
 - **Don't add bibliographic references unless they are key research papers.** Credit for images only, not inline citations.

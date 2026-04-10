@@ -45,12 +45,13 @@ Write the spec file immediately with the slug, title, category, and an IN-PROGRE
 ```
 
 ### Milestone 1 — Definition + orientation
-1. **Google AI Overview (optional, skip if unavailable)** — if `playwright-cli` is available and you are running interactively (not as a background agent), use it to fetch the Google AI Overview for orientation. See the `/google-ai-overview` skill for full instructions. If playwright is unavailable, a CAPTCHA blocks access, or you are running as a background agent, **skip this step** and proceed directly to Wikipedia/Britannica — the AI Overview is helpful but not required.
-2. Fetch the Wikipedia article and the Britannica page for the topic
-3. Read their reference lists — note any key papers, reviews, or external sources worth following
-4. If a seed URL was provided in the task context (from the master article list), fetch that too
-5. Extract: 1–2 sentence definition that distinguishes the topic from related concepts
-6. Update spec → write `## Definition` + update STATUS to `milestone: 1`
+1. **Quick web search for orientation** — run a WebSearch for the topic (e.g. `"{topic} astronomy"`) to get an initial overview and identify key sources. This is orientation only, not a citable source.
+2. Fetch the Wikipedia article for the topic
+3. Pick 2–3 additional sources from the source hierarchy below, choosing whichever are most relevant to the topic. Vary your choices — do not default to Britannica every time. For Solar System topics, NASA Science or NASA Fact Sheets are often better starting points. For physics concepts, HyperPhysics. For observational topics, ESA/ESO press releases. For historical topics, Britannica may be the right call. Use judgment.
+4. Read their reference lists — note any key papers, reviews, or external sources worth following
+5. If a seed URL was provided in the task context (from the master article list), fetch that too
+6. Extract: 1–2 sentence definition that distinguishes the topic from related concepts
+7. Update spec → write `## Definition` + update STATUS to `milestone: 1`
 
 ### Milestone 2 — Key numbers + physical properties
 1. Fetch quantitative data from NASA Science, HyperPhysics, NASA Fact Sheets, or specialist sources as appropriate

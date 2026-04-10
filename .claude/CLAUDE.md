@@ -63,3 +63,17 @@ State: `.omc/state/`, `.omc/state/sessions/{sessionId}/`, `.omc/notepad.md`, `.o
 Say "setup omc" or run `/oh-my-claudecode:omc-setup`.
 
 <!-- OMC:END -->
+
+## Web Search Tiers
+Use the lightest tool that gets the job done:
+
+1. **Built-in `WebSearch`** — simple factual lookups, quick references
+2. **`gemini-cli` headless** — when an AI-synthesized summary is needed (Google AI Overview); run non-interactively and extract the AI summary from the DOM output
+3. **Puppeteering** (playwright-cli, then Claude in Chrome as fallback) — full page interaction, login-gated content, JS-heavy pages
+
+## Web browsing as a puppeteer
+- favor using playwright-cli over Claude in Chrome
+- Use `read_page` to get element refs from the accessibility tree
+- Use `find` to locate elements by description
+- Click/interact using `ref`, not coordinates
+- Take screenshots only as a last resort when other methods fail

@@ -1,0 +1,782 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en-AU
+      - link "Accessibility feedback" [ref=e4] [cursor=pointer]
+  - generic [ref=e9]:
+    - search [ref=e10]:
+      - generic [ref=e12]:
+        - link "Go to Google Home" [ref=e14] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QPAgJ
+          - img [ref=e15]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - combobox "Search" [ref=e26]: what is a neutron star what is a neutron star
+            - generic [ref=e27]:
+              - button "Clear" [ref=e29] [cursor=pointer]:
+                - img [ref=e31]
+              - generic [ref=e34]:
+                - button "Search by voice" [ref=e35] [cursor=pointer]:
+                  - img [ref=e36]
+                - button "Search by image" [ref=e38] [cursor=pointer]:
+                  - img [ref=e39]
+          - button "Search" [ref=e41] [cursor=pointer]:
+            - img [ref=e44]
+    - generic [ref=e46]:
+      - button "Settings" [ref=e48] [cursor=pointer]:
+        - img [ref=e51]
+      - generic [ref=e54]:
+        - button "Google apps" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - link "Sign in" [ref=e61] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dwhat%2Bis%2Ba%2Bneutron%2Bstar&ec=futura_srp_og_si_72236_p
+  - generic [ref=e63]:
+    - navigation [ref=e69]:
+      - generic [ref=e73]:
+        - list [ref=e74]:
+          - listitem [ref=e75]:
+            - link "All" [disabled] [ref=e76]:
+              - generic [ref=e78]: All
+          - listitem [ref=e79]:
+            - link "Images" [ref=e80] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVgPsTSy5UjazDfPq8BLa8BrpC2CeRVYjn-nx4-2axs2ClyEp8KqYk3ZALvt0hrSEUkPJGJ92ZI79d6Y_8YoyziEJM7MSTolEzPF1F45tApkGHWM5nu5S1vyvcpZKBArRg3QaQp74USpKwCXMHV9Lr1ezFhxcA&q=what+is+a+neutron+star&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QtKgLegQIGRAB
+              - generic [ref=e82]: Images
+          - listitem [ref=e83]:
+            - link "Videos" [ref=e84] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVgPsTSy5UjazDfPq8BLa8BrpC2CeRVYjn-nx4-2axs2ClyEp8KqYk3ZALvt0hrSEUkPJGJ92ZI79d6Y_8YoyziEJM7MSTolEzPF1F45tApkGHWM5nu5S1vyvcpZKBArRg3QaQp74USpKwCXMHV9Lr1ezFhxcA&q=what+is+a+neutron+star&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QtKgLegQIGBAB
+              - generic [ref=e86]: Videos
+          - listitem [ref=e87]:
+            - link "Forums" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVgPsTSy5UjazDfPq8BLa8BrpC2CeRVYjn-nx4-2axs2ClyEp8KqYk3ZALvt0hrSEUkPJGJ92ZI79d6Y_8YoyziEJM7MSTolEzPF1F45tApkGHWM5nu5S1vyvcpZKBArRg3QaQp74USpKwCXMHV9Lr1ezFhxcA&q=what+is+a+neutron+star&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Qs6gLegQIFxAB
+              - generic [ref=e90]: Forums
+          - listitem [ref=e91]:
+            - link "Shopping" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVgPsTSy5UjazDfPq8BLa8BrpC2CeRVYjn-nx4-2axs2ClyEp8KqYk3ZALvt0hrSEUkPJGJ92ZI79d6Y_8YoyziEJM7MSTolEzPF1F45tApkGHWM5nu5S1vyvcpZKBArRg3QaQp74USpKwCXMHV9Lr1ezFhxcA&q=what+is+a+neutron+star&ved=1t:220175&ictx=111
+              - generic [ref=e94]: Shopping
+          - listitem [ref=e95]:
+            - link "News" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&q=what+is+a+neutron+star&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVgPsTSy5UjazDfPq8BLa8BrpC2CeRVYjn-nx4-2axs2ClyEp8KqYk3ZALvt0hrSEUkPJGJ92ZI79d6Y_8YoyziEJM7MSTolEzPF1F45tApkGHWM5nu5S1vyvcpZKBArRg3QaQp74USpKwCXMHV9Lr1ezFhxcA&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q0pQJegQIFRAB
+              - generic [ref=e98]: News
+          - listitem [ref=e99]:
+            - link "Short videos" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVgPsTSy5UjazDfPq8BLa8BrpC2CeRVYjn-nx4-2axs2ClyEp8KqYk3ZALvt0hrSEUkPJGJ92ZI79d6Y_8YoyziEJM7MSTolEzPF1F45tApkGHWM5nu5S1vyvcpZKBArRg3QaQp74USpKwCXMHV9Lr1ezFhxcA&q=what+is+a+neutron+star&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Qs6gLegQIFBAB
+              - generic [ref=e102]: Short videos
+          - listitem [ref=e103]:
+            - button "More filters" [ref=e104] [cursor=pointer]:
+              - generic "More filters" [ref=e105]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: More
+                  - img [ref=e109]
+        - button "Tools" [ref=e112] [cursor=pointer]:
+          - generic [ref=e114]:
+            - generic [ref=e115]: Tools
+            - img [ref=e117]
+    - heading "Search Results" [level=1] [ref=e119]
+    - generic [ref=e124]:
+      - generic [ref=e141]:
+        - generic [ref=e143]:
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - img [ref=e147]
+              - heading "AI Overview" [level=2] [ref=e149]
+            - button "About this result" [ref=e153]:
+              - img [ref=e155]
+          - generic [ref=e173]:
+            - generic [ref=e175]:
+              - list [ref=e177]:
+                - generic [ref=e178]:
+                  - listitem [ref=e179]:
+                    - button "What are neutron stars? | Space" [ref=e182]:
+                      - img "What are neutron stars? | Space" [ref=e183]
+                  - listitem [ref=e184]:
+                    - button "Neutron stars may not be as squishy as some scientists thought" [ref=e186]:
+                      - img "Neutron stars may not be as squishy as some scientists thought" [ref=e187]
+                  - listitem [ref=e188]:
+                    - button "What Is a Neutron Star? | Live Science" [ref=e190]:
+                      - img "What Is a Neutron Star? | Live Science" [ref=e191]
+                  - listitem [ref=e192]:
+                    - button "Neutron Stars Are Weird! - NASA Science" [ref=e194]:
+                      - img "Neutron Stars Are Weird! - NASA Science" [ref=e195]
+                  - listitem [ref=e196]:
+                    - button "Say Hello To Neutron Stars, Your Worst Nightmare" [ref=e198]:
+                      - img "Say Hello To Neutron Stars, Your Worst Nightmare" [ref=e199]
+                  - button "View all related links View all" [ref=e200] [cursor=pointer]:
+                    - generic "View all related links" [ref=e201]:
+                      - img [ref=e203]
+                    - generic [ref=e205]: View all
+                - button "Next" [ref=e206] [cursor=pointer]:
+                  - img [ref=e208]
+              - generic [ref=e210]:
+                - text: A neutron star is
+                - mark [ref=e211]: the incredibly dense, city-sized remnant core of a massive star that has collapsed under its own gravity following a supernova explosion
+                - text: . Primarily composed of neutrons, they pack roughly 1.4 to 3 solar masses into a radius of only about 10 kilometers. They are the densest known objects in the universe besides black holes.
+                - button "Wikipedia (+3) – View related links" [ref=e214] [cursor=pointer]:
+                  - generic [ref=e215]:
+                    - img "Wikipedia" [ref=e216]
+                    - generic [ref=e217]:
+                      - generic [ref=e218]: Wikipedia
+                      - generic [ref=e219]: "+3"
+              - strong [ref=e221]: "Key Characteristics and Facts:"
+              - generic [ref=e222]:
+                - list [ref=e223]:
+                  - listitem [ref=e224]:
+                    - generic [ref=e225]:
+                      - strong [ref=e226]: "Density:"
+                      - text: A single teaspoon of neutron star material would weigh about a trillion kilograms.
+                  - listitem [ref=e227]:
+                    - generic [ref=e228]:
+                      - strong [ref=e229]: "Formation:"
+                      - text: They form when supergiant stars (roughly 8 to 25 times the mass of the Sun) run out of fuel and explode.
+                  - listitem [ref=e230]:
+                    - generic [ref=e231]:
+                      - strong [ref=e232]: "Composition:"
+                      - text: Under extreme pressure, protons and electrons are squeezed together to form neutrons.
+                  - listitem [ref=e233]:
+                    - generic [ref=e234]:
+                      - strong [ref=e235]: "Rotation:"
+                      - text: Many neutron stars rotate extremely rapidly, sometimes spinning hundreds of times per second.
+                  - listitem [ref=e236]:
+                    - generic [ref=e237]:
+                      - strong [ref=e238]: "Magnetic Fields:"
+                      - text: They possess magnetic fields billions of times stronger than any generated on Earth.
+                  - listitem [ref=e239]:
+                    - generic [ref=e240]:
+                      - strong [ref=e241]: "Types:"
+                      - text: Fast-spinning, radio-emitting neutron stars are called
+                      - strong [ref=e242]:
+                        - link [ref=e244] [cursor=pointer]:
+                          - /url: https://www.google.com/search?q=pulsars&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QgK4QegYIAQgCEAY
+                          - text: pulsars
+                      - text: ", while those with exceptionally strong magnetic fields are called"
+                      - strong [ref=e245]:
+                        - link [ref=e247] [cursor=pointer]:
+                          - /url: https://www.google.com/search?q=magnetars&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QgK4QegYIAQgCEAc
+                          - text: magnetars
+                      - text: .
+                    - button [ref=e250] [cursor=pointer]:
+                      - generic [ref=e251]:
+                        - img [ref=e252]
+                        - generic [ref=e253]:
+                          - generic [ref=e254]: Wikipedia
+                          - generic [ref=e255]: "+9"
+                - generic [ref=e256]:
+                  - text: Neutron stars are so compressed that the core surpasses white dwarf density to become a compact, superdense material known as neutronium. If the collapsing core is too massive (greater than about 3 solar masses), it will continue to collapse into a black hole.
+                  - button [ref=e259] [cursor=pointer]:
+                    - generic [ref=e260]:
+                      - img [ref=e261]
+                      - generic [ref=e262]:
+                        - generic [ref=e263]: Wikipedia
+                        - generic [ref=e264]: "+3"
+            - generic [ref=e270]:
+              - list [ref=e272]:
+                - listitem [ref=e273]:
+                  - generic [ref=e274]:
+                    - link "Neutron star - Wikipedia. Opens in new tab." [ref=e275] [cursor=pointer]:
+                      - /url: /url?sa=i&source=web&rct=j&url=https://en.wikipedia.org/wiki/Neutron_star&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QqYcPegYIAQgAEBU&opi=89978449&cd&psig=AOvVaw3cVAOJhhvPR5sSm4Axs6Ba&ust=1775804893706000
+                    - generic [ref=e277]:
+                      - generic [ref=e278]: Neutron star - Wikipedia
+                      - generic [ref=e279]: A neutron star is the gravitationally collapsed core of a massive supergiant star. It results from the supernova explosion of a ma...
+                      - generic [ref=e280]:
+                        - generic [ref=e285]: Wikipedia
+                        - button "About this result" [ref=e287] [cursor=pointer]:
+                          - img [ref=e288]
+                - listitem [ref=e292]:
+                  - generic [ref=e293]:
+                    - link "Neutron Stars, Pulsars, and Magnetars. Opens in new tab." [ref=e294] [cursor=pointer]:
+                      - /url: /url?sa=i&source=web&rct=j&url=https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QqYcPegYIAQgAEBk&opi=89978449&cd&psig=AOvVaw3cVAOJhhvPR5sSm4Axs6Ba&ust=1775804893706000
+                    - generic [ref=e296]:
+                      - generic [ref=e297]: Neutron Stars, Pulsars, and Magnetars
+                      - generic [ref=e298]: Neutron stars are the densest objects known. They are formed when a massive star runs out of fuel and collapses. The collapse crus...
+                      - generic [ref=e299]:
+                        - generic [ref=e304]: NASA Imagine the Universe (.gov)
+                        - button "About this result" [ref=e306] [cursor=pointer]:
+                          - img [ref=e307]
+                - listitem [ref=e311]:
+                  - generic [ref=e312]:
+                    - link "Neutron Star - ESA/Hubble. Opens in new tab." [ref=e313] [cursor=pointer]:
+                      - /url: /url?sa=i&source=web&rct=j&url=https://esahubble.org/wordbank/neutron-star/&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4QqYcPegYIAQgAEB0&opi=89978449&cd&psig=AOvVaw3cVAOJhhvPR5sSm4Axs6Ba&ust=1775804893706000
+                    - generic [ref=e315]:
+                      - generic [ref=e316]: Neutron Star - ESA/Hubble
+                      - generic [ref=e317]: Neutron stars are the incredibly dense remnants of supermassive stars that have exploded as supernovae. A star's evolution and ult...
+                      - generic [ref=e318]:
+                        - generic [ref=e323]: ESA/Hubble
+                        - button [ref=e325] [cursor=pointer]:
+                          - img [ref=e326]
+              - button [ref=e331] [cursor=pointer]:
+                - generic [ref=e332]: Show all
+        - button "Show more AI Overview" [ref=e336]:
+          - generic [ref=e338] [cursor=pointer]:
+            - generic [ref=e339]: Show more
+            - img [ref=e341]
+      - main [ref=e344]:
+        - generic [ref=e348]:
+          - generic [ref=e351]:
+            - heading "Web results" [level=2] [ref=e352]
+            - generic [ref=e353]:
+              - generic [ref=e356]:
+                - link "Neutron star Wikipedia https://en.wikipedia.org › wiki › Neutron_star" [ref=e358] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Neutron_star
+                  - heading "Neutron star" [level=3] [ref=e359]
+                  - generic [ref=e364]:
+                    - generic [ref=e366]: Wikipedia
+                    - generic [ref=e368]: https://en.wikipedia.org › wiki › Neutron_star
+                - button "About this result" [ref=e369] [cursor=pointer]:
+                  - img [ref=e372]
+              - generic [ref=e375]:
+                - generic [ref=e376]:
+                  - text: A neutron star is
+                  - emphasis [ref=e377]: the gravitationally collapsed core of a massive supergiant star
+                  - text: . It results from the supernova explosion of a massive star.
+                - link "Read more" [ref=e378] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Neutron_star#:~:text=A%20neutron%20star%20is%20the,to%20that%20of%20atomic%20nuclei.
+          - generic [ref=e382]:
+            - heading "People also ask" [level=2] [ref=e384]
+            - generic [ref=e385]:
+              - button "What is a neutron star in simple terms?" [ref=e391] [cursor=pointer]:
+                - generic [ref=e393]: What is a neutron star in simple terms?
+                - img [ref=e396]
+              - button "What is so special about neutron stars?" [ref=e405] [cursor=pointer]:
+                - generic [ref=e407]: What is so special about neutron stars?
+                - img [ref=e410]
+              - button "Is a neutron star a dead star?" [ref=e419] [cursor=pointer]:
+                - generic [ref=e421]: Is a neutron star a dead star?
+                - img [ref=e424]
+              - button "What is the closest neutron star to Earth?" [ref=e433] [cursor=pointer]:
+                - generic [ref=e435]: What is the closest neutron star to Earth?
+                - img [ref=e438]
+          - generic [ref=e443]:
+            - heading "Web results" [level=2] [ref=e444]
+            - generic [ref=e445]:
+              - generic [ref=e448]:
+                - link "Neutron Stars - Imagine the Universe! - NASA NASA Imagine the Universe (.gov) https://imagine.gsfc.nasa.gov › science › objects › neutro..." [ref=e450] [cursor=pointer]:
+                  - /url: https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html
+                  - heading "Neutron Stars - Imagine the Universe! - NASA" [level=3] [ref=e451]
+                  - generic [ref=e456]:
+                    - generic [ref=e458]: NASA Imagine the Universe (.gov)
+                    - generic [ref=e460]: https://imagine.gsfc.nasa.gov › science › objects › neutro...
+                - button "About this result" [ref=e461] [cursor=pointer]:
+                  - img [ref=e464]
+              - generic [ref=e467]:
+                - generic [ref=e468]:
+                  - text: A neutron star is
+                  - emphasis [ref=e469]: the densest object astronomers can observe directly
+                  - text: ", crushing half a million times Earth's mass into a sphere about 12 miles across."
+                - link "Read more" [ref=e470] [cursor=pointer]:
+                  - /url: https://imagine.gsfc.nasa.gov/science/objects/neutron_stars1.html#:~:text=A%20neutron%20star%20is%20the,as%20shown%20in%20this%20illustration.
+          - generic [ref=e474]:
+            - generic [ref=e477]:
+              - link "Neutron Star ESA/Hubble https://esahubble.org › wordbank › neutron-star" [ref=e479] [cursor=pointer]:
+                - /url: https://esahubble.org/wordbank/neutron-star/
+                - heading "Neutron Star" [level=3] [ref=e480]
+                - generic [ref=e485]:
+                  - generic [ref=e487]: ESA/Hubble
+                  - generic [ref=e489]: https://esahubble.org › wordbank › neutron-star
+              - button "About this result" [ref=e490] [cursor=pointer]:
+                - img [ref=e493]
+            - generic [ref=e496]:
+              - generic [ref=e497]:
+                - emphasis [ref=e498]: Neutron stars
+                - text: are the incredibly dense remnants of supermassive stars that have exploded as supernovae.
+              - link "Read more" [ref=e499] [cursor=pointer]:
+                - /url: https://esahubble.org/wordbank/neutron-star/#:~:text=Neutron%20stars%20are%20the%20incredibly,that%20have%20exploded%20as%20supernovae.
+          - generic [ref=e503]:
+            - generic [ref=e506]:
+              - link "ESA - What is a neutron star? European Space Agency https://www.esa.int › ESA_Multimedia › Images › 2024/03" [ref=e508] [cursor=pointer]:
+                - /url: https://www.esa.int/ESA_Multimedia/Images/2024/03/What_is_a_neutron_star
+                - heading "ESA - What is a neutron star?" [level=3] [ref=e509]
+                - generic [ref=e514]:
+                  - generic [ref=e516]: European Space Agency
+                  - generic [ref=e518]: https://www.esa.int › ESA_Multimedia › Images › 2024/03
+              - button "About this result" [ref=e519] [cursor=pointer]:
+                - img [ref=e522]
+            - generic [ref=e525]:
+              - generic [ref=e526]: 12 Mar 2024 —
+              - generic [ref=e527]:
+                - text: A neutron star is
+                - emphasis [ref=e528]: extraordinarily dense, packing more mass than the entire Sun
+                - text: (1.5 to 2.5 solar masses) in a globe with a diameter of 10-15 km.
+              - link "Read more" [ref=e529] [cursor=pointer]:
+                - /url: https://www.esa.int/ESA_Multimedia/Images/2024/03/What_is_a_neutron_star#:~:text=A%20neutron%20star%20is%20extraordinarily,of%20a%20city%20like%20Paris).
+          - generic [ref=e533]:
+            - generic [ref=e536]:
+              - link "DOE Explains...Neutron Stars Department of Energy (.gov) https://www.energy.gov › science › doe-explainsneutron..." [ref=e538] [cursor=pointer]:
+                - /url: https://www.energy.gov/science/doe-explainsneutron-stars
+                - heading "DOE Explains...Neutron Stars" [level=3] [ref=e539]
+                - generic [ref=e544]:
+                  - generic [ref=e546]: Department of Energy (.gov)
+                  - generic [ref=e548]: https://www.energy.gov › science › doe-explainsneutron...
+              - button "About this result" [ref=e549] [cursor=pointer]:
+                - img [ref=e552]
+            - generic [ref=e555]:
+              - generic [ref=e556]:
+                - text: Neutron stars are among the densest objects in the cosmos.
+                - emphasis [ref=e557]: They average only about 12 miles in diameter
+                - text: but are denser than our sun.
+              - link "Read more" [ref=e558] [cursor=pointer]:
+                - /url: https://www.energy.gov/science/doe-explainsneutron-stars#:~:text=Neutron%20stars%20are%20among%20the,bigger%20than%20a%20neutron%20star.
+          - generic [ref=e564]:
+            - generic [ref=e567]:
+              - link "Video | What are Neutron Stars? | LIGO Lab | Caltech LIGO Caltech · Socratica https://www.ligo.caltech.edu · 4 Jan 2015" [ref=e569] [cursor=pointer]:
+                - /url: https://www.ligo.caltech.edu/WA/video/what-are-neutron-stars
+                - heading "Video | What are Neutron Stars? | LIGO Lab | Caltech" [level=3] [ref=e570]
+                - generic [ref=e575]:
+                  - generic [ref=e577]: LIGO Caltech · Socratica
+                  - generic [ref=e579]: https://www.ligo.caltech.edu · 4 Jan 2015
+              - button "About this result" [ref=e580] [cursor=pointer]:
+                - img [ref=e583]
+            - generic [ref=e585]:
+              - link "Video | What are Neutron Stars? | LIGO Lab | Caltech by Socratica on LIGO Caltech. Play on LIGO Caltech. 5:37" [ref=e586] [cursor=pointer]:
+                - /url: https://www.ligo.caltech.edu/WA/video/what-are-neutron-stars
+                - generic [ref=e588]:
+                  - img [ref=e594]
+                  - generic [ref=e599]: 5:37
+              - generic [ref=e601]: In between white dwarves and black holes are neutron stars. These stars are made primarily of neutrons which are neutral particles.
+          - generic [ref=e605]:
+            - generic [ref=e607]:
+              - heading "Videos" [level=2] [ref=e608]
+              - button "About this result" [ref=e609] [cursor=pointer]:
+                - img [ref=e612]
+            - generic [ref=e615]:
+              - generic [ref=e621]:
+                - generic [ref=e622]:
+                  - generic [ref=e623]:
+                    - link "Neutron Stars Explained in Simple Words for Laymen YouTube Science ABC 29 Nov 2022" [ref=e625] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=FVUbIaD94Ao
+                      - heading "Neutron Stars Explained in Simple Words for Laymen YouTube Science ABC 29 Nov 2022" [level=3] [ref=e626]:
+                        - generic [ref=e629]: Neutron Stars Explained in Simple Words for Laymen
+                        - generic [ref=e631]:
+                          - generic [ref=e632]:
+                            - text: YouTube
+                            - generic [ref=e633]: · Science ABC
+                          - generic [ref=e634]: 29 Nov 2022
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Science ABC
+                        - button "About this result" [ref=e635] [cursor=pointer]:
+                          - img [ref=e638]
+                  - button "Neutron Stars Explained in Simple Words for Laymen by Science ABC on YouTube. Play on Google. 5:43" [ref=e640] [cursor=pointer]:
+                    - generic [ref=e641]:
+                      - img [ref=e647]
+                      - generic [ref=e650]:
+                        - generic [ref=e652]: 5:43
+                        - img [ref=e655]
+                - button "Neutron stars are dense remnants of exploded stars, with masses exceeding 1.4 times the sun and powerful magnetic fields." [ref=e658] [cursor=pointer]:
+                  - generic [ref=e662]: Neutron stars are dense remnants of exploded stars, with masses exceeding 1.4 times the sun and powerful magnetic fields.
+              - generic [ref=e668]:
+                - generic [ref=e669]:
+                  - generic [ref=e670]:
+                    - link "What is a Neutron Star? YouTube NASA Goddard 19 May 2017" [ref=e672] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=hCwDNXKlN8Q
+                      - heading "What is a Neutron Star? YouTube NASA Goddard 19 May 2017" [level=3] [ref=e673]:
+                        - generic [ref=e676]: What is a Neutron Star?
+                        - generic [ref=e678]:
+                          - generic [ref=e679]:
+                            - text: YouTube
+                            - generic [ref=e680]: · NASA Goddard
+                          - generic [ref=e681]: 19 May 2017
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · NASA Goddard
+                        - button "About this result" [ref=e682] [cursor=pointer]:
+                          - img [ref=e685]
+                  - button "What is a Neutron Star? by NASA Goddard on YouTube. Play on Google. 2:17" [ref=e687] [cursor=pointer]:
+                    - generic [ref=e688]:
+                      - img [ref=e694]
+                      - generic [ref=e697]:
+                        - generic [ref=e699]: 2:17
+                        - img [ref=e702]
+                - button "A star 10-20x the sun leaves behind a neutron star, the densest observable object in the universe, weighing a billion tons per teaspoon." [ref=e705] [cursor=pointer]:
+                  - generic [ref=e709]: A star 10-20x the sun leaves behind a neutron star, the densest observable object in the universe, weighing a billion tons per teaspoon.
+              - generic [ref=e715]:
+                - generic [ref=e716]:
+                  - generic [ref=e717]:
+                    - link "Neutron Stars – The Most Extreme Things that are not Black ... YouTube Kurzgesagt – In a Nutshell 11 Nov 2019" [ref=e719] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=udFxKZRyQt4
+                      - heading "Neutron Stars – The Most Extreme Things that are not Black ... YouTube Kurzgesagt – In a Nutshell 11 Nov 2019" [level=3] [ref=e720]:
+                        - generic [ref=e723]: Neutron Stars – The Most Extreme Things that are not Black ...
+                        - generic [ref=e725]:
+                          - generic [ref=e726]:
+                            - text: YouTube
+                            - generic [ref=e727]: · Kurzgesagt – In a Nutshell
+                          - generic [ref=e728]: 11 Nov 2019
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Kurzgesagt – In a Nutshell
+                        - button "About this result" [ref=e729] [cursor=pointer]:
+                          - img [ref=e732]
+                  - button "Neutron Stars – The Most Extreme Things that are not Black ... by Kurzgesagt – In a Nutshell on YouTube. Play on Google. 7:26" [ref=e734] [cursor=pointer]:
+                    - generic [ref=e735]:
+                      - img [ref=e741]
+                      - generic [ref=e744]:
+                        - generic [ref=e746]: 7:26
+                        - img [ref=e749]
+                - button "Neutron stars are giant atomic nuclei, only a few km in diameter but as massive as stars, formed from supernova explosions." [ref=e752] [cursor=pointer]:
+                  - generic [ref=e756]: Neutron stars are giant atomic nuclei, only a few km in diameter but as massive as stars, formed from supernova explosions.
+              - generic [ref=e761]:
+                - generic [ref=e762]:
+                  - generic [ref=e763]:
+                    - link "Neutron Stars are More Bizarre Than You Think YouTube Space Matters 4 Mar 2024" [ref=e765] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=2mWFVU_5Xhk
+                      - heading "Neutron Stars are More Bizarre Than You Think YouTube Space Matters 4 Mar 2024" [level=3] [ref=e766]:
+                        - generic [ref=e769]: Neutron Stars are More Bizarre Than You Think
+                        - generic [ref=e771]:
+                          - generic [ref=e772]:
+                            - text: YouTube
+                            - generic [ref=e773]: · Space Matters
+                          - generic [ref=e774]: 4 Mar 2024
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Space Matters
+                        - button "About this result" [ref=e775] [cursor=pointer]:
+                          - img [ref=e778]
+                  - button "Neutron Stars are More Bizarre Than You Think by Space Matters on YouTube. Play on Google. 19:08" [ref=e780] [cursor=pointer]:
+                    - generic [ref=e781]:
+                      - img [ref=e784]
+                      - generic [ref=e787]:
+                        - generic [ref=e789]: 19:08
+                        - img [ref=e792]
+                - button "A neutron star is born it's a bizarre and exotic object incredibly small compared to the star it once was but in incredibly dense." [ref=e795] [cursor=pointer]:
+                  - generic [ref=e799]: A neutron star is born it's a bizarre and exotic object incredibly small compared to the star it once was but in incredibly dense.
+            - link "View all videos" [ref=e802] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&q=what+is+a+neutron+star&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8ccDKAJ6BAhOEAQ
+              - separator [ref=e803]
+              - generic [ref=e804]:
+                - generic [ref=e805]: View all
+                - img [ref=e807]
+          - generic [ref=e811]:
+            - heading "Web results" [level=2] [ref=e812]
+            - generic [ref=e813]:
+              - generic [ref=e816]:
+                - link "Neutron Star | COSMOS Swinburne University of Technology https://astronomy.swin.edu.au › cosmos › neutron+star" [ref=e818] [cursor=pointer]:
+                  - /url: https://astronomy.swin.edu.au/cosmos/n/neutron+star
+                  - heading "Neutron Star | COSMOS" [level=3] [ref=e819]
+                  - generic [ref=e824]:
+                    - generic [ref=e826]: Swinburne University of Technology
+                    - generic [ref=e828]: https://astronomy.swin.edu.au › cosmos › neutron+star
+                - button "About this result" [ref=e829] [cursor=pointer]:
+                  - img [ref=e832]
+              - generic [ref=e835]:
+                - generic [ref=e836]:
+                  - text: Neutrons stars are
+                  - emphasis [ref=e837]: extreme objects that measure between 10 and 20 km across
+                  - text: . They have densities of 10 17 kg/m 3.
+                - link "Read more" [ref=e838] [cursor=pointer]:
+                  - /url: https://astronomy.swin.edu.au/cosmos/n/neutron+star#:~:text=Neutrons%20stars%20are%20extreme%20objects,have%20densities%20of%201017%20kg%2Fm3
+          - generic [ref=e842]:
+            - heading "Short videos" [level=2] [ref=e844]
+            - generic [ref=e846]:
+              - list [ref=e848]:
+                - listitem [ref=e849]:
+                  - generic [ref=e853]:
+                    - generic [ref=e855]:
+                      - 'button "Neutron Stars: Extreme Physics by Ultra Space Balls on YouTube. Play on Google. 0:34" [ref=e857] [cursor=pointer]':
+                        - generic [ref=e861]:
+                          - generic [ref=e862]:
+                            - img [ref=e863]
+                            - generic [ref=e865]: 0:34
+                          - img [ref=e868]
+                      - 'link "Neutron Stars: Extreme Physics YouTube · Ultra Space Balls" [ref=e871] [cursor=pointer]':
+                        - /url: https://www.youtube.com/shorts/xvVUH-u1zJ8
+                        - generic [ref=e872]:
+                          - 'heading "Neutron Stars: Extreme Physics" [level=3] [ref=e874]':
+                            - generic [ref=e875]: "Neutron Stars: Extreme Physics"
+                          - generic [ref=e880]: YouTube · Ultra Space Balls
+                    - button "About this result" [ref=e884] [cursor=pointer]:
+                      - img [ref=e887]
+                - listitem [ref=e889]:
+                  - generic [ref=e893]:
+                    - generic [ref=e895]:
+                      - button "How Heavy Is a Teaspoon of Neutron Star? by Museum of Science on YouTube. Play on Google. 0:51" [ref=e897] [cursor=pointer]:
+                        - generic [ref=e901]:
+                          - generic [ref=e902]:
+                            - img [ref=e903]
+                            - generic [ref=e905]: 0:51
+                          - img [ref=e908]
+                      - link "How Heavy Is a Teaspoon of Neutron Star? YouTube · Museum of Science" [ref=e911] [cursor=pointer]:
+                        - /url: https://www.youtube.com/shorts/60YW4Rw7f8k
+                        - generic [ref=e912]:
+                          - heading "How Heavy Is a Teaspoon of Neutron Star?" [level=3] [ref=e914]:
+                            - generic [ref=e915]: How Heavy Is a Teaspoon of Neutron Star?
+                          - generic [ref=e920]: YouTube · Museum of Science
+                    - button "About this result" [ref=e924] [cursor=pointer]:
+                      - img [ref=e927]
+                - listitem [ref=e929]:
+                  - generic [ref=e933]:
+                    - generic [ref=e935]:
+                      - button "SOUND OF A PULSAR STAR ☠️☝️ by Hist Myst on YouTube. Play on Google. 0:38" [ref=e937] [cursor=pointer]:
+                        - generic [ref=e941]:
+                          - generic [ref=e942]:
+                            - img [ref=e943]
+                            - generic [ref=e945]: 0:38
+                          - img [ref=e948]
+                      - link "SOUND OF A PULSAR STAR ☠️☝️ YouTube · Hist Myst" [ref=e951] [cursor=pointer]:
+                        - /url: https://www.youtube.com/shorts/TtWwXcMNc0o
+                        - generic [ref=e952]:
+                          - heading "SOUND OF A PULSAR STAR ☠️☝️" [level=3] [ref=e954]:
+                            - generic [ref=e955]: SOUND OF A PULSAR STAR ☠️☝️
+                          - generic [ref=e960]: YouTube · Hist Myst
+                    - button "About this result" [ref=e964] [cursor=pointer]:
+                      - img [ref=e967]
+                - listitem [ref=e969]:
+                  - generic [ref=e973]:
+                    - generic [ref=e975]:
+                      - button "Scientists Think They Can See Inside a Neutron Star — And ... by SpaceVrse on YouTube. Play on Google. 0:59" [ref=e977] [cursor=pointer]:
+                        - generic [ref=e984]:
+                          - generic [ref=e985]:
+                            - img [ref=e986]
+                            - generic [ref=e988]: 0:59
+                          - img [ref=e991]
+                      - link "Scientists Think They Can See Inside a Neutron Star — And ... YouTube · SpaceVrse" [ref=e994] [cursor=pointer]:
+                        - /url: https://www.youtube.com/shorts/5oJnJcwt12c
+                        - generic [ref=e995]:
+                          - heading "Scientists Think They Can See Inside a Neutron Star — And ..." [level=3] [ref=e997]:
+                            - generic [ref=e998]: Scientists Think They Can See Inside a Neutron Star — And ...
+                          - generic [ref=e1003]: YouTube · SpaceVrse
+                    - button "About this result" [ref=e1007] [cursor=pointer]:
+                      - img [ref=e1010]
+                - listitem [ref=e1012]:
+                  - generic [ref=e1016]:
+                    - generic [ref=e1018]:
+                      - button "What is a Neutron Star? by Tech Guy Greg “TG2” on YouTube. Play on Google. 1:59" [ref=e1020] [cursor=pointer]:
+                        - generic [ref=e1027]:
+                          - generic [ref=e1028]:
+                            - img [ref=e1029]
+                            - generic [ref=e1031]: 1:59
+                          - img [ref=e1034]
+                      - link "What is a Neutron Star? YouTube · Tech Guy Greg “TG2”" [ref=e1037] [cursor=pointer]:
+                        - /url: https://www.youtube.com/watch?v=0waO_ORYtps
+                        - generic [ref=e1038]:
+                          - heading "What is a Neutron Star?" [level=3] [ref=e1040]:
+                            - generic [ref=e1041]: What is a Neutron Star?
+                          - generic [ref=e1046]: YouTube · Tech Guy Greg “TG2”
+                    - button "About this result" [ref=e1050] [cursor=pointer]:
+                      - img [ref=e1053]
+                - listitem [ref=e1055]:
+                  - generic [ref=e1058]:
+                    - generic [ref=e1060]:
+                      - 'link "Galaxies on Instagram: \"Neutron stars are the collapsed cores ... by Galaxies on Instagram. Play on Instagram. 0:05" [ref=e1062] [cursor=pointer]':
+                        - /url: https://www.instagram.com/reel/DWcMHxiESjc/
+                        - generic [ref=e1067]:
+                          - img [ref=e1068]
+                          - generic [ref=e1070]: 0:05
+                      - 'link "Galaxies on Instagram: \"Neutron stars are the collapsed cores ... Instagram · Galaxies" [ref=e1072] [cursor=pointer]':
+                        - /url: https://www.instagram.com/reel/DWcMHxiESjc/
+                        - generic [ref=e1073]:
+                          - 'heading "Galaxies on Instagram: \"Neutron stars are the collapsed cores ..." [level=3] [ref=e1075]':
+                            - generic [ref=e1076]: "Galaxies on Instagram: \"Neutron stars are the collapsed cores ..."
+                          - generic [ref=e1081]: Instagram · Galaxies
+                    - button "About this result" [ref=e1085] [cursor=pointer]:
+                      - img [ref=e1088]
+                - listitem [ref=e1090]:
+                  - generic [ref=e1093]:
+                    - generic [ref=e1095]:
+                      - link "A Star That Leaves Nothing Behind — And Humans Breaking ... by SpaceVrse on Instagram. Play on Instagram. 0:58" [ref=e1097] [cursor=pointer]:
+                        - /url: https://www.instagram.com/reel/DW5jRUjj2mK/
+                        - generic [ref=e1102]:
+                          - img [ref=e1103]
+                          - generic [ref=e1105]: 0:58
+                      - link "A Star That Leaves Nothing Behind — And Humans Breaking ... Instagram · SpaceVrse" [ref=e1107] [cursor=pointer]:
+                        - /url: https://www.instagram.com/reel/DW5jRUjj2mK/
+                        - generic [ref=e1108]:
+                          - heading "A Star That Leaves Nothing Behind — And Humans Breaking ..." [level=3] [ref=e1110]:
+                            - generic [ref=e1111]: A Star That Leaves Nothing Behind — And Humans Breaking ...
+                          - generic [ref=e1116]: Instagram · SpaceVrse
+                    - button "About this result" [ref=e1120] [cursor=pointer]:
+                      - img [ref=e1123]
+                - listitem [ref=e1125]:
+                  - generic [ref=e1128]:
+                    - generic [ref=e1130]:
+                      - link "Ever wondered about neutron stars? It's a dead star's core, so ... by phantasticphysics on TikTok. Play on TikTok. 2:03" [ref=e1132] [cursor=pointer]:
+                        - /url: https://www.tiktok.com/@phantasticphysics/video/7623868270516391182
+                        - generic [ref=e1137]:
+                          - img [ref=e1138]
+                          - generic [ref=e1140]: 2:03
+                      - link "Ever wondered about neutron stars? It's a dead star's core, so ... TikTok · phantasticphysics" [ref=e1142] [cursor=pointer]:
+                        - /url: https://www.tiktok.com/@phantasticphysics/video/7623868270516391182
+                        - generic [ref=e1143]:
+                          - heading "Ever wondered about neutron stars? It's a dead star's core, so ..." [level=3] [ref=e1145]:
+                            - generic [ref=e1146]: Ever wondered about neutron stars? It's a dead star's core, so ...
+                          - generic [ref=e1151]: TikTok · phantasticphysics
+                    - button "About this result" [ref=e1155] [cursor=pointer]:
+                      - img [ref=e1158]
+                - listitem [ref=e1160]:
+                  - generic [ref=e1164]:
+                    - generic [ref=e1166]:
+                      - button "What Is a Neutron Star? (The Densest Thing in the Universe) by Simple Science Lab on YouTube. Play on Google. 1:06" [ref=e1168] [cursor=pointer]:
+                        - generic [ref=e1172]:
+                          - generic [ref=e1173]:
+                            - img [ref=e1174]
+                            - generic [ref=e1176]: 1:06
+                          - img [ref=e1179]
+                      - link "What Is a Neutron Star? (The Densest Thing in the Universe) YouTube · Simple Science Lab" [ref=e1182] [cursor=pointer]:
+                        - /url: https://www.youtube.com/shorts/OGm79wcSYjs
+                        - generic [ref=e1183]:
+                          - heading "What Is a Neutron Star? (The Densest Thing in the Universe)" [level=3] [ref=e1185]:
+                            - generic [ref=e1186]: What Is a Neutron Star? (The Densest Thing in the Universe)
+                          - generic [ref=e1191]: YouTube · Simple Science Lab
+                    - button "About this result" [ref=e1195] [cursor=pointer]:
+                      - img [ref=e1198]
+                - listitem [ref=e1200]:
+                  - generic [ref=e1203]:
+                    - generic [ref=e1205]:
+                      - link "Scientists Think They Can See Inside a Neutron Star — And ... by SpaceVrse on Instagram. Play on Instagram. 0:58" [ref=e1207] [cursor=pointer]:
+                        - /url: https://www.instagram.com/spacevrs/reel/DWVEwTBFJp6/?hl=zh-cn
+                        - generic [ref=e1212]:
+                          - img [ref=e1213]
+                          - generic [ref=e1215]: 0:58
+                      - link "Scientists Think They Can See Inside a Neutron Star — And ... Instagram · SpaceVrse" [ref=e1217] [cursor=pointer]:
+                        - /url: https://www.instagram.com/spacevrs/reel/DWVEwTBFJp6/?hl=zh-cn
+                        - generic [ref=e1218]:
+                          - heading "Scientists Think They Can See Inside a Neutron Star — And ..." [level=3] [ref=e1220]:
+                            - generic [ref=e1221]: Scientists Think They Can See Inside a Neutron Star — And ...
+                          - generic [ref=e1226]: Instagram · SpaceVrse
+                    - button "About this result" [ref=e1230] [cursor=pointer]:
+                      - img [ref=e1233]
+              - button [ref=e1235] [cursor=pointer]:
+                - img [ref=e1238]
+            - link "More short videos" [ref=e1241] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&udm=39&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q3egMegQIXBAS
+              - separator [ref=e1242]
+              - generic [ref=e1243]:
+                - generic [ref=e1244]: More short videos
+                - img [ref=e1246]
+          - generic [ref=e1250]:
+            - heading "Web results" [level=2] [ref=e1251]
+            - generic [ref=e1252]:
+              - generic [ref=e1255]:
+                - link "What are neutron stars? Space https://www.space.com › Astronomy › Stars" [ref=e1257] [cursor=pointer]:
+                  - /url: https://www.space.com/22180-neutron-stars.html
+                  - heading "What are neutron stars?" [level=3] [ref=e1258]
+                  - generic [ref=e1263]:
+                    - generic [ref=e1265]: Space
+                    - generic [ref=e1267]: https://www.space.com › Astronomy › Stars
+                - button "About this result" [ref=e1268] [cursor=pointer]:
+                  - img [ref=e1271]
+              - generic [ref=e1274]:
+                - generic [ref=e1275]: 24 May 2023 —
+                - generic [ref=e1276]:
+                  - emphasis [ref=e1277]: Neutron stars
+                  - text: are the remains of the cores of massive stars that have reached the end of their lives.
+                - link "Read more" [ref=e1278] [cursor=pointer]:
+                  - /url: https://www.space.com/22180-neutron-stars.html#:~:text=Neutron%20stars%20are%20the%20remains,the%20end%20of%20their%20lives.
+        - generic [ref=e1280]:
+          - generic [ref=e1285]:
+            - heading "People also search for" [level=2] [ref=e1287]
+            - generic [ref=e1289]:
+              - generic [ref=e1290]:
+                - link "What is a neutron star made of" [ref=e1294] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=What+is+a+neutron+star+made+of&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAgvEAE
+                  - generic [ref=e1295]:
+                    - generic [ref=e1300]: What is a neutron star made of
+                    - img [ref=e1304]
+                - link "Neutron star vs black hole" [ref=e1309] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Neutron+star+vs+black+hole&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAhIEAE
+                  - generic [ref=e1310]:
+                    - generic [ref=e1315]: Neutron star vs black hole
+                    - img [ref=e1319]
+                - link "What is a neutron star for kids" [ref=e1324] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=What+is+a+neutron+star+for+kids&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAhHEAE
+                  - generic [ref=e1325]:
+                    - generic [ref=e1330]: What is a neutron star for kids
+                    - img [ref=e1334]
+                - link "Is a neutron star a black hole" [ref=e1339] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Is+a+neutron+star+a+black+hole&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAhFEAE
+                  - generic [ref=e1340]:
+                    - generic [ref=e1345]: Is a neutron star a black hole
+                    - img [ref=e1349]
+              - generic [ref=e1351]:
+                - link "What is a neutron star compared to earth" [ref=e1355] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=What+is+a+neutron+star+compared+to+earth&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAg-EAE
+                  - generic [ref=e1356]:
+                    - generic [ref=e1361]: What is a neutron star compared to earth
+                    - img [ref=e1365]
+                - link "Are neutron stars bright" [ref=e1370] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Are+neutron+stars+bright&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAg4EAE
+                  - generic [ref=e1371]:
+                    - generic [ref=e1376]: Are neutron stars bright
+                    - img [ref=e1380]
+                - link "What is a neutron star drop" [ref=e1385] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=What+is+a+neutron+star+drop&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAg3EAE
+                  - generic [ref=e1386]:
+                    - generic [ref=e1391]: What is a neutron star drop
+                    - img [ref=e1395]
+                - link "How is a neutron star formed" [ref=e1400] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=How+is+a+neutron+star+formed&sa=X&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q1QJ6BAg1EAE
+                  - generic [ref=e1401]:
+                    - generic [ref=e1406]: How is a neutron star formed
+                    - img [ref=e1410]
+          - navigation [ref=e1412]:
+            - heading "Page navigation" [level=1] [ref=e1413]
+            - text: "1"
+            - link "Page 2" [ref=e1416] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=10&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAE
+              - text: "2"
+            - link "Page 3" [ref=e1418] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=20&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAG
+              - text: "3"
+            - link "Page 4" [ref=e1420] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=30&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAI
+              - text: "4"
+            - link "Page 5" [ref=e1422] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=40&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAK
+              - text: "5"
+            - link "Page 6" [ref=e1424] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=50&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAM
+              - text: "6"
+            - link "Page 7" [ref=e1426] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=60&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAO
+              - text: "7"
+            - link "Page 8" [ref=e1428] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=70&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAQ
+              - text: "8"
+            - link "Page 9" [ref=e1430] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=80&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAS
+              - text: "9"
+            - link "Page 10" [ref=e1432] [cursor=pointer]:
+              - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=90&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8tMDegQICxAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e1434]:
+              - link "Next" [ref=e1435] [cursor=pointer]:
+                - /url: /search?q=what+is+a+neutron+star&sca_esv=6234f0784a7aac09&ei=XVDXaaySIuDewN4P_ruD8As&start=10&sa=N&sstk=Af77f_dfFuFjEZupazxlFxoe2wIf_j8ccomDtniLJhRDWgUJby5fMmrT39o68GEk8MYxFlHqqxcZpbLQ3T_PEzH9js_Cy0G7bSkPZA&ved=2ahUKEwjstJ7wmuCTAxVgL9AFHf7dAL4Q8NMDegQICxAW
+                - generic [ref=e1437]: Next
+        - navigation
+    - contentinfo [ref=e1438]:
+      - heading "Footer links" [level=1] [ref=e1439]
+      - generic [ref=e1443]:
+        - generic [ref=e1445]:
+          - text: Australia
+          - generic [ref=e1447]:
+            - button "Boroondara, Melbourne VIC - Based on your past activity" [ref=e1449] [cursor=pointer]:
+              - generic [ref=e1450]: Boroondara, Melbourne VIC
+              - generic [ref=e1452]:
+                - text: "-"
+                - generic [ref=e1453]: Based on your past activity
+            - text: "-"
+            - button "Update location" [ref=e1455] [cursor=pointer]: Update location
+        - generic [ref=e1458]:
+          - link "Help" [ref=e1459] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en-AU&fg=1
+          - link "Send feedback" [ref=e1460] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e1461] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en-AU&fg=1
+          - link "Terms" [ref=e1462] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en-AU&fg=1

@@ -80,41 +80,41 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | p-cygni-star | P-Cygni Star | 1 | done | done | - |  |
 | peculiar-a-star | Peculiar A Star | 1 | done | done | - |  |
 | peculiar-stars | Peculiar Stars | 1 | done | done | - |  |
-| pluto | Pluto | 1 | - | - | - |  |
+| pluto | Pluto | 1 | done | done | - |  |
 | rr-lyrae-stars | RR Lyrae Stars | 1 | - | - | - | existing: rr-lyrae |
-| saros | Saros | 1 | - | - | - |  |
+| saros | Saros | 1 | done | done | - |  |
 | saturn | Saturn | 1 | done | done | - |  |
-| sputnik | Sputnik | 1 | - | - | - |  |
+| sputnik | Sputnik | 1 | done | done | - |  |
 | star | Star | 1 | - | - | - | existing: star |
-| star-catalog | star catalog | 1 | - | - | - |  |
-| star-concepts | Star concepts | 1 | - | - | - |  |
-| star-counts | Star Counts | 1 | - | - | - |  |
-| star-spectral-types | star spectral types | 1 | - | - | - |  |
-| star-stream | Star Stream | 1 | - | - | - |  |
-| stark-effect | Stark Effect | 1 | - | - | - |  |
-| starlight | Starlight | 1 | - | - | - |  |
-| starlink | STARLINK | 1 | - | - | - |  |
-| subdwarf-star | Subdwarf Star | 1 | - | - | - |  |
+| star-catalog | star catalog | 1 | done | done | - |  |
+| star-concepts | Star concepts | 1 | done | done | - |  |
+| star-counts | Star Counts | 1 | done | done | - |  |
+| star-spectral-types | star spectral types | 1 | done | done | - |  |
+| star-stream | Star Stream | 1 | done | done | - |  |
+| stark-effect | Stark Effect | 1 | done | done | - |  |
+| starlight | Starlight | 1 | done | done | - |  |
+| starlink | STARLINK | 1 | done | done | - |  |
+| subdwarf-star | Subdwarf Star | 1 | done | done | - |  |
 | subgiant-ch-stars | Subgiant CH Stars | 3 | - | - | - |  |
-| submillimeter-astronomy | Submillimeter Astronomy | 1 | - | - | - |  |
+| submillimeter-astronomy | Submillimeter Astronomy | 1 | done | done | - |  |
 | sun | Sun | 1 | done | done | - | existing: sun |
 | sundial | Sundial | 2 | - | - | - |  |
 | sunspot-cycle | Sunspot Cycle | 1 | - | - | - | existing: sunspot-cycle |
-| sunyaev-zeldovich-process | Sunyaev Zel'dovich Process | 1 | - | - | - |  |
-| supermoon | supermoon | 1 | - | - | - |  |
-| supernova-1987a | Supernova 1987A | 1 | - | - | - |  |
-| symbiotic-stars | Symbiotic Stars | 1 | - | - | - |  |
-| triple-star | Triple Star | 1 | - | - | - |  |
-| tychos-nova | Tycho's Nova | 1 | - | - | - |  |
+| sunyaev-zeldovich-process | Sunyaev Zel'dovich Process | 1 | done | done | - |  |
+| supermoon | supermoon | 1 | done | done | - |  |
+| supernova-1987a | Supernova 1987A | 1 | done | done | - |  |
+| symbiotic-stars | Symbiotic Stars | 1 | done | done | - |  |
+| triple-star | Triple Star | 1 | done | done | - |  |
+| tychos-nova | Tycho's Nova | 1 | done | done | - |  |
 | u-geminorum-star | U Geminorum Star | 1 | - | - | - | existing: u-geminorum-stars |
 | venus | Venus | 1 | done | done | - |  |
 | white-dwarf | White dwarf | 1 | - | - | - | existing: white-dwarf |
-| absolute-space | Absolute Space | 1 | - | - | - |  |
-| algol | Algol | 1 | - | - | - |  |
-| andromeda | Andromeda (constellation) | 1 | - | - | - |  |
+| absolute-space | Absolute Space | 1 | done | done | - |  |
+| algol | Algol | 1 | done | done | - |  |
+| andromeda | Andromeda (constellation) | 1 | done | done | - |  |
 | andromeda-galaxy | Andromeda Galaxy | 1 | - | - | - | existing: andromeda-galaxy |
-| angstrom | Angstrom | 1 | - | - | - |  |
-| annular-eclipse | Annular Eclipse | 1 | - | - | - |  |
+| angstrom | Angstrom | 1 | done | done | - |  |
+| annular-eclipse | Annular Eclipse | 1 | done | done | - |  |
 | apastron | Apastron | 1 | - | - | - | existing: apastron |
 | ariel | Ariel (moon) | 1 | - | - | - |  |
 | asterism | Asterism (astronomy) | 1 | - | - | - | existing: asterism |
@@ -185,7 +185,7 @@ Source: `.planning/content/cosmos-all-merged-scored-final.md`
 | cluster-of-galaxies | Cluster of Galaxies | 2 | - | - | - |  |
 | dark-energy | Dark energy | 2 | - | - | - | existing: dark-energy |
 | disk-galaxies | Disk Galaxies | 2 | - | - | - | existing: disk-galaxies |
-| eddington-lema-tre-universe | Eddington Lemaître Universe | 2 | - | - | - |  |
+| eddington-lema-tre-universe | Eddington Lemaître Universe | 3 | - | - | - |  |
 | einstein-static-universe | Einstein Static Universe | 2 | - | - | - |  |
 | enceladus | Enceladus | 2 | - | - | - |  |
 | energy | Energy | 2 | - | - | - |  |

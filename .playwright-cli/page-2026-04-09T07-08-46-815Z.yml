@@ -1,0 +1,578 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en-AU
+      - link "Accessibility feedback" [ref=e4] [cursor=pointer]
+  - generic [ref=e9]:
+    - search [ref=e10]:
+      - generic [ref=e12]:
+        - link "Go to Google Home" [ref=e14] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQPAgJ
+          - img [ref=e15]
+        - generic [ref=e22]:
+          - generic [ref=e23]:
+            - combobox "Search" [ref=e26]: absolute space physics Newton absolute space physics Newton
+            - generic [ref=e27]:
+              - button "Clear" [ref=e29] [cursor=pointer]:
+                - img [ref=e31]
+              - generic [ref=e34]:
+                - button "Search by voice" [ref=e35] [cursor=pointer]:
+                  - img [ref=e36]
+                - button "Search by image" [ref=e38] [cursor=pointer]:
+                  - img [ref=e39]
+          - button "Search" [ref=e41] [cursor=pointer]:
+            - img [ref=e44]
+    - generic [ref=e46]:
+      - button "Settings" [ref=e48] [cursor=pointer]:
+        - img [ref=e51]
+      - generic [ref=e54]:
+        - button "Google apps" [ref=e56] [cursor=pointer]:
+          - img [ref=e57]
+        - link "Sign in" [ref=e61] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dabsolute%2Bspace%2Bphysics%2BNewton&ec=futura_srp_og_si_72236_p
+  - generic [ref=e63]:
+    - navigation [ref=e69]:
+      - generic [ref=e73]:
+        - list [ref=e74]:
+          - listitem [ref=e75]:
+            - link "All" [disabled] [ref=e76]:
+              - generic [ref=e78]: All
+          - listitem [ref=e79]:
+            - link "Images" [ref=e80] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyZwZa24LoDV0ibVpJXeyjt8RcPiyRFYYOAUlCvm0wpR4qyMnM5HHbv-iWvGMt3A0ZyOtpPKRTHByFt5Seznb2VxGuIqtQ17rdxVPMnDo4664OscY8A&q=absolute+space+physics+Newton&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQtKgLegQIGBAB
+              - generic [ref=e82]: Images
+          - listitem [ref=e83]:
+            - link "Videos" [ref=e84] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyZwZa24LoDV0ibVpJXeyjt8RcPiyRFYYOAUlCvm0wpR4qyMnM5HHbv-iWvGMt3A0ZyOtpPKRTHByFt5Seznb2VxGuIqtQ17rdxVPMnDo4664OscY8A&q=absolute+space+physics+Newton&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQtKgLegQIFBAB
+              - generic [ref=e86]: Videos
+          - listitem [ref=e87]:
+            - link "Shopping" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyZwZa24LoDV0ibVpJXeyjt8RcPiyRFYYOAUlCvm0wpR4qyMnM5HHbv-iWvGMt3A0ZyOtpPKRTHByFt5Seznb2VxGuIqtQ17rdxVPMnDo4664OscY8A&q=absolute+space+physics+Newton&ved=1t:220175&ictx=111
+              - generic [ref=e90]: Shopping
+          - listitem [ref=e91]:
+            - link "Forums" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyZwZa24LoDV0ibVpJXeyjt8RcPiyRFYYOAUlCvm0wpR4qyMnM5HHbv-iWvGMt3A0ZyOtpPKRTHByFt5Seznb2VxGuIqtQ17rdxVPMnDo4664OscY8A&q=absolute+space+physics+Newton&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQs6gLegQIFhAB
+              - generic [ref=e94]: Forums
+          - listitem [ref=e95]:
+            - link "Short videos" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyZwZa24LoDV0ibVpJXeyjt8RcPiyRFYYOAUlCvm0wpR4qyMnM5HHbv-iWvGMt3A0ZyOtpPKRTHByFt5Seznb2VxGuIqtQ17rdxVPMnDo4664OscY8A&q=absolute+space+physics+Newton&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQs6gLegQIFxAB
+              - generic [ref=e98]: Short videos
+          - listitem [ref=e99]:
+            - link "Maps" [ref=e100] [cursor=pointer]:
+              - /url: https://maps.google.com/maps?sca_esv=6234f0784a7aac09&output=search&q=absolute+space+physics+Newton&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3p-ML-906rRL_m6h4jR-tdCH-vUIlZq9RzugLEcfjf51b4dfDKizXS4hTwRCZW2TyZwZa24LoDV0ibVpJXeyjt8RcPiyRFYYOAUlCvm0wpR4qyMnM5HHbv-iWvGMt3A0ZyOtpPKRTHByFt5Seznb2VxGuIqtQ17rdxVPMnDo4664OscY8A&entry=mc&ved=1t:200715&ictx=111
+              - generic [ref=e102]: Maps
+          - listitem [ref=e103]:
+            - button "More filters" [ref=e104] [cursor=pointer]:
+              - generic "More filters" [ref=e105]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: More
+                  - img [ref=e109]
+        - button "Tools" [ref=e112] [cursor=pointer]:
+          - generic [ref=e114]:
+            - generic [ref=e115]: Tools
+            - img [ref=e117]
+    - heading "Search Results" [level=1] [ref=e119]
+    - generic [ref=e124]:
+      - generic [ref=e143]:
+        - heading "Thinking" [level=2] [ref=e147]:
+          - generic [ref=e148]: Thinking
+        - progressbar [ref=e149]
+      - main [ref=e151]:
+        - generic [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e165]:
+              - heading "Absolute space and time" [level=2] [ref=e167]
+              - button "More options for Absolute space and time" [ref=e173] [cursor=pointer]:
+                - img "More options for Absolute space and time" [ref=e174]:
+                  - img [ref=e176]
+            - complementary "Featured results" [ref=e182]:
+              - generic [ref=e184]:
+                - list [ref=e189]:
+                  - listitem [ref=e190]:
+                    - 'button "Image of DiSalle: Absolute Space and Newton''s Theory of Relativity (1 ..." [ref=e193] [cursor=pointer]':
+                      - 'img "Image of DiSalle: Absolute Space and Newton''s Theory of Relativity (1 ..." [ref=e196]'
+                  - listitem [ref=e197]:
+                    - button "Image of What is Absolute Space? - Universe Today" [ref=e200] [cursor=pointer]:
+                      - img "Image of What is Absolute Space? - Universe Today" [ref=e203]
+                  - listitem [ref=e204]:
+                    - button "Image of PDF) Newton's Conceptual Argument for Absolute Space" [ref=e207] [cursor=pointer]:
+                      - img "Image of PDF) Newton's Conceptual Argument for Absolute Space" [ref=e210]
+                  - listitem [ref=e211]:
+                    - button "Image of Absolute Space And Time / Absolute Spacetime ??? - YouTube" [ref=e214] [cursor=pointer]:
+                      - img "Image of Absolute Space And Time / Absolute Spacetime ??? - YouTube" [ref=e217]
+                  - listitem [ref=e218]:
+                    - link [ref=e222] [cursor=pointer]:
+                      - /url: /search?sca_esv=6234f0784a7aac09&q=absolute+space+physics+Newton&udm=2&source=univ&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQnN8JegQIHBAD
+                      - img [ref=e225]
+                - generic [ref=e232]:
+                  - generic [ref=e233]: Absolute space and time is a concept in physics and philosophy about the properties of the universe. In physics, absolute space and time may be a preferred frame.
+                  - generic [ref=e234]:
+                    - text: "Source:"
+                    - link "Wikipedia" [ref=e235] [cursor=pointer]:
+                      - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time
+                      - generic [ref=e237]: Wikipedia
+            - generic [ref=e239]:
+              - heading "Web results" [level=2] [ref=e240]
+              - generic [ref=e241]:
+                - generic [ref=e244]:
+                  - link "Newton's views on space, time, and motion Stanford Encyclopedia of Philosophy https://plato.stanford.edu › entries › newton-stm" [ref=e246] [cursor=pointer]:
+                    - /url: https://plato.stanford.edu/entries/newton-stm/
+                    - heading "Newton's views on space, time, and motion" [level=3] [ref=e247]
+                    - generic [ref=e252]:
+                      - generic [ref=e254]: Stanford Encyclopedia of Philosophy
+                      - generic [ref=e256]: https://plato.stanford.edu › entries › newton-stm
+                  - button "About this result" [ref=e257] [cursor=pointer]:
+                    - img [ref=e260]
+                - generic [ref=e263]:
+                  - generic [ref=e264]: by R Rynasiewicz · 2004 · Cited by 162 —
+                  - generic [ref=e265]:
+                    - emphasis [ref=e266]: Newton defined the true motion of a body to be its motion through absolute space
+                    - text: . Those who, before or shortly after Newton, rejected the ...
+                  - link "Read more" [ref=e267] [cursor=pointer]:
+                    - /url: https://plato.stanford.edu/entries/newton-stm/#:~:text=Newton%20defined%20the%20true%20motion,shortly%20after%20Newton%2C%20rejected%20the
+                - list [ref=e269]:
+                  - listitem [ref=e270]:
+                    - link "Overview of the Scholium" [ref=e271] [cursor=pointer]:
+                      - /url: https://plato.stanford.edu/entries/newton-stm/#1
+                      - generic [ref=e274]: Overview of the Scholium
+                  - listitem [ref=e275]:
+                    - link "The Structure of Newton's..." [ref=e276] [cursor=pointer]:
+                      - /url: https://plato.stanford.edu/entries/newton-stm/#5
+                      - generic [ref=e279]: The Structure of Newton's...
+                  - listitem [ref=e280]:
+                    - link "Common Impediments to..." [ref=e281] [cursor=pointer]:
+                      - /url: https://plato.stanford.edu/entries/newton-stm/#6
+                      - generic [ref=e284]: Common Impediments to...
+          - generic [ref=e288]:
+            - generic [ref=e291]:
+              - link "Absolute space and time Wikipedia https://en.wikipedia.org › wiki › Absolute_space_and_ti..." [ref=e293] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time
+                - heading "Absolute space and time" [level=3] [ref=e294]
+                - generic [ref=e299]:
+                  - generic [ref=e301]: Wikipedia
+                  - generic [ref=e303]: https://en.wikipedia.org › wiki › Absolute_space_and_ti...
+              - button "About this result" [ref=e304] [cursor=pointer]:
+                - img [ref=e307]
+            - generic [ref=e310]:
+              - generic [ref=e311]:
+                - emphasis [ref=e312]: Absolute space and time
+                - text: is a concept in physics and philosophy about the properties of the universe.
+              - link "Read more" [ref=e313] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time#:~:text=Absolute%20space%20and%20time%20is,the%20properties%20of%20the%20universe.
+            - list [ref=e315]:
+              - listitem [ref=e316]:
+                - link "Newton" [ref=e317] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time#Newton
+                  - generic [ref=e320]: Newton
+              - listitem [ref=e321]:
+                - link "Differing views" [ref=e322] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time#Differing_views
+                  - generic [ref=e325]: Differing views
+              - listitem [ref=e326]:
+                - link "Einstein" [ref=e327] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time#Einstein
+                  - generic [ref=e330]: Einstein
+              - listitem [ref=e331]:
+                - link "General relativity" [ref=e332] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Absolute_space_and_time#General_relativity
+                  - generic [ref=e335]: General relativity
+          - generic [ref=e339]:
+            - generic [ref=e342]:
+              - link "Absolute space and Newton's theory of relativity ScienceDirect.com https://www.sciencedirect.com › science › article › pii" [ref=e344] [cursor=pointer]:
+                - /url: https://www.sciencedirect.com/science/article/pii/S1355219819300747
+                - heading "Absolute space and Newton's theory of relativity" [level=3] [ref=e345]
+                - generic [ref=e350]:
+                  - generic [ref=e352]: ScienceDirect.com
+                  - generic [ref=e354]: https://www.sciencedirect.com › science › article › pii
+              - button "About this result" [ref=e355] [cursor=pointer]:
+                - img [ref=e358]
+            - generic [ref=e361]:
+              - generic [ref=e362]: by R DiSalle · 2020 · Cited by 13 —
+              - generic [ref=e363]:
+                - emphasis [ref=e364]: Absolute space
+                - text: so-called is that which by its own nature and unrelated to any other thing whatsoever always remains immobile [immobile]. As the order of the ...
+              - link "Read more" [ref=e365] [cursor=pointer]:
+                - /url: https://www.sciencedirect.com/science/article/pii/S1355219819300747#:~:text=Absolute%20space%20so%2Dcalled%20is%20that,of%20the%20parts%20of%20space.
+            - generic [ref=e367]:
+              - text: "Missing: physics ‎| Show results with:"
+              - link "physics" [ref=e368] [cursor=pointer]:
+                - /url: /search?sca_esv=6234f0784a7aac09&q=absolute+space+%22physics%22+Newton&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ5t4CegQIRBAB
+          - generic [ref=e372]:
+            - generic [ref=e374]:
+              - heading "Videos" [level=2] [ref=e375]
+              - button "About this result" [ref=e376] [cursor=pointer]:
+                - img [ref=e379]
+            - generic [ref=e382]:
+              - generic [ref=e388]:
+                - generic [ref=e389]:
+                  - generic [ref=e390]:
+                    - link "Absolute Space And Time / Absolute Spacetime ??? YouTube AH DOCUMENTARY 30 Aug 2024" [ref=e392] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=GuUa28qQUQw
+                      - heading "Absolute Space And Time / Absolute Spacetime ??? YouTube AH DOCUMENTARY 30 Aug 2024" [level=3] [ref=e393]:
+                        - generic [ref=e396]: Absolute Space And Time / Absolute Spacetime ???
+                        - generic [ref=e398]:
+                          - generic [ref=e399]:
+                            - text: YouTube
+                            - generic [ref=e400]: · AH DOCUMENTARY
+                          - generic [ref=e401]: 30 Aug 2024
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · AH DOCUMENTARY
+                        - button "About this result" [ref=e402] [cursor=pointer]:
+                          - img [ref=e405]
+                  - button "Absolute Space And Time / Absolute Spacetime ??? by AH DOCUMENTARY on YouTube. Play on Google. 8:46" [ref=e407] [cursor=pointer]:
+                    - generic [ref=e408]:
+                      - img [ref=e414]
+                      - generic [ref=e417]:
+                        - generic [ref=e418]: 8:46
+                        - img [ref=e421]
+                - button "Absolute space as proposed by Sir Isaac Newton is the notion that space exists as a vast unchanging stage where all events unfold." [ref=e424] [cursor=pointer]:
+                  - generic [ref=e428]: Absolute space as proposed by Sir Isaac Newton is the notion that space exists as a vast unchanging stage where all events unfold.
+              - generic [ref=e433]:
+                - generic [ref=e434]:
+                  - generic [ref=e435]:
+                    - link "Newtonian Space and Time (plus Mach's Principle) YouTube Jason Kendall 14 Aug 2024" [ref=e437] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=Gakkf5vPGWk
+                      - heading "Newtonian Space and Time (plus Mach's Principle) YouTube Jason Kendall 14 Aug 2024" [level=3] [ref=e438]:
+                        - generic [ref=e441]: Newtonian Space and Time (plus Mach's Principle)
+                        - generic [ref=e443]:
+                          - generic [ref=e444]:
+                            - text: YouTube
+                            - generic [ref=e445]: · Jason Kendall
+                          - generic [ref=e446]: 14 Aug 2024
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · Jason Kendall
+                        - button "About this result" [ref=e447] [cursor=pointer]:
+                          - img [ref=e450]
+                  - button "Newtonian Space and Time (plus Mach's Principle) by Jason Kendall on YouTube. Play on Google. 6:57" [ref=e452] [cursor=pointer]:
+                    - generic [ref=e453]:
+                      - img [ref=e456]
+                      - generic [ref=e459]:
+                        - generic [ref=e460]: 6:57
+                        - img [ref=e463]
+                - button "Newton based his mechanics on the notion of an absolute time and an absolute space as he wrote in his great work in the principia in 1687." [ref=e466] [cursor=pointer]:
+                  - generic [ref=e470]: Newton based his mechanics on the notion of an absolute time and an absolute space as he wrote in his great work in the principia in 1687.
+              - generic [ref=e475]:
+                - generic [ref=e476]:
+                  - generic [ref=e477]:
+                    - link "From Absolute Space And Time To Spacetime YouTube AH DOCUMENTARY 2 Aug 2024" [ref=e479] [cursor=pointer]:
+                      - /url: https://www.youtube.com/watch?v=3vmwmEuhrXQ
+                      - heading "From Absolute Space And Time To Spacetime YouTube AH DOCUMENTARY 2 Aug 2024" [level=3] [ref=e480]:
+                        - generic [ref=e483]: From Absolute Space And Time To Spacetime
+                        - generic [ref=e485]:
+                          - generic [ref=e486]:
+                            - text: YouTube
+                            - generic [ref=e487]: · AH DOCUMENTARY
+                          - generic [ref=e488]: 2 Aug 2024
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - text: YouTube
+                              - generic: · AH DOCUMENTARY
+                        - button "About this result" [ref=e489] [cursor=pointer]:
+                          - img [ref=e492]
+                  - button "From Absolute Space And Time To Spacetime by AH DOCUMENTARY on YouTube. Play on Google. 8:27" [ref=e494] [cursor=pointer]:
+                    - generic [ref=e495]:
+                      - img [ref=e498]
+                      - generic [ref=e501]:
+                        - generic [ref=e502]: 8:27
+                        - img [ref=e505]
+                - button "4 key moments in this video" [ref=e511] [cursor=pointer]:
+                  - generic [ref=e514]:
+                    - generic [ref=e517]: 4 key moments in this video
+                    - img [ref=e519]
+            - link "View all videos" [ref=e523] [cursor=pointer]:
+              - /url: /search?sca_esv=6234f0784a7aac09&udm=7&q=absolute+space+physics+Newton&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8ccDKAJ6BAhYEAQ
+              - separator [ref=e524]
+              - generic [ref=e525]:
+                - generic [ref=e526]: View all
+                - img [ref=e528]
+          - generic [ref=e532]:
+            - heading "Web results" [level=2] [ref=e533]
+            - generic [ref=e534]:
+              - generic [ref=e537]:
+                - link "How can Newton's idea of absolute space be reconciled ... Physics Stack Exchange https://physics.stackexchange.com › questions › how-ca..." [ref=e539] [cursor=pointer]:
+                  - /url: https://physics.stackexchange.com/questions/349882/how-can-newtons-idea-of-absolute-space-be-reconciled-with-galilean-relativity
+                  - heading "How can Newton's idea of absolute space be reconciled ..." [level=3] [ref=e540]
+                  - generic [ref=e545]:
+                    - generic [ref=e547]: Physics Stack Exchange
+                    - generic [ref=e549]: https://physics.stackexchange.com › questions › how-ca...
+                - button "About this result" [ref=e550] [cursor=pointer]:
+                  - img [ref=e553]
+              - generic [ref=e556]:
+                - generic [ref=e557]: 2 Aug 2017 —
+                - generic [ref=e558]:
+                  - text: Although Newton believed that
+                  - emphasis [ref=e559]: there is an absolute space
+                  - text: and an absolute time, he also believed that humans live in relative space and relative time.
+                - link "Read more" [ref=e560] [cursor=pointer]:
+                  - /url: https://physics.stackexchange.com/questions/349882/how-can-newtons-idea-of-absolute-space-be-reconciled-with-galilean-relativity#:~:text=Although%20Newton%20believed%20that%20there,relative%20space%20and%20relative%20time.
+              - generic [ref=e563]:
+                - generic [ref=e564]:
+                  - link "What was Newton's idea of absolute space and time?" [ref=e567] [cursor=pointer]:
+                    - /url: https://physics.stackexchange.com/questions/463099/what-was-newtons-idea-of-absolute-space-and-time
+                    - generic [ref=e568]:
+                      - text: What was
+                      - emphasis [ref=e569]: Newton's
+                      - text: idea of
+                      - emphasis [ref=e570]: absolute space
+                      - text: and time?
+                  - generic [ref=e572]: 1 answer
+                  - generic [ref=e574]: 26 Feb 2019
+                - generic [ref=e575]:
+                  - link "What are absolute space & time? Why are they not ..." [ref=e578] [cursor=pointer]:
+                    - /url: https://physics.stackexchange.com/questions/154882/what-are-absolute-space-time-why-are-they-not-absolute-in-reality
+                    - generic [ref=e579]:
+                      - text: What are
+                      - emphasis [ref=e580]: absolute space
+                      - text: "& time? Why are they not ..."
+                  - generic [ref=e582]: 2 answers
+                  - generic [ref=e584]: 24 Dec 2014
+                - link "More results from physics.stackexchange.com" [ref=e588] [cursor=pointer]:
+                  - /url: /search?q=absolute+space+physics+Newton+site:physics.stackexchange.com&sca_esv=6234f0784a7aac09&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQrQIoAnoECDIQAw
+          - generic [ref=e592]:
+            - generic [ref=e595]:
+              - link "The Role of Absolute Space in Newton's Physics Springer Nature Link https://link.springer.com › Foundations of Science" [ref=e597] [cursor=pointer]:
+                - /url: https://link.springer.com/article/10.1007/s10699-025-10023-2
+                - heading "The Role of Absolute Space in Newton's Physics" [level=3] [ref=e598]
+                - generic [ref=e603]:
+                  - generic [ref=e605]: Springer Nature Link
+                  - generic [ref=e607]: https://link.springer.com › Foundations of Science
+              - button "About this result" [ref=e608] [cursor=pointer]:
+                - img [ref=e611]
+            - generic [ref=e614]:
+              - generic [ref=e615]: by R Pisano · 2026 —
+              - generic [ref=e616]:
+                - text: According to Newton,
+                - emphasis [ref=e617]: the motion of a body relative to absolute space determines its physical shape
+                - text: —especially in the case of celestial bodies.
+              - link "Read more" [ref=e618] [cursor=pointer]:
+                - /url: https://link.springer.com/article/10.1007/s10699-025-10023-2#:~:text=According%20to%20Newton%2C%20the%20motion,the%20case%20of%20celestial%20bodies.
+          - generic [ref=e622]:
+            - generic [ref=e625]:
+              - link "The Existence of Absolute Space The Ohio State University https://kb.osu.edu › bitstreams › download" [ref=e627] [cursor=pointer]:
+                - /url: https://kb.osu.edu/bitstreams/3e228d55-6d97-5b9e-96d3-580e40c79f36/download
+                - heading "The Existence of Absolute Space" [level=3] [ref=e628]
+                - generic [ref=e633]:
+                  - generic [ref=e635]: The Ohio State University
+                  - generic [ref=e637]: https://kb.osu.edu › bitstreams › download
+              - generic [ref=e638]:
+                - generic:
+                  - generic: PDF
+              - button "About this result" [ref=e639] [cursor=pointer]:
+                - img [ref=e642]
+            - generic [ref=e645]:
+              - generic [ref=e646]: by JA Gould · 1962 · Cited by 14 —
+              - generic [ref=e647]:
+                - emphasis [ref=e648]: Newton
+                - text: also recognized relative
+                - emphasis [ref=e649]: space
+                - text: which changes, related to objects, and moves within
+                - emphasis [ref=e650]: absolute space
+                - text: . That there are relative spaces can be determined, he ...
+              - link "Read more" [ref=e651] [cursor=pointer]:
+                - /url: https://kb.osu.edu/bitstreams/3e228d55-6d97-5b9e-96d3-580e40c79f36/download#:~:text=Newton%20also%20recognized%20relative,maintained%2C%20through%20a%20study%20of
+          - generic [ref=e655]:
+            - generic [ref=e658]:
+              - link "The role of absolute space and time in Newton's physics? Reddit · r/askphilosophy 8 comments · 4 years ago" [ref=e660] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/askphilosophy/comments/mybukx/the_role_of_absolute_space_and_time_in_newtons/
+                - heading "The role of absolute space and time in Newton's physics?" [level=3] [ref=e661]
+                - generic [ref=e666]:
+                  - generic [ref=e668]: Reddit · r/askphilosophy
+                  - generic [ref=e670]: 8 comments · 4 years ago
+              - button "About this result" [ref=e671] [cursor=pointer]:
+                - img [ref=e674]
+            - generic [ref=e677]:
+              - generic [ref=e678]:
+                - text: In other words,
+                - emphasis [ref=e679]: Newton
+                - text: began with the assumption that
+                - emphasis [ref=e680]: space
+                - text: is three dimensional and that time is
+                - emphasis [ref=e681]: absolute
+                - text: and independent of
+                - emphasis [ref=e682]: space
+                - text: . He worked ...
+              - link "Read more" [ref=e683] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/askphilosophy/comments/mybukx/the_role_of_absolute_space_and_time_in_newtons/#:~:text=In%20other%20words%2C%20Newton%20began,to%20describe%20observations%20he%20had.
+            - generic [ref=e688]:
+              - link "8 answers" [ref=e689] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/askphilosophy/comments/mybukx/the_role_of_absolute_space_and_time_in_newtons/gvtynju/
+              - generic [ref=e690]: ·
+              - generic [ref=e691]: "Top answer:"
+              - generic [ref=e692]: Welcome to r/askphilosophy . Please read our rules before commenting and understand that ...
+            - generic [ref=e695]:
+              - generic [ref=e696]:
+                - 'link "Galilean relativity and absolute space : r/AskPhysics ..." [ref=e699] [cursor=pointer]':
+                  - /url: https://www.reddit.com/r/AskPhysics/comments/1rqzrtv/galilean_relativity_and_absolute_space/
+                  - generic [ref=e700]:
+                    - text: Galilean relativity and
+                    - emphasis [ref=e701]: absolute space
+                    - text: ": r/"
+                    - emphasis [ref=e702]: AskPhysics
+                    - text: ...
+                - generic [ref=e704]: 5 answers
+                - generic [ref=e706]: 12 Mar 2026
+              - generic [ref=e707]:
+                - link "Did Newton derive absolute space from his law of ..." [ref=e710] [cursor=pointer]:
+                  - /url: https://www.reddit.com/r/askphilosophy/comments/1f6eaee/did_newton_derive_absolute_space_from_his_law_of/
+                  - generic [ref=e711]:
+                    - text: Did
+                    - emphasis [ref=e712]: Newton
+                    - text: derive
+                    - emphasis [ref=e713]: absolute space
+                    - text: from his law of ...
+                - generic [ref=e715]: 8 answers
+                - generic [ref=e717]: 1 Sept 2024
+              - link "More results from www.reddit.com" [ref=e721] [cursor=pointer]:
+                - /url: /search?q=absolute+space+physics+Newton+site:www.reddit.com&sca_esv=6234f0784a7aac09&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQrQIoAnoECDsQAw
+          - generic [ref=e725]:
+            - generic [ref=e728]:
+              - link "What is Absolute Space? Universe Today https://www.universetoday.com › articles › absolute-space" [ref=e730] [cursor=pointer]:
+                - /url: https://www.universetoday.com/articles/absolute-space
+                - heading "What is Absolute Space?" [level=3] [ref=e731]
+                - generic [ref=e736]:
+                  - generic [ref=e738]: Universe Today
+                  - generic [ref=e740]: https://www.universetoday.com › articles › absolute-space
+              - button "About this result" [ref=e741] [cursor=pointer]:
+                - img [ref=e744]
+            - generic [ref=e747]:
+              - generic [ref=e748]: 4 July 2011 —
+              - generic [ref=e749]:
+                - emphasis [ref=e750]: Absolute space is the study of space as an absolute
+                - text: ", unmoving reference point for what inertial systems (ie planets and other objects) exist within it."
+              - link "Read more" [ref=e751] [cursor=pointer]:
+                - /url: https://www.universetoday.com/articles/absolute-space#:~:text=In%20other%20words%2C%20Absolute%20Space,other%20objects)%20exist%20within%20it.
+          - generic [ref=e755]:
+            - generic [ref=e758]:
+              - link "1 - Newton's philosophical analysis of space and time Cambridge University Press & Assessment https://www.cambridge.org › core › books › newtons-ph..." [ref=e760] [cursor=pointer]:
+                - /url: https://www.cambridge.org/core/books/cambridge-companion-to-newton/newtons-philosophical-analysis-of-space-and-time/519C503DC7F4E466C8E3322182BC2DC3
+                - heading "1 - Newton's philosophical analysis of space and time" [level=3] [ref=e761]
+                - generic [ref=e766]:
+                  - generic [ref=e768]: Cambridge University Press & Assessment
+                  - generic [ref=e770]: https://www.cambridge.org › core › books › newtons-ph...
+              - button "About this result" [ref=e771] [cursor=pointer]:
+                - img [ref=e774]
+            - generic [ref=e777]:
+              - generic [ref=e778]:
+                - text: By this standard,
+                - emphasis [ref=e779]: absolute space does not belong in Newtonian physics
+                - text: ", since absolute translation in space is not a physically measurable quantity. But ..."
+              - link "Read more" [ref=e780] [cursor=pointer]:
+                - /url: https://www.cambridge.org/core/books/cambridge-companion-to-newton/newtons-philosophical-analysis-of-space-and-time/519C503DC7F4E466C8E3322182BC2DC3#:~:text=By%20this%20standard%2C%20absolute%20space,a%20physically%20measurable%20quantity.%20But
+        - generic [ref=e782]:
+          - generic [ref=e787]:
+            - heading "People also search for" [level=2] [ref=e789]
+            - generic [ref=e791]:
+              - generic [ref=e792]:
+                - link "Absolute space and time" [ref=e796] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+space+and+time&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAgrEAE
+                  - generic [ref=e797]:
+                    - generic [ref=e802]: Absolute space and time
+                    - img [ref=e806]
+                - link "Absolute space in geography" [ref=e811] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+space+in+geography&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAhHEAE
+                  - generic [ref=e812]:
+                    - generic [ref=e817]: Absolute space in geography
+                    - img [ref=e821]
+                - link "Time is absolute or relative" [ref=e826] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Time+is+absolute+or+relative&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAhGEAE
+                  - generic [ref=e827]:
+                    - generic [ref=e832]: Time is absolute or relative
+                    - img [ref=e836]
+                - link "Newton absolute space" [ref=e841] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Newton+absolute+space&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAhBEAE
+                  - generic [ref=e842]:
+                    - generic [ref=e847]: Newton absolute space
+                    - img [ref=e851]
+              - generic [ref=e853]:
+                - link "Is space absolute or relative" [ref=e857] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Is+space+absolute+or+relative&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAg6EAE
+                  - generic [ref=e858]:
+                    - generic [ref=e863]: Is space absolute or relative
+                    - img [ref=e867]
+                - link "Example of absolute space in geography" [ref=e872] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Example+of+absolute+space+in+geography&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAg1EAE
+                  - generic [ref=e873]:
+                    - generic [ref=e878]: Example of absolute space in geography
+                    - img [ref=e882]
+                - link "Absolute space and relative space" [ref=e887] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+space+and+relative+space&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAgzEAE
+                  - generic [ref=e888]:
+                    - generic [ref=e893]: Absolute space and relative space
+                    - img [ref=e897]
+                - link "Absolute time definition" [ref=e902] [cursor=pointer]:
+                  - /url: /search?sca_esv=6234f0784a7aac09&q=Absolute+time+definition&sa=X&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ1QJ6BAgxEAE
+                  - generic [ref=e903]:
+                    - generic [ref=e908]: Absolute time definition
+                    - img [ref=e912]
+          - navigation [ref=e914]:
+            - heading "Page navigation" [level=1] [ref=e915]
+            - text: "1"
+            - link "Page 2" [ref=e918] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=10&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAE
+              - text: "2"
+            - link "Page 3" [ref=e920] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=20&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAG
+              - text: "3"
+            - link "Page 4" [ref=e922] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=30&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAI
+              - text: "4"
+            - link "Page 5" [ref=e924] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=40&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAK
+              - text: "5"
+            - link "Page 6" [ref=e926] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=50&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAM
+              - text: "6"
+            - link "Page 7" [ref=e928] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=60&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAO
+              - text: "7"
+            - link "Page 8" [ref=e930] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=70&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAQ
+              - text: "8"
+            - link "Page 9" [ref=e932] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=80&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAS
+              - text: "9"
+            - link "Page 10" [ref=e934] [cursor=pointer]:
+              - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=90&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8tMDegQIDBAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e936]:
+              - link "Next" [ref=e937] [cursor=pointer]:
+                - /url: /search?q=absolute+space+physics+Newton&sca_esv=6234f0784a7aac09&ei=fVDXae2ZKt_Lp84Pk5nQqQQ&start=10&sa=N&sstk=Af77f_d79pUju0mbf1QOeoEmM1usf3t5cAzVddVxqVLWvG8mTFfeH9RTY5RAOaR0CJYpOPc8I498sWFSLrIMDAZrNyTsfS3z0bQSgQ&ved=2ahUKEwitzMf_muCTAxXf5ckDHZMMNEUQ8NMDegQIDBAW
+                - generic [ref=e939]: Next
+        - navigation
+    - contentinfo [ref=e942]:
+      - heading "Footer links" [level=1] [ref=e943]
+      - generic [ref=e947]:
+        - generic [ref=e949]:
+          - text: Australia
+          - generic [ref=e951]:
+            - button "3101, Melbourne VIC - From your IP address" [ref=e953] [cursor=pointer]:
+              - generic [ref=e954]: 3101, Melbourne VIC
+              - generic [ref=e956]:
+                - text: "-"
+                - generic [ref=e957]: From your IP address
+            - text: "-"
+            - button "Update location" [ref=e959] [cursor=pointer]: Update location
+        - generic [ref=e962]:
+          - link "Help" [ref=e963] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en-AU&fg=1
+          - link "Send feedback" [ref=e964] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e965] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en-AU&fg=1
+          - link "Terms" [ref=e966] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en-AU&fg=1
